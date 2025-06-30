@@ -1,13 +1,21 @@
- // area of triangle
+// area of triangle
 
 #include<stdio.h>
 #include<conio.h>
 
 int main(){
-	float l=15.5f, b=8.8f, area=(l*b)/2;
+	float l, b, area;
+
 	clrscr();
 
-	printf("area of triangle is : %f", area);
+	printf("\n\tEnter length of triangle : ");
+	scanf("%f",&l);
+	printf("\n\tEnter breadth of triangle : ");
+	scanf("%f",&b);
+
+	area=(l*b)/2.0;
+
+	printf("\n\tarea of triangle is : %.2f", area);
 
 	getch();
 	return 0;

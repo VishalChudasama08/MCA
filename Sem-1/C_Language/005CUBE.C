@@ -4,11 +4,19 @@
 #include<conio.h>
 
 int main(){
-	int l=8, b=8, h=8, area;
+	float l, b, h, area;
 	clrscr();
 
+	printf("\n\tEnter length of cude : ");
+	scanf("%f",&l);
+	printf("\n\tEnter breadth of cude : ");
+	scanf("%f",&b);
+	printf("\n\tEnter height of cude : ");
+	scanf("%f",&h);
+
 	area = l*b*h;
-	printf("area of cube is : %d", area);
+
+	printf("\n\n\tarea of cube is : %.2f", area);
 
 	getch();
 	return 0;
