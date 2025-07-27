@@ -1,5 +1,3 @@
-// Write a C program to find out compound interest using following formula Compound Interest = P * ( 1 + r / 100 )^n - P.
-
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>

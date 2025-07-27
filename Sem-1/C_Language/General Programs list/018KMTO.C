@@ -1,6 +1,3 @@
-// Write a C program to read the distance between two cities in KM. and print that distance in meters, feet, inches and centimeters.
-
-
 #include<stdio.h>
 #include<conio.h>
 

@@ -1,5 +1,3 @@
-// display sum from 1 to N using the formula N(N+1)/2.
-
 #include<stdio.h>
 #include<conio.h>
 long int nsum(long int);

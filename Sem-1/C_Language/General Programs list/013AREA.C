@@ -1,5 +1,3 @@
-// Write a program that reads the radius of sphere “r”, then it calculates its volume “V” and surface area “A”
-
 #include<stdio.h>
 #include<conio.h>
 #define PI 3.14

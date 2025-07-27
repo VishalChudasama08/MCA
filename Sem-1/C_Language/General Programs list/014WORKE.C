@@ -1,5 +1,3 @@
-// Write a C program to obtain an hourly pay rate and the number of hours worked by workers. Calculate their pay for the week.
-
 #include<stdio.h>
 #include<conio.h>
 
