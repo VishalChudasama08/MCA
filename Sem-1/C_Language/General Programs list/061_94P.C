@@ -90,6 +90,20 @@ int main() {
 	getch();
 	return 0;
 }
+void px(int n){
+	int i,j;
+	if(n%2 == 0)
+		n++;
+	for(i=1;i<=n;i++){
+		for (j = 1; j <= n; j++) {
+			if(i==j || j==n-i+1)
+				printf("*");
+			else
+				printf(" ");
+		}
+		printf("\n");
+	}
+}
 
 void p61(int n) {
 	int i, j;
@@ -397,7 +411,7 @@ void p94(int n) {
 int menu() {
 	int i;
 	printf("\n\t-------------------------- Patterns --------------------------\n");
-	printf("\n\t Exit program => 1 \t 2 => pattern + \t3 => pattern X");
+	printf("\n\t Exit program => 0 \t pattern => 2 + \t pattern X => 3");
 	printf("\n\t pattern => 61 \t pattern => 71 \t pattern => 81 \t pattern => 91");
 	printf("\n\t pattern => 62 \t pattern => 72 \t pattern => 82 \t pattern => 92");
 	printf("\n\t pattern => 63 \t pattern => 73 \t pattern => 83 \t pattern => 93");
