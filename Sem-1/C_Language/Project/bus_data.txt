@@ -1,0 +1,88 @@
+Ashapura Travels
+Ahmedabad=Rajkot,Paldi|Iskcon Cross Road|Chotila|Rajkot Bus Stand
+Rajkot=Jamnagar,Limbda Chowk|Kalavad|Dhoraji|Jamnagar Bus Stand
+Bhuj=Ahmedabad,Bhujodi|Samakhiyali|Dholka|Paldi
+Bhavnagar=Surat,Bus Stand|Mahuva|Valsad|Kamrej|Surat City
+Junagadh=Dwarka,Zanzarda Chowk|Porbandar|Khambhalia|Dwarka Temple
+Gandhidham=Morbi,IFFCO Colony|Anjar|Maliya|Morbi Stand
+Surat=Rajkot,Kamrej|Vadodara|Chotila|Rajkot Limda Chowk
+Jamnagar=Bhavnagar,Khambhalia|Rajkot|Botad|Bhavnagar Circle
+Palanpur=Ahmedabad,Palanpur ST|Mehsana|Chiloda|Paldi
+Bhuj=Vadodara,Bhujodi|Samakhiyali|Morbi|Vadodara Lalbaug
+Deep Travels
+Rajkot=Bhavnagar,Limbda Chowk|Botad|Gadhada|Bhavnagar Bus Stand
+Ahmedabad=Bhuj,CTM|Samakhiyali|Bhachau|Bhujodi|Bhuj
+Junagadh=Surat,Zanzarda Chowk|Jetpur|Vadodara|Kamrej|Surat City
+Jamnagar=Ahmedabad,Patia|Rajkot|Bagodara|Iskcon Cross Road|Paldi
+Morbi=Bhavnagar,Morbi Circle|Wankaner|Botad|Bhavnagar Circle
+Bhuj=Surat,Bhujodi|Anjar|Vadodara|Kamrej|Surat
+Dwarka=Rajkot,Dwarka Stand|Khambhalia|Rajkot Limda Chowk
+Vadodara=Jamnagar,Lalbaug|Rajkot|Kalavad|Jamnagar Stand
+Surendranagar=Junagadh,Court Road|Botad|Jetpur|Junagadh Stand
+Gandhidham=Bhavnagar,Gandhidham Colony|Samakhiyali|Rajkot|Botad|Bhavnagar
+Eagle Express
+Ahmedabad=Bhuj,Iskcon|Samakhiyali|Bhachau|Bhujodi|Bhuj
+Surat=Jamnagar,Kamrej|Vadodara|Rajkot|Khambhalia|Jamnagar Stand
+Rajkot=Vadodara,Limbda Chowk|Chotila|Bagodara|Lalbaug
+Bhavnagar=Ahmedabad,Bhavnagar Stand|Botad|Bagodara|Iskcon Cross Road
+Gandhidham=Junagadh,IFFCO|Samakhiyali|Rajkot|Jetpur|Junagadh
+Dwarka=Vadodara,Dwarka Temple|Khambhalia|Rajkot|Lalbaug
+Junagadh=Surat,Zanzarda|Jetpur|Vadodara|Navsari|Surat
+Palanpur=Bhuj,Palanpur ST|Deesa|Samakhiyali|Bhuj
+Morbi=Surat,Morbi Stand|Rajkot|Vadodara|Kamrej
+Jamnagar=Bhavnagar,Jamnagar Stand|Rajkot|Botad|Bhavnagar
+Galaxy Travels
+Ahmedabad=Jamnagar,CTM|Rajkot|Kalavad|Jamnagar Stand
+Rajkot=Somnath,Limbda Chowk|Jetpur|Junagadh|Somnath Temple
+Bhuj=Surat,Bhujodi|Anjar|Vadodara|Kamrej|Surat
+Vadodara=Dwarka,Lalbaug|Rajkot|Khambhalia|Dwarka
+Surat=Bhavnagar,Kamrej|Vadodara|Botad|Bhavnagar Stand
+Morbi=Junagadh,Morbi Stand|Rajkot|Jetpur|Junagadh
+Bhavnagar=Jamnagar,Bhavnagar Stand|Botad|Rajkot|Jamnagar Stand
+Junagadh=Ahmedabad,Junagadh Stand|Jetpur|Rajkot|Paldi
+Surendranagar=Bhuj,Court Road|Dhrangadhra|Samakhiyali|Bhuj
+Gandhidham=Vadodara,Gandhidham Colony|Samakhiyali|Morbi|Lalbaug
+GSRTC
+Ahmedabad=Bhavnagar,Geeta Mandir|Bagodara|Botad|Bhavnagar ST
+Rajkot=Surat,Rajkot ST|Chotila|Vadodara|Kamrej|Surat
+Bhuj=Vadodara,Bhuj ST|Samakhiyali|Morbi|Lalbaug
+Junagadh=Ahmedabad,Junagadh ST|Jetpur|Rajkot|Paldi
+Jamnagar=Dwarka,Jamnagar ST|Khambhalia|Dwarka Temple
+Surat=Bhuj,Kamrej|Vadodara|Samakhiyali|Bhuj
+Vadodara=Somnath,Lalbaug|Rajkot|Junagadh|Somnath Temple
+Palanpur=Ahmedabad,Palanpur ST|Mehsana|Chiloda|Paldi
+Morbi=Bhavnagar,Morbi ST|Wankaner|Botad|Bhavnagar ST
+Dwarka=Junagadh,Dwarka Temple|Khambhalia|Rajkot|Junagadh ST
+Patel Tours & Travels
+Ahmedabad=Jamnagar,Iskcon|Rajkot|Kalavad|Jamnagar ST
+Surat=Bhuj,Kamrej|Vadodara|Samakhiyali|Bhuj
+Rajkot=Vadodara,Limbda Chowk|Chotila|Bagodara|Lalbaug
+Bhavnagar=Ahmedabad,Bhavnagar Circle|Botad|Bagodara|Iskcon
+Junagadh=Morbi,Zanzarda|Jetpur|Rajkot|Morbi ST
+Vadodara=Somnath,Lalbaug|Rajkot|Junagadh|Somnath
+Bhuj=Rajkot,Bhujodi|Samakhiyali|Rajkot Limda Chowk
+Dwarka=Surat,Dwarka Stand|Khambhalia|Vadodara|Kamrej|Surat
+Gandhidham=Ahmedabad,Gandhidham Colony|Samakhiyali|CTM|Paldi
+Palanpur=Bhavnagar,Palanpur ST|Mehsana|Botad|Bhavnagar Circle
+Jay Dwarkesh Travels
+Rajkot=Surat,Limbda Chowk|Chotila|Vadodara|Kamrej|Surat
+Ahmedabad=Somnath,Paldi|Rajkot|Junagadh|Somnath
+Jamnagar=Vadodara,Jamnagar ST|Khambhalia|Rajkot|Lalbaug
+Bhuj=Ahmedabad,Bhujodi|Samakhiyali|Iskcon|Paldi
+Surat=Bhavnagar,Kamrej|Vadodara|Botad|Bhavnagar
+Junagadh=Bhuj,Zanzarda|Jetpur|Rajkot|Samakhiyali|Bhuj
+Morbi=Dwarka,Morbi Stand|Rajkot|Khambhalia|Dwarka
+Vadodara=Rajkot,Lalbaug|Bagodara|Limbda Chowk
+Dwarka=Ahmedabad,Dwarka Temple|Khambhalia|Rajkot|CTM|Paldi
+Bhavnagar=Jamnagar,Bhavnagar Circle|Botad|Rajkot|Jamnagar
+Nand Travels
+Ahmedabad=Bhuj,CTM|Samakhiyali|Bhachau|Bhujodi|Bhuj
+Rajkot=Surat,Limbda Chowk|Chotila|Vadodara|Kamrej
+Vadodara=Somnath,Lalbaug|Rajkot|Junagadh|Somnath Temple
+Surat=Jamnagar,Kamrej|Vadodara|Rajkot|Jamnagar ST
+Junagadh=Bhavnagar,Zanzarda|Jetpur|Botad|Bhavnagar
+Bhuj=Vadodara,Bhujodi|Samakhiyali|Morbi|Lalbaug
+Dwarka=Surat,Dwarka ST|Khambhalia|Vadodara|Navsari|Surat
+Gandhidham=Ahmedabad,Gandhidham Colony|Samakhiyali|CTM|Paldi
+Bhavnagar=Rajkot,Bhavnagar Circle|Botad|Rajkot|Limda Chowk
+Palanpur=Junagadh,Palanpur ST|Mehsana|Rajkot|Junagadh ST
