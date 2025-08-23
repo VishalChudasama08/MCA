@@ -2,9 +2,22 @@
 #include<conio.h>
 #include<string.h>
 #define SIZE 35
-#define WORD 15
+#define word 30
+#define max_op 8
+#define max_route 10
+#define max_pd 7
 
-char name[SIZE][WORD] = { "Ahmadabad", "Amreli", "Anand", "Bharuch", "Bhavnagar", "Botad", "Dang", "Dwarka", "Dhrol", "Dhoraji", "Dahod", "Gandhinagar", "Gir Somnath", "Gondal", "Jamnagar", "Junagadh", "Jetpur", "Khambhlia", "Kachchh", "Keshod", "Kodinar", "Mehsana", "Morbi", "Navsari", "Patan", "Porbandar", "Rajkot", "Surendranagar", "Surat", "Tapi", "Talala", "Vadodara", "Valsad", "Vapi", "Veraval" };
+struct Route {
+	char routeName[word];
+	char pickDrop[max_pd][word];
+};
+
+struct BusOperator {
+	char name[word];
+	struct Route routes[max_route];
+}operators[max_op];
+
+char name[SIZE][word] = { "Ahmedabad", "Amreli", "Anand", "Bharuch", "Bhavnagar", "Botad", "Dang", "Dwarka", "Dhrol", "Dhoraji", "Dahod", "Gandhinagar", "Gir Somnath", "Gondal", "Jamnagar", "Junagadh", "Jetpur", "Khambhalia", "Kachchh", "Keshod", "Kodinar", "Mehsana", "Morbi", "Navsari", "Patan", "Porbandar", "Rajkot", "Surendranagar", "Surat", "Tapi", "Talala", "Vadodara", "Valsad", "Vapi", "Veraval" };
 
 
 void title();
@@ -13,12 +26,13 @@ void booking();
 void cancel();
 void history();
 void display_list();
-void bus_data();
+void load_data();
 
 int main() {
 	int x = 8;
 	// clrscr();
 	title();
+	load_data();
 	do {
 		x = main_menu();
 		switch (x) {
@@ -33,10 +47,6 @@ int main() {
 		}
 		case 3: {
 			history();
-			break;
-		}
-		case 4: {
-			bus_data();
 			break;
 		}
 		default: printf("See main menu and Enter proper number"); getch();
@@ -54,16 +64,16 @@ int main_menu() {
 	printf("\n\t 1. Advance Booking");
 	printf("\n\t 2. Booking Cancellation");
 	printf("\n\t 3. Booking History");
-	printf("\n\t 4. Bus data");
 	printf("\n\t 0. Exit Program");
 	printf("\n\t Enter number from menu: ");
 	scanf("%d", &i);
 	return i;
 }
 
-void bus_data() {
-	char data[8][11][100], ch, line[100], i, route[50], * pickup_drop[80];
-	int bus_i, route_i;
+void load_data() {
+	struct BusOperator operators[max_op] = { 0 };
+	char data[100], line[100], * p, * startAt; //bus[8][30], route[8][11][30], pickup_drop[8][11][9][30] = { 0 }
+	int bus_i, route_i, i, j, stop_i;
 
 	FILE* bus_data = fopen("bus_data.txt", "r");
 
@@ -72,72 +82,54 @@ void bus_data() {
 		return;
 	}
 
-	for (bus_i = 0; bus_i < 8; bus_i++) {
-		for (route_i = 0; route_i < 11; route_i++) {
-			fgets(data[bus_i][route_i], 100, bus_data);
+	for (bus_i = 0; bus_i < max_op; bus_i++) {
+		for (route_i = 0; route_i < max_route + 1; route_i++) {
+			fgets(data, 100, bus_data);
+			j = strcspn(data, "\n"); // find '\n' index and
+			data[j] = '\0'; // replace with '\0'
+			// printf("%s\n", data);
+
+
+
+			if (route_i == 0) {
+				strcpy(operators[bus_i].name, data); // store operator name
+			}
+			else {
+				strcpy(line, data);
+				// printf("%s\n", line);
+				j = strcspn(line, ",");
+				line[j] = '\0';
+
+				strcpy(operators[bus_i].routes[route_i - 1].routeName, line); // route name, index start 0
+
+				startAt = line + j + 1; // line address, than go at j index address, than +1, now startAt have address after comma (,)
+				stop_i = 0;
+				p = strtok(startAt, "|");
+				while (p != NULL && stop_i < max_pd) {
+					strcpy(operators[bus_i].routes[route_i - 1].pickDrop[stop_i], p);
+					stop_i++;
+					p = strtok(NULL, "|");
+				}
+			}
 		}
 	}
 
-	printf("bus Operator\t\troute_i\t\t\t\tpickup-drop points\n");
-	for (bus_i = 0; bus_i < 8; bus_i++) {
-		// printf("%s\t", data[bus_i][0]);
-		for (route_i = 0; route_i < 11; route_i++) {
-			for (i = 0; i < strlen(data[bus_i][route_i]); i++) {
-				line[i] = data[bus_i][route_i][i];
+
+	for (bus_i = 0; bus_i < max_op; bus_i++) {
+		printf("Operator[%d]: %s\n", bus_i + 1, operators[bus_i].name);
+		for (route_i = 0; route_i < max_route; route_i++) {
+			if (operators[bus_i].routes[route_i].routeName[0] != '\0') {
+				printf("\tRoute[%d]: %s\n", route_i + 1, operators[bus_i].routes[route_i].routeName);
+				for (stop_i = 0; stop_i < max_pd; stop_i++) {
+					if (operators[bus_i].routes[route_i].pickDrop[stop_i][0] != '\0')
+						printf("\t\tStop[%d]: %s\n", stop_i + 1, operators[bus_i].routes[route_i].pickDrop[stop_i]);
+				}
 			}
-			// line[i] = '\0'; 
-			line[strcspn(line, "\n")] = '\0'; // all lines have '\n' at last than replace all '\n' by '\0'. to avoid garbage value
-			// printf("%d=> %s\n", route_i, line);
 		}
 	}
+
 	fclose(bus_data);
 }
-// chatgpt code
-// void loadData(struct Operator operators[], int *operatorCount, const char *filename) {
-//     FILE *fp = fopen(filename, "r");
-//     if (!fp) {
-//         printf("Error opening file.\n");
-//         exit(1);
-//     }
-
-//     char line[256];
-//     *operatorCount = 0;
-
-//     while (fgets(line, sizeof(line), fp)) {
-//         line[strcspn(line, "\n")] = 0; // remove newline
-//         strcpy(operators[*operatorCount].name, line);
-
-//         // read number of routes
-//         fgets(line, sizeof(line), fp);
-//         int routeCount = atoi(line);
-//         operators[*operatorCount].routeCount = routeCount;
-
-//         for (int r = 0; r < routeCount; r++) {
-//             fgets(line, sizeof(line), fp);
-//             line[strcspn(line, "\n")] = 0;
-
-//             // split start, end, stops
-//             char *start = strtok(line, ",");
-//             char *end   = strtok(NULL, ",");
-//             char *stops = strtok(NULL, ",");
-
-//             strcpy(operators[*operatorCount].routes[r].start, start);
-//             strcpy(operators[*operatorCount].routes[r].end, end);
-
-//             // split stops by '|'
-//             int stopIndex = 0;
-//             char *stop = strtok(stops, "|");
-//             while (stop && stopIndex < MAX_POINTS) {
-//                 strcpy(operators[*operatorCount].routes[r].stops[stopIndex++], stop);
-//                 stop = strtok(NULL, "|");
-//             }
-//             operators[*operatorCount].routes[r].stopCount = stopIndex;
-//         }
-//         (*operatorCount)++;
-//     }
-
-//     fclose(fp);
-// }
 
 void booking() {
 	int from, to;
@@ -149,8 +141,7 @@ reBooking:
 	scanf("%d", &from);
 	from--; // Adjusting for 0-based index
 
-	display_list();
-	printf("\n\tTo: ");
+	printf("\tTo: ");
 	scanf("%d", &to);
 	to--; // Adjusting for 0-based index
 
