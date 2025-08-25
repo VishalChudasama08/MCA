@@ -94,9 +94,9 @@ void display_bus() {
 		printf("\n\n\tOperator-%d: %s\n", bus_i + 1, operators[bus_i].name);
 		for (route_i = 0; route_i < max_route; route_i++) {
 			if (operators[bus_i].routes[route_i].routeName[0] != '\0') {
+				printf("Route-%d: %-26s", route_i + 1, operators[bus_i].routes[route_i].routeName);
 				if (route_i % 2 != 0)
 					printf("\n");
-				printf("Route-%d: %s\t\t", route_i + 1, operators[bus_i].routes[route_i].routeName);
 			}
 		}
 	}
@@ -413,7 +413,7 @@ void history() {
 	FILE* rh;
 	char number[12], fname[15], line[150], * p, info[][15] = { "Name", "Mobile number", "Journey", "Bus", "Seat", "Price", "Date", "Status" };
 	char* name, * mobile, * journey, * bus, * seat, * price, * date, * status;
-	// int detail = 0, i = 1;
+	int detail = 0, i = 1;
 
 	printf("\n\t Enter Mobile Number: ");
 	scanf("%s", number);
@@ -433,7 +433,7 @@ void history() {
 	printf("-------------------------------------------------------------------------------------------------------\n");
 
 
-	int detail = 1;
+	detail = 1;
 	while (fgets(line, sizeof(line), rh)) {
 		name = strtok(line, "|");
 		mobile = strtok(NULL, "|");
