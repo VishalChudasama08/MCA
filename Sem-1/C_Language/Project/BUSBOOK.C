@@ -67,7 +67,7 @@ int main() {
 			display_bus();
 			break;
 		}
-		default: printf("See main menu and Enter proper number"); getch();
+		default: printf("Invalid input. See main menu and Enter proper number"); getch();
 		}
 	} while (x); // x = 0 means false
 	return 0;
