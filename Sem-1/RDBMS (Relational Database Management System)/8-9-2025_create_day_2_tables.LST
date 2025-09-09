@@ -1,0 +1,605 @@
+set linesize 500;
+SQL> set pagesize 200;
+SQL> selet * from tab;
+SP2-0734: unknown command beginning "selet * fr..." - rest of line ignored.
+SQL> selete * from tab;
+SP2-0734: unknown command beginning "selete * f..." - rest of line ignored.
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+DEPT                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+9 rows selected.
+
+SQL> drop table SALES_ORDER_DETAILS;
+
+Table dropped.
+
+SQL> drop table SALES_ORDER;
+
+Table dropped.
+
+SQL> drop table SALESMAN_MASTER;
+
+Table dropped.
+
+SQL> drop table PRODUCT_MASTER;
+
+Table dropped.
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+BIN$9Hr5EYgoT5ac9yDZwoqTyw==$0 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+BIN$EFExcIbZRGqXfFE73K/kNQ==$0 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+7 rows selected.
+
+SQL> create table client_master(
+  2  c_no varchar2(4) check (c_no like 'C%')primary key,
+  3  client_name varchar2(20) not null,
+  4  pincode number(6)check (LENGTH(pincode)=6)not null,
+  5  birth_date date not null,
+  6  occupation varchar(30) not null);
+
+Table created.
+
+SQL> desc client_master;
+ Name                                                                                                                                                                                                                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ C_NO                                                                                                                                                                                                                                                                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                                                                                                                                                                                                                                                                           NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                                                                                                                                                                                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                                                                                                                                                                                                                            NOT NULL DATE
+ OCCUPATION                                                                                                                                                                                                                                                                                            NOT NULL VARCHAR2(30)
+
+SQL> select * from user_constraints where table_name='CLIENT_MASTER';
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0032204                   C CLIENT_MASTER                  "CLIENT_NAME" IS NOT NULL                                                                                                                                ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032205                   C CLIENT_MASTER                  "PINCODE" IS NOT NULL                                                                                                                                    ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032206                   C CLIENT_MASTER                  "BIRTH_DATE" IS NOT NULL                                                                                                                                 ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032207                   C CLIENT_MASTER                  "OCCUPATION" IS NOT NULL                                                                                                                                 ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032208                   C CLIENT_MASTER                  c_no like 'C%'                                                                                                                                           ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032209                   C CLIENT_MASTER                  LENGTH(pincode)=6                                                                                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032210                   P CLIENT_MASTER                                                                                                                                                                           ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032210                                                                                                                               
+
+7 rows selected.
+
+SQL> insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+
+1 row created.
+
+SQL> 
+SQL> insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO');
+
+1 row created.
+
+SQL> 
+SQL> insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor')
+  2  
+SQL> 
+SQL> insert into client_master values('C005','Preeti Patel',390040,'28-feb-1971','Clerk');
+
+1 row created.
+
+SQL>  CREATE TABLE PRODUCT_MASTER(
+  2      P_NO VARCHAR2(5)CHECK (P_NO LIKE 'P%')PRIMARY KEY,
+  3      DESCRIPTION VARCHAR2(20) NOT NULL,
+  4      PROFIT_PER NUMBER(2) NOT NULL,
+  5      UNIT VARCHAR2(10)NOT NULL,
+  6      QTY_HAND NUMBER(3) NOT NULL,
+  7      RE_ORDER NUMBER(4)NOT NULL,
+  8      SELL_P NUMBER(4)NOT NULL,
+  9      COST_P NUMBER(4)NOT NULL);
+
+Table created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P001','T-SHIRT',5,'PIECE',200,50,350,250);
+
+1 row created.
+
+SQL>  INSERT INTO PRODUCT_MASTER VALUES('P002','JEANS',6,'PIECE',250,40,500,350);
+
+1 row created.
+
+SQL>  INSERT INTO PRODUCT_MASTER VALUES('P003','SKIRT',6,'PIECE',100,50,350,200);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P004','SAREE',3,'PIECE',100,20,800,600);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P005','Shirt',4,'Piece',300,60,450,300);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P006','Kurta',7,'Piece',120,30,700,500);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P007','Cap',8,'Piece',250,40,150,90);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P008','Shoes',5,'Pair',180,50,1000,700);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P009','Belt',4,'Piece',220,30,200,120);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P010','Jacket',6,'Piece',80,20,1500,1000);
+
+1 row created.
+
+SQL> create table salesman_master(
+  2  s_no varchar2(5) check (s_no like 'S%')primary key,
+  3  name varchar2(20) not null,
+  4  add1 varchar2(10),
+  5  add2 varchar2(15),
+  6  city varchar2(10)not null,
+  7  pincode number(6),
+  8  state varchar2(15) not null,
+  9  salary number(10) not null,
+ 10  target number(5)not null,
+ 11  sales number(5)not null);
+
+Table created.
+
+SQL> 
+SQL> insert into salesman_master values('S001','AMAN','3,DEV APPT','VAGHODIA','BARODA',NULL,'GUJRAT',5000,100,50);
+
+1 row created.
+
+SQL> insert into salesman_master values('S002','OMKAR','NULL','NULL','BHOPAL',NULL,'MP',4500,200,150);
+
+1 row created.
+
+SQL>  insert into salesman_master values('S003','RAJ','B-104','VERLI','MUMBAI',400002,'MAHARASHTRA',5500,200,200);
+
+1 row created.
+
+SQL> insert into salesman_master values('S004','ASHISH','1,SMRUTI','GHODDOL','SURAT',NULL,'GUJRAT',4500,150,100);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S005','Meera','10, Lotus','Alkapuri','Vadodara','390007','Gujarat',6000,300,250);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S006','Karan','Sector-17','Navrangpura','Ahmedabad','380009','Gujarat',5500,220,180);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S007','Priya','L-12','MG Road','Pune','411001','Maharashtra',5200,180,160);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S008','Dev','House-22','Civil Lines','Delhi','110054','Delhi',5800,250,200);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S009','Sahil','Flat-4','Indira Nagar','Lucknow','226016','UP',4900,160,140);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S010','Nidhi','Block-7','Park Street','Kolkata','700016','WB',5300,210,190);
+
+1 row created.
+
+SQL> CREATE TABLE Sales_Order (
+  2      Order_No     VARCHAR2(4) PRIMARY KEY CHECK (Order_No LIKE 'O%'),
+  3      Client_No    VARCHAR2(5),
+  4      Order_Date   DATE,
+  5      Salesman_No  VARCHAR2(4) REFERENCES Salesman_Master(S_No),
+  6      Delivery_Type CHAR(1) CHECK (Delivery_Type IN ('F','P')),
+  7      Bill_Paid    CHAR(1) CHECK (Bill_Paid IN ('Y','N')),
+  8      Delivery_Date DATE,
+  9      Order_Status VARCHAR2(20) CHECK (Order_Status IN ('In Process','Pending','Fulfilled'))
+ 10  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Sales_Order_Details (
+  2      Order_No       VARCHAR2(4),
+  3      Product_No     VARCHAR2(4),
+  4      Qty_Ordered    NUMBER(6) CHECK (Qty_Ordered > 0),
+  5      Qty_Dispatched NUMBER(6) CHECK (Qty_Dispatched >= 0),
+  6      Product_Rate   NUMBER(10,2) CHECK (Product_Rate >= 0),
+  7      PRIMARY KEY (Order_No, Product_No),
+  8      FOREIGN KEY (Order_No) REFERENCES Sales_Order(Order_No),
+  9      FOREIGN KEY (Product_No) REFERENCES Product_Master(P_No)
+ 10  );
+
+Table created.
+
+SQL> 
+SQL> -- Sample Sales_Order Inserts
+SQL> INSERT INTO Sales_Order VALUES ('O001','C001',SYSDATE-15,'S001','F','Y',SYSDATE-10,'Fulfilled');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O002','C002',SYSDATE-14,'S002','P','N',SYSDATE-7,'Pending');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O003','C003',SYSDATE-13,'S003','F','Y',SYSDATE-5,'Fulfilled');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O004','C004',SYSDATE-12,'S004','P','N',SYSDATE-3,'In Process');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O005','C005',SYSDATE-11,'S005','F','Y',SYSDATE-2,'Fulfilled');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O006','C006',SYSDATE-10,'S006','P','Y',SYSDATE+2,'Pending');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O007','C007',SYSDATE-9,'S007','F','N',SYSDATE+3,'In Process');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O008','C008',SYSDATE-8,'S008','P','Y',SYSDATE+4,'Pending');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O009','C009',SYSDATE-7,'S009','F','Y',SYSDATE+5,'Fulfilled');
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order VALUES ('O010','C010',SYSDATE-6,'S010','P','N',SYSDATE+6,'In Process');
+
+1 row created.
+
+SQL> -- Sales_Order_Details Inserts
+SQL> INSERT INTO Sales_Order_Details VALUES ('O001','P001',10,10,3500);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O002','P002',5,4,2000);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O003','P003',8,8,2800);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O004','P004',6,3,2400);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O005','P005',12,12,5400);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O006','P006',7,6,4200);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O007','P007',15,12,1800);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O008','P008',9,8,8000);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O009','P009',20,20,4000);
+
+1 row created.
+
+SQL> INSERT INTO Sales_Order_Details VALUES ('O010','P010',4,2,3000);
+
+1 row created.
+
+SQL> CREATE TABLE Applicant (
+  2      AID     VARCHAR2(4) PRIMARY KEY CHECK (AID LIKE 'A%'),
+  3      A_Name  VARCHAR2(30) NOT NULL,
+  4      Address VARCHAR2(50),
+  5      B_Date  DATE
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Entrance_Test (
+  2      ET_ID     VARCHAR2(4) PRIMARY KEY CHECK (ET_ID LIKE 'T%'),
+  3      ET_Name   VARCHAR2(30) NOT NULL,
+  4      Max_Score NUMBER(3) CHECK (Max_Score <= 100)
+  5  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE ETest_Details (
+  2      AID        VARCHAR2(4),
+  3      ETID       VARCHAR2(4),
+  4      ETest_Date DATE,
+  5      Score      NUMBER(3) CHECK (Score >= 0),
+  6      PRIMARY KEY (AID, ETID),
+  7      FOREIGN KEY (AID) REFERENCES Applicant(AID),
+  8      FOREIGN KEY (ETID) REFERENCES Entrance_Test(ET_ID)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> -- Applicant Inserts
+SQL> INSERT INTO Applicant VALUES ('A001','Ravi','Baroda',DATE '2000-05-12');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A002','Neha','Surat',DATE '1999-08-23');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A003','Amit','Mumbai',DATE '2001-02-14');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A004','Pooja','Delhi',DATE '2000-11-05');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A005','Karan','Pune',DATE '1998-09-30');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A006','Sita','Kolkata',DATE '2000-07-17');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A007','Mohan','Lucknow',DATE '2001-01-25');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A008','Anjali','Jaipur',DATE '1999-04-19');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A009','Vikas','Nagpur',DATE '2000-06-10');
+
+1 row created.
+
+SQL> INSERT INTO Applicant VALUES ('A010','Deepa','Chennai',DATE '2001-12-28');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- Entrance_Test Inserts
+SQL> INSERT INTO Entrance_Test VALUES ('T001','Maths',100);
+
+1 row created.
+
+SQL> INSERT INTO Entrance_Test VALUES ('T002','Physics',90);
+
+1 row created.
+
+SQL> INSERT INTO Entrance_Test VALUES ('T003','Chemistry',95);
+
+1 row created.
+
+SQL> INSERT INTO Entrance_Test VALUES ('T004','Biology',100);
+
+1 row created.
+
+SQL> INSERT INTO Entrance_Test VALUES ('T005','English',80);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- ETest_Details Inserts
+SQL> INSERT INTO ETest_Details VALUES ('A001','T001',SYSDATE-20,80);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A002','T002',SYSDATE-18,70);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A003','T003',SYSDATE-17,75);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A004','T004',SYSDATE-15,85);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A005','T005',SYSDATE-14,65);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A006','T001',SYSDATE-13,90);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A007','T002',SYSDATE-12,60);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A008','T003',SYSDATE-10,70);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A009','T004',SYSDATE-9,95);
+
+1 row created.
+
+SQL> INSERT INTO ETest_Details VALUES ('A010','T005',SYSDATE-8,75);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE Distributor (
+  2      Dno    VARCHAR2(4) PRIMARY KEY,
+  3      DName  VARCHAR2(30) NOT NULL,
+  4      City   VARCHAR2(30),
+  5      Phone  VARCHAR2(12)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Item (
+  2      Item_No   VARCHAR2(5) PRIMARY KEY CHECK (Item_No LIKE 'I%'),
+  3      Item_Name VARCHAR2(30) NOT NULL,
+  4      Price     NUMBER(8,2) NOT NULL CHECK (Price > 0),
+  5      Weight    NUMBER(8,2) NOT NULL CHECK (Weight > 0)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Dist_Item (
+  2      Dno     VARCHAR2(4),
+  3      Item_No VARCHAR2(5),
+  4      Qty     NUMBER(6) NOT NULL CHECK (Qty > 0),
+  5      Order_Date DATE,
+  6      PRIMARY KEY (Dno, Item_No),
+  7      FOREIGN KEY (Dno) REFERENCES Distributor(Dno),
+  8      FOREIGN KEY (Item_No) REFERENCES Item(Item_No)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> -- Distributor Inserts
+SQL> INSERT INTO Distributor VALUES ('D001','ABC Distributors','Baroda','9876543210');
+
+1 row created.
+
+SQL> INSERT INTO Distributor VALUES ('D002','Shree Suppliers','Surat','9123456780');
+
+1 row created.
+
+SQL> INSERT INTO Distributor VALUES ('D003','Om Traders','Mumbai','9988776655');
+
+1 row created.
+
+SQL> INSERT INTO Distributor VALUES ('D004','Global Supply','Delhi','9012345678');
+
+1 row created.
+
+SQL> INSERT INTO Distributor VALUES ('D005','FastMart','Pune','9090909090');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> -- Item Inserts
+SQL> INSERT INTO Item VALUES ('I001','Rice',50,5);
+
+1 row created.
+
+SQL> INSERT INTO Item VALUES ('I002','Wheat',40,4);
+
+1 row created.
+
+SQL> INSERT INTO Item VALUES ('I003','Sugar',35,3);
+
+1 row created.
+
+SQL> INSERT INTO Item VALUES ('I004','Oil',120,2);
+
+1 row created.
+
+SQL> INSERT INTO Item VALUES ('I005','Salt',20,1);
+
+1 row created.
+
+SQL> 
+SQL> -- Dist_Item Inserts
+SQL> INSERT INTO Dist_Item VALUES ('D001','I001',100,SYSDATE-10);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D001','I002',80,SYSDATE-9);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D002','I003',50,SYSDATE-8);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D002','I004',60,SYSDATE-7);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D003','I005',200,SYSDATE-6);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D003','I001',120,SYSDATE-5);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D004','I002',150,SYSDATE-4);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D004','I003',70,SYSDATE-3);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D005','I004',90,SYSDATE-2);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D005','I005',250,SYSDATE-1);
+
+1 row created.
+
+SQL> SELECT * FROM TAB;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+16 rows selected.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> 

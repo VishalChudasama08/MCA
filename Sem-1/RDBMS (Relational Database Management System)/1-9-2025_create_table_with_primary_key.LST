@@ -1,0 +1,89 @@
+drop table student_tab;
+
+Table dropped.
+
+SQL> create table student_tab(rollno number(2) primary key, name varchar2(20), age number(3));
+
+Table created.
+
+SQL> desc * student_tab;
+SP2-0565: Illegal identifier.
+SQL> desc student_tab;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ROLLNO                                    NOT NULL NUMBER(2)
+ NAME                                               VARCHAR2(20)
+ AGE                                                NUMBER(3)
+
+SQL> insert into student_tab values(&rollno, '&name', &age);
+Enter value for rollno: 1
+Enter value for name: a
+Enter value for age: 19
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(1, 'a', 19)
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 2
+Enter value for name: b
+Enter value for age: 20
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(2, 'b', 20)
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 3
+Enter value for name: c
+Enter value for age: 21
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(3, 'c', 21)
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 4
+Enter value for name: d
+Enter value for age: 20
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(4, 'd', 20)
+
+1 row created.
+
+SQL> /
+Enter value for rollno: 4
+Enter value for name: e
+Enter value for age: 21
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(4, 'e', 21)
+insert into student_tab values(4, 'e', 21)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCAB250013.SYS_C0022653) violated 
+
+
+SQL> /
+Enter value for rollno: 5
+Enter value for name: e
+Enter value for age: 21
+old   1: insert into student_tab values(&rollno, '&name', &age)
+new   1: insert into student_tab values(5, 'e', 21)
+
+1 row created.
+
+SQL> select * from student_tab;
+
+    ROLLNO NAME                        AGE                                      
+---------- -------------------- ----------                                      
+         1 a                            19                                      
+         2 b                            20                                      
+         3 c                            21                                      
+         4 d                            20                                      
+         5 e                            21                                      
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

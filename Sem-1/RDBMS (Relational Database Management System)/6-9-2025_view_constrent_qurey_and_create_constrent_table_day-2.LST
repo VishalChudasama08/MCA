@@ -1,0 +1,367 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                               
+------------------------------ ------- ----------                               
+CLIENT_MASTER                  TABLE                                            
+DEPT                           TABLE                                            
+EMP                            TABLE                                            
+GARBA                          TABLE                                            
+STUDENT_CONS                   TABLE                                            
+STUDENT_TAB                    TABLE                                            
+
+6 rows selected.
+
+SQL> select * from student_cons;
+
+ROLLN NAME                    PINCODE DEGREE                                    
+----- -------------------- ---------- ----------                                
+B01   v                        123456 BCA                                       
+B02   b                        654321 BCOM                                      
+
+SQL> select * from client_master;
+
+no rows selected
+
+SQL> desc client_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ C_NO                                      NOT NULL VARCHAR2(4)
+ CLIENT_NAME                               NOT NULL VARCHAR2(25)
+ PINCODE                                   NOT NULL NUMBER(6)
+ BIRTH_DATE                                NOT NULL DATE
+ OCCUPATION                                NOT NULL VARCHAR2(15)
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master value ('C001', 'Kajal Oza', 380036, '14-july-1987', 'Manager')
+SQL> /
+INSERT INTO client_master value ('C001', 'Kajal Oza', 380036, '14-july-1987', 'Manager')
+                                 *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master values ('C001', 'Kajal Oza', 380036, '14-july-1987', 'Manager')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  INSERT INTO client_master values ('C002', 'Vraj Shah', 380058, '20-nov-1986', 'CEO')
+  2  /
+  3  INSERT INTO client_master values ('C003', 'Dhyan Dave', 387903, '17-june-1988', 'Doctor')
+  4  /
+  5  INSERT INTO client_master values ('C004', 'Mira Vaid', 398006, '5-jan-1976', 'Professor')
+  6  /
+  7* INSERT INTO client_master values ('C005', 'Preeti Patel', 390040, '28-feb-1971', 'Clerk')
+SQL> /
+/
+*
+ERROR at line 2:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  INSERT INTO client_master values ('C002', 'Vraj Shah', 380058, '20-nov-1986', 'CEO');
+  2  INSERT INTO client_master values ('C003', 'Dhyan Dave', 387903, '17-june-1988', 'Doctor');
+  3  INSERT INTO client_master values ('C004', 'Mira Vaid', 398006, '5-jan-1976', 'Professor');
+  4* INSERT INTO client_master values ('C005', 'Preeti Patel', 390040, '28-feb-1971', 'Clerk');
+SQL> /
+INSERT INTO client_master values ('C002', 'Vraj Shah', 380058, '20-nov-1986', 'CEO');
+                                                                                    *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master values ('C002', 'Vraj Shah', 380058, '20-nov-1986', 'CEO')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master values ('C003', 'Dhyan Dave', 387903, '17-june-1988', 'Doctor')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master values ('C004', 'Mira Vaid', 398006, '5-jan-1976', 'Professor')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO client_master values ('C005', 'Preeti Patel', 390040, '28-feb-1971', 'Clerk')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Product_Master(
+  2  	P_No varchar2(5) check(like P_No 'P%') primary key,
+  3  	Desc varchar2(10) NOT NULL,
+  4  	Profit_Per number(4) NOT NULL,
+  5  	Unit varchar2(10) NOT NULL,
+  6  	Qty_Hand number(5) NOT NULL,
+  7  	ReOrder number(5) NOT NULL,
+  8  	Sell_P number(5) NOT NULL,
+  9  	Cost_P number(5) NOT NULL
+ 10* )
+SQL> /
+	P_No varchar2(5) check(like P_No 'P%') primary key,
+	                       *
+ERROR at line 2:
+ORA-00936: missing expression 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Product_Master(
+  2  	P_No varchar2(5) check(P_No like 'P%') primary key,
+  3  	Desc varchar2(10) NOT NULL,
+  4  	Profit_Per number(4) NOT NULL,
+  5  	Unit varchar2(10) NOT NULL,
+  6  	Qty_Hand number(5) NOT NULL,
+  7  	ReOrder number(5) NOT NULL,
+  8  	Sell_P number(5) NOT NULL,
+  9  	Cost_P number(5) NOT NULL
+ 10* )
+SQL> /
+	Desc varchar2(10) NOT NULL,
+	*
+ERROR at line 3:
+ORA-00904: : invalid identifier 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Product_Master(
+  2  	P_No varchar2(5) check(P_No like 'P%') PRIMARY KEY,
+  3  	Desc varchar2(10) NOT NULL,
+  4  	Profit_Per number(4) NOT NULL,
+  5  	Unit varchar2(10) NOT NULL,
+  6  	Qty_Hand number(5) NOT NULL,
+  7  	ReOrder number(5) NOT NULL,
+  8  	Sell_P number(5) NOT NULL,
+  9  	Cost_P number(5) NOT NULL
+ 10* )
+SQL> /
+	Desc varchar2(10) NOT NULL,
+	*
+ERROR at line 3:
+ORA-00904: : invalid identifier 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE TABLE Product_Master(
+  2  	P_No varchar2(5) check(P_No like 'P%') PRIMARY KEY,
+  3  	Description varchar2(10) NOT NULL,
+  4  	Profit_Per number(4) NOT NULL,
+  5  	Unit varchar2(10) NOT NULL,
+  6  	Qty_Hand number(5) NOT NULL,
+  7  	ReOrder number(5) NOT NULL,
+  8  	Sell_P number(5) NOT NULL,
+  9  	Cost_P number(5) NOT NULL
+ 10* )
+SQL> /
+
+Table created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* commit
+SQL> ed
+Wrote file afiedt.buf
+
+  1* commit
+SQL> desc product_master;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ P_NO                                      NOT NULL VARCHAR2(5)
+ DESCRIPTION                               NOT NULL VARCHAR2(10)
+ PROFIT_PER                                NOT NULL NUMBER(4)
+ UNIT                                      NOT NULL VARCHAR2(10)
+ QTY_HAND                                  NOT NULL NUMBER(5)
+ REORDER                                   NOT NULL NUMBER(5)
+ SELL_P                                    NOT NULL NUMBER(5)
+ COST_P                                    NOT NULL NUMBER(5)
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Product_Master values ('P001', 'T-Shirt', 5, 'Piece', 200, 50, 350, 250)
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Product_Master values ('P001', 'T-Shirt', 5, 'Piece', 200, 50, 350, 250)
+SQL> INSERT INTO Product_Master values ('P002', 'Jeans', 6, 'Piece', 150, 40, 500, 350);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master values ('P003', 'Skirt', 6, 'Piece', 100, 50, 350, 200);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master values ('P004', 'Saree', 3, 'Piece', 100, 20, 800, 600);
+
+1 row created.
+
+SQL> set linesize 300;
+SQL> set pagesize 120;
+SQL> select * from product_master;
+
+P_NO  DESCRIPTIO PROFIT_PER UNIT         QTY_HAND    REORDER     SELL_P     COST_P                                                                                                                                                                                                                          
+----- ---------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                                                                                                                                          
+P001  T-Shirt             5 Piece             200         50        350        250                                                                                                                                                                                                                          
+P002  Jeans               6 Piece             150         40        500        350                                                                                                                                                                                                                          
+P003  Skirt               6 Piece             100         50        350        200                                                                                                                                                                                                                          
+P004  Saree               3 Piece             100         20        800        600                                                                                                                                                                                                                          
+
+SQL> commit;
+
+Commit complete.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create table Salesman_Master(
+  2  	S_No varchar2(5) CHECK(S_No LIKE 'S%') PRIMARY KEY,
+  3  	Name varchar2(20) NOT NULL,
+  4  	Add1 varchar2(10) NOT NULL,
+  5  	Add2 varchar2(10) NOT NULL,
+  6  	City varchar2(20) NOT NULL,
+  7  	Pincode number(6) CHECK(LENGTH(Pincode) = 6),
+  8  	State varchar2(20) NOT NULL,
+  9  	Salary number(10) NOT NULL,
+ 10  	Target number(8) NOT NULL,
+ 11  	Sales number(8) NOT NULL
+ 12* )
+SQL> /
+
+Table created.
+
+SQL> desc salesman_master;
+ Name                                                                                                                                                                          Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ S_NO                                                                                                                                                                          NOT NULL VARCHAR2(5)
+ NAME                                                                                                                                                                          NOT NULL VARCHAR2(20)
+ ADD1                                                                                                                                                                          NOT NULL VARCHAR2(10)
+ ADD2                                                                                                                                                                          NOT NULL VARCHAR2(10)
+ CITY                                                                                                                                                                          NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                                                                                                NUMBER(6)
+ STATE                                                                                                                                                                         NOT NULL VARCHAR2(20)
+ SALARY                                                                                                                                                                        NOT NULL NUMBER(10)
+ TARGET                                                                                                                                                                        NOT NULL NUMBER(8)
+ SALES                                                                                                                                                                         NOT NULL NUMBER(8)
+
+SQL> select * from user_constraints where table_name='SALESMAN_MASTER';
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED         
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- -------------     
+GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                                                                                                                        
+-------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                                                                                                                      
+MCAB250013                     SYS_C0028891                   C SALESMAN_MASTER                "NAME" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028892                   C SALESMAN_MASTER                "ADD1" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028893                   C SALESMAN_MASTER                "ADD2" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028894                   C SALESMAN_MASTER                "CITY" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028895                   C SALESMAN_MASTER                "STATE" IS NOT NULL                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028896                   C SALESMAN_MASTER                "SALARY" IS NOT NULL                                                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028897                   C SALESMAN_MASTER                "TARGET" IS NOT NULL                                                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028898                   C SALESMAN_MASTER                "SALES" IS NOT NULL                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028899                   C SALESMAN_MASTER                S_No LIKE 'S%'                                                                                                                                           ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028900                   C SALESMAN_MASTER                LENGTH(Pincode) = 6                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0028901                   P SALESMAN_MASTER                                                                                                                                                                         ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          02-SEP-25 MCAB250013                     SYS_C0028901                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                            
+
+11 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* set linesize 500
+SQL> /
+set linesize 500
+    *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> set linesize 500;
+SQL> set pagesize 120;
+SQL> select * from user_constraints where table_name='SALESMAN_MASTER'
+  2  /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0028891                   C SALESMAN_MASTER                "NAME" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028892                   C SALESMAN_MASTER                "ADD1" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028893                   C SALESMAN_MASTER                "ADD2" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028894                   C SALESMAN_MASTER                "CITY" IS NOT NULL                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028895                   C SALESMAN_MASTER                "STATE" IS NOT NULL                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028896                   C SALESMAN_MASTER                "SALARY" IS NOT NULL                                                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028897                   C SALESMAN_MASTER                "TARGET" IS NOT NULL                                                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028898                   C SALESMAN_MASTER                "SALES" IS NOT NULL                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028899                   C SALESMAN_MASTER                S_No LIKE 'S%'                                                                                                                                           ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028900                   C SALESMAN_MASTER                LENGTH(Pincode) = 6                                                                                                                                      ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0028901                   P SALESMAN_MASTER                                                                                                                                                                         ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          02-SEP-25 MCAB250013                     SYS_C0028901                                                                                                                               
+
+11 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

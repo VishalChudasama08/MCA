@@ -1,0 +1,12 @@
+.feature:hover {
+  cursor: pointer;
+  background-color: #ffc107 !important;
+  color: #000;
+}
+
+.output {
+  padding: 15px;
+  border: 2px solid black;
+  background: #fff;
+  min-height: 300px;
+}

@@ -1,0 +1,116 @@
+lus: Release 9.0.1.0.1 - Production on Sat Aug 30 13:40:24 2025
+
+opyright 2001 Oracle Corporation.  All rights reserved.
+
+
+cted to:
+e Database 10g Enterprise Edition Release 10.2.0.3.0 - Production
+the Partitioning, OLAP and Data Mining options
+
+CREATE TABLE student_tab;
+E TABLE student_tab
+                  *
+ at line 1:
+0906: missing left parenthesis
+
+
+CREATE TABLE student_tab/
+/
+E TABLE student_tab/
+                   *
+ at line 1:
+0922: missing or invalid option
+
+
+CREATE TABLE student_tab(rollno number(3), name varchar2(50), age number(2));
+
+ created.
+
+SELECT * FROM student_tab;
+
+ws selected
+
+DESC student_tab;
+                                      Null?    Type
+------------------------------------- -------- ----------------------------
+NO                                             NUMBER(3)
+                                               VARCHAR2(50)
+                                               NUMBER(2)
+
+INSERT INTO student_tab(rollno, name, age) VALUES (1, "a", 18),(2, "b", 19);
+T INTO student_tab(rollno, name, age) VALUES (1, "a", 18),(2, "b", 19)
+                                                         *
+ at line 1:
+0933: SQL command not properly ended
+
+
+INSERT INTO student_tab(rollno, name, age) VALUES (1, "a", 18)(2, "b", 19);
+T INTO student_tab(rollno, name, age) VALUES (1, "a", 18)(2, "b", 19)
+                                                         *
+ at line 1:
+0933: SQL command not properly ended
+
+
+INSERT INTO student_tab(rollno, name, age) VALUES (1, "a", 18);
+T INTO student_tab(rollno, name, age) VALUES (1, "a", 18)
+                                                 *
+ at line 1:
+0984: column not allowed here
+
+
+INSERT INTO student_tab(rollno, name, age) VALUES (1, 'a', 18);
+
+ created.
+
+INSERT INTO student_tab VALUES (2, 'b', 19)(3, 'c', 20);
+T INTO student_tab VALUES (2, 'b', 19)(3, 'c', 20)
+                                      *
+ at line 1:
+0933: SQL command not properly ended
+
+
+INSERT INTO student_tab VALUES (&rollno, '&name', &age);
+ value for rollno: 2
+ value for name: b
+ value for age: 19
+ 1: INSERT INTO student_tab VALUES (&rollno, '&name', &age)
+ 1: INSERT INTO student_tab VALUES (2, 'b', 19)
+
+ created.
+
+/
+ value for rollno: 3
+ value for name: c
+ value for age: 20
+ 1: INSERT INTO student_tab VALUES (&rollno, '&name', &age)
+ 1: INSERT INTO student_tab VALUES (3, 'c', 20)
+
+ created.
+
+/
+ value for rollno: 4
+ value for name: d
+ value for age: 21
+ 1: INSERT INTO student_tab VALUES (&rollno, '&name', &age)
+ 1: INSERT INTO student_tab VALUES (4, 'd', 21)
+
+ created.
+
+/
+ value for rollno: 5
+ value for name: e
+ value for age: 22
+ 1: INSERT INTO student_tab VALUES (&rollno, '&name', &age)
+ 1: INSERT INTO student_tab VALUES (5, 'e', 22)
+
+ created.
+
+SELECT * FROM student_tab;
+
+OLLNO NAME                                                      AGE
+----- -------------------------------------------------- ----------
+    1 a                                                          18
+    2 b                                                          19
+    3 c                                                          20
+    4 d                                                          21
+    5 e                                                          22

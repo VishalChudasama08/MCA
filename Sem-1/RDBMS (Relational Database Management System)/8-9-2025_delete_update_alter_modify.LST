@@ -1,0 +1,294 @@
+set linesize 500;
+SQL> set pagesize 100;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+16 rows selected.
+
+SQL> select * from student_cons;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> insert into student_cons values('B03', 'c', 456123, 'BCOM');
+
+1 row created.
+
+SQL> select * from student_cons;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B03   c                        456123 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> delete from student_cons where name='c';
+
+1 row deleted.
+
+SQL> SELECT * FROM STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> SELECT FROM STUDENT_CONS;
+SELECT FROM STUDENT_CONS
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> SELECT * FROM STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> insert into student_cons values('B03', 'c', 456123, 'BCOM');
+
+1 row created.
+
+SQL> SELECT * FROM STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B03   c                        456123 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> UPDATE STUDENT_CONS SET pincode=654123 where rolln='B03';
+UPDATE STUDENT_CONS SET pincode=654123 where rolln='B03'
+                                             *
+ERROR at line 1:
+ORA-00904: "ROLLN": invalid identifier 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* UPDATE STUDENT_CONS SET pincode=654123 where rollno='B03'
+SQL> /
+
+1 row updated.
+
+SQL> select * from STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B03   c                        654123 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> delete from STUDENT_CONS where degree='BCOM';
+
+2 rows deleted.
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> select * from STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> select * from STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+SQL> delete from STUDENT_CONS where degree='BCOM';
+
+1 row deleted.
+
+SQL> select * from delete STUDENT_CONS;
+select * from delete STUDENT_CONS
+              *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> select * from STUDENT_CONS;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+SQL> insert into student_cons values('B02', 'b', 654321, 'BCOM');
+
+1 row created.
+
+SQL> insert into student_cons values('B03', 'c', 654123, 'BCA');
+
+1 row created.
+
+SQL> select * from student_cons;
+
+ROLLN NAME                    PINCODE DEGREE                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+B02   b                        654321 BCOM                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+B03   c                        654123 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+B01   v                        123456 BCA                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+SQL> create table s1(no number(2), name varchar2(10));
+
+Table created.
+
+SQL> insert into s1 values(&no, '&name');
+Enter value for no: 1
+Enter value for name: a
+old   1: insert into s1 values(&no, '&name')
+new   1: insert into s1 values(1, 'a')
+
+1 row created.
+
+SQL> /
+Enter value for no: 2
+Enter value for name: b
+old   1: insert into s1 values(&no, '&name')
+new   1: insert into s1 values(2, 'b')
+
+1 row created.
+
+SQL> /
+Enter value for no: 3
+Enter value for name: c
+old   1: insert into s1 values(&no, '&name')
+new   1: insert into s1 values(3, 'c')
+
+1 row created.
+
+SQL> /
+Enter value for no: 4
+Enter value for name: d
+old   1: insert into s1 values(&no, '&name')
+new   1: insert into s1 values(4, 'd')
+
+1 row created.
+
+SQL> /
+Enter value for no: 5
+Enter value for name: e
+old   1: insert into s1 values(&no, '&name')
+new   1: insert into s1 values(5, 'e')
+
+1 row created.
+
+SQL> select * from s1;
+
+        NO NAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+---------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+         1 a                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         2 b                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         3 c                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         4 d                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+         5 e                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+
+SQL> alter table s1 add age number(2);
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                                                                                                                                                                                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NO                                                                                                                                                                                                                                                                                                             NUMBER(2)
+ NAME                                                                                                                                                                                                                                                                                                           VARCHAR2(10)
+ AGE                                                                                                                                                                                                                                                                                                            NUMBER(2)
+
+SQL> set linesize 100;
+SQL> setect * from s1;
+SP2-0734: unknown command beginning "setect * f..." - rest of line ignored.
+SQL> desc s1;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NO                                                             NUMBER(2)
+ NAME                                                           VARCHAR2(10)
+ AGE                                                            NUMBER(2)
+
+SQL> alter table s1 drop column age;
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NO                                                             NUMBER(2)
+ NAME                                                           VARCHAR2(10)
+
+SQL> alter table s1 add age number(2);
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NO                                                             NUMBER(2)
+ NAME                                                           VARCHAR2(10)
+ AGE                                                            NUMBER(2)
+
+SQL> alter table s1 modify age number(3);
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NO                                                             NUMBER(2)
+ NAME                                                           VARCHAR2(10)
+ AGE                                                            NUMBER(3)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> alter table s1 modify age varchar2(2);
+
+Table altered.
+
+SQL>  desc s1;
+ Name                                                  Null?    Type
+ ----------------------------------------------------- -------- ------------------------------------
+ NO                                                             NUMBER(2)
+ NAME                                                           VARCHAR2(10)
+ AGE                                                            VARCHAR2(2)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 
