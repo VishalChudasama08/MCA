@@ -1,0 +1,131 @@
+C:\Users\visha>sqlplus
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Sep 12 01:07:43 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password: Vishal08 (not visible on enter time)
+Last Successful login time: Fri Sep 12 2025 01:01:29 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> -- Save all output to a text file
+SQL> SPOOL D:\SQL_Output\oracle_new_user_mca_setup.txt;
+SQL> CREATE USER mca IDENTIFIED BY mca08
+  2  DEFAULT TABLESPACE users
+  3  TEMPORARY TABLESPACE temp
+  4  QUOTA UNLIMITED ON users;
+CREATE USER mca IDENTIFIED BY mca08
+            *
+ERROR at line 1:
+ORA-65096: invalid common user or role name 
+
+
+SQL> -- quick check: which container are we in?
+SQL> SHOW CON_NAME;
+
+CON_NAME                                                                        
+------------------------------                                                  
+CDB$ROOT                                                                        
+SQL> CREATE USER mca IDENTIFIED BY mca08 DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON users;
+CREATE USER mca IDENTIFIED BY mca08 DEFAULT TABLESPACE users TEMPORARY TABLESPACE temp QUOTA UNLIMITED ON users
+            *
+ERROR at line 1:
+ORA-65096: invalid common user or role name 
+
+
+SQL> -- Switch PDB 
+SQL> ALTER SESSION SET CONTAINER = XEPDB1;
+
+Session altered.
+
+SQL> SHOW CON_NAME;
+
+CON_NAME                                                                        
+------------------------------                                                  
+XEPDB1  
+
+SQL> -- Now create the local user: mca                                                                        
+SQL> CREATE USER mca IDENTIFIED BY mca08
+  2       DEFAULT TABLESPACE users
+  3       TEMPORARY TABLESPACE temp
+  4       QUOTA UNLIMITED ON users;
+
+User created.
+
+SQL> -- Grant required privileges for SQL & PL/SQL work
+SQL> -- CONNECT = allows login
+SQL> -- RESOURCE = allows creating tables, procedures, triggers, etc.
+SQL> -- CREATE SESSION = basic login right (overlaps with CONNECT)
+SQL> -- CREATE TABLE, VIEW, SEQUENCE = allows schema objects
+SQL> -- CREATE PROCEDURE, TRIGGER, TYPE = allows PL/SQL development
+SQL> GRANT CONNECT, RESOURCE TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE SESSION TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE TABLE TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE VIEW TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE SEQUENCE TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE PROCEDURE TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE TRIGGER TO mca;
+
+Grant succeeded.
+
+SQL> GRANT CREATE TYPE TO mca;
+
+Grant succeeded.
+
+SQL> -- verify the user was created
+SQL> SELECT username, account_status, created FROM dba_users WHERE username='MCA';
+
+USERNAME                                                                        
+--------------------------------------------------------------------------------
+ACCOUNT_STATUS                   CREATED                                        
+-------------------------------- ---------                                      
+MCA                                                                             
+OPEN                             12-SEP-25                                      
+                                                                                
+
+SQL> -- Stop spooling (close log file)
+SQL> SPOOL OFF;
+
+============== NEW CMD ==============
+
+C:\Users\visha>sqlplus mca/mca08@//localhost:1521/XEPDB1
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Fri Sep 12 01:14:33 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Last Successful login time: Fri Sep 12 2025 01:02:00 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> SELECT * FROM TAB;
+
+no rows selected
+
+SQL>
