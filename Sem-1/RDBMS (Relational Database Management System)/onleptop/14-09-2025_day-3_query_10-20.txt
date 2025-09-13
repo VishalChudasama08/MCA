@@ -1,0 +1,489 @@
+SQL> select tname from tab;
+
+TNAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+--------------------------------------------------------------------------------------------------------------------------------                                                                                                                                                                                                                                                                                                                                                                                    
+DEPT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+CLIENT_MASTER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+PRODUCT_MASTER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+SALESMAN_MASTER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+SALES_ORDER                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+SALES_ORDER_DETAILS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
+APPLICANT                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+ENTRANCE_TEST                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+ETEST_DETAILS                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+DISTRIBUTOR                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+ITEM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DIST_ITEM                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+
+13 rows selected.
+
+SQL> select * from CLIENT_MASTER;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+---- -------------------- ---------- --------- ------------------------------                                                                                                                                                                                                                                                                                                                                                                                                                                       
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C003 Dhyan Dave               387903 17-JUN-88 Doctor                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+C004 Miral Vaid               398006 05-JAN-76 Professor                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+SQL> -- 10. Add a column Mobile_No of type Number, in the Client_Master Table
+SQL> alter table CLIENT_MASTER add Mobile_No number(10) not null;
+alter table CLIENT_MASTER add Mobile_No number(10) not null
+            *
+ERROR at line 1:
+ORA-01758: table must be empty to add mandatory (NOT NULL) column 
+
+
+SQL> alter table CLIENT_MASTER add Mobile_No number(10);
+
+Table altered.
+
+SQL> desc CLIENT_MASTER;
+ Name                                                                                                                                                                                                                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ C_NO                                                                                                                                                                                                                                                                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                                                                                                                                                                                                                                                                           NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                                                                                                                                                                                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                                                                                                                                                                                                                            NOT NULL DATE
+ OCCUPATION                                                                                                                                                                                                                                                                                            NOT NULL VARCHAR2(30)
+ MOBILE_NO                                                                                                                                                                                                                                                                                                      NUMBER(10)
+
+SQL> set linesize 180;
+SQL> desc CLIENT_MASTER;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ C_NO                                                                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                                                                           NOT NULL VARCHAR2(20)
+ PINCODE                                                                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                            NOT NULL DATE
+ OCCUPATION                                                                                            NOT NULL VARCHAR2(30)
+ MOBILE_NO                                                                                                      NUMBER(10)
+
+SQL> -- 11. Add constraint to the Mobile_No column
+SQL> alter table CLIENT_MASTER add constraint Mobile_No check (LENGTH(Mobile_No) = 10);
+
+Table altered.
+
+SQL> select CONSTRAINT_NAME, SEARCH_CONDITION from user_constraints where table_name = 'CLIENT_MASTER';
+
+CONSTRAINT_NAME                                                                                                                                                                     
+--------------------------------------------------------------------------------------------------------------------------------                                                    
+SEARCH_CONDITION                                                                                                                                                                    
+--------------------------------------------------------------------------------                                                                                                    
+MOBILE_NO                                                                                                                                                                           
+LENGTH(Mobile_No) = 10                                                                                                                                                              
+                                                                                                                                                                                    
+SYS_C008223                                                                                                                                                                         
+"CLIENT_NAME" IS NOT NULL                                                                                                                                                           
+                                                                                                                                                                                    
+SYS_C008224                                                                                                                                                                         
+"PINCODE" IS NOT NULL                                                                                                                                                               
+                                                                                                                                                                                    
+SYS_C008225                                                                                                                                                                         
+"BIRTH_DATE" IS NOT NULL                                                                                                                                                            
+                                                                                                                                                                                    
+SYS_C008226                                                                                                                                                                         
+"OCCUPATION" IS NOT NULL                                                                                                                                                            
+                                                                                                                                                                                    
+SYS_C008227                                                                                                                                                                         
+c_no like 'C%'                                                                                                                                                                      
+                                                                                                                                                                                    
+SYS_C008228                                                                                                                                                                         
+LENGTH(pincode)=6                                                                                                                                                                   
+                                                                                                                                                                                    
+SYS_C008229                                                                                                                                                                         
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+
+8 rows selected.
+
+SQL> insert into client_master values('C006','Rohit Mehta',380015,'30-apr-1990','Engineer', 123456789);
+insert into client_master values('C006','Rohit Mehta',380015,'30-apr-1990','Engineer', 123456789)
+*
+ERROR at line 1:
+ORA-02290: check constraint (MCA.MOBILE_NO) violated 
+
+
+SQL> insert into client_master values('C006','Rohit Mehta',380015,'30-apr-1990','Engineer', 1234567890);
+
+1 row created.
+
+SQL> -- 12. Change the name of Salesman_Master table to "SMan_Mst"
+SQL> desc Salesman_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ S_NO                                                                                                  NOT NULL VARCHAR2(5)
+ NAME                                                                                                  NOT NULL VARCHAR2(20)
+ ADD1                                                                                                           VARCHAR2(10)
+ ADD2                                                                                                           VARCHAR2(15)
+ CITY                                                                                                  NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                        NUMBER(6)
+ STATE                                                                                                 NOT NULL VARCHAR2(15)
+ SALARY                                                                                                NOT NULL NUMBER(10)
+ TARGET                                                                                                NOT NULL NUMBER(5)
+ SALES                                                                                                 NOT NULL NUMBER(5)
+
+SQL> rename Salesman_Master TO SMan_Mst;
+
+Table renamed.
+
+SQL> desc SMan_Mst;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ S_NO                                                                                                  NOT NULL VARCHAR2(5)
+ NAME                                                                                                  NOT NULL VARCHAR2(20)
+ ADD1                                                                                                           VARCHAR2(10)
+ ADD2                                                                                                           VARCHAR2(15)
+ CITY                                                                                                  NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                        NUMBER(6)
+ STATE                                                                                                 NOT NULL VARCHAR2(15)
+ SALARY                                                                                                NOT NULL NUMBER(10)
+ TARGET                                                                                                NOT NULL NUMBER(5)
+ SALES                                                                                                 NOT NULL NUMBER(5)
+
+SQL> -- 13. Add a column of Experience in the Faculty_Master Table
+SQL> desc SALESMAN_MASTER;
+ERROR:
+ORA-04043: object SALESMAN_MASTER does not exist 
+
+
+SQL> desc SALESMAN_MASTER;
+ERROR:
+ORA-04043: object SALESMAN_MASTER does not exist 
+
+
+SQL> select * from salesman_master;
+select * from salesman_master
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from salesman_master;
+select * from salesman_master
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from Sales_Order;
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                
+---- ----- --------- ---- - - --------- --------------------                                                                                                                        
+O001 C001  29-AUG-25 S001 F Y 03-SEP-25 Fulfilled                                                                                                                                   
+O002 C002  30-AUG-25 S002 P N 06-SEP-25 Pending                                                                                                                                     
+O003 C003  31-AUG-25 S003 F Y 08-SEP-25 Fulfilled                                                                                                                                   
+O004 C004  01-SEP-25 S004 P N 10-SEP-25 In Process                                                                                                                                  
+O005 C005  02-SEP-25 S005 F Y 11-SEP-25 Fulfilled                                                                                                                                   
+O006 C006  03-SEP-25 S006 P Y 15-SEP-25 Pending                                                                                                                                     
+O007 C007  04-SEP-25 S007 F N 16-SEP-25 In Process                                                                                                                                  
+O008 C008  05-SEP-25 S008 P Y 17-SEP-25 Pending                                                                                                                                     
+O009 C009  06-SEP-25 S009 F Y 18-SEP-25 Fulfilled                                                                                                                                   
+O010 C010  07-SEP-25 S010 P N 19-SEP-25 In Process                                                                                                                                  
+
+10 rows selected.
+
+SQL> create table salesman_master(
+  2      s_no varchar2(5) check (s_no like 'S%') primary key,
+  3      name varchar2(20) not null,
+  4      add1 varchar2(10),
+  5      add2 varchar2(15),
+  6      city varchar2(10) not null,
+  7      pincode number(6),
+  8      state varchar2(15) not null,
+  9      salary number(10) not null,
+ 10      target number(5) not null,
+ 11      sales number(5) not null
+ 12  );
+
+Table created.
+
+SQL> desc  salesman_master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ S_NO                                                                                                  NOT NULL VARCHAR2(5)
+ NAME                                                                                                  NOT NULL VARCHAR2(20)
+ ADD1                                                                                                           VARCHAR2(10)
+ ADD2                                                                                                           VARCHAR2(15)
+ CITY                                                                                                  NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                        NUMBER(6)
+ STATE                                                                                                 NOT NULL VARCHAR2(15)
+ SALARY                                                                                                NOT NULL NUMBER(10)
+ TARGET                                                                                                NOT NULL NUMBER(5)
+ SALES                                                                                                 NOT NULL NUMBER(5)
+
+SQL> insert into salesman_master values ('S001','AMAN','3,DEV APPT','VAGHODIA','BARODA',NULL,'GUJRAT',5000,100,50);
+
+1 row created.
+
+SQL> insert into salesman_master values ('S002','OMKAR','NULL','NULL','BHOPAL',NULL,'MP',4500,200,150);
+
+1 row created.
+
+SQL> insert into salesman_master values ('S003','RAJ','B-104','VERLI','MUMBAI',400002,'MAHARASHTRA',5500,200,200);
+
+1 row created.
+
+SQL> insert into salesman_master values ('S004','ASHISH','1,SMRUTI','GHODDOL','SURAT',NULL,'GUJRAT',4500,150,100);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S005','Meera','10, Lotus','Alkapuri','Vadodara',390007,'Gujarat',6000,300,250);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S006','Karan','Sector-17','Navrangpura','Ahmedabad',380009,'Gujarat',5500,220,180);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S007','Priya','L-12','MG Road','Pune',411001,'Maharashtra',5200,180,160);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S008','Dev','House-22','Civil Lines','Delhi',110054,'Delhi',5800,250,200);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S009','Sahil','Flat-4','Indira Nagar','Lucknow',226016,'UP',4900,160,140);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S010','Nidhi','Block-7','Park Street','Kolkata',700016,'WB',5300,210,190);
+
+1 row created.
+
+SQL> 
+SQL> select * from Salesman_Master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                        
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                        
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                        
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                        
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                        
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                        
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                        
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                        
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                        
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                        
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                        
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                        
+
+10 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 13. Add a column of Experience in the Faculty_Master Table
+SQL> alter table Salesman_Master add Experience varchar2(30);
+
+Table altered.
+
+SQL> desc Salesman_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ S_NO                                                                                                  NOT NULL VARCHAR2(5)
+ NAME                                                                                                  NOT NULL VARCHAR2(20)
+ ADD1                                                                                                           VARCHAR2(10)
+ ADD2                                                                                                           VARCHAR2(15)
+ CITY                                                                                                  NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                        NUMBER(6)
+ STATE                                                                                                 NOT NULL VARCHAR2(15)
+ SALARY                                                                                                NOT NULL NUMBER(10)
+ TARGET                                                                                                NOT NULL NUMBER(5)
+ SALES                                                                                                 NOT NULL NUMBER(5)
+ EXPERIENCE                                                                                                     VARCHAR2(30)
+
+SQL> -- 14. Change the name of the column Address to Area in Faculty_Master Table
+SQL> alter table Salesman_Master rename add1 to area;
+alter table Salesman_Master rename add1 to area
+                                   *
+ERROR at line 1:
+ORA-14155: missing PARTITION, PARTITIONS, SUBPARTITION, or SUBPARTITIONS keyword 
+
+
+SQL> alter table Salesman_Master rename column add1 to area;
+
+Table altered.
+
+SQL> desc Salesman_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ S_NO                                                                                                  NOT NULL VARCHAR2(5)
+ NAME                                                                                                  NOT NULL VARCHAR2(20)
+ AREA                                                                                                           VARCHAR2(10)
+ ADD2                                                                                                           VARCHAR2(15)
+ CITY                                                                                                  NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                        NUMBER(6)
+ STATE                                                                                                 NOT NULL VARCHAR2(15)
+ SALARY                                                                                                NOT NULL NUMBER(10)
+ TARGET                                                                                                NOT NULL NUMBER(5)
+ SALES                                                                                                 NOT NULL NUMBER(5)
+ EXPERIENCE                                                                                                     VARCHAR2(30)
+
+SQL> -- 15. Modify the Applicant Table name to Applicant_Master
+SQL> rename Applicant to Applicant_Master;
+
+Table renamed.
+
+SQL> desc Applicant_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ A_NAME                                                                                                NOT NULL VARCHAR2(30)
+ ADDRESS                                                                                                        VARCHAR2(50)
+ B_DATE                                                                                                         DATE
+
+SQL> -- 16. Add a column "Hobby" in Applicant_Master table.
+SQL> alter table Applicant_Master add column Hobby text(30);
+alter table Applicant_Master add column Hobby text(30)
+                                 *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> alter table Applicant_Master add Hobby text(30);
+alter table Applicant_Master add Hobby text(30)
+                                            *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table Applicant_Master add Hobby varchar2(30);
+
+Table altered.
+
+SQL> desc Applicant_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ A_NAME                                                                                                NOT NULL VARCHAR2(30)
+ ADDRESS                                                                                                        VARCHAR2(50)
+ B_DATE                                                                                                         DATE
+ HOBBY                                                                                                          VARCHAR2(30)
+
+SQL> -- 17. Add a column "Location" in the "ETest_Detail" table. Keep it varchar(10)
+SQL> desc ETest_Detail;
+ERROR:
+ORA-04043: object ETest_Detail does not exist 
+
+
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ ETID                                                                                                  NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                     DATE
+ SCORE                                                                                                          NUMBER(3)
+
+SQL> alter table ETEST_DETAILS add Location varchar(10);
+
+Table altered.
+
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ ETID                                                                                                  NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                     DATE
+ SCORE                                                                                                          NUMBER(3)
+ LOCATION                                                                                                       VARCHAR2(10)
+
+SQL> -- 18. Modify the column "Location" and increase the size upto 25 characters.
+SQL> alter table ETEST_DETAILS modify column Location varchar(25);
+alter table ETEST_DETAILS modify column Location varchar(25)
+                                                 *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> alter table ETEST_DETAILS modify column set Location varchar(25);
+alter table ETEST_DETAILS modify column set Location varchar(25)
+                                        *
+ERROR at line 1:
+ORA-00904: : invalid identifier 
+
+
+SQL> alter table ETEST_DETAILS modify column Location set varchar(25);
+alter table ETEST_DETAILS modify column Location set varchar(25)
+                                                 *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> alter table ETEST_DETAILS modify Location varchar(25);
+
+Table altered.
+
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ ETID                                                                                                  NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                     DATE
+ SCORE                                                                                                          NUMBER(3)
+ LOCATION                                                                                                       VARCHAR2(25)
+
+SQL> -- 19. Change the field "Address" to "City" in Applicant_Master Table
+SQL> desc Applicant_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ A_NAME                                                                                                NOT NULL VARCHAR2(30)
+ ADDRESS                                                                                                        VARCHAR2(50)
+ B_DATE                                                                                                         DATE
+ HOBBY                                                                                                          VARCHAR2(30)
+
+SQL> alter table Applicant_Master rename ADDRESS to City;
+alter table Applicant_Master rename ADDRESS to City
+                                    *
+ERROR at line 1:
+ORA-14155: missing PARTITION, PARTITIONS, SUBPARTITION, or SUBPARTITIONS keyword 
+
+
+SQL> alter table Applicant_Master rename column ADDRESS to City;
+
+Table altered.
+
+SQL> desc Applicant_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ A_NAME                                                                                                NOT NULL VARCHAR2(30)
+ CITY                                                                                                           VARCHAR2(50)
+ B_DATE                                                                                                         DATE
+ HOBBY                                                                                                          VARCHAR2(30)
+
+SQL> -- 20. Change the name of the Item table to "Item_Master"
+SQL> rename Item to trem_master;
+
+Table renamed.
+
+SQL> desc trem_master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ITEM_NO                                                                                               NOT NULL VARCHAR2(5)
+ ITEM_NAME                                                                                             NOT NULL VARCHAR2(30)
+ PRICE                                                                                                 NOT NULL NUMBER(8,2)
+ WEIGHT                                                                                                NOT NULL NUMBER(8,2)
+
+SQL> commit
+  2  ;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;
