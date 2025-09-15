@@ -1,0 +1,589 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                
+EMP                            TABLE                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                
+S                              TABLE                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                
+
+17 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 1. Remove all Sales_Orders whose QtyOrdered = 1 in "Sales_Order_Detail" table
+SQL> select * from sales_order_details;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O006 P006           7              6         4200                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+10 rows selected.
+
+SQL> -- here any row QTY_ORDERED = 1 not present than, form perfom query we remove QTY_ORDERED = 7
+SQL> select * from Sales_Orders;
+select * from Sales_Orders
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Sales_Order
+SQL> /
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                
+---- ----- --------- ---- - - --------- --------------------                                                                                                                        
+O001 C001  20-AUG-25 S001 F Y 25-AUG-25 Fulfilled                                                                                                                                   
+O002 C002  21-AUG-25 S002 P N 28-AUG-25 Pending                                                                                                                                     
+O003 C003  22-AUG-25 S003 F Y 30-AUG-25 Fulfilled                                                                                                                                   
+O004 C004  23-AUG-25 S004 P N 01-SEP-25 In Process                                                                                                                                  
+O005 C005  24-AUG-25 S005 F Y 02-SEP-25 Fulfilled                                                                                                                                   
+O006 C006  25-AUG-25 S006 P Y 06-SEP-25 Pending                                                                                                                                     
+O007 C007  26-AUG-25 S007 F N 07-SEP-25 In Process                                                                                                                                  
+O008 C008  27-AUG-25 S008 P Y 08-SEP-25 Pending                                                                                                                                     
+O009 C009  28-AUG-25 S009 F Y 09-SEP-25 Fulfilled                                                                                                                                   
+O010 C010  29-AUG-25 S010 P N 10-SEP-25 In Process                                                                                                                                  
+
+10 rows selected.
+
+SQL> delete from sales_order_details where QTY_ORDERED = 7;
+
+1 row deleted.
+
+SQL> select * from sales_order_details;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+9 rows selected.
+
+SQL> ROLL BACK;
+Rollback complete.
+SQL> /
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O006 P006           7              6         4200                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+10 rows selected.
+
+SQL> -- see contraints;
+SQL> select * from user_constraints where table_name='SALES_ORDER';
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                     
+------------------------------ ------------------------------ - ------------------------------ --------------------------------------------------------------------------------     
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN                           
+------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- ---------                           
+INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                                  
+------------------------------ ------------------------------ ------- --------------                                                                                                
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                   
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                           
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                               
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                 
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                         
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+MCAB250013                     SYS_C0032323                                                                                                                                         
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                         
+MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+
+6 rows selected.
+
+SQL> SET LINESIZE 500;
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                                                                                                                               
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                     MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+
+6 rows selected.
+
+SQL> SET LINESIZE 300;
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED         
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- -------------     
+GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                                                                                                                        
+-------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                                                                                                                      
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                                                                                                                                                                                                                               
+                                                                                                                                                                                                                                                                                                            
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                     MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED         
+GENERATED NAME          04-SEP-25                                                                                                                                                                                                                                                                           
+                                                                                                                                                                                                                                                                                                            
+
+6 rows selected.
+
+SQL> SET LINESIZE 400;
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID 
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- 
+VIEW_RELATED                                                                                                                                                                                                                                                                                                                                                                                                    
+--------------                                                                                                                                                                                                                                                                                                                                                                                                  
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                           
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                     MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                       
+                                                                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                                                                
+
+6 rows selected.
+
+SQL> SET LINESIZE 500;
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                                                                                                                               
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                     MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+
+6 rows selected.
+
+SQL> -- 2. Modify the OrderStatus to "Fulfilled" where the OrderStatus is "In Process" in Sales_Order Table
+SQL> SET LINESIZE 200;
+SQL> select * from Sales_Order;
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                                    
+---- ----- --------- ---- - - --------- --------------------                                                                                                                                            
+O001 C001  20-AUG-25 S001 F Y 25-AUG-25 Fulfilled                                                                                                                                                       
+O002 C002  21-AUG-25 S002 P N 28-AUG-25 Pending                                                                                                                                                         
+O003 C003  22-AUG-25 S003 F Y 30-AUG-25 Fulfilled                                                                                                                                                       
+O004 C004  23-AUG-25 S004 P N 01-SEP-25 In Process                                                                                                                                                      
+O005 C005  24-AUG-25 S005 F Y 02-SEP-25 Fulfilled                                                                                                                                                       
+O006 C006  25-AUG-25 S006 P Y 06-SEP-25 Pending                                                                                                                                                         
+O007 C007  26-AUG-25 S007 F N 07-SEP-25 In Process                                                                                                                                                      
+O008 C008  27-AUG-25 S008 P Y 08-SEP-25 Pending                                                                                                                                                         
+O009 C009  28-AUG-25 S009 F Y 09-SEP-25 Fulfilled                                                                                                                                                       
+O010 C010  29-AUG-25 S010 P N 10-SEP-25 In Process                                                                                                                                                      
+
+10 rows selected.
+
+SQL> UPDATE Sales_Order SET ORDER_STATUS='Fulfilled' WHERE ORDER_STATUS='In Process';
+
+3 rows updated.
+
+SQL> select * from Sales_Order;
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                                    
+---- ----- --------- ---- - - --------- --------------------                                                                                                                                            
+O001 C001  20-AUG-25 S001 F Y 25-AUG-25 Fulfilled                                                                                                                                                       
+O002 C002  21-AUG-25 S002 P N 28-AUG-25 Pending                                                                                                                                                         
+O003 C003  22-AUG-25 S003 F Y 30-AUG-25 Fulfilled                                                                                                                                                       
+O004 C004  23-AUG-25 S004 P N 01-SEP-25 Fulfilled                                                                                                                                                       
+O005 C005  24-AUG-25 S005 F Y 02-SEP-25 Fulfilled                                                                                                                                                       
+O006 C006  25-AUG-25 S006 P Y 06-SEP-25 Pending                                                                                                                                                         
+O007 C007  26-AUG-25 S007 F N 07-SEP-25 Fulfilled                                                                                                                                                       
+O008 C008  27-AUG-25 S008 P Y 08-SEP-25 Pending                                                                                                                                                         
+O009 C009  28-AUG-25 S009 F Y 09-SEP-25 Fulfilled                                                                                                                                                       
+O010 C010  29-AUG-25 S010 P N 10-SEP-25 Fulfilled                                                                                                                                                       
+
+10 rows selected.
+
+SQL> -- 3. Increase the sell price of saree by Rs. 20
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+SALES_ORDER                    TABLE                                                                                                                                                                    
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+17 rows selected.
+
+SQL> select * from PRODUCT_MASTER;
+
+P_NO  DESCRIPTION          PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                                                                            
+----- -------------------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                            
+P001  T-SHIRT                       5 PIECE             200         50        350        250                                                                                                            
+P002  JEANS                         6 PIECE             250         40        500        350                                                                                                            
+P003  SKIRT                         6 PIECE             100         50        350        200                                                                                                            
+P004  SAREE                         3 PIECE             100         20        800        600                                                                                                            
+P005  Shirt                         4 Piece             300         60        450        300                                                                                                            
+P006  Kurta                         7 Piece             120         30        700        500                                                                                                            
+P007  Cap                           8 Piece             250         40        150         90                                                                                                            
+P008  Shoes                         5 Pair              180         50       1000        700                                                                                                            
+P009  Belt                          4 Piece             220         30        200        120                                                                                                            
+P010  Jacket                        6 Piece              80         20       1500       1000                                                                                                            
+
+10 rows selected.
+
+SQL> update PRODUCT_MASTER set SELL_P=SELL_P+20 WHERE DESCRIPTION='SAREE';
+
+1 row updated.
+
+SQL> SELECT * FROM PRODUCT_MASTER;
+
+P_NO  DESCRIPTION          PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                                                                            
+----- -------------------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                            
+P001  T-SHIRT                       5 PIECE             200         50        350        250                                                                                                            
+P002  JEANS                         6 PIECE             250         40        500        350                                                                                                            
+P003  SKIRT                         6 PIECE             100         50        350        200                                                                                                            
+P004  SAREE                         3 PIECE             100         20        820        600                                                                                                            
+P005  Shirt                         4 Piece             300         60        450        300                                                                                                            
+P006  Kurta                         7 Piece             120         30        700        500                                                                                                            
+P007  Cap                           8 Piece             250         40        150         90                                                                                                            
+P008  Shoes                         5 Pair              180         50       1000        700                                                                                                            
+P009  Belt                          4 Piece             220         30        200        120                                                                                                            
+P010  Jacket                        6 Piece              80         20       1500       1000                                                                                                            
+
+10 rows selected.
+
+SQL> -- 4. Delete all Salesman from Salesman_Master table whose salary is more than 3500
+SQL> SELECT * FROM Salesman_Master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+
+10 rows selected.
+
+SQL> SET LINESIZE 300;
+SQL> /
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                                                                                                                                
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                                                                                                                                
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                                                                                                                                
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                                                                                                                                
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                                                                                                                                
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                                                                                                                                
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                                                                                                                                
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                                                                                                                                
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                                                                                                                                
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                                                                                                                                
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                                                                                                                                
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                                                                                                                                
+
+10 rows selected.
+
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+
+SQL> desc SALES_ORDER;
+ Name                                                                                                                                                                          Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------------------------------------------------------
+ ORDER_NO                                                                                                                                                                      NOT NULL VARCHAR2(4)
+ CLIENT_NO                                                                                                                                                                              VARCHAR2(5)
+ ORDER_DATE                                                                                                                                                                             DATE
+ SALESMAN_NO                                                                                                                                                                            VARCHAR2(4)
+ DELIVERY_TYPE                                                                                                                                                                          CHAR(1)
+ BILL_PAID                                                                                                                                                                              CHAR(1)
+ DELIVERY_DATE                                                                                                                                                                          DATE
+ ORDER_STATUS                                                                                                                                                                           VARCHAR2(20)
+
+SQL> set linesize 180;
+SQL> /
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+
+SQL> desc SALES_ORDER;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ORDER_NO                                                                                              NOT NULL VARCHAR2(4)
+ CLIENT_NO                                                                                                      VARCHAR2(5)
+ ORDER_DATE                                                                                                     DATE
+ SALESMAN_NO                                                                                                    VARCHAR2(4)
+ DELIVERY_TYPE                                                                                                  CHAR(1)
+ BILL_PAID                                                                                                      CHAR(1)
+ DELIVERY_DATE                                                                                                  DATE
+ ORDER_STATUS                                                                                                   VARCHAR2(20)
+
+SQL> select * from SALES_ORDER;
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                
+---- ----- --------- ---- - - --------- --------------------                                                                                                                        
+O001 C001  20-AUG-25 S001 F Y 25-AUG-25 Fulfilled                                                                                                                                   
+O002 C002  21-AUG-25 S002 P N 28-AUG-25 Pending                                                                                                                                     
+O003 C003  22-AUG-25 S003 F Y 30-AUG-25 Fulfilled                                                                                                                                   
+O004 C004  23-AUG-25 S004 P N 01-SEP-25 Fulfilled                                                                                                                                   
+O005 C005  24-AUG-25 S005 F Y 02-SEP-25 Fulfilled                                                                                                                                   
+O006 C006  25-AUG-25 S006 P Y 06-SEP-25 Pending                                                                                                                                     
+O007 C007  26-AUG-25 S007 F N 07-SEP-25 Fulfilled                                                                                                                                   
+O008 C008  27-AUG-25 S008 P Y 08-SEP-25 Pending                                                                                                                                     
+O009 C009  28-AUG-25 S009 F Y 09-SEP-25 Fulfilled                                                                                                                                   
+O010 C010  29-AUG-25 S010 P N 10-SEP-25 Fulfilled                                                                                                                                   
+
+10 rows selected.
+
+SQL> select * from SALES_ORDER_DETAILS;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O006 P006           7              6         4200                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+10 rows selected.
+
+SQL> -- here, Salesman_Master table relation with SALES_ORDER. SALES_ORDER table store salesman_master table S_NO in column SALESMAN_NO, than without remove column (SALES_ORDER.SALESMAN_NO) constraint query 4 not work
+SQL> -- now first remove SALES_ORDER column SALESMAN_NO constraint
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+
+SQL> select * from user_constraint where table_name='SALES_ORDER';
+select * from user_constraint where table_name='SALES_ORDER'
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from user_constraints where table_name='SALES_ORDER'
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                     
+------------------------------ ------------------------------ - ------------------------------ --------------------------------------------------------------------------------     
+R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN                           
+------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- ---------                           
+INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                                  
+------------------------------ ------------------------------ ------- --------------                                                                                                
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                   
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                           
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                               
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                 
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                         
+                                                                        ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+MCAB250013                     SYS_C0032323                                                                                                                                         
+                                                                                                                                                                                    
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                         
+MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                           
+                                                                                                                                                                                    
+                                                                                                                                                                                    
+
+6 rows selected.
+
+SQL> let linesize 500;
+SP2-0734: unknown command beginning "let linesi..." - rest of line ignored.
+SQL> set linesize 500;
+SQL> /
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                                                                                                                               
+MCAB250013                     SYS_C0032324                   R SALES_ORDER                                                                                                     MCAB250013                     SYS_C0032314                   NO ACTION ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+
+6 rows selected.
+
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+
+SQL> -- here in error (MCAB250013.SYS_C0032324) -> this is constraint name
+SQL> -- now remove SYS_C0032324 constraint;
+SQL> alert table SALES_ORDER drop constraints SYS_C0032324;
+SP2-0734: unknown command beginning "alert tabl..." - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1* DELETE FROM Salesman_Master WHERE SALARY>3500
+SQL> /
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+
+SQL> alter table SALES_ORDER drop constraints SYS_C0032324;
+
+Table altered.
+
+SQL> select * from user_constraints where table_name='SALES_ORDER';
+
+OWNER                          CONSTRAINT_NAME                C TABLE_NAME                     SEARCH_CONDITION                                                                 R_OWNER                        R_CONSTRAINT_NAME              DELETE_RU STATUS   DEFERRABLE     DEFERRED  VALIDATED     GENERATED      BAD RELY LAST_CHAN INDEX_OWNER                    INDEX_NAME                     INVALID VIEW_RELATED                                                                                        
+------------------------------ ------------------------------ - ------------------------------ -------------------------------------------------------------------------------- ------------------------------ ------------------------------ --------- -------- -------------- --------- ------------- -------------- --- ---- --------- ------------------------------ ------------------------------ ------- --------------                                                                                      
+MCAB250013                     SYS_C0032319                   C SALES_ORDER                    Order_No LIKE 'O%'                                                                                                                                       ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032320                   C SALES_ORDER                    Delivery_Type IN ('F','P')                                                                                                                               ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032321                   C SALES_ORDER                    Bill_Paid IN ('Y','N')                                                                                                                                   ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032322                   C SALES_ORDER                    Order_Status IN ('In Process','Pending','Fulfilled')                                                                                                     ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25                                                                                                                                                                           
+MCAB250013                     SYS_C0032323                   P SALES_ORDER                                                                                                                                                                             ENABLED  NOT DEFERRABLE IMMEDIATE VALIDATED     GENERATED NAME          04-SEP-25 MCAB250013                     SYS_C0032323                                                                                                                               
+
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+
+10 rows deleted.
+
+SQL> select * from Salesman_Master;
+
+no rows selected
+
+SQL> roll back;
+Rollback complete.
+SQL> /
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                                                                                                                                                                                                                                                                                                                                        
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                                                                                                                                                                                                                                                                                                                                        
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                                                                                                                                                                                                                                                                                                                                        
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                                                                                                                                                                                                                                                                                                                                        
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                                                                                                                                                                                                                                                                                                                                        
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                                                                                                                                                                                                                                                                                                                                        
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                                                                                                                                                                                                                                                                                                                                        
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                                                                                                                                                                                                                                                                                                                                        
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                                                                                                                                                                                                                                                                                                                                        
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                                                                                                                                                                                                                                                                                                                                        
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                                                                                                                                                                                                                                                                                                                                        
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                                                                                                                                                                                                                                                                                                                                        
+
+10 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

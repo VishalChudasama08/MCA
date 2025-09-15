@@ -1,0 +1,43 @@
+create table SUPPLIER(
+s_id varchar(5) primary key,
+s_name varchar(30) not null,
+contact number(10) check(length(contact)=10) not null,
+Contact_Person VARCHAR(20) NOT NULL);
+
+
+ create table PARTS(
+part_id varchar(5) primary key,
+ part_name varchar(50) not null,
+ unit_rate number(20) not null);
+
+
+create table CATALOG(
+s_id varchar(5),
+part_id varchar(5),
+qty number(10) not null,
+ constraint s_id foreign key(s_id) references SUPPLIER on delete cascade,
+ 	constraint part_id foreign key(part_id) references PARTS on delete set NULL);
+
+
+insert into SUPPLIER values('S1','Supplier A',7898568920, 'Rohit');
+ insert into SUPPLIER values('S2','Supplier B',7778881569, 'Hardik');
+ insert into SUPPLIER values('S3', 'Supplier C',9898247956, 'Virat');
+insert into SUPPLIER values('S4', 'Supplier D',9634123436, 'Krunal');
+insert into SUPPLIER values('S5', 'Supplier E',9909474231, 'Kirtan');
+
+
+insert into PARTS values('P1','RAM',1000);
+insert into PARTS values('P2','MOUSE',500);
+insert into PARTS values('P3','MONITOR',2500);
+insert into PARTS values('P4','KEYBOARD',800);
+
+
+insert into CATALOG values('S1','P1',50);
+insert into CATALOG values('S2','P3',10);
+insert into CATALOG values('S2','P2',100);
+insert into CATALOG values('S3','P3',60);
+insert into CATALOG values('S4','P3',30);
+insert into CATALOG values('S4','P1',50);
+insert into CATALOG values('S4','P2',200);
+
+

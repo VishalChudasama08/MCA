@@ -1,0 +1,117 @@
+set linesize 180;
+SQL> set pagesize 80;
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                
+EMP                            TABLE                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                
+S1                             TABLE                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                
+
+17 rows selected.
+
+SQL> select * from s1;
+
+        NO NAME       AG                                                                                                                                                            
+---------- ---------- --                                                                                                                                                            
+         1 a                                                                                                                                                                        
+         2 b                                                                                                                                                                        
+         3 c                                                                                                                                                                        
+         4 d                                                                                                                                                                        
+         5 e                                                                                                                                                                        
+
+SQL> alter table s1 drop column ag;
+alter table s1 drop column ag
+                           *
+ERROR at line 1:
+ORA-00904: "AG": invalid identifier 
+
+
+SQL> alter table s1 drop column AG;
+alter table s1 drop column AG
+                           *
+ERROR at line 1:
+ORA-00904: "AG": invalid identifier 
+
+
+SQL> desc s1;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NO                                                                                                             NUMBER(2)
+ NAME                                                                                                           VARCHAR2(10)
+ AGE                                                                                                            VARCHAR2(2)
+
+SQL> alter table s1 drop column age;
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NO                                                                                                             NUMBER(2)
+ NAME                                                                                                           VARCHAR2(10)
+
+SQL> -- add new column
+SQL> alter table s1 add age;
+alter table s1 add age
+                   *
+ERROR at line 1:
+ORA-02263: need to specify the datatype for this column 
+
+
+SQL> alter table s1 add age number(3);
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NO                                                                                                             NUMBER(2)
+ NAME                                                                                                           VARCHAR2(10)
+ AGE                                                                                                            NUMBER(3)
+
+SQL> -- modify column name
+SQL> alter table s1 rename column age to age_1;
+
+Table altered.
+
+SQL> desc s1;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NO                                                                                                             NUMBER(2)
+ NAME                                                                                                           VARCHAR2(10)
+ AGE_1                                                                                                          NUMBER(3)
+
+SQL> -- modify column data type
+SQL> -- rename table;
+SQL> rename s1 to s;
+
+Table renamed.
+
+SQL> desc s1;
+ERROR:
+ORA-04043: object s1 does not exist 
+
+
+SQL> desc s;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ NO                                                                                                             NUMBER(2)
+ NAME                                                                                                           VARCHAR2(10)
+ AGE_1                                                                                                          NUMBER(3)
+
+SQL> 

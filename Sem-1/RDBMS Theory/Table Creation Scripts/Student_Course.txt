@@ -1,0 +1,59 @@
+create table student
+(rollno number(2), fname varchar(20), lname varchar(20),
+dob date);
+
+create table course
+(rollno number(3), 
+courseno varchar(3),
+fees number(8,2),
+coursename varchar(10),
+max_marks number(3),
+pass_marks number(3));
+
+
+insert into student values
+(1, 'Ashish', 'Dubey', '12-Feb-1990');
+insert into student values
+(2, 'Asha', 'Dey', '12-Mar-1990');
+insert into student values
+(3, 'Shirish', 'Gor', '15-Feb-1991');
+insert into student values
+(4, 'Hitansh', 'Patel', '22-Jan-1992');
+insert into student values
+(5, 'Shikha', 'Modi', '02-Apr-1992');
+insert into student values
+(6, 'Kapil', 'Shah', '22-Apr-1992');
+insert into student values
+(7, 'Kalp', 'Shah', '22-Dec-1991');
+
+Insert into course values
+(1, 'C1', 2200, 'Java', 200, 120);
+Insert into course values
+(1, 'C2', 1200, 'C++', 100, 80);
+Insert into course values
+(2, 'C1', 2200, 'Java', 200, 90);
+Insert into course values
+(3, 'C1', 2200, 'Java', 200, 150);
+Insert into course values
+(3, 'C2', 1200, 'C++', 100, 90);
+Insert into course values
+(4, 'C3', 1000, 'Python', 100, 70);
+Insert into course values
+(5, 'C3', 1000, 'Python', 100, 80);
+Insert into course values
+(6, 'C3', 1000, 'Python', 100, 90);
+Insert into course values
+(6, 'C1', 2200, 'Java', 200, 150);
+
+
+select * from course where pass_marks in (select pass_marks from course where 
+rollno = (select rollno from student where fname like 'Kapil'));
+name like 'Kapil'))
+
+select rollno, c.courseno, pass_marks from course c where pass_marks > 
+(select avg(pass_marks) from course ic where ic.courseno = c.courseno);
+
+select rollno, fname, lname from student where 
+rollno in (select rollno from course where coursename like 'Python');
+
+select distinct rollno from course;

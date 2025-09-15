@@ -1,0 +1,142 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+EMP                            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+S                              TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+SALES_ORDER_DETAILS            TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+
+17 rows selected.
+
+SQL> create table client1 as select * from CLIENT_MASTER;
+
+Table created.
+
+SQL> select * from client1;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> -- create table by using as but only stucture. not any records
+SQL> create table client2;
+create table client2
+                   *
+ERROR at line 1:
+ORA-00906: missing left parenthesis 
+
+
+SQL> create table client2 as select * from CLIENT_MASTER where 12=10;
+
+Table created.
+
+SQL> desc client2;
+ Name                                                                                                                                                                                                                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ C_NO                                                                                                                                                                                                                                                                                                           VARCHAR2(4)
+ CLIENT_NAME                                                                                                                                                                                                                                                                                           NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                                                                                                                                                                                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                                                                                                                                                                                                                            NOT NULL DATE
+ OCCUPATION                                                                                                                                                                                                                                                                                            NOT NULL VARCHAR2(30)
+ CITY                                                                                                                                                                                                                                                                                                           VARCHAR2(20)
+ STATE                                                                                                                                                                                                                                                                                                          VARCHAR2(20)
+ MOBILE_NO                                                                                                                                                                                                                                                                                                      NUMBER(10)
+
+SQL> create table client3 as select * from CLIENT_MASTER where 12=12;
+
+Table created.
+
+SQL> select * from client3;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> select * from client2;
+
+no rows selected
+
+SQL> -- now insert CLIENT_MASTER all record in client2 table;
+SQL> insert into client2 select * from CLIENT_MASTER;
+
+4 rows created.
+
+SQL> select * from client2;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> create table client4 as select * from CLIENT_MASTER;
+
+Table created.
+
+SQL> drop table client4;
+
+Table dropped.
+
+SQL> create table client4 as select * from CLIENT_MASTER where 1=0;
+
+Table created.
+
+SQL> select * from client4;
+
+no rows selected
+
+SQL> -- now only this 'C003' record from CLIENT_MASTER add on client4 table;
+SQL> insert into client4 select * from CLIENT_MASTER where c_no='C003';
+
+1 row created.
+
+SQL> select * from client4;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> -- now, make client5 table and add 2 column from CLIENT_MASTER table;
+SQL> create table client5 as select C_NO, CLIENT_NAME from CLIENT_MASTER;
+
+Table created.
+
+SQL> select * from client5;
+
+C_NO CLIENT_NAME                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+---- --------------------                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
+C001 Kajal Oza                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+C002 Vraj Shah                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+C005 Preeti Patel                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
+C003 Dhyan Dave                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

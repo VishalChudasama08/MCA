@@ -1,0 +1,157 @@
+-- 1. Create a table called "Clients" from the "Client_Master" table.
+SQL> create table Clients as select * from Client_Master;
+
+Table created.
+
+SQL> select * from Clients;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> -- 2. Insert all records of "Client_Master" into "Clients"
+SQL> insert into Clients seelct * from Client_Master;
+insert into Clients seelct * from Client_Master
+                           *
+ERROR at line 1:
+ORA-00926: missing VALUES keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* insert into clients select * from CLIENT_MASTER;
+SQL> /
+insert into clients select * from CLIENT_MASTER;
+                                               *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* insert into clients select * from CLIENT_MASTER
+SQL> /
+
+4 rows created.
+
+SQL> select * from CLIENT_MASTER;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                                                                                                                                                                                                                                                                                                                                  
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                                                                                                                                                                                                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+
+SQL> -- 3. Create table "Products" from "Product_master"
+SQL> create table Products as select * from Product_master where 1=3;
+
+Table created.
+
+SQL> desc Products;
+ Name                                                                                                                                                                                                                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ P_NO                                                                                                                                                                                                                                                                                                           VARCHAR2(5)
+ PROFIT_PER                                                                                                                                                                                                                                                                                            NOT NULL NUMBER(2)
+ UNIT                                                                                                                                                                                                                                                                                                  NOT NULL VARCHAR2(10)
+ QTY_HAND                                                                                                                                                                                                                                                                                              NOT NULL NUMBER(3)
+ RE_ORDER                                                                                                                                                                                                                                                                                              NOT NULL NUMBER(4)
+ SELL_P                                                                                                                                                                                                                                                                                                NOT NULL NUMBER(4)
+ COST_P                                                                                                                                                                                                                                                                                                NOT NULL NUMBER(4)
+
+SQL> set linesize 120;
+SQL> /
+create table Products as select * from Product_master where 1=3
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL>  desc Products;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ P_NO                                                                       VARCHAR2(5)
+ PROFIT_PER                                                        NOT NULL NUMBER(2)
+ UNIT                                                              NOT NULL VARCHAR2(10)
+ QTY_HAND                                                          NOT NULL NUMBER(3)
+ RE_ORDER                                                          NOT NULL NUMBER(4)
+ SELL_P                                                            NOT NULL NUMBER(4)
+ COST_P                                                            NOT NULL NUMBER(4)
+
+SQL> -- 4. Copy only selected Product's information into "Products" table.
+SQL> select * from Product_master;
+
+P_NO  PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                 
+----- ---------- ---------- ---------- ---------- ---------- ----------                                                 
+P001           5 PIECE             200         50        350        250                                                 
+P002           6 PIECE             250         40        500        350                                                 
+P003           6 PIECE             100         50        350        200                                                 
+P004           3 PIECE             100         20        820        600                                                 
+P005           4 Piece             300         60        450        300                                                 
+P006           7 Piece             120         30        700        500                                                 
+P007           8 Piece             250         40        150         90                                                 
+P008           5 Pair              180         50       1000        700                                                 
+P009           4 Piece             220         30        200        120                                                 
+
+9 rows selected.
+
+SQL> insert into Product select * from Product_master where QTY_HAND=100;
+insert into Product select * from Product_master where QTY_HAND=100
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* insert into Products select * from Product_master where QTY_HAND=100
+SQL> /
+
+2 rows created.
+
+SQL> select * from Products;
+
+P_NO  PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                 
+----- ---------- ---------- ---------- ---------- ---------- ----------                                                 
+P003           6 PIECE             100         50        350        200                                                 
+P004           3 PIECE             100         20        820        600                                                 
+
+SQL> -- 5. Create table "Salesman" from Salesman_Master" where "Salesman" table contains Fields: Salesman number, Name, Address1, City, Target_Get, Achieved_Target
+SQL> desc Salesman_Master;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ S_NO                                                              NOT NULL VARCHAR2(5)
+ NAME                                                              NOT NULL VARCHAR2(20)
+ ADD1                                                                       VARCHAR2(10)
+ ADD2                                                                       VARCHAR2(15)
+ CITY                                                              NOT NULL VARCHAR2(10)
+ PINCODE                                                                    NUMBER(6)
+ STATE                                                             NOT NULL VARCHAR2(15)
+ SALARY                                                            NOT NULL NUMBER(10)
+ TARGET                                                            NOT NULL NUMBER(5)
+ SALES                                                             NOT NULL NUMBER(5)
+
+SQL> create table Salesman as select s_no,name,add1,city,target as Achieved_Target from Salesman_Master;
+
+Table created.
+
+SQL> desc Salesman;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ S_NO                                                                       VARCHAR2(5)
+ NAME                                                              NOT NULL VARCHAR2(20)
+ ADD1                                                                       VARCHAR2(10)
+ CITY                                                              NOT NULL VARCHAR2(10)
+ ACHIEVED_TARGET                                                   NOT NULL NUMBER(5)
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

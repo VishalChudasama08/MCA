@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p id="task1"></p>
+    <p id="task2"></p>
+    <p id="task3"></p>
+
+    <script>
+
+        // task-1 create student and print student id only
+        function Student(id, name, age, division) {
+            this.sId = id;
+            this.sName = name;
+            this.sAge = age;
+            this.sDivision = division;
+        }
+
+        const st = new Student(8, "vishal", 23, "B");
+
+        document.getElementById("task1").innerHTML = "Task-1 <br> Student id is " + st.sId;
+
+        // task-2
+        function Employee(id, name){
+            this.eId = id;
+            this.eName = name;
+        }
+        function Employee(id, name, job){
+            this.eId = id;
+            this.eName = name;
+            this.eJob = job;
+        }
+        var e1 = new Employee(2, "another");
+        var e1 = new Employee(3, "Twoend");
+
+        document.getElementById("task2").innerHTML = "Task-2 <br> First constructor: " + e1.eId + "<br> Second constructor: " + e1.eName;
+
+        // task-3
+        function Circle(radius){
+            this.area = 3.14*radius*radius;
+        }
+        function Rect(length, height){
+            this.area = length*height;
+        }
+
+        const c = new Circle(12);
+        const r = new Rect(10, 20);
+        let v;
+        if(c.area > r.area)
+            v = c.area;
+        else
+            v = r.area;
+        document.getElementById("task3").innerHTML = "Task-3 <br>Area of Circle: " + c.area + "<br>Area of Rect: " + r.area;
+        document.getElementById("task3").innerHTML += "<br>grater area: " + v;
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+create table employee(emp_no varchar(3), fname varchar(25), lname varchar(25), dob date, address varchar(25));
+
+insert into employee values
+('E1', 'Sakshi', 'Panchal', '12-Jan-2000','Ahmedabad');
+
+insert into employee values
+('E2', 'Sandeep', 'Patel', '22-Jan-2001','Ahmedabad');
+
+insert into employee values
+('E3', 'Deep', 'Patel', '22-June-2001','Vadodara');
+
+insert into employee values
+('E4', 'Pari', 'Pandya', '20-Feb-2002','Vadodara');
+
+insert into employee values
+('E5', 'Aarti', 'Pandit', '20-Mar-2002','Surat');
+
+create table Company(comp_id varchar(3) ,emp_no varchar(3), company_name varchar(20),salary number(7,2),department varchar(20),designation varchar(20));
+
+insert into company values('C1', 'E1', 'Elecon', 20000, 'Marketing', 'Manager');
+insert into company values('C1', 'E2', 'Elecon', 5000, 'Marketing', 'Clerk');
+insert into company values('C2', 'E3', 'Amtel', 25000, 'Sales', 'Manager');
+insert into company values('C2', 'E4', 'Amtel', 10000, 'Sales', 'Clerk');
+insert into company values('C2', 'E5', 'Amtel', 2000, 'Marketing', 'Peon');
+
+create table Customer(cust_no varchar(3),fname varchar(20),lname varchar(30),address varchar(20));
+
+insert into customer values('C01', 'Radhika', 'Raval', 'Ahmedabad');
+insert into customer values('C02', Chandrika', 'Joshi', 'Ahmedabad');
+insert into customer values('C03', 'Radha', 'Jain', 'Ahmedabad');
+insert into customer values('C04', 'Deep', 'Patel', 'Ahmedabad');
+insert into customer values('C05', 'Sakshi', 'Shah', 'Ahmedabad');
+

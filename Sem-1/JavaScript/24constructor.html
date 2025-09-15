@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>24 constructor</title>
+</head>
+
+<body>
+    <h2>Object constructor</h2>
+    <p id="demo"></p>
+    <script>
+        // constructor function for person
+        function Person(first, last, age, city) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.city = city;
+            console.log("first is called");
+        }
+        function Person1(first, last, age, city) {
+            this.firstName = first;
+            this.lastName = last;
+            this.age = age;
+            this.city = city;
+            console.log("second is called");
+        }
+        // create a Person object
+        const myFather = new Person("Jhon", "deo", 56, "ahem");
+        const newObject = new Person1("", "", 34, "surat");
+
+        document.getElementById("demo").innerHTML = "father is " + myFather.age + " year old. name is " + myFather.firstName + " " + myFather.lastName + ". city " + myFather.city + "<br>";
+
+        document.getElementById("demo").innerHTML = "new person is " + newObject.age + " year old. name is " + newObject.firstName + " " + newObject.lastName + ". city " + newObject.city + "<br>";
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+create table worker
+(Id varchar(2) primary key, 
+Name varchar(10), 
+Wages_Per_Hr number(5,2));
+
+insert into worker values
+('W1', 'Subhash', 200.50);
+
+insert into worker values
+('W2', 'Radha', 250.50);
+
+insert into worker values
+('W3', 'Rakesh', 350.50);
+
+insert into worker values
+('W4', 'Jaya', 200.00);
+
+insert into worker values
+('W5', 'Balvant', 250.00);
+
+****************************************************
+create table Job
+(Job_Id varchar(2) primary key, 
+Job_Type varchar(10));
+
+insert into job values
+('J1', 'Plumbing');
+
+insert into job values
+('J2', 'Swipping');
+
+insert into job values
+('J3', 'Carpenter');
+
+****************************************************
+create table Assigned
+(W_Id varchar(2) references worker(id),
+J_Id varchar(2) references job(job_id),
+Start_Date date,
+Status char(1) check(status in ('P', 'C')),
+Total_Hrs number(2),
+primary key(w_id, j_id)
+);
+
+insert into assigned values
+('W1', 'J1', '2-Jan-2020', 'C', 20);
+
+
+insert into assigned values
+('W1', 'J2', '2-July-2022', 'C', 20);
+
+
+insert into assigned values
+('W2', 'J1', '2-Jan-2024', 'C', 25);
+
+
+insert into assigned values
+('W3', 'J2', '20-Dec-2023', 'P', 35);
+
+
+insert into assigned values
+('W4', 'J3', '12-Jan-2024', 'P', 40);
+
+
+insert into assigned values
+('W4', 'J2', '20-Jul-2024', 'C', 30);

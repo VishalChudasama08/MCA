@@ -1,0 +1,69 @@
+create table applicant(aid varchar(3), a_name varchar(20), city varchar(20), b_date date);
+
+create table entrance_test(et_id varchar(3), et_name varchar(20), max_score number(3));
+
+create table etest_details(aid varchar(3), et_id varchar(3), eTest_Date date, Score number(3));
+
+
+insert into applicant values('A01', 'Akash', 'Ahmedabad', '1-Jan-1990');
+
+insert into applicant values('A02', 'Bhakti', 'Ahmedabad', '11-Jul-1990');
+
+insert into applicant values('A03', 'Charmi', 'Baroda', '15-Dec-1992');
+
+insert into applicant values('A04', 'Dharm', 'Baroda', '24-Nov-1998');
+
+insert into applicant values('A05', 'Eva', 'Baroda', '25-May-1996');
+
+
+insert into ENTRANCE_TEST values ('T01', 'Oracle', 100);
+insert into ENTRANCE_TEST values ('T02', 'Programming', 200);
+insert into ENTRANCE_TEST values ('T03', 'Testing', 50);
+
+
+insert into ETEST_DETAILS values('A01', 'T01', '12-Mar-2022', 80);
+insert into ETEST_DETAILS values('A01', 'T02', '15-Apr-2022', 180);
+insert into ETEST_DETAILS values('A02', 'T02', '11-Jul-2022', 120);
+insert into ETEST_DETAILS values('A02', 'T03', '10-Jan-2022', 20);
+insert into ETEST_DETAILS values('A03', 'T02', '22-Feb-2022', 100);
+insert into ETEST_DETAILS values('A03', 'T01', '11-Mar-2022', 70);
+insert into ETEST_DETAILS values('A03', 'T03', '1-Apr-2022', 12);
+insert into ETEST_DETAILS values('A04', 'T02', '31-Jan-2022', 160);
+insert into ETEST_DETAILS values('A01', 'T03', '31-Jan-2022', 16);
+
+SQL> Select * from applicant;
+
+AID A_NAME               CITY                 B_DATE
+--- -------------------- -------------------- ---------
+A01 Akash                Ahmedabad            01-JAN-90
+A02 Bhakti               Ahmedabad            11-JUL-90
+A03 Charmi               Baroda               15-DEC-92
+A04 Dharm                Baroda               24-NOV-98
+A05 Eva                  Baroda               25-MAY-96
+
+SQL> select * from entrance_test;
+
+ET_ ET_NAME               MAX_SCORE
+--- -------------------- ----------
+T01 Oracle                      100
+T02 Programming                 200
+T03 Testing                      50
+
+SQL> select * from etest_details;
+
+AID ET_ ETEST_DAT      SCORE
+--- --- --------- ----------
+A01 T01 12-MAR-22         80
+A01 T01 12-MAR-22         80
+A01 T02 15-APR-22        180
+A02 T02 11-JUL-22        120
+A02 T03 10-JAN-22         20
+A03 T02 22-FEB-22        100
+A03 T01 11-MAR-22         70
+A03 T03 01-APR-22         12
+A04 T02 31-JAN-22        160
+
+9 rows selected.
+
+
+

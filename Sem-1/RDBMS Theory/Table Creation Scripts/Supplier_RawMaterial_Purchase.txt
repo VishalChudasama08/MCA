@@ -1,0 +1,46 @@
+create table SUPPLIER(
+S_ID varchar(4) check(S_ID like 'S%') primary key,
+S_NAME varchar(15) not null,
+contact number(10) check(length(contact)=10) not null
+);
+
+INSERT INTO SUPPLIER VALUES ('S001', 'SAM', 7845126993);
+INSERT INTO SUPPLIER VALUES ('S002', 'Jane', 4587451263);
+INSERT INTO SUPPLIER VALUES ('S003', 'Mike', 4851236954);
+INSERT INTO SUPPLIER VALUES ('S004', 'Sara', 5821456932);
+INSERT INTO SUPPLIER VALUES ('S005', 'Tom', 1542126452);
+
+
+
+create table RAWMATIRIAL(
+id number(10) primary key,
+name varchar(15) not null,
+price number(10) check(price>500)
+);
+
+INSERT INTO RAWMATIRIAL VALUES (01, 'bricks', 1000);
+INSERT INTO RAWMATIRIAL VALUES (02, 'cement', 5000);
+INSERT INTO RAWMATIRIAL VALUES (03, 'sand', 4500);
+INSERT INTO RAWMATIRIAL VALUES (04, 'paint', 1000);
+INSERT INTO RAWMATIRIAL VALUES (05, 'blocks', 2500);
+
+
+create table PURCHASE(
+S_ID varchar(4) not null,
+id number(10) not null,
+qty_purchase number(5) not null,
+pur_date date not null,
+constraint S_ID foreign key(S_ID) references SUPPLIER(S_ID),
+constraint id foreign key(id) references RAWMATIRIAL(id)
+);
+
+
+INSERT INTO PURCHASE VALUES ('S001', 01, 550,'05-June-2023');
+INSERT INTO PURCHASE VALUES ('S001', 02, 550,'05-June-2023');
+INSERT INTO PURCHASE VALUES ('S001', 03, 550,'05-June-2023');
+INSERT INTO PURCHASE VALUES ('S001', 04, 550,'05-June-2023');
+INSERT INTO PURCHASE VALUES ('S001', 05, 550,'05-June-2023');
+INSERT INTO PURCHASE VALUES ('S003', 02, 300,'21-july-2023');
+INSERT INTO PURCHASE VALUES ('S005', 05, 450,'10-Aug-2023');
+INSERT INTO PURCHASE VALUES ('S004', 03, 550,'15-Sep-2023');
+INSERT INTO PURCHASE VALUES ('S002', 03, 600,'10-Sep-2023');

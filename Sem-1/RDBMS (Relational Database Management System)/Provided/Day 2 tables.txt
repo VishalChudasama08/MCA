@@ -1,0 +1,380 @@
+create table client_master(
+c_no varchar2(4) check (c_no like 'C%')primary key,
+client_name varchar2(20) not null,
+pincode number(6)check (LENGTH(pincode)=6)not null,
+birth_date date not null,
+occupation varchar(30) not null)
+
+
+ insert into client_master values('&c_no','&client_name',&pincode,'&birth_date','&occupation');
+
+insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+
+insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO');
+
+insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor')
+
+
+insert into client_master values('C005','Preeti Patel',390040,'28-feb-1971','Clerk');
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION
+---- -------------------- ---------- --------- ------------------------------
+C001 Kajal Oza                380036 14-JUL-87 Manager
+C002 Vraj Shah                380058 20-NOV-86 CEO
+C003 Dhyan Dave               387903 17-JUN-88 Doctor
+C004 Miral Vaid               398006 05-JAN-76 Professor
+C005 Preeti Patel             390040 28-FEB-71 Clerk
+
+
+
+
+ CREATE TABLE PRODUCT_MASTER(
+ P_NO VARCHAR2(5)CHECK (P_NO LIKE 'P%')PRIMARY KEY,
+ DESCRIPTION VARCHAR2(20) NOT NULL,
+ PROFIT_PER NUMBER(2) NOT NULL,
+ UNIT VARCHAR2(10)NOT NULL,
+ QTY_HAND NUMBER(3) NOT NULL,
+ RE_ORDER NUMBER(4)NOT NULL,
+ SELL_P NUMBER(4)NOT NULL,
+ COST_P NUMBER(4)NOT NULL);
+ 
+
+
+INSERT INTO PRODUCT_MASTER VALUES('&P_NO','&DESCRIPTION',&PROFIT_PER,'&UNIT',&QTY_HAND,&REORDER,&SELL_P,&COST_P);
+
+INSERT INTO PRODUCT_MASTER VALUES('P001','T-SHIRT',5,'PIECE',200,50,350,250);
+ INSERT INTO PRODUCT_MASTER VALUES('P002','JEANS',6,'PIECE',250,40,500,350);
+ INSERT INTO PRODUCT_MASTER VALUES('P003','SKIRT',6,'PIECE',100,50,350,200);
+INSERT INTO PRODUCT_MASTER VALUES('P004','SAREE',3,'PIECE',100,20,800,600);
+INSERT INTO Product_Master VALUES ('P005','Shirt',4,'Piece',300,60,450,300);
+INSERT INTO Product_Master VALUES ('P006','Kurta',7,'Piece',120,30,700,500);
+INSERT INTO Product_Master VALUES ('P007','Cap',8,'Piece',250,40,150,90);
+INSERT INTO Product_Master VALUES ('P008','Shoes',5,'Pair',180,50,1000,700);
+INSERT INTO Product_Master VALUES ('P009','Belt',4,'Piece',220,30,200,120);
+INSERT INTO Product_Master VALUES ('P010','Jacket',6,'Piece',80,20,1500,1000);
+
+
+P_NO  DESCRIPTION          PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P
+----- -------------------- ---------- ---------- ---------- ---------- ---------- ----------
+P005  Shirt                         4 Piece             300         60        450        300
+P006  Kurta                         7 Piece             120         30        700        500
+P007  Cap                           8 Piece             250         40        150         90
+P008  Shoes                         5 Pair              180         50       1000        700
+P009  Belt                          4 Piece             220         30        200        120
+P010  Jacket                        6 Piece              80         20       1500       1000
+P001  T-SHIRT                       5 PIECE             200         50        350        250
+P002  JEANS                         6 PIECE             250         40        500        350
+P003  SKIRT                         6 PIECE             100         50        350        200
+P004  SAREE                         3 PIECE             100         20        800        600
+
+
+
+create table salesman_master(
+s_no varchar2(5) check (s_no like 'S%')primary key,
+name varchar2(20) not null,
+add1 varchar2(10),
+add2 varchar2(15),
+city varchar2(10)not null,
+pincode number(6),
+state varchar2(15) not null,
+salary number(10) not null,
+target number(5)not null,
+sales number(5)not null);
+
+
+ insert into salesman_master values('&s_no','&name','&add1','&add2','&city',&pincode,'&state',&salary,&target,&sales)
+
+ insert into salesman_master values('S001','AMAN','3,DEV APPT','VAGHODIA','BARODA',NULL,'GUJRAT',5000,100,50);
+insert into salesman_master values('S002','OMKAR','NULL','NULL','BHOPAL',NULL,'MP',4500,200,150);
+ insert into salesman_master values('S003','RAJ','B-104','VERLI','MUMBAI',400002,'MAHARASHTRA',5500,200,200);
+insert into salesman_master values('S004','ASHISH','1,SMRUTI','GHODDOL','SURAT',NULL,'GUJRAT',4500,150,100);
+INSERT INTO Salesman_Master VALUES ('S005','Meera','10, Lotus','Alkapuri','Vadodara','390007','Gujarat',6000,300,250);
+INSERT INTO Salesman_Master VALUES ('S006','Karan','Sector-17','Navrangpura','Ahmedabad','380009','Gujarat',5500,220,180);
+INSERT INTO Salesman_Master VALUES ('S007','Priya','L-12','MG Road','Pune','411001','Maharashtra',5200,180,160);
+INSERT INTO Salesman_Master VALUES ('S008','Dev','House-22','Civil Lines','Delhi','110054','Delhi',5800,250,200);
+INSERT INTO Salesman_Master VALUES ('S009','Sahil','Flat-4','Indira Nagar','Lucknow','226016','UP',4900,160,140);
+INSERT INTO Salesman_Master VALUES ('S010','Nidhi','Block-7','Park Street','Kolkata','700016','WB',5300,210,190);
+
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100
+
+
+
+CREATE TABLE Sales_Order (
+    Order_No     VARCHAR2(4) PRIMARY KEY CHECK (Order_No LIKE 'O%'),
+    Client_No    VARCHAR2(5),
+    Order_Date   DATE,
+    Salesman_No  VARCHAR2(4) REFERENCES Salesman_Master(S_No),
+    Delivery_Type CHAR(1) CHECK (Delivery_Type IN ('F','P')),
+    Bill_Paid    CHAR(1) CHECK (Bill_Paid IN ('Y','N')),
+    Delivery_Date DATE,
+    Order_Status VARCHAR2(20) CHECK (Order_Status IN ('In Process','Pending','Fulfilled'))
+);
+
+CREATE TABLE Sales_Order_Details (
+    Order_No       VARCHAR2(4),
+    Product_No     VARCHAR2(4),
+    Qty_Ordered    NUMBER(6) CHECK (Qty_Ordered > 0),
+    Qty_Dispatched NUMBER(6) CHECK (Qty_Dispatched >= 0),
+    Product_Rate   NUMBER(10,2) CHECK (Product_Rate >= 0),
+    PRIMARY KEY (Order_No, Product_No),
+    FOREIGN KEY (Order_No) REFERENCES Sales_Order(Order_No),
+    FOREIGN KEY (Product_No) REFERENCES Product_Master(P_No)
+);
+
+-- Sample Sales_Order Inserts
+INSERT INTO Sales_Order VALUES ('O001','C001',SYSDATE-15,'S001','F','Y',SYSDATE-10,'Fulfilled');
+INSERT INTO Sales_Order VALUES ('O002','C002',SYSDATE-14,'S002','P','N',SYSDATE-7,'Pending');
+INSERT INTO Sales_Order VALUES ('O003','C003',SYSDATE-13,'S003','F','Y',SYSDATE-5,'Fulfilled');
+INSERT INTO Sales_Order VALUES ('O004','C004',SYSDATE-12,'S004','P','N',SYSDATE-3,'In Process');
+INSERT INTO Sales_Order VALUES ('O005','C005',SYSDATE-11,'S005','F','Y',SYSDATE-2,'Fulfilled');
+INSERT INTO Sales_Order VALUES ('O006','C006',SYSDATE-10,'S006','P','Y',SYSDATE+2,'Pending');
+INSERT INTO Sales_Order VALUES ('O007','C007',SYSDATE-9,'S007','F','N',SYSDATE+3,'In Process');
+INSERT INTO Sales_Order VALUES ('O008','C008',SYSDATE-8,'S008','P','Y',SYSDATE+4,'Pending');
+INSERT INTO Sales_Order VALUES ('O009','C009',SYSDATE-7,'S009','F','Y',SYSDATE+5,'Fulfilled');
+INSERT INTO Sales_Order VALUES ('O010','C010',SYSDATE-6,'S010','P','N',SYSDATE+6,'In Process');
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS
+---- ----- --------- ---- - - --------- --------------------
+O001 C001  18-AUG-25 S001 F Y 23-AUG-25 Fulfilled
+O002 C002  19-AUG-25 S002 P N 26-AUG-25 Pending
+O003 C003  20-AUG-25 S003 F Y 28-AUG-25 Fulfilled
+O004 C004  21-AUG-25 S004 P N 30-AUG-25 In Process
+O005 C005  22-AUG-25 S005 F Y 31-AUG-25 Fulfilled
+O006 C006  23-AUG-25 S006 P Y 04-SEP-25 Pending
+O007 C007  24-AUG-25 S007 F N 05-SEP-25 In Process
+O008 C008  25-AUG-25 S008 P Y 06-SEP-25 Pending
+O009 C009  26-AUG-25 S009 F Y 07-SEP-25 Fulfilled
+O010 C010  27-AUG-25 S010 P N 08-SEP-25 In Process
+
+-- Sales_Order_Details Inserts
+INSERT INTO Sales_Order_Details VALUES ('O001','P001',10,10,3500);
+INSERT INTO Sales_Order_Details VALUES ('O002','P002',5,4,2000);
+INSERT INTO Sales_Order_Details VALUES ('O003','P003',8,8,2800);
+INSERT INTO Sales_Order_Details VALUES ('O004','P004',6,3,2400);
+INSERT INTO Sales_Order_Details VALUES ('O005','P005',12,12,5400);
+INSERT INTO Sales_Order_Details VALUES ('O006','P006',7,6,4200);
+INSERT INTO Sales_Order_Details VALUES ('O007','P007',15,12,1800);
+INSERT INTO Sales_Order_Details VALUES ('O008','P008',9,8,8000);
+INSERT INTO Sales_Order_Details VALUES ('O009','P009',20,20,4000);
+INSERT INTO Sales_Order_Details VALUES ('O010','P010',4,2,3000);
+
+
+SQL> SELECT * FROM SALES_ORDER_DETAILS;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE
+---- ---- ----------- -------------- ------------
+O001 P001          10             10         3500
+O002 P002           5              4         2000
+O003 P003           8              8         2800
+O004 P004           6              3         2400
+O005 P005          12             12         5400
+O006 P006           7              6         4200
+O007 P007          15             12         1800
+O008 P008           9              8         8000
+O009 P009          20             20         4000
+O010 P010           4              2         3000
+
+--------------------------------------------------------------
+/* =========================================
+   4. APPLICANT / ENTRANCE TEST / ETEST_DETAILS
+   ========================================= */
+CREATE TABLE Applicant (
+    AID     VARCHAR2(4) PRIMARY KEY CHECK (AID LIKE 'A%'),
+    A_Name  VARCHAR2(30) NOT NULL,
+    Address VARCHAR2(50),
+    B_Date  DATE
+);
+
+CREATE TABLE Entrance_Test (
+    ET_ID     VARCHAR2(4) PRIMARY KEY CHECK (ET_ID LIKE 'T%'),
+    ET_Name   VARCHAR2(30) NOT NULL,
+    Max_Score NUMBER(3) CHECK (Max_Score <= 100)
+);
+
+CREATE TABLE ETest_Details (
+    AID        VARCHAR2(4),
+    ETID       VARCHAR2(4),
+    ETest_Date DATE,
+    Score      NUMBER(3) CHECK (Score >= 0),
+    PRIMARY KEY (AID, ETID),
+    FOREIGN KEY (AID) REFERENCES Applicant(AID),
+    FOREIGN KEY (ETID) REFERENCES Entrance_Test(ET_ID)
+);
+	
+-- Applicant Inserts
+INSERT INTO Applicant VALUES ('A001','Ravi','Baroda',DATE '2000-05-12');
+INSERT INTO Applicant VALUES ('A002','Neha','Surat',DATE '1999-08-23');
+INSERT INTO Applicant VALUES ('A003','Amit','Mumbai',DATE '2001-02-14');
+INSERT INTO Applicant VALUES ('A004','Pooja','Delhi',DATE '2000-11-05');
+INSERT INTO Applicant VALUES ('A005','Karan','Pune',DATE '1998-09-30');
+INSERT INTO Applicant VALUES ('A006','Sita','Kolkata',DATE '2000-07-17');
+INSERT INTO Applicant VALUES ('A007','Mohan','Lucknow',DATE '2001-01-25');
+INSERT INTO Applicant VALUES ('A008','Anjali','Jaipur',DATE '1999-04-19');
+INSERT INTO Applicant VALUES ('A009','Vikas','Nagpur',DATE '2000-06-10');
+INSERT INTO Applicant VALUES ('A010','Deepa','Chennai',DATE '2001-12-28');
+
+
+SQL> SELECT * FROM APPLICANT;
+
+AID  A_NAME                         ADDRESS                                            B_DATE
+---- ------------------------------ -------------------------------------------------- ---------
+A001 Ravi                           Baroda                                             12-MAY-00
+A002 Neha                           Surat                                              23-AUG-99
+A003 Amit                           Mumbai                                             14-FEB-01
+A004 Pooja                          Delhi                                              05-NOV-00
+A005 Karan                          Pune                                               30-SEP-98
+A006 Sita                           Kolkata                                            17-JUL-00
+A007 Mohan                          Lucknow                                            25-JAN-01
+A008 Anjali                         Jaipur                                             19-APR-99
+A009 Vikas                          Nagpur                                             10-JUN-00
+A010 Deepa                          Chennai                                            28-DEC-01
+
+-- Entrance_Test Inserts
+INSERT INTO Entrance_Test VALUES ('T001','Maths',100);
+INSERT INTO Entrance_Test VALUES ('T002','Physics',90);
+INSERT INTO Entrance_Test VALUES ('T003','Chemistry',95);
+INSERT INTO Entrance_Test VALUES ('T004','Biology',100);
+INSERT INTO Entrance_Test VALUES ('T005','English',80);
+
+
+SQL> SELECT * FROM ENTRANCE_TEST;
+
+ET_I ET_NAME                         MAX_SCORE
+---- ------------------------------ ----------
+T001 Maths                                 100
+T002 Physics                                90
+T003 Chemistry                              95
+T004 Biology                               100
+T005 English                                80
+
+
+-- ETest_Details Inserts
+INSERT INTO ETest_Details VALUES ('A001','T001',SYSDATE-20,80);
+INSERT INTO ETest_Details VALUES ('A002','T002',SYSDATE-18,70);
+INSERT INTO ETest_Details VALUES ('A003','T003',SYSDATE-17,75);
+INSERT INTO ETest_Details VALUES ('A004','T004',SYSDATE-15,85);
+INSERT INTO ETest_Details VALUES ('A005','T005',SYSDATE-14,65);
+INSERT INTO ETest_Details VALUES ('A006','T001',SYSDATE-13,90);
+INSERT INTO ETest_Details VALUES ('A007','T002',SYSDATE-12,60);
+INSERT INTO ETest_Details VALUES ('A008','T003',SYSDATE-10,70);
+INSERT INTO ETest_Details VALUES ('A009','T004',SYSDATE-9,95);
+INSERT INTO ETest_Details VALUES ('A010','T005',SYSDATE-8,75);
+
+
+SQL> SELECT * FROM ETEST_DETAILS;
+
+AID  ETID ETEST_DAT      SCORE
+---- ---- --------- ----------
+A001 T001 13-AUG-25         80
+A002 T002 15-AUG-25         70
+A003 T003 16-AUG-25         75
+A004 T004 18-AUG-25         85
+A005 T005 19-AUG-25         65
+A006 T001 20-AUG-25         90
+A007 T002 21-AUG-25         60
+A008 T003 23-AUG-25         70
+A009 T004 24-AUG-25         95
+A010 T005 25-AUG-25         75
+
+--------------------------------------------------------------
+/* =========================================
+   5. DISTRIBUTOR / ITEM / DIST_ITEM
+   ========================================= */
+CREATE TABLE Distributor (
+    Dno    VARCHAR2(4) PRIMARY KEY,
+    DName  VARCHAR2(30) NOT NULL,
+    City   VARCHAR2(30),
+    Phone  VARCHAR2(12)
+);
+
+CREATE TABLE Item (
+    Item_No   VARCHAR2(5) PRIMARY KEY CHECK (Item_No LIKE 'I%'),
+    Item_Name VARCHAR2(30) NOT NULL,
+    Price     NUMBER(8,2) NOT NULL CHECK (Price > 0),
+    Weight    NUMBER(8,2) NOT NULL CHECK (Weight > 0)
+);
+
+CREATE TABLE Dist_Item (
+    Dno     VARCHAR2(4),
+    Item_No VARCHAR2(5),
+    Qty     NUMBER(6) NOT NULL CHECK (Qty > 0),
+    Order_Date DATE,
+    PRIMARY KEY (Dno, Item_No),
+    FOREIGN KEY (Dno) REFERENCES Distributor(Dno),
+    FOREIGN KEY (Item_No) REFERENCES Item(Item_No)
+);
+
+-- Distributor Inserts
+INSERT INTO Distributor VALUES ('D001','ABC Distributors','Baroda','9876543210');
+INSERT INTO Distributor VALUES ('D002','Shree Suppliers','Surat','9123456780');
+INSERT INTO Distributor VALUES ('D003','Om Traders','Mumbai','9988776655');
+INSERT INTO Distributor VALUES ('D004','Global Supply','Delhi','9012345678');
+INSERT INTO Distributor VALUES ('D005','FastMart','Pune','9090909090');
+
+SQL> SELECT * FROM DISTRIBUTOR;
+
+DNO  DNAME                          CITY                           PHONE
+---- ------------------------------ ------------------------------ ------------
+D001 ABC Distributors               Baroda                         9876543210
+D002 Shree Suppliers                Surat                          9123456780
+D003 Om Traders                     Mumbai                         9988776655
+D004 Global Supply                  Delhi                          9012345678
+D005 FastMart                       Pune                           9090909090
+
+
+-- Item Inserts
+INSERT INTO Item VALUES ('I001','Rice',50,5);
+INSERT INTO Item VALUES ('I002','Wheat',40,4);
+INSERT INTO Item VALUES ('I003','Sugar',35,3);
+INSERT INTO Item VALUES ('I004','Oil',120,2);
+INSERT INTO Item VALUES ('I005','Salt',20,1);
+
+SQL> SELECT * FROM ITEM;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT
+----- ------------------------------ ---------- ----------
+I001  Rice                                   50          5
+I002  Wheat                                  40          4
+I003  Sugar                                  35          3
+I004  Oil                                   120          2
+I005  Salt                                   20          1
+
+-- Dist_Item Inserts
+INSERT INTO Dist_Item VALUES ('D001','I001',100,SYSDATE-10);
+INSERT INTO Dist_Item VALUES ('D001','I002',80,SYSDATE-9);
+INSERT INTO Dist_Item VALUES ('D002','I003',50,SYSDATE-8);
+INSERT INTO Dist_Item VALUES ('D002','I004',60,SYSDATE-7);
+INSERT INTO Dist_Item VALUES ('D003','I005',200,SYSDATE-6);
+INSERT INTO Dist_Item VALUES ('D003','I001',120,SYSDATE-5);
+INSERT INTO Dist_Item VALUES ('D004','I002',150,SYSDATE-4);
+INSERT INTO Dist_Item VALUES ('D004','I003',70,SYSDATE-3);
+INSERT INTO Dist_Item VALUES ('D005','I004',90,SYSDATE-2);
+INSERT INTO Dist_Item VALUES ('D005','I005',250,SYSDATE-1);
+
+SQL> SELECT * FROM DIST_ITEM;
+
+DNO  ITEM_        QTY ORDER_DAT
+---- ----- ---------- ---------
+D001 I001         100 23-AUG-25
+D001 I002          80 24-AUG-25
+D002 I003          50 25-AUG-25
+D002 I004          60 26-AUG-25
+D003 I005         200 27-AUG-25
+D003 I001         120 28-AUG-25
+D004 I002         150 29-AUG-25
+D004 I003          70 30-AUG-25
+D005 I004          90 31-AUG-25
+D005 I005         250 01-SEP-25
+

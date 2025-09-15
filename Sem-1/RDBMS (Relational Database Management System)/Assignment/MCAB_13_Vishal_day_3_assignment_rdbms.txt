@@ -1,0 +1,122 @@
+SQL> -- 1. Remove all Sales_Orders whose QtyOrdered = 1 in "Sales_Order_Detail" table
+SQL> delete from sales_order_details where QTY_ORDERED = 1;
+
+1 row deleted.
+
+SQL> -- 2. Modify the OrderStatus to "Fulfilled" where the OrderStatus is "In Process" in Sales_Order Table
+SQL> UPDATE Sales_Order SET ORDER_STATUS='Fulfilled' WHERE ORDER_STATUS='In Process';
+
+3 rows updated.
+
+SQL> -- 3. Increase the sell price of saree by Rs. 20
+SQL> update PRODUCT_MASTER set SELL_P=SELL_P+20 WHERE DESCRIPTION='SAREE';
+
+1 row updated.
+
+SQL> -- 4. Delete all Salesman from Salesman_Master table whose salary is more than 3500
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+DELETE FROM Salesman_Master WHERE SALARY>3500
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032324) violated - child record found 
+
+SQL> -- here, Salesman_Master table relation with SALES_ORDER. SALES_ORDER table store salesman_master table S_NO in column SALESMAN_NO, than without remove column (SALES_ORDER.SALESMAN_NO) constraint query 4 not work
+SQL> -- now first remove SALES_ORDER column SALESMAN_NO constraint
+SQL> alter table SALES_ORDER drop constraints SYS_C0032324;
+
+Table altered.
+
+SQL> DELETE FROM Salesman_Master WHERE SALARY>3500;
+
+10 rows deleted.
+
+SQL> -- 5. Delete all Products from Product_master where Quantity on Hand (Qty_Hand) is less than 50
+SQL> delete from PRODUCT_MASTER where qty_hand > 100;
+delete from PRODUCT_MASTER where qty_hand > 100
+*
+ERROR at line 1:
+ORA-02292: integrity constraint (MCAB250013.SYS_C0032330) violated - child record found 
+
+
+SQL> alter table Sales_Order_Details drop constraints SYS_C0032330;
+
+Table altered.
+
+SQL> delete from PRODUCT_MASTER where qty_hand > 100;
+
+7 rows deleted.
+
+SQL> -- 6. Change the details of the Client 'C003' as pincode  to 387903 and Occupation is 'Manager'
+SQL> update client_master set pincode=387903, OCCUPATION='Manager' where c_no='C003';
+
+1 row updated.
+
+SQL> -- 7. Remove the product details column from Product_Master Table
+SQL> alter table PRODUCT_MASTER drop column DESCRIPTION;
+
+Table altered.
+
+SQL> -- 8. Add column City and State in Client_Master table
+SQL> alter table Client_Master add (City varchar2(20), State varchar2(20));
+
+Table altered.
+
+SQL> -- 9. Increase the size of the Price Column
+SQL> alter table ITEM modify price number(12, 3);
+
+Table altered.
+
+SQL> -- 10. Add a column Mobile_No of type Number, in the Client_Master Table
+SQL> alter table Client_Master add Mobile_No number(10);
+
+Table altered.
+
+SQL> -- 11. Add constraint to the Mobile_No column;
+SQL> alter table Client_Master add constraints MOBILE_NO CHECK(LENGTH(MOBILE_NO) = 10);
+
+Table altered.
+
+SQL> -- 12. Change the name of Salesman_Master table to "SMan_Mst"
+SQL> rename Salesman_Master TO SMan_Mst;
+
+Table renamed.
+
+SQL> -- 13. Add a column of Experience in the Faculty_Master Table
+SQL> alter table Salesman_Master add Experience varchar2(30);
+
+Table altered.
+
+SQL> -- 14. Change the name of the column Address to Area in Faculty_Master Table
+SQL> alter table Salesman_Master rename column add1 to area;
+
+Table altered.
+
+SQL> -- 15. Modify the Applicant Table name to Applicant_Master
+SQL> rename Applicant to Applicant_Master;
+
+Table renamed.
+
+SQL> -- 16. Add a column "Hobby" in Applicant_Master table.
+SQL> alter table Applicant_Master add Hobby varchar2(30);
+
+Table altered.
+
+SQL> -- 17. Add a column "Location" in the "ETest_Detail" table. Keep it varchar(10)
+SQL> alter table ETEST_DETAILS add Location varchar(10);
+
+Table altered.
+
+SQL> -- 18. Modify the column "Location" and increase the size upto 25 characters.
+SQL> alter table ETEST_DETAILS modify Location varchar(25);
+
+Table altered.
+
+SQL> -- 19. Change the field "Address" to "City" in Applicant_Master Table
+SQL> alter table Applicant_Master rename column ADDRESS to City;
+
+Table altered.
+
+SQL> -- 20. Change the name of the Item table to "Item_Master"
+SQL> rename Item to trem_master;
+
+Table renamed.

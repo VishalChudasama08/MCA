@@ -1,0 +1,49 @@
+create table EMPLOYEE(
+empid varchar(5) check(empid like 'E%') primary key,
+ename varchar(10) not null,
+J_date date not null,
+designation varchar(10) not null
+);
+
+Table created.
+
+
+create table PROJECT(
+pid varchar(5) check(pid like 'P%') primary key,
+pname varchar(30) not null,
+proj_type varchar(30) not null,
+tot_duration int not null check (tot_duration BETWEEN 7 AND 30)
+);
+
+Table created.
+
+create table WORKS_ON(
+empid varchar(5) check(empid like 'E%'),
+pid varchar(5) check(pid like 'P%'),
+type_work varchar(10) not null,
+num_days int not null,
+constraint fk_empid foreign key (empid) references EMPLOYEE(empid),
+constraint fk_pid foreign key (pid) references PROJECT(pid)
+);
+
+Table created.
+
+INSERT INTO EMPLOYEE VALUES('E1','Harshil','15-Aug-2004','CEO');
+INSERT INTO EMPLOYEE VALUES('E2','Jaimini','24-Apr-2014','HR');
+INSERT INTO EMPLOYEE VALUES('E3','Hetal','03-Mar-2021','ACCOUNT');
+INSERT INTO EMPLOYEE VALUES('E4','Shubham','29-DEC-2023','DESIGNER');
+INSERT INTO EMPLOYEE VALUES('E5','Pratik','12-Aug-2013','MANAGER');
+
+
+INSERT INTO PROJECT VALUES('P1','Hotel Management System','Desktop App',25);
+INSERT INTO PROJECT VALUES('P2','Online Shopping App','Android App',15);
+INSERT INTO PROJECT VALUES('P3','Hospital ERP','Web App',28);
+
+INSERT INTO WORKS_ON VALUES('E1','P1','Analysis',22);
+INSERT INTO WORKS_ON VALUES('E1','P2','Analysis',10);
+INSERT INTO WORKS_ON VALUES('E2','P1','Design',30);
+INSERT INTO WORKS_ON VALUES('E2','P3','Analysis',50);
+INSERT INTO WORKS_ON VALUES('E3','P3','Design',25);
+INSERT INTO WORKS_ON VALUES('E3','P1','Coding',25);
+INSERT INTO WORKS_ON VALUES('E4','P2','Design',15);
+INSERT INTO WORKS_ON VALUES('E3','P2','Coding',10);
