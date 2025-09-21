@@ -1,0 +1,39 @@
+
+CREATE TABLE Worker (
+    Id INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Wages_Per_Hr DECIMAL(10,2)
+);
+
+CREATE TABLE Job (
+    Job_Id INT PRIMARY KEY,
+    Job_Type VARCHAR(100)
+);
+
+CREATE TABLE Assigned (
+    W_Id INT,
+    J_Id INT,
+    Start_Date DATE,
+    Status VARCHAR(50),
+    Total_Hrs INT,
+    FOREIGN KEY (W_Id) REFERENCES Worker(Id),
+    FOREIGN KEY (J_Id) REFERENCES Job(Job_Id)
+);
+
+
+INSERT INTO Worker VALUES (1, 'Alice', 50.00);
+INSERT INTO Worker VALUES (2, 'Bob', 60.00);
+INSERT INTO Worker VALUES (3, 'Charlie', 45.00);
+INSERT INTO Worker VALUES (4, 'Diana', 70.00);
+
+
+INSERT INTO Job VALUES (101, 'Welding');
+INSERT INTO Job VALUES (102, 'Plumbing');
+INSERT INTO Job VALUES (103, 'Painting');
+
+
+INSERT INTO Assigned VALUES (1, 101, TO_DATE('2023-05-10', 'YYYY-MM-DD'), 'Completed', 120);
+INSERT INTO Assigned VALUES (2, 102, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 'Pending', 80);
+INSERT INTO Assigned VALUES (3, 103, TO_DATE('2023-07-20', 'YYYY-MM-DD'), 'Completed', 150);
+INSERT INTO Assigned VALUES (4, 101, TO_DATE('2023-08-01', 'YYYY-MM-DD'), 'Pending', 95);
+INSERT INTO Assigned VALUES (2, 103, TO_DATE('2023-09-01', 'YYYY-MM-DD'), 'Completed', 30);

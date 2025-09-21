@@ -1,0 +1,179 @@
+SQL> -- 1. Count total distributors
+SQL> select count(*) from DISTRIBUTOR;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         5                                                                                                                                                                                              
+
+SQL> -- 2. Find the total price of all items
+SQL> select sum(PRICE) as total from item;
+
+     TOTAL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       265                                                                                                                                                                                              
+
+SQL> -- 3. Find the item wise total quantity of each item
+SQL> select * from DIST_ITEM;
+
+DNO  ITEM_        QTY ORDER_DAT                                                                                                                                                                         
+---- ----- ---------- ---------                                                                                                                                                                         
+D001 I001         100 03-SEP-25                                                                                                                                                                         
+D001 I002          80 04-SEP-25                                                                                                                                                                         
+D002 I003          50 05-SEP-25                                                                                                                                                                         
+D002 I004          60 06-SEP-25                                                                                                                                                                         
+D003 I005         200 07-SEP-25                                                                                                                                                                         
+D003 I001         120 08-SEP-25                                                                                                                                                                         
+D004 I002         150 09-SEP-25                                                                                                                                                                         
+D004 I003          70 10-SEP-25                                                                                                                                                                         
+D005 I004          90 11-SEP-25                                                                                                                                                                         
+D005 I005         250 12-SEP-25                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> desc DIST_ITEM;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DNO                                                                                                               NOT NULL VARCHAR2(4)
+ ITEM_NO                                                                                                           NOT NULL VARCHAR2(5)
+ QTY                                                                                                               NOT NULL NUMBER(6)
+ ORDER_DATE                                                                                                                 DATE
+
+SQL> select item_no, sum(QTY) from DIST_ITEM where group by ITEM_NO;
+select item_no, sum(QTY) from DIST_ITEM where group by ITEM_NO
+                                              *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select item_no, sum(QTY) from DIST_ITEM group by ITEM_NO;
+
+ITEM_   SUM(QTY)                                                                                                                                                                                        
+----- ----------                                                                                                                                                                                        
+I001         220                                                                                                                                                                                        
+I002         230                                                                                                                                                                                        
+I003         120                                                                                                                                                                                        
+I004         150                                                                                                                                                                                        
+I005         450                                                                                                                                                                                        
+
+SQL> -- 4. Display all items whose name starts with "S"
+SQL> select * from item where ITEM_NAME like 'S%';
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                                                                                                                                              
+----- ------------------------------ ---------- ----------                                                                                                                                              
+I003  Sugar                                  35          3                                                                                                                                              
+I005  Salt                                   20          1                                                                                                                                              
+
+SQL> -- 5. Display Distribution details of all items with month (from the date) only.
+SQL> select * from DISTRIBUTOR;
+
+DNO  DNAME                          CITY                           PHONE                                                                                                                                
+---- ------------------------------ ------------------------------ ------------                                                                                                                         
+D001 ABC Distributors               Baroda                         9876543210                                                                                                                           
+D002 Shree Suppliers                Surat                          9123456780                                                                                                                           
+D003 Om Traders                     Mumbai                         9988776655                                                                                                                           
+D004 Global Supply                  Delhi                          9012345678                                                                                                                           
+D005 FastMart                       Pune                           9090909090                                                                                                                           
+
+SQL> select * from DIST_ITEM;
+
+DNO  ITEM_        QTY ORDER_DAT                                                                                                                                                                         
+---- ----- ---------- ---------                                                                                                                                                                         
+D001 I001         100 03-SEP-25                                                                                                                                                                         
+D001 I002          80 04-SEP-25                                                                                                                                                                         
+D002 I003          50 05-SEP-25                                                                                                                                                                         
+D002 I004          60 06-SEP-25                                                                                                                                                                         
+D003 I005         200 07-SEP-25                                                                                                                                                                         
+D003 I001         120 08-SEP-25                                                                                                                                                                         
+D004 I002         150 09-SEP-25                                                                                                                                                                         
+D004 I003          70 10-SEP-25                                                                                                                                                                         
+D005 I004          90 11-SEP-25                                                                                                                                                                         
+D005 I005         250 12-SEP-25                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> -- 5. Display Distribution details of all items with month (from the date) only.
+SQL> desc DIST_ITEM;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DNO                                                                                                               NOT NULL VARCHAR2(4)
+ ITEM_NO                                                                                                           NOT NULL VARCHAR2(5)
+ QTY                                                                                                               NOT NULL NUMBER(6)
+ ORDER_DATE                                                                                                                 DATE
+
+SQL> desc DISTRIBUTOR;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DNO                                                                                                               NOT NULL VARCHAR2(4)
+ DNAME                                                                                                             NOT NULL VARCHAR2(30)
+ CITY                                                                                                                       VARCHAR2(30)
+ PHONE                                                                                                                      VARCHAR2(12)
+
+SQL> select d.dno,d.dname,d.city,d.phone,dt.item_no,dt.qty,to_char(dt.order_date, 'Month') from DISTRIBUTOR d JOIN DIST_ITEM dt ON d.dno=dt.dno;
+
+DNO  DNAME                          CITY                           PHONE        ITEM_        QTY TO_CHAR(DT.ORDER_DATE,'MONTH')                                                                         
+---- ------------------------------ ------------------------------ ------------ ----- ---------- ------------------------------------                                                                   
+D001 ABC Distributors               Baroda                         9876543210   I001         100 September                                                                                              
+D001 ABC Distributors               Baroda                         9876543210   I002          80 September                                                                                              
+D002 Shree Suppliers                Surat                          9123456780   I003          50 September                                                                                              
+D002 Shree Suppliers                Surat                          9123456780   I004          60 September                                                                                              
+D003 Om Traders                     Mumbai                         9988776655   I005         200 September                                                                                              
+D003 Om Traders                     Mumbai                         9988776655   I001         120 September                                                                                              
+D004 Global Supply                  Delhi                          9012345678   I002         150 September                                                                                              
+D004 Global Supply                  Delhi                          9012345678   I003          70 September                                                                                              
+D005 FastMart                       Pune                           9090909090   I004          90 September                                                                                              
+D005 FastMart                       Pune                           9090909090   I005         250 September                                                                                              
+
+10 rows selected.
+
+SQL> select d.dno,d.dname,d.city,d.phone,dt.item_no,dt.qty,to_char(dt.order_date, 'Month') as order_month from DISTRIBUTOR d JOIN DIST_ITEM dt ON d.dno=dt.dno;
+
+DNO  DNAME                          CITY                           PHONE        ITEM_        QTY ORDER_MONTH                                                                                            
+---- ------------------------------ ------------------------------ ------------ ----- ---------- ------------------------------------                                                                   
+D001 ABC Distributors               Baroda                         9876543210   I001         100 September                                                                                              
+D001 ABC Distributors               Baroda                         9876543210   I002          80 September                                                                                              
+D002 Shree Suppliers                Surat                          9123456780   I003          50 September                                                                                              
+D002 Shree Suppliers                Surat                          9123456780   I004          60 September                                                                                              
+D003 Om Traders                     Mumbai                         9988776655   I005         200 September                                                                                              
+D003 Om Traders                     Mumbai                         9988776655   I001         120 September                                                                                              
+D004 Global Supply                  Delhi                          9012345678   I002         150 September                                                                                              
+D004 Global Supply                  Delhi                          9012345678   I003          70 September                                                                                              
+D005 FastMart                       Pune                           9090909090   I004          90 September                                                                                              
+D005 FastMart                       Pune                           9090909090   I005         250 September                                                                                              
+
+10 rows selected.
+
+SQL> -- 6. Display the distributors whose city name starts with "B"
+SQL> select * from DISTRIBUTOR where like 'B%';
+select * from DISTRIBUTOR where like 'B%'
+                                *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select * from DISTRIBUTOR where city like 'B%';
+
+DNO  DNAME                          CITY                           PHONE                                                                                                                                
+---- ------------------------------ ------------------------------ ------------                                                                                                                         
+D001 ABC Distributors               Baroda                         9876543210                                                                                                                           
+
+SQL> -- 7. Find the highest weight of an item
+SQL> select ITEM_NAME,max(WEIGHT) from item;
+select ITEM_NAME,max(WEIGHT) from item
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> select max(WEIGHT) from item;
+
+MAX(WEIGHT)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+          5                                                                                                                                                                                             
+
+SQL> select ITEM_NAME, WEIGHT from item where WEIGHT = (select max(WEIGHT) from item);
+
+ITEM_NAME                          WEIGHT                                                                                                                                                               
+------------------------------ ----------                                                                                                                                                               
+Rice                                    5                                                                                                                                                               
+
+SQL> spool off;

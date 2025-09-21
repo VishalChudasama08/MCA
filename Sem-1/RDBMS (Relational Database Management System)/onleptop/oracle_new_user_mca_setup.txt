@@ -109,7 +109,7 @@ OPEN                             12-SEP-25
 SQL> -- Stop spooling (close log file)
 SQL> SPOOL OFF;
 
-============== NEW CMD ==============
+======================================================= NEW CMD =======================================================
 => created new user name is 'mca'
 => that user password is 'mca08'
 => for connect use this command 'sqlplus mca/mca08@//localhost:1521/XEPDB1'

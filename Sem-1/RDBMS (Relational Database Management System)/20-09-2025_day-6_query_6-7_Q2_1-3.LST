@@ -1,0 +1,435 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+31 rows selected.
+
+SQL> -- day-6.docx query nu. 6
+SQL> -- 6. Display ETID and Average score where average score is more than 50.
+SQL> select * from ETEST_DETAILS'
+  2  ;
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> select * from ETEST_DETAILS;
+
+AID  ETID ETEST_DAT      SCORE                                                                                                                                                                          
+---- ---- --------- ----------                                                                                                                                                                          
+A001 T002 25-AUG-25         80                                                                                                                                                                          
+A001 T003 23-AUG-25         85                                                                                                                                                                          
+A001 T005 21-AUG-25         76                                                                                                                                                                          
+A001 T001 15-AUG-25         80                                                                                                                                                                          
+A002 T002 17-AUG-25         70                                                                                                                                                                          
+A003 T003 18-AUG-25         75                                                                                                                                                                          
+A004 T004 20-AUG-25         85                                                                                                                                                                          
+A005 T005 21-AUG-25         65                                                                                                                                                                          
+A006 T001 22-AUG-25         90                                                                                                                                                                          
+A007 T002 23-AUG-25         60                                                                                                                                                                          
+A008 T003 25-AUG-25         70                                                                                                                                                                          
+A009 T004 26-AUG-25         95                                                                                                                                                                          
+A010 T005 27-AUG-25         75                                                                                                                                                                          
+
+13 rows selected.
+
+SQL> select etid, avg(score) from ETEST_DETAILS group by etid having avg(score)>50;
+
+ETID AVG(SCORE)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T002         70                                                                                                                                                                                         
+T005         72                                                                                                                                                                                         
+T003 76.6666667                                                                                                                                                                                         
+T001         85                                                                                                                                                                                         
+T004         90                                                                                                                                                                                         
+
+SQL> -- here all is more than 50 than do for more than 50
+SQL> select etid, avg(score) from ETEST_DETAILS group by etid having avg(score)>80;
+
+ETID AVG(SCORE)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T001         85                                                                                                                                                                                         
+T004         90                                                                                                                                                                                         
+
+SQL> -- 7. Count date wise total entrance test to be held.
+SQL> select extract(date from ETEST_DATE), etid from ETEST_DETAILS group by etid;
+select extract(date from ETEST_DATE), etid from ETEST_DETAILS group by etid
+               *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select ETEST_DATE, etid from ETEST_DETAILS group by etid order by ETEST_DATE;
+select ETEST_DATE, etid from ETEST_DETAILS group by etid order by ETEST_DATE
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select etid from ETEST_DETAILS group by etid order by ETEST_DATE;
+select etid from ETEST_DETAILS group by etid order by ETEST_DATE
+                                                      *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select ETEST_DATE, etid from ETEST_DETAILS group by etid, ETEST_DATE order by ETEST_DATE;
+
+ETEST_DAT ETID                                                                                                                                                                                          
+--------- ----                                                                                                                                                                                          
+15-AUG-25 T001                                                                                                                                                                                          
+17-AUG-25 T002                                                                                                                                                                                          
+18-AUG-25 T003                                                                                                                                                                                          
+20-AUG-25 T004                                                                                                                                                                                          
+21-AUG-25 T005                                                                                                                                                                                          
+21-AUG-25 T005                                                                                                                                                                                          
+22-AUG-25 T001                                                                                                                                                                                          
+23-AUG-25 T003                                                                                                                                                                                          
+23-AUG-25 T002                                                                                                                                                                                          
+25-AUG-25 T002                                                                                                                                                                                          
+25-AUG-25 T003                                                                                                                                                                                          
+26-AUG-25 T004                                                                                                                                                                                          
+27-AUG-25 T005                                                                                                                                                                                          
+
+13 rows selected.
+
+SQL>  select ETEST_DATE, count(ETEST_DATE) as test_count from ETEST_DETAILS group by ETEST_DATE;
+
+ETEST_DAT TEST_COUNT                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+25-AUG-25          1                                                                                                                                                                                    
+20-AUG-25          1                                                                                                                                                                                    
+23-AUG-25          1                                                                                                                                                                                    
+26-AUG-25          1                                                                                                                                                                                    
+18-AUG-25          1                                                                                                                                                                                    
+21-AUG-25          1                                                                                                                                                                                    
+21-AUG-25          1                                                                                                                                                                                    
+17-AUG-25          1                                                                                                                                                                                    
+27-AUG-25          1                                                                                                                                                                                    
+23-AUG-25          1                                                                                                                                                                                    
+22-AUG-25          1                                                                                                                                                                                    
+25-AUG-25          1                                                                                                                                                                                    
+15-AUG-25          1                                                                                                                                                                                    
+
+13 rows selected.
+
+SQL> SELECT ETEST_DATE, count(*) FROM ETEST_DETAILS GROUP BY ETEST_DATE ORDER BY ETEST_DATE;
+
+ETEST_DAT   COUNT(*)                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+15-AUG-25          1                                                                                                                                                                                    
+17-AUG-25          1                                                                                                                                                                                    
+18-AUG-25          1                                                                                                                                                                                    
+20-AUG-25          1                                                                                                                                                                                    
+21-AUG-25          1                                                                                                                                                                                    
+21-AUG-25          1                                                                                                                                                                                    
+22-AUG-25          1                                                                                                                                                                                    
+23-AUG-25          1                                                                                                                                                                                    
+23-AUG-25          1                                                                                                                                                                                    
+25-AUG-25          1                                                                                                                                                                                    
+25-AUG-25          1                                                                                                                                                                                    
+26-AUG-25          1                                                                                                                                                                                    
+27-AUG-25          1                                                                                                                                                                                    
+
+13 rows selected.
+
+SQL> desc ETEST_DATE;
+ERROR:
+ORA-04043: object ETEST_DATE does not exist 
+
+
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ AID                                                                                                               NOT NULL VARCHAR2(4)
+ ETID                                                                                                              NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                                 DATE
+ SCORE                                                                                                                      NUMBER(3)
+
+SQL> -- not work becase -> hidden times like 23-AUG-25 00:00:00 and 23-AUG-25 14:35:12.
+SQL> SELECT TRUNC(ETEST_DATE) AS TEST_DATE, COUNT(*) AS TOTAL_TEST FROM ETEST_DETAILS GROUP BY TRUNC(ETEST_DATE);
+
+TEST_DATE TOTAL_TEST                                                                                                                                                                                    
+--------- ----------                                                                                                                                                                                    
+20-AUG-25          1                                                                                                                                                                                    
+23-AUG-25          2                                                                                                                                                                                    
+21-AUG-25          2                                                                                                                                                                                    
+27-AUG-25          1                                                                                                                                                                                    
+25-AUG-25          2                                                                                                                                                                                    
+26-AUG-25          1                                                                                                                                                                                    
+15-AUG-25          1                                                                                                                                                                                    
+18-AUG-25          1                                                                                                                                                                                    
+22-AUG-25          1                                                                                                                                                                                    
+17-AUG-25          1                                                                                                                                                                                    
+
+10 rows selected.
+
+SQL> -- day-6.docx second question querys =>
+SQL> 1. Display city wise total number of distributors
+SP2-0734: unknown command beginning "1. Display..." - rest of line ignored.
+SQL> -- 1. Display city wise total number of distributors
+SQL> select * from Distributor;
+
+DNO  DNAME                          CITY                           PHONE                                                                                                                                
+---- ------------------------------ ------------------------------ ------------                                                                                                                         
+D001 ABC Distributors               Baroda                         9876543210                                                                                                                           
+D002 Shree Suppliers                Surat                          9123456780                                                                                                                           
+D003 Om Traders                     Mumbai                         9988776655                                                                                                                           
+D004 Global Supply                  Delhi                          9012345678                                                                                                                           
+D005 FastMart                       Pune                           9090909090                                                                                                                           
+
+SQL> select * from Item;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                                                                                                                                              
+----- ------------------------------ ---------- ----------                                                                                                                                              
+I001  Rice                                   50          5                                                                                                                                              
+I002  Wheat                                  40          4                                                                                                                                              
+I003  Sugar                                  35          3                                                                                                                                              
+I004  Oil                                   120          2                                                                                                                                              
+I005  Salt                                   20          1                                                                                                                                              
+
+SQL> select * from Dist_Item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                                                                                                                                         
+---- ----- ---------- ---------                                                                                                                                                                         
+D001 I001         100 25-AUG-25                                                                                                                                                                         
+D001 I002          80 26-AUG-25                                                                                                                                                                         
+D002 I003          50 27-AUG-25                                                                                                                                                                         
+D002 I004          60 28-AUG-25                                                                                                                                                                         
+D003 I005         200 29-AUG-25                                                                                                                                                                         
+D003 I001         120 30-AUG-25                                                                                                                                                                         
+D004 I002         150 31-AUG-25                                                                                                                                                                         
+D004 I003          70 01-SEP-25                                                                                                                                                                         
+D005 I004          90 02-SEP-25                                                                                                                                                                         
+D005 I005         250 03-SEP-25                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> -- 1. Display city wise total number of distributors
+SQL> -- here first insert same city name records
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Distributor VALUES ('D006','Fast','Pune','9090912345');
+SQL> /
+INSERT INTO Distributor VALUES ('D006','Fast','Pune','9090912345');
+                                                                  *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Distributor VALUES ('D006','Fast','Pune','9090912345')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Distributor VALUES ('D007','ABCD','Baroda','1234567890')
+SQL> /
+
+1 row created.
+
+SQL> select city, count(city) from Distributor group by city;
+
+CITY                           COUNT(CITY)                                                                                                                                                              
+------------------------------ -----------                                                                                                                                                              
+Delhi                                    1                                                                                                                                                              
+Mumbai                                   1                                                                                                                                                              
+Baroda                                   2                                                                                                                                                              
+Surat                                    1                                                                                                                                                              
+Pune                                     2                                                                                                                                                              
+
+SQL> -- 2. List the distributors by who distributed more than 50 items in month of July
+SQL> desc Dist_Item;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ DNO                                                                                                               NOT NULL VARCHAR2(4)
+ ITEM_NO                                                                                                           NOT NULL VARCHAR2(5)
+ QTY                                                                                                               NOT NULL NUMBER(6)
+ ORDER_DATE                                                                                                                 DATE
+
+SQL> select dno, count(qty), extract(month from ORDER_DATE) as order_month from Dist_Item group by dno having extract(month from ORDER_DATE)=9 AND count(qty)>50;
+select dno, count(qty), extract(month from ORDER_DATE) as order_month from Dist_Item group by dno having extract(month from ORDER_DATE)=9 AND count(qty)>50
+                                                                                                                            *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select dno, count(qty), extract(month from ORDER_DATE) as order_month from Dist_Item group by dno, ITEM_NO having extract(month from ORDER_DATE)=9 AND count(qty)>50;
+select dno, count(qty), extract(month from ORDER_DATE) as order_month from Dist_Item group by dno, ITEM_NO having extract(month from ORDER_DATE)=9 AND count(qty)>50
+                                                                                                                                     *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select * from Dist_Item group by dno;
+select * from Dist_Item group by dno
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select dno, ORDER_DATE from Dist_Item group by dno
+SQL> /
+select dno, ORDER_DATE from Dist_Item group by dno
+            *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select count(dno) from Dist_Item group by dno;
+
+COUNT(DNO)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+
+SQL> select dno, count(dno) from Dist_Item group by dno;
+
+DNO  COUNT(DNO)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+D001          2                                                                                                                                                                                         
+D002          2                                                                                                                                                                                         
+D003          2                                                                                                                                                                                         
+D004          2                                                                                                                                                                                         
+D005          2                                                                                                                                                                                         
+
+SQL> select dno, count(dno), sum(qty) from Dist_Item group by dno;
+
+DNO  COUNT(DNO)   SUM(QTY)                                                                                                                                                                              
+---- ---------- ----------                                                                                                                                                                              
+D001          2        180                                                                                                                                                                              
+D002          2        110                                                                                                                                                                              
+D003          2        320                                                                                                                                                                              
+D004          2        220                                                                                                                                                                              
+D005          2        340                                                                                                                                                                              
+
+SQL> select dno, sum(qty), extract(month from ORDER_DATE) from Dist_Item group by dno;
+select dno, sum(qty), extract(month from ORDER_DATE) from Dist_Item group by dno
+                                         *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select dno, sum(qty), to_char(ORDER_DATE, 'MM') from Dist_Item where to_char(ORDER_DATE, 'MM') = 'AUG' group by dno having SUM(QTY) > 50;
+select dno, sum(qty), to_char(ORDER_DATE, 'MM') from Dist_Item where to_char(ORDER_DATE, 'MM') = 'AUG' group by dno having SUM(QTY) > 50
+                              *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select to_char(ORDER_DATE, 'MM') from Dist_Item;
+
+TO                                                                                                                                                                                                      
+--                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+08                                                                                                                                                                                                      
+09                                                                                                                                                                                                      
+09                                                                                                                                                                                                      
+09                                                                                                                                                                                                      
+
+10 rows selected.
+
+SQL> select dno, sum(qty) from Dist_Item where to_char(ORDER_DATE, 'MM')=8 group by dno having SUM(QTY) > 50;
+
+DNO    SUM(QTY)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+D001        180                                                                                                                                                                                         
+D002        110                                                                                                                                                                                         
+D003        320                                                                                                                                                                                         
+D004        150                                                                                                                                                                                         
+
+SQL>  select dno, sum(qty) from Dist_Item where to_char(ORDER_DATE, 'MM')=8 group by dno having SUM(QTY) > 120;
+
+DNO    SUM(QTY)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+D001        180                                                                                                                                                                                         
+D003        320                                                                                                                                                                                         
+D004        150                                                                                                                                                                                         
+
+SQL> -- 3. List Item wise  total quantity delivered and display items having more than 5000 Qty delivered
+SQL> select Item_No, sun(qty) from Dist_Item group by Item_No;
+select Item_No, sun(qty) from Dist_Item group by Item_No
+                *
+ERROR at line 1:
+ORA-00904: "SUN": invalid identifier 
+
+
+SQL> select Item_No, sum(qty) from Dist_Item group by Item_No;
+
+ITEM_   SUM(QTY)                                                                                                                                                                                        
+----- ----------                                                                                                                                                                                        
+I002         230                                                                                                                                                                                        
+I005         450                                                                                                                                                                                        
+I001         220                                                                                                                                                                                        
+I004         150                                                                                                                                                                                        
+I003         120                                                                                                                                                                                        
+
+SQL> -- here not any more than 500 qty than do fo more than 200
+SQL> select Item_No, sum(qty) from Dist_Item group by Item_No having sum(qty)>200;
+
+ITEM_   SUM(QTY)                                                                                                                                                                                        
+----- ----------                                                                                                                                                                                        
+I002         230                                                                                                                                                                                        
+I005         450                                                                                                                                                                                        
+I001         220                                                                                                                                                                                        
+
+SQL> -- 4. List Dno who delivered more than 50 items for each month
+SQL> select dno, sum(qty) from Dist_Item group by dno;
+
+DNO    SUM(QTY)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+D001        180                                                                                                                                                                                         
+D002        110                                                                                                                                                                                         
+D003        320                                                                                                                                                                                         
+D004        220                                                                                                                                                                                         
+D005        340                                                                                                                                                                                         
+
+SQL> 

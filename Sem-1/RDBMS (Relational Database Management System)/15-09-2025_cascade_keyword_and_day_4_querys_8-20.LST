@@ -1,0 +1,536 @@
+-- 8. Insert appropriate records in "Order_Master" from Sales_Order" table
+SQL> insert into Order_Master select * from Sales_Order where Order_Status>'Fulfilled';
+
+4 rows created.
+
+SQL> -- 9. Create "Order_Detail" table from "Sales_Order_Detail" table.
+SQL> create table Order_Detail as select * from Sales_Order_Detail where 2=3;
+create table Order_Detail as select * from Sales_Order_Detail where 2=3
+                                           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* create table Order_Detail as select * from Sales_Order_Details where 2=3
+SQL> /
+
+Table created.
+
+SQL> -- 10. Insert few selected records in "Order_Detail" from Sales_Order_ Detail" table.
+SQL> select * from Sales_Order_Details;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O006 P006           7              6         4200                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+10 rows selected.
+
+SQL> 
+SQL> /
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+O006 P006           7              6         4200                                                                                                                                   
+O007 P007          15             12         1800                                                                                                                                   
+O008 P008           9              8         8000                                                                                                                                   
+O009 P009          20             20         4000                                                                                                                                   
+O010 P010           4              2         3000                                                                                                                                   
+
+10 rows selected.
+
+SQL> select * from order_detail;
+
+no rows selected
+
+SQL> desc sales_order_details;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ORDER_NO                                                                                              NOT NULL VARCHAR2(4)
+ PRODUCT_NO                                                                                            NOT NULL VARCHAR2(4)
+ QTY_ORDERED                                                                                                    NUMBER(6)
+ QTY_DISPATCHED                                                                                                 NUMBER(6)
+ PRODUCT_RATE                                                                                                   NUMBER(10,2)
+
+SQL> insert into Order_Detail select * from Sales_Order_Details where ORDER_NO in('O001', 'O002', 'O003', 'O004', 'O005');
+
+5 rows created.
+
+SQL> select * from Order_Detail;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                   
+---- ---- ----------- -------------- ------------                                                                                                                                   
+O001 P001          10             10         3500                                                                                                                                   
+O002 P002           5              4         2000                                                                                                                                   
+O003 P003           8              8         2800                                                                                                                                   
+O004 P004           6              3         2400                                                                                                                                   
+O005 P005          12             12         5400                                                                                                                                   
+
+SQL> -- 11. Destroy tables: Client_Master, Product_Master and Salesman_Master table using Truncate
+SQL> desc Sales_Order;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ORDER_NO                                                                                              NOT NULL VARCHAR2(4)
+ CLIENT_NO                                                                                                      VARCHAR2(5)
+ ORDER_DATE                                                                                                     DATE
+ SALESMAN_NO                                                                                                    VARCHAR2(4)
+ DELIVERY_TYPE                                                                                                  CHAR(1)
+ BILL_PAID                                                                                                      CHAR(1)
+ DELIVERY_DATE                                                                                                  DATE
+ ORDER_STATUS                                                                                                   VARCHAR2(20)
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select a.order_no,a.bill_paid,b.order_no,b.product_rate from sales_order.a, sales_order_details.b;
+SQL> /
+select a.order_no,a.bill_paid,b.order_no,b.product_rate from sales_order.a, sales_order_details.b;
+                                                                                                 *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select bill_paid,product_rate from sales_order, sales_order_details;
+SQL> /
+select bill_paid,product_rate from sales_order, sales_order_details;
+                                                                   *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> select a.order_no,a.bill_paid,b.order_no,b.product_rate from sales_order.a, sales_order_details.b;
+select a.order_no,a.bill_paid,b.order_no,b.product_rate from sales_order.a, sales_order_details.b
+                                                                                                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select bill_paid,product_rate from sales_order, sales_order_details
+SQL> /
+
+B PRODUCT_RATE                                                                                                                                                                      
+- ------------                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+N         3500                                                                                                                                                                      
+N         2000                                                                                                                                                                      
+N         2800                                                                                                                                                                      
+N         2400                                                                                                                                                                      
+N         5400                                                                                                                                                                      
+N         4200                                                                                                                                                                      
+N         1800                                                                                                                                                                      
+N         8000                                                                                                                                                                      
+N         4000                                                                                                                                                                      
+N         3000                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+N         3500                                                                                                                                                                      
+N         2000                                                                                                                                                                      
+N         2800                                                                                                                                                                      
+N         2400                                                                                                                                                                      
+N         5400                                                                                                                                                                      
+N         4200                                                                                                                                                                      
+N         1800                                                                                                                                                                      
+N         8000                                                                                                                                                                      
+N         4000                                                                                                                                                                      
+N         3000                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+N         3500                                                                                                                                                                      
+N         2000                                                                                                                                                                      
+N         2800                                                                                                                                                                      
+N         2400                                                                                                                                                                      
+N         5400                                                                                                                                                                      
+N         4200                                                                                                                                                                      
+N         1800                                                                                                                                                                      
+N         8000                                                                                                                                                                      
+N         4000                                                                                                                                                                      
+N         3000                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+Y         3500                                                                                                                                                                      
+Y         2000                                                                                                                                                                      
+Y         2800                                                                                                                                                                      
+Y         2400                                                                                                                                                                      
+Y         5400                                                                                                                                                                      
+Y         4200                                                                                                                                                                      
+Y         1800                                                                                                                                                                      
+Y         8000                                                                                                                                                                      
+Y         4000                                                                                                                                                                      
+Y         3000                                                                                                                                                                      
+N         3500                                                                                                                                                                      
+N         2000                                                                                                                                                                      
+N         2800                                                                                                                                                                      
+N         2400                                                                                                                                                                      
+N         5400                                                                                                                                                                      
+N         4200                                                                                                                                                                      
+N         1800                                                                                                                                                                      
+N         8000                                                                                                                                                                      
+N         4000                                                                                                                                                                      
+N         3000                                                                                                                                                                      
+
+100 rows selected.
+
+SQL> -- select a.order_no,a.bill_paid,b.order_no,b.product_rate from sales_order.a, sales_order_details.b;
+SQL> --11. Destroy tables: Client_Master, Product_Master and Salesman_Master table using Truncate
+SQL> truncate Client_Master, Product_Master,Salesman_Master;
+truncate Client_Master, Product_Master,Salesman_Master
+                      *
+ERROR at line 1:
+ORA-03290: Invalid truncate command - missing CLUSTER or TABLE keyword 
+
+
+SQL> truncate Client_Master;
+truncate Client_Master
+                     *
+ERROR at line 1:
+ORA-03290: Invalid truncate command - missing CLUSTER or TABLE keyword 
+
+
+SQL> truncate table Client_Master;
+
+Table truncated.
+
+SQL> select * from Client_Master;
+
+no rows selected
+
+SQL> desc Client_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ C_NO                                                                                                  NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                                                                           NOT NULL VARCHAR2(20)
+ PINCODE                                                                                               NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                            NOT NULL DATE
+ OCCUPATION                                                                                            NOT NULL VARCHAR2(30)
+ CITY                                                                                                           VARCHAR2(20)
+ STATE                                                                                                          VARCHAR2(20)
+ MOBILE_NO                                                                                                      NUMBER(10)
+
+SQL> truncate table Product_Master;
+
+Table truncated.
+
+SQL> truncate table Salesman_Master;
+
+Table truncated.
+
+SQL> -- 12. Destroy tables: "Sales_Order" and Sales_Order_Details using drop operation.
+SQL> drop table Sales_Order;
+drop table Sales_Order
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys 
+
+
+SQL> drop table Sales_Order cascade constraints;
+
+Table dropped.
+
+SQL> roll back;
+Rollback complete.
+SQL> select * from Sales_Order;
+select * from Sales_Order
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> roll back;
+Rollback complete.
+SQL> roll back;
+Rollback complete.
+SQL> select * from Sales_Order;
+select * from Sales_Order
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> drop table Sales_Order_Details;
+
+Table dropped.
+
+SQL> -- 14. Copy only the structure of Applicant Table into Applicant_Master
+SQL> -- question 13 not exitst in day-4 docx
+SQL> create table structure as select * from Applicant_Master where 2=1;
+create table structure as select * from Applicant_Master where 2=1
+                                        *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                   
+------------------------------ ------- ----------                                                                                                                                   
+APPLICANT                      TABLE                                                                                                                                                
+BIN$wvCghIY/S+Kk4pmeEQxBjQ==$0 TABLE                                                                                                                                                
+CLIENT1                        TABLE                                                                                                                                                
+CLIENT2                        TABLE                                                                                                                                                
+CLIENT3                        TABLE                                                                                                                                                
+CLIENT4                        TABLE                                                                                                                                                
+CLIENT5                        TABLE                                                                                                                                                
+CLIENTS                        TABLE                                                                                                                                                
+CLIENT_MASTER                  TABLE                                                                                                                                                
+DEPT                           TABLE                                                                                                                                                
+DISTRIBUTOR                    TABLE                                                                                                                                                
+DIST_ITEM                      TABLE                                                                                                                                                
+EMP                            TABLE                                                                                                                                                
+ENTRANCE_TEST                  TABLE                                                                                                                                                
+ETEST_DETAILS                  TABLE                                                                                                                                                
+GARBA                          TABLE                                                                                                                                                
+ITEM                           TABLE                                                                                                                                                
+ORDER_DETAIL                   TABLE                                                                                                                                                
+ORDER_MASTER                   TABLE                                                                                                                                                
+PRODUCTS                       TABLE                                                                                                                                                
+PRODUCT_MASTER                 TABLE                                                                                                                                                
+S                              TABLE                                                                                                                                                
+SALESMAN                       TABLE                                                                                                                                                
+SALESMAN_MASTER                TABLE                                                                                                                                                
+STUDENT_CONS                   TABLE                                                                                                                                                
+STUDENT_TAB                    TABLE                                                                                                                                                
+
+26 rows selected.
+
+SQL> create table Applicant_Master as select * from APPLICANT;
+
+Table created.
+
+SQL> drop table Applicant_Master;
+
+Table dropped.
+
+SQL> create table Applicant_Master as select * from APPLICANT where 1=2;
+
+Table created.
+
+SQL> select * from Applicant_Master;
+
+no rows selected
+
+SQL> desc Applicant_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                            VARCHAR2(4)
+ A_NAME                                                                                                NOT NULL VARCHAR2(30)
+ ADDRESS                                                                                                        VARCHAR2(50)
+ B_DATE                                                                                                         DATE
+
+SQL> -- 15. Create a new table called Course_Master having same fields as Enterance_Test table but change the column name as Course_Code, Course_Name and Course_Credit
+SQL> desc ENTRANCE_TEST;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ ET_ID                                                                                                 NOT NULL VARCHAR2(4)
+ ET_NAME                                                                                               NOT NULL VARCHAR2(30)
+ MAX_SCORE                                                                                                      NUMBER(3)
+
+SQL> create table Course_Master as select et_id as Course_Code, et_name as Course_Name, MAX_SCORE as Course_Credit from ENTRANCE_TEST;
+
+Table created.
+
+SQL> desc Course_Master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ COURSE_CODE                                                                                                    VARCHAR2(4)
+ COURSE_NAME                                                                                           NOT NULL VARCHAR2(30)
+ COURSE_CREDIT                                                                                                  NUMBER(3)
+
+SQL> select * from Course_Master;
+
+COUR COURSE_NAME                    COURSE_CREDIT                                                                                                                                   
+---- ------------------------------ -------------                                                                                                                                   
+T001 Maths                                    100                                                                                                                                   
+T002 Physics                                   90                                                                                                                                   
+T003 Chemistry                                 95                                                                                                                                   
+T004 Biology                                  100                                                                                                                                   
+T005 English                                   80                                                                                                                                   
+
+SQL> -- 16. Insert new data in Course_Master table.
+SQL> -- simple insert querys to insert new data in Course_Master table;
+SQL> -- 17. Create a view of Entrance_Test_Details table having only 2 columns
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ AID                                                                                                   NOT NULL VARCHAR2(4)
+ ETID                                                                                                  NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                     DATE
+ SCORE                                                                                                          NUMBER(3)
+
+SQL> create or replace view ETEST_DETAILS_view as select aid,etid from ETEST_DETAILS;
+
+View created.
+
+SQL> select * from ETEST_DETAILS_view;
+
+AID  ETID                                                                                                                                                                           
+---- ----                                                                                                                                                                           
+A001 T001                                                                                                                                                                           
+A002 T002                                                                                                                                                                           
+A003 T003                                                                                                                                                                           
+A004 T004                                                                                                                                                                           
+A005 T005                                                                                                                                                                           
+A006 T001                                                                                                                                                                           
+A007 T002                                                                                                                                                                           
+A008 T003                                                                                                                                                                           
+A009 T004                                                                                                                                                                           
+A010 T005                                                                                                                                                                           
+
+10 rows selected.
+
+SQL> -- 18. Create a view of Applicant Table
+SQL> create or replace view APPLICANT_view as select * from APPLICANT;
+
+View created.
+
+SQL> -- 19. Change the record (Column values) in the view table.
+SQL> select * from APPLICANT_view;
+
+AID  A_NAME                         ADDRESS                                            B_DATE                                                                                       
+---- ------------------------------ -------------------------------------------------- ---------                                                                                    
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                    
+A002 Neha                           Surat                                              23-AUG-99                                                                                    
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                    
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                    
+A005 Karan                          Pune                                               30-SEP-98                                                                                    
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                    
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                    
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                    
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                    
+A010 Deepa                          Chennai                                            28-DEC-01                                                                                    
+
+10 rows selected.
+
+SQL> update table APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa';
+update table APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> update view APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa';
+update view APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa'
+       *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> update APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa';
+
+1 row updated.
+
+SQL> 
+SQL> 
+SQL> APPLICANT_view;
+SP2-0734: unknown command beginning "APPLICANT_..." - rest of line ignored.
+SQL> select * from APPLICANT_view;
+
+AID  A_NAME                         ADDRESS                                            B_DATE                                                                                       
+---- ------------------------------ -------------------------------------------------- ---------                                                                                    
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                    
+A002 Neha                           Surat                                              23-AUG-99                                                                                    
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                    
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                    
+A005 Karan                          Pune                                               30-SEP-98                                                                                    
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                    
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                    
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                    
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                    
+A010 Dip                            Chennai                                            28-DEC-01                                                                                    
+
+10 rows selected.
+
+SQL> select * from APPLICANT;
+
+AID  A_NAME                         ADDRESS                                            B_DATE                                                                                       
+---- ------------------------------ -------------------------------------------------- ---------                                                                                    
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                    
+A002 Neha                           Surat                                              23-AUG-99                                                                                    
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                    
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                    
+A005 Karan                          Pune                                               30-SEP-98                                                                                    
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                    
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                    
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                    
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                    
+A010 Dip                            Chennai                                            28-DEC-01                                                                                    
+
+10 rows selected.
+
+SQL> drop view APPLICANT_view;
+
+View dropped.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

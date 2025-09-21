@@ -1,0 +1,333 @@
+select * form tab;
+select * form tab
+         *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+28 rows selected.
+
+SQL> select * from CLIENTS;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                     CITY                 STATE                 MOBILE_NO                                                                      
+---- -------------------- ---------- --------- ------------------------------ -------------------- -------------------- ----------                                                                      
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                  
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                      
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                    
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                  
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                  
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                      
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                    
+C003 Dhyan Dave               387903 17-JUN-88 Manager                                                                                                                                                  
+
+8 rows selected.
+
+SQL> -- 1. Display all the clients whose age is more than 25 years but less than 50 years
+SQL> select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DAT)) from CLIENTS;
+select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DAT)) from CLIENTS
+                                                                    *
+ERROR at line 1:
+ORA-00904: "BIRTH_DAT": invalid identifier 
+
+
+SQL> desc CLIENTS;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ C_NO                                                                                                                       VARCHAR2(4)
+ CLIENT_NAME                                                                                                       NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                           NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                                        NOT NULL DATE
+ OCCUPATION                                                                                                        NOT NULL VARCHAR2(30)
+ CITY                                                                                                                       VARCHAR2(20)
+ STATE                                                                                                                      VARCHAR2(20)
+ MOBILE_NO                                                                                                                  NUMBER(10)
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) from CLIENTS
+SQL> /
+
+CLIENT_NAME          (EXTRACT(YEARFROMSYSDATE)-EXTRACT(YEARFROMBIRTH_DATE))                                                                                                                             
+-------------------- ------------------------------------------------------                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Preeti Patel                                                             54                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Preeti Patel                                                             54                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+
+8 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) from CLIENTS WHERE (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) BETWEEN 25 AND 50
+SQL> /
+
+CLIENT_NAME          (EXTRACT(YEARFROMSYSDATE)-EXTRACT(YEARFROMBIRTH_DATE))                                                                                                                             
+-------------------- ------------------------------------------------------                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+
+6 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) from CLIENTS WHERE (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) BETWEEN 25 AND 50
+SQL> select CLIENT_NAME, (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) from CLIENTS WHERE (EXTRACT(YEAR from SYSDATE) - EXTRACT(YEAR from BIRTH_DATE)) BETWEEN 25 AND 50;
+
+CLIENT_NAME          (EXTRACT(YEARFROMSYSDATE)-EXTRACT(YEARFROMBIRTH_DATE))                                                                                                                             
+-------------------- ------------------------------------------------------                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+Kajal Oza                                                                38                                                                                                                             
+Vraj Shah                                                                39                                                                                                                             
+Dhyan Dave                                                               37                                                                                                                             
+
+6 rows selected.
+
+SQL> -- 2. Display all the Salesman from Salesman_Master table where "Sale" is more than his "Target" and "Target" is more than 100
+SQL> select * from SALESMAN_MASTER;
+
+no rows selected
+
+SQL> select * from SALESMAN;
+
+S_NO  NAME                 ADD1       CITY       ACHIEVED_TARGET                                                                                                                                        
+----- -------------------- ---------- ---------- ---------------                                                                                                                                        
+S001  AMAN                 3,DEV APPT BARODA                 100                                                                                                                                        
+S002  OMKAR                NULL       BHOPAL                 200                                                                                                                                        
+S003  RAJ                  B-104      MUMBAI                 200                                                                                                                                        
+S004  ASHISH               1,SMRUTI   SURAT                  150                                                                                                                                        
+S005  Meera                10, Lotus  Vadodara               300                                                                                                                                        
+S006  Karan                Sector-17  Ahmedabad              220                                                                                                                                        
+S007  Priya                L-12       Pune                   180                                                                                                                                        
+S008  Dev                  House-22   Delhi                  250                                                                                                                                        
+S009  Sahil                Flat-4     Lucknow                160                                                                                                                                        
+S010  Nidhi                Block-7    Kolkata                210                                                                                                                                        
+
+10 rows selected.
+
+SQL> desc SALESMAN_MASTER;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ S_NO                                                                                                              NOT NULL VARCHAR2(5)
+ NAME                                                                                                              NOT NULL VARCHAR2(20)
+ ADD1                                                                                                                       VARCHAR2(10)
+ ADD2                                                                                                                       VARCHAR2(15)
+ CITY                                                                                                              NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                                    NUMBER(6)
+ STATE                                                                                                             NOT NULL VARCHAR2(15)
+ SALARY                                                                                                            NOT NULL NUMBER(10)
+ TARGET                                                                                                            NOT NULL NUMBER(5)
+ SALES                                                                                                             NOT NULL NUMBER(5)
+
+SQL> insert into salesman_master values('S001','AMAN','3,DEV APPT','VAGHODIA','BARODA',NULL,'GUJRAT',5000,100,50);
+
+1 row created.
+
+SQL> insert into salesman_master values('S002','OMKAR','NULL','NULL','BHOPAL',NULL,'MP',4500,200,150);
+
+1 row created.
+
+SQL> insert into salesman_master values('S003','RAJ','B-104','VERLI','MUMBAI',400002,'MAHARASHTRA',5500,200,200);
+
+1 row created.
+
+SQL> insert into salesman_master values('S004','ASHISH','1,SMRUTI','GHODDOL','SURAT',NULL,'GUJRAT',4500,150,100);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S005','Meera','10, Lotus','Alkapuri','Vadodara','390007','Gujarat',6000,300,250);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S006','Karan','Sector-17','Navrangpura','Ahmedabad','380009','Gujarat',5500,220,180);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S007','Priya','L-12','MG Road','Pune','411001','Maharashtra',5200,180,160);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S008','Dev','House-22','Civil Lines','Delhi','110054','Delhi',5800,250,200);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S009','Sahil','Flat-4','Indira Nagar','Lucknow','226016','UP',4900,160,140);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S010','Nidhi','Block-7','Park Street','Kolkata','700016','WB',5300,210,190);
+
+1 row created.
+
+SQL> INSERT INTO Salesman_Master VALUES ('S011','Devendra','Block-12','Park Street-2','Kolkata','700019','UP',6000,210,500);
+
+1 row created.
+
+SQL> select * from Salesman_Master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+11 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 2. Display all the Salesman from Salesman_Master table where "Sale" is more than his "Target" and "Target" is more than 100
+SQL> select * from Salesman_Master where sales>target AMD target>100;
+select * from Salesman_Master where sales>target AMD target>100
+                                                 *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Salesman_Master where sales>target AND target>100
+SQL> /
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+SQL> -- 3. Find the Salesman who are neither from Baroda nor from Surat.
+SQL> select * from Salesman_Master where NOT IN('BARODA', 'SURAT');
+select * from Salesman_Master where NOT IN('BARODA', 'SURAT')
+                                        *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Salesman_Master city where NOT IN('BARODA', 'SURAT')
+SQL> /
+select * from Salesman_Master city where NOT IN('BARODA', 'SURAT')
+                                             *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Salesman_Master where city NOT IN('BARODA', 'SURAT')
+SQL> /
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+9 rows selected.
+
+SQL> -- 4. Display total number of clients using Client_Master Table.
+SQL> select count(*) from Client_Master;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         0                                                                                                                                                                                              
+
+SQL> select * from Client_Master;
+
+no rows selected
+
+SQL> 
+SQL> insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+SQL> insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO');
+insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+SQL> insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor');
+insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+
+16) select employee_id, employee_name,salary,to_char(joining_date, 'dd-mm-yy') from employee_master order by extract(month from joining_date);
+17) select to_char(dob, 'DD-Month-YY') from student_master;
+

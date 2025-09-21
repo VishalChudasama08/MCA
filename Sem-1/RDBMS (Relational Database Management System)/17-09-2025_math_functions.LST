@@ -1,0 +1,269 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+28 rows selected.
+
+SQL> -- math functions
+SQL> select * from SALESMAN_MASTER;
+
+no rows selected
+
+SQL> select * from CLIENT_MASTER;
+
+no rows selected
+
+SQL> select * from SALESMAN;
+
+S_NO  NAME                 ADD1       CITY       ACHIEVED_TARGET                                                                                                                                        
+----- -------------------- ---------- ---------- ---------------                                                                                                                                        
+S001  AMAN                 3,DEV APPT BARODA                 100                                                                                                                                        
+S002  OMKAR                NULL       BHOPAL                 200                                                                                                                                        
+S003  RAJ                  B-104      MUMBAI                 200                                                                                                                                        
+S004  ASHISH               1,SMRUTI   SURAT                  150                                                                                                                                        
+S005  Meera                10, Lotus  Vadodara               300                                                                                                                                        
+S006  Karan                Sector-17  Ahmedabad              220                                                                                                                                        
+S007  Priya                L-12       Pune                   180                                                                                                                                        
+S008  Dev                  House-22   Delhi                  250                                                                                                                                        
+S009  Sahil                Flat-4     Lucknow                160                                                                                                                                        
+S010  Nidhi                Block-7    Kolkata                210                                                                                                                                        
+
+10 rows selected.
+
+SQL> -- math function
+SQL> -- min()
+SQL> select min(ACHIEVED_TARGET) from SALESMAN;
+
+MIN(ACHIEVED_TARGET)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                 100                                                                                                                                                                                    
+
+SQL> -- count()
+SQL> select count(ACHIEVED_TARGET) from SALESMAN;
+
+COUNT(ACHIEVED_TARGET)                                                                                                                                                                                  
+----------------------                                                                                                                                                                                  
+                    10                                                                                                                                                                                  
+
+SQL> -- max()
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select max(ACHIEVED_TARGET) from SALESMAN
+SQL> /
+
+MAX(ACHIEVED_TARGET)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                 300                                                                                                                                                                                    
+
+SQL> -- avg() avrage
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select avg(ACHIEVED_TARGET) from SALESMAN
+SQL> /
+
+AVG(ACHIEVED_TARGET)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                 197                                                                                                                                                                                    
+
+SQL> -- abs() minus to plus, plus to minus
+SQL> select abs(-18) from dual;
+
+  ABS(-18)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        18                                                                                                                                                                                              
+
+SQL> -- sum() total
+SQL> select sum(ACHIEVED_TARGET) from SALESMAN;
+
+SUM(ACHIEVED_TARGET)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                1970                                                                                                                                                                                    
+
+SQL> -- power()
+SQL> select power(2,5) from dual;
+
+POWER(2,5)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        32                                                                                                                                                                                              
+
+SQL> -- round()
+SQL> select round(10.11) from dual;
+
+ROUND(10.11)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+          10                                                                                                                                                                                            
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select round(10.5) from dual
+SQL> /
+
+ROUND(10.5)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         11                                                                                                                                                                                             
+
+SQL> select round(10.8) from dual;
+
+ROUND(10.8)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         11                                                                                                                                                                                             
+
+SQL> -- sqrt() squere root
+SQL> select sqrt(25) from dual;
+
+  SQRT(25)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         5                                                                                                                                                                                              
+
+SQL> -- exp
+SQL> select exp(10) from deal
+  2  ;
+select exp(10) from deal
+                    *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select exp(10) from dual
+  2  /
+
+   EXP(10)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+22026.4658                                                                                                                                                                                              
+
+SQL> -- trunc() remuve pointing values
+SQL> select trunc(10.11) from dual;
+
+TRUNC(10.11)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+          10                                                                                                                                                                                            
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select trunc(10.5) from dual
+SQL> /
+
+TRUNC(10.5)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         10                                                                                                                                                                                             
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select trunc(10.8) from dual
+SQL> /
+
+TRUNC(10.8)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         10                                                                                                                                                                                             
+
+SQL> -- floor()
+SQL> select floor(10.11) from dual;
+
+FLOOR(10.11)                                                                                                                                                                                            
+------------                                                                                                                                                                                            
+          10                                                                                                                                                                                            
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select floor(10.5) from dual
+SQL> /
+
+FLOOR(10.5)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         10                                                                                                                                                                                             
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select floor(10.8) from dual
+SQL> /
+
+FLOOR(10.8)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         10                                                                                                                                                                                             
+
+SQL> -- ceil()
+SQL> select ceil(10.11) from dual;
+
+CEIL(10.11)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         11                                                                                                                                                                                             
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select ceil(10.5) from dual
+SQL> /
+
+CEIL(10.5)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+        11                                                                                                                                                                                              
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select ceil(10.81) from dual
+SQL> /
+
+CEIL(10.81)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+         11                                                                                                                                                                                             
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -- string function
+SQL> -- lower() lower case
+SQL> select * from SALESMAN;
+select * from SALESMAN
+*
+ERROR at line 1:
+ORA-12571: TNS:packet writer failure 
+
+
+SQL> commit;
+commit
+*
+ERROR at line 1:
+ORA-03114: not connected to ORACLE 
+
+
+SQL> 

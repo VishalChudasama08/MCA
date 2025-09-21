@@ -1,0 +1,40 @@
+CREATE TABLE Student_Master (
+    Student_ID NUMBER PRIMARY KEY,
+    Student_Name VARCHAR2(50),
+    DOB DATE
+);
+
+INSERT INTO Student_Master VALUES (1, 'Alice', TO_DATE('12-02-1998', 'DD-MM-YYYY'));
+INSERT INTO Student_Master VALUES (2, 'Bob', TO_DATE('23-05-2000', 'DD-MM-YYYY'));
+INSERT INTO Student_Master VALUES (3, 'Charlie', TO_DATE('15-11-1997', 'DD-MM-YYYY'));
+INSERT INTO Student_Master VALUES (4, 'Diana', TO_DATE('30-08-1999', 'DD-MM-YYYY'));
+
+
+CREATE TABLE Faculty_Master (
+    Faculty_ID NUMBER PRIMARY KEY,
+    Faculty_Name VARCHAR2(50),
+    DOJ DATE
+);
+
+INSERT INTO Faculty_Master VALUES (1, 'Dr. Smith', TO_DATE('15-06-2010', 'DD-MM-YYYY'));
+INSERT INTO Faculty_Master VALUES (2, 'Prof. Johnson', TO_DATE('01-09-2012', 'DD-MM-YYYY'));
+INSERT INTO Faculty_Master VALUES (3, 'Dr. Lee', TO_DATE('20-01-2015', 'DD-MM-YYYY'));
+INSERT INTO Faculty_Master VALUES (4, 'Prof. Brown', TO_DATE('05-11-2018', 'DD-MM-YYYY'));
+
+
+CREATE TABLE Employee_Master (
+    Employee_ID NUMBER PRIMARY KEY,
+    Employee_Name VARCHAR2(50),
+    Salary NUMBER(10, 2),
+    Joining_Date DATE
+);
+
+INSERT INTO Employee_Master VALUES (1, 'Adam', 15000, TO_DATE('10-04-2019', 'DD-MM-YYYY'));
+INSERT INTO Employee_Master VALUES (2, 'Eve', 12000, TO_DATE('23-07-2020', 'DD-MM-YYYY'));
+INSERT INTO Employee_Master VALUES (3, 'Sam', 18000, TO_DATE('05-12-2018', 'DD-MM-YYYY'));
+INSERT INTO Employee_Master VALUES (4, 'Jill', 22000, TO_DATE('15-01-2021', 'DD-MM-YYYY'));
+
+
+insert into salesman_master values('S011','KAJAL','PUSHPAK','ISANPUR','AHMEDABAD',382443,'GUJRAT',5000,150,500);
+
+ select * from salesman_master where  sales > target and target>100;

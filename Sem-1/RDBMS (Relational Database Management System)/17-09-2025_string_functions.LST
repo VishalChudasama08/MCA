@@ -1,0 +1,281 @@
+select * from SALESMAN;
+
+S_NO  NAME                 ADD1       CITY       ACHIEVED_TARGET                
+----- -------------------- ---------- ---------- ---------------                
+S001  AMAN                 3,DEV APPT BARODA                 100                
+S002  OMKAR                NULL       BHOPAL                 200                
+S003  RAJ                  B-104      MUMBAI                 200                
+S004  ASHISH               1,SMRUTI   SURAT                  150                
+S005  Meera                10, Lotus  Vadodara               300                
+S006  Karan                Sector-17  Ahmedabad              220                
+S007  Priya                L-12       Pune                   180                
+S008  Dev                  House-22   Delhi                  250                
+S009  Sahil                Flat-4     Lucknow                160                
+S010  Nidhi                Block-7    Kolkata                210                
+
+10 rows selected.
+
+SQL> -- lower() lower case
+SQL> select lower(name) form SALESMAN;
+select lower(name) form SALESMAN
+                        *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select lower(name) from SALESMAN
+SQL> /
+
+LOWER(NAME)                                                                     
+--------------------                                                            
+aman                                                                            
+omkar                                                                           
+raj                                                                             
+ashish                                                                          
+meera                                                                           
+karan                                                                           
+priya                                                                           
+dev                                                                             
+sahil                                                                           
+nidhi                                                                           
+
+10 rows selected.
+
+SQL> -- initcap()
+SQL> select initcap("this is string function initcap') from dual;
+ERROR:
+ORA-01740: missing double quote in identifier 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select initcap('this is string function initcap') from dual
+SQL> /
+
+INITCAP('THISISSTRINGFUNCTIONIN                                                 
+-------------------------------                                                 
+This Is String Function Initcap                                                 
+
+SQL> -- upper() upper case
+SQL> select upper('this is lower now showing in upper case') from dual;
+
+UPPER('THISISLOWERNOWSHOWINGINUPPERCASE                                         
+---------------------------------------                                         
+THIS IS LOWER NOW SHOWING IN UPPER CASE                                         
+
+SQL> -- substr() sub string
+SQL> select substr('this is string function substr', 6) from dual;
+
+SUBSTR('THISISSTRINGFUNCT                                                       
+-------------------------                                                       
+is string function substr                                                       
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select substr('this is string function substr', 6, 10) from dual
+SQL> /
+
+SUBSTR('TH                                                                      
+----------                                                                      
+is string                                                                       
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select substr('this is string function substr', 6, 11) from dual
+SQL> /
+
+SUBSTR('THI                                                                     
+-----------                                                                     
+is string f                                                                     
+
+SQL> -- ascii() ascii value
+SQL> select ascii('A') from dual;
+
+ASCII('A')                                                                      
+----------                                                                      
+        65                                                                      
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select ascii('V') from dual
+SQL> /
+
+ASCII('V')                                                                      
+----------                                                                      
+        86                                                                      
+
+SQL> select ascii(name) from SALESMAN;
+
+ASCII(NAME)                                                                     
+-----------                                                                     
+         65                                                                     
+         79                                                                     
+         82                                                                     
+         65                                                                     
+         77                                                                     
+         75                                                                     
+         80                                                                     
+         68                                                                     
+         83                                                                     
+         78                                                                     
+
+10 rows selected.
+
+SQL> -- TRANSLATE()
+SQL> select TRANSLATE('this is string function translate', 'i', 'I') from dual;
+
+TRANSLATE('THISISSTRINGFUNCTIONTR                                               
+---------------------------------                                               
+thIs Is strIng functIon translate                                               
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select TRANSLATE('this is string function translate', 't', 'T') from dual
+SQL> /
+
+TRANSLATE('THISISSTRINGFUNCTIONTR                                               
+---------------------------------                                               
+This is sTring funcTion TranslaTe                                               
+
+SQL> -- LENGTH()
+SQL> select LENGTH('vishal') from dual;
+
+LENGTH('VISHAL')                                                                
+----------------                                                                
+               6                                                                
+
+SQL> -- LTRIM()
+SQL> select LTRIM('         this is LTRIM         ') from deal;
+select LTRIM('         this is LTRIM         ') from deal
+                                                     *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select LTRIM('         this is LTRIM         ') from dual
+SQL> /
+
+LTRIM('THISISLTRIM')                                                            
+----------------------                                                          
+this is LTRIM                                                                   
+
+SQL> -- RTRIM()
+SQL> -- right side trim
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select RTRIM('         this is LTRIM         ') from dual
+SQL> /
+
+RTRIM('THISISLTRIM')                                                            
+----------------------                                                          
+         this is LTRIM                                                          
+
+SQL> -- TRIM()
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select TRIM('         this is LTRIM         ') from dual
+SQL> /
+
+TRIM('THISISL                                                                   
+-------------                                                                   
+this is LTRIM                                                                   
+
+SQL> -- LPAD();
+SQL> -- add character in left side see ex.
+SQL> select LPAD('1234567890', 6, '*') from dual;
+
+LPAD('                                                                          
+------                                                                          
+123456                                                                          
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select LPAD('1234567890', , '*') from dual
+SQL> /
+select LPAD('1234567890', , '*') from dual
+                          *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select LPAD('1234567890', -6, '*') from dual
+SQL> /
+
+L                                                                               
+-                                                                               
+                                                                                
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select LPAD('1234567890', 14, '*') from dual
+SQL> /
+
+LPAD('12345678                                                                  
+--------------                                                                  
+****1234567890                                                                  
+
+SQL> -- RPAD()
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select RPAD('1234567890', 14, '*') from dual
+SQL> /
+
+RPAD('12345678                                                                  
+--------------                                                                  
+1234567890****                                                                  
+
+SQL> -- sysdate()
+SQL> select sysdate() from dual;
+select sysdate() from dual
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select CURDATE() from dual;
+select CURDATE() from dual
+       *
+ERROR at line 1:
+ORA-00904: "CURDATE": invalid identifier 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select SYSDATE('dd-mm-yyyy') from dual
+SQL> /
+select SYSDATE('dd-mm-yyyy') from dual
+              *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> commit
+  2  ;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

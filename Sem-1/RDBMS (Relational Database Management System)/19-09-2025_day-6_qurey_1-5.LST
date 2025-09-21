@@ -1,0 +1,337 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+31 rows selected.
+
+SQL> -- day-6.docx
+SQL> -- 1. How many applicants have appeared for each test?
+SQL> select * from ETEST_DETAILS;
+
+AID  ETID ETEST_DAT      SCORE                                                                                                                                                                          
+---- ---- --------- ----------                                                                                                                                                                          
+A001 T001 15-AUG-25         80                                                                                                                                                                          
+A002 T002 17-AUG-25         70                                                                                                                                                                          
+A003 T003 18-AUG-25         75                                                                                                                                                                          
+A004 T004 20-AUG-25         85                                                                                                                                                                          
+A005 T005 21-AUG-25         65                                                                                                                                                                          
+A006 T001 22-AUG-25         90                                                                                                                                                                          
+A007 T002 23-AUG-25         60                                                                                                                                                                          
+A008 T003 25-AUG-25         70                                                                                                                                                                          
+A009 T004 26-AUG-25         95                                                                                                                                                                          
+A010 T005 27-AUG-25         75                                                                                                                                                                          
+
+10 rows selected.
+
+SQL> select count(aid), etid from ETEST_DETAILS group by (etid);
+
+COUNT(AID) ETID                                                                                                                                                                                         
+---------- ----                                                                                                                                                                                         
+         2 T002                                                                                                                                                                                         
+         2 T005                                                                                                                                                                                         
+         2 T001                                                                                                                                                                                         
+         2 T003                                                                                                                                                                                         
+         2 T004                                                                                                                                                                                         
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select etid, count(aid) from ETEST_DETAILS group by (etid)
+SQL> /
+
+ETID COUNT(AID)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T002          2                                                                                                                                                                                         
+T005          2                                                                                                                                                                                         
+T001          2                                                                                                                                                                                         
+T003          2                                                                                                                                                                                         
+T004          2                                                                                                                                                                                         
+
+SQL> -- 2. Display highest score for each test
+SQL> select etid, max(score) from ETEST_DETAILS group by (etid);
+
+ETID MAX(SCORE)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T002         70                                                                                                                                                                                         
+T005         75                                                                                                                                                                                         
+T001         90                                                                                                                                                                                         
+T003         75                                                                                                                                                                                         
+T004         95                                                                                                                                                                                         
+
+SQL> -- 3. Display applicant's ID who appeared for more than 3 tests
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO ETest_Details VALUES ('A001','T002',SYSDATE-21,80)
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO ETest_Details VALUES ('A001','T003',SYSDATE-23,85)
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO ETest_Details VALUES ('A001','T005',SYSDATE-25,76)
+SQL> /
+
+1 row created.
+
+SQL> select * from ETest_Details;
+
+AID  ETID ETEST_DAT      SCORE                                                                                                                                                                          
+---- ---- --------- ----------                                                                                                                                                                          
+A001 T002 25-AUG-25         80                                                                                                                                                                          
+A001 T003 23-AUG-25         85                                                                                                                                                                          
+A001 T005 21-AUG-25         76                                                                                                                                                                          
+A001 T001 15-AUG-25         80                                                                                                                                                                          
+A002 T002 17-AUG-25         70                                                                                                                                                                          
+A003 T003 18-AUG-25         75                                                                                                                                                                          
+A004 T004 20-AUG-25         85                                                                                                                                                                          
+A005 T005 21-AUG-25         65                                                                                                                                                                          
+A006 T001 22-AUG-25         90                                                                                                                                                                          
+A007 T002 23-AUG-25         60                                                                                                                                                                          
+A008 T003 25-AUG-25         70                                                                                                                                                                          
+A009 T004 26-AUG-25         95                                                                                                                                                                          
+A010 T005 27-AUG-25         75                                                                                                                                                                          
+
+13 rows selected.
+
+SQL> select aid,count(etid) from ETest_Details group by (aid);
+
+AID  COUNT(ETID)                                                                                                                                                                                        
+---- -----------                                                                                                                                                                                        
+A001           4                                                                                                                                                                                        
+A002           1                                                                                                                                                                                        
+A003           1                                                                                                                                                                                        
+A004           1                                                                                                                                                                                        
+A005           1                                                                                                                                                                                        
+A006           1                                                                                                                                                                                        
+A007           1                                                                                                                                                                                        
+A008           1                                                                                                                                                                                        
+A009           1                                                                                                                                                                                        
+A010           1                                                                                                                                                                                        
+
+10 rows selected.
+
+SQL> select aid, count(etid) from ETest_Details group by (aid) HAVING count(etid)>3;
+
+AID  COUNT(ETID)                                                                                                                                                                                        
+---- -----------                                                                                                                                                                                        
+A001           4                                                                                                                                                                                        
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 4. Calculate applicant's average score across all test they have appeared in
+SQL> select etid, avg(score) from ETest_Details group by etid;
+
+ETID AVG(SCORE)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T002         70                                                                                                                                                                                         
+T005         72                                                                                                                                                                                         
+T003 76.6666667                                                                                                                                                                                         
+T001         85                                                                                                                                                                                         
+T004         90                                                                                                                                                                                         
+
+SQL> -- 5. Display number of applicants by city
+SQL> select * from APPLICANT;
+
+AID  A_NAME                         ADDRESS                                            B_DATE                                                                                                           
+---- ------------------------------ -------------------------------------------------- ---------                                                                                                        
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                                        
+A002 Neha                           Surat                                              23-AUG-99                                                                                                        
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                                        
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                                        
+A005 Karan                          Pune                                               30-SEP-98                                                                                                        
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                                        
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                                        
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                                        
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                                        
+A010 Dip                            Chennai                                            28-DEC-01                                                                                                        
+
+10 rows selected.
+
+SQL> alter table APPLICANT rename column ADDRESS to city;
+
+Table altered.
+
+SQL> select * from  APPLICANT;
+
+AID  A_NAME                         CITY                                               B_DATE                                                                                                           
+---- ------------------------------ -------------------------------------------------- ---------                                                                                                        
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                                        
+A002 Neha                           Surat                                              23-AUG-99                                                                                                        
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                                        
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                                        
+A005 Karan                          Pune                                               30-SEP-98                                                                                                        
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                                        
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                                        
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                                        
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                                        
+A010 Dip                            Chennai                                            28-DEC-01                                                                                                        
+
+10 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 5. Display number of applicants by city
+SP2-0734: unknown command beginning "5. Display..." - rest of line ignored.
+SQL> -- 5. Display number of applicants by city
+SQL> de
+SP2-0042: unknown command "de" - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Applicant VALUES ('A011','Deepali','Chennai',DATE '2001-12-21');
+  2  /
+INSERT INTO Applicant VALUES ('A011','Deepali','Chennai',DATE '2001-12-21');
+                                                                           *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Applicant VALUES ('A011','Deepali','Chennai',DATE '2001-12-21')
+SQL> /
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Applicant VALUES ('A012','Ravina','Baroda',DATE '2000-08-12');
+SQL> /
+INSERT INTO Applicant VALUES ('A012','Ravina','Baroda',DATE '2000-08-12');
+                                                                         *
+ERROR at line 1:
+ORA-00911: invalid character 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* INSERT INTO Applicant VALUES ('A012','Ravina','Baroda',DATE '2000-08-12')
+SQL> /
+
+1 row created.
+
+SQL> -- 5. Display number of applicants by city
+SQL> select * from  Applicant;
+
+AID  A_NAME                         CITY                                               B_DATE                                                                                                           
+---- ------------------------------ -------------------------------------------------- ---------                                                                                                        
+A011 Deepali                        Chennai                                            21-DEC-01                                                                                                        
+A012 Ravina                         Baroda                                             12-AUG-00                                                                                                        
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                                        
+A002 Neha                           Surat                                              23-AUG-99                                                                                                        
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                                        
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                                        
+A005 Karan                          Pune                                               30-SEP-98                                                                                                        
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                                        
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                                        
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                                        
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                                        
+A010 Dip                            Chennai                                            28-DEC-01                                                                                                        
+
+12 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 5. Display number of applicants by city
+SQL> select city, count(aid) from Applicant group by city;
+
+CITY                                               COUNT(AID)                                                                                                                                           
+-------------------------------------------------- ----------                                                                                                                                           
+Jaipur                                                      1                                                                                                                                           
+Delhi                                                       1                                                                                                                                           
+Mumbai                                                      1                                                                                                                                           
+Baroda                                                      2                                                                                                                                           
+Kolkata                                                     1                                                                                                                                           
+Lucknow                                                     1                                                                                                                                           
+Nagpur                                                      1                                                                                                                                           
+Surat                                                       1                                                                                                                                           
+Chennai                                                     2                                                                                                                                           
+Pune                                                        1                                                                                                                                           
+
+10 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select city, count(aid) as number from Applicant group by city
+SQL> /
+select city, count(aid) as number from Applicant group by city
+                           *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select city, count(aid) as number_a from Applicant group by city
+SQL> /
+
+CITY                                                 NUMBER_A                                                                                                                                           
+-------------------------------------------------- ----------                                                                                                                                           
+Jaipur                                                      1                                                                                                                                           
+Delhi                                                       1                                                                                                                                           
+Mumbai                                                      1                                                                                                                                           
+Baroda                                                      2                                                                                                                                           
+Kolkata                                                     1                                                                                                                                           
+Lucknow                                                     1                                                                                                                                           
+Nagpur                                                      1                                                                                                                                           
+Surat                                                       1                                                                                                                                           
+Chennai                                                     2                                                                                                                                           
+Pune                                                        1                                                                                                                                           
+
+10 rows selected.
+
+SQL> -- 6. Display ETID and Average score where average score is more than 50.
+SQL> 

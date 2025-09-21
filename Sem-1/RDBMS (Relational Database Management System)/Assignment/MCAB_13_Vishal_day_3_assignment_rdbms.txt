@@ -1,3 +1,4 @@
+SQL> -- day-3.docx file excersice
 SQL> -- 1. Remove all Sales_Orders whose QtyOrdered = 1 in "Sales_Order_Detail" table
 SQL> delete from sales_order_details where QTY_ORDERED = 1;
 

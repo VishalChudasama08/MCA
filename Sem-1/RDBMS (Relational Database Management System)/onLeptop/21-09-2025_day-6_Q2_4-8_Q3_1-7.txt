@@ -1,0 +1,616 @@
+SQL> select * from Dist_Item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D001 I001         100 03-SEP-25                                                 
+D001 I002          80 04-SEP-25                                                 
+D002 I003          50 05-SEP-25                                                 
+D002 I004          60 06-SEP-25                                                 
+D003 I005         200 07-SEP-25                                                 
+D003 I001         120 08-SEP-25                                                 
+D004 I002         150 09-SEP-25                                                 
+D004 I003          70 10-SEP-25                                                 
+D005 I004          90 11-SEP-25                                                 
+D005 I005         250 12-SEP-25                                                 
+
+10 rows selected.
+
+SQL> -- 4. List Dno who delivered more than 50 items for each month
+SQL> select dno, sum(qty) as items, to_char(ORDER_DATE, 'MON') as month from Dist_Item group by (dno, to_char(ORDER_DATE, 'MON')) having sum(qty)>200;
+
+DNO       ITEMS MONTH                                                           
+---- ---------- ------------                                                    
+D003        320 SEP                                                             
+D004        220 SEP                                                             
+D005        340 SEP                                                             
+
+SQL> -- 5. Display item details in descending order of price and ascending order of weight
+SQL> select * from item;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                      
+----- ------------------------------ ---------- ----------                      
+I001  Rice                                   50          5                      
+I002  Wheat                                  40          4                      
+I003  Sugar                                  35          3                      
+I004  Oil                                   120          2                      
+I005  Salt                                   20          1                      
+
+SQL> select * from item order by price DESC, weight;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                      
+----- ------------------------------ ---------- ----------                      
+I004  Oil                                   120          2                      
+I001  Rice                                   50          5                      
+I002  Wheat                                  40          4                      
+I003  Sugar                                  35          3                      
+I005  Salt                                   20          1                      
+
+SQL> -- 6. Show all distributors in alphabetical order of City and DName
+SQL> select * from distributor;
+
+DNO  DNAME                          CITY                           PHONE        
+---- ------------------------------ ------------------------------ ------------ 
+D001 ABC Distributors               Baroda                         9876543210   
+D002 Shree Suppliers                Surat                          9123456780   
+D003 Om Traders                     Mumbai                         9988776655   
+D004 Global Supply                  Delhi                          9012345678   
+D005 FastMart                       Pune                           9090909090   
+
+SQL> INSERT INTO Distributor VALUES ('D006','Fast','Pune','9090912345');
+
+1 row created.
+
+SQL> INSERT INTO Distributor VALUES ('D007','ABCD','Baroda','1234567890');
+
+1 row created.
+
+SQL> select * from distributor;
+
+DNO  DNAME                          CITY                           PHONE        
+---- ------------------------------ ------------------------------ ------------ 
+D001 ABC Distributors               Baroda                         9876543210   
+D002 Shree Suppliers                Surat                          9123456780   
+D003 Om Traders                     Mumbai                         9988776655   
+D004 Global Supply                  Delhi                          9012345678   
+D005 FastMart                       Pune                           9090909090   
+D006 Fast                           Pune                           9090912345   
+D007 ABCD                           Baroda                         1234567890   
+
+7 rows selected.
+
+SQL> -- 6. Show all distributors in alphabetical order of City and DName
+SQL> select * from distributor order by DNAME, CITY;
+
+DNO  DNAME                          CITY                           PHONE        
+---- ------------------------------ ------------------------------ ------------ 
+D001 ABC Distributors               Baroda                         9876543210   
+D007 ABCD                           Baroda                         1234567890   
+D006 Fast                           Pune                           9090912345   
+D005 FastMart                       Pune                           9090909090   
+D004 Global Supply                  Delhi                          9012345678   
+D003 Om Traders                     Mumbai                         9988776655   
+D002 Shree Suppliers                Surat                          9123456780   
+
+7 rows selected.
+
+SQL> -- 7. Calculate average quantity of items distributed on each day.
+SQL> INSERT INTO Dist_Item VALUES ('D006','I001',150,SYSDATE-1);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D006','I002',50,SYSDATE-2);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D006','I003',100,SYSDATE-3);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D007','I003',120,SYSDATE-3);
+
+1 row created.
+
+SQL> INSERT INTO Dist_Item VALUES ('D007','I002',120,SYSDATE-4);
+
+1 row created.
+
+SQL> select * from Dist_Item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D001 I001         100 03-SEP-25                                                 
+D001 I002          80 04-SEP-25                                                 
+D002 I003          50 05-SEP-25                                                 
+D002 I004          60 06-SEP-25                                                 
+D003 I005         200 07-SEP-25                                                 
+D003 I001         120 08-SEP-25                                                 
+D004 I002         150 09-SEP-25                                                 
+D004 I003          70 10-SEP-25                                                 
+D005 I004          90 11-SEP-25                                                 
+D005 I005         250 12-SEP-25                                                 
+D006 I001         150 20-SEP-25                                                 
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D006 I002          50 19-SEP-25                                                 
+D006 I003         100 18-SEP-25                                                 
+D007 I003         120 18-SEP-25                                                 
+D007 I002         120 17-SEP-25                                                 
+
+15 rows selected.
+
+SQL> -- 7. Calculate average quantity of items distributed on each day.
+SQL> update dist_item set order_date = SYSDATE-11 where dno='D006' OR Item_no='I001';
+
+5 rows updated.
+
+SQL> select * from Dist_Item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D001 I001         100 10-SEP-25                                                 
+D001 I002          80 04-SEP-25                                                 
+D002 I003          50 05-SEP-25                                                 
+D002 I004          60 06-SEP-25                                                 
+D003 I005         200 07-SEP-25                                                 
+D003 I001         120 10-SEP-25                                                 
+D004 I002         150 09-SEP-25                                                 
+D004 I003          70 10-SEP-25                                                 
+D005 I004          90 11-SEP-25                                                 
+D005 I005         250 12-SEP-25                                                 
+D006 I001         150 10-SEP-25                                                 
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D006 I002          50 10-SEP-25                                                 
+D006 I003         100 10-SEP-25                                                 
+D007 I003         120 18-SEP-25                                                 
+D007 I002         120 17-SEP-25                                                 
+
+15 rows selected.
+
+SQL> update dist_item set order_date = SYSDATE-12 where dno='D006';
+
+3 rows updated.
+
+SQL> select * from Dist_Item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D001 I001         100 10-SEP-25                                                 
+D001 I002          80 04-SEP-25                                                 
+D002 I003          50 05-SEP-25                                                 
+D002 I004          60 06-SEP-25                                                 
+D003 I005         200 07-SEP-25                                                 
+D003 I001         120 10-SEP-25                                                 
+D004 I002         150 09-SEP-25                                                 
+D004 I003          70 10-SEP-25                                                 
+D005 I004          90 11-SEP-25                                                 
+D005 I005         250 12-SEP-25                                                 
+D006 I001         150 09-SEP-25                                                 
+
+DNO  ITEM_        QTY ORDER_DAT                                                 
+---- ----- ---------- ---------                                                 
+D006 I002          50 09-SEP-25                                                 
+D006 I003         100 09-SEP-25                                                 
+D007 I003         120 18-SEP-25                                                 
+D007 I002         120 17-SEP-25                                                 
+
+15 rows selected.
+
+SQL> -- 7. Calculate average quantity of items distributed on each day.
+SQL> select dno, avg(qty) from dist_item group by dno, to_char(order_date, 'DD');
+
+DNO    AVG(QTY)                                                                 
+---- ----------                                                                 
+D001        100                                                                 
+D001         80                                                                 
+D002         50                                                                 
+D002         60                                                                 
+D003        200                                                                 
+D003        120                                                                 
+D004        150                                                                 
+D004         70                                                                 
+D005         90                                                                 
+D005        250                                                                 
+D006        100                                                                 
+
+DNO    AVG(QTY)                                                                 
+---- ----------                                                                 
+D007        120                                                                 
+D007        120                                                                 
+
+13 rows selected.
+
+SQL> select dno, avg(qty), to_char(order_date, 'DD') as day from dist_item group by dno, to_char(order_date, 'DD');
+
+DNO    AVG(QTY) DA                                                              
+---- ---------- --                                                              
+D001        100 10                                                              
+D001         80 04                                                              
+D002         50 05                                                              
+D002         60 06                                                              
+D003        200 07                                                              
+D003        120 10                                                              
+D004        150 09                                                              
+D004         70 10                                                              
+D005         90 11                                                              
+D005        250 12                                                              
+D006        100 09                                                              
+
+DNO    AVG(QTY) DA                                                              
+---- ---------- --                                                              
+D007        120 18                                                              
+D007        120 17                                                              
+
+13 rows selected.
+
+SQL> set pagesize 80;
+SQL> -- 7. Calculate average quantity of items distributed on each day.
+SQL> select order_date, avg(qty) from dist_item group by order_date;
+
+ORDER_DAT   AVG(QTY)                                                            
+--------- ----------                                                            
+10-SEP-25        110                                                            
+04-SEP-25         80                                                            
+05-SEP-25         50                                                            
+06-SEP-25         60                                                            
+07-SEP-25        200                                                            
+09-SEP-25        150                                                            
+10-SEP-25         70                                                            
+11-SEP-25         90                                                            
+12-SEP-25        250                                                            
+09-SEP-25        100                                                            
+18-SEP-25        120                                                            
+17-SEP-25        120                                                            
+
+12 rows selected.
+
+SQL> SELECT ORDER_DAT,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DAT;
+SELECT ORDER_DAT,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DAT
+                                                             *
+ERROR at line 1:
+ORA-00904: "ORDER_DAT": invalid identifier 
+
+
+SQL> 
+SQL> SELECT ORDER_DATE,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DATE;
+
+ORDER_DAT    AVG_QTY                                                            
+--------- ----------                                                            
+10-SEP-25        110                                                            
+04-SEP-25         80                                                            
+05-SEP-25         50                                                            
+06-SEP-25         60                                                            
+07-SEP-25        200                                                            
+09-SEP-25        150                                                            
+10-SEP-25         70                                                            
+11-SEP-25         90                                                            
+12-SEP-25        250                                                            
+09-SEP-25        100                                                            
+18-SEP-25        120                                                            
+17-SEP-25        120                                                            
+
+12 rows selected.
+
+SQL> SELECT ORDER_DATE,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DATE ORDER BY ORDER_DAT;
+SELECT ORDER_DATE,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DATE ORDER BY ORDER_DAT
+                                                                                  *
+ERROR at line 1:
+ORA-00904: "ORDER_DAT": invalid identifier 
+
+
+SQL> SELECT ORDER_DATE,AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY ORDER_DATE ORDER BY ORDER_DATE;
+
+ORDER_DAT    AVG_QTY                                                            
+--------- ----------                                                            
+04-SEP-25         80                                                            
+05-SEP-25         50                                                            
+06-SEP-25         60                                                            
+07-SEP-25        200                                                            
+09-SEP-25        100                                                            
+09-SEP-25        150                                                            
+10-SEP-25        110                                                            
+10-SEP-25         70                                                            
+11-SEP-25         90                                                            
+12-SEP-25        250                                                            
+17-SEP-25        120                                                            
+18-SEP-25        120                                                            
+
+12 rows selected.
+
+SQL> SELECT TRUNC(ORDER_DATE),AVG(QTY) AS AVG_QTY FROM DIST_ITEM GROUP BY TRUNC(ORDER_DATE);
+
+TRUNC(ORD    AVG_QTY                                                            
+--------- ----------                                                            
+10-SEP-25 96.6666667                                                            
+04-SEP-25         80                                                            
+05-SEP-25         50                                                            
+06-SEP-25         60                                                            
+07-SEP-25        200                                                            
+09-SEP-25      112.5                                                            
+11-SEP-25         90                                                            
+12-SEP-25        250                                                            
+18-SEP-25        120                                                            
+17-SEP-25        120                                                            
+
+10 rows selected.
+
+SQL> select trunc(order_date) as day, avg(qty) from dist_item group by trunc(order_date);
+
+DAY         AVG(QTY)                                                            
+--------- ----------                                                            
+10-SEP-25 96.6666667                                                            
+04-SEP-25         80                                                            
+05-SEP-25         50                                                            
+06-SEP-25         60                                                            
+07-SEP-25        200                                                            
+09-SEP-25      112.5                                                            
+11-SEP-25         90                                                            
+12-SEP-25        250                                                            
+18-SEP-25        120                                                            
+17-SEP-25        120                                                            
+
+10 rows selected.
+
+SQL> -- 8. Find the weight wise average price of items
+SQL> select * from item;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                      
+----- ------------------------------ ---------- ----------                      
+I001  Rice                                   50          5                      
+I002  Wheat                                  40          4                      
+I003  Sugar                                  35          3                      
+I004  Oil                                   120          2                      
+I005  Salt                                   20          1                      
+
+SQL> INSERT INTO Item VALUES ('I006','Book',30,1);
+
+1 row created.
+
+SQL> INSERT INTO Item VALUES ('I006','Onion',50,2);
+
+1 row created.
+
+SQL> select * from item;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                      
+----- ------------------------------ ---------- ----------                      
+I001  Rice                                   50          5                      
+I002  Wheat                                  40          4                      
+I003  Sugar                                  35          3                      
+I004  Oil                                   120          2                      
+I005  Salt                                   20          1                      
+I006  Book                                   30          1                      
+I006  Onion                                  50          2                      
+
+7 rows selected.
+
+SQL> select weight, avg(price) from item group by weight;
+
+    WEIGHT AVG(PRICE)                                                           
+---------- ----------                                                           
+         5         50                                                           
+         4         40                                                           
+         3         35                                                           
+         2         85                                                           
+         1         25                                                           
+
+SQL> -- Question-3 tables: Worker, Job and Assigned;
+SQL> 
+SQL> CREATE TABLE Worker (
+  2      Id INT PRIMARY KEY,
+  3      Name VARCHAR(100),
+  4      Wages_Per_Hr DECIMAL(10,2)
+  5  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Job (
+  2      Job_Id INT PRIMARY KEY,
+  3      Job_Type VARCHAR(100)
+  4  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Assigned (
+  2      W_Id INT,
+  3      J_Id INT,
+  4      Start_Date DATE,
+  5      Status VARCHAR(50),
+  6      Total_Hrs INT,
+  7      FOREIGN KEY (W_Id) REFERENCES Worker(Id),
+  8      FOREIGN KEY (J_Id) REFERENCES Job(Job_Id)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO Worker VALUES (1, 'Alice', 50.00);
+
+1 row created.
+
+SQL> INSERT INTO Worker VALUES (2, 'Bob', 60.00);
+
+1 row created.
+
+SQL> INSERT INTO Worker VALUES (3, 'Charlie', 45.00);
+
+1 row created.
+
+SQL> INSERT INTO Worker VALUES (4, 'Diana', 70.00);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO Job VALUES (101, 'Welding');
+
+1 row created.
+
+SQL> INSERT INTO Job VALUES (102, 'Plumbing');
+
+1 row created.
+
+SQL> INSERT INTO Job VALUES (103, 'Painting');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO Assigned VALUES (1, 101, TO_DATE('2023-05-10', 'YYYY-MM-DD'), 'Completed', 120);
+
+1 row created.
+
+SQL> INSERT INTO Assigned VALUES (2, 102, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 'Pending', 80);
+
+1 row created.
+
+SQL> INSERT INTO Assigned VALUES (3, 103, TO_DATE('2023-07-20', 'YYYY-MM-DD'), 'Completed', 150);
+
+1 row created.
+
+SQL> INSERT INTO Assigned VALUES (4, 101, TO_DATE('2023-08-01', 'YYYY-MM-DD'), 'Pending', 95);
+
+1 row created.
+
+SQL> INSERT INTO Assigned VALUES (2, 103, TO_DATE('2023-09-01', 'YYYY-MM-DD'), 'Completed', 30);
+
+1 row created.
+
+SQL> select * from Worker;
+
+        ID                                                                      
+----------                                                                      
+NAME                                                                            
+--------------------------------------------------------------------------------
+WAGES_PER_HR                                                                    
+------------                                                                    
+         1                                                                      
+Alice                                                                           
+          50                                                                    
+                                                                                
+         2                                                                      
+Bob                                                                             
+          60                                                                    
+                                                                                
+         3                                                                      
+Charlie                                                                         
+          45                                                                    
+                                                                                
+         4                                                                      
+Diana                                                                           
+          70                                                                    
+                                                                                
+
+SQL> set linesize 100;
+SQL> select * from Worker;
+
+        ID                                                                                          
+----------                                                                                          
+NAME                                                                                                
+----------------------------------------------------------------------------------------------------
+WAGES_PER_HR                                                                                        
+------------                                                                                        
+         1                                                                                          
+Alice                                                                                               
+          50                                                                                        
+                                                                                                    
+         2                                                                                          
+Bob                                                                                                 
+          60                                                                                        
+                                                                                                    
+         3                                                                                          
+Charlie                                                                                             
+          45                                                                                        
+                                                                                                    
+         4                                                                                          
+Diana                                                                                               
+          70                                                                                        
+                                                                                                    
+
+SQL> COLUMN NAME FORMAT A15
+SQL> COLUMN WAGES_PER_HR FORMAT 9999.99
+SQL> select * from Worker;
+
+        ID NAME            WAGES_PER_HR                                                             
+---------- --------------- ------------                                                             
+         1 Alice                  50.00                                                             
+         2 Bob                    60.00                                                             
+         3 Charlie                45.00                                                             
+         4 Diana                  70.00                                                             
+
+SQL> COLUMN Job_Type FORMAT A15
+SQL> select * from Job;
+
+    JOB_ID JOB_TYPE                                                                                 
+---------- ---------------                                                                          
+       101 Welding                                                                                  
+       102 Plumbing                                                                                 
+       103 Painting                                                                                 
+
+SQL> select * from Assigned;
+
+      W_ID       J_ID START_DAT STATUS                                              TOTAL_HRS       
+---------- ---------- --------- -------------------------------------------------- ----------       
+         1        101 10-MAY-23 Completed                                                 120       
+         2        102 15-JUN-23 Pending                                                    80       
+         3        103 20-JUL-23 Completed                                                 150       
+         4        101 01-AUG-23 Pending                                                    95       
+         2        103 01-SEP-23 Completed                                                  30       
+
+SQL> -- 1. Display all workers in descending order of their Wages_Per_Hr
+SQL> select * from Worker order by WAGES_PER_HR desc;
+
+        ID NAME            WAGES_PER_HR                                                             
+---------- --------------- ------------                                                             
+         4 Diana                  70.00                                                             
+         2 Bob                    60.00                                                             
+         1 Alice                  50.00                                                             
+         3 Charlie                45.00                                                             
+
+SQL> -- 2. Count workers in each J_Id
+SQL> select J_ID, count(W_ID) from Assigned group by J_ID;
+
+      J_ID COUNT(W_ID)                                                                              
+---------- -----------                                                                              
+       101           2                                                                              
+       102           1                                                                              
+       103           2                                                                              
+
+SQL> -- 3. List all the W_Id who has worked for more than 100 hrs
+SQL> select W_ID, sum(TOTAL_HRS) as TOTAL_HRS from Assigned group by W_ID having sum(TOTAL_HRS)>100;
+
+      W_ID  TOTAL_HRS                                                                               
+---------- ----------                                                                               
+         1        120                                                                               
+         2        110                                                                               
+         3        150                                                                               
+
+SQL> select W_ID, sum(TOTAL_HRS) as TOTAL_HRS from Assigned WHERE status='Completed' group by W_ID having sum(TOTAL_HRS)>100;
+
+      W_ID  TOTAL_HRS                                                                               
+---------- ----------                                                                               
+         1        120                                                                               
+         3        150                                                                               
+
+SQL> -- 4. Count total jobs which are pending till date 5.
+SQL> select count(status) as pending_work from Assigned where status='Pending';
+
+PENDING_WORK                                                                                        
+------------                                                                                        
+           2                                                                                        
+
+SQL> -- 5. Display all Job_Id according to alphabetical order of their type
+SQL> select * from job order by JOB_TYPE;
+
+    JOB_ID JOB_TYPE                                                                                 
+---------- ---------------                                                                          
+       103 Painting                                                                                 
+       102 Plumbing                                                                                 
+       101 Welding                                                                                  
+
+SQL> spool off;

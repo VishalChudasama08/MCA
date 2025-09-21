@@ -1,0 +1,113 @@
+SQL> -- day-4.docx file excersice
+SQL> -- 1. Create a table called "Clients" from the "Client_Master" table.
+SQL> create table Clients as select * from Client_Master where 1=2;
+
+Table created.
+
+SQL> -- 2. Insert all records of "Client_Master" into "Clients"
+SQL> insert into clients select * from CLIENT_MASTER
+
+4 rows created.
+
+SQL> -- 3. Create table "Products" from "Product_master"
+SQL> create table Products as select * from Product_master where 5=3;
+
+Table created.
+
+SQL> -- 4. Copy only selected Product's information into "Products" table.
+SQL> insert into Products select * from Product_master where QTY_HAND=100;
+
+2 rows created.
+
+SQL> -- 5. Create table "Salesman" from "Salesman_Master" where "Salesman" table contains Fields: Salesman number, Name, Address1, City, Target_Get, Achieved_Target
+SQL> create table Salesman as select s_no,name,add1 as Address1,city,target as Achieved_Target from Salesman_Master;
+
+Table created.
+
+SQL> -- 6. Insert all records for the fields in new table from “Salesman_Master” table
+SQL> insert into Salesman select s_no,name,add1 as Address1,city,target as Achieved_Target from Salesman_Master;
+
+10 rows created.
+
+SQL> -- 7. Create an “Order_Master” table form “Sales_Order” Table
+SQL> create table Order_Master as select * from Sales_Order where 4=5;
+
+Table created.
+
+SQL> -- 8. Insert appropriate records in "Order_Master" from Sales_Order" table
+SQL> insert into Order_Master select * from Sales_Order where Order_Status>'Fulfilled';
+
+4 rows created.
+
+SQL> -- 9. Create "Order_Detail" table from "Sales_Order_Detail" table.
+SQL> create table Order_Detail as select * from Sales_Order_Details where 2=3;
+
+Table created.
+
+SQL> -- 10. Insert few selected records in "Order_Detail" from Sales_Order_ Detail" table.
+SQL> insert into Order_Detail select * from Sales_Order_Details where ORDER_NO in('O001', 'O002', 'O003', 'O004', 'O005');
+
+5 rows created.
+
+SQL> -- 11. Destroy tables: Client_Master, Product_Master and Salesman_Master table using Truncate
+SQL> truncate table Client_Master;
+
+Table truncated.
+
+SQL> select * from Client_Master;
+
+no rows selected
+
+SQL> truncate table Product_Master;
+
+Table truncated.
+
+SQL> truncate table Salesman_Master;
+
+Table truncated.
+
+SQL> -- 12. Destroy tables: "Sales_Order" and Sales_Order_Details using drop operation.
+SQL> drop table Sales_Order cascade constraints; -- if table have constraint than use 'cascade constraints' keyword to drop table
+
+Table dropped.
+
+SQL> drop table Sales_Order_Details;
+
+Table dropped.
+
+SQL> -- 14. Copy only the structure of Applicant Table into Applicant_Master
+SQL> -- question 13 not exist in day-4 docx
+SQL> create table Applicant_Master as select * from APPLICANT where 1=2;
+
+Table created.
+
+SQL> -- 15. Create a new table called Course_Master having same fields as Enterance_Test table but change the column name as Course_Code, Course_Name and Course_Credit
+SQL> create table Course_Master as select et_id as Course_Code, et_name as Course_Name, MAX_SCORE as Course_Credit from ENTRANCE_TEST;
+
+Table created.
+
+SQL> -- 16. Insert new data in Course_Master table.
+SQL> insert into Course_Master VALUES ('T006','Java',80);
+
+1 row created.
+
+SQL> -- 17. Create a view of Entrance_Test_Details table having only 2 columns
+SQL> create or replace view ETEST_DETAILS_view as select aid,etid from ETEST_DETAILS;
+
+View created.
+
+SQL> -- 18. Create a view of Applicant Table
+SQL> create or replace view APPLICANT_view as select * from APPLICANT;
+
+View created.
+
+SQL> -- 19. Change the record (Column values) in the view table.
+SQL> update APPLICANT_view set A_NAME='Dip' where A_NAME='Deepa';
+
+1 row updated.
+
+SQL> -- 20 Remove the view.
+SQL> drop view APPLICANT_view;
+
+View dropped.
+

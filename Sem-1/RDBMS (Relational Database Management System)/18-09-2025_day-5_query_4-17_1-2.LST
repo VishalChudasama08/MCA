@@ -1,0 +1,681 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+28 rows selected.
+
+SQL> -- insert all tables that need for day-5 query
+SQL> CREATE TABLE Student_Master (
+  2      Student_ID NUMBER PRIMARY KEY,
+  3      Student_Name VARCHAR2(50),
+  4      DOB DATE
+  5  );
+
+Table created.
+
+SQL> INSERT INTO Student_Master VALUES (1, 'Alice', TO_DATE('12-02-1998', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Student_Master VALUES (2, 'Bob', TO_DATE('23-05-2000', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Student_Master VALUES (3, 'Charlie', TO_DATE('15-11-1997', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Student_Master VALUES (4, 'Diana', TO_DATE('30-08-1999', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> CREATE TABLE Faculty_Master (
+  2      Faculty_ID NUMBER PRIMARY KEY,
+  3      Faculty_Name VARCHAR2(50),
+  4      DOJ DATE
+  5  );
+
+Table created.
+
+SQL> INSERT INTO Faculty_Master VALUES (1, 'Dr. Smith', TO_DATE('15-06-2010', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (2, 'Prof. Johnson', TO_DATE('01-09-2012', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (3, 'Dr. Lee', TO_DATE('20-01-2015', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (4, 'Prof. Brown', TO_DATE('05-11-2018', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> CREATE TABLE Employee_Master (
+  2      Employee_ID NUMBER PRIMARY KEY,
+  3      Employee_Name VARCHAR2(50),
+  4      Salary NUMBER(10, 2),
+  5      Joining_Date DATE
+  6  );
+
+Table created.
+
+SQL> INSERT INTO Employee_Master VALUES (1, 'Adam', 15000, TO_DATE('10-04-2019', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Employee_Master VALUES (2, 'Eve', 12000, TO_DATE('23-07-2020', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Employee_Master VALUES (3, 'Sam', 18000, TO_DATE('05-12-2018', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Employee_Master VALUES (4, 'Jill', 22000, TO_DATE('15-01-2021', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> insert into salesman_master values('S011','KAJAL','PUSHPAK','ISANPUR','AHMEDABAD',382443,'GUJRAT',5000,150,500);
+insert into salesman_master values('S011','KAJAL','PUSHPAK','ISANPUR','AHMEDABAD',382443,'GUJRAT',5000,150,500)
+*
+ERROR at line 1:
+ORA-00001: unique constraint (MCAB250013.SYS_C0032314) violated 
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+31 rows selected.
+
+SQL> select * from salesman_master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+11 rows selected.
+
+SQL> insert into salesman_master values('S012','KAJAL','PUSHPAK','ISANPUR','AHMEDABAD',382443,'GUJRAT',5000,150,500);
+
+1 row created.
+
+SQL> select * from salesman_master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S012  KAJAL                PUSHPAK    ISANPUR         AHMEDABAD      382443 GUJRAT                5000        150        500                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+12 rows selected.
+
+SQL> --- now run querys
+SQL> -- 4. Display total number of clients using Client_Master Table.
+SQL> select * from CLIENT_MASTER;
+
+no rows selected
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+SQL> insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO');
+insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+SQL> insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor');
+insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> desc client_master;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ C_NO                                                                                                              NOT NULL VARCHAR2(4)
+ CLIENT_NAME                                                                                                       NOT NULL VARCHAR2(20)
+ PINCODE                                                                                                           NOT NULL NUMBER(6)
+ BIRTH_DATE                                                                                                        NOT NULL DATE
+ OCCUPATION                                                                                                        NOT NULL VARCHAR2(30)
+ CITY                                                                                                                       VARCHAR2(20)
+ STATE                                                                                                                      VARCHAR2(20)
+ MOBILE_NO                                                                                                                  NUMBER(10)
+
+SQL> insert into client_master values('&c_no','&client_name',&pincode,'&birth_date','&occupation');
+Enter value for c_no: C001
+Enter value for client_name: Kajal Oza
+Enter value for pincode: 380036
+Enter value for birth_date: 14-july-1987
+Enter value for occupation: Manager
+old   1: insert into client_master values('&c_no','&client_name',&pincode,'&birth_date','&occupation')
+new   1: insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager')
+insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> drop client_master;
+drop client_master
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop table client_master;
+
+Table dropped.
+
+SQL> create table client_master(
+  2   c_no varchar2(4) check (c_no like 'C%')primary key,
+  3   client_name varchar2(20) not null,
+  4   pincode number(6)check (LENGTH(pincode)=6)not null,
+  5   birth_date date not null,
+  6   occupation varchar(30) not null
+  7  );
+
+Table created.
+
+SQL> insert into client_master values('C001','Kajal Oza',380036,'14-july-1987','Manager');
+
+1 row created.
+
+SQL> 
+SQL> insert into client_master values('C002','Vraj Shah', 380058,'20-nov-1986','CEO');
+
+1 row created.
+
+SQL> 
+SQL> insert into client_master values('C003','Dhyan Dave',387903,'17-june-1988','Doctor');
+
+1 row created.
+
+SQL> insert into client_master values('C004','Nilam Patel', 390041,'10-feb-1970','Doctor');
+
+1 row created.
+
+SQL> insert into client_master values('C005','Preeti Patel',390040,'28-feb-1971','Clerk');
+
+1 row created.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 4. Display total number of clients using Client_Master Table.
+SQL> select count(*) from client_master;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         5                                                                                                                                                                                              
+
+SQL> 5. Display the highest salary a salesman is getting.
+SP2-0734: unknown command beginning "5. Display..." - rest of line ignored.
+SQL> -- 5. Display the highest salary a salesman is getting.
+SQL> select * from SALESMAN;
+
+S_NO  NAME                 ADD1       CITY       ACHIEVED_TARGET                                                                                                                                        
+----- -------------------- ---------- ---------- ---------------                                                                                                                                        
+S001  AMAN                 3,DEV APPT BARODA                 100                                                                                                                                        
+S002  OMKAR                NULL       BHOPAL                 200                                                                                                                                        
+S003  RAJ                  B-104      MUMBAI                 200                                                                                                                                        
+S004  ASHISH               1,SMRUTI   SURAT                  150                                                                                                                                        
+S005  Meera                10, Lotus  Vadodara               300                                                                                                                                        
+S006  Karan                Sector-17  Ahmedabad              220                                                                                                                                        
+S007  Priya                L-12       Pune                   180                                                                                                                                        
+S008  Dev                  House-22   Delhi                  250                                                                                                                                        
+S009  Sahil                Flat-4     Lucknow                160                                                                                                                                        
+S010  Nidhi                Block-7    Kolkata                210                                                                                                                                        
+
+10 rows selected.
+
+SQL> select * from salesman_master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S012  KAJAL                PUSHPAK    ISANPUR         AHMEDABAD      382443 GUJRAT                5000        150        500                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+12 rows selected.
+
+SQL> select name,max(SALARY) from salesman_master;
+select name,max(SALARY) from salesman_master
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select max(SALARY), name from salesman_master
+SQL> /
+select max(SALARY), name from salesman_master
+                    *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select max(SALARY) from salesman_master
+SQL> /
+
+MAX(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+       6000                                                                                                                                                                                             
+
+SQL> -- 6. Display all item names in upper case letters only
+SQL> select * from ITEM;
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                                                                                                                                              
+----- ------------------------------ ---------- ----------                                                                                                                                              
+I001  Rice                                   50          5                                                                                                                                              
+I002  Wheat                                  40          4                                                                                                                                              
+I003  Sugar                                  35          3                                                                                                                                              
+I004  Oil                                   120          2                                                                                                                                              
+I005  Salt                                   20          1                                                                                                                                              
+
+SQL> select upper(ITEM_NAME) from ITEM;
+
+UPPER(ITEM_NAME)                                                                                                                                                                                        
+------------------------------                                                                                                                                                                          
+RICE                                                                                                                                                                                                    
+WHEAT                                                                                                                                                                                                   
+SUGAR                                                                                                                                                                                                   
+OIL                                                                                                                                                                                                     
+SALT                                                                                                                                                                                                    
+
+SQL> -- 7. Display current date and time
+SQL> select sysdate from dual;
+
+SYSDATE                                                                                                                                                                                                 
+---------                                                                                                                                                                                               
+14-SEP-25                                                                                                                                                                                               
+
+SQL> select sysdate, systime from dual;
+select sysdate, systime from dual
+                *
+ERROR at line 1:
+ORA-00904: "SYSTIME": invalid identifier 
+
+
+SQL> select date() from dual;
+select date() from dual
+       *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> -- 8. Display average target given to the salesman.
+SQL> select avg(TARGET) from salesman_master;
+
+AVG(TARGET)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+ 194.166667                                                                                                                                                                                             
+
+SQL> -- 9. Display the Birth Date (DOB in Student_Master Table) in a new format. (Eg. February 12, 1998) -- 9. Display the Birth Date (DOB in Student_Master Table) in a new format. (Eg. February 12, 1998) set linesize 300;
+SQL> 
+SQL> -- 9. Display the Birth Date (DOB in Student_Master Table) in a new format. (Eg. February 12, 1998)-- 9. Display the Birth Date (DOB in Student_Master Table) in a new format. (Eg. February 12, 1998)
+SQL> select * from Student_Master;
+
+STUDENT_ID STUDENT_NAME                                       DOB                                                                                                                                       
+---------- -------------------------------------------------- ---------                                                                                                                                 
+         1 Alice                                              12-FEB-98                                                                                                                                 
+         2 Bob                                                23-MAY-00                                                                                                                                 
+         3 Charlie                                            15-NOV-97                                                                                                                                 
+         4 Diana                                              30-AUG-99                                                                                                                                 
+
+SQL> select to_char(dob, 'Month dd, yyyy') from Student_Master;
+
+TO_CHAR(DOB,'MONTH                                                                                                                                                                                      
+------------------                                                                                                                                                                                      
+February  12, 1998                                                                                                                                                                                      
+May       23, 2000                                                                                                                                                                                      
+November  15, 1997                                                                                                                                                                                      
+August    30, 1999                                                                                                                                                                                      
+
+SQL> -- 10. Display Date of Joining (DOJ, Faculty_Master) of all faculties in DD/MM/YY format
+SQL> select * from Faculty_Master;
+
+FACULTY_ID FACULTY_NAME                                       DOJ                                                                                                                                       
+---------- -------------------------------------------------- ---------                                                                                                                                 
+         1 Dr. Smith                                          15-JUN-10                                                                                                                                 
+         2 Prof. Johnson                                      01-SEP-12                                                                                                                                 
+         3 Dr. Lee                                            20-JAN-15                                                                                                                                 
+         4 Prof. Brown                                        05-NOV-18                                                                                                                                 
+
+SQL> select to_char(doj, 'DD/MM/YY') from Faculty_Master;
+
+TO_CHAR(                                                                                                                                                                                                
+--------                                                                                                                                                                                                
+15/06/10                                                                                                                                                                                                
+01/09/12                                                                                                                                                                                                
+20/01/15                                                                                                                                                                                                
+05/11/18                                                                                                                                                                                                
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select to_char(doj, 'DD/MM/YY') as DOJ from Faculty_Master
+SQL> /
+
+DOJ                                                                                                                                                                                                     
+--------                                                                                                                                                                                                
+15/06/10                                                                                                                                                                                                
+01/09/12                                                                                                                                                                                                
+20/01/15                                                                                                                                                                                                
+05/11/18                                                                                                                                                                                                
+
+SQL> -- 11. Display Only Birth Date and Month of all the students from Student_Master Table
+SQL> select to_char(dob, 'DD MM') from Student_Master;
+
+TO_CH                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+12 02                                                                                                                                                                                                   
+23 05                                                                                                                                                                                                   
+15 11                                                                                                                                                                                                   
+30 08                                                                                                                                                                                                   
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select to_char(dob, 'DD-MM') as DD-MM from Student_Master
+SQL> /
+select to_char(dob, 'DD-MM') as DD-MM from Student_Master
+                                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select to_char(dob, 'DD-MM') as DD_MM from Student_Master
+SQL> /
+
+DD_MM                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+12-02                                                                                                                                                                                                   
+23-05                                                                                                                                                                                                   
+15-11                                                                                                                                                                                                   
+30-08                                                                                                                                                                                                   
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select to_char(dob, 'DD/MM') as DD_MM from Student_Master
+SQL> /
+
+DD_MM                                                                                                                                                                                                   
+-----                                                                                                                                                                                                   
+12/02                                                                                                                                                                                                   
+23/05                                                                                                                                                                                                   
+15/11                                                                                                                                                                                                   
+30/08                                                                                                                                                                                                   
+
+SQL> -- 12. Count the total number of employees.
+SQL> select count(*) from EMPLOYEE_MASTER;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> -- 13. Calculate the average salary of all the employees.
+SQL> select * from EMPLOYEE_MASTER;
+
+EMPLOYEE_ID EMPLOYEE_NAME                                          SALARY JOINING_D                                                                                                                     
+----------- -------------------------------------------------- ---------- ---------                                                                                                                     
+          1 Adam                                                    15000 10-APR-19                                                                                                                     
+          2 Eve                                                     12000 23-JUL-20                                                                                                                     
+          3 Sam                                                     18000 05-DEC-18                                                                                                                     
+          4 Jill                                                    22000 15-JAN-21                                                                                                                     
+
+SQL> select avg(SALARY) from EMPLOYEE_MASTER;
+
+AVG(SALARY)                                                                                                                                                                                             
+-----------                                                                                                                                                                                             
+      16750                                                                                                                                                                                             
+
+SQL> -- 14. Determine the maximum and minimum salary. Rename the output as max_salary and min_salary respectively.
+SQL> select max(SALARY) as max_salary, min(SALARY) as min_salary from EMPLOYEE_MASTER;
+
+MAX_SALARY MIN_SALARY                                                                                                                                                                                   
+---------- ----------                                                                                                                                                                                   
+     22000      12000                                                                                                                                                                                   
+
+SQL> -- 15. Count the number of employees having salary less than or equal to 15000.
+SQL> select count(EMPLOYEE_NAME) from EMPLOYEE_MASTER where SALARY <= 1500;
+
+COUNT(EMPLOYEE_NAME)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                   0                                                                                                                                                                                    
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select count(EMPLOYEE_NAME) from EMPLOYEE_MASTER where SALARY <= 15000
+SQL> /
+
+COUNT(EMPLOYEE_NAME)                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+                   2                                                                                                                                                                                    
+
+SQL> -- 16. List the details of Employee month wise in DD/MM/YY format.
+SQL> desc EMPLOYEE_MASTER;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ EMPLOYEE_ID                                                                                                       NOT NULL NUMBER
+ EMPLOYEE_NAME                                                                                                              VARCHAR2(50)
+ SALARY                                                                                                                     NUMBER(10,2)
+ JOINING_DATE                                                                                                               DATE
+
+SQL> select EMPLOYEE_NAME, SALARY, to_char(JOINING_DATE, 'DD/MM/YY') from EMPLOYEE_MASTER order by extract(month from JOINING_DATE);
+
+EMPLOYEE_NAME                                          SALARY TO_CHAR(                                                                                                                                  
+-------------------------------------------------- ---------- --------                                                                                                                                  
+Jill                                                    22000 15/01/21                                                                                                                                  
+Adam                                                    15000 10/04/19                                                                                                                                  
+Eve                                                     12000 23/07/20                                                                                                                                  
+Sam                                                     18000 05/12/18                                                                                                                                  
+
+SQL> -- 17. List the DOB in the format 'DD-Month-YY' eg. 12-February-91
+SQL> select to_char(JOINING_DATE, 'DD-Month-YY') from EMPLOYEE_MASTER;
+
+TO_CHAR(JOINING                                                                                                                                                                                         
+---------------                                                                                                                                                                                         
+10-April    -19                                                                                                                                                                                         
+23-July     -20                                                                                                                                                                                         
+05-December -18                                                                                                                                                                                         
+15-January  -21                                                                                                                                                                                         
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- next 1-7 query based on tables => Distributor, Item, Dist_Item
+SQL> -- 1. Count total distributors
+SQL> select count(*) from DISTRIBUTOR;
+
+  COUNT(*)                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         5                                                                                                                                                                                              
+
+SQL> -- 2. Find the total price of all items
+SQL> select * from items;
+select * from items
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from item
+SQL> /
+
+ITEM_ ITEM_NAME                           PRICE     WEIGHT                                                                                                                                              
+----- ------------------------------ ---------- ----------                                                                                                                                              
+I001  Rice                                   50          5                                                                                                                                              
+I002  Wheat                                  40          4                                                                                                                                              
+I003  Sugar                                  35          3                                                                                                                                              
+I004  Oil                                   120          2                                                                                                                                              
+I005  Salt                                   20          1                                                                                                                                              
+
+SQL> select sum(price) as total from item;
+
+     TOTAL                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+       265                                                                                                                                                                                              
+
+SQL> -- 3. Find the item wise total quantity of each item
+SQL> select * from dist_item;
+
+DNO  ITEM_        QTY ORDER_DAT                                                                                                                                                                         
+---- ----- ---------- ---------                                                                                                                                                                         
+D001 I001         100 25-AUG-25                                                                                                                                                                         
+D001 I002          80 26-AUG-25                                                                                                                                                                         
+D002 I003          50 27-AUG-25                                                                                                                                                                         
+D002 I004          60 28-AUG-25                                                                                                                                                                         
+D003 I005         200 29-AUG-25                                                                                                                                                                         
+D003 I001         120 30-AUG-25                                                                                                                                                                         
+D004 I002         150 31-AUG-25                                                                                                                                                                         
+D004 I003          70 01-SEP-25                                                                                                                                                                         
+D005 I004          90 02-SEP-25                                                                                                                                                                         
+D005 I005         250 03-SEP-25                                                                                                                                                                         
+
+10 rows selected.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 
