@@ -1,0 +1,86 @@
+CREATE TABLE STUDENT (
+    rollno NUMBER PRIMARY KEY,
+    fname VARCHAR2(12),
+    lname VARCHAR2(12),
+    dob DATE
+);
+
+CREATE TABLE COURSE (
+    C_No VARCHAR2(6) PRIMARY KEY,
+    coursename VARCHAR2(20),
+    fees NUMBER,
+    Credit NUMBER
+);
+
+CREATE TABLE ENROLL (
+    rollno NUMBER,
+    courseno VARCHAR2(10),
+    Earn_Credit NUMBER,
+    FOREIGN KEY (rollno) REFERENCES STUDENT(rollno),
+    FOREIGN KEY (courseno) REFERENCES COURSE(C_No)
+);
+
+
+INSERT INTO STUDENT VALUES (11, 'Kapil', 'Sharma', TO_DATE('2003-01-01', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES (12, 'Anjali', 'Verma', TO_DATE('2002-06-21', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES (13, 'Ravi', 'Kumar', TO_DATE('2004-03-12', 'YYYY-MM-DD'));
+INSERT INTO STUDENT VALUES (14, 'Pooja', 'Singh', TO_DATE('2001-11-23', 'YYYY-MM-DD'));
+
+INSERT INTO COURSE VALUES ('C101', 'Mathematics', 5000, 4);
+INSERT INTO COURSE VALUES ('C102', 'Physics', 6000, 3);
+INSERT INTO COURSE VALUES ('C103', 'Chemistry', 5500, 4);
+INSERT INTO COURSE VALUES ('C104', 'Biology', 5800, 3);
+
+INSERT INTO ENROLL VALUES (11, 'C101', 4);
+INSERT INTO ENROLL VALUES (11, 'C102', 3);
+INSERT INTO ENROLL VALUES (12, 'C101', 4);
+INSERT INTO ENROLL VALUES (12, 'C103', 4);
+INSERT INTO ENROLL VALUES (13, 'C103', 4);
+
+
+CREATE TABLE Employee (
+    emp_no NUMBER PRIMARY KEY,
+    fname VARCHAR2(12),
+    lname VARCHAR2(12),
+    dob DATE,
+    address VARCHAR2(30)
+);
+
+
+CREATE TABLE Company (
+    comp_id NUMBER PRIMARY KEY,
+    emp_no NUMBER,
+    company_name VARCHAR2(25),
+    salary NUMBER,
+    department VARCHAR2(18),
+    designation VARCHAR2(18),
+    FOREIGN KEY (emp_no) REFERENCES Employee(emp_no)
+);
+
+
+CREATE TABLE Customer (
+    cust_no NUMBER PRIMARY KEY,
+    fname VARCHAR2(12),
+    lname VARCHAR2(12),
+    address VARCHAR2(30)
+);
+
+
+
+INSERT INTO Employee VALUES (101, 'Jay', 'Shah', TO_DATE('1990-01-01', 'YYYY-MM-DD'), 'Mumbai');
+INSERT INTO Employee VALUES (102, 'Amit', 'Patel', TO_DATE('1989-02-10', 'YYYY-MM-DD'), 'Delhi');
+INSERT INTO Employee VALUES (103, 'Nina', 'Joshi', TO_DATE('1991-07-12', 'YYYY-MM-DD'), 'Bangalore');
+INSERT INTO Employee VALUES (104, 'Ravi', 'Kumar', TO_DATE('1987-11-05', 'YYYY-MM-DD'), 'Chennai');
+INSERT INTO Employee VALUES (105, 'Meena', 'Sharma', TO_DATE('1993-03-14', 'YYYY-MM-DD'), 'Pune');
+
+
+INSERT INTO Company VALUES (1, 101, 'ABC Corp', 60000, 'mrkt', 'Manager');    
+INSERT INTO Company VALUES (2, 102, 'ABC Corp', 50000, 'mrkt', 'Executive');  
+INSERT INTO Company VALUES (3, 103, 'XYZ Ltd', 70000, 'sales', 'Lead');       
+INSERT INTO Company VALUES (4, 104, 'XYZ Ltd', 55000, 'sales', 'Analyst');    
+
+
+INSERT INTO Customer VALUES (201, 'Jay', 'Shah', 'Ahmedabad');   
+INSERT INTO Customer VALUES (202, 'Amit', 'Patel', 'Surat');     
+INSERT INTO Customer VALUES (203, 'Sneha', 'Mehta', 'Delhi');
+INSERT INTO Customer VALUES (204, 'Ravi', 'Kumar', 'Chennai');  

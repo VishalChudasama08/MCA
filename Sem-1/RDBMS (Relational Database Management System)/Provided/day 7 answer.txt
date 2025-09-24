@@ -1,0 +1,105 @@
+ANS 6:-
+select s.rollno,s.fname from student s where not exists (select c.c_no from course c where not exists(select 1 from enroll 
+
+ANS 7:-
+ 1  SELECT COURSENAME
+ 2  FROM course
+ 3  WHERE C_NO IN (
+ 4    SELECT COURSENO
+ 5    FROM enroll
+ 6    GROUP BY COURSENO
+ 7    HAVING COUNT(DISTINCT ROLLNO) = (
+ 8      SELECT MAX(student_count) FROM (
+ 9        SELECT COUNT(DISTINCT ROLLNO) AS student_count
+10        FROM enroll
+11        GROUP BY COURSENO
+12      )
+13    )
+14* )
+
+ANS 8:-
+select * from student s where not exists(select rollno from enroll e where e.rollno=s.rollno)
+
+ANS 9:-
+SELECT DISTINCT s.* 
+FROM Student s
+WHERE s.rollno IN (
+  SELECT e.rollno 
+  FROM Enroll e 
+  WHERE e.Earn_Credit > (
+    SELECT AVG(e2.Earn_Credit) 
+    FROM Enroll e2 
+    WHERE e2.courseno = e.courseno
+  )
+);
+
+ANS 10:-
+
+SELECT * 
+FROM Student 
+WHERE rollno IN (
+  SELECT rollno 
+  FROM Enroll 
+  GROUP BY rollno 
+  HAVING SUM(Earn_Credit) = (
+    SELECT SUM(Earn_Credit) 
+    FROM Enroll 
+    WHERE rollno = (
+      SELECT rollno FROM Student WHERE fname = 'Kapil'
+    )
+  )
+);
+
+
+
+
+
+ANS:-1
+SELECT * 
+FROM Company c1
+WHERE salary > (
+  SELECT AVG(salary) 
+  FROM Company c2 
+  WHERE c2.department = c1.department
+);
+
+
+
+SELECT * 
+FROM Company 
+WHERE salary = (
+  SELECT salary 
+  FROM Company 
+  WHERE emp_no = (
+    SELECT emp_no 
+    FROM Employee 
+    WHERE fname = 'Jay'
+  )
+);
+
+
+SELECT fname, lname 
+FROM Employee 
+WHERE emp_no IN (
+  SELECT emp_no 
+  FROM Company 
+  WHERE department = 'mrkt'
+);
+
+
+
+
+SELECT * 
+FROM Employee 
+WHERE emp_no NOT IN (
+  SELECT emp_no FROM Company
+);
+
+
+
+SELECT * 
+FROM Customer 
+WHERE (fname, lname) IN (
+  SELECT fname, lname 
+  FROM Employee
+);

@@ -1,0 +1,150 @@
+SQL> select * from employee;
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                                                  
+---------- ------------ ------------ --------- ------------------------------                                                                                                                           
+       101 Jay          Shah         01-JAN-90 Mumbai                                                                                                                                                   
+       102 Amit         Patel        10-FEB-89 Delhi                                                                                                                                                    
+       103 Nina         Joshi        12-JUL-91 Bangalore                                                                                                                                                
+       104 Ravi         Kumar        05-NOV-87 Chennai                                                                                                                                                  
+       105 Meena        Sharma       14-MAR-93 Pune                                                                                                                                                     
+
+SQL> select * from company;
+
+   COMP_ID     EMP_NO COMPANY_NAME                  SALARY DEPARTMENT         DESIGNATION                                                                                                               
+---------- ---------- ------------------------- ---------- ------------------ ------------------                                                                                                        
+         1        101 ABC Corp                       60000 mrkt               Manager                                                                                                                   
+         2        102 ABC Corp                       50000 mrkt               Executive                                                                                                                 
+         3        103 XYZ Ltd                        70000 sales              Lead                                                                                                                      
+         4        104 XYZ Ltd                        55000 sales              Analyst                                                                                                                   
+
+SQL> select * from customer;
+
+   CUST_NO FNAME        LNAME        ADDRESS                                                                                                                                                            
+---------- ------------ ------------ ------------------------------                                                                                                                                     
+       201 Jay          Shah         Ahmedabad                                                                                                                                                          
+       202 Amit         Patel        Surat                                                                                                                                                              
+       203 Sneha        Mehta        Delhi                                                                                                                                                              
+       204 Ravi         Kumar        Chennai                                                                                                                                                            
+
+SQL> -- 1. Find all students whose salary is higher than the average salary of the employees in their departments.
+SQL> select fname from employee where emp_no in(select emp_no from company where salary > (select avg(salary) from company group by department));
+select fname from employee where emp_no in(select emp_no from company where salary > (select avg(salary) from company group by department))
+                                                                                      *
+ERROR at line 1:
+ORA-01427: single-row subquery returns more than one row 
+
+
+SQL> select fname from employee where emp_no in(select emp_no from company c1 where salary > (select avg(salary) from company c2 where c1.department=c2.department);
+select fname from employee where emp_no in(select emp_no from company c1 where salary > (select avg(salary) from company c2 where c1.department=c2.department)
+                                                                                                                                                             *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select fname from employee where emp_no in(select emp_no from company c1 where salary > (select avg(salary) from company c2 where c1.department=c2.department));
+
+FNAME                                                                                                                                                                                                   
+------------                                                                                                                                                                                            
+Jay                                                                                                                                                                                                     
+Nina                                                                                                                                                                                                    
+
+SQL> 
+SQL> -- 2. List the employee detail whose salary is same as "Jay".
+SQL> -- not any one salary as 'jay' insert new rocord
+SQL> insert into company values(105, 'XYZ Ltd', 60000, 'sales', 'Analyst');
+insert into company values(105, 'XYZ Ltd', 60000, 'sales', 'Analyst')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into company values(5,105, 'XYZ Ltd', 60000, 'sales', 'Analyst');
+
+1 row created.
+
+SQL> select fname from employee where EMP_NO in(select EMP_NO from company where SALARY = (select salary from company where EMP_NO = (select EMP_NO from employee where FNAME='Jay')));
+
+FNAME                                                                                                                                                                                                   
+------------                                                                                                                                                                                            
+Meena                                                                                                                                                                                                   
+Jay                                                                                                                                                                                                     
+
+SQL> select * from employee where EMP_NO in(select EMP_NO from company where SALARY = (select salary from company where EMP_NO = (select EMP_NO from employee where FNAME='Jay')));
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                                                  
+---------- ------------ ------------ --------- ------------------------------                                                                                                                           
+       105 Meena        Sharma       14-MAR-93 Pune                                                                                                                                                     
+       101 Jay          Shah         01-JAN-90 Mumbai                                                                                                                                                   
+
+SQL> -- 3. Display the name of employees who work in `mrkt' department.
+SQL> select fname from employee where emp_no in(select emp_no from company where DEPARTMENT='mrkt');
+
+FNAME                                                                                                                                                                                                   
+------------                                                                                                                                                                                            
+Jay                                                                                                                                                                                                     
+Amit                                                                                                                                                                                                    
+
+SQL> -- 4. Display details of employees not belong to any department.
+SQL> select * from employee;
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                                                  
+---------- ------------ ------------ --------- ------------------------------                                                                                                                           
+       101 Jay          Shah         01-JAN-90 Mumbai                                                                                                                                                   
+       102 Amit         Patel        10-FEB-89 Delhi                                                                                                                                                    
+       103 Nina         Joshi        12-JUL-91 Bangalore                                                                                                                                                
+       104 Ravi         Kumar        05-NOV-87 Chennai                                                                                                                                                  
+       105 Meena        Sharma       14-MAR-93 Pune                                                                                                                                                     
+
+SQL> select * from company;
+
+   COMP_ID     EMP_NO COMPANY_NAME                  SALARY DEPARTMENT         DESIGNATION                                                                                                               
+---------- ---------- ------------------------- ---------- ------------------ ------------------                                                                                                        
+         5        105 XYZ Ltd                        60000 sales              Analyst                                                                                                                   
+         1        101 ABC Corp                       60000 mrkt               Manager                                                                                                                   
+         2        102 ABC Corp                       50000 mrkt               Executive                                                                                                                 
+         3        103 XYZ Ltd                        70000 sales              Lead                                                                                                                      
+         4        104 XYZ Ltd                        55000 sales              Analyst                                                                                                                   
+
+SQL> insert into employee values(106, 'Rahul', 'Makvana', '24-SEP-95', 'Gujarat');
+
+1 row created.
+
+SQL> select * from employee where emp_no not in(select emp_no from company);
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                                                  
+---------- ------------ ------------ --------- ------------------------------                                                                                                                           
+       106 Rahul        Makvana      24-SEP-95 Gujarat                                                                                                                                                  
+
+SQL> -- 5. Find out all the customers having same name as the employees. (Using multi column subquery).
+SQL> select fname, lname from customer where fname in(select fname from employee) OR lname in(select lname from employee);
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Jay          Shah                                                                                                                                                                                       
+Amit         Patel                                                                                                                                                                                      
+Ravi         Kumar                                                                                                                                                                                      
+
+SQL> select fname, lname from customer where fname OR lname in(select fname, lname from employee);
+select fname, lname from customer where fname OR lname in(select fname, lname from employee)
+                                              *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> select fname, lname from customer where fname in(select fname from employee) OR lname in(select lname from employee);
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Jay          Shah                                                                                                                                                                                       
+Amit         Patel                                                                                                                                                                                      
+Ravi         Kumar                                                                                                                                                                                      
+
+SQL> select fname, lname from customer where (fname,lname) in(select fname, lname from employee);
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Jay          Shah                                                                                                                                                                                       
+Amit         Patel                                                                                                                                                                                      
+Ravi         Kumar                                                                                                                                                                                      
+
+SQL> spool off;
