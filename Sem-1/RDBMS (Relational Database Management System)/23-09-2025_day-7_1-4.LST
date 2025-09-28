@@ -1,0 +1,244 @@
+-- 1. Display the name of students who have enrolled for course 'C101'.
+SQL> select c.coursename from course c join enroll c.c_no = e.courseno where e.rollno = 11;
+select c.coursename from course c join enroll c.c_no = e.courseno where e.rollno = 11
+                                               *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> desc COURSE;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ C_NO                                                                                                              NOT NULL VARCHAR2(10)
+ COURSENAME                                                                                                                 VARCHAR2(25)
+ FEES                                                                                                                       NUMBER
+ CREDIT                                                                                                                     NUMBER
+
+SQL> select c.coursename from course c join enroll e on c.c_no = e.courseno where e.rollno = 11;
+
+COURSENAME                                                                                                                                                                                              
+-------------------------                                                                                                                                                                               
+Mathematics                                                                                                                                                                                             
+Physics                                                                                                                                                                                                 
+
+SQL> -- 2. Display the name of the courses in which rollno 11 is enrolled.
+SQL> select c.coursename from course c join enroll e on c.c_no = e.courseno where e.rollno = 11;
+
+COURSENAME                                                                                                                                                                                              
+-------------------------                                                                                                                                                                               
+Mathematics                                                                                                                                                                                             
+Physics                                                                                                                                                                                                 
+
+SQL>  -- 1. Display the name of students who have enrolled for course 'C101'.
+SQL> select s.fname,s.lname from student s join enroll e on e.eollno=s.rollno where e.courseno='C101';
+select s.fname,s.lname from student s join enroll e on e.eollno=s.rollno where e.courseno='C101'
+                                                       *
+ERROR at line 1:
+ORA-00904: "E"."EOLLNO": invalid identifier 
+
+
+SQL> select s.fname,s.lname from student s join enroll e on e.rollno=s.rollno where e.courseno='C101';
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Kapil        Sharma                                                                                                                                                                                     
+Anjali       Verma                                                                                                                                                                                      
+
+SQL> -- 2. Display the name of the courses in which rollno 11 is enrolled.
+SQL> select c.coursename from course c join enroll e on c.c_no = e.courseno where e.rollno = 11;
+
+COURSENAME                                                                                                                                                                                              
+-------------------------                                                                                                                                                                               
+Mathematics                                                                                                                                                                                             
+Physics                                                                                                                                                                                                 
+
+SQL> -- 3. Display the name of the student who have earned maximum credit.
+SQL> select s.fname,s.lname from student s join enroll e on e.eollno=s.rollno where Earn_Credit=(select max(Earn_Credit) from enroll);
+select s.fname,s.lname from student s join enroll e on e.eollno=s.rollno where Earn_Credit=(select max(Earn_Credit) from enroll)
+                                                       *
+ERROR at line 1:
+ORA-00904: "E"."EOLLNO": invalid identifier 
+
+
+SQL> select s.fname,s.lname from student s join enroll e on e.rollno=s.rollno where Earn_Credit=(select max(Earn_Credit) from enroll);
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Kapil        Sharma                                                                                                                                                                                     
+Anjali       Verma                                                                                                                                                                                      
+Anjali       Verma                                                                                                                                                                                      
+Ravi         Kumar                                                                                                                                                                                      
+
+SQL> -- 4. Display details of students who have enrolled in any course.
+SQL> select * from student;
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                
+---------- ------------ ------------ ---------                                                                                                                                                          
+        11 Kapil        Sharma       01-JAN-03                                                                                                                                                          
+        12 Anjali       Verma        21-JUN-02                                                                                                                                                          
+        13 Ravi         Kumar        12-MAR-04                                                                                                                                                          
+        14 Pooja        Singh        23-NOV-01                                                                                                                                                          
+
+SQL> -- i am using join on but on day-7 all query by using sub-query than do it again
+SQL> -- 1. Display the name of students who have enrolled for course 'C101'.
+SQL> select fname,lname from student where rollno in(select rollno from enroll where courseno='C101');
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Kapil        Sharma                                                                                                                                                                                     
+Anjali       Verma                                                                                                                                                                                      
+
+SQL> -- 2. Display the name of the courses in which rollno 11 is enrolled.
+SQL> select COURSENAME from course where C_NO in(select COURSENO from ENROLL where ROLLNO=11);
+
+COURSENAME                                                                                                                                                                                              
+-------------------------                                                                                                                                                                               
+Mathematics                                                                                                                                                                                             
+Physics                                                                                                                                                                                                 
+
+SQL> -- 3. Display the name of the student who have earned maximum credit.
+SQL> select fname,lname from student where rollno in(select ROLLNO, max(EARN_CREDIT) from EARN_CREDI;
+select fname,lname from student where rollno in(select ROLLNO, max(EARN_CREDIT) from EARN_CREDI
+                                                                                              *
+ERROR at line 1:
+ORA-00907: missing right parenthesis 
+
+
+SQL> select fname,lname from student where rollno in(select ROLLNO from enroll where EARN_CREDIT=max(EARN_CREDIT));
+select fname,lname from student where rollno in(select ROLLNO from enroll where EARN_CREDIT=max(EARN_CREDIT))
+                                                                                            *
+ERROR at line 1:
+ORA-00934: group function is not allowed here 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select fname,lname from student where rollno in(select ROLLNO from enroll where EARN_CREDIT=max(EARN_CREDIT))
+SQL> select fname,lname from student where rollno in(select ROLLNO from enroll where EARN_CREDIT=(select max(EARN_CREDIT) from enroll));
+
+FNAME        LNAME                                                                                                                                                                                      
+------------ ------------                                                                                                                                                                               
+Kapil        Sharma                                                                                                                                                                                     
+Ravi         Kumar                                                                                                                                                                                      
+Anjali       Verma                                                                                                                                                                                      
+
+SQL> -- 4. Display details of students who have enrolled in any course.
+SQL> set linesize 300;
+SQL> select * from student where rollno in(select rollno from enroll);
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                                                                                                                    
+---------- ------------ ------------ ---------                                                                                                                                                                                                                                                              
+        11 Kapil        Sharma       01-JAN-03                                                                                                                                                                                                                                                              
+        12 Anjali       Verma        21-JUN-02                                                                                                                                                                                                                                                              
+        13 Ravi         Kumar        12-MAR-04                                                                                                                                                                                                                                                              
+
+SQL> -- 5. Display details of students who have not enrolled in any course.
+SQL> select * from student where rollno not in(select rollno from enroll);
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                                                                                                                    
+---------- ------------ ------------ ---------                                                                                                                                                                                                                                                              
+        14 Pooja        Singh        23-NOV-01                                                                                                                                                                                                                                                              
+
+SQL> -- 6. Display details of students who have enrolled in all courses.
+SQL> INSERT INTO ENROLL VALUES (11, 'C103', 3);
+
+1 row created.
+
+SQL> INSERT INTO ENROLL VALUES (11, 'C104', 4);
+
+1 row created.
+
+SQL> select * from enroll;
+
+    ROLLNO COURSENO   EARN_CREDIT                                                                                                                                                                                                                                                                           
+---------- ---------- -----------                                                                                                                                                                                                                                                                           
+        11 C103                 3                                                                                                                                                                                                                                                                           
+        11 C104                 4                                                                                                                                                                                                                                                                           
+        11 C101                 4                                                                                                                                                                                                                                                                           
+        11 C102                 3                                                                                                                                                                                                                                                                           
+        12 C101                 4                                                                                                                                                                                                                                                                           
+        12 C103                 4                                                                                                                                                                                                                                                                           
+        13 C103                 4                                                                                                                                                                                                                                                                           
+
+7 rows selected.
+
+SQL> select * from student where rollno in(select rollno from enroll where COURSENO in(select C_NO from course));
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                                                                                                                    
+---------- ------------ ------------ ---------                                                                                                                                                                                                                                                              
+        11 Kapil        Sharma       01-JAN-03                                                                                                                                                                                                                                                              
+        13 Ravi         Kumar        12-MAR-04                                                                                                                                                                                                                                                              
+        12 Anjali       Verma        21-JUN-02                                                                                                                                                                                                                                                              
+
+SQL> select * from student where rollno in(select rollno from enroll group by rollno having count(*) = (select count(*) from course));
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                                                                                                                    
+---------- ------------ ------------ ---------                                                                                                                                                                                                                                                              
+        11 Kapil        Sharma       01-JAN-03                                                                                                                                                                                                                                                              
+
+SQL> -- 7. Give the name of the course in which maximum number of students are enrolled.
+SQL> select COURSENAME from course where C_NO = (select avg(COURSENO) from enroll);
+select COURSENAME from course where C_NO = (select avg(COURSENO) from enroll)
+                                    *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select COURSENAME from course where C_NO in (select avg(COURSENO) from enroll);
+select COURSENAME from course where C_NO in (select avg(COURSENO) from enroll)
+                                    *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select avg(COURSENO) from enroll;
+select avg(COURSENO) from enroll
+           *
+ERROR at line 1:
+ORA-01722: invalid number 
+
+
+SQL> select max(COURSENO) from enroll;
+
+MAX(COURSE                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+C104                                                                                                                                                                                                                                                                                                        
+
+SQL> select * from enroll;
+
+    ROLLNO COURSENO   EARN_CREDIT                                                                                                                                                                                                                                                                           
+---------- ---------- -----------                                                                                                                                                                                                                                                                           
+        11 C103                 3                                                                                                                                                                                                                                                                           
+        11 C104                 4                                                                                                                                                                                                                                                                           
+        11 C101                 4                                                                                                                                                                                                                                                                           
+        11 C102                 3                                                                                                                                                                                                                                                                           
+        12 C101                 4                                                                                                                                                                                                                                                                           
+        12 C103                 4                                                                                                                                                                                                                                                                           
+        13 C103                 4                                                                                                                                                                                                                                                                           
+
+7 rows selected.
+
+SQL> select max(courseno) from enroll;
+
+MAX(COURSE                                                                                                                                                                                                                                                                                                  
+----------                                                                                                                                                                                                                                                                                                  
+C104                                                                                                                                                                                                                                                                                                        
+
+SQL> select courseno, count(*) from enroll group by courseno;
+
+COURSENO     COUNT(*)                                                                                                                                                                                                                                                                                       
+---------- ----------                                                                                                                                                                                                                                                                                       
+C101                2                                                                                                                                                                                                                                                                                       
+C103                3                                                                                                                                                                                                                                                                                       
+C102                1                                                                                                                                                                                                                                                                                       
+C104                1                                                                                                                                                                                                                                                                                       
+
+SQL> select courseno, max(count(*)) from enroll group by courseno;
+select courseno, max(count(*)) from enroll group by courseno
+       *
+ERROR at line 1:
+ORA-00937: not a single-group group function 
+
+
+SQL> 

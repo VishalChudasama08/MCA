@@ -1,0 +1,59 @@
+CREATE TABLE FYRankers (
+    Enrol_No INT,
+    Name VARCHAR(15),
+    SPI DECIMAL(3,2)
+);
+INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES(1, 'John Doe', 8.2);
+INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (2, 'Jane Smith', 7.5);
+INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 6.9);
+INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (4, 'Michael Brown', 8.7);
+
+CREATE TABLE SYRankers (
+    Enrol_No INT,
+    Name VARCHAR(15),
+    SPI DECIMAL(3,2)
+);
+INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 8.1);
+INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(4, 'Michael Brown', 7.8);
+INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(5, 'Chris Lee', 8.3);
+INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (6, 'Anna White', 6.8);
+
+CREATE TABLE customers (
+    cust_id INT PRIMARY KEY,
+    name VARCHAR(15),
+    city VARCHAR(15),
+    country VARCHAR(15)
+);
+INSERT INTO customers (cust_id, name, city, country)VALUES (1, 'John Doe', 'Ahmedabad', 'India');
+INSERT INTO customers (cust_id, name, city, country)VALUES (2, 'Alice Smith', 'New York', 'USA');
+INSERT INTO customers (cust_id, name, city, country)VALUES (3, 'Bob Brown', 'London', 'UK');
+INSERT INTO customers (cust_id, name, city, country)VALUES (4, 'Charlie Black', 'Ahmedabad', 'India');
+
+CREATE TABLE supplier (
+    supp_id INT PRIMARY KEY,
+    name VARCHAR(15),
+    city VARCHAR(15),
+    country VARCHAR(15),
+    cust_id INT,
+    FOREIGN KEY (cust_id) REFERENCES customers(cust_id)
+);
+INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1);
+INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (2, 'Sup2', 'New York', 'USA', 2);
+INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (3, 'Sup3', 'London', 'UK', 3);
+INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL);
+
+CREATE TABLE students1 (
+    student_id INT PRIMARY KEY,
+    student_name VARCHAR(15)
+);
+INSERT INTO students1 (student_id, student_name)VALUES (1, 'Eve Adams');
+INSERT INTO students1 (student_id, student_name)VALUES (2, 'Lucas Scott');
+
+CREATE TABLE enrollment1 (
+    student_id INT,
+    course_name VARCHAR(15),
+    FOREIGN KEY (student_id) REFERENCES students1(student_id)
+);
+INSERT INTO enrollment1 (student_id, course_name)VALUES (1, 'HTML');
+INSERT INTO enrollment1 (student_id, course_name)VALUES (2, 'JavaScript');
+

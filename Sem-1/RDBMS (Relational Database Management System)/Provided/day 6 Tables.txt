@@ -1,13 +1,13 @@
 
 CREATE TABLE Worker (
     Id INT PRIMARY KEY,
-    Name VARCHAR(100),
+    Name VARCHAR(12),
     Wages_Per_Hr DECIMAL(10,2)
 );
 
 CREATE TABLE Job (
     Job_Id INT PRIMARY KEY,
-    Job_Type VARCHAR(100)
+    Job_Type VARCHAR(15)
 );
 
 CREATE TABLE Assigned (

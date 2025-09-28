@@ -1,0 +1,799 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COMPANY                        TABLE                                                                                                                                                                    
+COURSE                         TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+CUSTOMER                       TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE                       TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENROLL                         TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT                        TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+37 rows selected.
+
+SQL> -- create day-9 tables
+SQL> CREATE TABLE FYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR(100),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES(1, 'John Doe', 8.2);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (2, 'Jane Smith', 7.5);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 6.9);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (4, 'Michael Brown', 8.7);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE SYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR(100),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> 
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 8.1);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(4, 'Michael Brown', 7.8);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(5, 'Chris Lee', 8.3);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (6, 'Anna White', 6.8);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE customer (
+  2      cust_id INT PRIMARY KEY,
+  3      name VARCHAR(100),
+  4      city VARCHAR(100),
+  5      country VARCHAR(100)
+  6  );
+CREATE TABLE customer (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (1, 'John Doe', 'Ahmedabad', 'India');
+INSERT INTO customer (cust_id, name, city, country) VALUES (1, 'John Doe', 'Ahmedabad', 'India')
+                                           *
+ERROR at line 1:
+ORA-00904: "COUNTRY": invalid identifier 
+
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (2, 'Alice Smith', 'New York', 'USA');
+INSERT INTO customer (cust_id, name, city, country) VALUES (2, 'Alice Smith', 'New York', 'USA')
+                                           *
+ERROR at line 1:
+ORA-00904: "COUNTRY": invalid identifier 
+
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (3, 'Bob Brown', 'London', 'UK');
+INSERT INTO customer (cust_id, name, city, country) VALUES (3, 'Bob Brown', 'London', 'UK')
+                                           *
+ERROR at line 1:
+ORA-00904: "COUNTRY": invalid identifier 
+
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (4, 'Charlie Black', 'Ahmedabad', 'India');
+INSERT INTO customer (cust_id, name, city, country) VALUES (4, 'Charlie Black', 'Ahmedabad', 'India')
+                                           *
+ERROR at line 1:
+ORA-00904: "COUNTRY": invalid identifier 
+
+
+SQL> 
+SQL> CREATE TABLE supplier (
+  2      supp_id INT PRIMARY KEY,
+  3      name VARCHAR(100),
+  4      city VARCHAR(100),
+  5      country VARCHAR(100),
+  6      cust_id INT,
+  7      FOREIGN KEY (cust_id) REFERENCES customer(cust_id)
+  8  );
+    FOREIGN KEY (cust_id) REFERENCES customer(cust_id)
+                                              *
+ERROR at line 7:
+ORA-00904: "CUST_ID": invalid identifier 
+
+
+SQL> 
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1);
+INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (2, 'Sup2', 'New York', 'USA', 2);
+INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (2, 'Sup2', 'New York', 'USA', 2)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (3, 'Sup3', 'London', 'UK', 3);
+INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (3, 'Sup3', 'London', 'UK', 3)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL);
+INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> CREATE TABLE students1 (
+  2      student_id INT PRIMARY KEY,
+  3      student_name VARCHAR(100)
+  4  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE enrollment1 (
+  2      student_id INT,
+  3      course_name VARCHAR(100),
+  4      FOREIGN KEY (student_id) REFERENCES students1ss(student_id)
+  5  );
+    FOREIGN KEY (student_id) REFERENCES students1ss(student_id)
+                                        *
+ERROR at line 4:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> INSERT INTO students1 (student_id, student_name) VALUES (1, 'Eve Adams');
+
+1 row created.
+
+SQL> INSERT INTO students1 (student_id, student_name) VALUES (2, 'Lucas Scott');
+
+1 row created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (1, 'HTML');
+INSERT INTO enrollment1 (student_id, course_name) VALUES (1, 'HTML')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (2, 'JavaScript');
+INSERT INTO enrollment1 (student_id, course_name) VALUES (2, 'JavaScript')
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> 
+SQL> rename customer to customer1;
+
+Table renamed.
+
+SQL> CREATE TABLE customer (
+  2      cust_id INT PRIMARY KEY,
+  3      name VARCHAR(100),
+  4      city VARCHAR(100),
+  5      country VARCHAR(100)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (1, 'John Doe', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (2, 'Alice Smith', 'New York', 'USA');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (3, 'Bob Brown', 'London', 'UK');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (4, 'Charlie Black', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> CREATE TABLE supplier (
+  2      supp_id INT PRIMARY KEY,
+  3      name VARCHAR(100),
+  4      city VARCHAR(100),
+  5      country VARCHAR(100),
+  6      cust_id INT,
+  7      FOREIGN KEY (cust_id) REFERENCES customer(cust_id)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (2, 'Sup2', 'New York', 'USA', 2);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (3, 'Sup3', 'London', 'UK', 3);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL);
+
+1 row created.
+
+SQL> CREATE TABLE students1 (
+  2      student_id INT PRIMARY KEY,
+  3      student_name VARCHAR(100)
+  4  );
+CREATE TABLE students1 (
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> select * from students1;
+
+STUDENT_ID STUDENT_NAME                                                                                                                                                                                 
+---------- ----------------------------------------------------------------------------------------------------                                                                                         
+         1 Eve Adams                                                                                                                                                                                    
+         2 Lucas Scott                                                                                                                                                                                  
+
+SQL> CREATE TABLE enrollment1 (
+  2      student_id INT,
+  3      course_name VARCHAR(100),
+  4      FOREIGN KEY (student_id) REFERENCES students1(student_id)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (1, 'HTML');
+
+1 row created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (2, 'JavaScript');
+
+1 row created.
+
+SQL> select * from FYRankers;
+
+  ENROL_NO NAME                                                                                                        SPI                                                                              
+---------- ---------------------------------------------------------------------------------------------------- ----------                                                                              
+         1 John Doe                                                                                                    8.2                                                                              
+         2 Jane Smith                                                                                                  7.5                                                                              
+         3 Emily Davis                                                                                                 6.9                                                                              
+         4 Michael Brown                                                                                               8.7                                                                              
+
+SQL> select * from SYRankers;
+
+  ENROL_NO NAME                                                                                                        SPI                                                                              
+---------- ---------------------------------------------------------------------------------------------------- ----------                                                                              
+         3 Emily Davis                                                                                                 8.1                                                                              
+         4 Michael Brown                                                                                               7.8                                                                              
+         5 Chris Lee                                                                                                   8.3                                                                              
+         6 Anna White                                                                                                  6.8                                                                              
+
+SQL> select * from customer;
+
+   CUST_ID NAME                                                                                                                                                                                         
+---------- ----------------------------------------------------------------------------------------------------                                                                                         
+CITY                                                                                                                                                                                                    
+----------------------------------------------------------------------------------------------------                                                                                                    
+COUNTRY                                                                                                                                                                                                 
+----------------------------------------------------------------------------------------------------                                                                                                    
+         1 John Doe                                                                                                                                                                                     
+Ahmedabad                                                                                                                                                                                               
+India                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+         2 Alice Smith                                                                                                                                                                                  
+New York                                                                                                                                                                                                
+USA                                                                                                                                                                                                     
+                                                                                                                                                                                                        
+         3 Bob Brown                                                                                                                                                                                    
+London                                                                                                                                                                                                  
+UK                                                                                                                                                                                                      
+                                                                                                                                                                                                        
+         4 Charlie Black                                                                                                                                                                                
+Ahmedabad                                                                                                                                                                                               
+India                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+
+SQL> desc customer;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ CUST_ID                                                                                                           NOT NULL NUMBER(38)
+ NAME                                                                                                                       VARCHAR2(100)
+ CITY                                                                                                                       VARCHAR2(100)
+ COUNTRY                                                                                                                    VARCHAR2(100)
+
+SQL> alter table customer modify name VARCHAR2(10);
+alter table customer modify name VARCHAR2(10)
+                            *
+ERROR at line 1:
+ORA-01441: cannot decrease column length because some value is too big 
+
+
+SQL> alter table customer modify name VARCHAR2(15);
+
+Table altered.
+
+SQL> alter table customer modify city varchar2(15);
+
+Table altered.
+
+SQL> alter table customer modify country varchar2(15);
+
+Table altered.
+
+SQL> drop table FYRankers;
+
+Table dropped.
+
+SQL> drop table SYRankers;
+
+Table dropped.
+
+SQL> drop table customer;
+drop table customer
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys 
+
+
+SQL> drop table supplier;
+
+Table dropped.
+
+SQL> drop table students1;
+drop table students1
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys 
+
+
+SQL>  drop table enrollment1;
+
+Table dropped.
+
+SQL> drop table students1;
+
+Table dropped.
+
+SQL> drop table customer;
+
+Table dropped.
+
+SQL> CREATE TABLE FYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR(20),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES(1, 'John Doe', 8.2);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (2, 'Jane Smith', 7.5);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 6.9);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (4, 'Michael Brown', 8.7);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE SYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR2(20),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 8.1);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(4, 'Michael Brown', 7.8);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(5, 'Chris Lee', 8.3);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (6, 'Anna White', 6.8);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE customer (
+  2      cust_id INT PRIMARY KEY,
+  3      name VARCHAR(15),
+  4      city VARCHAR(15),
+  5      country VARCHAR(15)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (1, 'John Doe', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (2, 'Alice Smith', 'New York', 'USA');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (3, 'Bob Brown', 'London', 'UK');
+
+1 row created.
+
+SQL> INSERT INTO customer (cust_id, name, city, country) VALUES (4, 'Charlie Black', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE supplier (
+  2      supp_id INT PRIMARY KEY,
+  3      name VARCHAR(15),
+  4      city VARCHAR(15),
+  5      country VARCHAR(15),
+  6      cust_id INT,
+  7      FOREIGN KEY (cust_id) REFERENCES customer(cust_id)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (2, 'Sup2', 'New York', 'USA', 2);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (3, 'Sup3', 'London', 'UK', 3);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id) VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE students1 (
+  2      student_id INT PRIMARY KEY,
+  3      student_name VARCHAR(15)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO students1 (student_id, student_name) VALUES (1, 'Eve Adams');
+
+1 row created.
+
+SQL> INSERT INTO students1 (student_id, student_name) VALUES (2, 'Lucas Scott');
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE enrollment1 (
+  2      student_id INT,
+  3      course_name VARCHAR(15),
+  4      FOREIGN KEY (student_id) REFERENCES students1(student_id)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (1, 'HTML');
+
+1 row created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name) VALUES (2, 'JavaScript');
+
+1 row created.
+
+SQL> 
+SQL> select * from FYRankers;
+
+  ENROL_NO NAME                        SPI                                                                                                                                                              
+---------- -------------------- ----------                                                                                                                                                              
+         1 John Doe                    8.2                                                                                                                                                              
+         2 Jane Smith                  7.5                                                                                                                                                              
+         3 Emily Davis                 6.9                                                                                                                                                              
+         4 Michael Brown               8.7                                                                                                                                                              
+
+SQL> select * from SYRankers;
+
+  ENROL_NO NAME                        SPI                                                                                                                                                              
+---------- -------------------- ----------                                                                                                                                                              
+         3 Emily Davis                 8.1                                                                                                                                                              
+         4 Michael Brown               7.8                                                                                                                                                              
+         5 Chris Lee                   8.3                                                                                                                                                              
+         6 Anna White                  6.8                                                                                                                                                              
+
+SQL> select * from customer;
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         1 John Doe        Ahmedabad       India                                                                                                                                                        
+         2 Alice Smith     New York        USA                                                                                                                                                          
+         3 Bob Brown       London          UK                                                                                                                                                           
+         4 Charlie Black   Ahmedabad       India                                                                                                                                                        
+
+SQL> select * from supplier;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> select * from students1
+  2  ;
+
+STUDENT_ID STUDENT_NAME                                                                                                                                                                                 
+---------- ---------------                                                                                                                                                                              
+         1 Eve Adams                                                                                                                                                                                    
+         2 Lucas Scott                                                                                                                                                                                  
+
+SQL> select * from enrollment1;
+
+STUDENT_ID COURSE_NAME                                                                                                                                                                                  
+---------- ---------------                                                                                                                                                                              
+         1 HTML                                                                                                                                                                                         
+         2 JavaScript                                                                                                                                                                                   
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -- day-9 Q2
+SQL> -- 1. Display the name of the student who is ranker in 'FY' or 'SY'
+SQL> select name from FYRankers UNION select name from SYRankers;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+Anna White                                                                                                                                                                                              
+Chris Lee                                                                                                                                                                                               
+Emily Davis                                                                                                                                                                                             
+Jane Smith                                                                                                                                                                                              
+John Doe                                                                                                                                                                                                
+Michael Brown                                                                                                                                                                                           
+
+6 rows selected.
+
+SQL> -- 2. Display the name of the student who is ranker in 'FY' or 'SY' including duplicate data
+SQL> select name from FYRankers UNION ALL select name from SYRankers;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+John Doe                                                                                                                                                                                                
+Jane Smith                                                                                                                                                                                              
+Emily Davis                                                                                                                                                                                             
+Michael Brown                                                                                                                                                                                           
+Emily Davis                                                                                                                                                                                             
+Michael Brown                                                                                                                                                                                           
+Chris Lee                                                                                                                                                                                               
+Anna White                                                                                                                                                                                              
+
+8 rows selected.
+
+SQL> -- 3. Display the name of the students who is ranker in 'FY' or 'SY' and having SPI more than 7
+SQL> select name from FYRankers where spi>7 UNION select name from SYRankers where spi>7;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+Chris Lee                                                                                                                                                                                               
+Emily Davis                                                                                                                                                                                             
+Jane Smith                                                                                                                                                                                              
+John Doe                                                                                                                                                                                                
+Michael Brown                                                                                                                                                                                           
+
+SQL> -- 4. Display the name of the student who is ranker in both FY and SY
+SQL> select name from FYRankers INTENSECTION select name from SYRankers;
+select name from FYRankers INTENSECTION select name from SYRankers
+                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select name from FYRankers INTERSECTION select name from SYRankers;
+select name from FYRankers INTERSECTION select name from SYRankers
+                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select name from FYRankers INTERSECT select name from SYRankers
+SQL> select name from FYRankers INTERSECT select name from SYRankers;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+Emily Davis                                                                                                                                                                                             
+Michael Brown                                                                                                                                                                                           
+
+SQL> -- 5. Display the name of the student who is ranker in FY but not in SY
+SQL> select name from FYRankers MINUS select name from SYRankers;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+Jane Smith                                                                                                                                                                                              
+John Doe                                                                                                                                                                                                
+
+SQL> -- 6. Display the name of the student who is ranker in SY but not in FY
+SQL> select name from SYRankers MINUS select name from FYRankers;
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+Anna White                                                                                                                                                                                              
+Chris Lee                                                                                                                                                                                               
+
+SQL> 
+SQL> 
+SQL> -- day-9 Q3 tables => customer and supplier
+SQL> select * from supplier;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> select * from customer;
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         1 John Doe        Ahmedabad       India                                                                                                                                                        
+         2 Alice Smith     New York        USA                                                                                                                                                          
+         3 Bob Brown       London          UK                                                                                                                                                           
+         4 Charlie Black   Ahmedabad       India                                                                                                                                                        
+
+SQL> -- 1. Display distinct city of both the customer and supplier table in sorted order.
+SQL> select city from customer UNION select city from supplier;
+
+CITY                                                                                                                                                                                                    
+---------------                                                                                                                                                                                         
+Ahmedabad                                                                                                                                                                                               
+London                                                                                                                                                                                                  
+New York                                                                                                                                                                                                
+
+SQL> select city from customer order by city UNION select city from supplier order by city;
+select city from customer order by city UNION select city from supplier order by city
+                                        *
+ERROR at line 1:
+ORA-00933: SQL command not properly ended 
+
+
+SQL> select city from customer UNION select city from supplier;
+
+CITY                                                                                                                                                                                                    
+---------------                                                                                                                                                                                         
+Ahmedabad                                                                                                                                                                                               
+London                                                                                                                                                                                                  
+New York                                                                                                                                                                                                
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 2. Display city of both the tables with duplicate data.
+SQL> select city from customer UNION ALL select city from supplier;
+
+CITY                                                                                                                                                                                                    
+---------------                                                                                                                                                                                         
+Ahmedabad                                                                                                                                                                                               
+New York                                                                                                                                                                                                
+London                                                                                                                                                                                                  
+Ahmedabad                                                                                                                                                                                               
+Ahmedabad                                                                                                                                                                                               
+New York                                                                                                                                                                                                
+London                                                                                                                                                                                                  
+Ahmedabad                                                                                                                                                                                               
+
+8 rows selected.
+
+SQL> -- 3. Display the details of Ahmedabad city of both customer and supplier table.
+SQL> select * from customer where city='Ahmedabad' UNION ALL select * from supplier where city='Ahmedabad';
+select * from customer where city='Ahmedabad' UNION ALL select * from supplier where city='Ahmedabad'
+*
+ERROR at line 1:
+ORA-01789: query block has incorrect number of result columns 
+
+
+SQL> select * from customer where city='Ahmedabad' UNION select * from supplier where city='Ahmedabad';
+select * from customer where city='Ahmedabad' UNION select * from supplier where city='Ahmedabad'
+*
+ERROR at line 1:
+ORA-01789: query block has incorrect number of result columns 
+
+
+SQL> select name,city from customer where city='Ahmedabad' UNION select name,city from supplier where city='Ahmedabad';
+
+NAME            CITY                                                                                                                                                                                    
+--------------- ---------------                                                                                                                                                                         
+Charlie Black   Ahmedabad                                                                                                                                                                               
+John Doe        Ahmedabad                                                                                                                                                                               
+Sup1            Ahmedabad                                                                                                                                                                               
+Sup4            Ahmedabad                                                                                                                                                                               
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

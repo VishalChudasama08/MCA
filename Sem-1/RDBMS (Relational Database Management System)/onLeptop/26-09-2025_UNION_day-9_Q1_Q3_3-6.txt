@@ -1,0 +1,583 @@
+SQL> select tname from tab;
+
+TNAME                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------                                                                        
+DEPT                                                                                                                                                                                                    
+EMP                                                                                                                                                                                                     
+CLIENT_MASTER                                                                                                                                                                                           
+PRODUCT_MASTER                                                                                                                                                                                          
+SALES_ORDER                                                                                                                                                                                             
+SALES_ORDER_DETAILS                                                                                                                                                                                     
+TREM_MASTER                                                                                                                                                                                             
+ENTRANCE_TEST                                                                                                                                                                                           
+ETEST_DETAILS                                                                                                                                                                                           
+DISTRIBUTOR                                                                                                                                                                                             
+DIST_ITEM                                                                                                                                                                                               
+SMAN_MST                                                                                                                                                                                                
+SALESMAN_MASTER                                                                                                                                                                                         
+APPLICANT_MASTER                                                                                                                                                                                        
+ITEM                                                                                                                                                                                                    
+WORKER                                                                                                                                                                                                  
+JOB                                                                                                                                                                                                     
+ASSIGNED                                                                                                                                                                                                
+STUDENT                                                                                                                                                                                                 
+COURSE                                                                                                                                                                                                  
+ENROLL                                                                                                                                                                                                  
+EMPLOYEE                                                                                                                                                                                                
+COMPANY                                                                                                                                                                                                 
+CUSTOMER                                                                                                                                                                                                
+APPLICANT                                                                                                                                                                                               
+
+25 rows selected.
+
+SQL> select * from customer;
+
+   CUST_NO FNAME        LNAME        ADDRESS                                                                                                                                                            
+---------- ------------ ------------ ------------------------------                                                                                                                                     
+       201 Jay          Shah         Ahmedabad                                                                                                                                                          
+       202 Amit         Patel        Surat                                                                                                                                                              
+       203 Sneha        Mehta        Delhi                                                                                                                                                              
+       204 Ravi         Kumar        Chennai                                                                                                                                                            
+
+SQL> CREATE TABLE FYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR(15),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES(1, 'John Doe', 8.2);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (2, 'Jane Smith', 7.5);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 6.9);
+
+1 row created.
+
+SQL> INSERT INTO FYRankers (Enrol_No, Name, SPI) VALUES (4, 'Michael Brown', 8.7);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE SYRankers (
+  2      Enrol_No INT,
+  3      Name VARCHAR(15),
+  4      SPI DECIMAL(3,2)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (3, 'Emily Davis', 8.1);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(4, 'Michael Brown', 7.8);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES(5, 'Chris Lee', 8.3);
+
+1 row created.
+
+SQL> INSERT INTO SYRankers (Enrol_No, Name, SPI) VALUES (6, 'Anna White', 6.8);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE customers (
+  2      cust_id INT PRIMARY KEY,
+  3      name VARCHAR(15),
+  4      city VARCHAR(15),
+  5      country VARCHAR(15)
+  6  );
+
+Table created.
+
+SQL> INSERT INTO customers (cust_id, name, city, country)VALUES (1, 'John Doe', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> INSERT INTO customers (cust_id, name, city, country)VALUES (2, 'Alice Smith', 'New York', 'USA');
+
+1 row created.
+
+SQL> INSERT INTO customers (cust_id, name, city, country)VALUES (3, 'Bob Brown', 'London', 'UK');
+
+1 row created.
+
+SQL> INSERT INTO customers (cust_id, name, city, country)VALUES (4, 'Charlie Black', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE supplier (
+  2      supp_id INT PRIMARY KEY,
+  3      name VARCHAR(15),
+  4      city VARCHAR(15),
+  5      country VARCHAR(15),
+  6      cust_id INT,
+  7      FOREIGN KEY (cust_id) REFERENCES customers(cust_id)
+  8  );
+
+Table created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (1, 'Sup1', 'Ahmedabad', 'India', 1);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (2, 'Sup2', 'New York', 'USA', 2);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (3, 'Sup3', 'London', 'UK', 3);
+
+1 row created.
+
+SQL> INSERT INTO supplier (supp_id, name, city, country, cust_id)VALUES (4, 'Sup4', 'Ahmedabad', 'India', NULL);
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE students1 (
+  2      student_id INT PRIMARY KEY,
+  3      student_name VARCHAR(15)
+  4  );
+
+Table created.
+
+SQL> INSERT INTO students1 (student_id, student_name)VALUES (1, 'Eve Adams');
+
+1 row created.
+
+SQL> INSERT INTO students1 (student_id, student_name)VALUES (2, 'Lucas Scott');
+
+1 row created.
+
+SQL> 
+SQL> CREATE TABLE enrollment1 (
+  2      student_id INT,
+  3      course_name VARCHAR(15),
+  4      FOREIGN KEY (student_id) REFERENCES students1(student_id)
+  5  );
+
+Table created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name)VALUES (1, 'HTML');
+
+1 row created.
+
+SQL> INSERT INTO enrollment1 (student_id, course_name)VALUES (2, 'JavaScript');
+
+1 row created.
+
+SQL> 
+SQL> -- day-9 all table created
+SQL> 
+SQL> -- day-9 Q3 3-6
+SQL> -- 3. Display the details of Ahmedabad city of both customer and supplier table.
+SQL> select name,city from customer where city='Ahmedabad' UNION select name,city from supplier where city='Ahmedabad';
+select name,city from customer where city='Ahmedabad' UNION select name,city from supplier where city='Ahmedabad'
+                                     *
+ERROR at line 1:
+ORA-00904: "CITY": invalid identifier 
+
+
+SQL> select name,city from customers where city='Ahmedabad' UNION select name,city from supplier where city='Ahmedabad';
+
+NAME            CITY                                                                                                                                                                                    
+--------------- ---------------                                                                                                                                                                         
+John Doe        Ahmedabad                                                                                                                                                                               
+Charlie Black   Ahmedabad                                                                                                                                                                               
+Sup1            Ahmedabad                                                                                                                                                                               
+Sup4            Ahmedabad                                                                                                                                                                               
+
+SQL> -- 4. Display the name of students who have enrolled for `html' course.
+SQL> select * from students1;
+
+STUDENT_ID STUDENT_NAME                                                                                                                                                                                 
+---------- ---------------                                                                                                                                                                              
+         1 Eve Adams                                                                                                                                                                                    
+         2 Lucas Scott                                                                                                                                                                                  
+
+SQL> select * from enrollment1;
+
+STUDENT_ID COURSE_NAME                                                                                                                                                                                  
+---------- ---------------                                                                                                                                                                              
+         1 HTML                                                                                                                                                                                         
+         2 JavaScript                                                                                                                                                                                   
+
+SQL> select s.student_name from students1 s join enrollment1 e on e.student_id=s.student_id where e.course_name='HTML';
+
+STUDENT_NAME                                                                                                                                                                                            
+---------------                                                                                                                                                                                         
+Eve Adams                                                                                                                                                                                               
+
+SQL> -- 5. Display customer details who are living in `ahmedabad' and name start with `A'.
+SQL> select * from customers;
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         1 John Doe        Ahmedabad       India                                                                                                                                                        
+         2 Alice Smith     New York        USA                                                                                                                                                          
+         3 Bob Brown       London          UK                                                                                                                                                           
+         4 Charlie Black   Ahmedabad       India                                                                                                                                                        
+
+SQL> -- not any customer name start with 'A' and city Ahmedabad, now add it
+SQL> insert into customers values (5,'Avinav josi', 'Ahmedabad', 'India');
+
+1 row created.
+
+SQL> select * from customers where city='Ahmedabad' AND name like 'A%';
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         5 Avinav josi     Ahmedabad       India                                                                                                                                                        
+
+SQL> -- 6. Find the details of the supplier who are not customer.
+SQL> select * from customers;
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         1 John Doe        Ahmedabad       India                                                                                                                                                        
+         2 Alice Smith     New York        USA                                                                                                                                                          
+         3 Bob Brown       London          UK                                                                                                                                                           
+         4 Charlie Black   Ahmedabad       India                                                                                                                                                        
+         5 Avinav josi     Ahmedabad       India                                                                                                                                                        
+
+SQL> select * from supplier;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id not in(select cust_id from supplier);
+
+no rows selected
+
+SQL> select cust_id from supplier;
+
+   CUST_ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> select c.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id not in(select cust_id from supplier);
+
+no rows selected
+
+SQL> select c.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id in(select cust_id from supplier);
+
+   CUST_ID NAME            CITY            COUNTRY                                                                                                                                                      
+---------- --------------- --------------- ---------------                                                                                                                                              
+         1 John Doe        Ahmedabad       India                                                                                                                                                        
+         2 Alice Smith     New York        USA                                                                                                                                                          
+         3 Bob Brown       London          UK                                                                                                                                                           
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id in(select cust_id from supplier);
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id NOT in(select cust_id from supplier);
+
+no rows selected
+
+SQL> select cust_id from supplier where name='Sup4';
+
+   CUST_ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> update supplier set cust_id=NULL where name='Sup4';
+
+1 row updated.
+
+SQL> select * from supplier;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> update supplier set cust_id=NULL where name='Sup4';
+
+1 row updated.
+
+SQL> select cust_id from supplier where name='Sup4';
+
+   CUST_ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+                                                                                                                                                                                                        
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id NOT in(select cust_id from supplier);
+
+no rows selected
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id=NULL;
+
+no rows selected
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id=;
+select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id=
+                                                                                  *
+ERROR at line 1:
+ORA-00936: missing expression 
+
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id='';
+
+no rows selected
+
+SQL> select s.* from supplier s join customers c on s.cust_id=c.cust_id where s.cust_id=(select cust_id from supplier where name='Sup4');
+
+no rows selected
+
+SQL> 
+SQL> 
+SQL> 
+SQL> -- day-9 Q3 query-6 "Find the details of the supplier who are not customer." is not sholwed Question!
+SQL> 
+SQL> 
+SQL> -- Day-9 Q1
+SQL> select * from Worker;
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         2 Deep Jha             60                                                                                                                                                                      
+         3 Charlie              45                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> select * from Job;
+
+    JOB_ID JOB_TYPE                                                                                                                                                                                     
+---------- ------------                                                                                                                                                                                 
+       101 Cutting                                                                                                                                                                                      
+       102 Packing                                                                                                                                                                                      
+       103 Assemble                                                                                                                                                                                     
+
+SQL> select * from Assigned;
+
+      W_ID       J_ID START_DAT STATUS                                              TOTAL_HRS                                                                                                           
+---------- ---------- --------- -------------------------------------------------- ----------                                                                                                           
+         1        101 12-SEP-21 Completed                                                 120                                                                                                           
+         2        102 15-JUN-23 Pending                                                    80                                                                                                           
+         3        103 20-JUL-23 Completed                                                 150                                                                                                           
+         4        101 01-AUG-23 Pending                                                    95                                                                                                           
+         2        103 01-SEP-21 Completed                                                  30                                                                                                           
+
+SQL> alter table Assigned modify STATUS varcahr2(10);
+alter table Assigned modify STATUS varcahr2(10)
+                                           *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> alter table Assigned modify STATUS varchar2(10);
+
+Table altered.
+
+SQL> select * from Worker;
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         2 Deep Jha             60                                                                                                                                                                      
+         3 Charlie              45                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> select * from Job;
+
+    JOB_ID JOB_TYPE                                                                                                                                                                                     
+---------- ------------                                                                                                                                                                                 
+       101 Cutting                                                                                                                                                                                      
+       102 Packing                                                                                                                                                                                      
+       103 Assemble                                                                                                                                                                                     
+
+SQL> select * from Assigned;
+
+      W_ID       J_ID START_DAT STATUS      TOTAL_HRS                                                                                                                                                   
+---------- ---------- --------- ---------- ----------                                                                                                                                                   
+         1        101 12-SEP-21 Completed         120                                                                                                                                                   
+         2        102 15-JUN-23 Pending            80                                                                                                                                                   
+         3        103 20-JUL-23 Completed         150                                                                                                                                                   
+         4        101 01-AUG-23 Pending            95                                                                                                                                                   
+         2        103 01-SEP-21 Completed          30                                                                                                                                                   
+
+SQL> -- 1. Display all the workers' Id assigned for Job 1 and 2 both (J_Id =1 and J_Id=2)
+SQL> select w.* from worker w join Assigned a on a.W_ID=w.ID where a.J_ID in(101, 102);
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         2 Deep Jha             60                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> -- 2. List the workers who are working for J_Id =1 and not for J_Id = 2
+SQL> select w.* from worker w join Assigned a on a.W_ID=w.ID where a.J_ID=101 AND a.J_ID!=102;
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> select w.* from worker w join Assigned a on a.W_ID=w.ID where a.J_ID=103 AND a.J_ID!=102;
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         3 Charlie              45                                                                                                                                                                      
+         2 Deep Jha             60                                                                                                                                                                      
+
+SQL> select w.* from worder w where w.id in(select a.w_id from assigned a where a.j_id=101) AND w.id not in(select a.w_id from assigned a where a.j_id=102);
+select w.* from worder w where w.id in(select a.w_id from assigned a where a.j_id=101) AND w.id not in(select a.w_id from assigned a where a.j_id=102)
+                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select w.* from worders w where w.id in(select a.w_id from assigned a where a.j_id=101) AND w.id not in(select a.w_id from assigned a where a.j_id=102);
+select w.* from worders w where w.id in(select a.w_id from assigned a where a.j_id=101) AND w.id not in(select a.w_id from assigned a where a.j_id=102)
+                *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select w.* from Worker w where w.id in(select a.w_id from Assigned a where a.j_id=101) AND w.id not in(select a.w_id from Assigned a where a.j_id=102);
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> select w.* from Worker w where w.id in(select a.w_id from Assigned a where a.j_id=103) AND w.id not in(select a.w_id from Assigned a where a.j_id=102);
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         3 Charlie              45                                                                                                                                                                      
+
+SQL> select w.* from Worker w where w.id in(select a.w_id from Assigned a where a.j_id=101) AND w.id not in(select a.w_id from Assigned a where a.j_id=102);
+
+        ID NAME       WAGES_PER_HR                                                                                                                                                                      
+---------- ---------- ------------                                                                                                                                                                      
+         1 Alice                50                                                                                                                                                                      
+         4 Diana                70                                                                                                                                                                      
+
+SQL> -- 3. Display the workers Id who are working for more than 6 hours and status is pending. And Union them
+SQL> select w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 UNION select w.id from Worker w join Assigned a on w.id=a.w_id where a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 UNION select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         1                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 AND a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 INTERSECT select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> -- 3. Display the workers Id who are working for more than 6 hours and status is pending. And Union them all with the worker's Id who are working for less than 6 hours and status is completed
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 AND a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs<6 AND a.status='Completed';
+
+no rows selected
+
+SQL> -- not any worker more than 6 hours with status Pending and less than 6 hours and status Completed, now add it
+SQL> INSERT INTO Assigned VALUES (1, 102, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 'Pending', 5);
+
+1 row created.
+
+SQL> INSERT INTO Assigned VALUES (3, 102, TO_DATE('2023-06-15', 'YYYY-MM-DD'), 'Completed', 5);
+
+1 row created.
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs<6 AND a.status='Completed';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 AND a.status='Pending';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+
+SQL> select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs>6 AND a.status='Pending' UNION select distinct w.id from Worker w join Assigned a on w.id=a.w_id where a.total_hrs<6 AND a.status='Completed';
+
+        ID                                                                                                                                                                                              
+----------                                                                                                                                                                                              
+         2                                                                                                                                                                                              
+         4                                                                                                                                                                                              
+         3                                                                                                                                                                                              
+
+SQL> coommit;
+SP2-0042: unknown command "coommit" - rest of line ignored.
+SQL> 
+SQL> commit;
+
+Commit complete.
+
+SQL> -- day-9 Q3 last qurey
+SQL> -- 6. Find the details of the supplier who are not customer.
+SQL> select * from supplier;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         1 Sup1            Ahmedabad       India                    1                                                                                                                                   
+         2 Sup2            New York        USA                      2                                                                                                                                   
+         3 Sup3            London          UK                       3                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> select * from supplier where cust_id IS NULL;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                                                   
+---------- --------------- --------------- --------------- ----------                                                                                                                                   
+         4 Sup4            Ahmedabad       India                                                                                                                                                        
+
+SQL> commit;
+
+Commit complete.
+
+SQL> spool off;

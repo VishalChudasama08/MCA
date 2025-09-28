@@ -1,0 +1,514 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COMPANY                        TABLE                                                                                                                                                                    
+COURSE                         TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+CUSTOMER                       TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE                       TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENROLL                         TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT                        TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+37 rows selected.
+
+SQL> select * from CLIENT_MASTER;
+
+C_NO CLIENT_NAME             PINCODE BIRTH_DAT OCCUPATION                                                                                                                                               
+---- -------------------- ---------- --------- ------------------------------                                                                                                                           
+C001 Kajal Oza                380036 14-JUL-87 Manager                                                                                                                                                  
+C002 Vraj Shah                380058 20-NOV-86 CEO                                                                                                                                                      
+C003 Dhyan Dave               387903 17-JUN-88 Doctor                                                                                                                                                   
+C004 Nilam Patel              390041 10-FEB-70 Doctor                                                                                                                                                   
+C005 Preeti Patel             390040 28-FEB-71 Clerk                                                                                                                                                    
+
+SQL> select * from PRODUCT_MASTER;
+
+no rows selected
+
+SQL> desc PRODUCT_MASTER;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ P_NO                                                                                                              NOT NULL VARCHAR2(5)
+ PROFIT_PER                                                                                                        NOT NULL NUMBER(2)
+ UNIT                                                                                                              NOT NULL VARCHAR2(10)
+ QTY_HAND                                                                                                          NOT NULL NUMBER(3)
+ RE_ORDER                                                                                                          NOT NULL NUMBER(4)
+ SELL_P                                                                                                            NOT NULL NUMBER(4)
+ COST_P                                                                                                            NOT NULL NUMBER(4)
+
+SQL> select * from PRODUCTS;
+
+P_NO  PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                                                                                                 
+----- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                                                 
+P003           6 PIECE             100         50        350        200                                                                                                                                 
+P004           3 PIECE             100         20        820        600                                                                                                                                 
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P001','T-SHIRT',5,'PIECE',200,50,350,250);
+INSERT INTO PRODUCT_MASTER VALUES('P001','T-SHIRT',5,'PIECE',200,50,350,250)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P002','JEANS',6,'PIECE',250,40,500,350);
+INSERT INTO PRODUCT_MASTER VALUES('P002','JEANS',6,'PIECE',250,40,500,350)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P003','SKIRT',6,'PIECE',100,50,350,200);
+INSERT INTO PRODUCT_MASTER VALUES('P003','SKIRT',6,'PIECE',100,50,350,200)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P004','SAREE',3,'PIECE',100,20,800,600);
+INSERT INTO PRODUCT_MASTER VALUES('P004','SAREE',3,'PIECE',100,20,800,600)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P005','Shirt',4,'Piece',300,60,450,300);
+INSERT INTO Product_Master VALUES ('P005','Shirt',4,'Piece',300,60,450,300)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P006','Kurta',7,'Piece',120,30,700,500);
+INSERT INTO Product_Master VALUES ('P006','Kurta',7,'Piece',120,30,700,500)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P007','Cap',8,'Piece',250,40,150,90);
+INSERT INTO Product_Master VALUES ('P007','Cap',8,'Piece',250,40,150,90)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P008','Shoes',5,'Pair',180,50,1000,700);
+INSERT INTO Product_Master VALUES ('P008','Shoes',5,'Pair',180,50,1000,700)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P009','Belt',4,'Piece',220,30,200,120);
+INSERT INTO Product_Master VALUES ('P009','Belt',4,'Piece',220,30,200,120)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> INSERT INTO Product_Master VALUES ('P010','Jacket',6,'Piece',80,20,1500,1000);
+INSERT INTO Product_Master VALUES ('P010','Jacket',6,'Piece',80,20,1500,1000)
+            *
+ERROR at line 1:
+ORA-00913: too many values 
+
+
+SQL> drop Product_Master;
+drop Product_Master
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop PRODUCT_MASTER;
+drop PRODUCT_MASTER
+     *
+ERROR at line 1:
+ORA-00950: invalid DROP option 
+
+
+SQL> drop table PRODUCT_MASTER;
+
+Table dropped.
+
+SQL> CREATE TABLE PRODUCT_MASTER(
+  2   P_NO VARCHAR2(5)CHECK (P_NO LIKE 'P%')PRIMARY KEY,
+  3   DESCRIPTION VARCHAR2(20) NOT NULL,
+  4   PROFIT_PER NUMBER(2) NOT NULL,
+  5   UNIT VARCHAR2(10)NOT NULL,
+  6   QTY_HAND NUMBER(3) NOT NULL,
+  7   RE_ORDER NUMBER(4)NOT NULL,
+  8   SELL_P NUMBER(4)NOT NULL,
+  9   COST_P NUMBER(4)NOT NULL);
+
+Table created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P001','T-SHIRT',5,'PIECE',200,50,350,250);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P002','JEANS',6,'PIECE',250,40,500,350);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P003','SKIRT',6,'PIECE',100,50,350,200);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT_MASTER VALUES('P004','SAREE',3,'PIECE',100,20,800,600);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P005','Shirt',4,'Piece',300,60,450,300);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P006','Kurta',7,'Piece',120,30,700,500);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P007','Cap',8,'Piece',250,40,150,90);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P008','Shoes',5,'Pair',180,50,1000,700);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P009','Belt',4,'Piece',220,30,200,120);
+
+1 row created.
+
+SQL> INSERT INTO Product_Master VALUES ('P010','Jacket',6,'Piece',80,20,1500,1000);
+
+1 row created.
+
+SQL> 
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from Product_Master;
+
+P_NO  DESCRIPTION          PROFIT_PER UNIT         QTY_HAND   RE_ORDER     SELL_P     COST_P                                                                                                            
+----- -------------------- ---------- ---------- ---------- ---------- ---------- ----------                                                                                                            
+P001  T-SHIRT                       5 PIECE             200         50        350        250                                                                                                            
+P002  JEANS                         6 PIECE             250         40        500        350                                                                                                            
+P003  SKIRT                         6 PIECE             100         50        350        200                                                                                                            
+P004  SAREE                         3 PIECE             100         20        800        600                                                                                                            
+P005  Shirt                         4 Piece             300         60        450        300                                                                                                            
+P006  Kurta                         7 Piece             120         30        700        500                                                                                                            
+P007  Cap                           8 Piece             250         40        150         90                                                                                                            
+P008  Shoes                         5 Pair              180         50       1000        700                                                                                                            
+P009  Belt                          4 Piece             220         30        200        120                                                                                                            
+P010  Jacket                        6 Piece              80         20       1500       1000                                                                                                            
+
+10 rows selected.
+
+SQL> select * from Salesman_master;
+
+S_NO  NAME                 ADD1       ADD2            CITY          PINCODE STATE               SALARY     TARGET      SALES                                                                            
+----- -------------------- ---------- --------------- ---------- ---------- --------------- ---------- ---------- ----------                                                                            
+S012  KAJAL                PUSHPAK    ISANPUR         AHMEDABAD      382443 GUJRAT                5000        150        500                                                                            
+S001  AMAN                 3,DEV APPT VAGHODIA        BARODA                GUJRAT                5000        100         50                                                                            
+S002  OMKAR                NULL       NULL            BHOPAL                MP                    4500        200        150                                                                            
+S003  RAJ                  B-104      VERLI           MUMBAI         400002 MAHARASHTRA           5500        200        200                                                                            
+S004  ASHISH               1,SMRUTI   GHODDOL         SURAT                 GUJRAT                4500        150        100                                                                            
+S005  Meera                10, Lotus  Alkapuri        Vadodara       390007 Gujarat               6000        300        250                                                                            
+S006  Karan                Sector-17  Navrangpura     Ahmedabad      380009 Gujarat               5500        220        180                                                                            
+S007  Priya                L-12       MG Road         Pune           411001 Maharashtra           5200        180        160                                                                            
+S008  Dev                  House-22   Civil Lines     Delhi          110054 Delhi                 5800        250        200                                                                            
+S009  Sahil                Flat-4     Indira Nagar    Lucknow        226016 UP                    4900        160        140                                                                            
+S010  Nidhi                Block-7    Park Street     Kolkata        700016 WB                    5300        210        190                                                                            
+S011  Devendra             Block-12   Park Street-2   Kolkata        700019 UP                    6000        210        500                                                                            
+
+12 rows selected.
+
+SQL> select * from Sales_Order;
+select * from Sales_Order
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+BIN$fo6QQjsVRA+V0DyjK+8WUQ==$0 TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COMPANY                        TABLE                                                                                                                                                                    
+COURSE                         TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+CUSTOMER                       TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE                       TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENROLL                         TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT                        TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+
+38 rows selected.
+
+SQL> select * from ORDER_MASTER;
+
+ORDE CLIEN ORDER_DAT SALE D B DELIVERY_ ORDER_STATUS                                                                                                                                                    
+---- ----- --------- ---- - - --------- --------------------                                                                                                                                            
+O001 C001  20-AUG-25 S001 F Y 25-AUG-25 Fulfilled                                                                                                                                                       
+O002 C002  21-AUG-25 S002 P N 28-AUG-25 Pending                                                                                                                                                         
+O003 C003  22-AUG-25 S003 F Y 30-AUG-25 Fulfilled                                                                                                                                                       
+O004 C004  23-AUG-25 S004 P N 01-SEP-25 Fulfilled                                                                                                                                                       
+O005 C005  24-AUG-25 S005 F Y 02-SEP-25 Fulfilled                                                                                                                                                       
+O006 C006  25-AUG-25 S006 P Y 06-SEP-25 Pending                                                                                                                                                         
+O007 C007  26-AUG-25 S007 F N 07-SEP-25 Fulfilled                                                                                                                                                       
+O008 C008  27-AUG-25 S008 P Y 08-SEP-25 Pending                                                                                                                                                         
+O009 C009  28-AUG-25 S009 F Y 09-SEP-25 Fulfilled                                                                                                                                                       
+O010 C010  29-AUG-25 S010 P N 10-SEP-25 Fulfilled                                                                                                                                                       
+
+10 rows selected.
+
+SQL> select * from ORDER_DETAIL;
+
+ORDE PROD QTY_ORDERED QTY_DISPATCHED PRODUCT_RATE                                                                                                                                                       
+---- ---- ----------- -------------- ------------                                                                                                                                                       
+O001 P001          10             10         3500                                                                                                                                                       
+O002 P002           5              4         2000                                                                                                                                                       
+O003 P003           8              8         2800                                                                                                                                                       
+O004 P004           6              3         2400                                                                                                                                                       
+O005 P005          12             12         5400                                                                                                                                                       
+
+SQL> -- 1) Display the salesman name who have processed Order_No 1
+SQL> select s.NAME from Salesman_master s join ORDER_MASTER o on o.SALE=s.S_NO where o.ORDE='O001';
+select s.NAME from Salesman_master s join ORDER_MASTER o on o.SALE=s.S_NO where o.ORDE='O001'
+                                                            *
+ERROR at line 1:
+ORA-00904: "O"."SALE": invalid identifier 
+
+
+SQL> desc ORDER_MASTER;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ORDER_NO                                                                                                                   VARCHAR2(4)
+ CLIENT_NO                                                                                                                  VARCHAR2(5)
+ ORDER_DATE                                                                                                                 DATE
+ SALESMAN_NO                                                                                                                VARCHAR2(4)
+ DELIVERY_TYPE                                                                                                              CHAR(1)
+ BILL_PAID                                                                                                                  CHAR(1)
+ DELIVERY_DATE                                                                                                              DATE
+ ORDER_STATUS                                                                                                               VARCHAR2(20)
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select s.NAME from Salesman_master s join ORDER_MASTER o on o.SALE=s.S_NO where o.ORDE='O001'
+SQL> desc Salesman_master;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ S_NO                                                                                                              NOT NULL VARCHAR2(5)
+ NAME                                                                                                              NOT NULL VARCHAR2(20)
+ ADD1                                                                                                                       VARCHAR2(10)
+ ADD2                                                                                                                       VARCHAR2(15)
+ CITY                                                                                                              NOT NULL VARCHAR2(10)
+ PINCODE                                                                                                                    NUMBER(6)
+ STATE                                                                                                             NOT NULL VARCHAR2(15)
+ SALARY                                                                                                            NOT NULL NUMBER(10)
+ TARGET                                                                                                            NOT NULL NUMBER(5)
+ SALES                                                                                                             NOT NULL NUMBER(5)
+
+SQL> select s.name from Salesman_master s join ORDER_MASTER o on o.SALESMAN_NO=s.S_NO where ORDER_MASTER='O001';
+select s.name from Salesman_master s join ORDER_MASTER o on o.SALESMAN_NO=s.S_NO where ORDER_MASTER='O001'
+                                                                                       *
+ERROR at line 1:
+ORA-00904: "ORDER_MASTER": invalid identifier 
+
+
+SQL> select s.name from Salesman_master s join ORDER_MASTER o on o.SALESMAN_NO=s.S_NO where o.ORDER_NO='O001';
+
+NAME                                                                                                                                                                                                    
+--------------------                                                                                                                                                                                    
+AMAN                                                                                                                                                                                                    
+
+SQL> -- now query from day-8 last qustion Worker, Job and Assigned
+SQL> 
+SQL> select * from Worker;
+select * from Worker
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from Worker
+SQL> /
+select * from Worker
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> -- now query from day-8 last qustion APPLICANT, ENTRANCE_TEST and ETEST_DETAILS;
+SQL> select * from APPLICANT;
+
+AID  A_NAME                         CITY                                               B_DATE                                                                                                           
+---- ------------------------------ -------------------------------------------------- ---------                                                                                                        
+A011 Deepali                        Chennai                                            21-DEC-01                                                                                                        
+A012 Ravina                         Baroda                                             12-AUG-00                                                                                                        
+A001 Ravi                           Baroda                                             12-MAY-00                                                                                                        
+A002 Neha                           Surat                                              23-AUG-99                                                                                                        
+A003 Amit                           Mumbai                                             14-FEB-01                                                                                                        
+A004 Pooja                          Delhi                                              05-NOV-00                                                                                                        
+A005 Karan                          Pune                                               30-SEP-98                                                                                                        
+A006 Sita                           Kolkata                                            17-JUL-00                                                                                                        
+A007 Mohan                          Lucknow                                            25-JAN-01                                                                                                        
+A008 Anjali                         Jaipur                                             19-APR-99                                                                                                        
+A009 Vikas                          Nagpur                                             10-JUN-00                                                                                                        
+A010 Dip                            Chennai                                            28-DEC-01                                                                                                        
+
+12 rows selected.
+
+SQL> select * from ENTRANCE_TEST;
+
+ET_I ET_NAME                         MAX_SCORE                                                                                                                                                          
+---- ------------------------------ ----------                                                                                                                                                          
+T001 Maths                                 100                                                                                                                                                          
+T002 Physics                                90                                                                                                                                                          
+T003 Chemistry                              95                                                                                                                                                          
+T004 Biology                               100                                                                                                                                                          
+T005 English                                80                                                                                                                                                          
+
+SQL> select * from ETEST_DETAILS;
+
+AID  ETID ETEST_DAT      SCORE                                                                                                                                                                          
+---- ---- --------- ----------                                                                                                                                                                          
+A001 T002 25-AUG-25         80                                                                                                                                                                          
+A001 T003 23-AUG-25         85                                                                                                                                                                          
+A001 T005 21-AUG-25         76                                                                                                                                                                          
+A001 T001 15-AUG-25         80                                                                                                                                                                          
+A002 T002 17-AUG-25         70                                                                                                                                                                          
+A003 T003 18-AUG-25         75                                                                                                                                                                          
+A004 T004 20-AUG-25         85                                                                                                                                                                          
+A005 T005 21-AUG-25         65                                                                                                                                                                          
+A006 T001 22-AUG-25         90                                                                                                                                                                          
+A007 T002 23-AUG-25         60                                                                                                                                                                          
+A008 T003 25-AUG-25         70                                                                                                                                                                          
+A009 T004 26-AUG-25         95                                                                                                                                                                          
+A010 T005 27-AUG-25         75                                                                                                                                                                          
+
+13 rows selected.
+
+SQL> desc ENTRANCE_TEST;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ ET_ID                                                                                                             NOT NULL VARCHAR2(4)
+ ET_NAME                                                                                                           NOT NULL VARCHAR2(30)
+ MAX_SCORE                                                                                                                  NUMBER(3)
+
+SQL> desc ETEST_DETAILS;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ AID                                                                                                               NOT NULL VARCHAR2(4)
+ ETID                                                                                                              NOT NULL VARCHAR2(4)
+ ETEST_DATE                                                                                                                 DATE
+ SCORE                                                                                                                      NUMBER(3)
+
+SQL> desc APPLICANT;
+ Name                                                                                                              Null?    Type
+ ----------------------------------------------------------------------------------------------------------------- -------- ----------------------------------------------------------------------------
+ AID                                                                                                               NOT NULL VARCHAR2(4)
+ A_NAME                                                                                                            NOT NULL VARCHAR2(30)
+ CITY                                                                                                                       VARCHAR2(50)
+ B_DATE                                                                                                                     DATE
+
+SQL> -- 1. Display Entrance Test ID (ETID) Wise highest marks scored by any applicant.
+SQL> select etid, max(score) from ETEST_DETAILS group by AID;
+select etid, max(score) from ETEST_DETAILS group by AID
+       *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> select etid, max(score) from ETEST_DETAILS group by etid;
+
+ETID MAX(SCORE)                                                                                                                                                                                         
+---- ----------                                                                                                                                                                                         
+T002         80                                                                                                                                                                                         
+T005         76                                                                                                                                                                                         
+T003         85                                                                                                                                                                                         
+T001         90                                                                                                                                                                                         
+T004         95                                                                                                                                                                                         
+
+SQL> select e.etid,max(e.score),a.a_name from ETEST_DETAILS e join APPLICANT a on a.aid=e.aid group by etid;
+select e.etid,max(e.score),a.a_name from ETEST_DETAILS e join APPLICANT a on a.aid=e.aid group by etid
+                           *
+ERROR at line 1:
+ORA-00979: not a GROUP BY expression 
+
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

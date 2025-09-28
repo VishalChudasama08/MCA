@@ -1,0 +1,292 @@
+select * from tab;
+
+TNAME                          TABTYPE  CLUSTERID                                                                                                                                                       
+------------------------------ ------- ----------                                                                                                                                                       
+APPLICANT                      TABLE                                                                                                                                                                    
+APPLICANT_MASTER               TABLE                                                                                                                                                                    
+CLIENT1                        TABLE                                                                                                                                                                    
+CLIENT2                        TABLE                                                                                                                                                                    
+CLIENT3                        TABLE                                                                                                                                                                    
+CLIENT4                        TABLE                                                                                                                                                                    
+CLIENT5                        TABLE                                                                                                                                                                    
+CLIENTS                        TABLE                                                                                                                                                                    
+CLIENT_MASTER                  TABLE                                                                                                                                                                    
+COMPANY                        TABLE                                                                                                                                                                    
+COURSE                         TABLE                                                                                                                                                                    
+COURSE_MASTER                  TABLE                                                                                                                                                                    
+CUSTOMER                       TABLE                                                                                                                                                                    
+CUSTOMER1                      TABLE                                                                                                                                                                    
+DEPT                           TABLE                                                                                                                                                                    
+DISTRIBUTOR                    TABLE                                                                                                                                                                    
+DIST_ITEM                      TABLE                                                                                                                                                                    
+EMP                            TABLE                                                                                                                                                                    
+EMPLOYEE                       TABLE                                                                                                                                                                    
+EMPLOYEE_MASTER                TABLE                                                                                                                                                                    
+ENROLL                         TABLE                                                                                                                                                                    
+ENROLLMENT1                    TABLE                                                                                                                                                                    
+ENTRANCE_TEST                  TABLE                                                                                                                                                                    
+ETEST_DETAILS                  TABLE                                                                                                                                                                    
+ETEST_DETAILS_VIEW             VIEW                                                                                                                                                                     
+FACULTY_MASTER                 TABLE                                                                                                                                                                    
+FYRANKERS                      TABLE                                                                                                                                                                    
+GARBA                          TABLE                                                                                                                                                                    
+ITEM                           TABLE                                                                                                                                                                    
+ORDER_DETAIL                   TABLE                                                                                                                                                                    
+ORDER_MASTER                   TABLE                                                                                                                                                                    
+PRODUCTS                       TABLE                                                                                                                                                                    
+PRODUCT_MASTER                 TABLE                                                                                                                                                                    
+S                              TABLE                                                                                                                                                                    
+SALESMAN                       TABLE                                                                                                                                                                    
+SALESMAN_MASTER                TABLE                                                                                                                                                                    
+STUDENT                        TABLE                                                                                                                                                                    
+STUDENTS1                      TABLE                                                                                                                                                                    
+STUDENT_CONS                   TABLE                                                                                                                                                                    
+STUDENT_MASTER                 TABLE                                                                                                                                                                    
+STUDENT_TAB                    TABLE                                                                                                                                                                    
+SUPPLIER                       TABLE                                                                                                                                                                    
+SYRANKERS                      TABLE                                                                                                                                                                    
+
+43 rows selected.
+
+SQL> CREATE TABLE PRODUCT (
+  2      Prod_ID NUMBER PRIMARY KEY,
+  3      Prod_Name VARCHAR2(20),
+  4      Supplier_ID NUMBER,
+  5      Cat_ID NUMBER,
+  6      Unit VARCHAR2(10),
+  7      Price NUMBER
+  8  );
+
+Table created.
+
+SQL> -- Creating the ORDER_DETAILS table
+SQL> CREATE TABLE ORDER_DETAILS (
+  2      OrderDetail_ID NUMBER PRIMARY KEY,
+  3      Order_ID NUMBER,
+  4      Prod_ID NUMBER,
+  5      Quantity NUMBER,
+  6      FOREIGN KEY (Prod_ID) REFERENCES PRODUCTS(Prod_ID)
+  7  );
+    FOREIGN KEY (Prod_ID) REFERENCES PRODUCTS(Prod_ID)
+                                              *
+ERROR at line 6:
+ORA-00904: "PROD_ID": invalid identifier 
+
+
+SQL> -- Creating the ORDER_DETAILS table
+SQL> CREATE TABLE ORDER_DETAILS (
+  2      OrderDetail_ID NUMBER PRIMARY KEY,
+  3      Order_ID NUMBER,
+  4      Prod_ID NUMBER,
+  5      Quantity NUMBER,
+  6      FOREIGN KEY (Prod_ID) REFERENCES PRODUCT(Prod_ID)
+  7  );
+
+Table created.
+
+SQL> -- Inserting sample data into PRODUCTS
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (1, 'Product 1', 101, 1, 'Piece', 10);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (2, 'Product 2', 102, 2, 'Box', 20);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (3, 'Product 3', 103, 3, 'Pack', 30);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (4, 'Product 4', 104, 1, 'Bag', 15);
+
+1 row created.
+
+SQL> 
+SQL> -- Inserting sample data into ORDER_DETAILS
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (1, 3, 1, 10);
+
+1 row created.
+
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (2, 3, 2, 5);
+
+1 row created.
+
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (3, 3, 3, 3);
+
+1 row created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece              10                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> select * from ORDER_DETAILS;
+
+ORDERDETAIL_ID   ORDER_ID    PROD_ID   QUANTITY                                                                                                                                                         
+-------------- ---------- ---------- ----------                                                                                                                                                         
+             1          3          1         10                                                                                                                                                         
+             2          3          2          5                                                                                                                                                         
+             3          3          3          3                                                                                                                                                         
+
+SQL> update PRODUCT set price=100 where prod_id=1;
+
+1 row updated.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece             100                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> -- rollback; to undu it
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece              10                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> update PRODUCT set price=100 where prod_id=1;
+
+1 row updated.
+
+SQL> update PRODUCT set price=200 where prod_id=2;
+
+1 row updated.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece             100                                                                                                                            
+         2 Product 2                    102          2 Box               200                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece              10                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> -- rollback is roll back last all querys
+SQL> -- user savepoint
+SQL> update PRODUCT set price=100 where prod_id=1;
+
+1 row updated.
+
+SQL> update PRODUCT set price=200 where prod_id=2;
+
+1 row updated.
+
+SQL> rollback;
+
+Rollback complete.
+
+SQL> -- create savepint sp1
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> update PRODUCT set price=100 where prod_id=1;
+
+1 row updated.
+
+SQL> savepoint sp2;
+
+Savepoint created.
+
+SQL> update PRODUCT set price=200 where prod_id=2;
+
+1 row updated.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece             100                                                                                                                            
+         2 Product 2                    102          2 Box               200                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> rollback to savepoint sp1;
+
+Rollback complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece              10                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> savepoint sp1;
+
+Savepoint created.
+
+SQL> update PRODUCT set price=100 where prod_id=1;
+
+1 row updated.
+
+SQL> savepoint sp2;
+
+Savepoint created.
+
+SQL> update PRODUCT set price=200 where prod_id=2;
+
+1 row updated.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece             100                                                                                                                            
+         2 Product 2                    102          2 Box               200                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> rollback to savepoint sp2;
+
+Rollback complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece             100                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> 
