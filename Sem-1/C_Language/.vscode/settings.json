@@ -1,0 +1,25 @@
+{
+	"files.associations": {
+		"117SEARC.C": "cpp",
+		"041.C": "cpp",
+		"043.C": "cpp",
+		"44_45_51.C": "cpp",
+		"044.C": "cpp",
+		"045.C": "cpp",
+		"054.C": "cpp",
+		"061_62P.C": "cpp",
+		"G042.C": "cpp",
+		"G095_112.C": "cpp",
+		"116BUBBL.C": "cpp",
+		"118ADD.C": "cpp",
+		"119DELET.C": "cpp",
+		"120SWAP.C": "cpp",
+		"CHECKCHA.C": "cpp",
+		"ARRAY2D.C": "cpp",
+		"MATRIX.C": "cpp",
+		"121TRASP.C": "cpp",
+		"122MMUL.C": "cpp",
+		"123COUNT.C": "cpp",
+		"124.C": "cpp"
+	}
+}

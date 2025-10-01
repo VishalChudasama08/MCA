@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<conio.h>
+#include<stdlib.h>
 
 
 int menu();
@@ -58,8 +59,7 @@ int main() {
 		}
 
 		switch (i) {
-			// case 0: exit(1);
-
+		case 0: exit(1);
 		case 56: pp(n); break;
 		case 57: px(n); break;
 		case 58: p58(n); break;
