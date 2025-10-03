@@ -1,13 +1,55 @@
 Q - 3 Answer The Following Questions.
 11. Define the first normal form to normalize the database.
+=> 
+  A relation is in First Normal Form (1NF) if all attributes contain only atomic (indivisible) values and each record has a unique identifier (primary key).
+  👉 In simple terms:
+    ▶ No repeating groups or arrays.
+    ▶ Each cell of the table holds a single value only.
+    ▶ Each row is unique.
+
+
 12. Define the term Cardinality
+=>
+  Cardinality in a database refers to the number of instances of one entity that can be associated with the number of instances of another entity in a relationship.
+  👉 Types:
+    ▶ One-to-One (1:1)
+    ▶ One-to-Many (1:N)
+    ▶ Many-to-Many (M:N)
+
+
 13. Define "Deletion Anomalies" with suitable example.
-14. Normalize the given relation: BRANCH (Branch#, Branch_Addr, ISBN, Title, Authaor, Publisher, Num_copies) and give explanation for decomposition of the relation to convert it into 2nd normal form. 
+=>
+  A deletion anomaly occurs when the deletion of a record unintentionally causes loss of valuable data that should have been retained.
+  Example: 
+  StudentID	StudentName	Course
+  1	        Ajay	      Math
+  2	        Meera	      Science
+  If Ajay is the only student enrolled in Math and we delete his record, information about the Math course is also lost.
+
+
+14. Normalize the given relation: BRANCH (Branch#, Branch_Addr, ISBN, Title, Author, Publisher, Num_copies) and give explanation for decomposition of the relation to convert it into 2nd normal form. 
   Consider few functional dependancies like Branch# -> ISBN, ISBN -> Title, {Branch#, ISBN} -> Num_Copies
+=>
+  Second Normal Form (2NF):
+  A relation is in 2nd Normal Form if it is already in First Normal Form (1NF) and there are no partial dependencies.
+  partial dependencies: all non-prime attributes are functionally dependent on the whole candidate key
+  Keys: {Branch#}
+  BRANCH_INFO(Branch#, Branch_Addr, ISBN)
+  BOOK(ISBN, Title, Author, Publisher)
+  STOCK(Branch#, ISBN, Num_Copies)
+
 15. Convert the following database schema in 3NF.
   Emp (SSN, Birth_Date, Department, Proj_Manager, Proj_Handled)
   Here it is to be assumes that one employee will work for one department only but can handle multiple projects and for each project there with be a project 
   manager(another employee from same or different department).
+=>
+  1NF: All attributes atomic 1NF satisfied.
+  2NF: A relation is already in First Normal Form (1NF) and there are no partial dependencies.
+  partial dependencies: all non-prime attributes are functionally dependent on the whole candidate key
+  keys- 
+  3NF: A relation is already in Second Normal Form (2NF) and there are no transitive dependency.
+  transitive dependency: non-key attribute dependent on another non-key attribute that is transitive dependency.
+
   
 OR
 
