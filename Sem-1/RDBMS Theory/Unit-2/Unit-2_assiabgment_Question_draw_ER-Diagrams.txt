@@ -1,0 +1,472 @@
+https://www.mermaidchart.com/app/projects/caf32b74-31e2-4435-a0a4-5fb85102c681/diagrams/6e07b863-fd5c-4617-b918-815803b3b065/version/v0.1/edit
+
+9) Draw all the ER-Diagrams given in the ER-Example file and convert all in relational schema. =>
+
+# ER-Diagrams + Relational Schemas — 6 Examples (Completed with 4+ attributes per entity)
+
+---
+
+# Example 1 — Bus Company
+
+*description — A bus company owns a number of buses. Each bus is allocated to a particular route. Although some routes may have several buses, each route passes through a number of towns. One or more drivers are allocated to each stage of a route, which corresponds to a journey through some or all of the towns on a route. Some of the towns have a garage, where buses are kept and each of the buses are identified by the registration number and can carry different numbers of passengers, since the vehicles vary in size and can be single or double decked, each route is identified by a route number and information is available on the average number of passengers carried per day for each route. Drivers have an employee number, name, address and sometimes a telephone number. 
+
+
+*Entities (PK marked)*
+
+* *Bus*(reg_no PK, capacity, type, status)
+* *Route*(route_no PK, avg_passengers, length, start_point)
+* *Town*(town_id PK, name, population, state, has_garage)
+* *Garage*(garage_id PK, town_id FK, capacity, supervisor, contact_no)
+* *Driver*(driver_id PK, name, address, phone, license_no)
+* *Stage*(stage_id PK, route_no FK, sequence_no, town_id FK, distance)
+
+*Specials*
+
+* Bus allocated to one Route (1:M)
+* Route passes through Towns (M:N via Stage)
+* Garage weakly depends on Town
+* Drivers allocated to Stages (M:N)
+
+mermaid
+erDiagram
+    BUS {
+      string reg_no PK
+      int capacity
+      string type
+      string status
+    }
+    ROUTE {
+      int route_no PK
+      int avg_passengers
+      float length
+      string start_point
+    }
+    TOWN {
+      int town_id PK
+      string name
+      int population
+      string state
+      bool has_garage
+    }
+    GARAGE {
+      int garage_id PK
+      int town_id FK
+      int capacity
+      string supervisor
+      string contact_no
+    }
+    DRIVER {
+      int driver_id PK
+      string name
+      string address
+      string phone
+      string license_no
+    }
+    STAGE {
+      int stage_id PK
+      int route_no FK
+      int sequence_no
+      int town_id FK
+      float distance
+    }
+
+    BUS }o--|| ROUTE : allocated_to
+    ROUTE ||--o{ STAGE : has
+    STAGE ||--|| TOWN : passes_through
+    TOWN ||--o{ GARAGE : contains
+    DRIVER }o--o{ STAGE : assigned
+
+
+*Relational Schema*
+
+* BUS(reg_no PK, capacity, type, status, route_no FK)
+* ROUTE(route_no PK, avg_passengers, length, start_point)
+* TOWN(town_id PK, name, population, state, has_garage)
+* GARAGE(garage_id PK, town_id FK, capacity, supervisor, contact_no)
+* DRIVER(driver_id PK, name, address, phone, license_no)
+* STAGE(stage_id PK, route_no FK, sequence_no, town_id FK, distance)
+* DRIVER_STAGE(driver_id FK, stage_id FK, PK(driver_id, stage_id))
+
+---
+
+# Example 2 — College
+
+*description — A college contains many departments. Each department can offer any number of courses. Many instructors can work in a department. An instructor can work only in one department. For each department there is a Head. An instructor can be head of only one department. Each instructor can take any number of courses. A course can be taken by only one instructor. A student can enroll for any number of courses. Each course can have any number of students
+
+*Entities (PK marked)*
+
+* *Department*(dept_id PK, name, building, phone)
+* *Instructor*(instr_id PK, name, address, phone, salary)
+* *Course*(course_id PK, title, credits, semester, dept_id FK)
+* *Student*(student_id PK, name, dob, address, branch)
+
+*Specials*
+
+* Department has one Head (1:1 with Instructor)
+* Instructor teaches Course (1:M)
+* Student enrolls in Course (M:N)
+
+mermaid
+erDiagram
+    DEPARTMENT {
+      int dept_id PK
+      string name
+      string building
+      string phone
+    }
+    INSTRUCTOR {
+      int instr_id PK
+      string name
+      string address
+      string phone
+      float salary
+    }
+    COURSE {
+      int course_id PK
+      string title
+      int credits
+      string semester
+      int dept_id FK
+    }
+    STUDENT {
+      int student_id PK
+      string name
+      date dob
+      string address
+      string branch
+    }
+
+    DEPARTMENT ||--o{ INSTRUCTOR : employs
+    DEPARTMENT ||--o{ COURSE : offers
+    INSTRUCTOR ||--o{ COURSE : teaches
+    STUDENT }o--o{ COURSE : enrolls
+    INSTRUCTOR ||--|| DEPARTMENT : heads
+
+
+*Relational Schema*
+
+* DEPARTMENT(dept_id PK, name, building, phone, head_id FK)
+* INSTRUCTOR(instr_id PK, name, address, phone, salary, dept_id FK)
+* COURSE(course_id PK, title, credits, semester, dept_id FK, instr_id FK)
+* STUDENT(student_id PK, name, dob, address, branch)
+* ENROLL(student_id FK, course_id FK, PK(student_id, course_id))
+
+---
+
+# Example 3 — Hotel Management System
+
+*description — A hotel has different types of room. Customers check in for a room. They pay bills against the usage of rooms. Hotel has service desk from where registration and housekeeping services are provided to the customers. Hotel has a restaurant that provides food to the customers for their order.
+
+*Entities (PK marked)*
+
+* *RoomType*(type_id PK, type_name, capacity, nightly_rate, description)
+* *Room*(room_no PK, type_id FK, floor, status, last_cleaned_date)
+* *Customer*(customer_id PK, name, email, dob, address)
+* *Booking*(booking_id PK, customer_id FK, room_no FK, checkin_date, checkout_date, num_guests)
+* *Bill*(bill_id PK, booking_id FK, amount, bill_date, payment_method)
+* *ServiceDesk*(desk_id PK, location, contact_no, open_hours, services_offered)
+* *RestaurantOrder*(order_id PK, customer_id FK, order_time, total_amount, order_status)
+
+*Specials*
+
+* Multi-valued: Customer may have multiple phone numbers (CustomerPhone weak entity).
+* Booking is relationship between Customer and Room (total on both sides).
+
+mermaid
+erDiagram
+    ROOMTYPE {
+      int type_id PK
+      string type_name
+      int capacity
+      float nightly_rate
+      string description
+    }
+    ROOM {
+      int room_no PK
+      int floor
+      string status
+      date last_cleaned_date
+    }
+    CUSTOMER {
+      int customer_id PK
+      string name
+      string email
+      date dob
+      string address
+    }
+    BOOKING {
+      int booking_id PK
+      date checkin_date
+      date checkout_date
+      int num_guests
+    }
+    BILL {
+      int bill_id PK
+      float amount
+      date bill_date
+      string payment_method
+    }
+    SERVICEDESK {
+      int desk_id PK
+      string location
+      string contact_no
+      string open_hours
+      string services_offered
+    }
+    RESTAURANTORDER {
+      int order_id PK
+      date order_time
+      float total_amount
+      string order_status
+    }
+
+    ROOMTYPE ||--o{ ROOM : has
+    CUSTOMER ||--o{ BOOKING : makes
+    ROOM ||--o{ BOOKING : reserved_in
+    BOOKING ||--|| BILL : generates
+    CUSTOMER ||--o{ RESTAURANTORDER : places
+
+
+*Relational Schema*
+
+* ROOMTYPE(type_id PK, type_name, capacity, nightly_rate, description)
+* ROOM(room_no PK, type_id FK, floor, status, last_cleaned_date)
+* CUSTOMER(customer_id PK, name, email, dob, address)
+* CUSTOMER_PHONE(customer_id FK, phone_no, PK(customer_id, phone_no))
+* BOOKING(booking_id PK, customer_id FK, room_no FK, checkin_date, checkout_date, num_guests)
+* BILL(bill_id PK, booking_id FK, amount, bill_date, payment_method)
+* SERVICEDESK(desk_id PK, location, contact_no, open_hours, services_offered)
+* RESTAURANTORDER(order_id PK, customer_id FK, order_time, total_amount, order_status)
+
+---
+
+# Example 4 — Hospital
+
+*description — In a hospital there are three different types of doctors (trainee, visitor and permanent) are there to checkup the patients admitted in the hospital. There are rooms in the hospital where patients are admitted and looked after by the nurse. Recipient maintains the records for each patient. Patient has to pay the bill against the medicines prescribed by the doctor and room changes.
+
+*Entities (PK marked)*
+
+* *Doctor*(doc_id PK, name, specialization, phone_number, doctor_type)
+* *Patient*(patient_id PK, name, dob, address, emergency_contact)
+* *Room*(room_no PK, room_type, floor, charge_per_day, capacity)
+* *Nurse*(nurse_id PK, name, shift, phone_number, ward)
+* *MedicalRecord* weak (record_id PARTIAL, patient_id FK owner, visit_date, diagnosis, treatment)
+* *Bill*(bill_id PK, patient_id FK, amount, payment_date, status)
+
+*Specials*
+
+* Weak entity: MedicalRecord depends on Patient.
+* Doctor type is an attribute (trainee, visitor, permanent).
+* Nurse assigned to Room.
+
+mermaid
+erDiagram
+    DOCTOR {
+      int doc_id PK
+      string name
+      string specialization
+      string phone_number
+      string doctor_type
+    }
+    PATIENT {
+      int patient_id PK
+      string name
+      date dob
+      string address
+      string emergency_contact
+    }
+    ROOM {
+      int room_no PK
+      string room_type
+      int floor
+      float charge_per_day
+      int capacity
+    }
+    NURSE {
+      int nurse_id PK
+      string name
+      string shift
+      string phone_number
+      string ward
+    }
+    MEDICALRECORD {
+      int record_id PK
+      date visit_date
+      string diagnosis
+      string treatment
+    }
+    BILL {
+      int bill_id PK
+      float amount
+      date payment_date
+      string status
+    }
+
+    PATIENT ||--o{ MEDICALRECORD : has
+    PATIENT ||--o{ BILL : charged
+    PATIENT ||--|| ROOM : admitted_in
+    ROOM ||--o{ NURSE : assigned
+    DOCTOR ||--o{ MEDICALRECORD : prescribes
+
+
+*Relational Schema*
+
+* DOCTOR(doc_id PK, name, specialization, phone_number, doctor_type)
+* PATIENT(patient_id PK, name, dob, address, emergency_contact, room_no FK)
+* ROOM(room_no PK, room_type, floor, charge_per_day, capacity)
+* NURSE(nurse_id PK, name, shift, phone_number, ward, room_no FK)
+* MEDICALRECORD(record_id PK, patient_id FK, visit_date, diagnosis, treatment, doc_id FK)
+* BILL(bill_id PK, patient_id FK, amount, payment_date, status)
+
+---
+
+# Example 5 — Library Management System
+
+*description — In Library different types of books are purchased for the students to refer. Books are categorized by different authors and publishers. Student registers in the library and can issue books. Librarian manages student details.
+
+*Entities (PK marked)*
+
+* *Book*(book_id PK, title, isbn, publish_year, category)
+* *Author*(author_id PK, name, nationality, dob, awards)
+* *Publisher*(publisher_id PK, name, address, phone, email)
+* *Student*(student_id PK, name, email, enrollment_year, branch)
+* *Librarian*(lib_id PK, name, email, shift, phone)
+* *Issue*(issue_id PK, student_id FK, book_id FK, issue_date, return_date)
+
+*Specials*
+
+* Many-to-Many: Book–Author
+* Each book has one publisher.
+* Student can issue multiple books.
+
+mermaid
+erDiagram
+    BOOK {
+      int book_id PK
+      string title
+      string isbn
+      int publish_year
+      string category
+    }
+    AUTHOR {
+      int author_id PK
+      string name
+      string nationality
+      date dob
+      string awards
+    }
+    PUBLISHER {
+      int publisher_id PK
+      string name
+      string address
+      string phone
+      string email
+    }
+    STUDENT {
+      int student_id PK
+      string name
+      string email
+      int enrollment_year
+      string branch
+    }
+    LIBRARIAN {
+      int lib_id PK
+      string name
+      string email
+      string shift
+      string phone
+    }
+    ISSUE {
+      int issue_id PK
+      date issue_date
+      date return_date
+    }
+
+    BOOK ||--o{ ISSUE : issued
+    STUDENT ||--o{ ISSUE : borrows
+    BOOK }o--o{ AUTHOR : written_by
+    BOOK ||--|| PUBLISHER : published_by
+    LIBRARIAN ||--o{ STUDENT : manages
+
+
+*Relational Schema*
+
+* BOOK(book_id PK, title, isbn, publish_year, category, publisher_id FK)
+* AUTHOR(author_id PK, name, nationality, dob, awards)
+* PUBLISHER(publisher_id PK, name, address, phone, email)
+* STUDENT(student_id PK, name, email, enrollment_year, branch)
+* LIBRARIAN(lib_id PK, name, email, shift, phone)
+* ISSUE(issue_id PK, student_id FK, book_id FK, issue_date, return_date)
+* BOOK_AUTHOR(book_id FK, author_id FK, PK(book_id, author_id))
+
+---
+
+# Example 6 — Train Booking System
+
+*description — A passenger books a ticket for a Train. Train has its unique number, seating capacity, arrival time and departure time at a particular station. Train travels by different stations. Station has its number and platform number. Train has a ticket collector assigned, who checks the ticket of a passenger.
+
+*Entities (PK marked)*
+
+* *Train*(train_no PK, name, seating_capacity, arrival_time, departure_time)
+* *Station*(station_id PK, name, city, platform_no, state)
+* *Passenger*(passenger_id PK, name, age, gender, phone)
+* *Ticket*(ticket_id PK, passenger_id FK, train_no FK, travel_date, seat_no)
+* *TicketCollector*(tc_id PK, name, shift, phone, assigned_train)
+
+*Specials*
+
+* Train travels via many stations (M:N — TrainStation table).
+* Each passenger books ticket for a train.
+* Ticket collector is assigned per train.
+
+mermaid
+erDiagram
+    TRAIN {
+      int train_no PK
+      string name
+      int seating_capacity
+      string train_type
+    }
+    STATION {
+      int station_id PK
+      string name
+      string city
+      string platform_no
+    }
+    PASSENGER {
+      int passenger_id PK
+      string name
+      int age
+      string phone
+    }
+    TICKET {
+      int ticket_id PK
+      date travel_date
+      string seat_no
+    }
+    TICKETCOLLECTOR {
+      int tc_id PK
+      string name
+      string shift
+      string phone
+    }
+    TRAIN_STATION {
+      int train_no FK
+      int station_id FK
+      int stop_sequence
+      string arrival_time
+    }
+
+    TRAIN ||--o{ TICKET : "has"
+    PASSENGER ||--o{ TICKET : "books"
+    TRAIN }o--o{ STATION : "stops_at"
+    TRAIN ||--|| TICKETCOLLECTOR : "assigned"
+
+*Relational Schema*
+
+* TRAIN(train_no PK, name, seating_capacity, arrival_time, departure_time)
+* STATION(station_id PK, name, city, platform_no, state)
+* PASSENGER(passenger_id PK, name, age, gender, phone)
+* TICKET(ticket_id PK, passenger_id FK, train_no FK, travel_date, seat_no)
+* TICKETCOLLECTOR(tc_id PK, name, shift, phone, assigned_train FK)
+* TRAIN_STATION(train_no FK, station_id FK, stop_sequence, arrival_time, departure_time, PK(train_no, station_id))
