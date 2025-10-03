@@ -1,7 +1,7 @@
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
-#include <stdarg.h>   /* <-- needed for va_list, va_start, va_end */
+// #include <stdarg.h>   /* <-- needed for va_list, va_start, va_end */
 #include <time.h>
 #define SIZE 28
 #define word 30
@@ -82,7 +82,7 @@ int main_menu() {
 	printf("\n\t 1. Advance Booking");
 	printf("\n\t 2. Booking History");
 	printf("\n\t 3. View Available Bus");
-	printf("\n\t 0. Exit Program");
+	printf("\n\t 0. Exit Program\n");
 	printf("\n\t Enter number from menu: ");
 	scanf("%d", &i);
 	return i;
@@ -251,8 +251,8 @@ void match() {
 }
 
 void displayAvailable() {
-
 	int b, r, s, i, n;
+
 reEnterNumber:
 	// printf("\n No.\tBus Operator Name\tBus Route\tPrice\n");
 	printf("\n%-4s %-23s %-26s %5s %12s\n", "No.", "Bus Operator Name", "Bus Route", "Price", "Discount");
@@ -294,7 +294,7 @@ reEnterNumber:
 
 void finalBook(int operator_i, int route_i, int stops_count) {
 	char* seat;
-	char name[50], m_number[11], fname[15];
+	char name[50], m_number[11], fname[15], age[3], gender[6];
 	FILE* rf;
 	time_t t;
 	struct tm* today;
@@ -311,6 +311,10 @@ void finalBook(int operator_i, int route_i, int stops_count) {
 	// printf("\n\tNote: Enter 10-digit only. Number is impotent for booking cantinotation.");
 	printf("\n\tEnter Mobile Number: ");
 	scanf("%s", m_number);
+	printf("\n\tEnter Your Age: ");
+	scanf("%s", age);
+	printf("\n\tEnter Your Gender[M/F]: ");
+	scanf("%s", gender);
 
 	// printf("\n\tname: %s\n\tmobile number: %s", name, m_number);
 
@@ -325,7 +329,8 @@ void finalBook(int operator_i, int route_i, int stops_count) {
 
 	rf = fopen(fname, "a");
 	fprintf(rf, "%s|%s|", name, m_number); // name, mobile number
-	fprintf(rf, "%s to %s|", list[from], list[to]);
+	fprintf(rf, "%s|%s|", age, gender); // name, mobile number
+	fprintf(rf, "%s to %s|", list[from], list[to]); // bus details
 	fprintf(rf, "%s|%s|", operators[operator_i].name, seat); // operator name, seat
 	fprintf(rf, "%.2lf|%s\n", price, date); // price, date
 
@@ -333,8 +338,10 @@ void finalBook(int operator_i, int route_i, int stops_count) {
 
 	// textcolor(GREEN);
 	// cprintf("\n\tYour Bus Booking Successfully\n");
-	printf("\n\tYour Bus Booking Successfully.\n");
-	getch();
+	printf("\n\tYour Bus Booking Successfully.");
+	printf("\n\t--[record file %s.txt created.]", m_number);
+	printf("\n\tFor see details go on option 2. Booking History and Enter mobile number carefully!\n");
+	// getch();
 }
 
 char* seatLayout() {
@@ -412,7 +419,7 @@ void display_list() {
 void history() {
 	FILE* rh;
 	char number[12], fname[15], line[150], * p, info[][15] = { "Name", "Mobile number", "Journey", "Bus", "Seat", "Price", "Date", "Status" };
-	char* name, * mobile, * journey, * bus, * seat, * price, * date, * status;
+	char* name, * mobile, * age, * gender, * journey, * bus, * seat, * price, * date, * status;
 	int detail = 0, i = 1;
 
 	printf("\n\t Enter Mobile Number: ");
@@ -424,19 +431,21 @@ void history() {
 	rh = fopen(fname, "r");
 
 	if (rh == NULL) {
-		printf("\n\tRecord not found or number not match");
+		printf("\n\tRecord not found or number not match\n");
 		getch();
 		return;
 	}
 
-	printf("%-4s %-8s %-12s %-24s %-16s %-4s %-7s %-10s\n", "no", "name", "mobile", "journey", "bus", "seat", "price", "date");
-	printf("-------------------------------------------------------------------------------------------------------\n");
+	printf("%-4s %-15s %-12s %-3s %-6s %-24s %-16s %-4s %-7s %-10s\n", "no", "name", "mobile", "age", "gender", "journey", "bus", "seat", "price", "date");
+	printf("--------------------------------------------------------------------------------------------------------------\n");
 
 
 	detail = 1;
 	while (fgets(line, sizeof(line), rh)) {
 		name = strtok(line, "|");
 		mobile = strtok(NULL, "|");
+		age = strtok(NULL, "|");
+		gender = strtok(NULL, "|");
 		journey = strtok(NULL, "|");
 		bus = strtok(NULL, "|");
 		seat = strtok(NULL, "|");
@@ -444,7 +453,7 @@ void history() {
 		date = strtok(NULL, "|");
 		status = strtok(NULL, "|");
 
-		printf("%-4d %-8s %-12s %-24s %-16s %-4s %-7s %-10s", detail++, name, mobile, journey, bus, seat, price, date);
+		printf("%-4d %-15s %-12s %-3s %-6s %-24s %-16s %-4s %-7s %-10s", detail++, name, mobile, age, gender, journey, bus, seat, price, date);
 	}
 	// while (fgets(line, sizeof(line), rh)) {
 	// 	detail = 0;
