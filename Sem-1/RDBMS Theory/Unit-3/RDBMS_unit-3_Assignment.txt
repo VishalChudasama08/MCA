@@ -1,0 +1,62 @@
+Q - 3 Answer The Following Questions.
+11. Define the first normal form to normalize the database.
+12. Define the term Cardinality
+13. Define "Deletion Anomalies" with suitable example.
+14. Normalize the given relation: BRANCH (Branch#, Branch_Addr, ISBN, Title, Authaor, Publisher, Num_copies) and give explanation for decomposition of the relation to convert it into 2nd normal form. 
+  Consider few functional dependancies like Branch# -> ISBN, ISBN -> Title, {Branch#, ISBN} -> Num_Copies
+15. Convert the following database schema in 3NF.
+  Emp (SSN, Birth_Date, Department, Proj_Manager, Proj_Handled)
+  Here it is to be assumes that one employee will work for one department only but can handle multiple projects and for each project there with be a project 
+  manager(another employee from same or different department).
+  
+OR
+
+15. Convert the following relation into 3NF and then BCNF. Explain the difference between both normal forms.
+  R = {Property_ID, City, Plot_No, Area, Price}
+  Functional Dependencies are given as below:
+  FD1: Property_ID -> {City, Plot_No, Area, Price}
+  FD2: {City, Plot_No} -> {Property_ID, Area, Price}
+  FD3: Area -> Price
+  FD4: Area -> City
+  
+  
+  
+Q - 3 Answer The Following Questions.
+11. Define "Multivalued Functional Dependency" with appropriate example
+12. Define any two Armstrong’s axioms/properties of functional dependencies.
+13. Define Codd's "Foundation Rule" and "Information Rule" for a database to be the correct RDBMS.
+14. What is Normalization? Explain 1NF, 2NF with suitable example. =>3
+15. What is Anomalies? Define Insert, Update and Delete Anomalies with suitable example. =>4
+
+OR
+
+15. Consider the following relation and its functional dependencies. Assume that the relation is in 1NF and convert the relation in 2NF and 3NF with the rules for each decomposition.
+  R = {Proj#, Proj_Name, Emp#, Emp_Name, Job_Class, Chg_Per_Hr, Hours}
+  FD1: {Proj#, Emp#} -> Hours 
+  FD2: {Job_Class} -> {Chg_Per_Hr}
+  
+  
+  
+  
+Q - 3 Answer The Following Questions.
+11. Define the first normal form to normalize the database. 1
+12. Define the terms Dependent and Determinant in any functional dependency 1
+13. Differentiate between candidate key and primary key. 1
+14. What is functional Dependency? Explain which type of FD is not allowed in 3NF and decompose the relation to convert it into 3NF.
+  EMP_ID  EMP_NAME  EMP_ZIP EMP_STATE EMP_CITY
+  222     Harry     201010  UP Noida
+  333     Stephan   02228   US Boston
+  444     Lan       60007   US Chicago
+  555     Katharine 06389   UK Norwich
+  666     John      462007  MP Bhopal
+
+15. Normalize the given relation and give explanation for decomposition of the relation to convert it into 2NF and 3NF.
+  BRANCH (Branch_No, Branch_Addr, ISBN, Title, Author, Publisher, Num_copies)
+  Consider few functional dependancies like 
+  Branch_No -> ISBN, 
+  ISBN -> Title, 
+  {Branch_No, ISBN} -> Num_Copies
+
+OR
+
+15. What is Normalization? Explain 2NF, 3NF and BCNF with suitable example.

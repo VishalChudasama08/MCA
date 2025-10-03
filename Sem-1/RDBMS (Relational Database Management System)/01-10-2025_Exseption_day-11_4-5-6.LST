@@ -1,0 +1,360 @@
+-- day-11 query-4
+SQL> -- 4. Write a program to divide 2 numbers and if the denominator if 0 then handle the exception.
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> select * from dual;
+
+D                                                                                                                                                                                                       
+-                                                                                                                                                                                                       
+X                                                                                                                                                                                                       
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	a number;
+  3  	b number;
+  4  begin
+  5  	a:=&a;
+  6  	b:=&b;
+  7  	ans:=a/b;
+  8  	dbms_output.put_line('Ans is ' || ans);
+  9  Exception 
+ 10  	when ZERO_DIVIDE then
+ 11  		dbms_output.put_line('B value is 0');
+ 12* end;
+SQL> /
+Enter value for a: 10
+old   5: 	a:=&a;
+new   5: 	a:=10;
+Enter value for b: 0
+old   6: 	b:=&b;
+new   6: 	b:=0;
+	ans:=a/b;
+	*
+ERROR at line 7:
+ORA-06550: line 7, column 2: 
+PLS-00201: identifier 'ANS' must be declared 
+ORA-06550: line 7, column 2: 
+PL/SQL: Statement ignored 
+ORA-06550: line 8, column 36: 
+PLS-00201: identifier 'ANS' must be declared 
+ORA-06550: line 8, column 2: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	a number;
+  3  	b number;
+  4  	ans number;
+  5  begin
+  6  	a:=&a;
+  7  	b:=&b;
+  8  	ans:=a/b;
+  9  	dbms_output.put_line('Ans is ' || ans);
+ 10  Exception 
+ 11  	when ZERO_DIVIDE then
+ 12  		dbms_output.put_line('B value is 0');
+ 13* end;
+SQL> /
+Enter value for a: 10
+old   6: 	a:=&a;
+new   6: 	a:=10;
+Enter value for b: 0
+old   7: 	b:=&b;
+new   7: 	b:=0;
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> 
+SQL> /
+Enter value for a: 10
+old   6: 	a:=&a;
+new   6: 	a:=10;
+Enter value for b: 2
+old   7: 	b:=&b;
+new   7: 	b:=2;
+Ans is 5                                                                                                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for a: 10
+old   6: 	a:=&a;
+new   6: 	a:=10;
+Enter value for b: 0
+old   7: 	b:=&b;
+new   7: 	b:=0;
+B value is 0                                                                                                                                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> -- this is system define exseption headling
+SQL> -- now create user defined exseption
+SQL> -- 5. Write a user defined exception for above program 3 where if marks are less than 0  then appropriate error message must be shown as exception.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8      marksNotZero EXSEPTION;
+  9  begin
+ 10      name:='&name';
+ 11      s1:=&s1;
+ 12      s2:=&s2;
+ 13      s3:=&s3;
+ 14      if s1=0 || s2=0 || s3=0 then
+ 15          RAISE marksNotZero;
+ 16      end if;
+ 17      total := s1+s2+s3;
+ 18      per := total/3;
+ 19      dbms_output.put_line('Student name: ' || name);
+ 20      dbms_output.put_line('Total marks: ' || total);
+ 21      dbms_output.put_line('Percentage: ' || per);
+ 22  Exception 
+ 23      when marksNotZero then
+ 24          dbms_output.put_line('B value is 0');	
+ 25* end;
+ 26  /
+Enter value for name: 10
+old  10:     name:='&name';
+new  10:     name:='10';
+Enter value for s1: 20
+old  11:     s1:=&s1;
+new  11:     s1:=20;
+Enter value for s2: 30
+old  12:     s2:=&s2;
+new  12:     s2:=30;
+Enter value for s3: 40
+old  13:     s3:=&s3;
+new  13:     s3:=40;
+    if s1=0 || s2=0 || s3=0 then
+                 *
+ERROR at line 14:
+ORA-06550: line 14, column 18: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+. ( * @ % & - + / at mod remainder rem then 
+<an exponent (**)> and or || 
+The symbol "( was inserted before "=" to continue. 
+ORA-06550: line 14, column 29: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+) , * & - + / at mod remainder rem <an exponent (**)> and or 
+using || multiset 
+The symbol ")" was substituted for "THEN" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8      marksNotZero EXSEPTION;
+  9  begin
+ 10      name:='&name';
+ 11      s1:=&s1;
+ 12      s2:=&s2;
+ 13      s3:=&s3;
+ 14      if s1=0 OR s2=0 OR s3=0 then
+ 15          RAISE marksNotZero;
+ 16      end if;
+ 17      total := s1+s2+s3;
+ 18      per := total/3;
+ 19      dbms_output.put_line('Student name: ' || name);
+ 20      dbms_output.put_line('Total marks: ' || total);
+ 21      dbms_output.put_line('Percentage: ' || per);
+ 22  Exception 
+ 23      when marksNotZero then
+ 24          dbms_output.put_line('B value is 0');	
+ 25* end;
+SQL> /
+Enter value for name: vishal
+old  10:     name:='&name';
+new  10:     name:='vishal';
+Enter value for s1: 80
+old  11:     s1:=&s1;
+new  11:     s1:=80;
+Enter value for s2: 90
+old  12:     s2:=&s2;
+new  12:     s2:=90;
+Enter value for s3: 88
+old  13:     s3:=&s3;
+new  13:     s3:=88;
+    marksNotZero EXSEPTION;
+                 *
+ERROR at line 8:
+ORA-06550: line 8, column 18: 
+PLS-00201: identifier 'EXSEPTION' must be declared 
+ORA-06550: line 8, column 18: 
+PL/SQL: Item ignored 
+ORA-06550: line 15, column 15: 
+PLS-00320: the declaration of the type of this expression is incomplete or malformed 
+ORA-06550: line 15, column 9: 
+PL/SQL: Statement ignored 
+ORA-06550: line 23, column 10: 
+PLS-00320: the declaration of the type of this expression is incomplete or malformed 
+ORA-06550: line 0, column 0: 
+PL/SQL: Compilation unit analysis terminated 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8      marksnotzero exception;
+  9  begin
+ 10      name:='&name';
+ 11      s1:=&s1;
+ 12      s2:=&s2;
+ 13      s3:=&s3;
+ 14      if s1<0 OR s2<0 OR s3<0 then
+ 15          RAISE marksnotzero;
+ 16      end if;
+ 17      total := s1+s2+s3;
+ 18      per := total/3;
+ 19      dbms_output.put_line('Student name: ' || name);
+ 20      dbms_output.put_line('Total marks: ' || total);
+ 21      dbms_output.put_line('Percentage: ' || per);
+ 22  Exception 
+ 23      when marksnotzero then
+ 24          dbms_output.put_line('B value is 0');	
+ 25* end;
+ 26  /
+Enter value for name: vishal
+old  10:     name:='&name';
+new  10:     name:='vishal';
+Enter value for s1: 60
+old  11:     s1:=&s1;
+new  11:     s1:=60;
+Enter value for s2: 70
+old  12:     s2:=&s2;
+new  12:     s2:=70;
+Enter value for s3: 80
+old  13:     s3:=&s3;
+new  13:     s3:=80;
+Student name: vishal                                                                                                                                                                                    
+Total marks: 210                                                                                                                                                                                        
+Percentage: 70                                                                                                                                                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for name: vi
+old  10:     name:='&name';
+new  10:     name:='vi';
+Enter value for s1: -12
+old  11:     s1:=&s1;
+new  11:     s1:=-12;
+Enter value for s2: 80
+old  12:     s2:=&s2;
+new  12:     s2:=80;
+Enter value for s3: 90
+old  13:     s3:=&s3;
+new  13:     s3:=90;
+B value is 0                                                                                                                                                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8      nagetiveMark exception;
+  9  begin
+ 10      name:='&name';
+ 11      s1:=&s1;
+ 12      s2:=&s2;
+ 13      s3:=&s3;
+ 14      if s1<0 OR s2<0 OR s3<0 then
+ 15          RAISE nagetiveMark;
+ 16      end if;
+ 17      total := s1+s2+s3;
+ 18      per := total/3;
+ 19      dbms_output.put_line('Student name: ' || name);
+ 20      dbms_output.put_line('Total marks: ' || total);
+ 21      dbms_output.put_line('Percentage: ' || per);
+ 22  Exception 
+ 23      when nagetiveMark then
+ 24          dbms_output.put_line('Marks less then zero! Negative marks not allowd');	
+ 25* end;
+SQL> /
+Enter value for name: dga
+old  10:     name:='&name';
+new  10:     name:='dga';
+Enter value for s1: -1
+old  11:     s1:=&s1;
+new  11:     s1:=-1;
+Enter value for s2: 45
+old  12:     s2:=&s2;
+new  12:     s2:=45;
+Enter value for s3: 5
+old  13:     s3:=&s3;
+new  13:     s3:=5;
+Marks less then zero! Negative marks not allowd                                                                                                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 6. Write a PLSQL block to find the largest of three numbers
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2    	no1 number;
+  3    	no2 number;
+  4    	no3 number;
+  5  begin
+  6    	no1:=&no1;
+  7    	no2:=&no2;
+  8   	no3:=&no3;
+  9     	if no1>no2 AND no1>no3 then
+ 10    		dbms_output.put_line('max number is: ' || no1);
+ 11    	elsif no2>no3 then
+ 12    		dbms_output.put_line('max number is: ' || no2);
+ 13    	else
+ 14    		dbms_output.put_line('max number is: ' || no3);
+ 15  	end if;
+ 16* end;
+SQL> /
+Enter value for no1: 1
+old   6:   	no1:=&no1;
+new   6:   	no1:=1;
+Enter value for no2: 2
+old   7:   	no2:=&no2;
+new   7:   	no2:=2;
+Enter value for no3: 3
+old   8:  	no3:=&no3;
+new   8:  	no3:=3;
+max number is: 3                                                                                                                                                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

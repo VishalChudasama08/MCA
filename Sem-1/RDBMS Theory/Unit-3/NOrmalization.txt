@@ -1,0 +1,149 @@
+StudentID, StudentName, CourseID, CourseName, InstructorID, InstructorName
+-------------------------------------------
+First Normal Form (1NF)
+-------------------------------------------
+(StudentID, StudentName, CourseID, CourseName, InstructorID, InstructorName)
+-------------------------------------------
+Second Normal Form (2NF)
+-------------------------------------------
+partial dependency (non-key attributes depending on part of composite key).
+Here, the key = (StudentID, CourseID).
+
+StudentName depends only on StudentID.
+
+CourseName, InstructorID, InstructorName depend only on CourseID.
+
+So, split:
+
+STUDENT(StudentID, StudentName)
+COURSE(CourseID, CourseName, InstructorID, InstructorName)
+ENROLLMENT(StudentID, CourseID)
+-------------------------------------------
+Third Normal Form (3NF)
+-------------------------------------------
+
+👉 Remove transitive dependency (non-key → non-key).
+In COURSE relation:
+
+CourseID → InstructorID
+
+and InstructorID → InstructorName (transitive).
+
+So, split COURSE into:
+
+COURSE(CourseID, CourseName, InstructorID)
+INSTRUCTOR(InstructorID, InstructorName)
+
+Now we have:
+
+STUDENT(StudentID, StudentName)
+
+COURSE(CourseID, CourseName, InstructorID)
+
+INSTRUCTOR(InstructorID, InstructorName)
+
+ENROLLMENT(StudentID, CourseID)
+
+-------------------------------------------
+Step 5: Boyce-Codd Normal Form (BCNF)
+-------------------------------------------
+
+👉 Every determinant must be a candidate key.
+
+Check relations:
+
+STUDENT: StudentID → StudentName ✅
+
+COURSE: CourseID → CourseName, InstructorID ✅
+
+INSTRUCTOR: InstructorID → InstructorName ✅
+
+ENROLLMENT: composite key (StudentID, CourseID) ✅
+
+
+
+-------------------------------------------
+-------------------------------------------
+Example Relation: EMPLOYEE_PROJECT
+
+Attributes:
+EmpID, EmpName, DeptID, DeptName, ProjectID, ProjectName, ProjectLocation
+
+
+-------------------------------------------
+First Normal Form (1NF)
+-------------------------------------------
+
+👉 Remove repeating groups:
+
+(EmpID, EmpName, DeptID, DeptName, ProjectID, ProjectName, ProjectLocation)
+
+
+-------------------------------------------
+Second Normal Form (2NF)
+-------------------------------------------
+
+👉 Key = (EmpID, ProjectID).
+
+EmpName, DeptID, DeptName depend only on EmpID.
+
+ProjectName, ProjectLocation depend only on ProjectID.
+
+So split into:
+
+EMPLOYEE(EmpID, EmpName, DeptID, DeptName)
+
+PROJECT(ProjectID, ProjectName, ProjectLocation)
+
+WORKS_ON(EmpID, ProjectID)
+
+
+-------------------------------------------
+Third Normal Form (3NF)
+-------------------------------------------
+
+👉 Remove transitive dependency.
+In EMPLOYEE: DeptID → DeptName (transitive).
+
+So split EMPLOYEE:
+
+EMPLOYEE(EmpID, EmpName, DeptID)
+
+DEPARTMENT(DeptID, DeptName)
+
+Now we have:
+
+EMPLOYEE(EmpID, EmpName, DeptID)
+
+DEPARTMENT(DeptID, DeptName)
+
+PROJECT(ProjectID, ProjectName, ProjectLocation)
+
+WORKS_ON(EmpID, ProjectID)
+
+-------------------------------------------
+Boyce–Codd Normal Form (BCNF)
+-------------------------------------------
+
+👉 Check determinants:
+
+EmpID → EmpName, DeptID ✅
+
+DeptID → DeptName ✅
+
+ProjectID → ProjectName, ProjectLocation ✅
+
+(EmpID, ProjectID) → WORKS_ON ✅
+
+All determinants are candidate keys → Schema is in BCNF.
+
+✅ Final BCNF Schema:
+-------------------------------------------
+
+EMPLOYEE(EmpID, EmpName, DeptID)
+
+DEPARTMENT(DeptID, DeptName)
+
+PROJECT(ProjectID, ProjectName, ProjectLocation)
+
+WORKS_ON(EmpID, ProjectID)

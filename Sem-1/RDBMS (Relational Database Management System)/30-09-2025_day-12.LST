@@ -1,0 +1,217 @@
+-- prime number
+SQL> -- day-12
+SQL> -- 1. Write a PLSQL block to print all the prime numbers between 1 to 50
+SQL> set serveroutput on;
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> select * from dual;
+
+D                                                                               
+-                                                                               
+X                                                                               
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	i number;
+  3  	j number;
+  4  	flag boolean;
+  5  begin
+  6  	for i IN 1..50 loop
+  7  		flag:= true;
+  8  		for j IN 2..trunc(sqrt(i)) loop
+  9  			if mod(i,j)=0 then
+ 10  				flag:= false;
+ 11  			end if;
+ 12  		end loop;
+ 13  		if flag then
+ 14  			dbms_output.put_line(i);
+ 15  		end if;
+ 16  	end loop;
+ 17* end;
+SQL> /
+1                                                                               
+2                                                                               
+3                                                                               
+5                                                                               
+7                                                                               
+11                                                                              
+13                                                                              
+17                                                                              
+19                                                                              
+23                                                                              
+29                                                                              
+31                                                                              
+37                                                                              
+41                                                                              
+43                                                                              
+47                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 4. Implement PL/SQL block that inputs a string and checks palindrome or not.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	str varchar(20);
+  3  	str_rev varchar(20);
+  4  begin
+  5  	for i IN 1..length(str) loop
+  6  		str_rev := str_rev || strsub(str,i,1);
+  7  	end loop;
+  8  	dbms_output.put_line('original string: ' || str);
+  9  	dbms_output.put_line('reverse string: ' || str_rev);
+ 10* end;
+SQL> /
+		str_rev := str_rev || strsub(str,i,1);
+		                      *
+ERROR at line 6:
+ORA-06550: line 6, column 25: 
+PLS-00201: identifier 'STRSUB' must be declared 
+ORA-06550: line 6, column 3: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	str varchar(20);
+  3  	str_rev varchar(20);
+  4  begin
+  5  	for i IN 1..length(str) loop
+  6  		str_rev := str_rev || substr(str,i,1);
+  7  	end loop;
+  8  	dbms_output.put_line('original string: ' || str);
+  9  	dbms_output.put_line('reverse string: ' || str_rev);
+ 10* end;
+SQL> /
+declare
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error 
+ORA-06512: at line 5 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	str varchar(20);
+  3  	str_rev varchar(20);
+  4  begin
+  5  	str:= 'ljku';
+  6  	for i IN 1..length(str) loop
+  7  		str_rev := str_rev || substr(str,i,1);
+  8  	end loop;
+  9  	dbms_output.put_line('original string: ' || str);
+ 10  	dbms_output.put_line('reverse string: ' || str_rev);
+ 11* end;
+SQL> /
+original string: ljku                                                           
+reverse string: ljku                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	str varchar(20);
+  3  	str_rev varchar(20);
+  4  begin
+  5  	str:= 'ljku';
+  6  	for i IN REVERSE 1..length(str) loop
+  7  		str_rev := str_rev || substr(str,i,1);
+  8  	end loop;
+  9  	dbms_output.put_line('original string: ' || str);
+ 10  	dbms_output.put_line('reverse string: ' || str_rev);
+ 11* end;
+SQL> /
+original string: ljku                                                           
+reverse string: ukjl                                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	str varchar(20);
+  3  	str_rev varchar(20);
+  4  begin
+  5  	str:= 'wow';
+  6  	for i IN REVERSE 1..length(str) loop
+  7  		str_rev := str_rev || substr(str,i,1);
+  8  	end loop;
+  9  	dbms_output.put_line('original string: ' || str);
+ 10  	dbms_output.put_line('reverse string: ' || str_rev);
+ 11  	if str = str_rev then
+ 12  		dbms_output.put_line('palindrome string');
+ 13  	else
+ 14  		dbms_output.put_line('not palindrome string');
+ 15  	end if;
+ 16* end;
+ 17  /
+original string: wow                                                            
+reverse string: wow                                                             
+palindrome string                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 3. Implement a PL/SQL Block which takes input number of rows and displays triangle.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2     i number;
+  3     j number;
+  4  begin
+  5     for i in 1..5 loop
+  6         for j in 1..i loop
+  7             dbms_output.put('*');
+  8         end loop;
+  9             dbms_output.new_line();
+ 10     end loop;
+ 11* end;
+SQL> /
+*                                                                               
+**                                                                              
+***                                                                             
+****                                                                            
+*****                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 2. Display all the integer numbers between 4 to 40 which are divisible by 3 using "Exit When" statement.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2     i number;
+  3  begin
+  4     for i in 4..40 loop
+  5        if mod(i,3)=0 then
+  6           dbms_output.put_line(i);
+  7        end if;
+  8     end loop;
+  9* end;
+SQL> /
+6                                                                               
+9                                                                               
+12                                                                              
+15                                                                              
+18                                                                              
+21                                                                              
+24                                                                              
+27                                                                              
+30                                                                              
+33                                                                              
+36                                                                              
+39                                                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> exit;

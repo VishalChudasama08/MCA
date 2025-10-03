@@ -1,0 +1,294 @@
+select tname from tab;
+
+TNAME                                                                                                                                                                                                   
+------------------------------                                                                                                                                                                          
+APPLICANT                                                                                                                                                                                               
+APPLICANT_MASTER                                                                                                                                                                                        
+CLIENT1                                                                                                                                                                                                 
+CLIENT2                                                                                                                                                                                                 
+CLIENT3                                                                                                                                                                                                 
+CLIENT4                                                                                                                                                                                                 
+CLIENT5                                                                                                                                                                                                 
+CLIENTS                                                                                                                                                                                                 
+CLIENT_MASTER                                                                                                                                                                                           
+COMPANY                                                                                                                                                                                                 
+COURSE                                                                                                                                                                                                  
+COURSE_MASTER                                                                                                                                                                                           
+CUSTOMER                                                                                                                                                                                                
+CUSTOMER1                                                                                                                                                                                               
+DEPT                                                                                                                                                                                                    
+DISTRIBUTOR                                                                                                                                                                                             
+DIST_ITEM                                                                                                                                                                                               
+EMP                                                                                                                                                                                                     
+EMPLOYEE                                                                                                                                                                                                
+EMPLOYEE_MASTER                                                                                                                                                                                         
+ENROLL                                                                                                                                                                                                  
+ENROLLMENT1                                                                                                                                                                                             
+ENTRANCE_TEST                                                                                                                                                                                           
+ETEST_DETAILS                                                                                                                                                                                           
+ETEST_DETAILS_VIEW                                                                                                                                                                                      
+FACULTY_MASTER                                                                                                                                                                                          
+FYRANKERS                                                                                                                                                                                               
+GARBA                                                                                                                                                                                                   
+ITEM                                                                                                                                                                                                    
+ORDER_DETAIL                                                                                                                                                                                            
+ORDER_DETAILS                                                                                                                                                                                           
+ORDER_MASTER                                                                                                                                                                                            
+PRODUCT                                                                                                                                                                                                 
+PRODUCTS                                                                                                                                                                                                
+PRODUCT_MASTER                                                                                                                                                                                          
+S                                                                                                                                                                                                       
+SALESMAN                                                                                                                                                                                                
+SALESMAN_MASTER                                                                                                                                                                                         
+STUDENT                                                                                                                                                                                                 
+STUDENTS1                                                                                                                                                                                               
+STUDENT_CONS                                                                                                                                                                                            
+STUDENT_MASTER                                                                                                                                                                                          
+STUDENT_TAB                                                                                                                                                                                             
+SUPPLIER                                                                                                                                                                                                
+SYRANKERS                                                                                                                                                                                               
+
+45 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* set serveroutput on
+SQL> /
+set serveroutput on
+    *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> set serveroutput on;
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- day-10 
+  2  declare
+  3  	no1 number;
+  4  	no2 number;
+  5  	no3 number;
+  6  begin
+  7  	no1:=&no1;
+  8  	no2:=&no2;
+  9  	no3:=&no3;
+ 10  	if no1>no2 AND no1>no3 then
+ 11  		dbms_output.put_line('max number is: ' || no1);
+ 12  	elsif no2>no3 then
+ 13  		dbms_output.put_line('max number is: ' || no2);
+ 14  	else
+ 15  		dbms_output.put_line('max number is: ' || no3);
+ 16  	end if;
+ 17* end
+ 18  -- day-10
+ 19  /
+Enter value for no1: 10
+old   7: 	no1:=&no1;
+new   7: 	no1:=10;
+Enter value for no2: 20
+old   8: 	no2:=&no2;
+new   8: 	no2:=20;
+Enter value for no3: 30
+old   9: 	no3:=&no3;
+new   9: 	no3:=30;
+-- day-10
+        *
+ERROR at line 18:
+ORA-06550: line 18, column 9: 
+PLS-00103: Encountered the symbol "end-of-file" when expecting one of the following: 
+; <an identifier> <a double-quoted delimited-identifier> 
+The symbol ";" was substituted for "end-of-file" to continue. 
+
+
+SQL> 
+SQL> 
+SQL> -- day-11
+SQL> -- 6. Write a PLSQL block to find the largest of three numbers
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	no1 number;
+  3  	no2 number;
+  4  	no3 number;
+  5  begin
+  6  	no1:=&no1;
+  7  	no2:=&no2;
+  8  	no3:=&no3;
+  9  	if no1>no2 AND no1>no3 then
+ 10  		dbms_output.put_line('max number is: ' || no1);
+ 11  	elsif no2>no3 then
+ 12  		dbms_output.put_line('max number is: ' || no2);
+ 13  	else
+ 14  		dbms_output.put_line('max number is: ' || no3);
+ 15  	end if;
+ 16* end;
+SQL> /
+Enter value for no1: 10
+old   6: 	no1:=&no1;
+new   6: 	no1:=10;
+Enter value for no2: 20
+old   7: 	no2:=&no2;
+new   7: 	no2:=20;
+Enter value for no3: 30
+old   8: 	no3:=&no3;
+new   8: 	no3:=30;
+max number is: 30                                                                                                                                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for no1: 20
+old   6: 	no1:=&no1;
+new   6: 	no1:=20;
+Enter value for no2: 10
+old   7: 	no2:=&no2;
+new   7: 	no2:=10;
+Enter value for no3: 5
+old   8: 	no3:=&no3;
+new   8: 	no3:=5;
+max number is: 20                                                                                                                                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for no1: 10
+old   6: 	no1:=&no1;
+new   6: 	no1:=10;
+Enter value for no2: 30
+old   7: 	no2:=&no2;
+new   7: 	no2:=30;
+Enter value for no3: 20
+old   8: 	no3:=&no3;
+new   8: 	no3:=20;
+max number is: 30                                                                                                                                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 2. Write a PLSQL block to display a greeting message like: "Hi!! Today is 3rd November
+SQL>        2021, Friday.
+SP2-0734: unknown command beginning "2021, Frid..." - rest of line ignored.
+SQL> -- 2. Write a PLSQL block to display a greeting message like: "Hi!! Today is 3rd November 2021, Friday.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	dbms_output.put_line('max number is: ' || to_char(sysdate, 'DD Month YYYY DAY'));
+  3* end;
+SQL> /
+max number is: 23 September 2025 TUESDAY                                                                                                                                                                
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 3. Declare a string variable to store student's name, define three integer variables to store  marks of 3 subjects (out of 50) of that student. Write a PLSQL code to calculate total of all three subjects and print the result in percentage.
+SQL> ed
+Wrote file afiedt.buf
+
+  1   declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8   begin
+  9      name:=&name;
+ 10      s1:=&s1;
+ 11      s2:=&s2;
+ 12      s3:=&s3;
+ 13      total := s1+s2+s3;
+ 14      per := total/3;
+ 15      dbms_output.put_line('Student name: ' || name);
+ 16      dbms_output.put_line('Total marks: ' || total);
+ 17      dbms_output.put_line('Percentage: ' || per);	
+ 18*  end;
+ 19  /
+Enter value for name: vishal
+old   9:     name:=&name;
+new   9:     name:=vishal;
+Enter value for s1: 40
+old  10:     s1:=&s1;
+new  10:     s1:=40;
+Enter value for s2: 45
+old  11:     s2:=&s2;
+new  11:     s2:=45;
+Enter value for s3: 48
+old  12:     s3:=&s3;
+new  12:     s3:=48;
+    name:=vishal;
+          *
+ERROR at line 9:
+ORA-06550: line 9, column 11: 
+PLS-00201: identifier 'VISHAL' must be declared 
+ORA-06550: line 9, column 5: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1   declare
+  2      name varchar(15);
+  3      s1 number;
+  4      s2 number;
+  5      s3 number;
+  6      total number;
+  7      per number;
+  8   begin
+  9      name:='&name';
+ 10      s1:=&s1;
+ 11      s2:=&s2;
+ 12      s3:=&s3;
+ 13      total := s1+s2+s3;
+ 14      per := total/3;
+ 15      dbms_output.put_line('Student name: ' || name);
+ 16      dbms_output.put_line('Total marks: ' || total);
+ 17      dbms_output.put_line('Percentage: ' || per);	
+ 18*  end;
+SQL> /
+Enter value for name: vishal
+old   9:     name:='&name';
+new   9:     name:='vishal';
+Enter value for s1: 45
+old  10:     s1:=&s1;
+new  10:     s1:=45;
+Enter value for s2: 46
+old  11:     s2:=&s2;
+new  11:     s2:=46;
+Enter value for s3: 48
+old  12:     s3:=&s3;
+new  12:     s3:=48;
+Student name: vishal                                                                                                                                                                                    
+Total marks: 139                                                                                                                                                                                        
+Percentage: 46.33333333333333333333333333333333333333                                                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 1. Print a static string "Hello Every One�!" using an anonymous PLSQL block and execute  it.
+SQL> ed
+Wrote file afiedt.buf
+
+  1   begin
+  2      dbms_output.put_line('Hello Every One…!');	
+  3*  end;
+SQL> /
+Hello Every One…!                                                                                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1   begin
+  2      dbms_output.put_line('Hello Every One... !');	
+  3*  end;
+SQL> /
+Hello Every One... !                                                                                                                                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 4. Write a program to divide 2 numbers and if the denominator if 0 then handle the exception.
+SQL> -- exception not leran today. do it on next day
+SQL> spool off;
