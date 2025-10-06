@@ -21,6 +21,7 @@
 		"122MMUL.C": "cpp",
 		"123COUNT.C": "cpp",
 		"124.C": "cpp",
-		"BUSBOOK.C": "cpp"
+		"BUSBOOK.C": "cpp",
+		"026LEAP.C": "cpp"
 	}
 }
