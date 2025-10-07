@@ -109,7 +109,7 @@ OPEN                             12-SEP-25
 SQL> -- Stop spooling (close log file)
 SQL> SPOOL OFF;
 
-======================================================= NEW CMD =======================================================
+======================================================= NEW CMD ==========================================================
 => created new user name is 'mca'
 => that user password is 'mca08'
 => for connect use this command 'sqlplus mca/mca08@//localhost:1521/XEPDB1'
@@ -132,3 +132,68 @@ SQL> SELECT * FROM TAB;
 no rows selected
 
 SQL>
+
+=================================================== IF NOT LOGEDIN =======================================================
+======================================================= NEW CMD ==========================================================
+C:\Users\visha>sqlplus
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Tue Oct 7 18:05:10 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password:
+ERROR:
+ORA-12560: TNS:protocol adapter error
+
+
+C:\Users\visha>net start OracleServiceXE
+The OracleServiceXE service is starting............
+The OracleServiceXE service was started successfully.
+
+
+C:\Users\visha>sqlplus
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Tue Oct 7 18:11:27 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Enter user-name: system
+Enter password: Vishal08 (not visible on enter time)
+Last Successful login time: Sat Sep 13 2025 22:18:20 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> exit  -- this is logen in on system login (main)
+Disconnected from Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+C:\Users\visha>sqlplus mca/mca08@//localhost:1521/XEPDB1  -- mca login
+
+SQL*Plus: Release 21.0.0.0.0 - Production on Tue Oct 7 18:12:29 2025
+Version 21.3.0.0.0
+
+Copyright (c) 1982, 2021, Oracle.  All rights reserved.
+
+Last Successful login time: Fri Sep 26 2025 21:43:05 +05:30
+
+Connected to:
+Oracle Database 21c Express Edition Release 21.0.0.0.0 - Production
+Version 21.3.0.0.0
+
+SQL> select * from customers;
+
+   CUST_ID NAME            CITY            COUNTRY
+---------- --------------- --------------- ---------------
+         1 John Doe        Ahmedabad       India
+         2 Alice Smith     New York        USA
+         3 Bob Brown       London          UK
+         4 Charlie Black   Ahmedabad       India
+         5 Avinav josi     Ahmedabad       India
+
+SQL> 
+
