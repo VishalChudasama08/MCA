@@ -43,6 +43,7 @@ int main() {
 			print_matrix(matrix, r, c);
 			printf("\t------------------------\n");
 			tra_matrix(matrix, r, c);
+			break;
 		case 3:
 			printf("\n\t Enter row and column: ");
 			scanf("%d %d", &r, &c);
@@ -100,6 +101,7 @@ int main() {
 					scanf("%d", &matrix[i][j]);
 				}
 			matrix_row_col_sum(matrix, r, c);
+			break;
 		case 7:
 			printf("\n\t Enter row and column: ");
 			scanf("%d %d", &r, &c);
@@ -118,6 +120,7 @@ int main() {
 				scanf("%s", name[i]);
 			}
 			name_sort(name, r);
+			break;
 		}
 	} while (1);
 }
@@ -163,7 +166,7 @@ void matrix_sub(int m1[MAX][MAX], int m2[MAX][MAX], int r, int c) {
 	printf("\t------------------------\n");
 	for (i = 0;i < r;i++) {
 		for (j = 0;j < c;j++) {
-			s = m1[i][j] + m2[i][j];
+			s = m1[i][j] - m2[i][j];
 			printf("\t%d", s);
 		}
 		printf("\n");
@@ -236,7 +239,7 @@ int menu() {
 	printf("\n\t 0. Exit program");
 	printf("\n\t 1. print matrix");
 	printf("\n\t 2. row column transpose matrix");
-	printf("\n\t 3. 2 matrix adition");
+	printf("\n\t 3. 2 matrix addition");
 	printf("\n\t 4. 2 matrix subtraction");
 	printf("\n\t 5. 2 matrix multiplication");
 	printf("\n\t 6. matrix sum row and column");

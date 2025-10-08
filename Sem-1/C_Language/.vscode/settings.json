@@ -22,6 +22,15 @@
 		"123COUNT.C": "cpp",
 		"124.C": "cpp",
 		"BUSBOOK.C": "cpp",
-		"026LEAP.C": "cpp"
-	}
+		"026LEAP.C": "cpp",
+		"ARRAY.C": "cpp",
+		"CIRCUPRI.C": "cpp",
+		"PRIME.C": "cpp",
+		"FILE.C": "cpp",
+		"FILEINT.C": "cpp",
+		"FOR.C": "cpp"
+	},
+	"cSpell.words": [
+		"charecter"
+	]
 }
