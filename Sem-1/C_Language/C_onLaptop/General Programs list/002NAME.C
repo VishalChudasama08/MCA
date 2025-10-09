@@ -1,10 +1,9 @@
-// print name, address and birth date
-
+// 2. Write a program to print Name, Address and Birth Date.
 #include<stdio.h>
 #include<conio.h>
 
-int main(){
-	clrscr();
+int main() {
+	// clrscr();
 
 	printf("\n\tName \t\t: Vishal");
 	printf("\n\tAddress \t: Dwarka - 361306");

@@ -1,9 +1,10 @@
+// 12. Write a program in C to display sum from 1 to N using the formula N(N+1)/2.
 #include<stdio.h>
 #include<conio.h>
 long int nsum(long int);
-int main(){
+int main() {
 	long int n;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter nth number: ");
 	scanf("%ld", &n);
@@ -11,6 +12,6 @@ int main(){
 	getch();
 	return 0;
 }
-long int nsum(long int n){
-	return n * (n+1) / 2;
+long int nsum(long int n) {
+	return n * (n + 1) / 2;
 }

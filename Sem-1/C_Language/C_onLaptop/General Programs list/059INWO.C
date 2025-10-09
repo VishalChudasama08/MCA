@@ -1,3 +1,4 @@
+/* 59 Write a program to accept amount paid as number (integer) and display it in words. (e.g. Rs 1541 in word : One Thousand Five Hundred Fourty One ). Consider user will enter more than 999 and less than 9999.  */
 #include<stdio.h>
 #include<conio.h>
 

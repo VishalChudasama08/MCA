@@ -1,3 +1,4 @@
+// 18. Write a C program to read the distance between two cities in KM. and print that distance in meters, feet, inches and centimeters.
 #include<stdio.h>
 #include<conio.h>
 
@@ -6,9 +7,9 @@ float kmtoft(float);
 float kmtoin(float);
 float kmtocm(float);
 
-int main(){
+int main() {
 	float km;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter distance between two cities in km: ");
 	scanf("%f", &km);
@@ -21,7 +22,7 @@ int main(){
 	getch();
 	return 0;
 }
-float kmtom(float km){ return (1000*km); }
-float kmtocm(float km){ return (100000*km); }
-float kmtoft(float km){ return (3280.84*km); }
-float kmtoin(float km){ return (39370.1*km); }
+float kmtom(float km) { return (1000 * km); }
+float kmtocm(float km) { return (100000 * km); }
+float kmtoft(float km) { return (3280.84 * km); }
+float kmtoin(float km) { return (39370.1 * km); }

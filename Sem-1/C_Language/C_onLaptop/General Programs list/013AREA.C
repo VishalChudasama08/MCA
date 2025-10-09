@@ -1,3 +1,4 @@
+// 13. Write a program that reads the radius of sphere “r”, then it calculates its volume “V” and surface area “A” using formulas. (pi*r*r*4)/3
 #include<stdio.h>
 #include<conio.h>
 #define PI 3.14
@@ -5,9 +6,9 @@
 float volume(float);
 float area(float);
 
-int main(){
+int main() {
 	float r;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter Radius or Sphere: ");
 	scanf("%f", &r);
@@ -19,9 +20,9 @@ int main(){
 	return 0;
 }
 
-float volume(float r){
-	return (4/3) * PI * r * r * r;
+float volume(float r) {
+	return (4 / 3) * PI * r * r * r;
 }
-float area(float r){
+float area(float r) {
 	return 4 * PI * r * r;
 }

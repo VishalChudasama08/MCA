@@ -1,18 +1,17 @@
-// area of reactangle
-
+// 4. Write a program to find area of a rectangle.(Area=l*b)
 #include<stdio.h>
 #include<conio.h>
 
-int main(){
+int main() {
 	float l, b, area;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter length of reactangle : ");
-	scanf("%f",&l);
+	scanf("%f", &l);
 	printf("\n\tEnter breadth of reactangle : ");
-	scanf("%f",&b);
+	scanf("%f", &b);
 
-	area = l*b;
+	area = l * b;
 
 	printf("\n\n\tArea of Rectangle : %.2f", area);
 

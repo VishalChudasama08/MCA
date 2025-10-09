@@ -1,12 +1,11 @@
-// area of circle
-
+// 9. Write a program to calculate area of circle.(pi*r*r)
 #include<stdio.h>
 #include<conio.h>
 #define PI 3.14
 
-int main(){
+int main() {
 	float r, area;
-	clrscr();
+	// clrscr();
 
 	printf("Enter circle radius : ");
 	scanf("%f", &r);

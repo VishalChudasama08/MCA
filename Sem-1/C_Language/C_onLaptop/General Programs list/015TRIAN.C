@@ -1,11 +1,12 @@
+// 15. Write a C program to find out the area of right angle triangle using formula area = ½ * base * height.
 #include<stdio.h>
 #include<conio.h>
 
 float area(float, float);
 
-int main(){
+int main() {
 	float base, height;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter base of right angle triangle: ");
 	scanf("%f", &base);
@@ -17,6 +18,6 @@ int main(){
 	getch();
 	return 0;
 }
-float area(float base, float height){
+float area(float base, float height) {
 	return (1.5 * base * height);
 }

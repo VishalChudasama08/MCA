@@ -1,12 +1,13 @@
+// 19. Write a C program to convert angle in degrees to radians using formula angle in radians = (angle in degrees * ∏) / 180.
 #include<stdio.h>
 #include<conio.h>
 #define PI 3.14
 
 float dtor(float);
 
-int main(){
+int main() {
 	float d;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter degrees: ");
 	scanf("%f", &d);
@@ -16,6 +17,6 @@ int main(){
 	getch();
 	return 0;
 }
-float dtor(float d){
-	return (d*PI)/180.0;
+float dtor(float d) {
+	return (d * PI) / 180.0;
 }

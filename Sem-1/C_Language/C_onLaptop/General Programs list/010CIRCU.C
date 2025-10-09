@@ -1,11 +1,11 @@
-// find circumference of a circle
+// 10. Write a program in C to find the Circumference of a circle.(2*pi*r)
 #include<stdio.h>
 #include<conio.h>
 #define PI 3.14
 
-int main(){
+int main() {
 	float r, area;
-	clrscr();
+	// clrscr();
 
 	printf("Enter circle radius : ");
 	scanf("%f", &r);

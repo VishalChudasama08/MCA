@@ -1,12 +1,11 @@
-// calculate simple interest
-
+// 11. Write a program in C to calculate simple interest using formula SI = (P*R*N) / 100.
 #include<stdio.h>
 #include<conio.h>
 
-int main(){
+int main() {
 	float p, r, si;
 	int n;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter principal amount : ");
 	scanf("%f", &p);
@@ -15,7 +14,7 @@ int main(){
 	printf("\n\tEnter time period in years : ");
 	scanf("%d", &n);
 
-	si = (p*r*n)/100;
+	si = (p * r * n) / 100;
 
 	printf("\n\tsimple interest is : %.2f", si);
 

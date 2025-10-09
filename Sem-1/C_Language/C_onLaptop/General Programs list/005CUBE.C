@@ -1,20 +1,19 @@
-// area of cube
-
+// 5. Write a program to find volume of cube.(Area=l*b*h)
 #include<stdio.h>
 #include<conio.h>
 
-int main(){
+int main() {
 	float l, b, h, area;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter length of cude : ");
-	scanf("%f",&l);
+	scanf("%f", &l);
 	printf("\n\tEnter breadth of cude : ");
-	scanf("%f",&b);
+	scanf("%f", &b);
 	printf("\n\tEnter height of cude : ");
-	scanf("%f",&h);
+	scanf("%f", &h);
 
-	area = l*b*h;
+	area = l * b * h;
 
 	printf("\n\n\tarea of cube is : %.2f", area);
 

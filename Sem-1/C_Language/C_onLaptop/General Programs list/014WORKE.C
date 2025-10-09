@@ -1,11 +1,12 @@
+// 14. Write a C program to obtain an hourly pay rate and the number of hours worked by workers. Calculate their pay for the week.
 #include<stdio.h>
 #include<conio.h>
 
 long payForWeek(int, int);
 
-int main(){
+int main() {
 	int rate, time;
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter Hourly pay rate: ");
 	scanf("%d", &rate);
@@ -17,6 +18,6 @@ int main(){
 	getch();
 	return 0;
 }
-long payForWeek(int rate, int time){
-	return 7*rate*time;
+long payForWeek(int rate, int time) {
+	return 7 * rate * time;
 }

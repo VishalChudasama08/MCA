@@ -1,3 +1,4 @@
+/* 61-94 all patterns */
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
@@ -688,8 +689,8 @@ int menu() {
 	printf("\n\t 67. pattern 67\t\t77. pattern 77\t\t87. pattern 87");
 	printf("\n\t 68. pattern 68\t\t78. pattern 78\t\t88. pattern 88");
 	printf("\n\t 69. pattern 69\t\t79. pattern 79\t\t89. pattern 89");
-	printf("\n\t 90. pattern 90");
-	printf("\n\t 91. pattern 91");
+	printf("\n\t 90. pattern 90\t\t91. pattern 91\t\t92. pattern 92");
+	printf("\n\t 93. pattern 93");
 	printf("\n\n\tEnter Number: ");
 	scanf("%d", &i);
 	v++;

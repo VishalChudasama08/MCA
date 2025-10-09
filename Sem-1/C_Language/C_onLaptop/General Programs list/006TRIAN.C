@@ -1,19 +1,18 @@
-// area of triangle
-
+// 6. Write a program to find area of triangle.(Area=(l*b)/2)
 #include<stdio.h>
 #include<conio.h>
 
-int main(){
+int main() {
 	float l, b, area;
 
-	clrscr();
+	// clrscr();
 
 	printf("\n\tEnter length of triangle : ");
-	scanf("%f",&l);
+	scanf("%f", &l);
 	printf("\n\tEnter breadth of triangle : ");
-	scanf("%f",&b);
+	scanf("%f", &b);
 
-	area=(l*b)/2.0;
+	area = (l * b) / 2.0;
 
 	printf("\n\tarea of triangle is : %.2f", area);
 

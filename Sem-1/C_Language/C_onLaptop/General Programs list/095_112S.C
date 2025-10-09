@@ -44,6 +44,7 @@ float s110(int);
 float s111(int);
 float s112(int, int);
 long fact(int);
+int menu();
 
 int main() {
 	int n, i, x = 1;
