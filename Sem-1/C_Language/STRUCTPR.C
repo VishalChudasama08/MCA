@@ -2,13 +2,13 @@
 #include<conio.h>
 
 struct product {
-	int id,qty;
+	int id, qty;
 	char name[50];
-	double price,total;
+	double price, total;
 }p;
 
-void product_enfo(struct product);
-int main(){
+void product_info(struct product);
+int main() {
 	clrscr();
 
 	printf("\n\tEnter product id: ");
@@ -20,14 +20,15 @@ int main(){
 	printf("\n\tEnter product price: ");
 	scanf("%lf", &p.price);
 
-	product_enfo(p);
+	product_info(p);
 
 	getch();
 	return 0;
 }
-void product_enfo(struct product p){
+void product_info(struct product p) {
 	textcolor(YELLOW);
 	printf("\n\tProduct information");
-	printf("\n\tid\tname\tquelity\tprice\ttotal");
-	printf("\n\t%d\t%s\t%d\t%lf\t%lf", p.id, p.name, p.qty, p.price, p.qty*p.price);
+	printf("\n\tid\tname\tquelity\tprice\t\ttotal");
+	printf("\n\t%d\t%s\t%d\t%.2lf\t%.2lf", p.id, p.name, p.qty, p.price, p.qty * p.price);
+	resetcolor();
 }

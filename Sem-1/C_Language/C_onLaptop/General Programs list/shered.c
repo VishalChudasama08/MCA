@@ -1,4 +1,3 @@
-
 // 1. Write a program to print “Hello World” message.
 #include<stdio.h>
 #include<conio.h>
@@ -8,6 +7,8 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Hello World!
 
 // 2. Write a program to print Name, Address and Birth Date.
 #include<stdio.h>
@@ -23,6 +24,10 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Name: Vishal
+Address : Dwarka - 361306
+Birth Date : 18 / 12 / 2002
 
 // 3. Write a program to add, multiply and divide two integers and float numbers. 
 #include<stdio.h>
@@ -63,6 +68,30 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+
+Enter first integer number : 12
+
+Enter second integer number : 10
+
+For Integer Number
+
+12 + 10 = 22
+12 - 10 = 2
+12 * 10 = 120
+12 / 10 = 1
+
+Enter first float number : 12.10
+
+Enter second float number : 12.12
+
+
+For Floting Number
+
+12.100000 + 12.120000 = 24.220000
+12.100000 - 12.120000 = -0.020000
+12.100000 * 12.120000 = 146.652003
+12.100000 / 12.120000 = 0.998350
 
 // 4. Write a program to find area of a rectangle.(Area=l*b)
 #include<stdio.h>
@@ -84,6 +113,13 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter length of reactangle : 12
+
+Enter breadth of reactangle : 13
+
+
+Area of Rectangle : 156.00
 
 // 5. Write a program to find volume of cube.(Area=l*b*h)
 #include<stdio.h>
@@ -107,6 +143,15 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter length of cude : 12
+
+Enter breadth of cude : 23
+
+Enter height of cude : 21
+
+
+area of cube is : 5796.00
 
 // 6. Write a program to find area of triangle.(Area=(l*b)/2)
 #include<stdio.h>
@@ -129,6 +174,12 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter length of triangle : 12
+
+Enter breadth of triangle : 10
+
+area of triangle is : 60.00
 
 // 7. Write a program in C to convert the given temperature from Fahrenheit to Celsius using the formula C = (F – 32) / 1.8
 #include<stdio.h>
@@ -148,7 +199,10 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter tempereture in fahrenhit : 152
 
+Tempereture in Celsius is 66.67
 // 8. Write a program convert temperature from Celsius to Fahrenheit where temperature in Celsius is entered by user.(C = 5/9 (f – 32))
 #include<stdio.h>
 #include<conio.h>
@@ -167,6 +221,10 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter tempereture in celsius : 35
+
+Tempereture in Fahrenheit is 95.00
 
 // 9. Write a program to calculate area of circle.(pi*r*r)
 #include<stdio.h>
@@ -187,6 +245,9 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter circle radius : 12
+circle area is : 452.16
 
 // 10. Write a program in C to find the Circumference of a circle.(2*pi*r)
 #include<stdio.h>
@@ -207,6 +268,9 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter circle radius : 12
+circumference circle is : 75.36
 
 // 11. Write a program in C to calculate simple interest using formula SI = (P*R*N) / 100.
 #include<stdio.h>
@@ -231,6 +295,14 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter principal amount : 12300
+
+Enter rate of interest per year : 123
+
+Enter time period in years : 45
+
+simple interest is : 680805.00
 
 // 12. Write a program in C to display sum from 1 to N using the formula N(N+1)/2.
 #include<stdio.h>
@@ -249,6 +321,10 @@ int main() {
 long int nsum(long int n) {
 	return n * (n + 1) / 2;
 }
+Output:
+Enter nth number : 12
+
+Sum of 1 to 12 number is 78
 
 // 13. Write a program that reads the radius of sphere “r”, then it calculates its volume “V” and surface area “A” using formulas. (pi*r*r*4)/3
 #include<stdio.h>
@@ -278,6 +354,11 @@ float volume(float r) {
 float area(float r) {
 	return 4 * PI * r * r;
 }
+Output:
+Enter Radius or Sphere : 12
+
+Volume of Sphere is 5425.92
+Area of Sphere is 1808.64
 
 // 14. Write a C program to obtain an hourly pay rate and the number of hours worked by workers. Calculate their pay for the week.
 #include<stdio.h>
@@ -302,6 +383,12 @@ int main() {
 long payForWeek(int rate, int time) {
 	return 7 * rate * time;
 }
+Output:
+Enter Hourly pay rate : 12
+
+Enter number of hours : 10
+
+Pay for the week is 840
 
 // 15. Write a C program to find out the area of right angle triangle using formula area = ½ * base * height.
 #include<stdio.h>
@@ -326,6 +413,12 @@ int main() {
 float area(float base, float height) {
 	return (1.5 * base * height);
 }
+Output:
+Enter base of right angle triangle : 12
+
+Enter height of right angle triangle : 15
+
+Area of right angle triangle is 270.00
 
 // 16. Write a C program to find out compound interest using following formula Compound Interest = P * ( 1 + r / 100 ) n - P. 
 #include<stdio.h>
@@ -356,6 +449,15 @@ float interest(long p, int r, int n) {
 	//printf("%f", a);
 	return a - p;
 }
+Output:
+
+Enter Principal amount : 1200
+
+Enter rate of interest : 5
+
+Enter time per year : 12
+
+Compound interest is 955.03
 
 // 17. Write a C program to read a floating point number from user and then display the right most digit of the integral part of the number.
 #include<stdio.h>
@@ -373,7 +475,10 @@ int main() {
 	getch();
 	return 0;
 }
+Output:
+Enter floting number : 12.123
 
+Ingeral part is 12
 
 // 18. Write a C program to read the distance between two cities in KM. and print that distance in meters, feet, inches and centimeters.
 #include<stdio.h>
@@ -403,6 +508,13 @@ float kmtom(float km) { return (1000 * km); }
 float kmtocm(float km) { return (100000 * km); }
 float kmtoft(float km) { return (3280.84 * km); }
 float kmtoin(float km) { return (39370.1 * km); }
+Output:
+Enter distance between two cities in km : 45
+
+45.00 km = 45000.00 meters
+45.00 km = 147637.80 feet
+45.00 km = 1771654.50 inches
+45.00 km = 4500000.00 centimeters
 
 // 19. Write a C program to convert angle in degrees to radians using formula angle in radians = (angle in degrees * ∏) / 180.
 #include<stdio.h>
@@ -426,9 +538,12 @@ int main() {
 float dtor(float d) {
 	return (d * PI) / 180.0;
 }
+Output:
+Enter degrees : 12
+
+12.00 degrees = 0.21 radians
 
 /* 20. Write a program to accept number of days and print year, month and remaining days. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -457,10 +572,15 @@ void day_to_year_month(int n) {
 	}
 	printf("\n\t %d Remaining days", n);
 }
+Output:
+Enter number of days : 400
+
+1 Year
+1 Month
+5 Remaining days
 
 /* 21. Write a C program to read a price of an item in (float) like 10.25 and print output in
 (int) paisa like1025. */
-
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
@@ -501,6 +621,12 @@ int remove_point(float n) {
 	}
 	return c;
 }
+Output:
+Enter floating point number : 10.25
+
+Answer : 1025
+10.250000
+Answer : 102500000
 
 /* 22. Write a C program to read number and display in the form of Hour, Min and Seconds. */
 #include <stdio.h>
@@ -523,6 +649,11 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Seconds to minits and hours
+Enter seconds : 18240
+
+18240 Seconds = 5 Hour : 4 Minits : 0 Seconds
 
 /* 23. Write a program to Find out Maximum number among two numbers. */
 #include<stdio.h>
@@ -547,9 +678,14 @@ int find_max(int a, int b) {
 	else
 		return b;
 }
+Output:
+Enter number 1 : 1
+
+Enter number 2 : 3
+
+Maximum value is : 3
 
 /* 24. Write a program to Check whether given number is positive, negative or zero. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -571,9 +707,12 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Enter number : -2
+
+Number is negative
 
 /* 25. Write a program to arrange any three numbers in ascending order. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -608,6 +747,10 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Enter number(ex. 1 2 3) : 1 4 2
+
+Ascending order : 1 2 4
 
 /* 26. Write a program to Find out given year which is leap or not. */
 #include<stdio.h>
@@ -633,10 +776,13 @@ int main() {
 int isLeapYear(int year) {
 	return (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
 }
+Output:
+Enter year : 2025
+
+2025 is not a leap year.
 
 /* 27. Write a program in C to enter any arithmetic operator (+ - * /) and two integer values
 and display result according to selection of operator. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -670,10 +816,17 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Enter number 1 : 12
+
+Enter number 2 : 18
+
+Enter operator (+-*/ ) : +
+
+Result : 30.00
 
 /* 28. Write a program that read a number from 1 TO 7 and then print corresponding day
 name from the week using switch-case. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -703,11 +856,14 @@ void dayName(int day) {
 	default: printf("\n\tInvalid day number. Please enter a number between 1 and 7.");
 	}
 }
+Output:
+Enter day number(1 to 7) : 5
+
+Day is Thursday
 
 /* 29. Write a program to enter 4 digit numbers from user and display it in string.
 e.g.  Input : 1234
 output : One Two Three Four. */
-
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -752,7 +908,10 @@ void printDigitInWords(int num) {
 		reverse = reverse / 10;
 	}
 }
+Output:
+Enter a 4 - digit number : 1432
 
+Number in words : One Four Three Two
 
 /* 41. Write a program to accept numbers from the user till their sum exceeds 50 */
 #include<stdio.h>
@@ -778,6 +937,18 @@ void exceed50() {
 	} while (sum <= 50);
 	printf("\n\tYou are exceeds sum of 50!");
 }
+Output:
+Enter number : 12
+
+Enter number : 10
+
+Enter number : 8
+
+Enter number : 4
+
+Enter number : 34
+
+You are exceeds sum of 50!
 
 /* 42. Print first 50 odd numbers. Note that program should display only five numbers per line. */
 #include<stdio.h>
@@ -809,11 +980,19 @@ void first50Odd() {
 		i++;
 	}
 }
+Output:
+1       3       5       7       9
+11      13      15      17      19
+21      23      25      27      29
+31      33      35      37      39
+41      43      45      47      49
+51      53      55      57      59
+61      63      65      67      69
+71      73      75      77      79
+81      83      85      87      89
+91      93      95      97      99
 
-/*
-43. Write a C program to read 4-digit number and print the sum of first and last digit of the number.
-*/
-
+/*43. Write a C program to read 4-digit number and print the sum of first and last digit of the number.*/
 #include<stdio.h>
 #include<conio.h>
 
@@ -842,9 +1021,12 @@ int firstAndLastSum(int n) {
 	sum = sum + rem;
 	return sum;
 }
+Output:
+Enter number : 1234
+
+First and last sum is 5
 
 /* 44. Write a program to find sum of all digits of given number. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -871,9 +1053,12 @@ int digitSum(int n) {
 	}
 	return sum;
 }
+Output:
+Enter number : 154
+
+Sum of Digits is 10
 
 /* 45. Write a program to find reverse of a given number. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -900,9 +1085,12 @@ int reverse(int n) {
 	}
 	return rev;
 }
+Output:
+Enter number : 1534
+
+it's Reverse number is 4351
 
 /* 47. Write a program to find out and print all prime numbers lying between 1 to 200. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -939,9 +1127,10 @@ void prime200() {
 		i++;
 	}
 }
+Output:
+2       3       5       7       11      13      17      19      23      29      31      37      41      43      47      53      59      61      67      7173      79      83      89      97      101     103     107     109     113     127     131     137     139     149     151     157     163     167     173     179       181     191     193     197     199
 
 /* 48 To check whether the given number is valid binary or not. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -975,9 +1164,12 @@ int isBinary(long int binary) {
 	}
 	return flag;
 }
+Output:
+Enter Binary number : 10110001
+
+Yes, 10110001 is valid binary
 
 /* 49 To check whether the given number is valid Octal or not. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -1011,9 +1203,12 @@ int isOctal(long int octal) {
 	}
 	return flag;
 }
+Output:
+Enter Octal number : 172
+
+Yes, 172 is valid octal
 
 /* 50. Write a program generate Sum of two binary numbers. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -1056,9 +1251,14 @@ long decimalToBinary(int decimal) {
 
 	return binary;
 }
+Output:
+Enter Decimal number : 182
+
+Enter Decimal number : 182
+
+182 + 182 = 101100
 
 /* 51. To check whether the giver number is palindrome or not. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -1085,9 +1285,14 @@ int reverse(int n) {
 	}
 	return rev;
 }
+Output:
+check is palindrome
+
+Enter number : 121
+
+Yes, This is palindrome number
 
 /* 52. Write a program to Check whether number is Armstrong or not. */
-
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -1129,9 +1334,12 @@ int digitCount(int n) {
 	}
 	return c;
 }
+Output:
+Enter number : 153
+
+Yes, This is Armstrong number
 
 /* 53. Write a program to check whether number is krishnamurti or not. */
-
 #include<stdio.h>
 #include<conio.h>
 #include<math.h>
@@ -1171,12 +1379,14 @@ long factorial(long n) {
 	//printf("\n%ld", fact);
 	return fact;
 }
+Output:
+Check Krishnamurti number
 
+Enter number : 145
 
-
+Yes, This is Krishnamurti number
 
 /* 54. Write a program to convert decimal to binary. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -1232,9 +1442,13 @@ void decimalToBinaryBitwise(int n) {
 		}
 	}
 }
+Output:
+Enter Decimal number : 182
+Decimal = 182
+Binary = 10110110
+BinaryBitwise = 10110110
 
 /* 55. Write a program to convert decimal to octal. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -1262,6 +1476,10 @@ int decimalToOctal(int decimal) {
 	}
 	return octal;
 }
+Output:
+Enter Decimal number : 153289
+
+153289 Decimal = 453311 Octal
 
 
 /* 59 Write a program to accept amount paid as number (integer) and display it in words. (e.g. Rs 1541 in word : One Thousand Five Hundred Fourty One ). Consider user will enter more than 999 and less than 9999.  */
@@ -1383,7 +1601,9 @@ void inword1(long x) {
 	default: printf("invalid"); break;
 	}
 }
-
+Output:
+Enter Number : 1432
+one thousand four hundred thirty two
 
 
 /* 61-94 all patterns */
@@ -2076,13 +2296,379 @@ int menu() {
 	printf("\n\t 67. pattern 67\t\t77. pattern 77\t\t87. pattern 87");
 	printf("\n\t 68. pattern 68\t\t78. pattern 78\t\t88. pattern 88");
 	printf("\n\t 69. pattern 69\t\t79. pattern 79\t\t89. pattern 89");
-	printf("\n\t 90. pattern 90");
-	printf("\n\t 91. pattern 91");
+	printf("\n\t 90. pattern 90\t\t91. pattern 91\t\t92. pattern 92");
+	printf("\n\t 93. pattern 93");
 	printf("\n\n\tEnter Number: ");
 	scanf("%d", &i);
 	v++;
 	return i;
 }
+Output:
+2╠
+Series
+0. Exit                56. pattern + 57. pattern x
+58. pattern 58         59. pattern 59          60. pattern 60
+61. pattern 61         71. pattern 71          81. pattern 81
+62. pattern 62         72. pattern 72          82. pattern 82
+63. pattern 63         73. pattern 73          83. pattern 83
+64. pattern 64         74. pattern 74          84. pattern 84
+65. pattern 65         75. pattern 75          85. pattern 85
+66. pattern 66         76. pattern 76          86. pattern 86
+67. pattern 67         77. pattern 77          87. pattern 87
+68. pattern 68         78. pattern 78          88. pattern 88
+69. pattern 69         79. pattern 79          89. pattern 89
+90. pattern 90         91. pattern 91          92. pattern 92
+93. pattern 93
+
+Enter Number : 56
+
+Enter n : 5
++
++
+++++ +
++
++
+
+
+Continue ? then press enter                                           …[skip writing common part]
+
+Enter Number : 57
+
+Enter n : 5
+* *
+**
+*
+**
+**
+
+Enter Number : 58
+
+Enter n : 5
+A       B       C       D       E
+F       G       H       I       J
+K       L       M       N       O
+P       Q       R       S       T
+U       V       W       X       Y
+
+Enter Number : 59
+
+Enter n : 5
+1       2       3       4       5
+A       B       C       D       E
+1       2       3       4       5
+A       B       C       D       E
+1       2       3       4       5
+
+Enter Number : 60
+
+Enter n : 5
+* ****
+*****
+*****
+*****
+*****
+
+Enter Number : 61
+
+Enter n : 5
+1       2       3       4       5
+1       2       3       4       5
+1       2       3       4       5
+1       2       3       4       5
+1       2       3       4       5
+
+Enter Number : 62
+
+Enter n : 5
+1       2       3       4       5
+6       7       8       9       10
+11      12      13      14      15
+16      17      18      19      20
+21      22      23      24      25
+
+Enter Number : 63
+
+Enter n : 5
+*
+**
+***
+****
+*****
+
+Enter Number : 64
+
+Enter n : 5
+*
+**
+***
+****
+*****
+
+Enter Number : 65
+
+Enter n : 5
+*
+**
+***
+****
+*****
+
+Enter Number : 66
+
+Enter n : 5
+1
+1 2
+1 2 3
+1 2 3 4
+1 2 3 4 5
+
+Enter Number : 67
+
+Enter n : 5
+1
+2 2
+3 3 3
+4 4 4 4
+5 5 5 5 5
+
+Enter Number : 68
+
+Enter n : 5
+55555
+4444
+333
+22
+1
+
+Enter Number : 69
+
+Enter n : 5
+$$$$$
+$$$$
+$$$
+$$
+$
+
+Enter Number : 70
+
+Enter n : 5
+$ $ $ $ $
+$ $ $ $
+$ $ $
+$ $
+$
+
+Enter Number : 71
+
+Enter n : 5
+1
+2 3
+4 5 6
+7 8 9 10
+
+Enter Number : 72
+
+Enter n : 5
+1
+12
+123
+1234
+12345
+
+Enter Number : 73
+
+Enter n : 4
+1   2   3   4
+5   6   7
+8   9
+10
+
+Enter Number : 74
+
+Enter n : 5
+1 2 3 4 5
+1 2 3 4
+1 2 3
+1 2
+1
+
+Enter Number : 75
+
+Enter n : 4
+1 2 3 4
+5 6 7
+8 9
+10
+
+Enter Number : 76
+
+Enter n : 5
+25      24      23      22      21
+20      19      18      17      16
+15      14      13      12      11
+10      9       8       7       6
+5       4       3       2       1
+Enter Number : 77
+
+Enter n : 4
+10 9 8 7
+6 5 4
+3 2
+1
+
+Enter Number : 78
+
+Enter n : 4
+1     1
+12   21
+123 321
+1234321
+
+Enter Number : 79
+
+Enter n : 5
+1
+A B
+1 2 3
+C D E F
+1 2 3 4 5
+
+Enter Number : 80
+
+Enter n : 5
+A
+A B
+A B C
+A B C D
+A B C D E
+
+
+Enter Number : 81
+
+Enter n : 5
+*
+**
+***
+****
+*****
+****
+***
+**
+*
+
+Enter Number : 82
+
+Enter n : 5
+*
+**
+**
+**
+**
+**
+**
+**
+*
+
+Enter Number : 83
+
+Enter n : 5
+* ****
+**
+**
+**
+*****
+
+Enter Number : 84
+
+Enter n : 4
+* *
+****
+******
+********
+
+
+Enter Number : 85
+
+Enter n : 5
+1
+1 1
+1 2 1
+1 3 3 1
+1 4 6 4 1
+
+Enter Number : 86
+
+Enter n : 5
+a b c d e
+a b c d
+a b c
+a b
+a
+
+Enter Number : 87
+
+Enter n : 5
+1
+01
+101
+0101
+10101
+
+Enter Number : 88
+
+Enter n : 5
+1
+1 3
+1 3 5
+1 3 5 7
+1 3 5 7 9
+
+Enter Number : 89
+
+Enter n : 5
+1 4 9 16 25
+1 4 9 16
+1 4 9
+1 4
+1
+
+Enter Number : 90
+
+Enter n : 5
+A       a       A       a       A
+a       A       a       A       a
+A       a       A       a       A
+a       A       a       A       a
+A       a       A       a       A
+
+Enter Number : 91
+
+Enter n : 5
+a       b       c       d       e
+f       g       h       i       j
+k       l       m       n       o
+p       q       r       s       t
+u       v       w       x       y
+
+Enter Number : 92
+
+Enter n : 5
+1
+2 1 2
+3 2 1 2 3
+4 3 2 1 2 3 4
+5 4 3 2 1 2 3 4 5
+
+Enter Number : 93
+
+Enter n : 5
+* ********
+********
+******
+****
+**
+
+Enter Number : 0
 
 
 /*
@@ -2131,6 +2717,7 @@ float s110(int);
 float s111(int);
 float s112(int, int);
 long fact(int);
+int menu();
 
 int main() {
 	int n, i, x = 1;
@@ -2364,9 +2951,9 @@ float s110(int n) {
 	int i;
 	float sum = 0;
 	for (i = 1;i <= n;i++) {
-		printf("\nsum=%f, %f", sum, (1.0 / (i * i)));
+		//printf("\nsum=%f, %f", sum, (1.0 / (i * i)));
 		sum = sum + (1 / i * i);
-		printf("\nsum=%f, %f", sum, (1.0 / (i * i)));
+		//printf("\nsum=%f, %f", sum, (1.0 / (i * i)));
 	}
 	return sum;
 }
@@ -2400,8 +2987,113 @@ long fact(int n) {
 		fact = fact * i;
 	return fact;
 }
+Output:
 
+----------Find out the Sum of following series----------
 
+0. Exit program
+1. 1 + 2 + 3 + 4 + ... + n
+2. 2 + 4 + 6 + 8 + ... + n
+3. 1 + 3 + 5 + 7 + ... + n
+4. 12 + 22 + 32 + 42 + ... + n
+5. 22 + 42 + 62 + 82 + ... + n
+6. 22 - 42 + 62 - 82 + ... + n
+7. 1 ^ 2 + 2 ^ 2 + 3 ^ 2 + 4 ^ 2 + ... + n
+8. 1 + 4 - 9 + 16 - 25 + ... + n
+9. 1!+ 2!+ 3!+ 4!+ ... + n
+10. 1 / 1!+ 1 / 2!+ 1 / 3!+ 1 / 4!+ ... + n
+11. 1 / 22 + 1 / 42 + 1 / 62 + 1 / 82 + ... + n
+12. x + x ^ 2 / 2!+ x ^ 3 / 3!+ x ^ 4 / 4!+ ... + n
+13. x + x ^ 3 / 3!+ x ^ 5 / 5!+ x ^ 7 / 7!+ ... + n
+14. x + x ^ 2 + x ^ 3 + x ^ 4 + ... + n
+15. 1 + 2 4 + 8 + 16 + ... + n
+16. 1 + 1 / 4 + 1 / 9 + 1 / 16 + ... + n
+17. 1 / 1 ^ 2 - 1 / 2 ^ 2 + 1 / 3 ^ 2 - 1 / 4 ^ 2 + ... + n
+18. x + x ^ 2 / 2!+ x ^ 4 / 4!+ x ^ 6 / 6!+ ... + n
+
+Enter your choice : 1
+
+Enter n numbers value : 10
+Answer : 55
+Press any key for Continue …[skip writing common part]
+Enter your choice : 2
+
+Enter n numbers value : 10
+Answer : 110
+
+Enter your choice : 3
+
+Enter n numbers value : 10
+Answer : 100
+
+Enter your choice : 4
+
+Enter n numbers value : 70
+Answer : 24990
+
+Enter your choice : 5
+
+Enter n numbers value : 100
+Answer : 101200
+
+Enter your choice : 6
+
+Enter n numbers value : 8
+Answer : -80
+
+Enter your choice : 9
+
+Enter n numbers value : 9
+Answer : 409113
+
+Enter your choice : 10
+
+Enter n numbers value : 10
+Answer : 1.718
+
+Enter your choice : 11
+
+Enter n numbers value : 11
+Answer : 0.1438
+
+Enter your choice : 12
+
+Enter n numbers value : 12
+Enter base x value : 2
+Answer : 6.389
+
+Enter your choice : 13
+
+Enter n numbers value : 13
+Enter base x value : 2
+Answer : 3.655
+
+Enter your choice : 14
+
+Enter n numbers value : 14
+Enter base x value : 3
+Answer : 7174452
+
+Enter your choice : 15
+
+Enter n numbers value : 15
+Answer : 32767
+
+Enter your choice : 16
+
+Enter n numbers value : 5
+Answer : 1.000
+
+Enter your choice : 17
+
+Enter n numbers value : 5
+Answer : 1.000
+
+Enter your choice : 18
+
+Enter n numbers value : 4
+Enter base x value : 2
+Answer : 3.756
 
 
 /* 113. Write a program to print sum of any 10 numbers using 1-D array. */
@@ -2419,9 +3111,10 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Sum of 10 number is : 155
 
 /* 114. Write a program to find maximum and minimum element from 1- Dimensional array. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2440,9 +3133,11 @@ int main() {
 	// getch();
 	return 0;
 }
+Output:
+Maximum number is : 80
+Minimum number is : 8
 
 /* 115. Write a program to perform selection sort using 1-D array. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2476,9 +3171,12 @@ void selectionSort(int arr[], int n) {
 		}
 	}
 }
+Output:
+
+Before select sort array value is : 18, 12, 10, 80, 8, 16, 17, 18, 9, 20,
+After select sort array value is : 8, 9, 10, 12, 16, 17, 18, 18, 20, 80,
 
 /* 116. Write a program to perform bubble sort Using 1-D Array. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2512,9 +3210,12 @@ void bubbleSort(int arr[], int n) {
 		}
 	}
 }
+Output:
+
+Before select sort array value is : 18, 12, 10, 80, 8, 16, 17, 50, 9, 20,
+After select sort array value is : 8, 9, 10, 12, 16, 17, 18, 20, 50, 80,
 
 /* 117. Write a program of linear and binary search. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2590,9 +3291,14 @@ int binarySearch(int arr[], int n, int value) {
 		return -1;
 	}
 }
+Output:
+Array value is : 8, 9, 10, 12, 16, 17, 18, 20, 50, 80,
+Enter value from array : 12
+
+Search by 'Liner search' value 12 At index : 3
+Search by 'Binary search' value 12 At index : 3
 
 /* 118. Write a program to insert an element in 1-D array at specified place. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2633,9 +3339,15 @@ int insertAt(int arr[], int n, int value, int at) {
 	}
 	return v;
 }
+Output:
+Array value is : 8, 9, 10, 12, 16, 17, 18, 20, 50, 80,
+Enter value to insert in array : 15
+
+Enter index value : 4
+
+After Insert Array value is : 8, 9, 10, 12, 15, 16, 17, 18, 20, 50, 80,
 
 /* 119. Write a program to delete an element from 1-D array. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2680,9 +3392,13 @@ int deleteAt(int arr[], int n, int value) {
 	}
 	return v;
 }
+Output:
+Array value is : 8, 9, 10, 12, 16, 17, 18, 20, 50, 80,
+Enter value to delete from array : 17
+
+After Delete Array value is : 8, 9, 10, 12, 16, 18, 20, 50, 80,
 
 /* 120. Write a program to swap even position number with odd position. */
-
 #include<stdio.h>
 #include<conio.h>
 
@@ -2715,9 +3431,11 @@ void swapEvenOdd(int arr[], int n) {
 		arr[i + 1] = temp;
 	}
 }
+Output:
+Array value is : 8, 9, 10, 11, 16, 17, 18, 21, 80, 71,
+After Swap Even - Odd position Array value is : 9, 8, 11, 10, 17, 16, 21, 18, 71, 80,
 
 /* 121. Write a program to Read n x n matrix. Print the original matrix and its transpose. */
-
 #include<stdio.h>
 #include<conio.h>
 #define MAX 20
@@ -2765,9 +3483,30 @@ void tra_matrix(int m[MAX][MAX], int r, int c) {
 		printf("\n");
 	}
 }
+Output:
+Enter row and column : 3 3
+Enter value of matrix[0][0] : 1
+Enter value of matrix[0][1] : 2
+Enter value of matrix[0][2] : 3
+Enter value of matrix[1][0] : 4
+Enter value of matrix[1][1] : 5
+Enter value of matrix[1][2] : 6
+Enter value of matrix[2][0] : 7
+Enter value of matrix[2][1] : 8
+Enter value of matrix[2][2] : 9
+
+Original matrix
+1       2       3
+4       5       6
+7       8       9
+------------------------
+
+Transpose matrix
+1       4       7
+2       5       8
+3       6       9
 
 /* 122. Write a Program to Read n x n two matrices A and B and find sum and multiplication. */
-
 #include<stdio.h>
 #include<conio.h>
 #include<stdlib.h>
@@ -2846,7 +3585,52 @@ void matrix_mul(int m1[MAX][MAX], int m2[MAX][MAX], int r, int c) {
 		printf("\n");
 	}
 }
+Output:
+Enter row(row and column both are same) : 3
+Enter value of matrix[0][0] : 1
+Enter value of matrix[0][1] : 2
+Enter value of matrix[0][2] : 3
+Enter value of matrix[1][0] : 4
+Enter value of matrix[1][1] : 5
+Enter value of matrix[1][2] : 6
+Enter value of matrix[2][0] : 7
+Enter value of matrix[2][1] : 8
+Enter value of matrix[2][2] : 9
 
+
+Second matrix
+Enter value of matrix[0][0] : 9
+Enter value of matrix[0][1] : 8
+Enter value of matrix[0][2] : 7
+Enter value of matrix[1][0] : 6
+Enter value of matrix[1][1] : 5
+Enter value of matrix[1][2] : 4
+Enter value of matrix[2][0] : 3
+Enter value of matrix[2][1] : 2
+Enter value of matrix[2][2] : 1
+
+First matrix :
+1       2       3
+4       5       6
+7       8       9
+------------------------
+
+Second matrix :
+9       8       7
+6       5       4
+3       2       1
+------------------------
+
+Sum of two matrix :
+10      10      10
+10      10      10
+10      10      10
+------------------------
+
+Multiplication of two matrix :
+30      24      18
+84      69      54
+138     114     90
 
 /* 123. Write a program in C to enter marks of 10 students. Count how many students have secured marks above 80 and below 40.  */
 
@@ -2872,36 +3656,17 @@ int main() {
 	// getch();
 	return 0;
 }
-/* 124. An election is contested by 5 candidates. The candidates are numbered 1 to 5 and the voting is done by marking the candidate number on the ballot paper. Write a program in C to read the ballots and count the votes cast for each candidate using an array variable count. In case a number read is outside the range 1 to 5, the ballot should be considered as a spoilt ballot and the program should also count the number of spoilt ballots. */
+Output:
+Enter marks of student 1 : 50
+Enter marks of student 2 : 38
+Enter marks of student 3 : 60
+Enter marks of student 4 : 76
+Enter marks of student 5 : 80
+Enter marks of student 6 : 90
+Enter marks of student 7 : 85
+Enter marks of student 8 : 92
+Enter marks of student 9 : 45
+Enter marks of student 10 : 64
 
-#include<stdio.h>
-#include<conio.h>
-
-int main() {
-	int votes[5] = { 0 }, vote, i, spoilt = 0, total = 0;
-	// clrscr();
-	printf("\n\tEnter votes (1 to 5). Enter 0 to stop voting:\n");
-	while (1) {
-		printf("\tVote: ");
-		scanf("%d", &vote);
-		if (vote == 0) {
-			break;
-		}
-		else if (vote >= 1 && vote <= 5) {
-			votes[vote - 1]++;
-			total++;
-		}
-		else {
-			spoilt++;
-		}
-	}
-	printf("\n\tVote count:\n");
-	for (i = 0; i < 5; i++) {
-		printf("\tCandidate %d: %d votes\n", i + 1, votes[i]);
-	}
-	printf("\tSpoilt ballots: %d\n", spoilt);
-	printf("\tTotal valid votes: %d\n", total);
-
-	// getch();
-	return 0;
-}
+Number of students secured marks above 80 : 3
+Number of students secured marks below 40 : 1
