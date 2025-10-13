@@ -1,0 +1,183 @@
+SQL> set linesize 200;
+SQL> set pagesize 100;
+SQL> -- day-10
+SQL> select tname from tab;
+
+TNAME                                                                                                                                                                                                   
+--------------------------------------------------------------------------------------------------------------------------------                                                                        
+DEPT                                                                                                                                                                                                    
+EMP                                                                                                                                                                                                     
+CLIENT_MASTER                                                                                                                                                                                           
+PRODUCT_MASTER                                                                                                                                                                                          
+SALES_ORDER                                                                                                                                                                                             
+SALES_ORDER_DETAILS                                                                                                                                                                                     
+TREM_MASTER                                                                                                                                                                                             
+ENTRANCE_TEST                                                                                                                                                                                           
+ETEST_DETAILS                                                                                                                                                                                           
+DISTRIBUTOR                                                                                                                                                                                             
+DIST_ITEM                                                                                                                                                                                               
+SMAN_MST                                                                                                                                                                                                
+SALESMAN_MASTER                                                                                                                                                                                         
+APPLICANT_MASTER                                                                                                                                                                                        
+ITEM                                                                                                                                                                                                    
+WORKER                                                                                                                                                                                                  
+JOB                                                                                                                                                                                                     
+ASSIGNED                                                                                                                                                                                                
+STUDENT                                                                                                                                                                                                 
+COURSE                                                                                                                                                                                                  
+FYRANKERS                                                                                                                                                                                               
+ENROLL                                                                                                                                                                                                  
+SYRANKERS                                                                                                                                                                                               
+EMPLOYEE                                                                                                                                                                                                
+COMPANY                                                                                                                                                                                                 
+CUSTOMER                                                                                                                                                                                                
+APPLICANT                                                                                                                                                                                               
+CUSTOMERS                                                                                                                                                                                               
+SUPPLIER                                                                                                                                                                                                
+STUDENTS1                                                                                                                                                                                               
+ENROLLMENT1                                                                                                                                                                                             
+
+31 rows selected.
+
+SQL> select * from PRODUCT;
+select * from PRODUCT
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from ORDER_DETAILS;
+select * from ORDER_DETAILS
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> -- insert day-10 tables
+SQL> CREATE TABLE PRODUCT (
+  2      Prod_ID NUMBER PRIMARY KEY,
+  3      Prod_Name VARCHAR2(20),
+  4      Supplier_ID NUMBER,
+  5      Cat_ID NUMBER,
+  6      Unit VARCHAR2(10),
+  7      Price NUMBER
+  8  );
+
+Table created.
+
+SQL> 
+SQL> -- Creating the ORDER_DETAILS table
+SQL> CREATE TABLE ORDER_DETAILS (
+  2      OrderDetail_ID NUMBER PRIMARY KEY,
+  3      Order_ID NUMBER,
+  4      Prod_ID NUMBER,
+  5      Quantity NUMBER,
+  6      FOREIGN KEY (Prod_ID) REFERENCES PRODUCT(Prod_ID)
+  7  );
+
+Table created.
+
+SQL> 
+SQL> -- Inserting sample data into PRODUCTS
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (1, 'Product 1', 101, 1, 'Piece', 10);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (2, 'Product 2', 102, 2, 'Box', 20);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (3, 'Product 3', 103, 3, 'Pack', 30);
+
+1 row created.
+
+SQL> INSERT INTO PRODUCT (Prod_ID, Prod_Name, Supplier_ID, Cat_ID, Unit, Price) VALUES (4, 'Product 4', 104, 1, 'Bag', 15);
+
+1 row created.
+
+SQL> 
+SQL> -- Inserting sample data into ORDER_DETAILS
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (1, 3, 1, 10);
+
+1 row created.
+
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (2, 3, 2, 5);
+
+1 row created.
+
+SQL> INSERT INTO ORDER_DETAILS (OrderDetail_ID, Order_ID, Prod_ID, Quantity) VALUES (3, 3, 3, 3);
+
+1 row created.
+
+SQL> 
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from PRODUCT;
+
+   PROD_ID PROD_NAME            SUPPLIER_ID     CAT_ID UNIT            PRICE                                                                                                                            
+---------- -------------------- ----------- ---------- ---------- ----------                                                                                                                            
+         1 Product 1                    101          1 Piece              10                                                                                                                            
+         2 Product 2                    102          2 Box                20                                                                                                                            
+         3 Product 3                    103          3 Pack               30                                                                                                                            
+         4 Product 4                    104          1 Bag                15                                                                                                                            
+
+SQL> select * from ORDER_DETAILS;
+
+ORDERDETAIL_ID   ORDER_ID    PROD_ID   QUANTITY                                                                                                                                                         
+-------------- ---------- ---------- ----------                                                                                                                                                         
+             1          3          1         10                                                                                                                                                         
+             2          3          2          5                                                                                                                                                         
+             3          3          3          3                                                                                                                                                         
+
+SQL> -- 1. Write a PLSQL block to display total number of products ordered in Order_ID = 3
+SQL> ed
+Wrote file afiedt.buf
+
+  1  1. Write a PLSQL block to display total number of products ordered in Order_ID = 3
+  2  declare
+  3  	pruduct_number number;
+  4  begin
+  5  	select count(ORDER_ID) into pruduct_number from ORDER_DETAILS where ORDER_ID=3;
+  6  	dbms_output.put_line('pruduct number is ' || pruduct_number);
+  7* end;
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	pruduct_number number;
+  3  begin
+  4  	select count(ORDER_ID) into pruduct_number from ORDER_DETAILS where ORDER_ID=3;
+  5  	dbms_output.put_line('pruduct number is ' || pruduct_number);
+  6* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> /
+pruduct number is 3                                                                                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 1. Write a PLSQL block to display total number of products ordered in Order_ID = 3
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	pruduct_number number;
+  3  begin
+  4  	select count(ORDER_ID) into pruduct_number from ORDER_DETAILS where ORDER_ID=3;
+  5  	dbms_output.put_line('pruduct number is ' || pruduct_number);
+  6* end;
+SQL> /
+pruduct number is 3                                                                                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

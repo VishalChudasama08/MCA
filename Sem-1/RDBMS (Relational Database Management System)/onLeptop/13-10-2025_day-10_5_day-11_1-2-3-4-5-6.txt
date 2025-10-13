@@ -1,0 +1,419 @@
+SQL> set pagesize 100;
+SQL> -- day-10
+SQL> -- 5. Write a PLSQL block to display Supplier_Id and their total number of products they supply
+SQL> BEGIN
+  2  	dbms_output.put_line('SUPPLIER_ID	TOTAL_PRODUCTS');
+  3  	dbms_output.put_line('--------------------------------');
+  4  	for data in(select Supplier_ID, count(Prod_ID) as total_products from PRODUCT group by Supplier_ID)
+  5  	loop
+  6          	dbms_output.put_line('	' || data.Supplier_ID || '		' || data.total_products);
+  7  	end loop;
+  8  END;
+  9  /
+SUPPLIER_ID	TOTAL_PRODUCTS                                                      
+--------------------------------                                                
+	101		1                                                                         
+	102		1                                                                         
+	103		1                                                                         
+	104		1                                                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> -- day-11
+SQL> -- 1. Print a static string "Hello Every One.!" using an anonymous PLSQL block and      execute  it.
+SQL> BEGIN
+  2      DBMS_OUTPUT.PUT_LINE('Hello Every One...!');
+  3  END;
+  4  /
+Hello Every One...!                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 2. Write a PLSQL block to display a greeting message like: "Hi!! Today is 3rd November 2021, Friday.
+SQL> BEGIN
+  2  	dbms_output.put_line('Hey ! Today is ' || to_char(sysdate, 'DD Month YYYY Day'));
+  3  END;
+  4  /
+Hey ! Today is 13 October   2025 Monday                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  	dbms_output.put_line('Hey ! Today is ' || to_char(sysdate, 'DD MonthYYYY, Day'));
+  3  END;
+  4  /
+Hey ! Today is 13 October  2025, Monday                                         
+
+PL/SQL procedure successfully completed.
+
+SQL> BEGIN
+  2  	dbms_output.put_line('Hey!! Today is ' || to_char(sysdate, 'DD Month YYYY, Day'));
+  3  END;
+  4  /
+Hey!! Today is 13 October   2025, Monday                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 3. Declare a string variable to store student's name, define three integer variables to store marks of 3 subjects (out of 50) of that student. Write a PLSQL code to calculate total of all three subjects and print the result in percentage.
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number(,2);
+  8  begin
+  9  	name:='&name';
+ 10  	s1:=&s1;
+ 11  	s2:=&s2;
+ 12  	s3:=&s3;
+ 13  	total := s1+s2+s3;
+ 14  	per := total/3;
+ 15  	dbms_output.put_line('Student name: ' || name);
+ 16  	dbms_output.put_line('Total marks: ' || total);
+ 17  	dbms_output.put_line('Percentage: ' || per);
+ 18  end;
+ 19  /
+Enter value for name: Vishal
+old   9: 	name:='&name';
+new   9: 	name:='Vishal';
+Enter value for s1: 45
+old  10: 	s1:=&s1;
+new  10: 	s1:=45;
+Enter value for s2: 48
+old  11: 	s2:=&s2;
+new  11: 	s2:=48;
+Enter value for s3: 49
+old  12: 	s3:=&s3;
+new  12: 	s3:=49;
+	per number(,2);
+	           *
+ERROR at line 7:
+ORA-06550: line 7, column 13: 
+PLS-00103: Encountered the symbol "," when expecting one of the following: 
+( - + case for mod new not null <an identifier> 
+<a double-quoted delimited-identifier> <a bind variable> 
+continue avg count current exists max min prior sql stddev 
+sum variance execute forall merge standard time timestamp 
+interval date 
+<a string literal with character set specification> 
+<a number> <a single-quoted SQL string> pipe 
+<an alternatively-quoted string literal with character set specification> 
+< 
+
+
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number(2,2);
+  8  begin
+  9  	name:='&name';
+ 10  	s1:=&s1;
+ 11  	s2:=&s2;
+ 12  	s3:=&s3;
+ 13  	total := s1+s2+s3;
+ 14  	per := total/3;
+ 15  	dbms_output.put_line('Student name: ' || name);
+ 16  	dbms_output.put_line('Total marks: ' || total);
+ 17  	dbms_output.put_line('Percentage: ' || per);
+ 18  end;
+ 19  /
+Enter value for name: Vishal
+old   9: 	name:='&name';
+new   9: 	name:='Vishal';
+Enter value for s1: 45
+old  10: 	s1:=&s1;
+new  10: 	s1:=45;
+Enter value for s2: 48
+old  11: 	s2:=&s2;
+new  11: 	s2:=48;
+Enter value for s3: 49
+old  12: 	s3:=&s3;
+new  12: 	s3:=49;
+declare
+*
+ERROR at line 1:
+ORA-06502: PL/SQL: numeric or value error: number precision too large 
+ORA-06512: at line 14 
+
+
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number;
+  8  begin
+  9  	name:='&name';
+ 10  	s1:=&s1;
+ 11  	s2:=&s2;
+ 12  	s3:=&s3;
+ 13  	total := s1+s2+s3;
+ 14  	per := total/3;
+ 15  	dbms_output.put_line('Student name: ' || name);
+ 16  	dbms_output.put_line('Total marks: ' || total);
+ 17  	dbms_output.put_line('Percentage: ' || per);
+ 18  end;
+ 19  /
+Enter value for name: Vishal
+old   9: 	name:='&name';
+new   9: 	name:='Vishal';
+Enter value for s1: 45
+old  10: 	s1:=&s1;
+new  10: 	s1:=45;
+Enter value for s2: 46
+old  11: 	s2:=&s2;
+new  11: 	s2:=46;
+Enter value for s3: 48
+old  12: 	s3:=&s3;
+new  12: 	s3:=48;
+Student name: Vishal                                                            
+Total marks: 139                                                                
+Percentage: 46.33333333333333333333333333333333333333                           
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 4. Write a program to divide 2 numbers and if the denominator if 0 then handle the exception.
+SQL> declare
+  2  	a number;
+  3  	b number;
+  4  	ans number;
+  5  begin
+  6  	a:=&a;
+  7  	b:=&b;
+  8  	ans:= a/b;
+  9  	dbms_output.put_line('Ans is ' || ans);
+ 10  Exception
+ 11  	when ZERO_DIVIDE then
+ 12  		dbms_output.put_line('B value is 0');
+ 13  end;
+ 14  /
+Enter value for a: 11
+old   6: 	a:=&a;
+new   6: 	a:=11;
+Enter value for b: 0
+old   7: 	b:=&b;
+new   7: 	b:=0;
+B value is 0                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 5. Write a user defined exception for above program 3 where if marks are less than 0 then appropriate error message must be shown as exception.
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number;
+  8  	marksNotZero EXSEPTION;
+  9  begin
+ 10  	name:='&name';
+ 11  	s1:=&s1;
+ 12  	s2:=&s2;
+ 13  	s3:=&s3;
+ 14  	if s1=0 || s2=0 || s3=0 then
+ 15  		RAISE marksNotZero;
+ 16  	end if;
+ 17  	total := s1+s2+s3;
+ 18  	per := total/3;
+ 19  	dbms_output.put_line('Student name: ' || name);
+ 20  	dbms_output.put_line('Total marks: ' || total);
+ 21  	dbms_output.put_line('Percentage: ' || per);
+ 22  Exception
+ 23  	when marksNotZero then
+ 24  		dbms_output.put_line('B value is 0');
+ 25  end;
+ 26  /
+Enter value for name: Vishal
+old  10: 	name:='&name';
+new  10: 	name:='Vishal';
+Enter value for s1: 0
+old  11: 	s1:=&s1;
+new  11: 	s1:=0;
+Enter value for s2: 12
+old  12: 	s2:=&s2;
+new  12: 	s2:=12;
+Enter value for s3: 13
+old  13: 	s3:=&s3;
+new  13: 	s3:=13;
+	if s1=0 || s2=0 || s3=0 then
+	             *
+ERROR at line 14:
+ORA-06550: line 14, column 15: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+. ( * @ % & - + / at mod remainder rem then 
+<an exponent (**)> and or || 
+The symbol "( was inserted before "=" to continue. 
+ORA-06550: line 14, column 26: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+) , * & - + / at mod remainder null rem returning with 
+<an exponent (**)> and or default error using || multiset 
+empty lax strict without pretty ascii true false absent 
+format allow truncate 
+The symbol ")" was substituted for "THEN" to continue. 
+
+
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number;
+  8  	marksNotZero EXCEPTION;
+  9  begin
+ 10  	name:='&name';
+ 11  	s1:=&s1;
+ 12  	s2:=&s2;
+ 13  	s3:=&s3;
+ 14  	if s1=0 || s2=0 || s3=0 then
+ 15  		RAISE marksNotZero;
+ 16  	end if;
+ 17  	total := s1+s2+s3;
+ 18  	per := total/3;
+ 19  	dbms_output.put_line('Student name: ' || name);
+ 20  	dbms_output.put_line('Total marks: ' || total);
+ 21  	dbms_output.put_line('Percentage: ' || per);
+ 22  Exception
+ 23  	when marksNotZero then
+ 24  		dbms_output.put_line('Marks less then zero! Negative marks not allowd');
+ 25  end;
+ 26  /
+Enter value for name: Vishal
+old  10: 	name:='&name';
+new  10: 	name:='Vishal';
+Enter value for s1: 1
+old  11: 	s1:=&s1;
+new  11: 	s1:=1;
+Enter value for s2: 12
+old  12: 	s2:=&s2;
+new  12: 	s2:=12;
+Enter value for s3: 13
+old  13: 	s3:=&s3;
+new  13: 	s3:=13;
+	if s1=0 || s2=0 || s3=0 then
+	             *
+ERROR at line 14:
+ORA-06550: line 14, column 15: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+. ( * @ % & - + / at mod remainder rem then 
+<an exponent (**)> and or || 
+The symbol "( was inserted before "=" to continue. 
+ORA-06550: line 14, column 26: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+) , * & - + / at mod remainder null rem returning with 
+<an exponent (**)> and or default error using || multiset 
+empty lax strict without pretty ascii true false absent 
+format allow truncate 
+The symbol ")" was substituted for "THEN" to continue. 
+
+
+SQL> /
+Enter value for name: Vishal
+old  10: 	name:='&name';
+new  10: 	name:='Vishal';
+Enter value for s1: 0
+old  11: 	s1:=&s1;
+new  11: 	s1:=0;
+Enter value for s2: 1
+old  12: 	s2:=&s2;
+new  12: 	s2:=1;
+Enter value for s3: 2
+old  13: 	s3:=&s3;
+new  13: 	s3:=2;
+	if s1=0 || s2=0 || s3=0 then
+	             *
+ERROR at line 14:
+ORA-06550: line 14, column 15: 
+PLS-00103: Encountered the symbol "=" when expecting one of the following: 
+. ( * @ % & - + / at mod remainder rem then 
+<an exponent (**)> and or || 
+The symbol "( was inserted before "=" to continue. 
+ORA-06550: line 14, column 26: 
+PLS-00103: Encountered the symbol "THEN" when expecting one of the following: 
+) , * & - + / at mod remainder null rem returning with 
+<an exponent (**)> and or default error using || multiset 
+empty lax strict without pretty ascii true false absent 
+format allow truncate 
+The symbol ")" was substituted for "THEN" to continue. 
+
+
+SQL> declare
+  2  	name varchar(15);
+  3  	s1 number;
+  4  	s2 number;
+  5  	s3 number;
+  6  	total number;
+  7  	per number;
+  8  	marksNotZero EXCEPTION;
+  9  begin
+ 10  	name:='&name';
+ 11  	s1:=&s1;
+ 12  	s2:=&s2;
+ 13  	s3:=&s3;
+ 14  	if s1=0 OR s2=0 OR s3=0 then
+ 15  		RAISE marksNotZero;
+ 16  	end if;
+ 17  	total := s1+s2+s3;
+ 18  	per := total/3;
+ 19  	dbms_output.put_line('Student name: ' || name);
+ 20  	dbms_output.put_line('Total marks: ' || total);
+ 21  	dbms_output.put_line('Percentage: ' || per);
+ 22  Exception
+ 23  	when marksNotZero then
+ 24  		dbms_output.put_line('Marks less then zero! Negative marks not allowd');
+ 25  end;
+ 26  /
+Enter value for name: Vishal
+old  10: 	name:='&name';
+new  10: 	name:='Vishal';
+Enter value for s1: 0
+old  11: 	s1:=&s1;
+new  11: 	s1:=0;
+Enter value for s2: 13
+old  12: 	s2:=&s2;
+new  12: 	s2:=13;
+Enter value for s3: 14
+old  13: 	s3:=&s3;
+new  13: 	s3:=14;
+Marks less then zero! Negative marks not allowd                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 6. Write a PLSQL block to find the largest of three numbers
+SQL> declare
+  2  	no1 number;
+  3  	no2 number;
+  4  	no3 number;
+  5  begin
+  6  	no1:=&no1;
+  7  	no2:=&no2;
+  8  	no3:=&no3;
+  9  	if no1>no2 AND no1>no3 then
+ 10  		dbms_output.put_line('max number is: ' || no1);
+ 11  	elsif no2>no3 then
+ 12  		dbms_output.put_line('max number is: ' || no2);
+ 13  	else
+ 14  		dbms_output.put_line('max number is: ' || no3);
+ 15  	end if;
+ 16  end;
+ 17  /
+Enter value for no1: 12
+old   6: 	no1:=&no1;
+new   6: 	no1:=12;
+Enter value for no2: 13
+old   7: 	no2:=&no2;
+new   7: 	no2:=13;
+Enter value for no3: 14
+old   8: 	no3:=&no3;
+new   8: 	no3:=14;
+max number is: 14                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;
