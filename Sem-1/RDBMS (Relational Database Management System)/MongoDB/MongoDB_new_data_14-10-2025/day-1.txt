@@ -1,0 +1,122 @@
+use Div_C   //create database of name Div_C
+
+> show dbs // show databse
+
+db.createCollection("Demo");
+
+show collections //show no of collections in database
+
+> db.createCollection("Demo");
+{ "ok" : 1 }
+> show collections
+Demo
+> show dbs
+Div-A   0.000GB
+Div_C   0.000GB
+admin   0.000GB
+anu_db  0.000GB
+config  0.000GB
+local   0.000GB
+test    0.000GB
+
+> db.version()
+4.2.7
+
+----------------------------------------------------
+Person<- name,mobno,address,gender,dob
+()<-function
+{}<-document
+[]<-array
+
+db.Person.insert({
+	_id:1,
+	name:"Jinal",
+	mobno:12345,
+	address:"A'bad",
+	gender:"Female",
+	dob:"09-12-22"
+})
+WriteResult({ "nInserted" : 1 })
+
+db.Person.insert({
+	_id:2,
+	name:"Kinjal",
+	mobno:12345,
+	address:"A'bad",
+	gender:"Female",
+	dob:"09-12-22"
+})
+
+
+--------------------
+> db.dropDatabase()	<--drop database
+{ "ok" : 1 }
+db.Person.drop() <--delete collection
+> db.Demo.drop()
+true
+
+
+
+
+
+------------------TEACHER-----------------------
+use Teacher
+db.createCollection("Teacher_Master")
+
+db.Teacher_Master.insert(
+{	
+	_id:1,
+	Name:"Jinal",
+	Age:42,
+	Subject:["Hindi","Gujarati"],
+	Dob:"8-Oct-22",
+	Gender:"Female",
+	Salary:40000,
+	City:"Ahmedabad"
+}
+)
+-------------------------------------
+db.Teacher_Master.insertMany([
+{	
+	_id:2,
+	Name:"Anil",
+	Age:42,
+	Subject:["Hindi","Science"],
+	Dob:"8-Dec-22",
+	Gender:"Male",
+	Salary:30000,
+	City:"Surat"
+},
+{	
+	_id:3,
+	Name:"Pinal",
+	Age:42,
+	Subject:["Hindi","English"],
+	Dob:"8-Oct-22",
+	Gender:"Female",
+	Salary:40000,
+	City:"Ahmedabad"
+},
+{	
+	_id:4,
+	Name:"Akash",
+	Age:45,
+	Subject:["Hindi","Gujarati"],
+	Dob:"18-Oct-22",
+	Gender:"Male",
+	Salary:25000,
+	City:"Ahmedabad"
+}
+])
+
+
+
+
+
+
+
+
+
+
+
+

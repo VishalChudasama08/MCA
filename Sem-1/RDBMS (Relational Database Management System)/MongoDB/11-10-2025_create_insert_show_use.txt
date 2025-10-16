@@ -1,0 +1,225 @@
+// showing all databases
+> show dbs
+Showroom  0.000GB
+admin     0.000GB
+config    0.000GB
+local     0.000GB
+
+// create or use this databases
+> use v08
+switched to db v08
+
+// showing all tables
+> show collections
+
+// create table 'Day1'
+> db.createCollection("Day1")
+{ "ok" : 1 }
+
+> show collections
+Day1
+
+// create table 'Day1'
+> db.createCollection("day1")
+{ "ok" : 1 }
+
+> show collections
+Day1
+day1
+
+// insert record
+> db.day1.insert({Name:"Vishal",RollNo:13,Address:{city:"Ahemdabad",state:"Gujarat",pinCode:380002},Hobbies:["Games","Movie"]})
+WriteResult({ "nInserted" : 1 })
+
+// showing table data
+> db.day1.find()
+{ "_id" : ObjectId("68e9fdc114cc70401d9a4db1"), "Name" : "Vishal", "RollNo" : 13, "Address" : { "city" : "Ahemdabad", "state" : "Gujarat", "pinCode" : 380002 }, "Hobbies" : [ "Games", "Movie" ] }
+>
+
+=============================================================
+
+-------------------------------------------------------------
+MongoDB.docx file Q2
+-------------------------------------------------------------
+Create a new MongoDB database called “TEACHER”. 
+###
+use TEACHER
+
+Within “TEACHER” database, create a collection named “TEACHER_MASTER”. 
+Assume an appropriate Schema consisting of fields like Name, Age, Subject(array), DOB, Gender, Salary, City 
+###
+db.TEACHER_MASTER.insertMany([{
+    _id:1,
+    Name:"Anil",
+    Age:32,
+    Subject:["Hindi","Gujarati"],
+    DOB:"01/01/1980",
+    Gender:"Male",
+    Salary:80000,
+    City:"Ahemdabad"
+},{
+    _id:2,
+    Name:"Vishal",
+    Age:23,
+    Subject:["Hindi","Gujarati","Java"],
+    DOB:"11/10/2025",
+    Gender:"Male",
+    Salary:80008,
+    City:"Dwarka"
+},{
+    _id:3,
+    Name:"Abc",
+    Age:35,
+    Subject:["Hindi","MongoDB","Java","English"],
+    DOB:"15/08/1988",
+    Gender:"Female",
+    Salary:90000,
+    City:"Surat"
+},{
+    _id:4,
+    Name:"Xyz",
+    Age:31,
+    Subject:["C","MongoDB","Java"],
+    DOB:"01/08/1990",
+    Gender:"Female",
+    Salary:70000,
+    City:"Ahemdabad"
+},{
+    _id:5,
+    Name:"Def",
+    Age:31,
+    Subject:["C","MongoDB","Java","English"],
+    DOB:"01/08/1990",
+    Gender:"Female",
+    Salary:20000,
+    City:"Ahemdabad"
+},{
+    _id:6,
+    Name:"Hey",
+    Age:30,
+    Subject:["C","RDBMS","Java"],
+    DOB:"01/08/1999",
+    Gender:"Male",
+    Salary:20000,
+    City:"Ahemdabad"
+},{
+    _id:7,
+    Name:"Last",
+    Age:30,
+    Subject:["C","Set","Java","English"],
+    DOB:"01/08/1999",
+    Gender:"Male",
+    Salary:28000,
+    City:"Ahemdabad"
+}])
+
+###
+db.TEACHER_MASTER.find()
+
+
+1. Insert 7 documents into the above collection. 
+2. Display Name, Subject, Gender and Salary. 
+3. Display teacher, which are from the city “Ahmedabad”. 
+4. Display the teacher id, name, city and DOB. 
+5. Display the teachers whose gender is female and teach either “Hindi” or “English” subject. 
+6. Update all those documents where name of teacher is “Anil” with the new value of subject as “English”. 
+7. Delete data of all those teachers who were born on date 1st January 1980. 
+8. Remove field age. 
+9. Display the teachers that do not teach “English” subject and their salary is more than 30000. 
+10. Find all the teachers having gender “Male” and display salary for them. 
+
+> db.TEACHER_MASTER.find()
+{ "_id" : 1, "Name" : "Anil", "Age" : 32, "Subject" : [ "Hindi", "Gujarati" ], "DOB" : "01/01/1980", "Gender" : "Male", "Salary" : 80000, "City" : "Ahemdabad" }
+{ "_id" : 2, "Name" : "Vishal", "Age" : 23, "Subject" : [ "Hindi", "Gujarati", "Java" ], "DOB" : "11/10/2025", "Gender" : "Male", "Salary" : 80008, "City" : "Dwarka" }
+{ "_id" : 3, "Name" : "Abc", "Age" : 35, "Subject" : [ "Hindi", "MongoDB", "Java" ], "DOB" : "15/08/1988", "Gender" : "Female", "Salary" : 90000, "City" : "Surat" }
+{ "_id" : 4, "Name" : "Xyz", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 70000, "City" : "Ahemdabad" }
+{ "_id" : 5, "Name" : "Def", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 6, "Name" : "Hey", "Age" : 30, "Subject" : [ "C", "RDBMS", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 7, "Name" : "Last", "Age" : 30, "Subject" : [ "C", "Set", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 28000, "City" : "Ahemdabad" }
+>
+
+-------------------------------------------------------------
+MongoDB.docx file Q3
+-------------------------------------------------------------
+Create a new MongoDB database called “EMPLOYEE”.
+### 
+use EMPLOYEE
+
+Within “EMPLOYEE” database, create a collection named EMPLOYEE_MASTER”
+assume an appropriate schema consisting of fields like Empno, Name, Designation, DOJ, Department, Salary, Gender, Skills(array)
+###
+db.EMPLOYEE_MASTER.insertMany([{
+    _id: 1,
+    Name: "Akash",
+    Designation: "Analyst",
+    DOJ: "1998-12-15",
+    Department: "HR",
+    Salary: 30000,
+    Gender: "Male",
+    Skills: ["Java", "PHP"]
+},{
+    _id: 2,
+    Name: "Amit",
+    Designation: "Accountant",
+    DOJ: "2000-01-20",
+    Department: "Finance",
+    Salary: 28000,
+    Gender: "Male",
+    Skills: ["Excel", "Tally"]
+},{
+    _id: 3,
+    Name: "Neha",
+    Designation: "Engineer",
+    DOJ: "2005-07-11",
+    Department: "Development",
+    Salary: 35000,
+    Gender: "Female",
+    Skills: ["Java", "Python"]
+},{
+    _id: 4,
+    Name: "Riya",
+    Designation: "Scientist",
+    DOJ: "1999-01-01",
+    Department: "Research",
+    Salary: 40000,
+    Gender: "Female",
+    Skills: ["Python", "R"]
+},{
+    _id: 5,
+    Name: "Sunil",
+    Designation: "Engineer",
+    DOJ: "2003-03-15",
+    Department: "Development",
+    Salary: 32000,
+    Gender: "Male",
+    Skills: ["PHP", "JavaScript"]
+},{
+    _id: 6,
+    Name: "Akash",
+    Designation: "Technician",
+    DOJ: "2010-10-10",
+    Department: "Maintenance",
+    Salary: 22000,
+    Gender: "Male",
+    Skills: ["Hardware", "Networking"]
+},{
+    _id: 7,
+    Name: "Divya",
+    Designation: "Engineer",
+    DOJ: "2012-12-12",
+    Department: "Development",
+    Salary: 38000,
+    Gender: "Female",
+    Skills: ["Java", "C++"]
+}])
+
+1. Insert 7 documents into the above collection.
+2. Display Name, Department, Gender and Salary.
+3. Display the list of employees from the department “HR”.
+4. Display the employee id, name, department and DOB.
+5. Display the employees whose gender is female and designation either “Engineer” or “Scientist”.
+6. Update all those documents where name of employee is “Akash” with the new value of designation as “Engineer”.
+7. Delete all those documents where DOJ is  1st January 1999.
+8. Display the employees whose salary is greater than 25000 and have skills Java or PHP.
+9. Find all the employees having designation “Engineer” and display salary for them.
+10. Display only those documents where the name of employee is “Amit” and designation is “Accountant”.

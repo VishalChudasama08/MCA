@@ -1,0 +1,185 @@
+2. 	Create a new MongoDB database called “TEACHER”. 
+Within “TEACHER” database, create a collection named “TEACHER_MASTER”. 
+Assume an appropriate Schema consisting of fields like Name, Age, Subject(array), DOB, Gender, Salary, City 
+1. Insert 7 documents into the above collection. 
+2. Display Name, Subject, Gender and Salary. 
+3. Display teacher, which are from the city “Ahmedabad”. 
+4. Display the teacher id, name, city and DOB. 
+5. Display the teachers whose gender is female and teach either “Hindi” or “English” subject. 
+6. Update all those documents where name of teacher is “Anil” with the new value of subject as “English”. 
+7. Delete data of all those teachers who were born on date 1st January 1980. 
+8. Remove field age. 
+9. Display the teachers that do not teach “English” subject and their salary is more than 30000. 
+10. Find all the teachers having gender “Male” and display salary for them. 
+
+=============================================================
+
+Create a new MongoDB database called “TEACHER”. 
+###
+use TEACHER
+
+Within “TEACHER” database, create a collection named “TEACHER_MASTER”. 
+Assume an appropriate Schema consisting of fields like Name, Age, Subject(array), DOB, Gender, Salary, City 
+
+-------------------------------------------------------------
+1. Insert 7 documents into the above collection.
+###
+db.TEACHER_MASTER.insertMany([
+    {
+        _id:1,
+        Name:"Anil",
+        Age:32,
+        Subject:["Hindi","Gujarati"],
+        DOB:"01/01/1980",
+        Gender:"Male",
+        Salary:80000,
+        City:"Ahemdabad"
+    },{
+        _id:2,
+        Name:"Vishal",
+        Age:23,
+        Subject:["Hindi","Gujarati","Java"],
+        DOB:"11/10/2025",
+        Gender:"Male",
+        Salary:80008,
+        City:"Dwarka"
+    },{
+        _id:3,
+        Name:"Abc",
+        Age:35,
+        Subject:["Hindi","MongoDB","Java","English"],
+        DOB:"15/08/1988",
+        Gender:"Female",
+        Salary:90000,
+        City:"Surat"
+    },{
+        _id:4,
+        Name:"Xyz",
+        Age:31,
+        Subject:["C","MongoDB","Java"],
+        DOB:"01/08/1990",
+        Gender:"Female",
+        Salary:70000,
+        City:"Ahemdabad"
+    },{
+        _id:5,
+        Name:"Def",
+        Age:31,
+        Subject:["C","MongoDB","Java","English"],
+        DOB:"01/08/1990",
+        Gender:"Female",
+        Salary:20000,
+        City:"Ahemdabad"
+    },{
+        _id:6,
+        Name:"Hey",
+        Age:30,
+        Subject:["C","RDBMS","Java"],
+        DOB:"01/08/1999",
+        Gender:"Male",
+        Salary:20000,
+        City:"Ahemdabad"
+    },{
+        _id:7,
+        Name:"Last",
+        Age:30,
+        Subject:["C","Set","Java","English"],
+        DOB:"01/08/1999",
+        Gender:"Male",
+        Salary:28000,
+        City:"Ahemdabad"
+    }
+])
+
+###
+db.TEACHER_MASTER.find()
+
+
+> db.TEACHER_MASTER.find()
+{ "_id" : 1, "Name" : "Anil", "Age" : 32, "Subject" : [ "Hindi", "Gujarati" ], "DOB" : "01/01/1980", "Gender" : "Male", "Salary" : 80000, "City" : "Ahemdabad" }
+{ "_id" : 2, "Name" : "Vishal", "Age" : 23, "Subject" : [ "Hindi", "Gujarati", "Java" ], "DOB" : "11/10/2025", "Gender" : "Male", "Salary" : 80008, "City" : "Dwarka" }
+{ "_id" : 3, "Name" : "Abc", "Age" : 35, "Subject" : [ "Hindi", "MongoDB", "Java" ], "DOB" : "15/08/1988", "Gender" : "Female", "Salary" : 90000, "City" : "Surat" }
+{ "_id" : 4, "Name" : "Xyz", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 70000, "City" : "Ahemdabad" }
+{ "_id" : 5, "Name" : "Def", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 6, "Name" : "Hey", "Age" : 30, "Subject" : [ "C", "RDBMS", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 7, "Name" : "Last", "Age" : 30, "Subject" : [ "C", "Set", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 28000, "City" : "Ahemdabad" }
+>
+
+-------------------------------------------------------------
+2. Display Name, Subject, Gender and Salary.
+###
+db.TEACHER_MASTER.find({},{Name:1,Subject:1,Gender:1,Salary:1})
+
+> db.TEACHER_MASTER.find({},{Name:1,Subject:1,Gender:1,Salary:1})
+{ "_id" : 2, "Name" : "Vishal", "Subject" : [ "Hindi", "Gujarati", "Java" ], "Gender" : "Male", "Salary" : 80008 }
+{ "_id" : 3, "Name" : "Abc", "Subject" : [ "Hindi", "MongoDB", "Java" ], "Gender" : "Female", "Salary" : 90000 }
+{ "_id" : 4, "Name" : "Xyz", "Subject" : [ "C", "MongoDB", "Java" ], "Gender" : "Female", "Salary" : 70000 }
+{ "_id" : 5, "Name" : "Def", "Subject" : [ "C", "MongoDB", "Java" ], "Gender" : "Female", "Salary" : 20000 }
+{ "_id" : 6, "Name" : "Hey", "Subject" : [ "C", "RDBMS", "Java" ], "Gender" : "Male", "Salary" : 20000 }
+{ "_id" : 7, "Name" : "Last", "Subject" : [ "C", "Set", "Java" ], "Gender" : "Male", "Salary" : 28000 }
+>
+
+-------------------------------------------------------------
+3. Display teacher, which are from the city “Ahmedabad”.
+###
+db.TEACHER_MASTER.find({City:"Ahemdabad"},{})
+
+> db.TEACHER_MASTER.find({City:"Ahemdabad"},{})
+{ "_id" : 4, "Name" : "Xyz", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 70000, "City" : "Ahemdabad" }
+{ "_id" : 5, "Name" : "Def", "Age" : 31, "Subject" : [ "C", "MongoDB", "Java" ], "DOB" : "01/08/1990", "Gender" : "Female", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 6, "Name" : "Hey", "Age" : 30, "Subject" : [ "C", "RDBMS", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 20000, "City" : "Ahemdabad" }
+{ "_id" : 7, "Name" : "Last", "Age" : 30, "Subject" : [ "C", "Set", "Java" ], "DOB" : "01/08/1999", "Gender" : "Male", "Salary" : 28000, "City" : "Ahemdabad" }
+>
+
+-------------------------------------------------------------
+4. Display the teacher id, name, city and DOB. 
+###
+db.TEACHER_MASTER.find({},{_id:1,Name:1,City:1,DOB:1})
+
+> db.TEACHER_MASTER.find({},{_id:1,Name:1,City:1,DOB:1})
+{ "_id" : 2, "Name" : "Vishal", "DOB" : "11/10/2025", "City" : "Dwarka" }
+{ "_id" : 3, "Name" : "Abc", "DOB" : "15/08/1988", "City" : "Surat" }
+{ "_id" : 4, "Name" : "Xyz", "DOB" : "01/08/1990", "City" : "Ahemdabad" }
+{ "_id" : 5, "Name" : "Def", "DOB" : "01/08/1990", "City" : "Ahemdabad" }
+{ "_id" : 6, "Name" : "Hey", "DOB" : "01/08/1999", "City" : "Ahemdabad" }
+{ "_id" : 7, "Name" : "Last", "DOB" : "01/08/1999", "City" : "Ahemdabad" }
+>
+
+-------------------------------------------------------------
+5. Display the teachers whose gender is female and teach either “Hindi” or “English” subject. 
+###
+db.TEACHER_MASTER.find({
+    $and:[
+        {Gender:"Female"},
+        {Subject:{$in:["Hindi","Gujarati"]}}
+    ]
+})
+
+> db.TEACHER_MASTER.find({$and:[{Gender:"Female"},{Subject:{$in:["Hindi","Gujarati"]}}]})
+{ "_id" : 3, "Name" : "Abc", "Age" : 35, "Subject" : [ "Hindi", "MongoDB", "Java" ], "DOB" : "15/08/1988", "Gender" : "Female", "Salary" : 90000, "City" : "Surat" }
+>
+
+-------------------------------------------------------------
+6. Update all those documents where name of teacher is “Anil” with the new value of subject as “English”. 
+###
+db.TEACHER_MASTER.find({
+
+-------------------------------------------------------------
+7. Delete data of all those teachers who were born on date 1st January 1980.
+
+-------------------------------------------------------------
+8. Remove field age. 
+
+-------------------------------------------------------------
+9. Display the teachers that do not teach “English” subject and their salary is more than 30000. 
+
+-------------------------------------------------------------
+10. Find all the teachers having gender “Male” and display salary for them. 
+###
+db.TEACHER_MASTER.find({Gender:"Male"},{Name:1,Gender:1,Salary:1})
+
+> db.TEACHER_MASTER.find({Gender:"Male"},{Name:1,Gender:1,Salary:1})
+{ "_id" : 2, "Name" : "Vishal", "Gender" : "Male", "Salary" : 80008 }
+{ "_id" : 6, "Name" : "Hey", "Gender" : "Male", "Salary" : 20000 }
+{ "_id" : 7, "Name" : "Last", "Gender" : "Male", "Salary" : 28000 }
+>

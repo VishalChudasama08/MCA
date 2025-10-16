@@ -1,0 +1,69 @@
+db.employees.insert(
+{"name":"Adma","dept":"Admin","languages":["german","french","english","hindi"],"age":30, "totalExp":10});
+db.employees.insert(
+{"name":"Anna","dept":"Admin","languages":["english","hindi"],"age":35, "totalExp":11});
+db.employees.insert(
+{"name":"Bob","dept":"Facilities","languages":["english","hindi"],"age":36, "totalExp":14});
+db.employees.insert(
+{"name":"Cathy","dept":"Facilities","languages":["hindi"],"age":31, "totalExp":4});
+db.employees.insert(
+{"name":"Mike","dept":"HR","languages":["english", "hindi", "spanish"],"age":26, "totalExp":3});
+db.employees.insert(
+{"name":"Jenny","dept":"HR","languages":["english", "hindi", "spanish"],"age":25, "totalExp":3});
+db.employees.insert(
+{"name":"Jerry","dept":"HR","languages":["english", "Sanskrit", "spanish"],"age":25, "totalExp":1});
+
+
+
+db.employees.insertMany([
+  {"name":"Adma","dept":"Admin","languages":["German","French","English","Hindi"],"age":30,"totalExp":10},
+  {"name":"Brian","dept":"HR","languages":["English","Spanish"],"age":28,"totalExp":6},
+  {"name":"Clara","dept":"Finance","languages":["English","French"],"age":32,"totalExp":8},
+  {"name":"David","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":5},
+  {"name":"Eva","dept":"Marketing","languages":["German","English"],"age":31,"totalExp":7},
+  {"name":"Frank","dept":"Admin","languages":["English","Hindi","Gujarati"],"age":35,"totalExp":12},
+  {"name":"Grace","dept":"Finance","languages":["English","Spanish"],"age":29,"totalExp":7},
+  {"name":"Harry","dept":"Sales","languages":["English"],"age":33,"totalExp":9},
+  {"name":"Isabel","dept":"HR","languages":["English","French","Hindi"],"age":26,"totalExp":4},
+  {"name":"Jack","dept":"IT","languages":["English","German"],"age":24,"totalExp":3},
+  {"name":"Kiran","dept":"Support","languages":["Hindi","Gujarati","English"],"age":34,"totalExp":10},
+  {"name":"Lena","dept":"Finance","languages":["English"],"age":28,"totalExp":5},
+  {"name":"Mohan","dept":"Admin","languages":["Hindi","English"],"age":40,"totalExp":15},
+  {"name":"Nora","dept":"Sales","languages":["English","Spanish","French"],"age":29,"totalExp":6},
+  {"name":"Omar","dept":"Marketing","languages":["Arabic","English"],"age":31,"totalExp":8},
+  {"name":"Priya","dept":"IT","languages":["English","Hindi"],"age":25,"totalExp":3},
+  {"name":"Quinn","dept":"Finance","languages":["English","German"],"age":30,"totalExp":6},
+  {"name":"Ravi","dept":"Support","languages":["Hindi","English"],"age":38,"totalExp":14},
+  {"name":"Sara","dept":"Admin","languages":["English","French"],"age":27,"totalExp":5},
+  {"name":"Tom","dept":"HR","languages":["English"],"age":35,"totalExp":12},
+  {"name":"Uma","dept":"IT","languages":["English","Tamil","Hindi"],"age":29,"totalExp":7},
+  {"name":"Vikram","dept":"Finance","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Wendy","dept":"Marketing","languages":["English","French"],"age":26,"totalExp":4},
+  {"name":"Xavier","dept":"Sales","languages":["English","Spanish"],"age":36,"totalExp":11},
+  {"name":"Yash","dept":"Support","languages":["Hindi","Gujarati"],"age":31,"totalExp":8},
+  {"name":"Zara","dept":"HR","languages":["English","Arabic"],"age":25,"totalExp":3},
+  {"name":"Amit","dept":"Admin","languages":["Hindi","English"],"age":37,"totalExp":13},
+  {"name":"Bella","dept":"Finance","languages":["English","French"],"age":28,"totalExp":6},
+  {"name":"Carlos","dept":"Marketing","languages":["Spanish","English"],"age":34,"totalExp":10},
+  {"name":"Disha","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"Ethan","dept":"Sales","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Farah","dept":"Support","languages":["Urdu","English","Hindi"],"age":30,"totalExp":9},
+  {"name":"Gaurav","dept":"Finance","languages":["Hindi","English"],"age":41,"totalExp":16},
+  {"name":"Hina","dept":"HR","languages":["English","Gujarati"],"age":29,"totalExp":6},
+  {"name":"Irfan","dept":"IT","languages":["English","Hindi"],"age":26,"totalExp":3},
+  {"name":"Jaya","dept":"Admin","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Kamal","dept":"Sales","languages":["English","Hindi"],"age":35,"totalExp":11},
+  {"name":"Leena","dept":"Finance","languages":["English","French"],"age":28,"totalExp":5},
+  {"name":"Manish","dept":"Support","languages":["English","Hindi","Gujarati"],"age":39,"totalExp":14},
+  {"name":"Nikhil","dept":"IT","languages":["English","Hindi"],"age":30,"totalExp":8},
+  {"name":"Olivia","dept":"Marketing","languages":["English","French"],"age":27,"totalExp":4},
+  {"name":"Pooja","dept":"HR","languages":["English","Hindi"],"age":25,"totalExp":2},
+  {"name":"Qadir","dept":"Finance","languages":["Arabic","English"],"age":34,"totalExp":9},
+  {"name":"Rita","dept":"Admin","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Sameer","dept":"IT","languages":["English","Hindi"],"age":29,"totalExp":6},
+  {"name":"Tina","dept":"Sales","languages":["English","Spanish"],"age":31,"totalExp":8},
+  {"name":"Umesh","dept":"Support","languages":["Hindi","Gujarati"],"age":36,"totalExp":10},
+  {"name":"Vani","dept":"Finance","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"William","dept":"Marketing","languages":["English","German"],"age":38,"totalExp":13},
+  {"name":"Zubin","dept":"Admin","languages":["English","Hindi"],"age":40,"totalExp":15}
+]);

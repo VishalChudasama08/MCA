@@ -1,0 +1,171 @@
+db.employees.insert(
+{"name":"Adma","dept":"Admin","languages":["german","french","english","hindi"],"age":30, "totalExp":10});
+db.employees.insert(
+{"name":"Anna","dept":"Admin","languages":["english","hindi"],"age":35, "totalExp":11});
+db.employees.insert(
+{"name":"Bob","dept":"Facilities","languages":["english","hindi"],"age":36, "totalExp":14});
+db.employees.insert(
+{"name":"Cathy","dept":"Facilities","languages":["hindi"],"age":31, "totalExp":4});
+db.employees.insert(
+{"name":"Mike","dept":"HR","languages":["english", "hindi", "spanish"],"age":26, "totalExp":3});
+db.employees.insert(
+{"name":"Jenny","dept":"HR","languages":["english", "hindi", "spanish"],"age":25, "totalExp":3});
+db.employees.insert(
+{"name":"Jerry","dept":"HR","languages":["english", "Sanskrit", "spanish"],"age":25, "totalExp":1});
+
+
+
+db.employees.insertMany([
+  {"name":"Adma","dept":"Admin","languages":["German","French","English","Hindi"],"age":30,"totalExp":10},
+  {"name":"Brian","dept":"HR","languages":["English","Spanish"],"age":28,"totalExp":6},
+  {"name":"Clara","dept":"Finance","languages":["English","French"],"age":32,"totalExp":8},
+  {"name":"David","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":5},
+  {"name":"Eva","dept":"Marketing","languages":["German","English"],"age":31,"totalExp":7},
+  {"name":"Frank","dept":"Admin","languages":["English","Hindi","Gujarati"],"age":35,"totalExp":12},
+  {"name":"Grace","dept":"Finance","languages":["English","Spanish"],"age":29,"totalExp":7},
+  {"name":"Harry","dept":"Sales","languages":["English"],"age":33,"totalExp":9},
+  {"name":"Isabel","dept":"HR","languages":["English","French","Hindi"],"age":26,"totalExp":4},
+  {"name":"Jack","dept":"IT","languages":["English","German"],"age":24,"totalExp":3},
+  {"name":"Kiran","dept":"Support","languages":["Hindi","Gujarati","English"],"age":34,"totalExp":10},
+  {"name":"Lena","dept":"Finance","languages":["English"],"age":28,"totalExp":5},
+  {"name":"Mohan","dept":"Admin","languages":["Hindi","English"],"age":40,"totalExp":15},
+  {"name":"Nora","dept":"Sales","languages":["English","Spanish","French"],"age":29,"totalExp":6},
+  {"name":"Omar","dept":"Marketing","languages":["Arabic","English"],"age":31,"totalExp":8},
+  {"name":"Priya","dept":"IT","languages":["English","Hindi"],"age":25,"totalExp":3},
+  {"name":"Quinn","dept":"Finance","languages":["English","German"],"age":30,"totalExp":6},
+  {"name":"Ravi","dept":"Support","languages":["Hindi","English"],"age":38,"totalExp":14},
+  {"name":"Sara","dept":"Admin","languages":["English","French"],"age":27,"totalExp":5},
+  {"name":"Tom","dept":"HR","languages":["English"],"age":35,"totalExp":12},
+  {"name":"Uma","dept":"IT","languages":["English","Tamil","Hindi"],"age":29,"totalExp":7},
+  {"name":"Vikram","dept":"Finance","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Wendy","dept":"Marketing","languages":["English","French"],"age":26,"totalExp":4},
+  {"name":"Xavier","dept":"Sales","languages":["English","Spanish"],"age":36,"totalExp":11},
+  {"name":"Yash","dept":"Support","languages":["Hindi","Gujarati"],"age":31,"totalExp":8},
+  {"name":"Zara","dept":"HR","languages":["English","Arabic"],"age":25,"totalExp":3},
+  {"name":"Amit","dept":"Admin","languages":["Hindi","English"],"age":37,"totalExp":13},
+  {"name":"Bella","dept":"Finance","languages":["English","French"],"age":28,"totalExp":6},
+  {"name":"Carlos","dept":"Marketing","languages":["Spanish","English"],"age":34,"totalExp":10},
+  {"name":"Disha","dept":"IT","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"Ethan","dept":"Sales","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Farah","dept":"Support","languages":["Urdu","English","Hindi"],"age":30,"totalExp":9},
+  {"name":"Gaurav","dept":"Finance","languages":["Hindi","English"],"age":41,"totalExp":16},
+  {"name":"Hina","dept":"HR","languages":["English","Gujarati"],"age":29,"totalExp":6},
+  {"name":"Irfan","dept":"IT","languages":["English","Hindi"],"age":26,"totalExp":3},
+  {"name":"Jaya","dept":"Admin","languages":["English","Hindi"],"age":33,"totalExp":9},
+  {"name":"Kamal","dept":"Sales","languages":["English","Hindi"],"age":35,"totalExp":11},
+  {"name":"Leena","dept":"Finance","languages":["English","French"],"age":28,"totalExp":5},
+  {"name":"Manish","dept":"Support","languages":["English","Hindi","Gujarati"],"age":39,"totalExp":14},
+  {"name":"Nikhil","dept":"IT","languages":["English","Hindi"],"age":30,"totalExp":8},
+  {"name":"Olivia","dept":"Marketing","languages":["English","French"],"age":27,"totalExp":4},
+  {"name":"Pooja","dept":"HR","languages":["English","Hindi"],"age":25,"totalExp":2},
+  {"name":"Qadir","dept":"Finance","languages":["Arabic","English"],"age":34,"totalExp":9},
+  {"name":"Rita","dept":"Admin","languages":["English"],"age":32,"totalExp":7},
+  {"name":"Sameer","dept":"IT","languages":["English","Hindi"],"age":29,"totalExp":6},
+  {"name":"Tina","dept":"Sales","languages":["English","Spanish"],"age":31,"totalExp":8},
+  {"name":"Umesh","dept":"Support","languages":["Hindi","Gujarati"],"age":36,"totalExp":10},
+  {"name":"Vani","dept":"Finance","languages":["English","Hindi"],"age":27,"totalExp":4},
+  {"name":"William","dept":"Marketing","languages":["English","German"],"age":38,"totalExp":13},
+  {"name":"Zubin","dept":"Admin","languages":["English","Hindi"],"age":40,"totalExp":15}
+]);
+
+
+---------------------
+1. Match: Used to match documents (like SQL where clause)
+
+db.employees.aggregate([{$match:{dept:"Admin"}}]);
+
+
+------------------
+2. Project: Used to populate specific field's value(s)
+
+project stage will include _id field automatically unless you specify to disable.
+
+db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1}}]);
+
+------------------
+3. Group: $group is used to group documents by specific field, here documents are grouped by "dept" field's value. Another useful feature is that you can group by null, it means all documents will be aggregated into one.
+
+db.employees.aggregate([{$group:{"_id":"$dept"}}]) 
+db.employees.aggregate([{$group:{"_id":null, "totalAge":{$sum:"$age"}}}])
+
+----------------------
+4. Sum: $sum is used to count or sum the values inside a group.
+db.employees.aggregate([{$group:{"_id":"$dept", "noOfDept":{$sum:1}}}]);
+
+----------------------
+5. Average: Calculates average of specific field's value per group.
+db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "avgExp":{$avg:"$totalExp"}}}]);
+----------------------
+6. Minimum: Finds minimum value of a field in each group.
+db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "minExp":{$min:"$totalExp"}}}]);
+----------------------
+7. Maximum: Finds maximum value of a field in each group.
+
+db.employees.aggregate([{$match:{dept:"Admin"}},{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "maxExp":{$max:"$totalExp"}}}]);
+----------------------
+
+8. Getting specific field's value from first and last document of each group: 
+Works well when doucument result is sorted.
+
+db.employees.aggregate([{$group:{"_id":"$dept", "last":{$last:"$name"}, "first":{$first:"$name"}}}]);
+----------------------
+9. Minumum with maximum:
+
+db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "maxExp":{$max:"$totalExp"}, "minExp":{$min: "$totalExp"}}}]);
+----------------------
+10. Push and addToSet: Push adds a field's value form each document in group to 
+an array used to project data in array format, 
+addToSet is simlar to push but it omits duplicate values.
+
+db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}, "arrSet": {$addToSet:"$age"}}}]);
+Output:
+{ "_id" : "dept", "arrPush" : [ 30, 35, 35, 35, 26, 25 ], "arrSet" : [ 25, 26, 35, 30 ] }
+
+
+-----------------------------
+11. Unwind: Used to create multiple in-memory documents for each value in the
+ specified array type field, then we can do further aggregation based on those 
+values.
+
+For each element in the specified array field, $unwind generates a new document.
+The new document is a copy of the original document, but the array field is replaced by a single element from the array.
+
+
+db.employees.aggregate([{$match:{"name":"Adma"}}, {$unwind:"$languages"}]);
+------------------------------
+12. Sorting:
+
+db.employees.aggregate([{$match:{dept:"Admin"}}, 
+{$project:{"name":1, "dept":1}}, {$sort: {name: 1}}]);
+------------------
+13. Skip:
+
+db.employees.aggregate([{$match:{dept:"Admin"}},
+{$project:{"name":1, "dept":1}}, {$sort: {name: -1}}, {$skip:1}]);
+------------------
+14. Limit:
+
+db.employees.aggregate([{$match:{dept:"Admin"}}, 
+{$project:{"name":1, "dept":1}}, {$sort: {name: -1}}, {$limit:1}]); 
+-------------------------
+15. Comparison operator in projection:
+db.employees.aggregate([{$match:{dept:"Admin"}}, 
+{$project:{"name":1, "dept":1, age: {$gt: ["$age", 30]}}}]);
+
+-------------------------
+16. Comparison operator in match:
+List of comparison operators: $cmp, $eq, $gt, $gte, $lt, $lte, and $ne
+
+db.employees.aggregate([{$match:{dept:"Admin", age: {$gt:30}}}, {$project:{"name":1, "dept":1}}]);   
+
+-------------------------
+7. Boolean aggregation opertor in projection:
+
+db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, { $lt: [ "$age", 36 ] } ] }}}]);
+----------------------
+18. Boolean aggregation opertor in match:
+
+db.employees.aggregate([{$match:{dept:"Admin", $and: [{age: { $gt:  30 }}, {age: {$lt: 36 }} ] }}, 
+			{$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, 
+			{$lt: [ "$age", 36 ] } ] }}}])
+List of boolean aggregation opertors: $and, $or, and $not.
