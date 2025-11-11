@@ -1,0 +1,391 @@
+ed
+SP2-0107: Nothing to save.
+SQL> select * from dual;
+
+D                                                                               
+-                                                                               
+X                                                                               
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin 
+  2  	for e in (select ename from emp) loop
+  3  		dbms_output.put_line(e.ename);
+  4  	end loop;
+  5* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> /
+SMITH                                                                           
+ALLEN                                                                           
+WARD                                                                            
+JONES                                                                           
+MARTIN                                                                          
+BLAKE                                                                           
+CLARK                                                                           
+SCOTT                                                                           
+KING                                                                            
+TURNER                                                                          
+ADAMS                                                                           
+JAMES                                                                           
+FORD                                                                            
+MILLER                                                                          
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin 
+  2  	for e in (select ename,sal from emp) loop
+  3  		dbms_output.put_line(e.ename || ' ' ||e.sal);
+  4  	end loop;
+  5* end;
+SQL> /
+SMITH 800                                                                       
+ALLEN 1600                                                                      
+WARD 1250                                                                       
+JONES 2975                                                                      
+MARTIN 1250                                                                     
+BLAKE 2850                                                                      
+CLARK 2450                                                                      
+SCOTT 3000                                                                      
+KING 5000                                                                       
+TURNER 1500                                                                     
+ADAMS 1100                                                                      
+JAMES 950                                                                       
+FORD 3000                                                                       
+MILLER 1300                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin 
+  2  	for e in (select ename,sal from emp) loop
+  3  		dbms_output.put_line(e.ename || '\t' ||e.sal);
+  4  	end loop;
+  5* end;
+SQL> /
+SMITH\t800                                                                      
+ALLEN\t1600                                                                     
+WARD\t1250                                                                      
+JONES\t2975                                                                     
+MARTIN\t1250                                                                    
+BLAKE\t2850                                                                     
+CLARK\t2450                                                                     
+SCOTT\t3000                                                                     
+KING\t5000                                                                      
+TURNER\t1500                                                                    
+ADAMS\t1100                                                                     
+JAMES\t950                                                                      
+FORD\t3000                                                                      
+MILLER\t1300                                                                    
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin 
+  2  	for e in (select ename,sal from emp) loop
+  3  		dbms_output.put_line(e.ename || '	' ||e.sal);
+  4  	end loop;
+  5* end;
+SQL> /
+SMITH	800                                                                       
+ALLEN	1600                                                                      
+WARD	1250                                                                       
+JONES	2975                                                                      
+MARTIN	1250                                                                     
+BLAKE	2850                                                                      
+CLARK	2450                                                                      
+SCOTT	3000                                                                      
+KING	5000                                                                       
+TURNER	1500                                                                     
+ADAMS	1100                                                                      
+JAMES	950                                                                       
+FORD	3000                                                                       
+MILLER	1300                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- normal cursor
+  2  declare
+  3  	j varchar2(15);
+  4  	s number;
+  5  	cursor cur1 is select job,sal from emp;
+  6  begin 
+  7  open cur1
+  8  	loop
+  9  		fetch cur1 into j,s;
+ 10  		exit when cur1%NOTFOUND;
+ 11  		dbms_output.put_line(j || '	' ||s);
+ 12  	end loop;
+ 13  close cur1;
+ 14* end;
+SQL> /
+	loop
+	*
+ERROR at line 8:
+ORA-06550: line 8, column 2: 
+PLS-00103: Encountered the symbol "LOOP" when expecting one of the following: 
+. ( % ; for 
+The symbol "; was inserted before "LOOP" to continue. 
+ORA-06550: line 13, column 1: 
+PLS-00103: Encountered the symbol "CLOSE"  
+
+
+SQL> ed;
+Wrote file afiedt.buf
+
+  1  -- normal cursor
+  2  declare
+  3  	j varchar2(15);
+  4  	s number;
+  5  	cursor cur1 is select job,sal from emp;
+  6  begin 
+  7  open cur1;
+  8  	loop
+  9  		fetch cur1 into j,s;
+ 10  		exit when cur1%NOTFOUND;
+ 11  		dbms_output.put_line(j || '	' ||s);
+ 12  	end loop;
+ 13  close cur1;
+ 14* end;
+SQL> /
+CLERK	800                                                                       
+SALESMAN	1600                                                                   
+SALESMAN	1250                                                                   
+MANAGER	2975                                                                    
+SALESMAN	1250                                                                   
+MANAGER	2850                                                                    
+MANAGER	2450                                                                    
+ANALYST	3000                                                                    
+PRESIDENT	5000                                                                  
+SALESMAN	1500                                                                   
+CLERK	1100                                                                      
+CLERK	950                                                                       
+ANALYST	3000                                                                    
+CLERK	1300                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- normal cursor
+  2  declare
+  3  	j varchar2(15);
+  4  	s number;
+  5  	cursor cur1 is select job,sal from emp;
+  6  begin 
+  7  open cur1;
+  8  	loop
+  9  		fetch cur1 into j,s;
+ 10  		exit when cur1%NOTFOUND;
+ 11  		dbms_output.put_line(j || '		' ||s);
+ 12  	end loop;
+ 13  close cur1;
+ 14* end;
+SQL> /
+CLERK		800                                                                      
+SALESMAN		1600                                                                  
+SALESMAN		1250                                                                  
+MANAGER		2975                                                                   
+SALESMAN		1250                                                                  
+MANAGER		2850                                                                   
+MANAGER		2450                                                                   
+ANALYST		3000                                                                   
+PRESIDENT		5000                                                                 
+SALESMAN		1500                                                                  
+CLERK		1100                                                                     
+CLERK		950                                                                      
+ANALYST		3000                                                                   
+CLERK		1300                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- cursor by for loop
+  2  begin
+  3     for e in (select ename,sal from emp) loop
+  4             dbms_output.put_line(e.ename || '       ' ||e.sal);
+  5     end loop;
+  6* end;
+SQL> /
+SMITH       800                                                                 
+ALLEN       1600                                                                
+WARD       1250                                                                 
+JONES       2975                                                                
+MARTIN       1250                                                               
+BLAKE       2850                                                                
+CLARK       2450                                                                
+SCOTT       3000                                                                
+KING       5000                                                                 
+TURNER       1500                                                               
+ADAMS       1100                                                                
+JAMES       950                                                                 
+FORD       3000                                                                 
+MILLER       1300                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- cursor by for loop
+  2  begin
+  3     for e in (select ename,sal from emp) loop
+  4             dbms_output.put_line(e.ename || '       ' ||e.sal);
+  5     end loop;
+  6* end;
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- cursor with parameater
+  2  declare
+  3     j varchar2(15);
+  4     s number;
+  5     cursor cur1(salary number) is select job,sal from emp where sal>salary; -- sal>salary this salary value from call argument
+  6  begin
+  7  open cur1(1500);
+  8     loop
+  9             fetch cur1 into j,s;
+ 10             exit when cur1%NOTFOUND;
+ 11             dbms_output.put_line(j || '             ' ||s);
+ 12     end loop;
+ 13  close cur1;
+ 14* end;
+ 15  /
+SALESMAN             1600                                                       
+MANAGER             2975                                                        
+MANAGER             2850                                                        
+MANAGER             2450                                                        
+ANALYST             3000                                                        
+PRESIDENT             5000                                                      
+ANALYST             3000                                                        
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- cursor with parameater
+  2  declare
+  3     j varchar2(15);
+  4     s number;
+  5     -- if you dot know which datatype of 'ename' than use 'emp.ename%type'
+  6     cursor cur1(name emp.ename%type) is select job,sal from emp where ename=name; 
+  7  begin
+  8  open cur1('SMITH');
+  9     loop
+ 10             fetch cur1 into j,s;
+ 11             exit when cur1%NOTFOUND;
+ 12             dbms_output.put_line(j || '             ' ||s);
+ 13     end loop;
+ 14  close cur1;
+ 15* end;
+ 16  /
+CLERK             800                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- cursor with parameater
+  2  declare
+  3     nm varchar2(12);
+  4     j varchar2(15);
+  5     s number;
+  6     -- if you dot know which datatype of 'ename' than use 'emp.ename%type'
+  7     cursor cur1(name emp.ename%type) is select ename,job,sal from emp where ename=name; 
+  8  begin
+  9  open cur1('SMITH');
+ 10     loop
+ 11             fetch cur1 into nm,j,s;
+ 12             exit when cur1%NOTFOUND;
+ 13             dbms_output.put_line(nm || '    ' || j || '    ' || s);
+ 14     end loop;
+ 15  close cur1;
+ 16* end;
+SQL> /
+SMITH    CLERK    800                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* select * from dept
+SQL> /
+
+    DEPTNO DNAME          LOC                                                   
+---------- -------------- -------------                                         
+        10 ACCOUNTING     NEW YORK                                              
+        20 RESEARCH       DALLAS                                                
+        30 SALES          CHICAGO                                               
+        40 OPERATIONS     BOSTON                                                
+
+SQL> ed;
+Wrote file afiedt.buf
+
+  1  -- cursor within cursor (cursor inside cursor)
+  2  declare
+  3  	dno dept.deptno%TYPE;
+  4  	dnm dept.dname%TYPE;
+  5  	cursor d is select deptno,dname from dept;
+  6  	eno emp.empno%TYPE;
+  7  	enm emp.ename%TYPE;
+  8  	cursor e(ddeptno dept.deptno%TYPE) is select ename,job,sal from emp where ename=name; 
+  9  begin
+ 10  open cur1('SMITH');
+ 11     loop
+ 12             fetch cur1 into nm,j,s;
+ 13             exit when cur1%NOTFOUND;
+ 14             dbms_output.put_line(nm || '    ' || j || '    ' || s);
+ 15     end loop;
+ 16  close cur1;
+ 17* end;
+ 18  /
+	cursor e(ddeptno dept.deptno%TYPE) is select ename,job,sal from emp where ename=name; 
+	                                                                                *
+ERROR at line 8:
+ORA-06550: line 8, column 82: 
+PL/SQL: ORA-00904: "NAME": invalid identifier 
+ORA-06550: line 8, column 40: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 10, column 6: 
+PLS-00201: identifier 'CUR1' must be declared 
+ORA-06550: line 10, column 1: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 12, column 18: 
+PLS-00201: identifier 'CUR1' must be declared 
+ORA-06550: line 12, column 12: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 13, column 22: 
+PLS-00201: identifier 'CUR1' must be declared 
+ORA-06550: line 13, column 12: 
+PL/SQL: Statement ignored 
+ORA-06550: line 14, column 33: 
+PLS-00201: identifier 'NM' must be declared 
+ORA-06550: line 14, column 12: 
+PL/SQL: Statement ignored 
+ORA-06550: line 16, column 7: 
+PLS-00201: identifier 'CUR1' must be declared 
+ORA-06550: line 16, column 1: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> spool off;

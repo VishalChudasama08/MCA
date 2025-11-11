@@ -1,0 +1,450 @@
+set linesize 200;
+SQL> set pagesize 100;
+SQL> select * from student;
+
+    ROLLNO FNAME        LNAME        DOB                                                                                                                                                                
+---------- ------------ ------------ ---------                                                                                                                                                          
+        11 Kapil        Sharma       01-JAN-03                                                                                                                                                          
+        12 Anjali       Verma        21-JUN-02                                                                                                                                                          
+        13 Ravi         Kumar        12-MAR-04                                                                                                                                                          
+        14 Pooja        Singh        23-NOV-01                                                                                                                                                          
+
+SQL> select * from student1;
+select * from student1
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE TABLE Student1 (
+  2     R_No   NUMBER PRIMARY KEY,
+  3     Name   VARCHAR2(50),
+  4     Sub1   NUMBER(3),
+  5     Sub2   NUMBER(3),
+  6     Sub3   NUMBER(3),
+  7     Total  NUMBER(5),
+  8     Grade  VARCHAR2(5)
+  9  );
+
+Table created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (1, 'Amit', 78, 65, 80);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (2, 'Nisha', 90, 88, 92);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (3, 'Rahul', 55, 60, 58);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (4, 'Priya', 40, 45, 42);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (5, 'Karan', 95, 90, 85);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (6, 'Sneha', 72, 68, 70);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (7, 'Ravi', 30, 25, 35);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (8, 'Meena', 65, 70, 60);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (9, 'Arjun', 85, 80, 78);
+
+1 row created.
+
+SQL> INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (10,'Pooja', 50, 55, 53);
+
+1 row created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from student1;
+
+      R_NO NAME                                                     SUB1       SUB2       SUB3      TOTAL GRADE                                                                                         
+---------- -------------------------------------------------- ---------- ---------- ---------- ---------- -----                                                                                         
+         1 Amit                                                       78         65         80                                                                                                          
+         2 Nisha                                                      90         88         92                                                                                                          
+         3 Rahul                                                      55         60         58                                                                                                          
+         4 Priya                                                      40         45         42                                                                                                          
+         5 Karan                                                      95         90         85                                                                                                          
+         6 Sneha                                                      72         68         70                                                                                                          
+         7 Ravi                                                       30         25         35                                                                                                          
+         8 Meena                                                      65         70         60                                                                                                          
+         9 Arjun                                                      85         80         78                                                                                                          
+        10 Pooja                                                      50         55         53                                                                                                          
+
+10 rows selected.
+
+SQL> alter table student1 modify name varchar2(12);
+
+Table altered.
+
+SQL> select * from student1;
+
+      R_NO NAME               SUB1       SUB2       SUB3      TOTAL GRADE                                                                                                                               
+---------- ------------ ---------- ---------- ---------- ---------- -----                                                                                                                               
+         1 Amit                 78         65         80                                                                                                                                                
+         2 Nisha                90         88         92                                                                                                                                                
+         3 Rahul                55         60         58                                                                                                                                                
+         4 Priya                40         45         42                                                                                                                                                
+         5 Karan                95         90         85                                                                                                                                                
+         6 Sneha                72         68         70                                                                                                                                                
+         7 Ravi                 30         25         35                                                                                                                                                
+         8 Meena                65         70         60                                                                                                                                                
+         9 Arjun                85         80         78                                                                                                                                                
+        10 Pooja                50         55         53                                                                                                                                                
+
+10 rows selected.
+
+SQL> -- day-13
+SQL> -- 1. Write a PLSQL block to calculate and update the Total for each and every student.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	UPDATE student1 set total=(sub1+sub2+sub3);
+  3* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> set serveroutput on;
+SQL> select * from student1;
+
+      R_NO NAME               SUB1       SUB2       SUB3      TOTAL GRADE                                                                                                                               
+---------- ------------ ---------- ---------- ---------- ---------- -----                                                                                                                               
+         1 Amit                 78         65         80        223                                                                                                                                     
+         2 Nisha                90         88         92        270                                                                                                                                     
+         3 Rahul                55         60         58        173                                                                                                                                     
+         4 Priya                40         45         42        127                                                                                                                                     
+         5 Karan                95         90         85        270                                                                                                                                     
+         6 Sneha                72         68         70        210                                                                                                                                     
+         7 Ravi                 30         25         35         90                                                                                                                                     
+         8 Meena                65         70         60        195                                                                                                                                     
+         9 Arjun                85         80         78        243                                                                                                                                     
+        10 Pooja                50         55         53        158                                                                                                                                     
+
+10 rows selected.
+
+SQL> -- 2. Calculate the grade of all students, based to total (>70 AA, >60 A, >50 B, >35 C, else Fail)
+SQL> ed
+Wrote file afiedt.buf
+
+  1  begin
+  2  	update student1 set grade=
+  3  	case
+  4  		when total>270 then 'AA'
+  5  		when total>250 then 'A'
+  6  		when total>200 then 'B'
+  7  		when total>150 then 'C'
+  8  	else 'Fail'
+  9  	end;
+ 10* end;
+SQL> /
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from student1;
+
+      R_NO NAME               SUB1       SUB2       SUB3      TOTAL GRADE                                                                                                                               
+---------- ------------ ---------- ---------- ---------- ---------- -----                                                                                                                               
+         1 Amit                 78         65         80        223 B                                                                                                                                   
+         2 Nisha                90         88         92        270 A                                                                                                                                   
+         3 Rahul                55         60         58        173 C                                                                                                                                   
+         4 Priya                40         45         42        127 Fail                                                                                                                                
+         5 Karan                95         90         85        270 A                                                                                                                                   
+         6 Sneha                72         68         70        210 B                                                                                                                                   
+         7 Ravi                 30         25         35         90 Fail                                                                                                                                
+         8 Meena                65         70         60        195 C                                                                                                                                   
+         9 Arjun                85         80         78        243 B                                                                                                                                   
+        10 Pooja                50         55         53        158 C                                                                                                                                   
+
+10 rows selected.
+
+SQL> -- 3. Write a Cursor to find the first 3 rankers based on the total marks.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	nm student1.name%type;
+  3  	t student1.total%type;
+  4  	g student1.grade%type;
+  5  	count number;
+  6  	cursor cur is select name,total,grade from student order by total desc;
+  7  begin
+  8  	count:=0;
+  9  	open cur;
+ 10  		loop
+ 11  			fetch cur into nm,t,g;
+ 12  			exit when count=3 or cur%NOTFOUND;
+ 13  			count:=count+1;
+ 14  			dbms_output.put_line(nm || ' ' || t || ' ' || g);
+ 15  		end loop;
+ 16  	close cur
+ 17* end;
+SQL> /
+end;
+*
+ERROR at line 17:
+ORA-06550: line 17, column 1: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+. ; 
+The symbol ";" was substituted for "END" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	nm student1.name%type;
+  3  	t student1.total%type;
+  4  	g student1.grade%type;
+  5  	count number;
+  6  	cursor cur is select name,total,grade from student order by total desc;
+  7  begin
+  8  	count:=0;
+  9  	open cur;
+ 10  		loop
+ 11  			fetch cur into nm,t,g;
+ 12  			exit when count=3 or cur%NOTFOUND;
+ 13  			count:=count+1;
+ 14  			dbms_output.put_line(nm || ' ' || t || ' ' || g);
+ 15  		end loop;
+ 16  	close cur;
+ 17* end;
+SQL> /
+	cursor cur is select name,total,grade from student order by total desc;
+	                                *
+ERROR at line 6:
+ORA-06550: line 6, column 34: 
+PL/SQL: ORA-00904: "GRADE": invalid identifier 
+ORA-06550: line 6, column 16: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 12, column 14: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 12, column 4: 
+PL/SQL: Statement ignored 
+ORA-06550: line 13, column 11: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 13, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	nm student1.Name%type;
+  3  	t student1.Total%type;
+  4  	g student1.Grade%type;
+  5  	count number;
+  6  	cursor cur is select Name,Total,Grade from student order by Total desc;
+  7  begin
+  8  	count:=0;
+  9  	open cur;
+ 10  		loop
+ 11  			fetch cur into nm,t,g;
+ 12  			exit when count=3 or cur%NOTFOUND;
+ 13  			count:=count+1;
+ 14  			dbms_output.put_line(nm || ' ' || t || ' ' || g);
+ 15  		end loop;
+ 16  	close cur;
+ 17* end;
+SQL> /
+	cursor cur is select Name,Total,Grade from student order by Total desc;
+	                                *
+ERROR at line 6:
+ORA-06550: line 6, column 34: 
+PL/SQL: ORA-00904: "GRADE": invalid identifier 
+ORA-06550: line 6, column 16: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 12, column 14: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 12, column 4: 
+PL/SQL: Statement ignored 
+ORA-06550: line 13, column 11: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 13, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	nm student1.Name%type;
+  3  	t student1.Total%type;
+  4  	g student1.Grade%type;
+  5  	count number:=0;
+  6  	cursor cur is select Name,Total,Grade from student order by Total desc;
+  7  begin
+  8  	open cur;
+  9  		loop
+ 10  			fetch cur into nm,t,g;
+ 11  			exit when count=3 or cur%NOTFOUND;
+ 12  			count:=count+1;
+ 13  			dbms_output.put_line(nm || ' ' || t || ' ' || g);
+ 14  		end loop;
+ 15  	close cur;
+ 16* end;
+SQL> /
+	cursor cur is select Name,Total,Grade from student order by Total desc;
+	                                *
+ERROR at line 6:
+ORA-06550: line 6, column 34: 
+PL/SQL: ORA-00904: "GRADE": invalid identifier 
+ORA-06550: line 6, column 16: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 11, column 14: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 11, column 4: 
+PL/SQL: Statement ignored 
+ORA-06550: line 12, column 11: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 12, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	nm student1.Name%type;
+  3  	t student1.Total%type;
+  4  	count number:=0;
+  5  	cursor cur is select Name,Total from student order by Total desc;
+  6  begin
+  7  	open cur;
+  8  		loop
+  9  			fetch cur into nm,t;
+ 10  			exit when count=3 or cur%NOTFOUND;
+ 11  			count:=count+1;
+ 12  			dbms_output.put_line(nm || '	' || t );
+ 13  		end loop;
+ 14  	close cur;
+ 15* end;
+SQL> /
+	cursor cur is select Name,Total from student order by Total desc;
+	                          *
+ERROR at line 5:
+ORA-06550: line 5, column 28: 
+PL/SQL: ORA-00904: "TOTAL": invalid identifier 
+ORA-06550: line 5, column 16: 
+PL/SQL: SQL Statement ignored 
+ORA-06550: line 10, column 14: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 10, column 4: 
+PL/SQL: Statement ignored 
+ORA-06550: line 11, column 11: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 11, column 4: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      nm Student1.Name%TYPE;
+  3      t Student1.Total%TYPE;
+  4      count_num NUMBER := 0;  -- Changed variable name from COUNT to count_num
+  5      CURSOR cur IS 
+  6          SELECT Name, Total 
+  7          FROM Student1 
+  8          ORDER BY Total DESC;  -- Removed Grade as it is not inserted in the table
+  9  BEGIN
+ 10      OPEN cur;
+ 11      LOOP
+ 12          FETCH cur INTO nm, t;
+ 13          EXIT WHEN count_num = 3 OR cur%NOTFOUND;
+ 14          count_num := count_num + 1;
+ 15          DBMS_OUTPUT.PUT_LINE(nm || ' ' || t);  -- Outputs Name and Total
+ 16      END LOOP;
+ 17      CLOSE cur;
+ 18* END;
+SQL> /
+Karan 270                                                                                                                                                                                               
+Nisha 270                                                                                                                                                                                               
+Arjun 243                                                                                                                                                                                               
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      nm Student1.Name%TYPE;
+  3      t Student1.Total%TYPE;
+  4      g Student1.Grade%TYPE;
+  5      count NUMBER := 0;  
+  6      CURSOR cur IS SELECT Name, Total, Grade FROM Student1 ORDER BY Total DESC;
+  7  BEGIN
+  8      OPEN cur;
+  9      LOOP
+ 10          FETCH cur INTO nm, t, g;
+ 11          EXIT WHEN count = 3 OR cur%NOTFOUND;
+ 12          count := count + 1;
+ 13          DBMS_OUTPUT.PUT_LINE(nm || ' ' || t || ' ' || g);
+ 14      END LOOP;
+ 15      CLOSE cur;
+ 16* END;
+ 17  /
+        EXIT WHEN count = 3 OR cur%NOTFOUND;
+                  *
+ERROR at line 11:
+ORA-06550: line 11, column 19: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 11, column 9: 
+PL/SQL: Statement ignored 
+ORA-06550: line 12, column 18: 
+PLS-00204: function or pseudo-column 'COUNT' may be used inside a SQL statement only 
+ORA-06550: line 12, column 9: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      nm Student1.Name%TYPE;
+  3      t Student1.Total%TYPE;
+  4      g Student1.Grade%TYPE;
+  5      count_n NUMBER := 0;  
+  6      CURSOR cur IS SELECT Name, Total, Grade FROM Student1 ORDER BY Total DESC;
+  7  BEGIN
+  8      OPEN cur;
+  9      LOOP
+ 10          FETCH cur INTO nm, t, g;
+ 11          EXIT WHEN count_n = 3 OR cur%NOTFOUND;
+ 12          count_n := count_n + 1;
+ 13          DBMS_OUTPUT.PUT_LINE(nm || ' ' || t || ' ' || g);
+ 14      END LOOP;
+ 15      CLOSE cur;
+ 16* END;
+SQL> /
+Karan 270 A                                                                                                                                                                                             
+Nisha 270 A                                                                                                                                                                                             
+Arjun 243 B                                                                                                                                                                                             
+
+PL/SQL procedure successfully completed.
+
+SQL> 
+SQL> spool offf;

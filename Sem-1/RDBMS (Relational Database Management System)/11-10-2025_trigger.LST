@@ -1,0 +1,90 @@
+-- day-15 tables
+SQL> CREATE TABLE Movie (
+  2      movie_id      NUMBER PRIMARY KEY,
+  3      movie_name    VARCHAR2(35),
+  4      genre         VARCHAR2(20),
+  5      release_date  DATE
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE Screen (
+  2      screen_id     NUMBER PRIMARY KEY,
+  3      screen_name   VARCHAR2(40),
+  4      max_capacity  NUMBER
+  5  );
+
+Table created.
+
+SQL> -- day-15
+SQL> -- 1. Create a trigger that when the new record is inserted in the Movie table
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE TRIGGER movie_t1
+  2  AFTER
+  3  insert -- when use trigger 'insert or update or delete'
+  4  on
+  5  movie -- table name
+  6  begin
+  7  	dbms_output.put_line('Your movie record is inserted ' || :NEW.MOVIE_NAME);
+  8* end
+SQL> /
+CREATE OR REPLACE TRIGGER movie_t1
+                          *
+ERROR at line 1:
+ORA-04082: NEW or OLD references not allowed in table level triggers 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE TRIGGER movie_t1
+  2  AFTER
+  3  insert -- when use trigger 'insert or update or delete'
+  4  on
+  5  movie -- table name
+  6  for each row -- trigger for all row
+  7  begin
+  8  	dbms_output.put_line('Your movie record is inserted ' || :NEW.MOVIE_NAME);
+  9  	-- :NEW.column_name show new record
+ 10* end
+SQL> /
+
+Warning: Trigger created with compilation errors.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  CREATE OR REPLACE TRIGGER movie_t1
+  2  AFTER
+  3  insert -- when use trigger 'insert or update or delete'
+  4  on
+  5  movie -- table name
+  6  for each row -- trigger for all row
+  7  begin
+  8  	dbms_output.put_line('Your movie record is inserted ' || :NEW.MOVIE_NAME);
+  9  	-- :NEW.column_name show new record
+ 10* end;
+SQL> /
+
+Trigger created.
+
+SQL> set serveroutput on;
+SQL> insert into movie values(1, 'WAR', 'ACTION', '12-JAN-2025');
+Your movie record is inserted WAR                                               
+
+1 row created.
+
+SQL> -- 2. Create a trigger that will be fired when a Movie is deleted
+SQL> insert into movie values(2, 'WAR2', 'ACTION', '12-JAN-2026');
+Your movie record is inserted WAR2                                              
+
+1 row created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* insert into movie values(2, 'WAR2', 'ACTION', '12-JAN-2026')
+SQL> spool off;

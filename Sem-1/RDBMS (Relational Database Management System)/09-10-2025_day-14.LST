@@ -1,0 +1,116 @@
+desc faculty_master;
+ Name                                                              Null?    Type
+ ----------------------------------------------------------------- -------- --------------------------------------------
+ FACULTY_ID                                                        NOT NULL NUMBER
+ FACULTY_NAME                                                               VARCHAR2(50)
+ DOJ                                                                        DATE
+
+SQL> -- day-14
+SQL> -- 1. 1. Write a procedure which will take Faculty ID as an input and will display all the information of that faculty
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure facolty_master fac_data(n IN number)
+  2  IS
+  3  id facolty_master.facolty_id%type;
+  4  nm facolty_master.facolty_name%type;
+  5  dj facolty_master.doj%type;
+  6  Begin
+  7  	select facolty_id,facolty_name,doj into id,nm,dj from facolty_master
+  8  	where facolty_id=n;
+  9  	dbms_output.put_line(id || '	' || nm || '	' || dj);
+ 10* end;
+ 11  /
+
+Warning: Procedure created with compilation errors.
+
+SQL> set serveroutput on;
+SQL> exec fac_data(2);
+BEGIN fac_data(2); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00201: identifier 'FAC_DATA' must be declared 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or repalce procedure facolty_master fac_data(n IN number)
+  2  IS
+  3  id facolty_master.facolty_id%type;
+  4  nm facolty_master.facolty_name%type;
+  5  dj facolty_master.doj%type;
+  6  Begin
+  7  	select facolty_id,facolty_name,doj into id,nm,dj from facolty_master
+  8  	where facolty_id=n;
+  9  	dbms_output.put_line(id || '	' || nm || '	' || dj);
+ 10* end;
+SQL> /
+create or repalce procedure facolty_master fac_data(n IN number)
+          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or repalce procedure fac_data(n IN number)
+  2  IS
+  3  id facolty_master.facolty_id%type;
+  4  nm facolty_master.facolty_name%type;
+  5  dj facolty_master.doj%type;
+  6  Begin
+  7  	select facolty_id,facolty_name,doj into id,nm,dj from facolty_master
+  8  	where facolty_id=n;
+  9  	dbms_output.put_line(id || '	' || nm || '	' || dj);
+ 10* end;
+SQL> /
+create or repalce procedure fac_data(n IN number)
+          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create and repalce procedure fac_data(n IN number)
+  2  IS
+  3  id facolty_master.facolty_id%type;
+  4  nm facolty_master.facolty_name%type;
+  5  dj facolty_master.doj%type;
+  6  Begin
+  7  	select facolty_id,facolty_name,doj into id,nm,dj from facolty_master
+  8  	where facolty_id=n;
+  9  	dbms_output.put_line(id || '	' || nm || '	' || dj);
+ 10* end;
+SQL> /
+create and repalce procedure fac_data(n IN number)
+           *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure fac_data(n IN number)
+  2  IS
+  3  id facolty_master.facolty_id%type;
+  4  nm facolty_master.facolty_name%type;
+  5  dj facolty_master.doj%type;
+  6  Begin
+  7  	select facolty_id,facolty_name,doj into id,nm,dj from facolty_master
+  8  	where facolty_id=n;
+  9  	dbms_output.put_line(id || '	' || nm || '	' || dj);
+ 10* end;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> spool off;
