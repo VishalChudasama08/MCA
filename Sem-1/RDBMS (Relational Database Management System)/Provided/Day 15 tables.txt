@@ -1,0 +1,12 @@
+CREATE TABLE Movie (
+    movie_id      NUMBER PRIMARY KEY,
+    movie_name    VARCHAR2(35),
+    genre         VARCHAR2(20),
+    release_date  DATE
+);
+
+CREATE TABLE Screen (
+    screen_id     NUMBER PRIMARY KEY,
+    screen_name   VARCHAR2(40),
+    max_capacity  NUMBER
+);

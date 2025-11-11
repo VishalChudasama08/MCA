@@ -1,0 +1,23 @@
+CREATE TABLE Student1 (
+   R_No   NUMBER PRIMARY KEY,
+   Name   VARCHAR2(12),
+   Sub1   NUMBER(3),
+   Sub2   NUMBER(3),
+   Sub3   NUMBER(3),
+   Total  NUMBER(5),
+   Grade  VARCHAR2(5)
+);
+
+
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (1, 'Amit', 78, 65, 80);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (2, 'Nisha', 90, 88, 92);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (3, 'Rahul', 55, 60, 58);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (4, 'Priya', 40, 45, 42);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (5, 'Karan', 95, 90, 85);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (6, 'Sneha', 72, 68, 70);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (7, 'Ravi', 30, 25, 35);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (8, 'Meena', 65, 70, 60);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (9, 'Arjun', 85, 80, 78);
+INSERT INTO Student1 (R_No, Name, Sub1, Sub2, Sub3) VALUES (10,'Pooja', 50, 55, 53);
+
+COMMIT;
