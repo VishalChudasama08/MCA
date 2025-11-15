@@ -25,19 +25,21 @@ int paisa(float n) {
 }
 
 int remove_point(float n) {
-	char str[100];
-	int a, c = 0, i = 0;
-	float b;
-	sprintf(str, "%f", n); // convert float to string, after point not 6 digit than add 0 it self
-	printf("\n%s", str);
+	float a = 10.254500;
+	int i = 0, ans = 0;
+	char str[20];
+	sprintf(str, "%f", a); // convert float to string, after point not 6 digit than add 0 it self
 	while (str[i] != '\0') {
 		if (str[i] >= '0' && str[i] <= '9') {
-			a = n;
-			b = n - a;
-			n = b * 10;
-			c = (c * 10) + a;
+			ans = (ans * 10) + (str[i] - '0'); // (str[i] - '0') this part convert char to int (only numeric char)
 		}
 		i++;
 	}
-	return c;
+	while (i > 0) {
+		if (ans % 10 == 0) {
+			ans = ans / 10;
+		}
+		i--;
+	}
+	return ans;
 }

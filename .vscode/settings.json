@@ -23,6 +23,8 @@
       "BUSBOOK.C": "cpp",
       "ARRAY.C": "cpp",
       "CHECKCHA.C": "cpp",
-      "CIRCUPRI.C": "cpp"
+      "CIRCUPRI.C": "cpp",
+      "FLOAT.C": "cpp",
+      "021PAISA.C": "cpp"
    }
 }
