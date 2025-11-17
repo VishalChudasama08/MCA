@@ -1,0 +1,3 @@
+
+// avoid pretty printing 
+.forEach(doc => print(EJSON.stringify(doc)))

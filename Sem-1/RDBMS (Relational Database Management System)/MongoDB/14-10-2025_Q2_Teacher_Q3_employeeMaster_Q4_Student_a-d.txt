@@ -143,13 +143,64 @@ db.EMPLOYEE_MASTER.insertMany([
     }
 ])
 
-###
-db.EMPLOYEE_MASTER.find()
 
+### edit on 17-11-2025 on laptop
+> db.EMPLOYEE_MASTER.find()
+{"_id":1,"Name":"Akash","Designation":"Analyst","DOJ":"1998-12-15","Department":"HR","Salary":30000,"Gender":"Male","Skills":["Java","PHP"]}
+{"_id":2,"Name":"Amit","Designation":"Accountant","DOJ":"2000-01-20","Department":"Finance","Salary":28000,"Gender":"Male","Skills":["Excel","Tally"]}
+{"_id":3,"Name":"Neha","Designation":"Engineer","DOJ":"2005-07-11","Department":"Development","Salary":35000,"Gender":"Female","Skills":["Java","Python"]}
+{"_id":4,"Name":"Riya","Designation":"Scientist","DOJ":"1999-01-01","Department":"Research","Salary":40000,"Gender":"Female","Skills":["Python","R"]}
+{"_id":5,"Name":"Sunil","Designation":"Engineer","DOJ":"2003-03-15","Department":"Development","Salary":32000,"Gender":"Male","Skills":["PHP","JavaScript"]}
+{"_id":6,"Name":"Akash","Designation":"Technician","DOJ":"2010-10-10","Department":"Maintenance","Salary":22000,"Gender":"Male","Skills":["Hardware","Networking"]}
+{"_id":7,"Name":"Divya","Designation":"Engineer","DOJ":"2012-12-12","Department":"Development","Salary":38000,"Gender":"Female","Skills":["Java","C++"]}
+
+--------------------------------------------------------------------
+2. Display Name, Department, Gender and Salary.
+
+> db.EMPLOYEE_MASTER.find({},{Name:1,Department:1,Gender:1,Salary:1})
+{"_id":1,"Name":"Akash","Department":"HR","Salary":30000,"Gender":"Male"}
+{"_id":2,"Name":"Amit","Department":"Finance","Salary":28000,"Gender":"Male"}
+{"_id":3,"Name":"Neha","Department":"Development","Salary":35000,"Gender":"Female"}
+{"_id":4,"Name":"Riya","Department":"Research","Salary":40000,"Gender":"Female"}
+{"_id":5,"Name":"Sunil","Department":"Development","Salary":32000,"Gender":"Male"}
+{"_id":6,"Name":"Akash","Department":"Maintenance","Salary":22000,"Gender":"Male"}
+{"_id":7,"Name":"Divya","Department":"Development","Salary":38000,"Gender":"Female"}
+
+--------------------------------------------------------------------
+3. Display the list of employees from the department “HR”.
+
+> db.EMPLOYEE_MASTER.find({Department:"HR"})
+{"_id":1,"Name":"Akash","Designation":"Analyst","DOJ":"1998-12-15","Department":"HR","Salary":30000,"Gender":"Male","Skills":["Java","PHP"]}
+
+--------------------------------------------------------------------
+4. Display the employee id, name, department and DOB.
+
+> db.EMPLOYEE_MASTER.find({},{Name:1,Department:1,DOJ:1})
+{"_id":1,"Name":"Akash","DOJ":"1998-12-15","Department":"HR"}
+{"_id":2,"Name":"Amit","DOJ":"2000-01-20","Department":"Finance"}
+{"_id":3,"Name":"Neha","DOJ":"2005-07-11","Department":"Development"}
+{"_id":4,"Name":"Riya","DOJ":"1999-01-01","Department":"Research"}
+{"_id":5,"Name":"Sunil","DOJ":"2003-03-15","Department":"Development"}
+{"_id":6,"Name":"Akash","DOJ":"2010-10-10","Department":"Maintenance"}
+{"_id":7,"Name":"Divya","DOJ":"2012-12-12","Department":"Development"}
+
+--------------------------------------------------------------------
+5. Display the employees whose gender is female and designation either “Engineer” or “Scientist”.
+--------------------------------------------------------------------
+6. Update all those documents where name of employee is “Akash” with the new value of designation as “Engineer”.
+--------------------------------------------------------------------
+7. Delete all those documents where DOJ is  1st January 1999.
+--------------------------------------------------------------------
+8. Display the employees whose salary is greater than 25000 and have skills Java or PHP.
+--------------------------------------------------------------------
+9. Find all the employees having designation “Engineer” and display salary for them.
+--------------------------------------------------------------------
+10. Display only those documents where the name of employee is “Amit” and designation is “Accountant”.
+--------------------------------------------------------------------
 
 =============================================================
 
-Create a Student Master database with a collection called “Student” containing
+4       Create a Student Master database with a collection called “Student” containing
 documents with some or all of the following fields: StudentRollNo, StudentName,
 Grade, Hobbies, and DOJ.
 Perform the following operations on the database:
@@ -171,6 +222,20 @@ db.Student.insert( {_id:8,Rollno:8,StudName:"poojan",Grade:"IVV",Hobbies:"Typing
 db.Student.insert( {_id:9,Rollno:9,StudName:"Parth",Grade:"VI",Hobbies:"Music",Doj:"16/01/2020"});
 db.Student.insert( {_id:10,Rollno:10,StudName:"Vihan",Grade:"IV",Hobbies:"Reading",Doj:"16/02/2021"});
 db.Student.insert( {_id:11,Rollno:11,StudName:"Akhay",Grade:"IV",Hobbies:"Chess",Doj:"16/02/2021"});
+
+db.Student.insertMany([
+        {_id:1,Rollno:1,StudName:"vijay",Grade:"IV",Hobbies:"Dancing",Doj:"22/05/2020"},
+        {_id:2,Rollno:2,StudName:"Jay",Grade:"IV",Hobbies:"Reading",Doj:"16/01/2020"},
+        {_id:3,Rollno:3,StudName:"Maukesh",Grade:"IVV",Hobbies:"Music",Doj:"01/01/2020"},
+        {_id:4,Rollno:4,StudName:"Anuradha",Grade:"IVV",Hobbies:"Reading",Doj:"16/05/2020"},
+        {_id:5,Rollno:5,StudName:"Ramesh",Grade:"VII",Hobbies:"Chess",Doj:"16/01/2021"},
+        {_id:6,Rollno:6,StudName:"Paresh",Grade:"VII",Hobbies:"Dancing",Doj:"27/12/2020"},
+        {_id:7,Rollno:7,StudName:"Sangeeta",Grade:"VI",Hobbies:"Running",Doj:"26/07/2020"},
+        {_id:8,Rollno:8,StudName:"poojan",Grade:"IVV",Hobbies:"Typing",Doj:"25/03/2020"},
+        {_id:9,Rollno:9,StudName:"Parth",Grade:"VI",Hobbies:"Music",Doj:"16/01/2020"},
+        {_id:10,Rollno:10,StudName:"Vihan",Grade:"IV",Hobbies:"Reading",Doj:"16/02/2021"},
+        {_id:11,Rollno:11,StudName:"Akhay",Grade:"IV",Hobbies:"Chess",Doj:"16/02/2021"}
+])
 
 ---------------------------------------------------------------------
 b) Find the document where in the “StudName” has value “Akhay”.
@@ -324,9 +389,18 @@ i) Find those documents where the Hobbies is set to either ‘Chess’ or is set
 j) Find those documents where the Hobbies is set neither to ‘Chess’ nor is set to
 ‘Dancing”.
 
+> db.Student.find({Hobbies:{$nin:["Chess", "Dancing"]}});
+{"_id":2,"Rollno":2,"StudName":"Jay","Grade":"IV","Hobbies":"Reading","Doj":"16/01/2020"}
+{"_id":3,"Rollno":3,"StudName":"Maukesh","Grade":"IVV","Hobbies":"Music","Doj":"01/01/2020"}
+{"_id":4,"Rollno":4,"StudName":"Anuradha","Grade":"IVV","Hobbies":"Reading","Doj":"16/05/2020"}
+{"_id":7,"Rollno":7,"StudName":"Sangeeta","Grade":"VI","Hobbies":"Running","Doj":"26/07/2020"}
+{"_id":8,"Rollno":8,"StudName":"poojan","Grade":"IVV","Hobbies":"Typing","Doj":"25/03/2020"}
+{"_id":9,"Rollno":9,"StudName":"Parth","Grade":"VI","Hobbies":"Music","Doj":"16/01/2020"}
+{"_id":10,"Rollno":10,"StudName":"Vihan","Grade":"IV","Hobbies":"Reading","Doj":"16/02/2021"}
+
 ---------------------------------------------------------------------
 k) Find those documents where the student name begins with ‘M’.
- ---------------------------------------------------------------------
+---------------------------------------------------------------------
 l) Find those documents where the student name has an “e” in any position.
 ---------------------------------------------------------------------
 m) Find those documents where the student name ends in “a”.
@@ -336,8 +410,6 @@ n) Find total number of documents.
 o) Find total number of documents where Grade is ‘VII’.
 ---------------------------------------------------------------------
 p) Sort the documents in ascending order of student name.
-
-
 ---------------------------------------------------------------------
 q) Display the last two records
 ---------------------------------------------------------------------
