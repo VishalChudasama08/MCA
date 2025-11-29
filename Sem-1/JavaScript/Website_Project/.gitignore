@@ -1,0 +1,26 @@
+# ----------------------------------------
+# React Website Project .gitignore
+# ----------------------------------------
+
+# Node modules
+/node_modules/
+/backend/node_modules/
+/frontend/node_modules/
+
+# Production build files
+/build/
+/dist/
+
+# Environment variables (Keep secrets safe!)
+*.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Cache files
+/.cache/
+.cache-loader/
+.vscode/
+.DS_Store
+*.log
