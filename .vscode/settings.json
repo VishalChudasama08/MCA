@@ -25,6 +25,7 @@
       "CHECKCHA.C": "cpp",
       "CIRCUPRI.C": "cpp",
       "FLOAT.C": "cpp",
-      "021PAISA.C": "cpp"
+      "021PAISA.C": "cpp",
+      "FILEINT.C": "cpp"
    }
 }

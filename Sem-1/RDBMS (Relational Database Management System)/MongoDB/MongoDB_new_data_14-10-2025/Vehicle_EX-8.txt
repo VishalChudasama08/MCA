@@ -1,0 +1,208 @@
+db.Vehicle.insert({
+  _id: 1,
+  "VehicleId": "V10001",
+  "Make": "Maruti Suzuki",
+  "Model": "Baleno",
+  "Year": 2021,
+  "Mileage": 19.5,
+  "Price": 780000,
+  "FuelType": "Petrol",
+  "Location": "Pune, Maharashtra",
+  "OwnerName": "Rohan Deshpande",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Pune",
+    "ZipCode": "411001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 2,
+  "VehicleId": "V10002",
+  "Make": "Hyundai",
+  "Model": "i20",
+  "Year": 2020,
+  "Mileage": 18.1,
+  "Price": 650000,
+  "FuelType": "Petrol",
+  "Location": "Ahmedabad, Gujarat",
+  "OwnerName": "Neha Patel",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-06-12",
+  "OwnerDetails": {
+    "City": "Ahmedabad",
+    "ZipCode": "380001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 3,
+  "VehicleId": "V10003",
+  "Make": "Tata",
+  "Model": "Harrier",
+  "Year": 2022,
+  "Mileage": 14.9,
+  "Price": 1650000,
+  "FuelType": "Diesel",
+  "Location": "Mumbai, Maharashtra",
+  "OwnerName": "Siddharth Joshi",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Mumbai",
+    "ZipCode": "400002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 4,
+  "VehicleId": "V10004",
+  "Make": "Honda",
+  "Model": "Amaze",
+  "Year": 2019,
+  "Mileage": 20.4,
+  "Price": 590000,
+  "FuelType": "Diesel",
+  "Location": "Chennai, Tamil Nadu",
+  "OwnerName": "Deepa Krishnan",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-04-18",
+  "OwnerDetails": {
+    "City": "Chennai",
+    "ZipCode": "600003"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 5,
+  "VehicleId": "V10005",
+  "Make": "Mahindra",
+  "Model": "Thar",
+  "Year": 2023,
+  "Mileage": 13.1,
+  "Price": 1650000,
+  "FuelType": "Petrol",
+  "Location": "Delhi",
+  "OwnerName": "Amit Sharma",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-05-02",
+  "OwnerDetails": {
+    "City": "Delhi",
+    "ZipCode": "110002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 6,
+  "VehicleId": "V10006",
+  "Make": "Renault",
+  "Model": "Kwid",
+  "Year": 2018,
+  "Mileage": 22.3,
+  "Price": 350000,
+  "FuelType": "Petrol",
+  "Location": "Jaipur, Rajasthan",
+  "OwnerName": "Pooja Meena",
+  "BookingStatus": "Cancelled",
+  "BookingDate": "2023-03-10",
+  "OwnerDetails": {
+    "City": "Jaipur",
+    "ZipCode": "302001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 7,
+  "VehicleId": "V10007",
+  "Make": "Kia",
+  "Model": "Seltos",
+  "Year": 2021,
+  "Mileage": 16.5,
+  "Price": 1350000,
+  "FuelType": "Diesel",
+  "Location": "Bengaluru, Karnataka",
+  "OwnerName": "Manoj Gowda",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Bengaluru",
+    "ZipCode": "560002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 8,
+  "VehicleId": "V10008",
+  "Make": "Toyota",
+  "Model": "Innova Crysta",
+  "Year": 2020,
+  "Mileage": 12.5,
+  "Price": 2100000,
+  "FuelType": "Diesel",
+  "Location": "Hyderabad, Telangana",
+  "OwnerName": "Ravi Teja",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-07-20",
+  "OwnerDetails": {
+    "City": "Hyderabad",
+    "ZipCode": "500001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 9,
+  "VehicleId": "V10009",
+  "Make": "Skoda",
+  "Model": "Octavia",
+  "Year": 2019,
+  "Mileage": 15.7,
+  "Price": 1200000,
+  "FuelType": "Petrol",
+  "Location": "Kolkata, West Bengal",
+  "OwnerName": "Arunabha Sen",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Kolkata",
+    "ZipCode": "700002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 10,
+  "VehicleId": "V10010",
+  "Make": "Volkswagen",
+  "Model": "Polo",
+  "Year": 2018,
+  "Mileage": 17.2,
+  "Price": 480000,
+  "FuelType": "Petrol",
+  "Location": "Surat, Gujarat",
+  "OwnerName": "Mehul Gandhi",
+  "BookingStatus": "Cancelled",
+  "BookingDate": "2023-02-14",
+  "OwnerDetails": {
+    "City": "Surat",
+    "ZipCode": "395003"
+  }
+});
+
+
+1.	Find vehicles with a price greater than $25,000.
+
+2.	Count the number of vehicles for each fuel type.
+3.	Find vehicles manufactured after 2018.
+4.	Retrieve vehicles that have a mileage greater than 15 miles per gallon.
+5.	Find vehicles whose make contains "Honda" or "Toyota".
+6.	Sort the vehicles by year in ascending order.
+7.	Find vehicles located in "California" or "Nevada"
+8.	Count the number of vehicles in each location (city/state).
+9.	Find vehicles whose model starts with the letter "A".
+10.	Retrieve vehicles with exactly 3 owners.
+11.	Find vehicles whose owner name contains "John".
+12.	Sort vehicles by mileage in descending order.
+13.	Find vehicles whose fuel type is not "Petrol".
+14.	Retrieve vehicles with a price between $15,000 and $40,000.
+15.	Find vehicles whose booking status is "Booked".
+16.	Find vehicles located in "New York".

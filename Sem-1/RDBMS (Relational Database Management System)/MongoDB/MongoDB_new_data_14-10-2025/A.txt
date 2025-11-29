@@ -90,7 +90,11 @@ db.employees.aggregate([{$group:{"_id":null, "totalAge":{$sum:"$age"}}}])
 
 ----------------------
 4. Sum: $sum is used to count or sum the values inside a group.
-db.employees.aggregate([{$group:{"_id":"$dept", "noOfDept":{$sum:1}}}]);
+db.employees.aggregate(
+		[{$group:{"_id":"$dept",
+			 "noOfDept":{$sum:1}}
+		}]
+		);
 
 ----------------------
 5. Average: Calculates average of specific field's value per group.
@@ -107,7 +111,13 @@ db.employees.aggregate([{$match:{dept:"Admin"}},{$group:{"_id":"$dept", "noOfEmp
 8. Getting specific field's value from first and last document of each group: 
 Works well when doucument result is sorted.
 
-db.employees.aggregate([{$group:{"_id":"$dept", "last":{$last:"$name"}, "first":{$first:"$name"}}}]);
+db.employees.aggregate([{$match:{dept:"Admin"}}]);
+-------------
+db.employees.aggregate([
+		{$group:{"_id":"$dept",
+		 "last":{$last:"$name"},
+		 "first":{$first:"$name"}}
+		}]);
 ----------------------
 9. Minumum with maximum:
 
@@ -117,26 +127,56 @@ db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "maxExp
 an array used to project data in array format, 
 addToSet is simlar to push but it omits duplicate values.
 
-db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}, "arrSet": {$addToSet:"$age"}}}]);
+db.employees.aggregate([{$group:{"_id":"$dept",
+			 "arrPush":{$push:"$age"},
+			 "arrSet": {$addToSet:"$age"}}}]);
+
+db.employees.aggregate([{$group:{"_id":null,
+			 "arrPush":{$push:"$age"},
+			 "arrSet": {$addToSet:"$age"}}}]);
+
+{ "_id" : "HR", 
+"arrPush" : [ 28, 26, 35, 25, 29, 25 ], 
+"arrSet" : [ 28, 35, 25, 26, 29 ] }
+{ "_id" : "Finance", 
+"arrPush" : [ 32, 29, 28, 30, 33, 28, 41, 28, 34, 27 ], 
+"arrSet" : [ 41, 28, 33, 34, 32, 27, 29, 30 ] }
+{ "_id" : "IT", "arrPush" : [ 27, 24, 25, 29, 27, 26, 30, 29 ], "arrSet" : [ 26, 25, 24, 27, 29, 30 ] }
+{ "_id" : "Sales", "arrPush" : [ 33, 29, 36, 32, 35, 31 ], "arrSet" : [ 32, 33, 35, 36, 31, 29 ] }
+{ "_id" : "Admin", "arrPush" : [ 30, 35, 40, 27, 37, 33, 32, 40 ], "arrSet" : [ 33, 35, 40, 30, 37, 27, 32 ] }
+{ "_id" : "Marketing", "arrPush" : [ 31, 31, 26, 34, 27, 38 ], "arrSet" : [ 34, 31, 26, 38, 27 ] }
+{ "_id" : "Support", "arrPush" : [ 34, 38, 31, 30, 39, 36 ], "arrSet" : [ 34, 39, 31, 36, 38, 30 ]
 Output:
 { "_id" : "dept", "arrPush" : [ 30, 35, 35, 35, 26, 25 ], "arrSet" : [ 25, 26, 35, 30 ] }
 
 
 -----------------------------
-11. Unwind: Used to create multiple in-memory documents for each value in the
- specified array type field, then we can do further aggregation based on those 
-values.
+11. Unwind: Used to create multiple in-memory documents for each value in the  specified array type field, then we can do further aggregation based on those values.
 
 For each element in the specified array field, $unwind generates a new document.
 The new document is a copy of the original document, but the array field is replaced by a single element from the array.
 
+db.employees.aggregate([{$match:{name:"Adma"}}]);
 
-db.employees.aggregate([{$match:{"name":"Adma"}}, {$unwind:"$languages"}]);
+{ "_id" : ObjectId("691d6ec6ce00f703d28404ce"), "name" : "Adma", "dept" : "Admin", "languages" : [ "German", "French", "English", "Hindi" ], "age" : 30, "totalExp" : 10 }
+
+db.employees.aggregate([
+			{$match:{"name":"Adma"}}, 			{$unwind:"$languages"}
+		       ]);
+
+{ "_id" : ObjectId("691d6ec6ce00f703d28404ce"), "name" : "Adma", "dept" : "Admin", "languages" : "German", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691d6ec6ce00f703d28404ce"), "name" : "Adma", "dept" : "Admin", "languages" : "French", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691d6ec6ce00f703d28404ce"), "name" : "Adma", "dept" : "Admin", "languages" : "English", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691d6ec6ce00f703d28404ce"), "name" : "Adma", "dept" : "Admin", "languages" : "Hindi", "age" : 30, "totalExp" : 10 }
 ------------------------------
 12. Sorting:
 
 db.employees.aggregate([{$match:{dept:"Admin"}}, 
 {$project:{"name":1, "dept":1}}, {$sort: {name: 1}}]);
+
+
+db.employees.aggregate([{$match:{dept:"Admin"}}, 
+{$project:{"name":1, "dept":1}}, {$sort: {name: -1}}]);
 ------------------
 13. Skip:
 
@@ -161,11 +201,23 @@ db.employees.aggregate([{$match:{dept:"Admin", age: {$gt:30}}}, {$project:{"name
 -------------------------
 7. Boolean aggregation opertor in projection:
 
-db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, { $lt: [ "$age", 36 ] } ] }}}]);
+db.employees.aggregate([
+			{$match:{dept:"Admin"}},
+			{$project:{"name":1, "dept":1,
+			 age: { $and: [ { $gt: [ "$age", 30 ] },
+					{ $lt: [ "$age", 36 ] } 
+				      ]
+			 }}}]);
+
+
+
 ----------------------
 18. Boolean aggregation opertor in match:
 
-db.employees.aggregate([{$match:{dept:"Admin", $and: [{age: { $gt:  30 }}, {age: {$lt: 36 }} ] }}, 
-			{$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, 
+db.employees.aggregate([
+		{$match:{dept:"Admin", 
+		$and: [{age: { $gt:  30 }},
+		       {age: {$lt: 36 }} ] }}, 
+		       {$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, 
 			{$lt: [ "$age", 36 ] } ] }}}])
 List of boolean aggregation opertors: $and, $or, and $not.

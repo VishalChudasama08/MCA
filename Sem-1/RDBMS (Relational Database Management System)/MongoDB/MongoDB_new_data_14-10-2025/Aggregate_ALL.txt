@@ -71,11 +71,12 @@ db.employees.insertMany([
 
 ---------------------
 1. Match: Used to match documents (like SQL where clause)
-
-db.employees.aggregate([{$match:{dept:"Admin"}}]);
-
-
 db.employees.find({dept:"Admin"})
+
+db.employees.aggregate([{$match:{dept:"Admin"}}]);//agreegate where clause than use $match
+
+
+
 
 ------------------
 2. Project: Used to populate specific field's value(s)
@@ -90,10 +91,27 @@ db.employees.find({dept:"Admin"},{"name":1, "dept":1,_id:0});
 3. Group: $group is used to group documents by specific field, here documents are grouped by "dept" field's value. Another useful feature is that you can group by null, it means all documents will be aggregated into one.
 
 db.employees.aggregate([{$group:{"_id":"$dept"}}]) 
+db.employees.aggregate([{$group:{"_id":"$age"}}]) 
+db.employees.aggregate([{$group:{"_id":"$totalExp"}}]) 
+
+
+
+
 
 
 
 db.employees.aggregate([{$group:{"_id":"$dept", "totalAge":{$sum:"$age"}}}]) //total
+db.employees.aggregate([{$group:{"_id":"$dept", "MaxAge":{$max:"$age"}}}]) //max
+db.employees.aggregate([{$group:{"_id":"$dept", "MinAge":{$min:"$age"}}}]) //min
+db.employees.aggregate([{$group:{"_id":"$dept", "AvgAge":{$avg:"$age"}}}]) //Average
+db.employees.aggregate([{$group:{"_id":null, "TotalEmp":{$sum:1}}}]) //count
+
+
+
+
+
+
+
 db.employees.aggregate([{$group:{"_id":null, "totalAge":{$sum:"$age"}}}]) //total
 { "_id" : null, "totalAge" : 1640 }
 
@@ -152,7 +170,10 @@ db.employees.aggregate([
 				"_id":"$dept", 
 				"noOfEmployee":{$sum:1},
 				"maxExp":{$max:"$totalExp"}
-			}},{$project:{"name":1}}]);
+			}},
+			{$project:{"dept":1}}]);
+
+
 
 
 ----------------------
