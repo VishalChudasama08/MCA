@@ -13,9 +13,12 @@ app.use(express.json());
 import authRoutes from "./routes/authRoutes.js";
 app.use("/api/auth", authRoutes);
 
+import moviesRoutes from "./routes/moviesRoutes.js";
+app.use("/api/movie", moviesRoutes);
+
 import userRoutes from "./routes/userRoutes.js";
 app.use("/api/users", userRoutes);
 
-app.listen(PORT, () => 
+app.listen(PORT, () =>
   console.log(`Server running → http://localhost:${PORT}`)
 );
