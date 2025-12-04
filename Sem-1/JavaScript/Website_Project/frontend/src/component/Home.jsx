@@ -5,7 +5,9 @@ export default function Home() {
 	return (
 		<>
 			<Navbar />
-			<Outlet /> {/* all route (that have inside of Home route)  will render here */}
+			<div className="container-lg" id="main">
+				<Outlet /> {/* all route (that have inside of Home route)  will render here */}
+			</div>
 		</>
 
 	)

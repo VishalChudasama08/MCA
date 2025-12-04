@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./component/Home";
 import Register from "./component/authComponent/Register";
 import Login from "./component/authComponent/Login";
-import Users from "./component/authComponent/Users";
 import About from './component/About';
 import ForgotPassword from './component/ForgotPassword';
 import Movie from './component/Movie';
@@ -11,6 +10,7 @@ import MovieInfo from './component/MovieInfo';
 import DateAndCinema from './component/DateAndCinema';
 import SeatLayoutSelection from './component/SeatLayoutSelection';
 import Payment from './component/Payment';
+import Contact from './component/Contact';
 
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
           {/* ❗ Child routes MUST NOT have leading slash */}
           <Route path="Register" element={<Register />} />
           <Route path="Login" element={<Login />} />
-          <Route path="Users" element={<Users />} />
+          <Route path="Contact" element={<Contact />} />
           <Route path="About" element={<About />} />
           <Route path="ForgotPassword" element={<ForgotPassword />} />
           <Route path="MovieInfo" element={<MovieInfo />} />

@@ -5,7 +5,7 @@ export default function Users() {
 	const [users, setUsers] = useState([]);
 	async function getUsers() {
 		const res = await fetch("http://localhost:5000/api/users", {
-			headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+			headers: { "Authorization": "Bearer " + sessionStorage.getItem("token") }
 		});
 		const data = await res.json();
 		console.log(data);

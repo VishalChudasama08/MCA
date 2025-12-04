@@ -39,5 +39,7 @@ export const login = async (req, res) => {
 
 	const token = jwt.sign({ id: user.id }, "SECRET123", { expiresIn: "1d" });
 
-	res.json({ status: true, message: "Login Success", token });
+	user.password = ""; // password not send on frontend
+
+	res.json({ status: true, message: "Login Success", token, user });
 };

@@ -14,14 +14,16 @@ export default function Payment() {
 	useEffect(() => {
 		if (navigationState) {
 			// Destructure the values directly from the navigation state object
-			const { selectedSeats, movie_id, cinema_id, times_id } = navigationState;
+			const { selectedSeats, movie_id, cinema_id, totalPrice, times_id } = navigationState;
 
 			// Log the data to verify
 			console.log("Seats Selected:", selectedSeats);
 			console.log("Movie ID:", movie_id);
 			console.log("Cinema ID:", cinema_id);
+			console.log("Cinema ID:", totalPrice);
+			console.log("Cinema ID:", times_id);
 			// Assuming you also pass times_id (though not shown in your example, 
-			// the previous component logic was setting it in localStorage)
+			// the previous component logic was setting it in sessionStorage)
 
 			setBookingDetails({ selectedSeats, movie_id, cinema_id });
 		} else {
@@ -34,13 +36,17 @@ export default function Payment() {
 	if (!bookingDetails) {
 		return <div>Loading booking details...</div>;
 	}
+	console.log(JSON.parse(sessionStorage.getItem("userDetail")));
 
 	return (
 		<div>
 			<h2>Checkout / Payment Details</h2>
-			<p>Movie ID: **{bookingDetails.movie_id}**</p>
-			<p>Cinema ID: **{bookingDetails.cinema_id}**</p>
-			<p>Selected Seats ({bookingDetails.selectedSeats.length}): **{bookingDetails.selectedSeats.join(', ')}**</p>
+			<p>Movie ID: {bookingDetails.movie_id}</p>
+			<p>Cinema ID: {bookingDetails.cinema_id}</p>
+			<p>Total Price: {bookingDetails.totalPrice}</p>
+			<p>Times ID: {bookingDetails.times_id}</p>
+			<p>Selected Seats ({bookingDetails.selectedSeats.length}): {bookingDetails.selectedSeats.join(', ')}</p>
+			<p>User Details {JSON.parse(sessionStorage.getItem("userDetail")).name}</p>
 			{/* ... Rest of your payment form ... */}
 		</div>
 	);

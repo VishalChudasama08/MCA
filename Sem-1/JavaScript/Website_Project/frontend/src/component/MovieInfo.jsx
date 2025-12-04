@@ -5,13 +5,13 @@ export default function MovieInfo() {
 	const [info, setInfo] = useState([]);
 	useEffect(() => {
 		async function getThisMovieData() {
-			let id = localStorage.getItem("SelectedMovieID");
+			let id = sessionStorage.getItem("selectedMovieID");
 			const res = await fetch(`http://localhost:5000/api/movie/getThisMovie/${id}`, { method: "POST" })
 			const data = await res.json();
-			console.log(data);
+			// console.log(data);
 			if (data.status) {
 				setInfo(data.rows[0])
-				localStorage.setItem("MovieLanguage", data.rows[0].language);
+				sessionStorage.setItem("movieLanguage", data.rows[0].language);
 			} else {
 				alert(data.message);
 			}

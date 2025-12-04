@@ -9,21 +9,21 @@ export default function Movie() {
 			const res = await fetch("http://localhost:5000/api/movie/allMovies");
 			const data = await res.json();
 			setAllMovies(data);
-			console.log(allMovies.rows);
+			// console.log(allMovies.rows);
 		}
 		getAllMovies();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	async function selectMovieId(id) {
-		localStorage.setItem("SelectedMovieID", id)
-		localStorage.setItem("SelectedMovieName", allMovies.rows[id - 1].title)
-		localStorage.setItem("SelectedMovieRating", allMovies.rows[id - 1].rating)
-		localStorage.setItem("SelectedMoviePrice", allMovies.rows[id - 1].movie_price)
+		sessionStorage.setItem("selectedMovieID", id)
+		sessionStorage.setItem("selectedMovieName", allMovies.rows[id - 1].title)
+		sessionStorage.setItem("selectedMovieRating", allMovies.rows[id - 1].rating)
+		sessionStorage.setItem("selectedMoviePrice", allMovies.rows[id - 1].movie_price)
 	}
 
 	return (
-		<div>
+		<div className="row">
 			{/* All Movies */}
 			{allMovies.status && allMovies.rows.map((m, i) => (
 				<div key={i} className="col-6 col-md-4 col-lg-3">
@@ -34,7 +34,7 @@ export default function Movie() {
 								<img src={m.image_location} className="img-fluid rounded" alt={m.image_location} />
 							</div>
 						</Link>
-						<div className="card-body m-0 px-0 py-2" style={{ textIndent: 5 }}>
+						<div className="card-body m-0 px-1 py-2">
 							<h5 className="card-title m-0">{m.title}</h5>
 							<p className="card-text m-0">{m.genre}</p>
 							<p className="card-text m-0">{m.rating}</p>

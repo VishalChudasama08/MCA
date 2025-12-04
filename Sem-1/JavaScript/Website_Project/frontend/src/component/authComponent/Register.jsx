@@ -24,7 +24,7 @@ export default function Register() {
 
 	return (
 		<div style={{ padding: 20 }}>
-			<div className="card mx-auto my-5" style={{ minWidth: 300, maxWidth: 600 }}>
+			<div className="card mx-auto my-3" style={{ minWidth: 300, maxWidth: 600 }}>
 				<div className="card-header text-center">New User Registration Form</div>
 				<div className="card-body">
 					<div className="md-3 pb-2">

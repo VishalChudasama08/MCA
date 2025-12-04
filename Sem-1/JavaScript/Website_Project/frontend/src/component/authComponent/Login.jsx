@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
 	const [form, setForm] = useState({ email: "", password: "" });
+
 	const navigate = useNavigate();
 	const submit = async (e) => {
 		e.preventDefault();
@@ -14,21 +15,24 @@ export default function Login() {
 		});
 
 		const data = await res.json();
-		console.log(data);
+		// console.log(data);
+		sessionStorage.setItem("userDetail", JSON.stringify(data.user));
+		// console.log(typeof data.user);
 
-		if (data.message === "Login Success") {
+
+		if (data.status) {
 			navigate("/");
-		} else if (data.message === "Wrong Password") {
+		} else {
 			alert(data.message);
 		}
 
 		if (data.token) {
-			localStorage.setItem("token", data.token);
+			sessionStorage.setItem("token", data.token);
 		}
 	};
 
 	return (
-		<div className="card mx-auto my-5" style={{ minWidth: 300, maxWidth: 600 }}>
+		<div className="card mx-auto my-3" style={{ minWidth: 300, maxWidth: 600 }}>
 			<div className="card-header text-center h5">User Login</div>
 			<div className="card-body">
 				<div className="mb-3">
