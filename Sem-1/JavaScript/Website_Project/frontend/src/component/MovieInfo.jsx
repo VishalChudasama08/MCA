@@ -5,14 +5,13 @@ export default function MovieInfo() {
 	const [info, setInfo] = useState([]);
 	useEffect(() => {
 		async function getThisMovieData() {
-			let id = localStorage.getItem("SelectedID");
-			const res = await fetch(`http://localhost:5000/api/movie/getThisMovie/${id}`, {
-				method: "POST",
-			})
+			let id = localStorage.getItem("SelectedMovieID");
+			const res = await fetch(`http://localhost:5000/api/movie/getThisMovie/${id}`, { method: "POST" })
 			const data = await res.json();
 			console.log(data);
 			if (data.status) {
 				setInfo(data.rows[0])
+				localStorage.setItem("MovieLanguage", data.rows[0].language);
 			} else {
 				alert(data.message);
 			}
@@ -25,7 +24,7 @@ export default function MovieInfo() {
 		return <div className="text-center mt-5">Loading...</div>;
 	}
 	return (
-		<div className="container border border-2 border-info rounded p-0 mx-auto my-5" id="show_movies">
+		<div className="container border border-2 border-info rounded p-0 mx-auto my-3" id="show_movies">
 			<div className="card">
 				<div className="row">
 					<div className="col-4">

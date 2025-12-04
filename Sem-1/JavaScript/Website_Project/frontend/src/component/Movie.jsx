@@ -16,7 +16,10 @@ export default function Movie() {
 	}, [])
 
 	async function selectMovieId(id) {
-		localStorage.setItem("SelectedID", id)
+		localStorage.setItem("SelectedMovieID", id)
+		localStorage.setItem("SelectedMovieName", allMovies.rows[id - 1].title)
+		localStorage.setItem("SelectedMovieRating", allMovies.rows[id - 1].rating)
+		localStorage.setItem("SelectedMoviePrice", allMovies.rows[id - 1].movie_price)
 	}
 
 	return (
@@ -28,7 +31,7 @@ export default function Movie() {
 						{/* navigate(`/Movie/${i}`) */}
 						<Link to={"/MovieInfo"} onClick={() => { selectMovieId(i + 1) }} style={{ border: "none", padding: 0 }}>
 							<div className="ratio" style={{ "--bs-aspect-ratio": "calc(3 / 2 * 100%)" }}>
-								<img src={m.image_location} className="img-fluid rounded" alt="<?= $row['title'] ?>" />
+								<img src={m.image_location} className="img-fluid rounded" alt={m.image_location} />
 							</div>
 						</Link>
 						<div className="card-body m-0 px-0 py-2" style={{ textIndent: 5 }}>

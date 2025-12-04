@@ -1,6 +1,10 @@
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
+	let serToken = localStorage.getItem("token");
+	function handleLogout() {
+		localStorage.removeItem("token");
+	}
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light border border-secondary rounded m-0">
 			<div className="container-fluid">
@@ -13,12 +17,22 @@ const Navbar = () => {
 				</button>
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav me-auto mb-2 mb-lg-0">
-						<li className="nav-item">
-							<Link className="nav-link active" to="/Login">Login</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link active" to="/Register">Register</Link>
-						</li>
+						{
+							serToken ? (
+								<li className="nav-item">
+									<span className="nav-link active" onClick={() => { handleLogout() }}>Logout</span>
+								</li>
+							) : (
+								<>
+									<li className="nav-item">
+										<Link className="nav-link active" to="/Login">Login</Link>
+									</li>
+									<li className="nav-item">
+										<Link className="nav-link active" to="/Register">Register</Link>
+									</li>
+								</>
+							)
+						}
 						<li className="nav-item">
 							<Link className="nav-link active" to="/Users">Users (Protected)</Link>
 						</li>
