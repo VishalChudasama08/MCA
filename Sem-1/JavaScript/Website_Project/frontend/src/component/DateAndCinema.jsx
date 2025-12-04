@@ -97,6 +97,7 @@ export default function DateAndCinema() {
 		sessionStorage.setItem("selectedCinemaId", selectedCinemaId);
 		sessionStorage.setItem("selectedCinemaName", selectedCinemaName);
 		sessionStorage.setItem("selectedCinemaPriceLevel", allCinema[selectedCinemaId - 1].price_level);
+		sessionStorage.setItem("selectedCinemaLocation", allCinema[selectedCinemaId - 1].location);
 	}
 
 	if (loading) {
@@ -107,11 +108,6 @@ export default function DateAndCinema() {
 		<div className="my-1 font-inter">
 			<div className="border border-2 border-info rounded p-1">
 				<h4 className="font-semibold d-inline mt-1 mx-3">Select Date:</h4>
-				{/* {Object.entries(apiDates).map(([label, date]) => (
-					<button key={date} onClick={() => handleDateSelect(date)} className={`btn px-3 m-2 ${rawDate === date ? 'btn-info' : 'btn-outline-secondary'} `}>
-						<strong>{label}</strong>
-					</button>
-				))} */}
 				<button id="autoclick" onClick={() => { setRawDate('2025-12-01'); setSelectedDate(todayFormatted) }} type="button" className={`btn ${rawDate === '2025-12-01' ? 'btn-info' : 'btn-outline-secondary'} m-2 buttons`}>{today}</button>
 				<button id="autoclick" onClick={() => { setRawDate('2025-12-02'); setSelectedDate(tomorrowFormatted) }} type="button" className={`btn ${rawDate === '2025-12-02' ? 'btn-info' : 'btn-outline-secondary'} m-2 buttons`}>{tomorrow}</button>
 				<button id="autoclick" onClick={() => { setRawDate('2025-12-03'); setSelectedDate(dayAfterFormatted) }} type="button" className={`btn ${rawDate === '2025-12-03' ? 'btn-info' : 'btn-outline-secondary'} m-2 buttons`}>{dayAfter}</button>
@@ -140,7 +136,7 @@ export default function DateAndCinema() {
 									<td>
 										{timesForCinema.length > 0 ? (
 											timesForCinema.map((time, index) => (
-												<Link to="/SeatLayoutAndSelection" key={index} className="btn btn-outline-warning mx-1 btn-sm" onClick={() => selectedData(time, cinema.id, cinema.name)}>{time}</Link>
+												<Link to="/SeatLayoutAndSelection" key={index} style={{ color: 'black' }} className="btn btn-outline-warning mx-1 btn-sm" onClick={() => selectedData(time, cinema.id, cinema.name)}>{time}</Link>
 											))
 										) : (
 											<span className="text-red-500 text-xs font-medium">No shows found</span>

@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function MovieInfo() {
 	const [info, setInfo] = useState([]);
+	const navigate = useNavigate();
+
 	useEffect(() => {
 		async function getThisMovieData() {
 			let id = sessionStorage.getItem("selectedMovieID");
@@ -19,6 +21,34 @@ export default function MovieInfo() {
 		getThisMovieData();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
+
+	function handleBook() {
+		if (sessionStorage.getItem("token")) {
+			navigate("/Date_Cinema")
+		} else {
+			const modal = new window.bootstrap.Modal(document.getElementById("loginModal"));
+			modal.show();
+		}
+	}
+
+	// remove modal effect
+	const handleLoginClick = () => {
+		const modalElement = document.getElementById("loginModal");
+
+		if (modalElement && window.bootstrap && window.bootstrap.Modal) {
+			const modalInstance = window.bootstrap.Modal.getInstance(modalElement);
+
+			if (modalInstance) {
+				modalInstance.hide();
+			} else {
+				document.body.classList.remove('modal-open');
+				const backdrop = document.querySelector('.modal-backdrop');
+				if (backdrop) {
+					backdrop.remove();
+				}
+			}
+		}
+	};
 
 	if (!info) {
 		return <div className="text-center mt-5">Loading...</div>;
@@ -51,7 +81,28 @@ export default function MovieInfo() {
 							</div>
 							<p className="card-text mb-1"><strong>About the movie: </strong></p>
 							<p className="card-text mb-1">{info.description}</p>
-							<Link to={"/Date_Cinema"} className="btn btn-outline-primary" style={{ width: '95%' }}>Booking</Link>
+							{/* <Link to={"/Date_Cinema"} className="btn btn-outline-primary" style={{ width: '95%' }}>Booking</Link> */}
+							<button onClick={() => { handleBook() }} className="btn btn-outline-primary" style={{ width: '95%' }}>Booking</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			{/* Bootstrap Modal */}
+			<div className="modal fade" id="loginModal" tabIndex="-1" aria-hidden="true">
+				<div className="modal-dialog">
+					<div className="modal-content">
+						<div className="modal-header">
+							<h5>Please log in to continue.</h5>
+							<button type="button" className="btn-close" data-bs-dismiss="modal"></button>
+						</div>
+						<div className="modal-body py-2 m-0">
+							<strong className='m-0'>Hey there, you need to be logged in to book movie.</strong>
+						</div>
+						<div className="modal-footer">
+							<button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+							<Link to="/Login" onClick={() => { handleLoginClick() }} type="button" className="btn btn-primary">Login</Link>
 						</div>
 					</div>
 				</div>

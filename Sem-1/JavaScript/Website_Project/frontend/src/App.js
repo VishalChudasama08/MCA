@@ -11,6 +11,7 @@ import DateAndCinema from './component/DateAndCinema';
 import SeatLayoutSelection from './component/SeatLayoutSelection';
 import Payment from './component/Payment';
 import Contact from './component/Contact';
+import TicketLayout from './component/TicketLayout';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="Date_Cinema" element={<DateAndCinema />} />
           <Route path="SeatLayoutAndSelection" element={<SeatLayoutSelection />} />
           <Route path="Payment" element={<Payment />} />
+          <Route path="Ticket" element={<TicketLayout />} />
         </Route>
 
       </Routes>

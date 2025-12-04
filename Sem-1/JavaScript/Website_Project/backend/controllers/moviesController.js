@@ -47,3 +47,50 @@ export const getSeatLayout = async (req, res) => {
 
 	res.json({ status: true, message: "Layout found", rows });
 }
+
+export const addOnHistory = async (req, res) => {
+	const { userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats } = req.body;
+
+	try {
+		await db.query(
+			"INSERT INTO bookings (user_name, movies_title, cinema_name, number_of_seats, total_price, booked_seats_name, status) VALUES (?, ?, ?, ?, ?, ?, 'Booking successful.')",
+			[userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats]
+		);
+		console.log(userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats, "- from addOnHistory");
+
+		res.json({ status: true, message: "Booking Successfully" });
+
+	} catch (err) {
+		console.log(err);
+		res.json({ status: false, message: "Error" });
+	}
+};
+
+export const seatStructureUpdate = async (req, res) => {
+	const { selectSeats, numberOfSeats } = req.body; // get from sended data (json)
+	const { id } = req.params; // get from url
+
+	const updateQuery = `
+	UPDATE 
+		seats 
+	SET 
+		available_seats = available_seats - ?, 
+		booked_seats_name = CONCAT_WS(', ', booked_seats_name, ?) 
+	WHERE 
+	id = ?
+	`; // CONCAT_WS(', ', booked_seats_name, ?) ==> to keep old value, and add on new value
+
+	// console.log(updateQuery, numberOfSeats, selectSeats, id, "- from seatStructureUpdate");
+
+	try {
+		const [rows] = await db.query(updateQuery, [numberOfSeats, selectSeats, id]);
+
+		console.log(`Rows affected: ${rows.affectedRows}  - from seatStructureUpdate`);
+		// console.log(rows);
+		res.json({ status: true, message: "Seat Update Successfully" })
+	} catch (error) {
+		res.json({ status: false, message: "Error on Seat Update" })
+		console.error("Database error:", error);
+	}
+
+}

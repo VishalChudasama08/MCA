@@ -15,11 +15,19 @@ export default function Movie() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
-	async function selectMovieId(id) {
+	async function handleClick(id) {
+		// if (sessionStorage.getItem("token")) {
 		sessionStorage.setItem("selectedMovieID", id)
 		sessionStorage.setItem("selectedMovieName", allMovies.rows[id - 1].title)
 		sessionStorage.setItem("selectedMovieRating", allMovies.rows[id - 1].rating)
 		sessionStorage.setItem("selectedMoviePrice", allMovies.rows[id - 1].movie_price)
+		// navigate("/MovieInfo");
+		// } else {
+		// let res = confirm("Hey there, you need to be logged in to perform this action.");
+		// if (res) {
+		// navigate("/Login")
+		// }
+		// }
 	}
 
 	return (
@@ -29,7 +37,7 @@ export default function Movie() {
 				<div key={i} className="col-6 col-md-4 col-lg-3">
 					<div className="card mb-4" style={{ border: "none" }}>
 						{/* navigate(`/Movie/${i}`) */}
-						<Link to={"/MovieInfo"} onClick={() => { selectMovieId(i + 1) }} style={{ border: "none", padding: 0 }}>
+						<Link to={"/MovieInfo"} onClick={() => { handleClick(i + 1) }} style={{ border: "none", padding: 0 }}>
 							<div className="ratio" style={{ "--bs-aspect-ratio": "calc(3 / 2 * 100%)" }}>
 								<img src={m.image_location} className="img-fluid rounded" alt={m.image_location} />
 							</div>
@@ -43,6 +51,7 @@ export default function Movie() {
 					</div>
 				</div>
 			))}
+
 		</div>
 
 	)
