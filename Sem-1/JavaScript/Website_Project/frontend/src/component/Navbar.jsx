@@ -27,7 +27,7 @@ const Navbar = () => {
 	}, [location.pathname])
 
 	return (
-		<div className="container-flued mb-2" id="header">
+		<div className="container-flued mb-2" id="navbarDiv">
 			<nav className="navbar navbar-expand-lg navbar-info bg-info border border-secondary rounded m-0 p-0">
 				<div className="container-fluid py-0 px-1">
 					<Link className="navbar-brand" to="/">

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Payment() {
 	const navigate = useNavigate();
 
-	const [bookingDetails, setBookingDetails] = useState({ userName: "", movieName: "", cinemaName: "", numberOfSeats: 0, totalPrice: 0, selectSeats: "" });
+	const [bookingDetails, setBookingDetails] = useState({ userId: "", movieName: "", cinemaName: "", numberOfSeats: 0, totalPrice: 0, selectSeats: "" });
 
 	const [seatUpdateData, setSeatUpdateData] = useState({ selectSeats: "", numberOfSeats: 0, seatID: 0 });
 
@@ -19,7 +19,7 @@ export default function Payment() {
 		// console.log(selectedSeatsString);
 
 		setBookingDetails({
-			userName: userDetail.name,
+			userId: userDetail.id,
 			movieName: sessionStorage.getItem("selectedMovieName"),
 			cinemaName: sessionStorage.getItem("selectedCinemaName"),
 			numberOfSeats: selectedSeatsArray.length,

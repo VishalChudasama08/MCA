@@ -49,14 +49,14 @@ export const getSeatLayout = async (req, res) => {
 }
 
 export const addOnHistory = async (req, res) => {
-	const { userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats } = req.body;
+	const { userId, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats } = req.body;
 
 	try {
 		await db.query(
-			"INSERT INTO bookings (user_name, movies_title, cinema_name, number_of_seats, total_price, booked_seats_name, status) VALUES (?, ?, ?, ?, ?, ?, 'Booking successful.')",
-			[userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats]
+			"INSERT INTO bookings (user_id, movies_title, cinema_name, number_of_seats, total_price, booked_seats_name, status) VALUES (?, ?, ?, ?, ?, ?, 'Booking successful.')",
+			[userId, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats]
 		);
-		console.log(userName, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats, "- from addOnHistory");
+		console.log(userId, movieName, cinemaName, numberOfSeats, totalPrice, selectSeats, "- from addOnHistory");
 
 		res.json({ status: true, message: "Booking Successfully" });
 
@@ -93,4 +93,17 @@ export const seatStructureUpdate = async (req, res) => {
 		console.error("Database error:", error);
 	}
 
+}
+
+export const getHistory = async (req, res) => {
+	const { id } = req.params;
+	try {
+		const [rows] = await db.query("SELECT * FROM bookings WHERE user_id = ?", [id])
+		console.log(rows[0].status, " - from getHistory")
+
+		res.json({ status: true, message: "Here your booking history", rows });
+	} catch (error) {
+		res.json({ status: false, message: "Error on get booking history" })
+		console.log(error);
+	}
 }

@@ -12,6 +12,8 @@ import SeatLayoutSelection from './component/SeatLayoutSelection';
 import Payment from './component/Payment';
 import Contact from './component/Contact';
 import TicketLayout from './component/TicketLayout';
+import Profile from './component/Profile';
+import BookingHistory from './component/BookingHistory';
 
 
 function App() {
@@ -31,6 +33,8 @@ function App() {
           <Route path="SeatLayoutAndSelection" element={<SeatLayoutSelection />} />
           <Route path="Payment" element={<Payment />} />
           <Route path="Ticket" element={<TicketLayout />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="BookingHistory" element={<BookingHistory />} />
         </Route>
 
       </Routes>

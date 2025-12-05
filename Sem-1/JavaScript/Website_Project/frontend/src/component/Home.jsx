@@ -5,7 +5,7 @@ export default function Home() {
 	return (
 		<>
 			<Navbar />
-			<div className="container-lg" id="main">
+			<div className="container-lg p-0" id="main">
 				<Outlet /> {/* all route (that have inside of Home route)  will render here */}
 			</div>
 		</>
