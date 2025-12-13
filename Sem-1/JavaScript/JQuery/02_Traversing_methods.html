@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Traversal Methods Demo</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        .box {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .highlight {
+            background: yellow;
+        }
+
+        button {
+            margin: 4px;
+            padding: 6px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>jQuery Traversal Methods Demo</h2>
+
+    <div id="root" class="box">
+        Root DIV
+        <ul id="list1" class="box">
+            <li class="item">Item 1</li>
+            <li class="item special">Item 2</li>
+            <li class="item">Item 3</li>
+        </ul>
+
+        <div id="container" class="box">
+            <p class="child">Paragraph A</p>
+            <p class="child special">Paragraph B</p>
+            <span class="child">Span C</span>
+        </div>
+
+        <div id="footer" class="box">Footer Div</div>
+    </div>
+
+
+    <h3>Traversal Actions</h3>
+    <!-- Parent / Ancestors -->
+    <button id="parent">parent()</button>
+    <button id="parents">parents()</button>
+    <button id="parentsUntil">parentsUntil('#root')</button>
+
+    <!-- Children / Descendants -->
+    <button id="children">children()</button>
+    <button id="find">find('.special')</button>
+
+    <!-- Siblings -->
+    <button id="siblings">siblings()</button>
+    <button id="next">next()</button>
+    <button id="nextAll">nextAll()</button>
+    <button id="nextUntil">nextUntil('.special')</button>
+    <button id="prev">prev()</button>
+    <button id="prevAll">prevAll()</button>
+    <button id="prevUntil">prevUntil('.special')</button>
+
+    <!-- Filtering -->
+    <button id="first">first()</button>
+    <button id="last">last()</button>
+    <button id="eq">eq(1)</button>
+    <button id="filter">filter('.special')</button>
+    <button id="not">not('.special')</button>
+
+    <!-- Others -->
+    <button id="closest">closest('.box')</button>
+
+    <script>
+        $(document).ready(function () {
+
+            // Utility: clear highlights
+            $("*").click(function (e) { e.stopPropagation(); });
+            $("button").click(function () {
+                $(".highlight").removeClass("highlight");
+            });
+
+            // Parent / Ancestors
+            $("#parent").click(function () { $(".special").parent().addClass("highlight"); });
+            $("#parents").click(function () { $(".special").parents().addClass("highlight"); });
+            $("#parentsUntil").click(function () { $(".special").parentsUntil("#root").addClass("highlight"); });
+
+            // Children / Descendants
+            $("#children").click(function () { $("#root").children().addClass("highlight"); });
+            $("#find").click(function () { $("#root").find(".special").addClass("highlight"); });
+
+            // Siblings
+            $("#siblings").click(function () { $(".special").siblings().addClass("highlight"); });
+            $("#next").click(function () { $(".special").next().addClass("highlight"); });
+            $("#nextAll").click(function () { $(".special").nextAll().addClass("highlight"); });
+            $("#nextUntil").click(function () { $(".item:first").nextUntil(".special").addClass("highlight"); });
+            $("#prev").click(function () { $(".special").prev().addClass("highlight"); });
+            $("#prevAll").click(function () { $(".special").prevAll().addClass("highlight"); });
+            $("#prevUntil").click(function () { $(".item:last").prevUntil(".special").addClass("highlight"); });
+
+            // Filtering
+            $("#first").click(function () { $(".item").first().addClass("highlight"); });
+            $("#last").click(function () { $(".item").last().addClass("highlight"); });
+            $("#eq").click(function () { $(".item").eq(1).addClass("highlight"); });
+            $("#filter").click(function () { $(".child").filter(".special").addClass("highlight"); });
+            $("#not").click(function () { $(".child").not(".special").addClass("highlight"); });
+
+            // Closest
+            $("#closest").click(function () { $(".special").closest(".box").addClass("highlight"); });
+
+        });
+    </script>
+</body>
+
+</html>

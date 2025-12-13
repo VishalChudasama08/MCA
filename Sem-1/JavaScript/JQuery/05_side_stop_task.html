@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <style>
+        #panel,
+        #flip {
+            padding: 5px;
+            font-size: 18px;
+            text-align: center;
+            background-color: #555;
+            color: white;
+            border: solid 1px #666;
+            border-radius: 3px;
+        }
+
+        #panel {
+            padding: 10px;
+            display: none;
+        }
+
+        #mon, #mo{
+            padding-top: 40px;
+            padding-right: 40px;
+        }
+        .month{
+            padding: 5px;
+            margin: 5px;
+            display: inline;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background: yellow;
+        }
+    </style>
+</head>
+
+<body>
+
+    <button id="stop">Stop sliding</button>
+
+    <div id="flip">Click to slide down panel</div>
+    
+    <div id="panel">
+        <p class="1">sunday</p>
+        <p class="2">monday</p>
+        <p class="3">tuesday</p>
+        <p class="4">wednesday</p>
+        <p class="5">thursday</p>
+        <p class="6">friday</p>
+        <p class="7">saturday</p>
+    </div>
+<div id="mo">
+    <button type="button" id="m1">1</button>
+    <button type="button" id="m2">2</button>
+    <button type="button" id="m3">3</button>
+    <button type="button" id="m4">4</button>
+    <button type="button" id="m5">5</button>
+    <button type="button" id="m6">6</button>
+    <button type="button" id="m7">7</button>
+    <button type="button" id="m8">8</button>
+    <button type="button" id="m9">9</button>
+    <button type="button" id="m10">10</button>
+    <button type="button" id="m11">11</button>
+    <button type="button" id="m12">12</button>
+</div>
+<br>
+<div id="mon">
+    <div id="1" class="month">jan</div>
+    <div id="2" class="month">feb</div>
+    <div id="3" class="month">mar</div>
+    <div id="4" class="month">apr</div>
+    <div id="5" class="month">may</div>
+    <div id="6" class="month">jun</div>
+    <div id="7" class="month">jul</div>
+    <div id="8" class="month">ogs</div>
+    <div id="9" class="month">sap</div>
+    <div id="10" class="month">oct</div>
+    <div id="11" class="month">nov</div>
+    <div id="12" class="month">des</div>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#m1").click(function(){
+                $(".month").removeClass("highlight");
+                $("#1").addClass("highlight");
+            })
+            $("#m2").click(function(){
+                $(".month").removeClass("highlight");
+                $("#2").addClass("highlight");
+            })
+            $("#m3").click(function(){
+                $(".month").removeClass("highlight");
+                $("#3").addClass("highlight");
+            })
+            $("#m4").click(function(){
+                $(".month").removeClass("highlight");
+                $("#4").addClass("highlight");
+            })
+            $("#m5").click(function(){
+                $(".month").removeClass("highlight");
+                $("#5").addClass("highlight");
+            })
+            $("#m6").click(function(){
+                $(".month").removeClass("highlight");
+                $("#6").addClass("highlight");
+            })
+            $("#m7").click(function(){
+                $(".month").removeClass("highlight");
+                $("#7").addClass("highlight");
+            })
+            $("#m8").click(function(){
+                $(".month").removeClass("highlight");
+                $("#8").addClass("highlight");
+            })
+            $("#m9").click(function(){
+                $(".month").removeClass("highlight");
+                $("#9").addClass("highlight");
+            })
+            $("#m10").click(function(){
+                $(".month").removeClass("highlight");
+                $("#10").addClass("highlight");
+            })
+            $("#m11").click(function(){
+                $(".month").removeClass("highlight");
+                $("#11").addClass("highlight");
+            })
+            $("#m12").click(function(){
+                $(".month").removeClass("highlight");
+                $("#12").addClass("highlight");
+            })
+            $("#flip").click(function () {
+                $(".panel").slideDown(5000);
+                $("#panel").slideDown(5000);
+            });
+            $("#stop").click(function () {
+                $(".panel").stop();
+                $("#panel").stop();
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,262 @@
+Q6.  Create “Mymenu” database with a collection called “Restaurants”, containing documents with some or all of the following fields: Restaurant Id, Restaurant Name, Grades (Note: An array is expected), Cuisine, Address (Note: Must include Building Name, Street, Area, City, ZipCode), and Date of Establishment (Note: Use Proper Date format), Score and Rating. Perform the following operations on the database. (Insert at least 10 documents)
+.
+.
+.
+.
+---------------------------------------------------------------------
+5. Find the Restaurant Names and Cuisine, for those restaurants which contain ‘chen’ (Example: “Kitchen”) as the last three letters.
+
+edit on: 17-11-2025
+
+db.Restaurants.find({RestaurantName:{$regex: "chen$"}});
+db.Restaurants.find({Cuisine:{$regex: "chen$"}});
+db.Restaurants.find({RestaurantName:{$regex: "chen$"}, Cuisine:{$regex: "chen$"}});
+db.Restaurants.find({$and:[{RestaurantName:{$regex: "chen$"}}, {Cuisine:{$regex: "chen$"}}]});
+
+-- not done
+---------------------------------------------------------------------
+6. Find the Restaurant Id’s and Restaurant Names of those restaurants, which are situated in “Ahmedabad” (City) but not in “ISKON” (Area).
+---------------------------------------------------------------------
+7. Add a field “Borough” with value “Bronx”, for restaurants with _id: 3 and 4.
+---------------------------------------------------------------------
+8. Remove the field Cuisine for restaurants whose name is “Jassi De Paratha”.
+---------------------------------------------------------------------
+9. Remove the document, with restaurant named “Barbeque Nation”.
+---------------------------------------------------------------------
+
+
+=============================================================
+Q7. Create the HotelBookings collection and insert sample documents
+    {
+        HotelId: "HOT0395",
+        HotelName: "Royal Inn",
+        HotelType: ["3 Star", "4 Star"],
+        TotNoOfRooms: 40,
+        CityName: "New York",
+        DateOfRegistration: ISODate("2022-08-15T00:00:00Z"),
+        ContactNumber: "1234567890",
+        Ratings: 4.5,
+        Owners: [{ OwnerName: "John Doe" }, { OwnerName: "Jane Doe" }],
+        Bookings: [
+            {
+                BookingId: "B001",
+                BookingDate: ISODate("2023-01-10T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Alice Brown",
+                NoOfRoomsBooked: 2,
+                Price: 200,
+                Discount: 10
+            }
+        ]
+    }
+
+1.	Find hotels where Ratings are greater than 4
+2.	Count the number of hotels in each CityName
+3.	Find hotels that have "Star" in their HotelType
+4.	Retrieve all hotels that have at least one booking
+5.	Find the highest-rated hotel
+6.	Retrieve all hotels where the ContactNumber starts with '12'
+7.	Count the total number of rooms available in all hotels
+8.	Find hotels where the discount given is greater than 5% in any booking
+9.	Find hotels that have more than 2 owners
+10.	Count the number of hotels in each CityName
+
+    
+db.HotelBookings.insert({
+        _id: 1,
+        HotelId: "HOT0395",
+        HotelName: "Royal Inn",
+        HotelType: ["3 Star", "4 Star"],
+        TotNoOfRooms: 40,
+        CityName: "New York",
+        DateOfRegistration: ISODate("2022-08-15T00:00:00Z"),
+        ContactNumber: "1234567890",
+        Ratings: 4.5,
+        Owners: [{ OwnerName: "John Doe" }, { OwnerName: "Jane Doe" }],
+        Bookings: [
+            {
+                BookingId: "B001",
+                BookingDate: ISODate("2023-01-10T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Alice Brown",
+                NoOfRoomsBooked: 2,
+                Price: 200,
+                Discount: 10
+            }
+        ]
+    }
+);
+db.HotelBookings.insert({
+        _id: 2,
+        HotelId: "HOT0396",
+        HotelName: "vj",
+        HotelType: ["4 Star", "5 Star"],
+        TotNoOfRooms: 50,
+        CityName: "India",
+        DateOfRegistration: ISODate("2025-11-17T00:00:00Z"),
+        ContactNumber: "9876543210",
+        Ratings: 4.8,
+        Owners: [{ OwnerName: "Vijay" }, { OwnerName: "Vijay" }],
+        Bookings: [
+            {
+                BookingId: "B002",
+                BookingDate: ISODate("2025-11-20T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Ajay Chavda",
+                NoOfRoomsBooked: 3,
+                Price: 300,
+                Discount: 20
+            }
+        ]
+    }
+);
+db.HotelBookings.insert({
+        _id: 3,
+        HotelId: "HOT0397",
+        HotelName: "DJ",
+        HotelType: ["2 Star", "3 Star"],
+        TotNoOfRooms: 30,
+        CityName: "India",
+        DateOfRegistration: ISODate("2023-04-25T00:00:00Z"),
+        ContactNumber: "1234512345",
+        Ratings: 3.7,
+        Owners: [{ OwnerName: "Dixit" }, { OwnerName: "Dixit" }],
+        Bookings: [
+            {
+                BookingId: "B003",
+                BookingDate: ISODate("2023-05-20T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Pravin Karmur",
+                NoOfRoomsBooked: 1,
+                Price: 250,
+                Discount: 25
+            }
+        ]
+    }
+);
+db.HotelBookings.insert({
+        _id: 4,
+        HotelId: "HOT0398",
+        HotelName: "LK",
+        HotelType: ["4", "5"],
+        TotNoOfRooms: 35,
+        CityName: "India",
+        DateOfRegistration: ISODate("2024-05-30T00:00:00Z"),
+        ContactNumber: "6789467894",
+        Ratings: 4.4,
+        Owners: [{ OwnerName: "Ajit" }, { OwnerName: "Ajit" }],
+        Bookings: [
+            {
+                BookingId: "B004",
+                BookingDate: ISODate("2024-07-12T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Kriti Patel",
+                NoOfRoomsBooked: 4,
+                Price: 420,
+                Discount: 15
+            }
+        ]
+    }
+);
+db.HotelBookings.insert({
+        _id: 5,
+        HotelId: "HOT0399",
+        HotelName: "JJ",
+        HotelType: ["5 Star", "5 Star"],
+        TotNoOfRooms: 60,
+        CityName: "India",
+        DateOfRegistration: ISODate("2022-05-26T00:00:00Z"),
+        ContactNumber: "8320383204",
+        Ratings: 5.0,
+        Owners: [{ OwnerName: "Vishnu" }, { OwnerName: "Vishnu" }],
+        Bookings: [
+            {
+                BookingId: "B005",
+                BookingDate: ISODate("2025-01-13T00:00:00Z"),
+                RoomType: ["Deluxe", "Twin"],
+                CustomerName: "Pritesh M",
+                NoOfRoomsBooked: 7,
+                Price: 500,
+                Discount: 5
+            }
+        ]
+    }
+);
+
+> db.HotelBookings.find();
+{ "_id" : 1, "HotelId" : "HOT0395", "HotelName" : "Royal Inn", "HotelType" : [ "3 Star", "4 Star" ], "TotNoOfRooms" : 40, "CityName" : "New York", "DateOfRegistration" : ISODate("2022-08-15T00:00:00Z"), "ContactNumber" : "1234567890", "Ratings" : 4.5, "Owners" : [ { "OwnerName" : "John Doe" }, { "OwnerName" : "Jane Doe" } ], "Bookings" : [ { "BookingId" : "B001", "BookingDate" : ISODate("2023-01-10T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Alice Brown", "NoOfRoomsBooked" : 2, "Price" : 200, "Discount" : 10 } ] }
+{ "_id" : 2, "HotelId" : "HOT0396", "HotelName" : "vj", "HotelType" : [ "4 Star", "5 Star" ], "TotNoOfRooms" : 50, "CityName" : "India", "DateOfRegistration" : ISODate("2025-11-17T00:00:00Z"), "ContactNumber" : "9876543210", "Ratings" : 4.8, "Owners" : [ { "OwnerName" : "Vijay" }, { "OwnerName" : "Vijay" } ], "Bookings" : [ { "BookingId" : "B002", "BookingDate" : ISODate("2025-11-20T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Ajay Chavda", "NoOfRoomsBooked" : 3, "Price" : 300, "Discount" : 20 } ] }
+{ "_id" : 3, "HotelId" : "HOT0397", "HotelName" : "DJ", "HotelType" : [ "2 Star", "3 Star" ], "TotNoOfRooms" : 30, "CityName" : "India", "DateOfRegistration" : ISODate("2023-04-25T00:00:00Z"), "ContactNumber" : "1234512345", "Ratings" : 3.7, "Owners" : [ { "OwnerName" : "Dixit" }, { "OwnerName" : "Dixit" } ], "Bookings" : [ { "BookingId" : "B003", "BookingDate" : ISODate("2023-05-20T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Pravin Karmur", "NoOfRoomsBooked" : 1, "Price" : 250, "Discount" : 25 } ] }
+{ "_id" : 4, "HotelId" : "HOT0398", "HotelName" : "LK", "HotelType" : [ "4", "5" ], "TotNoOfRooms" : 35, "CityName" : "India", "DateOfRegistration" : ISODate("2024-05-30T00:00:00Z"), "ContactNumber" : "6789467894", "Ratings" : 4.4, "Owners" : [ { "OwnerName" : "Ajit" }, { "OwnerName" : "Ajit" } ], "Bookings" : [ { "BookingId" : "B004", "BookingDate" : ISODate("2024-07-12T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Kriti Patel", "NoOfRoomsBooked" : 4, "Price" : 420, "Discount" : 15 } ] }
+{ "_id" : 5, "HotelId" : "HOT0399", "HotelName" : "JJ", "HotelType" : [ "5 Star", "5 Star" ], "TotNoOfRooms" : 60, "CityName" : "India", "DateOfRegistration" : ISODate("2022-05-26T00:00:00Z"), "ContactNumber" : "8320383204", "Ratings" : 5, "Owners" : [ { "OwnerName" : "Vishnu" }, { "OwnerName" : "Vishnu" } ], "Bookings" : [ { "BookingId" : "B005", "BookingDate" : ISODate("2025-01-13T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Pritesh M", "NoOfRoomsBooked" : 7, "Price" : 500, "Discount" : 30 } ] }
+
+---------------------------------------------------------------------
+1.	Find hotels where Ratings are greater than 4
+
+> db.HotelBookings.find({Ratings:{$gt:4}},{HotelId:1,HotelName:1,Ratings:1});
+{ "_id" : 1, "HotelId" : "HOT0395", "HotelName" : "Royal Inn", "Ratings" : 4.5 }
+{ "_id" : 2, "HotelId" : "HOT0396", "HotelName" : "vj", "Ratings" : 4.8 }
+{ "_id" : 4, "HotelId" : "HOT0398", "HotelName" : "LK", "Ratings" : 4.4 }
+{ "_id" : 5, "HotelId" : "HOT0399", "HotelName" : "JJ", "Ratings" : 5 }
+
+---------------------------------------------------------------------
+2.	Count the number of hotels in each CityName
+
+
+---------------------------------------------------------------------
+3.	Find hotels that have "Star" in their HotelType
+
+-- $options:"i"  --> to ignored case sensitivity
+> db.HotelBookings.find({HotelType:{$regex:"Star",$options:"i"}});
+{ "_id" : 1, "HotelId" : "HOT0395", "HotelName" : "Royal Inn", "HotelType" : [ "3 Star", "4 Star" ], "TotNoOfRooms" : 40, "CityName" : "New York", "DateOfRegistration" : ISODate("2022-08-15T00:00:00Z"), "ContactNumber" : "1234567890", "Ratings" : 4.5, "Owners" : [ { "OwnerName" : "John Doe" }, { "OwnerName" : "Jane Doe" } ], "Bookings" : [ { "BookingId" : "B001", "BookingDate" : ISODate("2023-01-10T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Alice Brown", "NoOfRoomsBooked" : 2, "Price" : 200, "Discount" : 10 } ] }
+{ "_id" : 2, "HotelId" : "HOT0396", "HotelName" : "vj", "HotelType" : [ "4 Star", "5 Star" ], "TotNoOfRooms" : 50, "CityName" : "India", "DateOfRegistration" : ISODate("2025-11-17T00:00:00Z"), "ContactNumber" : "9876543210", "Ratings" : 4.8, "Owners" : [ { "OwnerName" : "Vijay" }, { "OwnerName" : "Vijay" } ], "Bookings" : [ { "BookingId" : "B002", "BookingDate" : ISODate("2025-11-20T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Ajay Chavda", "NoOfRoomsBooked" : 3, "Price" : 300, "Discount" : 20 } ] }
+{ "_id" : 3, "HotelId" : "HOT0397", "HotelName" : "DJ", "HotelType" : [ "2 Star", "3 Star" ], "TotNoOfRooms" : 30, "CityName" : "India", "DateOfRegistration" : ISODate("2023-04-25T00:00:00Z"), "ContactNumber" : "1234512345", "Ratings" : 3.7, "Owners" : [ { "OwnerName" : "Dixit" }, { "OwnerName" : "Dixit" } ], "Bookings" : [ { "BookingId" : "B003", "BookingDate" : ISODate("2023-05-20T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Pravin Karmur", "NoOfRoomsBooked" : 1, "Price" : 250, "Discount" : 25 } ] }
+{ "_id" : 5, "HotelId" : "HOT0399", "HotelName" : "JJ", "HotelType" : [ "5 Star", "5 Star" ], "TotNoOfRooms" : 60, "CityName" : "India", "DateOfRegistration" : ISODate("2022-05-26T00:00:00Z"), "ContactNumber" : "8320383204", "Ratings" : 5, "Owners" : [ { "OwnerName" : "Vishnu" }, { "OwnerName" : "Vishnu" } ], "Bookings" : [ { "BookingId" : "B005", "BookingDate" : ISODate("2025-01-13T00:00:00Z"), "RoomType" : [ "Deluxe", "Twin" ], "CustomerName" : "Pritesh M", "NoOfRoomsBooked" : 7, "Price" : 500, "Discount" : 30 } ] }
+
+---------------------------------------------------------------------
+4.	Retrieve all hotels that have at least one booking
+
+---------------------------------------------------------------------
+5.	Find the highest-rated hotel
+
+> db.HotelBookings.find({},{HotelId:1,HotelName:1,Ratings:1,_id:0}).sort({Ratings:-1}).limit(1)
+{ "HotelId" : "HOT0399", "HotelName" : "JJ", "Ratings" : 5 }
+
+---------------------------------------------------------------------
+6.	Retrieve all hotels where the ContactNumber starts with '12'
+
+> db.HotelBookings.find({ContactNumber:{$regex:"^12",$options:"i"}},{HotelId:1,HotelName:1,ContactNumber:1,_id:0});
+{ "HotelId" : "HOT0395", "HotelName" : "Royal Inn", "ContactNumber" : "1234567890" }
+{ "HotelId" : "HOT0397", "HotelName" : "DJ", "ContactNumber" : "1234512345" }
+
+---------------------------------------------------------------------
+7.	Count the total number of rooms available in all hotels
+
+
+---------------------------------------------------------------------
+8.	Find hotels where the discount given is greater than 5% in any booking
+---------------------------------------------------------------------
+9.	Find hotels that have more than 2 owners
+---------------------------------------------------------------------
+10.	Count the number of hotels in each CityName
+---------------------------------------------------------------------
+11.	Display only the HotelName’s, where TotNoOfRooms is greater than 35.
+---------------------------------------------------------------------
+12.	Find HotelName and CityName, where HotelId is either “HOT0395” or “HOT2659”.
+---------------------------------------------------------------------
+13.	Display the HotelName’s and DateOfRegistration of hotels, whose TotNoOfRooms is greater than 30 and less than 45.
+---------------------------------------------------------------------
+14.	Modify HotelType of hotel with HotelId: “HOT3951”.
+---------------------------------------------------------------------
+15.	Add a field called “History”, which describes the hotel for documents with HotelId, “HOT2156”, “HOT3951” and “HOT3654”.
+---------------------------------------------------------------------
+16.	Find those documents where the HotelType is not “4 Star”.
+---------------------------------------------------------------------
+17.	Display only the HotelName and DateOfRegistration where HotelName begins with letter “S”.
+---------------------------------------------------------------------
+18.	Display HotelName and ContactNumber in the descending order of the HotelName’s.
+---------------------------------------------------------------------
+19.	Find those hotels where number of owners is 3.
+---------------------------------------------------------------------
+20.	Add an owner “Mr. Mathur” in the list of owners in the document whose HotelId is “HOT0395”.
+---------------------------------------------------------------------

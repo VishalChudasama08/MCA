@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    Click to hide
+    <p>If you click on me, I will disappear.</p>
+    <p>Click me away!</p>
+    <p>Click me too!</p>
+    <br>
+    dubble click to hide
+    <li>If you click on me, I will disappear.</li>
+    <li>Click me away!</li>
+    <li>Click me too!</li>
+    <br>
+    mouseenter
+    <span id="p1">Enter this paragraph.</span>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("p").click(function () {
+                $(this).hide();
+            });
+            $("li").dblclick(function () {
+                $(this).hide();
+            });
+            $("#p1").mouseenter(function () {
+                alert("You entered p1!");
+            });
+        });
+    </script>
+</body>
+
+</html>

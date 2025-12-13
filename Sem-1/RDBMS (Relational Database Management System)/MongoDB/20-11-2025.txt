@@ -1,0 +1,448 @@
+------------------------------------------------------------
+8. Getting specific field's value from first and last document of each group: 
+Works well when doucument result is sorted.
+
+db.employees.aggregate([
+			{$group:{"_id":"$dept","first":{$first:"$name"}, "last":{$last:"$name"}}}
+			]);
+> db.employees.aggregate([{$group:{"_id":"$dept", "first":{$first:"$name"}, "last":{$last:"$name"}}}]);
+{ "_id" : "Sales", "first" : "Harry", "last" : "Tina" }
+{ "_id" : "Support", "first" : "Kiran", "last" : "Umesh" }
+{ "_id" : "Admin", "first" : "Adma", "last" : "Zubin" }
+{ "_id" : "HR", "first" : "Brian", "last" : "Pooja" }
+{ "_id" : "IT", "first" : "David", "last" : "Sameer" }
+{ "_id" : "Finance", "first" : "Clara", "last" : "Vani" }
+{ "_id" : "Marketing", "first" : "Eva", "last" : "William" }
+>
+
+------------------------------------------------------------
+9. Minumum with maximum:
+
+db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "maxExp":{$max:"$totalExp"}, "minExp":{$min: "$totalExp"}}}]);
+
+> db.employees.aggregate([{$group:{"_id":"$dept", "noOfEmployee":{$sum:1}, "maxExp":{$max:"$totalExp"}, "minExp":{$min: "$totalExp"}}}]);
+{ "_id" : "Admin", "noOfEmployee" : 8, "maxExp" : 15, "minExp" : 5 }
+{ "_id" : "Sales", "noOfEmployee" : 6, "maxExp" : 11, "minExp" : 6 }
+{ "_id" : "Finance", "noOfEmployee" : 10, "maxExp" : 16, "minExp" : 4 }
+{ "_id" : "HR", "noOfEmployee" : 6, "maxExp" : 12, "minExp" : 2 }
+{ "_id" : "IT", "noOfEmployee" : 8, "maxExp" : 8, "minExp" : 3 }
+{ "_id" : "Marketing", "noOfEmployee" : 6, "maxExp" : 13, "minExp" : 4 }
+{ "_id" : "Support", "noOfEmployee" : 6, "maxExp" : 14, "minExp" : 8 }
+------------------------------------------------------------
+
+10. Push and addToSet: Push adds a field's value form each document in group to 
+an array used to project data in array format, 
+addToSet is simlar to push but it omits duplicate values.
+
+db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}, "arrSet": {$addToSet:"$age"}}}]);
+db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}}}]);
+
+db.employees.aggregate([{$group:{"_id":"dept", "arrSet": {$addToSet:"$age"}}}]);
+db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}}}]);
+Output:
+{ "_id" : "dept", "arrPush" : [ 30, 35, 35, 35, 26, 25 ], "arrSet" : [ 25, 26, 35, 30 ] }
+
+> db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}, "arrSet": {$addToSet:"$age"}}}]);
+{ "_id" : "dept", "arrPush" : [ 30, 28, 32, 27, 31, 35, 29, 33, 26, 24, 34, 28, 40, 29, 31, 25, 30, 38, 27, 35, 29, 33, 26, 36, 31, 25, 37, 28, 34, 27, 32, 30, 41, 29, 26, 33, 35, 28, 39, 30, 27, 25, 34, 32, 29, 31, 36, 27, 38, 40 ], "arrSet" : [ 30, 41, 26, 31, 25, 36, 27, 32, 33, 40, 28, 35, 24, 29, 34, 37, 38, 39 ] }
+> db.employees.aggregate([{$group:{"_id":"dept", "arrPush":{$push:"$age"}}}]);
+{ "_id" : "dept", "arrPush" : [ 30, 28, 32, 27, 31, 35, 29, 33, 26, 24, 34, 28, 40, 29, 31, 25, 30, 38, 27, 35, 29, 33, 26, 36, 31, 25, 37, 28, 34, 27, 32, 30, 41, 29, 26, 33, 35, 28, 39, 30, 27, 25, 34, 32, 29, 31, 36, 27, 38, 40 ] }
+> db.employees.aggregate([{$group:{"_id":"dept", "arrSet": {$addToSet:"$age"}}}]);
+{ "_id" : "dept", "arrSet" : [ 34, 39, 32, 27, 25, 31, 36, 26, 41, 30, 38, 29, 37, 40, 33, 28, 35, 24 ] }
+------------------------------------------------------------
+11. Unwind: Used to create multiple in-memory documents for each value in the specified array type field, then we can do further aggregation based on those values.
+
+For each element in the specified array field, $unwind generates a new document.
+The new document is a copy of the original document, but the array field is replaced by a single element from the array.
+db.employees.aggregate([{$match:{"name":"Adma"}}, {$unwind:"$languages"}]);
+
+> db.employees.aggregate([{$match:{"name":"Adma"}}]);
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin", "languages" : [ "German", "French", "English", "Hindi" ], "age" : 30, "totalExp" : 10 }
+> db.employees.aggregate([{$match:{"name":"Adma"}}, {$unwind:"$languages"}]);
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin", "languages" : "German", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin", "languages" : "French", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin", "languages" : "English", "age" : 30, "totalExp" : 10 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin", "languages" : "Hindi", "age" : 30, "totalExp" : 10 }
+>
+------------------------------------------------------------
+12. Sorting:
+
+db.employees.aggregate([{$match:{dept:"Admin"}},{$project:{"name":1, "dept":1,_id:0}}, {$sort: {name: 1}}]);
+
+> db.employees.aggregate([{$match:{dept:"Admin"}},{$project:{"name":1, "dept":1,_id:0}}, {$sort: {name: 1}}]);
+{ "name" : "Adma", "dept" : "Admin" }
+{ "name" : "Amit", "dept" : "Admin" }
+{ "name" : "Frank", "dept" : "Admin" }
+{ "name" : "Jaya", "dept" : "Admin" }
+{ "name" : "Mohan", "dept" : "Admin" }
+{ "name" : "Rita", "dept" : "Admin" }
+{ "name" : "Sara", "dept" : "Admin" }
+{ "name" : "Zubin", "dept" : "Admin" }
+>
+------------------------------------------------------------
+13. Skip:
+
+db.employees.aggregate([{$match:{dept:"Admin"}},{$project:{"name":1, "dept":1}}, {$sort: {name: -1}}, {$skip:1}]);
+
+> db.employees.aggregate([{$match:{dept:"Admin"}},{$project:{"name":1, "dept":1}}, {$sort: {name: -1}}, {$skip:1}]);
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fe9"), "name" : "Sara", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d9002"), "name" : "Rita", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fe3"), "name" : "Mohan", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8ffa"), "name" : "Jaya", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fdc"), "name" : "Frank", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8ff1"), "name" : "Amit", "dept" : "Admin" }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fd7"), "name" : "Adma", "dept" : "Admin" }
+------------------------------------------------------------
+14. Limit:
+
+db.employees.aggregate([
+		{$match:{dept:"Admin"}},
+		{$project:{"name":1, "dept":1,_id:0}},
+		{$sort: {age: -1}},
+		{$limit:5}
+		]); 
+> db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1, _id:0}}, {$sort: {age:-1}}, {$limit:5}]);
+{ "name" : "Sara", "dept" : "Admin" }
+{ "name" : "Amit", "dept" : "Admin" }
+{ "name" : "Frank", "dept" : "Admin" }
+{ "name" : "Adma", "dept" : "Admin" }
+{ "name" : "Mohan", "dept" : "Admin" }
+------------------------------------------------------------
+16. Comparison operator in match:
+List of comparison operators: $cmp, $eq, $gt, $gte, $lt, $lte, and $ne
+
+ db.employees.aggregate([
+			{$match:{dept:"Admin", age: {$gt:30}}},
+			{$project:{"name":1, "dept":1,age:1}} 
+			])
+            
+> db.employees.aggregate([{$match:{dept:"Admin", age:{$gt:30}}}, {$project:{"name":1, "dept":1, age:1}}]);
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fdc"), "name" : "Frank", "dept" : "Admin", "age" : 35 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8fe3"), "name" : "Mohan", "dept" : "Admin", "age" : 40 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8ff1"), "name" : "Amit", "dept" : "Admin", "age" : 37 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d8ffa"), "name" : "Jaya", "dept" : "Admin", "age" : 33 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d9002"), "name" : "Rita", "dept" : "Admin", "age" : 32 }
+{ "_id" : ObjectId("691ec9dcf5aae7759e6d9008"), "name" : "Zubin", "dept" : "Admin", "age" : 40 }
+>
+
+------------------------------------------------------------
+17. Boolean aggregation opertor in projection:
+
+db.employees.aggregate([{$match:{dept:"Admin"}},
+			{$project:{"name":1, "dept":1, 
+				age: { $and: [ { $gt: [ "$age", 30 ] }, { $lt: [ "$age", 36 ] }] }
+			}}
+			]);
+
+> db.employees.aggregate([{$match:{dept:"Admin"}}, {$project:{"name":1, "dept":1, age:{$and:[{$gt:["$age", 30]}, {$lt:["$age", 36]}]}}}])
+{ "_id" : ObjectId("6920117c1282090783dd7e1c"), "name" : "Adma", "dept" : "Admin", "age" : false }
+{ "_id" : ObjectId("6920117c1282090783dd7e21"), "name" : "Frank", "dept" : "Admin", "age" : true }
+{ "_id" : ObjectId("6920117c1282090783dd7e28"), "name" : "Mohan", "dept" : "Admin", "age" : false }
+{ "_id" : ObjectId("6920117c1282090783dd7e2e"), "name" : "Sara", "dept" : "Admin", "age" : false }
+{ "_id" : ObjectId("6920117c1282090783dd7e36"), "name" : "Amit", "dept" : "Admin", "age" : false }
+{ "_id" : ObjectId("6920117c1282090783dd7e3f"), "name" : "Jaya", "dept" : "Admin", "age" : true }
+{ "_id" : ObjectId("6920117c1282090783dd7e47"), "name" : "Rita", "dept" : "Admin", "age" : true }
+{ "_id" : ObjectId("6920117c1282090783dd7e4d"), "name" : "Zubin", "dept" : "Admin", "age" : false }
+>
+------------------------------------------------------------
+18. Boolean aggregation opertor in match:
+
+db.employees.aggregate([{$match:{dept:"Admin", $and: [{age: { $gt:  30 }}, {age: {$lt: 36 }} ] }}, 
+			{$project:{"name":1, "dept":1, age: { $and: [ { $gt: [ "$age", 30 ] }, 
+			{$lt: [ "$age", 36 ] } ] }}}])
+List of boolean aggregation opertors: $and, $or, and $not.
+------------------------------------------------------------
+------------------------------------------------------------
+------------------------------------------------------------
+
+
+
+============================================================
+
+Vehicle_EX-8.txt...
+
+------------------------------------------------------------
+db.Vehicle.insert({
+  _id: 1,
+  "VehicleId": "V10001",
+  "Make": "Maruti Suzuki",
+  "Model": "Baleno",
+  "Year": 2021,
+  "Mileage": 19.5,
+  "Price": 780000,
+  "FuelType": "Petrol",
+  "Location": "Pune, Maharashtra",
+  "OwnerName": "Rohan Deshpande",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Pune",
+    "ZipCode": "411001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 2,
+  "VehicleId": "V10002",
+  "Make": "Hyundai",
+  "Model": "i20",
+  "Year": 2020,
+  "Mileage": 18.1,
+  "Price": 650000,
+  "FuelType": "Petrol",
+  "Location": "Ahmedabad, Gujarat",
+  "OwnerName": "Neha Patel",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-06-12",
+  "OwnerDetails": {
+    "City": "Ahmedabad",
+    "ZipCode": "380001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 3,
+  "VehicleId": "V10003",
+  "Make": "Tata",
+  "Model": "Harrier",
+  "Year": 2022,
+  "Mileage": 14.9,
+  "Price": 1650000,
+  "FuelType": "Diesel",
+  "Location": "Mumbai, Maharashtra",
+  "OwnerName": "Siddharth Joshi",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Mumbai",
+    "ZipCode": "400002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 4,
+  "VehicleId": "V10004",
+  "Make": "Honda",
+  "Model": "Amaze",
+  "Year": 2019,
+  "Mileage": 20.4,
+  "Price": 590000,
+  "FuelType": "Diesel",
+  "Location": "Chennai, Tamil Nadu",
+  "OwnerName": "Deepa Krishnan",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-04-18",
+  "OwnerDetails": {
+    "City": "Chennai",
+    "ZipCode": "600003"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 5,
+  "VehicleId": "V10005",
+  "Make": "Mahindra",
+  "Model": "Thar",
+  "Year": 2023,
+  "Mileage": 13.1,
+  "Price": 1650000,
+  "FuelType": "Petrol",
+  "Location": "Delhi",
+  "OwnerName": "Amit Sharma",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-05-02",
+  "OwnerDetails": {
+    "City": "Delhi",
+    "ZipCode": "110002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 6,
+  "VehicleId": "V10006",
+  "Make": "Renault",
+  "Model": "Kwid",
+  "Year": 2018,
+  "Mileage": 22.3,
+  "Price": 350000,
+  "FuelType": "Petrol",
+  "Location": "Jaipur, Rajasthan",
+  "OwnerName": "Pooja Meena",
+  "BookingStatus": "Cancelled",
+  "BookingDate": "2023-03-10",
+  "OwnerDetails": {
+    "City": "Jaipur",
+    "ZipCode": "302001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 7,
+  "VehicleId": "V10007",
+  "Make": "Kia",
+  "Model": "Seltos",
+  "Year": 2021,
+  "Mileage": 16.5,
+  "Price": 1350000,
+  "FuelType": "Diesel",
+  "Location": "Bengaluru, Karnataka",
+  "OwnerName": "Manoj Gowda",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Bengaluru",
+    "ZipCode": "560002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 8,
+  "VehicleId": "V10008",
+  "Make": "Toyota",
+  "Model": "Innova Crysta",
+  "Year": 2020,
+  "Mileage": 12.5,
+  "Price": 2100000,
+  "FuelType": "Diesel",
+  "Location": "Hyderabad, Telangana",
+  "OwnerName": "Ravi Teja",
+  "BookingStatus": "Booked",
+  "BookingDate": "2023-07-20",
+  "OwnerDetails": {
+    "City": "Hyderabad",
+    "ZipCode": "500001"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 9,
+  "VehicleId": "V10009",
+  "Make": "Skoda",
+  "Model": "Octavia",
+  "Year": 2019,
+  "Mileage": 15.7,
+  "Price": 1200000,
+  "FuelType": "Petrol",
+  "Location": "Kolkata, West Bengal",
+  "OwnerName": "Arunabha Sen",
+  "BookingStatus": "Available",
+  "BookingDate": null,
+  "OwnerDetails": {
+    "City": "Kolkata",
+    "ZipCode": "700002"
+  }
+});
+
+db.Vehicle.insert({
+  _id: 10,
+  "VehicleId": "V10010",
+  "Make": "Volkswagen",
+  "Model": "Polo",
+  "Year": 2018,
+  "Mileage": 17.2,
+  "Price": 480000,
+  "FuelType": "Petrol",
+  "Location": "Surat, Gujarat",
+  "OwnerName": "Mehul Gandhi",
+  "BookingStatus": "Cancelled",
+  "BookingDate": "2023-02-14",
+  "OwnerDetails": {
+    "City": "Surat",
+    "ZipCode": "395003"
+  }
+});
+
+
+> db.Vehicle.find();
+{ "_id" : 1, "VehicleId" : "V10001", "Make" : "Maruti Suzuki", "Model" : "Baleno", "Year" : 2021, "Mileage" : 19.5, "Price" : 780000, "FuelType" : "Petrol", "Location" : "Pune, Maharashtra", "OwnerName" : "Rohan Deshpande", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Pune", "ZipCode" : "411001" } }
+{ "_id" : 2, "VehicleId" : "V10002", "Make" : "Hyundai", "Model" : "i20", "Year" : 2020, "Mileage" : 18.1, "Price" : 650000, "FuelType" : "Petrol", "Location" : "Ahmedabad, Gujarat", "OwnerName" : "Neha Patel", "BookingStatus" : "Booked", "BookingDate" : "2023-06-12", "OwnerDetails" : { "City" : "Ahmedabad", "ZipCode" : "380001" } }
+{ "_id" : 3, "VehicleId" : "V10003", "Make" : "Tata", "Model" : "Harrier", "Year" : 2022, "Mileage" : 14.9, "Price" : 1650000, "FuelType" : "Diesel", "Location" : "Mumbai, Maharashtra", "OwnerName" : "Siddharth Joshi", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Mumbai", "ZipCode" : "400002" } }
+{ "_id" : 4, "VehicleId" : "V10004", "Make" : "Honda", "Model" : "Amaze", "Year" : 2019, "Mileage" : 20.4, "Price" : 590000, "FuelType" : "Diesel", "Location" : "Chennai, Tamil Nadu", "OwnerName" : "Deepa Krishnan", "BookingStatus" : "Booked", "BookingDate" : "2023-04-18", "OwnerDetails" : { "City" : "Chennai", "ZipCode" : "600003" } }
+{ "_id" : 5, "VehicleId" : "V10005", "Make" : "Mahindra", "Model" : "Thar", "Year" : 2023, "Mileage" : 13.1, "Price" : 1650000, "FuelType" : "Petrol", "Location" : "Delhi", "OwnerName" : "Amit Sharma", "BookingStatus" : "Booked", "BookingDate" : "2023-05-02", "OwnerDetails" : { "City" : "Delhi", "ZipCode" : "110002" } }
+{ "_id" : 6, "VehicleId" : "V10006", "Make" : "Renault", "Model" : "Kwid", "Year" : 2018, "Mileage" : 22.3, "Price" : 350000, "FuelType" : "Petrol", "Location" : "Jaipur, Rajasthan", "OwnerName" : "Pooja Meena", "BookingStatus" : "Cancelled", "BookingDate" : "2023-03-10", "OwnerDetails" : { "City" : "Jaipur", "ZipCode" : "302001" } }
+{ "_id" : 7, "VehicleId" : "V10007", "Make" : "Kia", "Model" : "Seltos", "Year" : 2021, "Mileage" : 16.5, "Price" : 1350000, "FuelType" : "Diesel", "Location" : "Bengaluru, Karnataka", "OwnerName" : "Manoj Gowda", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Bengaluru", "ZipCode" : "560002" } }
+{ "_id" : 8, "VehicleId" : "V10008", "Make" : "Toyota", "Model" : "Innova Crysta", "Year" : 2020, "Mileage" : 12.5, "Price" : 2100000, "FuelType" : "Diesel", "Location" : "Hyderabad, Telangana", "OwnerName" : "Ravi Teja", "BookingStatus" : "Booked", "BookingDate" : "2023-07-20", "OwnerDetails" : { "City" : "Hyderabad", "ZipCode" : "500001" } }
+{ "_id" : 9, "VehicleId" : "V10009", "Make" : "Skoda", "Model" : "Octavia", "Year" : 2019, "Mileage" : 15.7, "Price" : 1200000, "FuelType" : "Petrol", "Location" : "Kolkata, West Bengal", "OwnerName" : "Arunabha Sen", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Kolkata", "ZipCode" : "700002" } }
+{ "_id" : 10, "VehicleId" : "V10010", "Make" : "Volkswagen", "Model" : "Polo", "Year" : 2018, "Mileage" : 17.2, "Price" : 480000, "FuelType" : "Petrol", "Location" : "Surat, Gujarat", "OwnerName" : "Mehul Gandhi", "BookingStatus" : "Cancelled", "BookingDate" : "2023-02-14", "OwnerDetails" : { "City" : "Surat", "ZipCode" : "395003" } }
+
+------------------------------------------------------------
+1.	Find vehicles with a price greater than $25,000.
+------------------------------------------------------------
+2.	Count the number of vehicles for each fuel type.
+
+> db.Vehicle.aggregate([{$group:{"_id":"$FuelType", "Total":{$sum:1}}}])
+{ "_id" : "Petrol", "Total" : 6 }
+{ "_id" : "Diesel", "Total" : 4 }
+------------------------------------------------------------
+3.	Find vehicles manufactured after 2018.
+
+------------------------------------------------------------
+4.	Retrieve vehicles that have a mileage greater than 15 miles per gallon.
+
+> db.Vehicle.find({"Mileage":{$gt:15}})
+{ "_id" : 1, "VehicleId" : "V10001", "Make" : "Maruti Suzuki", "Model" : "Baleno", "Year" : 2021, "Mileage" : 19.5, "Price" : 780000, "FuelType" : "Petrol", "Location" : "Pune, Maharashtra", "OwnerName" : "Rohan Deshpande", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Pune", "ZipCode" : "411001" } }
+{ "_id" : 2, "VehicleId" : "V10002", "Make" : "Hyundai", "Model" : "i20", "Year" : 2020, "Mileage" : 18.1, "Price" : 650000, "FuelType" : "Petrol", "Location" : "Ahmedabad, Gujarat", "OwnerName" : "Neha Patel", "BookingStatus" : "Booked", "BookingDate" : "2023-06-12", "OwnerDetails" : { "City" : "Ahmedabad", "ZipCode" : "380001" } }
+{ "_id" : 4, "VehicleId" : "V10004", "Make" : "Honda", "Model" : "Amaze", "Year" : 2019, "Mileage" : 20.4, "Price" : 590000, "FuelType" : "Diesel", "Location" : "Chennai, Tamil Nadu", "OwnerName" : "Deepa Krishnan", "BookingStatus" : "Booked", "BookingDate" : "2023-04-18", "OwnerDetails" : { "City" : "Chennai", "ZipCode" : "600003" } }
+{ "_id" : 6, "VehicleId" : "V10006", "Make" : "Renault", "Model" : "Kwid", "Year" : 2018, "Mileage" : 22.3, "Price" : 350000, "FuelType" : "Petrol", "Location" : "Jaipur, Rajasthan", "OwnerName" : "Pooja Meena", "BookingStatus" : "Cancelled", "BookingDate" : "2023-03-10", "OwnerDetails" : { "City" : "Jaipur", "ZipCode" : "302001" } }
+{ "_id" : 7, "VehicleId" : "V10007", "Make" : "Kia", "Model" : "Seltos", "Year" : 2021, "Mileage" : 16.5, "Price" : 1350000, "FuelType" : "Diesel", "Location" : "Bengaluru, Karnataka", "OwnerName" : "Manoj Gowda", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Bengaluru", "ZipCode" : "560002" } }
+{ "_id" : 9, "VehicleId" : "V10009", "Make" : "Skoda", "Model" : "Octavia", "Year" : 2019, "Mileage" : 15.7, "Price" : 1200000, "FuelType" : "Petrol", "Location" : "Kolkata, West Bengal", "OwnerName" : "Arunabha Sen", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Kolkata", "ZipCode" : "700002" } }
+{ "_id" : 10, "VehicleId" : "V10010", "Make" : "Volkswagen", "Model" : "Polo", "Year" : 2018, "Mileage" : 17.2, "Price" : 480000, "FuelType" : "Petrol", "Location" : "Surat, Gujarat", "OwnerName" : "Mehul Gandhi", "BookingStatus" : "Cancelled", "BookingDate" : "2023-02-14", "OwnerDetails" : { "City" : "Surat", "ZipCode" : "395003" } }
+
+------------------------------------------------------------
+5.	Find vehicles whose make contains "Honda" or "Toyota".
+
+> db.Vehicle.find({"Make":{$in:["Honda","Toyota"]}});
+{ "_id" : 4, "VehicleId" : "V10004", "Make" : "Honda", "Model" : "Amaze", "Year" : 2019, "Mileage" : 20.4, "Price" : 590000, "FuelType" : "Diesel", "Location" : "Chennai, Tamil Nadu", "OwnerName" : "Deepa Krishnan", "BookingStatus" : "Booked", "BookingDate" : "2023-04-18", "OwnerDetails" : { "City" : "Chennai", "ZipCode" : "600003" } }
+{ "_id" : 8, "VehicleId" : "V10008", "Make" : "Toyota", "Model" : "Innova Crysta", "Year" : 2020, "Mileage" : 12.5, "Price" : 2100000, "FuelType" : "Diesel", "Location" : "Hyderabad, Telangana", "OwnerName" : "Ravi Teja", "BookingStatus" : "Booked", "BookingDate" : "2023-07-20", "OwnerDetails" : { "City" : "Hyderabad", "ZipCode" : "500001" } }
+
+------------------------------------------------------------
+6.	Sort the vehicles by year in ascending order.
+
+> db.Vehicle.find().sort({"Year":1});
+{ "_id" : 6, "VehicleId" : "V10006", "Make" : "Renault", "Model" : "Kwid", "Year" : 2018, "Mileage" : 22.3, "Price" : 350000, "FuelType" : "Petrol", "Location" : "Jaipur, Rajasthan", "OwnerName" : "Pooja Meena", "BookingStatus" : "Cancelled", "BookingDate" : "2023-03-10", "OwnerDetails" : { "City" : "Jaipur", "ZipCode" : "302001" } }
+{ "_id" : 10, "VehicleId" : "V10010", "Make" : "Volkswagen", "Model" : "Polo", "Year" : 2018, "Mileage" : 17.2, "Price" : 480000, "FuelType" : "Petrol", "Location" : "Surat, Gujarat", "OwnerName" : "Mehul Gandhi", "BookingStatus" : "Cancelled", "BookingDate" : "2023-02-14", "OwnerDetails" : { "City" : "Surat", "ZipCode" : "395003" } }
+{ "_id" : 4, "VehicleId" : "V10004", "Make" : "Honda", "Model" : "Amaze", "Year" : 2019, "Mileage" : 20.4, "Price" : 590000, "FuelType" : "Diesel", "Location" : "Chennai, Tamil Nadu", "OwnerName" : "Deepa Krishnan", "BookingStatus" : "Booked", "BookingDate" : "2023-04-18", "OwnerDetails" : { "City" : "Chennai", "ZipCode" : "600003" } }
+{ "_id" : 9, "VehicleId" : "V10009", "Make" : "Skoda", "Model" : "Octavia", "Year" : 2019, "Mileage" : 15.7, "Price" : 1200000, "FuelType" : "Petrol", "Location" : "Kolkata, West Bengal", "OwnerName" : "Arunabha Sen", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Kolkata", "ZipCode" : "700002" } }
+{ "_id" : 2, "VehicleId" : "V10002", "Make" : "Hyundai", "Model" : "i20", "Year" : 2020, "Mileage" : 18.1, "Price" : 650000, "FuelType" : "Petrol", "Location" : "Ahmedabad, Gujarat", "OwnerName" : "Neha Patel", "BookingStatus" : "Booked", "BookingDate" : "2023-06-12", "OwnerDetails" : { "City" : "Ahmedabad", "ZipCode" : "380001" } }
+{ "_id" : 8, "VehicleId" : "V10008", "Make" : "Toyota", "Model" : "Innova Crysta", "Year" : 2020, "Mileage" : 12.5, "Price" : 2100000, "FuelType" : "Diesel", "Location" : "Hyderabad, Telangana", "OwnerName" : "Ravi Teja", "BookingStatus" : "Booked", "BookingDate" : "2023-07-20", "OwnerDetails" : { "City" : "Hyderabad", "ZipCode" : "500001" } }
+{ "_id" : 1, "VehicleId" : "V10001", "Make" : "Maruti Suzuki", "Model" : "Baleno", "Year" : 2021, "Mileage" : 19.5, "Price" : 780000, "FuelType" : "Petrol", "Location" : "Pune, Maharashtra", "OwnerName" : "Rohan Deshpande", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Pune", "ZipCode" : "411001" } }
+{ "_id" : 7, "VehicleId" : "V10007", "Make" : "Kia", "Model" : "Seltos", "Year" : 2021, "Mileage" : 16.5, "Price" : 1350000, "FuelType" : "Diesel", "Location" : "Bengaluru, Karnataka", "OwnerName" : "Manoj Gowda", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Bengaluru", "ZipCode" : "560002" } }
+{ "_id" : 3, "VehicleId" : "V10003", "Make" : "Tata", "Model" : "Harrier", "Year" : 2022, "Mileage" : 14.9, "Price" : 1650000, "FuelType" : "Diesel", "Location" : "Mumbai, Maharashtra", "OwnerName" : "Siddharth Joshi", "BookingStatus" : "Available", "BookingDate" : null, "OwnerDetails" : { "City" : "Mumbai", "ZipCode" : "400002" } }
+{ "_id" : 5, "VehicleId" : "V10005", "Make" : "Mahindra", "Model" : "Thar", "Year" : 2023, "Mileage" : 13.1, "Price" : 1650000, "FuelType" : "Petrol", "Location" : "Delhi", "OwnerName" : "Amit Sharma", "BookingStatus" : "Booked", "BookingDate" : "2023-05-02", "OwnerDetails" : { "City" : "Delhi", "ZipCode" : "110002" } }
+>
+------------------------------------------------------------
+7.	Find vehicles located in "California" or "Nevada"
+
+> db.Vehicle.find({"OwnerDetails.City":{$in:["Delhi","Jaipur"]}});
+{ "_id" : 5, "VehicleId" : "V10005", "Make" : "Mahindra", "Model" : "Thar", "Year" : 2023, "Mileage" : 13.1, "Price" : 1650000, "FuelType" : "Petrol", "Location" : "Delhi", "OwnerName" : "Amit Sharma", "BookingStatus" : "Booked", "BookingDate" : "2023-05-02", "OwnerDetails" : { "City" : "Delhi", "ZipCode" : "110002" } }
+{ "_id" : 6, "VehicleId" : "V10006", "Make" : "Renault", "Model" : "Kwid", "Year" : 2018, "Mileage" : 22.3, "Price" : 350000, "FuelType" : "Petrol", "Location" : "Jaipur, Rajasthan", "OwnerName" : "Pooja Meena", "BookingStatus" : "Cancelled", "BookingDate" : "2023-03-10", "OwnerDetails" : { "City" : "Jaipur", "ZipCode" : "302001" } }
+>
+------------------------------------------------------------
+8.	Count the number of vehicles in each location (city/state).
+
+> db.Vehicle.aggregate([{$group:{"_id":"$Location", "vehicles_number":{$sum:1}}}]);
+{ "_id" : "Chennai, Tamil Nadu", "vehicles_number" : 1 }
+{ "_id" : "Mumbai, Maharashtra", "vehicles_number" : 1 }
+{ "_id" : "Bengaluru, Karnataka", "vehicles_number" : 1 }
+{ "_id" : "Kolkata, West Bengal", "vehicles_number" : 1 }
+{ "_id" : "Surat, Gujarat", "vehicles_number" : 1 }
+{ "_id" : "Pune, Maharashtra", "vehicles_number" : 1 }
+{ "_id" : "Jaipur, Rajasthan", "vehicles_number" : 1 }
+{ "_id" : "Hyderabad, Telangana", "vehicles_number" : 1 }
+{ "_id" : "Ahmedabad, Gujarat", "vehicles_number" : 1 }
+{ "_id" : "Delhi", "vehicles_number" : 1 }
+------------------------------------------------------------
+9.	Find vehicles whose model starts with the letter "A".
+------------------------------------------------------------
+10.	Retrieve vehicles with exactly 3 owners.
+------------------------------------------------------------
+11.	Find vehicles whose owner name contains "John".
+------------------------------------------------------------
+12.	Sort vehicles by mileage in descending order.
+------------------------------------------------------------
+13.	Find vehicles whose fuel type is not "Petrol".
+------------------------------------------------------------
+14.	Retrieve vehicles with a price between $15,000 and $40,000.
+------------------------------------------------------------
+15.	Find vehicles whose booking status is "Booked".
+------------------------------------------------------------
+16.	Find vehicles located in "New York".

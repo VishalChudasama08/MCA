@@ -1,0 +1,384 @@
+CREATE TABLE STUDENT (
+  2      rollno NUMBER PRIMARY KEY,
+  3      fname VARCHAR2(50),
+  4      lname VARCHAR2(50),
+  5      dob DATE
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE COURSE (
+  2      C_No VARCHAR2(10) PRIMARY KEY,
+  3      coursename VARCHAR2(100),
+  4      fees NUMBER,
+  5      Credit NUMBER
+  6  );
+
+Table created.
+
+SQL> 
+SQL> CREATE TABLE ENROLL (
+  2      rollno NUMBER,
+  3      courseno VARCHAR2(10),
+  4      Earn_Credit NUMBER,
+  5      FOREIGN KEY (rollno) REFERENCES STUDENT(rollno),
+  6      FOREIGN KEY (courseno) REFERENCES COURSE(C_No)
+  7  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO STUDENT VALUES (11, 'Kapil', 'Sharma', TO_DATE('2003-01-01', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO STUDENT VALUES (12, 'Anjali', 'Verma', TO_DATE('2002-06-21', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO STUDENT VALUES (13, 'Ravi', 'Kumar', TO_DATE('2004-03-12', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> INSERT INTO STUDENT VALUES (14, 'Pooja', 'Singh', TO_DATE('2001-11-23', 'YYYY-MM-DD'));
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO COURSE VALUES ('C101', 'Mathematics', 5000, 4);
+
+1 row created.
+
+SQL> INSERT INTO COURSE VALUES ('C102', 'Physics', 6000, 3);
+
+1 row created.
+
+SQL> INSERT INTO COURSE VALUES ('C103', 'Chemistry', 5500, 4);
+
+1 row created.
+
+SQL> INSERT INTO COURSE VALUES ('C104', 'Biology', 5800, 3);
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO ENROLL VALUES (11, 'C101', 4);
+
+1 row created.
+
+SQL> INSERT INTO ENROLL VALUES (11, 'C102', 3);
+
+1 row created.
+
+SQL> INSERT INTO ENROLL VALUES (12, 'C101', 4);
+
+1 row created.
+
+SQL> INSERT INTO ENROLL VALUES (12, 'C103', 4);
+
+1 row created.
+
+SQL> INSERT INTO ENROLL VALUES (13, 'C103', 4);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE Employee (
+  2      emp_no NUMBER PRIMARY KEY,
+  3      fname VARCHAR2(50),
+  4      lname VARCHAR2(50),
+  5      dob DATE,
+  6      address VARCHAR2(100)
+  7  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE Company (
+  2      comp_id NUMBER PRIMARY KEY,
+  3      emp_no NUMBER,
+  4      company_name VARCHAR2(100),
+  5      salary NUMBER,
+  6      department VARCHAR2(50),
+  7      designation VARCHAR2(50),
+  8      FOREIGN KEY (emp_no) REFERENCES Employee(emp_no)
+  9  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> CREATE TABLE Customer (
+  2      cust_no NUMBER PRIMARY KEY,
+  3      fname VARCHAR2(50),
+  4      lname VARCHAR2(50),
+  5      address VARCHAR2(100)
+  6  );
+
+Table created.
+
+SQL> 
+SQL> 
+SQL> 
+SQL> INSERT INTO Employee VALUES (101, 'Jay', 'Shah', TO_DATE('1990-01-01', 'YYYY-MM-DD'), 'Mumbai');
+
+1 row created.
+
+SQL> INSERT INTO Employee VALUES (102, 'Amit', 'Patel', TO_DATE('1989-02-10', 'YYYY-MM-DD'), 'Delhi');
+
+1 row created.
+
+SQL> INSERT INTO Employee VALUES (103, 'Nina', 'Joshi', TO_DATE('1991-07-12', 'YYYY-MM-DD'), 'Bangalore');
+
+1 row created.
+
+SQL> INSERT INTO Employee VALUES (104, 'Ravi', 'Kumar', TO_DATE('1987-11-05', 'YYYY-MM-DD'), 'Chennai');
+
+1 row created.
+
+SQL> INSERT INTO Employee VALUES (105, 'Meena', 'Sharma', TO_DATE('1993-03-14', 'YYYY-MM-DD'), 'Pune');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO Company VALUES (1, 101, 'ABC Corp', 60000, 'mrkt', 'Manager');
+
+1 row created.
+
+SQL> INSERT INTO Company VALUES (2, 102, 'ABC Corp', 50000, 'mrkt', 'Executive');
+
+1 row created.
+
+SQL> INSERT INTO Company VALUES (3, 103, 'XYZ Ltd', 70000, 'sales', 'Lead');
+
+1 row created.
+
+SQL> INSERT INTO Company VALUES (4, 104, 'XYZ Ltd', 55000, 'sales', 'Analyst');
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> INSERT INTO Customer VALUES (201, 'Jay', 'Shah', 'Ahmedabad');
+
+1 row created.
+
+SQL> INSERT INTO Customer VALUES (202, 'Amit', 'Patel', 'Surat');
+
+1 row created.
+
+SQL> INSERT INTO Customer VALUES (203, 'Sneha', 'Mehta', 'Delhi');
+
+1 row created.
+
+SQL> INSERT INTO Customer VALUES (204, 'Ravi', 'Kumar', 'Chennai');
+
+1 row created.
+
+SQL> commit
+  2  ;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from STUDENT;
+
+    ROLLNO FNAME                                              LNAME                                              DOB                                                                                    
+---------- -------------------------------------------------- -------------------------------------------------- ---------                                                                              
+        11 Kapil                                              Sharma                                             01-JAN-03                                                                              
+        12 Anjali                                             Verma                                              21-JUN-02                                                                              
+        13 Ravi                                               Kumar                                              12-MAR-04                                                                              
+        14 Pooja                                              Singh                                              23-NOV-01                                                                              
+
+SQL> select * from COURSE;
+
+C_NO       COURSENAME                                                                                                 FEES     CREDIT                                                                   
+---------- ---------------------------------------------------------------------------------------------------- ---------- ----------                                                                   
+C101       Mathematics                                                                                                5000          4                                                                   
+C102       Physics                                                                                                    6000          3                                                                   
+C103       Chemistry                                                                                                  5500          4                                                                   
+C104       Biology                                                                                                    5800          3                                                                   
+
+SQL> alter table STUDENT modify column fname VARCHAR2(18);
+alter table STUDENT modify column fname VARCHAR2(18)
+                                        *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> alter table student modify fname varchar2(12);
+
+Table altered.
+
+SQL> alter table student modify lname varchar2(12);
+
+Table altered.
+
+SQL> alter table course modify coursename varchar2(25);
+
+Table altered.
+
+SQL> select * from course;
+
+C_NO       COURSENAME                      FEES     CREDIT                                                                                                                                              
+---------- ------------------------- ---------- ----------                                                                                                                                              
+C101       Mathematics                     5000          4                                                                                                                                              
+C102       Physics                         6000          3                                                                                                                                              
+C103       Chemistry                       5500          4                                                                                                                                              
+C104       Biology                         5800          3                                                                                                                                              
+
+SQL> select * from ENROLL;
+
+    ROLLNO COURSENO   EARN_CREDIT                                                                                                                                                                       
+---------- ---------- -----------                                                                                                                                                                       
+        11 C101                 4                                                                                                                                                                       
+        11 C102                 3                                                                                                                                                                       
+        12 C101                 4                                                                                                                                                                       
+        12 C103                 4                                                                                                                                                                       
+        13 C103                 4                                                                                                                                                                       
+
+SQL> select * from Employee;
+
+    EMP_NO FNAME                                              LNAME                                              DOB                                                                                    
+---------- -------------------------------------------------- -------------------------------------------------- ---------                                                                              
+ADDRESS                                                                                                                                                                                                 
+----------------------------------------------------------------------------------------------------                                                                                                    
+       101 Jay                                                Shah                                               01-JAN-90                                                                              
+Mumbai                                                                                                                                                                                                  
+                                                                                                                                                                                                        
+       102 Amit                                               Patel                                              10-FEB-89                                                                              
+Delhi                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+       103 Nina                                               Joshi                                              12-JUL-91                                                                              
+Bangalore                                                                                                                                                                                               
+                                                                                                                                                                                                        
+       104 Ravi                                               Kumar                                              05-NOV-87                                                                              
+Chennai                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+       105 Meena                                              Sharma                                             14-MAR-93                                                                              
+Pune                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+
+SQL> alter table employee modify fname varchar2(12);
+
+Table altered.
+
+SQL> alter table employee modify lname varchar2(12);
+
+Table altered.
+
+SQL> alter table employee modify address varchar2(30);
+
+Table altered.
+
+SQL> select * from employee;
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                                                  
+---------- ------------ ------------ --------- ------------------------------                                                                                                                           
+       101 Jay          Shah         01-JAN-90 Mumbai                                                                                                                                                   
+       102 Amit         Patel        10-FEB-89 Delhi                                                                                                                                                    
+       103 Nina         Joshi        12-JUL-91 Bangalore                                                                                                                                                
+       104 Ravi         Kumar        05-NOV-87 Chennai                                                                                                                                                  
+       105 Meena        Sharma       14-MAR-93 Pune                                                                                                                                                     
+
+SQL> select * from Company;
+
+   COMP_ID     EMP_NO COMPANY_NAME                                                                                             SALARY DEPARTMENT                                                        
+---------- ---------- ---------------------------------------------------------------------------------------------------- ---------- --------------------------------------------------                
+DESIGNATION                                                                                                                                                                                             
+--------------------------------------------------                                                                                                                                                      
+         1        101 ABC Corp                                                                                                  60000 mrkt                                                              
+Manager                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+         2        102 ABC Corp                                                                                                  50000 mrkt                                                              
+Executive                                                                                                                                                                                               
+                                                                                                                                                                                                        
+         3        103 XYZ Ltd                                                                                                   70000 sales                                                             
+Lead                                                                                                                                                                                                    
+                                                                                                                                                                                                        
+         4        104 XYZ Ltd                                                                                                   55000 sales                                                             
+Analyst                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+
+SQL> alter table company modify company_name varchar2(25);
+
+Table altered.
+
+SQL> alter table company modify department varchar2(18);
+
+Table altered.
+
+SQL> alter table company modify designation varchar2(18);
+
+Table altered.
+
+SQL> select * from Company;
+
+   COMP_ID     EMP_NO COMPANY_NAME                  SALARY DEPARTMENT         DESIGNATION                                                                                                               
+---------- ---------- ------------------------- ---------- ------------------ ------------------                                                                                                        
+         1        101 ABC Corp                       60000 mrkt               Manager                                                                                                                   
+         2        102 ABC Corp                       50000 mrkt               Executive                                                                                                                 
+         3        103 XYZ Ltd                        70000 sales              Lead                                                                                                                      
+         4        104 XYZ Ltd                        55000 sales              Analyst                                                                                                                   
+
+SQL> select * from Customer;
+
+   CUST_NO FNAME                                              LNAME                                                                                                                                     
+---------- -------------------------------------------------- --------------------------------------------------                                                                                        
+ADDRESS                                                                                                                                                                                                 
+----------------------------------------------------------------------------------------------------                                                                                                    
+       201 Jay                                                Shah                                                                                                                                      
+Ahmedabad                                                                                                                                                                                               
+                                                                                                                                                                                                        
+       202 Amit                                               Patel                                                                                                                                     
+Surat                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+       203 Sneha                                              Mehta                                                                                                                                     
+Delhi                                                                                                                                                                                                   
+                                                                                                                                                                                                        
+       204 Ravi                                               Kumar                                                                                                                                     
+Chennai                                                                                                                                                                                                 
+                                                                                                                                                                                                        
+
+SQL> alter table Customer modify fname varchar2(12);
+
+Table altered.
+
+SQL> alter table Customer modify lname varchar2(12);
+
+Table altered.
+
+SQL> alter table Customer modify address varchar2(30);
+
+Table altered.
+
+SQL> select * from Customer;
+
+   CUST_NO FNAME        LNAME        ADDRESS                                                                                                                                                            
+---------- ------------ ------------ ------------------------------                                                                                                                                     
+       201 Jay          Shah         Ahmedabad                                                                                                                                                          
+       202 Amit         Patel        Surat                                                                                                                                                              
+       203 Sneha        Mehta        Delhi                                                                                                                                                              
+       204 Ravi         Kumar        Chennai                                                                                                                                                            
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> 

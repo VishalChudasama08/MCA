@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #box{
+            width: 50px;
+            height: 50px;
+            background-color: blue;
+            position: relative;
+        }
+        .btn {
+            border: 1px solid black;
+            padding: 10px;
+            background-color: rgb(224, 240, 87);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="container">
+        <button class="btn" id="left"><strong>←</strong></button>
+        <button class="btn" id="right"><strong>→</strong></button>
+    </div>
+
+    <br>
+
+    <div id="box"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $("#left").click(function () {
+                $("#box").animate({ left: "-=50px" });
+            });
+            $("#right").click(function () {
+                $("#box").animate({ left: "+=50px" });
+            });
+        });
+    </script>
+
+</body>
+
+</html>

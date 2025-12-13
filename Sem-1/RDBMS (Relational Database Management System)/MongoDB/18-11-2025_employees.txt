@@ -1,0 +1,121 @@
+db.employees.insertMany([
+    { 
+        _id:1,
+        firstName: "John",
+        lastName: "King",
+        email: "john.king@abc.com",
+        salary: 5000,
+        skills: [ "Angular", "React", "MongoDB" ]
+    },
+    { 
+        _id:2,
+        firstName: "Sachin",
+        lastName: "T",
+        email: "sachin.t@abc.com",
+        salary: 8000,
+        skills: [ "Accounting", "Tax" ]
+    },
+    { 
+        _id:3,
+        firstName: "James",
+        lastName: "Bond",
+        email: "jamesb@abc.com",
+        salary: 7500,
+        skills: [ "Sales", "Marketing" ]
+    },
+    { 
+        _id:4,
+        firstName: "Steve",
+        lastName: "J",
+        email: "steve.j@abc.com",
+        salary: 7000,
+        skills: [ "Mac", "Marketing", "Product Design" ]
+    },
+    { 
+        _id:5,
+        firstName: "Kapil",
+        lastName: "D",
+        email: "kapil.d@abc.com",
+        salary: 4500,
+        skills: [ "Accounting", "Tax", "Sales" ]
+    },
+    { 
+        _id:6,
+        firstName: "Amitabh",
+        lastName: "B",
+        email: "amitabh.b@abc.com",
+        salary: 7000,
+        skills: [ "Marketing", "Tax"]
+    }
+])
+
+> db.employees.find();
+{ "_id" : 1, "firstName" : "John", "lastName" : "King", "email" : "john.king@abc.com", "salary" : 5000, "skills" : [ "Angular", "React", "MongoDB" ] }
+{ "_id" : 2, "firstName" : "Sachin", "lastName" : "T", "email" : "sachin.t@abc.com", "salary" : 8000, "skills" : [ "Accounting", "Tax" ] }
+{ "_id" : 3, "firstName" : "James", "lastName" : "Bond", "email" : "jamesb@abc.com", "salary" : 7500, "skills" : [ "Sales", "Marketing" ] }
+{ "_id" : 4, "firstName" : "Steve", "lastName" : "J", "email" : "steve.j@abc.com", "salary" : 7000, "skills" : [ "Mac", "Marketing", "Product Design" ] }
+{ "_id" : 5, "firstName" : "Kapil", "lastName" : "D", "email" : "kapil.d@abc.com", "salary" : 4500, "skills" : [ "Accounting", "Tax", "Sales" ] }
+{ "_id" : 6, "firstName" : "Amitabh", "lastName" : "B", "email" : "amitabh.b@abc.com", "salary" : 7000, "skills" : [ "Marketing", "Tax" ] }
+
+
+------------- Update in array ----------------------
+-- only one row update ==> db.employees.update({skills:"Marketing"},{$set:{"skills.$":"Public speaking"}});
+
+
+> db.employees.updateMany({skills:"Marketing"},{$set:{"skills.$":"Public speaking"}}); -- many row update
+{ "acknowledged" : true, "matchedCount" : 2, "modifiedCount" : 2 }
+> db.employees.find({skills:"Public speaking"},{});
+{ "_id" : 3, "firstName" : "James", "lastName" : "Bond", "email" : "jamesb@abc.com", "salary" : 7500, "skills" : [ "Sales", "Public speaking" ] }
+{ "_id" : 4, "firstName" : "Steve", "lastName" : "J", "email" : "steve.j@abc.com", "salary" : 7000, "skills" : [ "Mac", "Public speaking", "Product Design" ] }
+{ "_id" : 6, "firstName" : "Amitabh", "lastName" : "B", "email" : "amitabh.b@abc.com", "salary" : 7000, "skills" : [ "Public speaking", "Tax" ] }
+> db.employees.find({skills:"Marketing"},{});
+>
+
+------------- Update in array, add new value in array ----------------------
+
+db.employees.update({_id:5},{$push:{skills:["GST"]}}); -- this is add array in side of array
+db.employees.update({_id:5},{$push:{skills:"GST"}}); -- this is add new value in array
+
+> db.employees.update({_id:5},{$push:{skills:["GST"]}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employees.find({_id:5})
+{ "_id" : 5, "firstName" : "Kapil", "lastName" : "D", "email" : "kapil.d@abc.com", "salary" : 4500, "skills" : [ "Accounting", "Tax", "Sales", [ "GST" ] ] }
+
+
+> db.employees.update({_id:5},{$push:{skills:"GST"}});
+WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 })
+> db.employees.find({_id:5})
+{ "_id" : 5, "firstName" : "Kapil", "lastName" : "D", "email" : "kapil.d@abc.com", "salary" : 4500, "skills" : [ "Accounting", "Tax", "Sales", [ "GST" ], "GST" ] }
+>
+
+
+------------- Update in array, add new value in all feilds array, $each----------------------
+
+db.employees.updateMany({},{$push:{"skills":{$each:["Sports", "Acting"]}}}); -- add new values in all feild array
+
+> db.employees.find();
+{ "_id" : 1, "firstName" : "John", "lastName" : "King", "email" : "john.king@abc.com", "salary" : 5000, "skills" : [ "Angular", "React", "MongoDB" ] }
+{ "_id" : 2, "firstName" : "Sachin", "lastName" : "T", "email" : "sachin.t@abc.com", "salary" : 8000, "skills" : [ "Accounting", "Tax" ] }
+{ "_id" : 3, "firstName" : "James", "lastName" : "Bond", "email" : "jamesb@abc.com", "salary" : 7500, "skills" : [ "Sales", "Public speaking" ] }
+{ "_id" : 4, "firstName" : "Steve", "lastName" : "J", "email" : "steve.j@abc.com", "salary" : 7000, "skills" : [ "Mac", "Public speaking", "Product Design" ] }
+{ "_id" : 5, "firstName" : "Kapil", "lastName" : "D", "email" : "kapil.d@abc.com", "salary" : 4500, "skills" : [ "Accounting", "Tax", "Sales", [ "GST" ], "GST" ] }
+{ "_id" : 6, "firstName" : "Amitabh", "lastName" : "B", "email" : "amitabh.b@abc.com", "salary" : 7000, "skills" : [ "Public speaking", "Tax" ] }
+> db.employees.updateMany({},{$push:{"skills":{$each:["Sports", "Acting"]}}});
+{ "acknowledged" : true, "matchedCount" : 6, "modifiedCount" : 6 }
+> db.employees.find();
+{ "_id" : 1, "firstName" : "John", "lastName" : "King", "email" : "john.king@abc.com", "salary" : 5000, "skills" : [ "Angular", "React", "MongoDB", "Sports", "Acting" ] }
+{ "_id" : 2, "firstName" : "Sachin", "lastName" : "T", "email" : "sachin.t@abc.com", "salary" : 8000, "skills" : [ "Accounting", "Tax", "Sports", "Acting" ] }
+{ "_id" : 3, "firstName" : "James", "lastName" : "Bond", "email" : "jamesb@abc.com", "salary" : 7500, "skills" : [ "Sales", "Public speaking", "Sports", "Acting" ] }
+{ "_id" : 4, "firstName" : "Steve", "lastName" : "J", "email" : "steve.j@abc.com", "salary" : 7000, "skills" : [ "Mac", "Public speaking", "Product Design", "Sports", "Acting" ] }
+{ "_id" : 5, "firstName" : "Kapil", "lastName" : "D", "email" : "kapil.d@abc.com", "salary" : 4500, "skills" : [ "Accounting", "Tax", "Sales", [ "GST" ], "GST", "Sports", "Acting" ] }
+{ "_id" : 6, "firstName" : "Amitabh", "lastName" : "B", "email" : "amitabh.b@abc.com", "salary" : 7000, "skills" : [ "Public speaking", "Tax", "Sports", "Acting" ] }
+>
+
+------------- Update in array, $addToSet,  ----------------------
+
+18-11-2025.png...
+
+db.employees.updateMany({},{}); 
+
+To Be Continue...
+19-11-2025...

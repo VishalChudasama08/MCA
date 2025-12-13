@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //ITERATOR AND GENRATOR:
+        function createArrayIterator(arr){
+            let index=0;
+            return{
+                next:function(){
+                    if(index<arr.length){
+                        return {value:arr[index++],done:false};
+                }else{
+                    return {value:undefined,done:true};
+                }
+            }
+        };
+    }
+    const myIterator=createArrayIterator([1,2,3]);
+    console.log(myIterator.next());
+    console.log(myIterator.next());
+    console.log(myIterator.next());
+    console.log(myIterator.next());
+
+
+    //GENRATOR
+    function*countUpTo(limit)
+    {
+        let i=1;
+        while(i<=limit)
+        {
+            yield i;
+            i++;
+        }
+    }
+
+    const counter=countUpTo(3);
+    console.log(counter.next());
+    console.log(counter.next());
+    console.log(counter.next());
+    console.log(counter.next());
+
+    </script>
+</body>
+</html>

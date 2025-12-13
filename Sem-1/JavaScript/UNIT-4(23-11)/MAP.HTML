@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        //map and set method
+        const A= new Set(['a','b','c','d']);
+        const B= new Set(['b','c','d']);
+
+        const C= A.union(B);
+        console.log(C);  //[op:=a,b,c,d]
+
+        const D= A.difference(B);
+        console.log(D); //[A]
+
+        const E= A.intersection(B);
+        console.log(E);  //[b,c]
+
+        const F= A.symmetricDifference(B);
+        console.log(F);     //[A,D]
+
+        const G= A.isSubsetof(B);
+        console.log(G);     //false
+
+        const H = A.isSupersetof(B);
+        console.log(H); //false
+
+        const I= A.isDisjointFrom(B);
+        console.log(I); //false [any element are not common]
+
+
+
+    </script>
+</body>
+</html>

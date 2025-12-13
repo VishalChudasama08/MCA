@@ -3,7 +3,7 @@ Perform the following operations on the database:
 use movie_maker
 db.createCollection("movie")
 ---------------------------------------------------------------
-
+a)	Retrieve all documents.
 
 db.movie.insert([
 { "_id" : 1, "title" : "Fight Club", "writer" : "Chuck Palahniuk", "year" : 1999, "actors" : [ "Brad Pitt", "Edward Norton" ] },

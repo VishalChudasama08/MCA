@@ -47,9 +47,9 @@ export default function Login() {
 					<button onClick={submit} className="btn btn-outline-success" name="submit">Login</button>
 					<Link className="btn btn-outline-primary" to="/Register">Register Anew</Link>
 				</div>
-				<div className="mt-2 ms-0">
+				{/* <div className="mt-2 ms-0">
 					<Link to="/ForgotPassword">Forgot Password?</Link>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	)
