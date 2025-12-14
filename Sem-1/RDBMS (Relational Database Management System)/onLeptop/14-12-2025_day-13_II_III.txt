@@ -1,0 +1,1009 @@
+SQL> CREATE TABLE Faculty_Master (
+  2      Faculty_ID NUMBER PRIMARY KEY,
+  3      Faculty_Name VARCHAR2(15),
+  4      DOJ DATE
+  5  );
+
+Table created.
+
+SQL> INSERT INTO Faculty_Master VALUES (1, 'Dr. Smith', TO_DATE('15-06-2010', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (2, 'Prof. Johnson', TO_DATE('01-09-2012', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (3, 'Dr. Lee', TO_DATE('20-01-2015', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> INSERT INTO Faculty_Master VALUES (4, 'Prof. Brown', TO_DATE('05-11-2018', 'DD-MM-YYYY'));
+
+1 row created.
+
+SQL> select * from faculty_master;
+
+FACULTY_ID FACULTY_NAME    DOJ                                                                                                                                                      
+---------- --------------- ---------                                                                                                                                                
+         1 Dr. Smith       15-JUN-10                                                                                                                                                
+         2 Prof. Johnson   01-SEP-12                                                                                                                                                
+         3 Dr. Lee         20-JAN-15                                                                                                                                                
+         4 Prof. Brown     05-NOV-18                                                                                                                                                
+
+SQL> ALTER TABLE Faculty_Master ADD ( Department VARCHAR2(10), Salary NUMBER, Bonus NUMBER);
+
+Table altered.
+
+SQL> UPDATE Faculty_Master
+  2  SET Department = 'MCA', Salary = 30000
+  3  WHERE Faculty_ID = 1;
+
+1 row updated.
+
+SQL> 
+SQL> UPDATE Faculty_Master
+  2  SET Department = 'MCA', Salary = 24000
+  3  WHERE Faculty_ID = 2;
+
+1 row updated.
+
+SQL> 
+SQL> UPDATE Faculty_Master
+  2  SET Department = 'MBA', Salary = 40000
+  3  WHERE Faculty_ID = 3;
+
+1 row updated.
+
+SQL> 
+SQL> UPDATE Faculty_Master
+  2  SET Department = 'MCA', Salary = 35000
+  3  WHERE Faculty_ID = 4;
+
+1 row updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from faculty_master;
+
+FACULTY_ID FACULTY_NAME    DOJ       DEPARTMENT     SALARY      BONUS                                                                                                               
+---------- --------------- --------- ---------- ---------- ----------                                                                                                               
+         1 Dr. Smith       15-JUN-10 MCA             30000                                                                                                                          
+         2 Prof. Johnson   01-SEP-12 MCA             24000                                                                                                                          
+         3 Dr. Lee         20-JAN-15 MBA             40000                                                                                                                          
+         4 Prof. Brown     05-NOV-18 MCA             35000                                                                                                                          
+
+SQL> -- (II)
+SQL> -- 1.	Add a Salary and Bonus column in the Faculty_Master Table and calculate the bonus of each faculty of "MCA" department which is based on the 5% of their salary. If the salary in less than 25000, then raise the exception.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	fid Faculty_Master.faculty_id%type;
+  3  	fnm Faculty_Master.faculty_name%type;
+  4  	dep Faculty_Master.department%type;
+  5  	sal Faculty_Master.salary%type;
+  6  	bon Faculty_Master.bonus%type;
+  7  	cursor cur is select FACULTY_ID, FACULTY_NAME, DEPARTMENT, SALARY, BONUS from Faculty_Master where DEPARTMENT = 'MCA';
+  8  	low_salary EXCEPTION;
+  9  begin
+ 10  	open cur;
+ 11  	loop
+ 12  		fetch cur into fid, fnm, dep, sal;
+ 13  		exit when cur%NOTFOUND;
+ 14  		begin
+ 15  			if sal < 25000 then
+ 16  				raise low_salary
+ 17  			end if;
+ 18  			update Faculty_Master set BONUS = BONUS * 0.05 where FACULTY_ID = fid;
+ 19  		exception
+ 20  			when low_salary then
+ 21  				dbms_output.put_line('Exception: Salary < 25000 for Faculty ID: ' || fid || ' Name: ' || fnm);
+ 22  		end;
+ 23  	end loop;
+ 24  	close cur;
+ 25* end;
+ 26  /
+			end if;
+			*
+ERROR at line 17:
+ORA-06550: line 17, column 4: 
+PLS-00103: Encountered the symbol "END" when expecting one of the following: 
+. ; 
+The symbol ";" was substituted for "END" to continue. 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	fid Faculty_Master.faculty_id%type;
+  3  	fnm Faculty_Master.faculty_name%type;
+  4  	dep Faculty_Master.department%type;
+  5  	sal Faculty_Master.salary%type;
+  6  	bon Faculty_Master.bonus%type;
+  7  	cursor cur is select FACULTY_ID, FACULTY_NAME, DEPARTMENT, SALARY, BONUS from Faculty_Master where DEPARTMENT = 'MCA';
+  8  	low_salary EXCEPTION;
+  9  begin
+ 10  	open cur;
+ 11  	loop
+ 12  		fetch cur into fid, fnm, dep, sal;
+ 13  		exit when cur%NOTFOUND;
+ 14  		begin
+ 15  			if sal < 25000 then
+ 16  				raise low_salary;
+ 17  			end if;
+ 18  			update Faculty_Master set BONUS = BONUS * 0.05 where FACULTY_ID = fid;
+ 19  		exception
+ 20  			when low_salary then
+ 21  				dbms_output.put_line('Exception: Salary < 25000 for Faculty ID: ' || fid || ' Name: ' || fnm);
+ 22  		end;
+ 23  	end loop;
+ 24  	close cur;
+ 25* end;
+SQL> /
+		fetch cur into fid, fnm, dep, sal;
+		*
+ERROR at line 12:
+ORA-06550: line 12, column 3: 
+PLS-00394: wrong number of values in the INTO list of a FETCH statement 
+ORA-06550: line 12, column 3: 
+PL/SQL: SQL Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	fid Faculty_Master.faculty_id%type;
+  3  	fnm Faculty_Master.faculty_name%type;
+  4  	dep Faculty_Master.department%type;
+  5  	sal Faculty_Master.salary%type;
+  6  	cursor cur is select FACULTY_ID, FACULTY_NAME, DEPARTMENT, SALARY from Faculty_Master where DEPARTMENT = 'MCA';
+  7  	low_salary EXCEPTION;
+  8  begin
+  9  	open cur;
+ 10  	loop
+ 11  		fetch cur into fid, fnm, dep, sal;
+ 12  		exit when cur%NOTFOUND;
+ 13  		begin
+ 14  			if sal < 25000 then
+ 15  				raise low_salary;
+ 16  			end if;
+ 17  			update Faculty_Master set BONUS = BONUS * 0.05 where FACULTY_ID = fid;
+ 18  		exception
+ 19  			when low_salary then
+ 20  				dbms_output.put_line('Exception: Salary < 25000 for Faculty ID: ' || fid || ' Name: ' || fnm);
+ 21  		end;
+ 22  	end loop;
+ 23  	close cur;
+ 24* end;
+SQL> /
+Exception: Salary < 25000 for Faculty ID: 2 Name: Prof. Johnson                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from Faculty_Master;
+
+FACULTY_ID FACULTY_NAME    DOJ       DEPARTMENT     SALARY      BONUS                                                                                                               
+---------- --------------- --------- ---------- ---------- ----------                                                                                                               
+         1 Dr. Smith       15-JUN-10 MCA             30000                                                                                                                          
+         2 Prof. Johnson   01-SEP-12 MCA             24000                                                                                                                          
+         3 Dr. Lee         20-JAN-15 MBA             40000                                                                                                                          
+         4 Prof. Brown     05-NOV-18 MCA             35000                                                                                                                          
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	fid Faculty_Master.faculty_id%type;
+  3  	fnm Faculty_Master.faculty_name%type;
+  4  	dep Faculty_Master.department%type;
+  5  	sal Faculty_Master.salary%type;
+  6  	cursor cur is select FACULTY_ID, FACULTY_NAME, DEPARTMENT, SALARY from Faculty_Master where DEPARTMENT = 'MCA';
+  7  	low_salary EXCEPTION;
+  8  begin
+  9  	open cur;
+ 10  	loop
+ 11  		fetch cur into fid, fnm, dep, sal;
+ 12  		exit when cur%NOTFOUND;
+ 13  		begin
+ 14  			if sal < 25000 then
+ 15  				raise low_salary;
+ 16  			end if;
+ 17  			update Faculty_Master set BONUS = sal * 0.05 where FACULTY_ID = fid;
+ 18  		exception
+ 19  			when low_salary then
+ 20  				dbms_output.put_line('Exception: Salary < 25000 for Faculty ID: ' || fid || ' Name: ' || fnm);
+ 21  		end;
+ 22  	end loop;
+ 23  	close cur;
+ 24* end;
+SQL> /
+Exception: Salary < 25000 for Faculty ID: 2 Name: Prof. Johnson                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> select * from Faculty_Master;
+
+FACULTY_ID FACULTY_NAME    DOJ       DEPARTMENT     SALARY      BONUS                                                                                                               
+---------- --------------- --------- ---------- ---------- ----------                                                                                                               
+         1 Dr. Smith       15-JUN-10 MCA             30000       1500                                                                                                               
+         2 Prof. Johnson   01-SEP-12 MCA             24000                                                                                                                          
+         3 Dr. Lee         20-JAN-15 MBA             40000                                                                                                                          
+         4 Prof. Brown     05-NOV-18 MCA             35000       1750                                                                                                               
+
+SQL> -- 2.	Display name of 2 faculties getting maximum bonus.
+SQL> update Faculty_Master set BONUS = sal * 0.05 where FACULTY_ID = 2;
+update Faculty_Master set BONUS = sal * 0.05 where FACULTY_ID = 2
+                                  *
+ERROR at line 1:
+ORA-00904: "SAL": invalid identifier 
+
+
+SQL> update Faculty_Master set BONUS = salary * 0.05 where FACULTY_ID = 2;
+
+1 row updated.
+
+SQL> update Faculty_Master set BONUS = salary * 0.05 where FACULTY_ID = 3;
+
+1 row updated.
+
+SQL> -- 2.	Display name of 2 faculties getting maximum bonus.
+SQL> select * from Faculty_Master;
+
+FACULTY_ID FACULTY_NAME    DOJ       DEPARTMENT     SALARY      BONUS                                                                                                               
+---------- --------------- --------- ---------- ---------- ----------                                                                                                               
+         1 Dr. Smith       15-JUN-10 MCA             30000       1500                                                                                                               
+         2 Prof. Johnson   01-SEP-12 MCA             24000       1200                                                                                                               
+         3 Dr. Lee         20-JAN-15 MBA             40000       2000                                                                                                               
+         4 Prof. Brown     05-NOV-18 MCA             35000       1750                                                                                                               
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	fid Faculty_Master.faculty_id%type;
+  3  	fnm Faculty_Master.faculty_name%type;
+  4  	bon Faculty_Master.bonus%type;
+  5  	num number := 0;
+  6  	cursor cur is select FACULTY_ID, FACULTY_NAME, BONUS from Faculty_Master order by BONUS desc;
+  7  begin
+  8  	dbms_output.put_line('The 2 faculties who got the maximum bonus are: ');
+  9  	dbms_output.put_line('ID  Name');
+ 10  	open cur;
+ 11  	loop
+ 12  		fetch cur into fid, fnm, bon;
+ 13  		exit when num = 2 OR cur%NOTFOUND;
+ 14  		num := num + 1;
+ 15  		dbms_output.put_line(fid || '   ' || fnm);
+ 16  	end loop;
+ 17  	close cur;
+ 18* end;
+SQL> /
+The 2 faculties who got the maximum bonus are:                                                                                                                                      
+ID  Name                                                                                                                                                                            
+3   Dr. Lee                                                                                                                                                                         
+4   Prof. Brown                                                                                                                                                                     
+
+PL/SQL procedure successfully completed.
+
+SQL> -- (II)
+SQL> 
+SQL> create table SUPPLIER(
+  2  	s_id varchar(5) primary key,
+  3  	s_name varchar(15) not null,
+  4  	contact number(10) check(length(contact)=10) not null,
+  5  	Contact_Person VARCHAR(15) NOT NULL
+  6  );
+create table SUPPLIER(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> 
+SQL> create table PARTS(
+  2  	part_id varchar(5) primary key,
+  3   	part_name varchar(15) not null,
+  4   	unit_rate number(8) not null
+  5  );
+
+Table created.
+
+SQL> 
+SQL> create table CATALOG(
+  2  	s_id varchar(5),
+  3  	part_id varchar(5),
+  4  	qty number(10) not null,
+  5   	constraint s_id foreign key(s_id) references SUPPLIER on delete cascade,
+  6   	constraint part_id foreign key(part_id) references PARTS on delete set NULL
+  7  );
+ 	constraint s_id foreign key(s_id) references SUPPLIER on delete cascade,
+ 	                            *
+ERROR at line 5:
+ORA-02267: column type incompatible with referenced column type 
+
+
+SQL> 
+SQL> 
+SQL> insert into SUPPLIER values('S1','Supplier A',7898568920, 'Rohit');
+insert into SUPPLIER values('S1','Supplier A',7898568920, 'Rohit')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into SUPPLIER values('S2','Supplier B',7778881569, 'Hardik');
+insert into SUPPLIER values('S2','Supplier B',7778881569, 'Hardik')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into SUPPLIER values('S3', 'Supplier C',9898247956, 'Virat');
+insert into SUPPLIER values('S3', 'Supplier C',9898247956, 'Virat')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into SUPPLIER values('S4', 'Supplier D',9634123436, 'Krunal');
+insert into SUPPLIER values('S4', 'Supplier D',9634123436, 'Krunal')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> insert into SUPPLIER values('S5', 'Supplier E',9909474231, 'Kirtan');
+insert into SUPPLIER values('S5', 'Supplier E',9909474231, 'Kirtan')
+            *
+ERROR at line 1:
+ORA-00947: not enough values 
+
+
+SQL> 
+SQL> 
+SQL> insert into PARTS values('P1','RAM',1000);
+
+1 row created.
+
+SQL> insert into PARTS values('P2','MOUSE',500);
+
+1 row created.
+
+SQL> insert into PARTS values('P3','MONITOR',2500);
+
+1 row created.
+
+SQL> insert into PARTS values('P4','KEYBOARD',800);
+
+1 row created.
+
+SQL> 
+SQL> 
+SQL> insert into CATALOG values('S1','P1',50);
+insert into CATALOG values('S1','P1',50)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S2','P3',10);
+insert into CATALOG values('S2','P3',10)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S2','P2',100);
+insert into CATALOG values('S2','P2',100)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S3','P3',60);
+insert into CATALOG values('S3','P3',60)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S4','P3',30);
+insert into CATALOG values('S4','P3',30)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S4','P1',50);
+insert into CATALOG values('S4','P1',50)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> insert into CATALOG values('S4','P2',200);
+insert into CATALOG values('S4','P2',200)
+            *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from SUPPLIER;
+
+   SUPP_ID NAME            CITY            COUNTRY            CUST_ID                                                                                                               
+---------- --------------- --------------- --------------- ----------                                                                                                               
+         1 Sup1            Ahmedabad       India                    1                                                                                                               
+         2 Sup2            New York        USA                      2                                                                                                               
+         3 Sup3            London          UK                       3                                                                                                               
+         4 Sup4            Ahmedabad       India                                                                                                                                    
+
+SQL> create table suppliers(
+  2  	s_id varchar(5) primary key,
+  3  	s_name varchar(15) not null,
+  4  	contact number(10) check(length(contact)=10) not null,
+  5  	Contact_Person VARCHAR(15) NOT NULL
+  6  );
+
+Table created.
+
+SQL> create table CATALOG(
+  2  	s_id varchar(5),
+  3  	part_id varchar(5),
+  4  	qty number(10) not null,
+  5   	constraint s_id foreign key(s_id) references suppliers on delete cascade,
+  6   	constraint part_id foreign key(part_id) references PARTS on delete set NULL
+  7  );
+
+Table created.
+
+SQL> insert into suppliers values('S1','supplier A',7898568920, 'Rohit');
+
+1 row created.
+
+SQL> insert into suppliers values('S2','supplier B',7778881569, 'Hardik');
+
+1 row created.
+
+SQL> insert into suppliers values('S3', 'supplier C',9898247956, 'Virat');
+
+1 row created.
+
+SQL> insert into suppliers values('S4', 'supplier D',9634123436, 'Krunal');
+
+1 row created.
+
+SQL> insert into suppliers values('S5', 'supplier E',9909474231, 'Kirtan');
+
+1 row created.
+
+SQL> insert into CATALOG values('S1','P1',50);
+
+1 row created.
+
+SQL> insert into CATALOG values('S2','P3',10);
+
+1 row created.
+
+SQL> insert into CATALOG values('S2','P2',100);
+
+1 row created.
+
+SQL> insert into CATALOG values('S3','P3',60);
+
+1 row created.
+
+SQL> insert into CATALOG values('S4','P3',30);
+
+1 row created.
+
+SQL> insert into CATALOG values('S4','P1',50);
+
+1 row created.
+
+SQL> insert into CATALOG values('S4','P2',200);
+
+1 row created.
+
+SQL> select * from SUPPLIERs;
+
+S_ID  S_NAME             CONTACT CONTACT_PERSON                                                                                                                                     
+----- --------------- ---------- ---------------                                                                                                                                    
+S1    supplier A      7898568920 Rohit                                                                                                                                              
+S2    supplier B      7778881569 Hardik                                                                                                                                             
+S3    supplier C      9898247956 Virat                                                                                                                                              
+S4    supplier D      9634123436 Krunal                                                                                                                                             
+S5    supplier E      9909474231 Kirtan                                                                                                                                             
+
+SQL> select * from parts;
+
+PART_ PART_NAME        UNIT_RATE                                                                                                                                                    
+----- --------------- ----------                                                                                                                                                    
+P1    RAM                   1000                                                                                                                                                    
+P2    MOUSE                  500                                                                                                                                                    
+P3    MONITOR               2500                                                                                                                                                    
+P4    KEYBOARD               800                                                                                                                                                    
+
+SQL> select * from catalog;
+
+S_ID  PART_        QTY                                                                                                                                                              
+----- ----- ----------                                                                                                                                                              
+S1    P1            50                                                                                                                                                              
+S2    P3            10                                                                                                                                                              
+S2    P2           100                                                                                                                                                              
+S3    P3            60                                                                                                                                                              
+S4    P3            30                                                                                                                                                              
+S4    P1            50                                                                                                                                                              
+S4    P2           200                                                                                                                                                              
+
+7 rows selected.
+
+SQL> -- (II)
+SQL> -- Use following tables are create a report as shown below.
+SQL> -- supplier (sid, sname, contactnum), parts (pid, pname, color, unitrate), catalog (sid, pid, qty), [primary key(sid,pid)]
+SQL> -- Write a PLSQl Cursor to take a supplier's name as an input from the user and prepare a report in the following format:
+SQL> -- ***********************************************************
+SQL> -- PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL
+SQL> -- ***********************************************************
+SQL> -- Grand Total:
+SQL> -- Raise a user defined exception when the supplier's name not found in the database table.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      -- input variable
+  3      p_name supplier.sname%TYPE;
+  4      -- supplier variables
+  5      v_sid  supplier.sid%TYPE;
+  6      v_sname supplier.sname%TYPE;
+  7      -- catalog variables
+  8      v_pid catalog.pid%TYPE;
+  9      v_qty catalog.qty%TYPE;
+ 10      -- parts variables
+ 11      v_pname parts.pname%TYPE;
+ 12      v_rate  parts.unitrate%TYPE;
+ 13      v_total NUMBER;
+ 14      v_grand NUMBER := 0;
+ 15      -- user-defined exception
+ 16      supplier_not_found EXCEPTION;
+ 17      -- cursor for supplier
+ 18      CURSOR cur_supplier IS
+ 19          SELECT sid, sname
+ 20          FROM supplier
+ 21          WHERE sname = p_name;
+ 22      -- cursor for catalog (depends on supplier)
+ 23      CURSOR cur_catalog IS
+ 24          SELECT pid, qty
+ 25          FROM catalog
+ 26          WHERE sid = v_sid;
+ 27      -- cursor for parts
+ 28      CURSOR cur_parts IS
+ 29          SELECT pid, pname, unitrate
+ 30          FROM parts;
+ 31  BEGIN
+ 32      -- take input INSIDE begin
+ 33      p_name := '&p_name';
+ 34      -- open supplier cursor
+ 35      OPEN cur_supplier;
+ 36      FETCH cur_supplier INTO v_sid, v_sname;
+ 37      IF cur_supplier%NOTFOUND THEN
+ 38          RAISE supplier_not_found;
+ 39      END IF;
+ 40      CLOSE cur_supplier;
+ 41      -- report header
+ 42      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 43      DBMS_OUTPUT.PUT_LINE('PART ID  PART NAME    QUANTITY  UNIT PRICE  TOTAL');
+ 44      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 45      -- catalog cursor
+ 46      OPEN cur_catalog;
+ 47      LOOP
+ 48          FETCH cur_catalog INTO v_pid, v_qty;
+ 49          EXIT WHEN cur_catalog%NOTFOUND;
+ 50          -- parts cursor
+ 51          OPEN cur_parts;
+ 52          LOOP
+ 53              FETCH cur_parts INTO v_pid, v_pname, v_rate;
+ 54              EXIT WHEN cur_parts%NOTFOUND;
+ 55              IF v_pid = v_pid THEN
+ 56                  v_total := v_qty * v_rate;
+ 57                  v_grand := v_grand + v_total;
+ 58                  DBMS_OUTPUT.PUT_LINE(
+ 59                      v_pid || '      ' ||
+ 60                      RPAD(v_pname, 10) || '  ' ||
+ 61                      v_qty || '        ' ||
+ 62                      v_rate || '        ' ||
+ 63                      v_total
+ 64                  );
+ 65              END IF;
+ 66          END LOOP;
+ 67          CLOSE cur_parts;
+ 68      END LOOP;
+ 69      CLOSE cur_catalog;
+ 70      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 71      DBMS_OUTPUT.PUT_LINE('Grand Total: ' || v_grand);
+ 72  EXCEPTION
+ 73      WHEN supplier_not_found THEN
+ 74          DBMS_OUTPUT.PUT_LINE('Error: Supplier name not found.');
+ 75* END;
+ 76  /
+Enter value for p_name: supplier A
+old  33:     p_name := '&p_name';
+new  33:     p_name := 'supplier A';
+    p_name supplier.sname%TYPE;
+                    *
+ERROR at line 3:
+ORA-06550: line 3, column 21: 
+PLS-00302: component 'SNAME' must be declared 
+ORA-06550: line 0, column 0: 
+PL/SQL: Compilation unit analysis terminated 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  SET SERVEROUTPUT ON
+  2  DECLARE
+  3      -- input
+  4      p_name VARCHAR2(20);
+  5      -- supplier
+  6      v_sid   suppliers.s_id%TYPE;
+  7      v_sname suppliers.s_name%TYPE;
+  8      -- catalog
+  9      c_pid   catalog.part_id%TYPE;
+ 10      c_qty   catalog.qty%TYPE;
+ 11      -- parts
+ 12      p_pid   parts.part_id%TYPE;
+ 13      p_pname parts.part_name%TYPE;
+ 14      p_rate  parts.unit_rate%TYPE;
+ 15      v_total NUMBER;
+ 16      v_grand NUMBER := 0;
+ 17      supplier_not_found EXCEPTION;
+ 18      -- supplier cursor
+ 19      CURSOR cur_supplier IS
+ 20          SELECT s_id, s_name
+ 21          FROM suppliers
+ 22          WHERE s_name = p_name;
+ 23      -- catalog cursor (depends on supplier)
+ 24      CURSOR cur_catalog IS
+ 25          SELECT part_id, qty
+ 26          FROM catalog
+ 27          WHERE s_id = v_sid;
+ 28      -- parts cursor
+ 29      CURSOR cur_parts IS
+ 30          SELECT part_id, part_name, unit_rate
+ 31          FROM parts;
+ 32  BEGIN
+ 33      -- take input inside BEGIN
+ 34      p_name := '&p_name';
+ 35      -- check supplier
+ 36      OPEN cur_supplier;
+ 37      FETCH cur_supplier INTO v_sid, v_sname;
+ 38      IF cur_supplier%NOTFOUND THEN
+ 39          RAISE supplier_not_found;
+ 40      END IF;
+ 41      CLOSE cur_supplier;
+ 42      -- report header
+ 43      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 44      DBMS_OUTPUT.PUT_LINE('PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL');
+ 45      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 46      -- catalog loop
+ 47      OPEN cur_catalog;
+ 48      LOOP
+ 49          FETCH cur_catalog INTO c_pid, c_qty;
+ 50          EXIT WHEN cur_catalog%NOTFOUND;
+ 51          -- parts loop
+ 52          OPEN cur_parts;
+ 53          LOOP
+ 54              FETCH cur_parts INTO p_pid, p_pname, p_rate;
+ 55              EXIT WHEN cur_parts%NOTFOUND;
+ 56              IF c_pid = p_pid THEN
+ 57                  v_total := c_qty * p_rate;
+ 58                  v_grand := v_grand + v_total;
+ 59                  DBMS_OUTPUT.PUT_LINE(
+ 60                      RPAD(p_pid,8) ||
+ 61                      RPAD(p_pname,14) ||
+ 62                      RPAD(c_qty,11) ||
+ 63                      RPAD(p_rate,13) ||
+ 64                      v_total
+ 65                  );
+ 66              END IF;
+ 67          END LOOP;
+ 68          CLOSE cur_parts;
+ 69      END LOOP;
+ 70      CLOSE cur_catalog;
+ 71      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 72      DBMS_OUTPUT.PUT_LINE('Grand Total: ' || v_grand);
+ 73  EXCEPTION
+ 74      WHEN supplier_not_found THEN
+ 75          DBMS_OUTPUT.PUT_LINE('Error: Supplier name not found.');
+ 76* END;
+ 77  /
+Enter value for p_name: supplier D
+old  34:     p_name := '&p_name';
+new  34:     p_name := 'supplier D';
+SET SERVEROUTPUT ON
+    *
+ERROR at line 1:
+ORA-00922: missing or invalid option 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      -- input
+  3      p_name VARCHAR2(20);
+  4      -- supplier
+  5      v_sid   suppliers.s_id%TYPE;
+  6      v_sname suppliers.s_name%TYPE;
+  7      -- catalog
+  8      c_pid   catalog.part_id%TYPE;
+  9      c_qty   catalog.qty%TYPE;
+ 10      -- parts
+ 11      p_pid   parts.part_id%TYPE;
+ 12      p_pname parts.part_name%TYPE;
+ 13      p_rate  parts.unit_rate%TYPE;
+ 14      v_total NUMBER;
+ 15      v_grand NUMBER := 0;
+ 16      supplier_not_found EXCEPTION;
+ 17      -- supplier cursor
+ 18      CURSOR cur_supplier IS
+ 19          SELECT s_id, s_name
+ 20          FROM suppliers
+ 21          WHERE s_name = p_name;
+ 22      -- catalog cursor (depends on supplier)
+ 23      CURSOR cur_catalog IS
+ 24          SELECT part_id, qty
+ 25          FROM catalog
+ 26          WHERE s_id = v_sid;
+ 27      -- parts cursor
+ 28      CURSOR cur_parts IS
+ 29          SELECT part_id, part_name, unit_rate
+ 30          FROM parts;
+ 31  BEGIN
+ 32      -- take input inside BEGIN
+ 33      p_name := '&p_name';
+ 34      -- check supplier
+ 35      OPEN cur_supplier;
+ 36      FETCH cur_supplier INTO v_sid, v_sname;
+ 37      IF cur_supplier%NOTFOUND THEN
+ 38          RAISE supplier_not_found;
+ 39      END IF;
+ 40      CLOSE cur_supplier;
+ 41      -- report header
+ 42      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 43      DBMS_OUTPUT.PUT_LINE('PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL');
+ 44      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 45      -- catalog loop
+ 46      OPEN cur_catalog;
+ 47      LOOP
+ 48          FETCH cur_catalog INTO c_pid, c_qty;
+ 49          EXIT WHEN cur_catalog%NOTFOUND;
+ 50          -- parts loop
+ 51          OPEN cur_parts;
+ 52          LOOP
+ 53              FETCH cur_parts INTO p_pid, p_pname, p_rate;
+ 54              EXIT WHEN cur_parts%NOTFOUND;
+ 55              IF c_pid = p_pid THEN
+ 56                  v_total := c_qty * p_rate;
+ 57                  v_grand := v_grand + v_total;
+ 58                  DBMS_OUTPUT.PUT_LINE(
+ 59                      RPAD(p_pid,8) ||
+ 60                      RPAD(p_pname,14) ||
+ 61                      RPAD(c_qty,11) ||
+ 62                      RPAD(p_rate,13) ||
+ 63                      v_total
+ 64                  );
+ 65              END IF;
+ 66          END LOOP;
+ 67          CLOSE cur_parts;
+ 68      END LOOP;
+ 69      CLOSE cur_catalog;
+ 70      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 71      DBMS_OUTPUT.PUT_LINE('Grand Total: ' || v_grand);
+ 72  EXCEPTION
+ 73      WHEN supplier_not_found THEN
+ 74          DBMS_OUTPUT.PUT_LINE('Error: Supplier name not found.');
+ 75* END;
+SQL> /
+Enter value for p_name: supplier D
+old  33:     p_name := '&p_name';
+new  33:     p_name := 'supplier D';
+***********************************************************                                                                                                                         
+PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL                                                                                                                               
+***********************************************************                                                                                                                         
+P3      MONITOR       30         2500         75000                                                                                                                                 
+P1      RAM           50         1000         50000                                                                                                                                 
+P2      MOUSE         200        500          100000                                                                                                                                
+***********************************************************                                                                                                                         
+Grand Total: 225000                                                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      -- input
+  3      p_name VARCHAR2(20);
+  4      -- supplier
+  5      v_sid   suppliers.s_id%TYPE;
+  6      v_sname suppliers.s_name%TYPE;
+  7      -- catalog
+  8      c_pid   catalog.part_id%TYPE;
+  9      c_qty   catalog.qty%TYPE;
+ 10      -- parts
+ 11      p_pid   parts.part_id%TYPE;
+ 12      p_pname parts.part_name%TYPE;
+ 13      p_rate  parts.unit_rate%TYPE;
+ 14      v_total NUMBER;
+ 15      v_grand NUMBER := 0;
+ 16      supplier_not_found EXCEPTION;
+ 17      -- supplier cursor
+ 18      CURSOR cur_supplier IS
+ 19          SELECT s_id, s_name
+ 20          FROM suppliers
+ 21          WHERE s_name = p_name;
+ 22      -- catalog cursor (depends on supplier)
+ 23      CURSOR cur_catalog IS
+ 24          SELECT part_id, qty
+ 25          FROM catalog
+ 26          WHERE s_id = v_sid;
+ 27      -- parts cursor
+ 28      CURSOR cur_parts IS
+ 29          SELECT part_id, part_name, unit_rate
+ 30          FROM parts;
+ 31  BEGIN
+ 32      -- take input inside BEGIN
+ 33      p_name := '&p_name';
+ 34      -- check supplier
+ 35      OPEN cur_supplier;
+ 36      FETCH cur_supplier INTO v_sid, v_sname;
+ 37      IF cur_supplier%NOTFOUND THEN
+ 38          RAISE supplier_not_found;
+ 39      END IF;
+ 40      CLOSE cur_supplier;
+ 41      -- report header
+ 42      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 43      DBMS_OUTPUT.PUT_LINE('PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL');
+ 44      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 45      -- catalog loop
+ 46      OPEN cur_catalog;
+ 47      LOOP
+ 48          FETCH cur_catalog INTO c_pid, c_qty;
+ 49          EXIT WHEN cur_catalog%NOTFOUND;
+ 50          -- parts loop
+ 51          OPEN cur_parts;
+ 52          LOOP
+ 53              FETCH cur_parts INTO p_pid, p_pname, p_rate;
+ 54              EXIT WHEN cur_parts%NOTFOUND;
+ 55              IF c_pid = p_pid THEN
+ 56                  v_total := c_qty * p_rate;
+ 57                  v_grand := v_grand + v_total;
+ 58                  DBMS_OUTPUT.PUT_LINE(
+ 59                      RPAD(p_pid,10) ||
+ 60                      RPAD(p_pname,14) ||
+ 61                      RPAD(c_qty,11) ||
+ 62                      RPAD(p_rate,13) ||
+ 63                      v_total
+ 64                  );
+ 65              END IF;
+ 66          END LOOP;
+ 67          CLOSE cur_parts;
+ 68      END LOOP;
+ 69      CLOSE cur_catalog;
+ 70      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 71      DBMS_OUTPUT.PUT_LINE('Grand Total: ' || v_grand);
+ 72  EXCEPTION
+ 73      WHEN supplier_not_found THEN
+ 74          DBMS_OUTPUT.PUT_LINE('Error: Supplier name not found.');
+ 75* END;
+SQL> /
+Enter value for p_name: supplier D
+old  33:     p_name := '&p_name';
+new  33:     p_name := 'supplier D';
+***********************************************************                                                                                                                         
+PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL                                                                                                                               
+***********************************************************                                                                                                                         
+P3        MONITOR       30         2500         75000                                                                                                                               
+P1        RAM           50         1000         50000                                                                                                                               
+P2        MOUSE         200        500          100000                                                                                                                              
+***********************************************************                                                                                                                         
+Grand Total: 225000                                                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  DECLARE
+  2      p_name VARCHAR2(20);
+  3      -- supplier
+  4      s_sid suppliers.s_id%TYPE;
+  5      s_snm suppliers.s_name%TYPE;
+  6      -- catalog
+  7      c_pid catalog.part_id%TYPE;
+  8      c_qty catalog.qty%TYPE;
+  9      -- parts
+ 10      p_pid parts.part_id%TYPE;
+ 11      p_pnm parts.part_name%TYPE;
+ 12      p_rate parts.unit_rate%TYPE;
+ 13      total NUMBER;
+ 14      grand_total NUMBER := 0;
+ 15      supplier_not_found EXCEPTION;
+ 16      -- supplier cursor
+ 17      CURSOR cur_supplier IS SELECT s_id, s_name FROM suppliers WHERE s_name = p_name;
+ 18      -- catalog cursor (depends on supplier)
+ 19      CURSOR cur_catalog IS SELECT part_id, qty FROM catalog WHERE s_id = s_sid;
+ 20      -- parts cursor
+ 21      CURSOR cur_parts IS SELECT part_id, part_name, unit_rate FROM parts;
+ 22  BEGIN
+ 23      -- take input
+ 24      p_name := '&p_name';
+ 25      -- check supplier
+ 26      OPEN cur_supplier;
+ 27      FETCH cur_supplier INTO s_sid, s_snm;
+ 28      IF cur_supplier%NOTFOUND THEN
+ 29          RAISE supplier_not_found;
+ 30      END IF;
+ 31      CLOSE cur_supplier;
+ 32      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 33      DBMS_OUTPUT.PUT_LINE('PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL');
+ 34      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 35      -- catalog loop
+ 36      OPEN cur_catalog;
+ 37      LOOP
+ 38          FETCH cur_catalog INTO c_pid, c_qty;
+ 39          EXIT WHEN cur_catalog%NOTFOUND;
+ 40          -- parts loop
+ 41          OPEN cur_parts;
+ 42          LOOP
+ 43              FETCH cur_parts INTO p_pid, p_pnm, p_rate;
+ 44              EXIT WHEN cur_parts%NOTFOUND;
+ 45              IF c_pid = p_pid THEN
+ 46                  total := c_qty * p_rate;
+ 47                  grand_total := grand_total + total;
+ 48                  DBMS_OUTPUT.PUT_LINE(RPAD(p_pid,10) || RPAD(p_pnm,14) || RPAD(c_qty,11) || RPAD(p_rate,13) || total);
+ 49              END IF;
+ 50          END LOOP;
+ 51          CLOSE cur_parts;
+ 52      END LOOP;
+ 53      CLOSE cur_catalog;
+ 54      DBMS_OUTPUT.PUT_LINE('***********************************************************');
+ 55      DBMS_OUTPUT.PUT_LINE('Grand Total: ' || grand_total);
+ 56  EXCEPTION
+ 57      WHEN supplier_not_found THEN
+ 58          DBMS_OUTPUT.PUT_LINE('Exception: Supplier name not found.');
+ 59* END;
+ 60  /
+Enter value for p_name: supplier D
+old  24:     p_name := '&p_name';
+new  24:     p_name := 'supplier D';
+***********************************************************                                                                                                                         
+PART ID   PART NAME     QUANTITY   UNIT PRICE   TOTAL                                                                                                                               
+***********************************************************                                                                                                                         
+P3        MONITOR       30         2500         75000                                                                                                                               
+P1        RAM           50         1000         50000                                                                                                                               
+P2        MOUSE         200        500          100000                                                                                                                              
+***********************************************************                                                                                                                         
+Grand Total: 225000                                                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for p_name: vishal
+old  24:     p_name := '&p_name';
+new  24:     p_name := 'vishal';
+Exception: Supplier name not found.                                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;

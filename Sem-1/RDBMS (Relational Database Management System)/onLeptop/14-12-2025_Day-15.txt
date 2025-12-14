@@ -1,0 +1,106 @@
+SQL> -- Day-15.docx
+SQL> -- 1. Create a trigger that when the new record is inserted in the Movie table
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create of replace trigger movie_insert_trigger
+  2  AFTER insert ON movie
+  3  FOR EACH ROWS
+  4  BEGIN
+  5  	dbms_output.put_line('New Movie Inserted: ' || :NEW.movie_name);
+  6* end;
+SQL> /
+create of replace trigger movie_insert_trigger
+       *
+ERROR at line 1:
+ORA-00901: invalid CREATE command 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace trigger movie_insert_trigger
+  2  AFTER insert ON movie
+  3  FOR EACH ROWS
+  4  BEGIN
+  5  	dbms_output.put_line('New Movie Inserted: ' || :NEW.movie_name);
+  6* end;
+SQL> /
+FOR EACH ROWS
+         *
+ERROR at line 3:
+ORA-01912: ROW keyword expected 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace trigger movie_insert_trigger
+  2  AFTER insert ON movie
+  3  FOR EACH ROW
+  4  BEGIN
+  5  	dbms_output.put_line('New Movie Inserted: ' || :NEW.movie_name);
+  6* end;
+SQL> /
+
+Trigger created.
+
+SQL> INSERT INTO Movie VALUES (4, 'Dune', 'Sci-Fi', SYSDATE-1);
+New Movie Inserted: Dune                                                                                                                                                            
+
+1 row created.
+
+SQL> --  2. Create a trigger that will be fired when a Movie is deleted.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace trigger movie_delete_trigger
+  2  AFTER delete ON movie
+  3  FOR EACH ROW
+  4  BEGIN
+  5  	delete from movie where movie_id=4;
+  6* end;
+SQL> /
+
+Trigger created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace trigger movie_delete_trigger
+  2  AFTER delete ON movie
+  3  FOR EACH ROW
+  4  BEGIN
+  5  	dbms_output.put_line('Movie Deleted: ' || :OLD.movie_name);
+  6* end;
+SQL> /
+
+Trigger created.
+
+SQL> delete from movie where movie_id=4;
+Movie Deleted: Dune                                                                                                                                                                 
+
+1 row deleted.
+
+SQL> -- 3. Create a trigger when the max_capacity of the screen is more than 100.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace trigger max_capacity_trigger
+  2  AFTER insert OR update ON screen
+  3  FOR EACH ROW
+  4  BEGIN
+  5  	if :NEW.max_capacity > 100 then
+  6  		dbms_output.put_line('Warning: Screen capacity greater than 100');
+  7  	end if;
+  8* end;
+SQL> /
+
+Trigger created.
+
+SQL> insert into screen values (104, 'Screen 4', 150);
+Warning: Screen capacity greater than 100                                                                                                                                           
+
+1 row created.
+
+SQL> spool off;

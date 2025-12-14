@@ -1,0 +1,674 @@
+SQL> -- Day-14.docx
+SQL> -- 1. Write a procedure which will take Faculty ID as an input and will display all the information of that faculty
+SQL> desc faculty_master;
+ Name                                                                                                  Null?    Type
+ ----------------------------------------------------------------------------------------------------- -------- --------------------------------------------------------------------
+ FACULTY_ID                                                                                            NOT NULL NUMBER
+ FACULTY_NAME                                                                                                   VARCHAR2(15)
+ DOJ                                                                                                            DATE
+ DEPARTMENT                                                                                                     VARCHAR2(10)
+ SALARY                                                                                                         NUMBER
+ BONUS                                                                                                          NUMBER
+
+SQL> select * from faculty_master;
+
+FACULTY_ID FACULTY_NAME    DOJ       DEPARTMENT     SALARY      BONUS                                                                                                               
+---------- --------------- --------- ---------- ---------- ----------                                                                                                               
+         1 Dr. Smith       15-JUN-10 MCA             30000       1500                                                                                                               
+         2 Prof. Johnson   01-SEP-12 MCA             24000       1200                                                                                                               
+         3 Dr. Lee         20-JAN-15 MBA             40000       2000                                                                                                               
+         4 Prof. Brown     05-NOV-18 MCA             35000       1750                                                                                                               
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure fac_data(n IN number)
+  2  IS
+  3  	id facolty_master.facolty_id%type;
+  4  	nm facolty_master.facolty_name%type;
+  5  	dj facolty_master.doj%type;
+  6  BEGIN
+  7  	select facolty_id, facolty_name, doj into id, nm, dj from facolty_master where facolty_id = n;
+  8  	dbms_output.put_line(RPAD(id,5) || RPAD(nm,10) || RPAD(dj,12));
+  9* end;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> fac_data(1)
+SP2-0734: unknown command beginning "fac_data(1..." - rest of line ignored.
+SQL> execute fac_data(1);
+BEGIN fac_data(1); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00905: object MCA.FAC_DATA is invalid 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> exec fac_data(1)
+BEGIN fac_data(1); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00905: object MCA.FAC_DATA is invalid 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> BEGIN fac_data(1); END;
+  2  /
+BEGIN fac_data(1); END;
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00905: object MCA.FAC_DATA is invalid 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure fac_data(n IN number)
+  2  IS
+  3  	id faculty_master.faculty_id%type;
+  4  	nm faculty_master.faculty_name%type;
+  5  	dj faculty_master.doj%type;
+  6  BEGIN
+  7  	select faculty_id, faculty_name, doj into id, nm, dj from faculty_master where faculty_id = n;
+  8  	dbms_output.put_line(RPAD(id,5) || RPAD(nm,10) || RPAD(dj,12));
+  9* end;
+SQL> execute fac_data(1);
+BEGIN fac_data(1); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00905: object MCA.FAC_DATA is invalid 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed'=
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure fac_data(n IN number)
+  2  IS
+  3  	id faculty_master.faculty_id%type;
+  4  	nm faculty_master.faculty_name%type;
+  5  	dj faculty_master.doj%type;
+  6  BEGIN
+  7  	select faculty_id, faculty_name, doj into id, nm, dj from faculty_master WHERE faculty_id = n;
+  8  	dbms_output.put_line(RPAD(id,5) || RPAD(nm,15) || dj);
+  9* end;
+SQL> /
+
+Procedure created.
+
+SQL> execute fac_data(1);
+1    Dr. Smith      15-JUN-10                                                                                                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 1. Write a procedure which will take Faculty ID as an input and will display all the information of that faculty
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure fac_data(n IN number)
+  2  IS
+  3  	id faculty_master.faculty_id%type;
+  4  	nm faculty_master.faculty_name%type;
+  5  	dj faculty_master.doj%type;
+  6  BEGIN
+  7  	select faculty_id, faculty_name, doj into id, nm, dj from faculty_master WHERE faculty_id = n;
+  8  	dbms_output.put_line(RPAD(id,5) || RPAD(nm,15) || dj);
+  9* end;
+SQL> /
+
+Procedure created.
+
+SQL> execute fac_data(2);
+2    Prof. Johnson  01-SEP-12                                                                                                                                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 2. Write a stored procedure that uses an INOUT parameter and an IN parameter. The user will supply 'M' or 'F' through IN parameter (emp_gender) to count a number of male or female from Employee table. The INOUT parameter (mfgender) will return the result to a user.
+SQL> select * from employee;
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                                                                                                                              
+---------- ------------ ------------ --------- ------------------------------                                                                                                       
+       106 Rahul        Makvana      24-SEP-95 Gujarat                                                                                                                              
+       101 Jay          Shah         01-JAN-90 Mumbai                                                                                                                               
+       102 Amit         Patel        10-FEB-89 Delhi                                                                                                                                
+       103 Nina         Joshi        12-JUL-91 Bangalore                                                                                                                            
+       104 Ravi         Kumar        05-NOV-87 Chennai                                                                                                                              
+       105 Meena        Sharma       14-MAR-93 Pune                                                                                                                                 
+
+6 rows selected.
+
+SQL> ALTER TABLE employee ADD emp_gender CHAR(1);
+
+Table altered.
+
+SQL> UPDATE employee SET emp_gender = 'M' WHERE emp_no IN (101,102,104,106);
+
+4 rows updated.
+
+SQL> UPDATE employee SET emp_gender = 'F' WHERE emp_no IN (103,105);
+
+2 rows updated.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> select * from employee;
+
+    EMP_NO FNAME        LNAME        DOB       ADDRESS                        E                                                                                                     
+---------- ------------ ------------ --------- ------------------------------ -                                                                                                     
+       106 Rahul        Makvana      24-SEP-95 Gujarat                        M                                                                                                     
+       101 Jay          Shah         01-JAN-90 Mumbai                         M                                                                                                     
+       102 Amit         Patel        10-FEB-89 Delhi                          M                                                                                                     
+       103 Nina         Joshi        12-JUL-91 Bangalore                      F                                                                                                     
+       104 Ravi         Kumar        05-NOV-87 Chennai                        M                                                                                                     
+       105 Meena        Sharma       14-MAR-93 Pune                           F                                                                                                     
+
+6 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1* alter table employee rename emp_genter to genter
+SQL> /
+alter table employee rename emp_genter to genter
+                            *
+ERROR at line 1:
+ORA-14155: missing PARTITION, PARTITIONS, SUBPARTITION, or SUBPARTITIONS keyword 
+
+
+SQL> alter table employee rename emp_gender to gender;
+alter table employee rename emp_gender to gender
+                            *
+ERROR at line 1:
+ORA-14155: missing PARTITION, PARTITIONS, SUBPARTITION, or SUBPARTITIONS keyword 
+
+
+SQL> alter table employee rename column emp_gender to gender;
+
+Table altered.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or reaplace procedure count_gender(emp_gender in char, mfgender in out number)
+  2  IS
+  3  BEGIN
+  4  	select count(*) into mfgender from employee where gender = emp_gender;
+  5* end;
+SQL> /
+create or reaplace procedure count_gender(emp_gender in char, mfgender in out number)
+          *
+ERROR at line 1:
+ORA-00905: missing keyword 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure count_gender(emp_gender in char, mfgender in out number)
+  2  IS
+  3  BEGIN
+  4  	select count(*) into mfgender from employee where gender = emp_gender;
+  5* end;
+SQL> /
+
+Procedure created.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	gender_count_result number := 0;
+  3  BEGIN
+  4  	count_gender('F', gender_count_result);
+  5  	dbms_output.put_line('Female Employees: ' || gender_count_result);
+  6* end;
+SQL> /
+Female Employees: 2                                                                                                                                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2  	gender_count_result number := 0;
+  3  BEGIN
+  4  	count_gender('M', gender_count_result);
+  5  	dbms_output.put_line('Male Employees: ' || gender_count_result);
+  6* end;
+SQL> /
+Male Employees: 4                                                                                                                                                                   
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 3. Write a procedure which will take minimum limit and maximum limit of salary and the execution of the procedure will display name of the employees having salary between the range.
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM     DEPTNO                                                                                               
+---------- ---------- --------- ---------- --------- ---------- ---------- ----------                                                                                               
+      7369 SMITH      CLERK           7902 17-DEC-80        800                    20                                                                                               
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300         30                                                                                               
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500         30                                                                                               
+      7566 JONES      MANAGER         7839 02-APR-81       2975                    20                                                                                               
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400         30                                                                                               
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                    30                                                                                               
+      7782 CLARK      MANAGER         7839 09-JUN-81       2450                    10                                                                                               
+      7788 SCOTT      ANALYST         7566 19-APR-87       3000                    20                                                                                               
+      7839 KING       PRESIDENT            17-NOV-81       5000                    10                                                                                               
+      7844 TURNER     SALESMAN        7698 08-SEP-81       1500          0         30                                                                                               
+      7876 ADAMS      CLERK           7788 23-MAY-87       1100                    20                                                                                               
+      7900 JAMES      CLERK           7698 03-DEC-81        950                    30                                                                                               
+      7902 FORD       ANALYST         7566 03-DEC-81       3000                    20                                                                                               
+      7934 MILLER     CLERK           7782 23-JAN-82       1300                    10                                                                                               
+
+14 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure emp_salary_range(min in number, max in number)
+  2  IS
+  3  BEGIN
+  4  	for i in (select ename, sal from emp where sal between min AND max)
+  5  	loop 
+  6  		dbms_out.put_line(RPAD(i.ename, 10) || RPAD(sal, 10));
+  7  	end loop;
+  8* end;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> execute emp_salary_range(1500, 2000);
+BEGIN emp_salary_range(1500, 2000); END;
+
+      *
+ERROR at line 1:
+ORA-06550: line 1, column 7: 
+PLS-00905: object MCA.EMP_SALARY_RANGE is invalid 
+ORA-06550: line 1, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure emp_salary_range(min in number, max in number)
+  2  IS
+  3  BEGIN
+  4  	for i in (select ename, sal from emp where sal between min AND max)
+  5  	loop 
+  6  		dbms_out.put_line(RPAD(i.ename, 10) || RPAD(sal, 10));
+  7  	end loop;
+  8* end;
+SQL> /
+
+Warning: Procedure created with compilation errors.
+
+SQL> show errors;
+Errors for PROCEDURE EMP_SALARY_RANGE:
+
+LINE/COL ERROR                                                                                                                                                                      
+-------- -----------------------------------------------------------------                                                                                                          
+6/3      PL/SQL: Statement ignored                                                                                                                                                  
+6/47     PLS-00201: identifier 'SAL' must be declared                                                                                                                               
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace procedure emp_salary_range(min in number, max in number)
+  2  IS
+  3  BEGIN
+  4  	for i in (select ename, sal from emp where sal between min AND max)
+  5  	loop 
+  6  		dbms_output.put_line(RPAD(i.ename, 10) || RPAD(i.sal, 10));
+  7  	end loop;
+  8* end;
+SQL> /
+
+Procedure created.
+
+SQL> emp_salary_range(1500, 2000);
+SP2-0734: unknown command beginning "emp_salary..." - rest of line ignored.
+SQL> execute emp_salary_range(1500, 2000);
+ALLEN     1600                                                                                                                                                                      
+TURNER    1500                                                                                                                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> execute emp_salary_range(1000, 3000);
+ALLEN     1600                                                                                                                                                                      
+WARD      1250                                                                                                                                                                      
+JONES     2975                                                                                                                                                                      
+MARTIN    1250                                                                                                                                                                      
+BLAKE     2850                                                                                                                                                                      
+CLARK     2450                                                                                                                                                                      
+SCOTT     3000                                                                                                                                                                      
+TURNER    1500                                                                                                                                                                      
+ADAMS     1100                                                                                                                                                                      
+FORD      3000                                                                                                                                                                      
+MILLER    1300                                                                                                                                                                      
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 4. Use following tables and do as directed: Movie (movie_id, movie_name, date_of_release) Screen (screen_id, location, max_capacity), Current (movie_id,screen_id, date_of_arrival, date_of_closure)
+SQL> -- 5. Consider the above table and write a function to return the movie name which arrived today.
+SQL> select tname from tab;
+
+TNAME                                                                                                                                                                               
+--------------------------------------------------------------------------------------------------------------------------------                                                    
+DEPT                                                                                                                                                                                
+EMP                                                                                                                                                                                 
+CLIENT_MASTER                                                                                                                                                                       
+PRODUCT_MASTER                                                                                                                                                                      
+SALES_ORDER                                                                                                                                                                         
+SALES_ORDER_DETAILS                                                                                                                                                                 
+TREM_MASTER                                                                                                                                                                         
+ENTRANCE_TEST                                                                                                                                                                       
+ETEST_DETAILS                                                                                                                                                                       
+DISTRIBUTOR                                                                                                                                                                         
+DIST_ITEM                                                                                                                                                                           
+SMAN_MST                                                                                                                                                                            
+SALESMAN_MASTER                                                                                                                                                                     
+APPLICANT_MASTER                                                                                                                                                                    
+ITEM                                                                                                                                                                                
+FACULTY_MASTER                                                                                                                                                                      
+PARTS                                                                                                                                                                               
+WORKER                                                                                                                                                                              
+JOB                                                                                                                                                                                 
+ASSIGNED                                                                                                                                                                            
+SUPPLIERS                                                                                                                                                                           
+CATALOG                                                                                                                                                                             
+PRODUCT                                                                                                                                                                             
+ORDER_DETAILS                                                                                                                                                                       
+STUDENT                                                                                                                                                                             
+COURSE                                                                                                                                                                              
+FYRANKERS                                                                                                                                                                           
+ENROLL                                                                                                                                                                              
+SYRANKERS                                                                                                                                                                           
+EMPLOYEE                                                                                                                                                                            
+COMPANY                                                                                                                                                                             
+CUSTOMER                                                                                                                                                                            
+APPLICANT                                                                                                                                                                           
+CUSTOMERS                                                                                                                                                                           
+SUPPLIER                                                                                                                                                                            
+STUDENTS1                                                                                                                                                                           
+ENROLLMENT1                                                                                                                                                                         
+
+37 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- Movie table
+  2  CREATE TABLE Movie (
+  3      movie_id      NUMBER PRIMARY KEY,
+  4      movie_name    VARCHAR2(15),
+  5      genre         VARCHAR2(10),
+  6      release_date  DATE
+  7  );
+  8  -- Screen table
+  9  CREATE TABLE Screen (
+ 10      screen_id     NUMBER PRIMARY KEY,
+ 11      screen_name   VARCHAR2(12),
+ 12      max_capacity  NUMBER
+ 13  );
+ 14  -- Current table (movie running info)
+ 15  CREATE TABLE Current (
+ 16      movie_id        NUMBER,
+ 17      screen_id       NUMBER,
+ 18      date_of_arrival DATE,
+ 19      date_of_closure DATE,
+ 20      CONSTRAINT fk_movie FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+ 21      CONSTRAINT fk_screen FOREIGN KEY (screen_id) REFERENCES Screen(screen_id)
+ 22* );
+ 23  /
+);
+ *
+ERROR at line 7:
+ORA-00922: missing or invalid option 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- Movie table
+  2  CREATE TABLE Movie (
+  3      movie_id      NUMBER PRIMARY KEY,
+  4      movie_name    VARCHAR2(15),
+  5      genre         VARCHAR2(10),
+  6      release_date  DATE
+  7* );
+SQL> /
+);
+ *
+ERROR at line 7:
+ORA-00922: missing or invalid option 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  -- Movie table
+  2  CREATE TABLE Movie (
+  3      movie_id      NUMBER PRIMARY KEY,
+  4      movie_name    VARCHAR2(15),
+  5      genre         VARCHAR2(10),
+  6      release_date  DATE
+  7  )
+  8  -- Screen table
+  9  CREATE TABLE Screen (
+ 10      screen_id     NUMBER PRIMARY KEY,
+ 11      screen_name   VARCHAR2(12),
+ 12      max_capacity  NUMBER
+ 13  )
+ 14  -- Current table (movie running info)
+ 15  CREATE TABLE Current (
+ 16      movie_id        NUMBER,
+ 17      screen_id       NUMBER,
+ 18      date_of_arrival DATE,
+ 19      date_of_closure DATE,
+ 20      CONSTRAINT fk_movie FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+ 21      CONSTRAINT fk_screen FOREIGN KEY (screen_id) REFERENCES Screen(screen_id)
+ 22* )
+SQL> /
+CREATE TABLE Screen (
+*
+ERROR at line 9:
+ORA-00922: missing or invalid option 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+SP2-0223: No lines in SQL buffer.
+SQL> CREATE TABLE Movie (
+  2      movie_id      NUMBER PRIMARY KEY,
+  3      movie_name    VARCHAR2(15),
+  4      genre         VARCHAR2(10),
+  5      release_date  DATE
+  6  );
+
+Table created.
+
+SQL> CREATE TABLE Screen (
+  2      screen_id     NUMBER PRIMARY KEY,
+  3      screen_name   VARCHAR2(12),
+  4      max_capacity  NUMBER
+  5  );
+
+Table created.
+
+SQL> CREATE TABLE Current (
+  2      movie_id        NUMBER,
+  3      screen_id       NUMBER,
+  4      date_of_arrival DATE,
+  5      date_of_closure DATE,
+  6      CONSTRAINT fk_movie FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+  7      CONSTRAINT fk_screen FOREIGN KEY (screen_id) REFERENCES Screen(screen_id)
+  8  );
+CREATE TABLE Current (
+             *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> select * from current;
+select * from current
+              *
+ERROR at line 1:
+ORA-00903: invalid table name 
+
+
+SQL> CREATE TABLE Current_Movie (
+  2      movie_id        NUMBER,
+  3      screen_id       NUMBER,
+  4      date_of_arrival DATE,
+  5      date_of_closure DATE,
+  6      CONSTRAINT fk_movie FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+  7      CONSTRAINT fk_screen FOREIGN KEY (screen_id) REFERENCES Screen(screen_id)
+  8  );
+
+Table created.
+
+SQL> -- Insert Movies
+SQL> INSERT INTO Movie VALUES (1, 'Inception', 'Sci-Fi', DATE '2010-07-16');
+
+1 row created.
+
+SQL> INSERT INTO Movie VALUES (2, 'Avatar', 'Fantasy', DATE '2009-12-18');
+
+1 row created.
+
+SQL> INSERT INTO Movie VALUES (3, 'Interstellar', 'Sci-Fi', DATE '2014-11-07');
+
+1 row created.
+
+SQL> 
+SQL> -- Insert Screens
+SQL> INSERT INTO Screen VALUES (101, 'Screen 1', 80);
+
+1 row created.
+
+SQL> INSERT INTO Screen VALUES (102, 'Screen 2', 120);
+
+1 row created.
+
+SQL> INSERT INTO Screen VALUES (103, 'Screen 3', 60);
+
+1 row created.
+
+SQL> 
+SQL> -- Insert Current movies
+SQL> INSERT INTO Current_Movie VALUES (1, 101, TRUNC(SYSDATE), NULL);
+
+1 row created.
+
+SQL> INSERT INTO Current_Movie VALUES (2, 102, DATE '2024-01-01', NULL);
+
+1 row created.
+
+SQL> 
+SQL> commit;
+
+Commit complete.
+
+SQL> commit;
+
+Commit complete.
+
+SQL> -- 4. Use following tables and do as directed: Movie (movie_id, movie_name, date_of_release) Screen (screen_id, location, max_capacity), Current (movie_id,screen_id, date_of_arrival, date_of_closure)
+SQL> select * from Movie;
+
+  MOVIE_ID MOVIE_NAME      GENRE      RELEASE_D                                                                                                                                     
+---------- --------------- ---------- ---------                                                                                                                                     
+         1 Inception       Sci-Fi     16-JUL-10                                                                                                                                     
+         2 Avatar          Fantasy    18-DEC-09                                                                                                                                     
+         3 Interstellar    Sci-Fi     07-NOV-14                                                                                                                                     
+
+SQL> select * from Screen;
+
+ SCREEN_ID SCREEN_NAME  MAX_CAPACITY                                                                                                                                                
+---------- ------------ ------------                                                                                                                                                
+       101 Screen 1               80                                                                                                                                                
+       102 Screen 2              120                                                                                                                                                
+       103 Screen 3               60                                                                                                                                                
+
+SQL> select * from Current_Movie;
+
+  MOVIE_ID  SCREEN_ID DATE_OF_A DATE_OF_C                                                                                                                                           
+---------- ---------- --------- ---------                                                                                                                                           
+         1        101 14-DEC-25                                                                                                                                                     
+         2        102 01-JAN-24                                                                                                                                                     
+
+SQL>  -- 5. Consider the above table and write a function to return the movie name which arrived today.
+SQL> SQL> select tname from tab;
+SP2-0734: unknown command beginning "SQL> selec..." - rest of line ignored.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function movie_arrived_today 
+  2  Return varchar2
+  3  Is
+  4  	m_name Movie.movie_name%type;
+  5  BEGIN
+  6  	select m.movie_name into m_name from movie m join current_movie c on m.movie_id=c.movie_id where trunc(c.date_of_arrival)=trunc(SYSDATE);
+  7  	return m_name;
+  8* end;
+SQL> /
+
+Function created.
+
+SQL> movie_arrived_today()
+SP2-0734: unknown command beginning "movie_arri..." - rest of line ignored.
+SQL> select movie_arrived_today from dual;
+
+MOVIE_ARRIVED_TODAY                                                                                                                                                                 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Inception                                                                                                                                                                           
+
+SQL> -- 6. Write a function that will return max_capacity of a screen by providing Screen_Id as a parameter.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  create or replace function screen_max_capacity(id in number)
+  2  return number
+  3  IS
+  4  	capacity number;
+  5  BEGIN
+  6  	select max_capacity into capacity from screen where screen_id = id;
+  7  	return capacity;
+  8* end;
+SQL> /
+
+Function created.
+
+SQL> select max_capacity(102) from dual;
+select max_capacity(102) from dual
+       *
+ERROR at line 1:
+ORA-00904: "MAX_CAPACITY": invalid identifier 
+
+
+SQL> select screen_max_capacity(102) from dual;
+
+SCREEN_MAX_CAPACITY(102)                                                                                                                                                            
+------------------------                                                                                                                                                            
+                     120                                                                                                                                                            
+
+SQL> spool off;

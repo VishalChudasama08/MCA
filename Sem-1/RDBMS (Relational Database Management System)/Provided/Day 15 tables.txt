@@ -1,12 +1,41 @@
+-- data from chat-gpt 14-12-2025
+
+-- Movie table
 CREATE TABLE Movie (
     movie_id      NUMBER PRIMARY KEY,
-    movie_name    VARCHAR2(35),
-    genre         VARCHAR2(20),
+    movie_name    VARCHAR2(15),
+    genre         VARCHAR2(10),
     release_date  DATE
 );
-
+-- Screen table
 CREATE TABLE Screen (
     screen_id     NUMBER PRIMARY KEY,
-    screen_name   VARCHAR2(40),
+    screen_name   VARCHAR2(12),
     max_capacity  NUMBER
 );
+-- Current_Movie table (movie running info)
+CREATE TABLE Current_Movie (
+    movie_id        NUMBER,
+    screen_id       NUMBER,
+    date_of_arrival DATE,
+    date_of_closure DATE,
+    CONSTRAINT fk_movie FOREIGN KEY (movie_id) REFERENCES Movie(movie_id),
+    CONSTRAINT fk_screen FOREIGN KEY (screen_id) REFERENCES Screen(screen_id)
+);
+
+-- Insert Movies
+INSERT INTO Movie VALUES (1, 'Inception', 'Sci-Fi', DATE '2010-07-16');
+INSERT INTO Movie VALUES (2, 'Avatar', 'Fantasy', DATE '2009-12-18');
+INSERT INTO Movie VALUES (3, 'Interstellar', 'Sci-Fi', DATE '2014-11-07');
+
+-- Insert Screens
+INSERT INTO Screen VALUES (101, 'Screen 1', 80);
+INSERT INTO Screen VALUES (102, 'Screen 2', 120);
+INSERT INTO Screen VALUES (103, 'Screen 3', 60);
+
+-- Insert Current movies
+INSERT INTO Current_Movie VALUES (1, 101, TRUNC(SYSDATE), NULL);
+INSERT INTO Current_Movie VALUES (2, 102, DATE '2024-01-01', NULL);
+
+COMMIT;
+

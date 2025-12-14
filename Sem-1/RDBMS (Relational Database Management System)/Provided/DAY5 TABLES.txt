@@ -1,6 +1,6 @@
 CREATE TABLE Student_Master (
     Student_ID NUMBER PRIMARY KEY,
-    Student_Name VARCHAR2(50),
+    Student_Name VARCHAR2(12),
     DOB DATE
 );
 
@@ -12,7 +12,7 @@ INSERT INTO Student_Master VALUES (4, 'Diana', TO_DATE('30-08-1999', 'DD-MM-YYYY
 
 CREATE TABLE Faculty_Master (
     Faculty_ID NUMBER PRIMARY KEY,
-    Faculty_Name VARCHAR2(50),
+    Faculty_Name VARCHAR2(15),
     DOJ DATE
 );
 
@@ -24,7 +24,7 @@ INSERT INTO Faculty_Master VALUES (4, 'Prof. Brown', TO_DATE('05-11-2018', 'DD-M
 
 CREATE TABLE Employee_Master (
     Employee_ID NUMBER PRIMARY KEY,
-    Employee_Name VARCHAR2(50),
+    Employee_Name VARCHAR2(12),
     Salary NUMBER(10, 2),
     Joining_Date DATE
 );

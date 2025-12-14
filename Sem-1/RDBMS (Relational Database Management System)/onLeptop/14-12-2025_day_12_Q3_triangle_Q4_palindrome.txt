@@ -1,0 +1,256 @@
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> set serveroutput on;
+SQL> ed
+SP2-0107: Nothing to save.
+SQL> select tname from tab;
+
+TNAME                                                                           
+--------------------------------------------------------------------------------
+DEPT                                                                            
+EMP                                                                             
+CLIENT_MASTER                                                                   
+PRODUCT_MASTER                                                                  
+SALES_ORDER                                                                     
+SALES_ORDER_DETAILS                                                             
+TREM_MASTER                                                                     
+ENTRANCE_TEST                                                                   
+ETEST_DETAILS                                                                   
+DISTRIBUTOR                                                                     
+DIST_ITEM                                                                       
+
+TNAME                                                                           
+--------------------------------------------------------------------------------
+SMAN_MST                                                                        
+SALESMAN_MASTER                                                                 
+APPLICANT_MASTER                                                                
+ITEM                                                                            
+WORKER                                                                          
+JOB                                                                             
+ASSIGNED                                                                        
+PRODUCT                                                                         
+ORDER_DETAILS                                                                   
+STUDENT                                                                         
+COURSE                                                                          
+
+TNAME                                                                           
+--------------------------------------------------------------------------------
+FYRANKERS                                                                       
+ENROLL                                                                          
+SYRANKERS                                                                       
+EMPLOYEE                                                                        
+COMPANY                                                                         
+CUSTOMER                                                                        
+APPLICANT                                                                       
+CUSTOMERS                                                                       
+SUPPLIER                                                                        
+STUDENTS1                                                                       
+ENROLLMENT1                                                                     
+
+33 rows selected.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2       rows number;
+  3       i number;
+  4       j number;
+  5  begin
+  6       rows:=&rows;
+  7       for i in 1..rows loop
+  8       	for j in 1..i loop
+  9       	    dbms_output.put('*');
+ 10       	end loop;
+ 11       	dbms_output.put_line();
+ 12       end loop;
+ 13* end;
+SQL> /
+Enter value for rows: 5
+old   6:      rows:=&rows;
+new   6:      rows:=5;
+     	dbms_output.put_line();
+     	*
+ERROR at line 11:
+ORA-06550: line 11, column 7: 
+PLS-00306: wrong number or types of arguments in call to 'PUT_LINE' 
+ORA-06550: line 11, column 7: 
+PL/SQL: Statement ignored 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2       rows number;
+  3       i number;
+  4       j number;
+  5  begin
+  6       rows:=&rows;
+  7       for i in 1..rows loop
+  8       	for j in 1..i loop
+  9       	    dbms_output.put('*');
+ 10       	end loop;
+ 11       	dbms_output.put_line(' ');
+ 12       end loop;
+ 13* end;
+SQL> /
+Enter value for rows: 5
+old   6:      rows:=&rows;
+new   6:      rows:=5;
+*                                                                               
+**                                                                              
+***                                                                             
+****                                                                            
+*****                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 3. Implement a PL/SQL Block which takes input number of rows and displays triangle.
+SQL> ed
+Wrote file afiedt.buf
+
+  1  declare
+  2       rows number;
+  3       i number;
+  4       j number;
+  5  begin
+  6       rows:=&rows;
+  7       for i in 1..rows loop
+  8       	for j in 1..i loop
+  9       	    dbms_output.put('*');
+ 10       	end loop;
+ 11       	dbms_output.put_line(' ');
+ 12       end loop;
+ 13* end;
+SQL> /
+Enter value for rows: 5
+old   6:      rows:=&rows;
+new   6:      rows:=5;
+*                                                                               
+**                                                                              
+***                                                                             
+****                                                                            
+*****                                                                           
+
+PL/SQL procedure successfully completed.
+
+SQL> -- 4. Implement PL/SQL block that inputs a string and checks palindrome or not.
+SQL> ed
+Wrote file afiedt.buf
+
+  1    declare
+  2    	str varchar(20);
+  3    	str_rev varchar(20);
+  4    begin
+  5  	dbms_output.put('   Enter String: ');
+  6    	str:= '&str';
+  7    	for i IN REVERSE 1..length(str) loop
+  8    		str_rev := str_rev || substr(str,i,1);
+  9    	end loop;
+ 10    	dbms_output.put_line('   Input String : ' || str);
+ 11    	dbms_output.put_line('   Reverse String: ' || str_rev);
+ 12    	if str = str_rev then
+ 13    		dbms_output.put_line('   Output: ' || str || 'is 'palindrome string');
+ 14    	else
+ 15    		dbms_output.put_line('   Output: ' || str || 'is 'not palindrome string');
+ 16    	end if;
+ 17*   end;
+SQL> /
+Enter value for str: wow
+old   6:   	str:= '&str';
+new   6:   	str:= 'wow';
+  		dbms_output.put_line('   Output: ' || str || 'is 'palindrome string');
+  		                                                  *
+ERROR at line 13:
+ORA-06550: line 13, column 55: 
+PLS-00103: Encountered the symbol "PALINDROME" when expecting one of the 
+following: 
+) , * & | = - + < / > at in is mod remainder not null rem 
+returning with => .. <an exponent (**)> <> or != or ~= >= <= 
+<> and or default like like2 like4 likec as between error 
+from using || member empty submultiset lax strict without 
+pretty ascii true false absent format allow truncate 
+
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1    declare
+  2    	str varchar(20);
+  3    	str_rev varchar(20);
+  4    begin
+  5  	dbms_output.put('   Enter String: ');
+  6    	str:= '&str';
+  7    	for i IN REVERSE 1..length(str) loop
+  8    		str_rev := str_rev || substr(str,i,1);
+  9    	end loop;
+ 10    	dbms_output.put_line('   Input String : ' || str);
+ 11    	dbms_output.put_line('   Reverse String: ' || str_rev);
+ 12    	if str = str_rev then
+ 13    		dbms_output.put_line('   Output: ' || str || 'is palindrome string');
+ 14    	else
+ 15    		dbms_output.put_line('   Output: ' || str || 'is not palindrome string');
+ 16    	end if;
+ 17*   end;
+SQL> /
+Enter value for str: wow
+old   6:   	str:= '&str';
+new   6:   	str:= 'wow';
+Enter String:    Input String : wow                                             
+Reverse String: wow                                                             
+Output: wowis palindrome string                                                 
+
+PL/SQL procedure successfully completed.
+
+SQL> ed
+Wrote file afiedt.buf
+
+  1    declare
+  2    	str varchar(20);
+  3    	str_rev varchar(20);
+  4    begin
+  5  	dbms_output.put('   Enter String: ');
+  6    	str:= '&str';
+  7    	for i IN REVERSE 1..length(str) loop
+  8    		str_rev := str_rev || substr(str,i,1);
+  9    	end loop;
+ 10    	dbms_output.put_line('   Input String : ' || str);
+ 11    	dbms_output.put_line('   Reverse String: ' || str_rev);
+ 12    	if str = str_rev then
+ 13    		dbms_output.put_line('   Output: "' || str || '" is palindrome string');
+ 14    	else
+ 15    		dbms_output.put_line('   Output: "' || str || '" is not palindrome string');
+ 16    	end if;
+ 17*   end;
+SQL> /
+Enter value for str: wow
+old   6:   	str:= '&str';
+new   6:   	str:= 'wow';
+Enter String:    Input String : wow                                             
+Reverse String: wow                                                             
+Output: "wow" is palindrome string                                              
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for str: vishal
+old   6:   	str:= '&str';
+new   6:   	str:= 'vishal';
+Enter String:    Input String : vishal                                          
+Reverse String: lahsiv                                                          
+Output: "vishal" is not palindrome string                                       
+
+PL/SQL procedure successfully completed.
+
+SQL> /
+Enter value for str: level
+old   6:   	str:= '&str';
+new   6:   	str:= 'level';
+Enter String:    Input String : level                                           
+Reverse String: level                                                           
+Output: "level" is palindrome string                                            
+
+PL/SQL procedure successfully completed.
+
+SQL> spool off;
