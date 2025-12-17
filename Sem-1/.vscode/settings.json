@@ -1,0 +1,14 @@
+{
+	"files.associations": {
+		"ARRAY.C": "cpp",
+		"CHECKCHA.C": "cpp",
+		"CIRCUPRI.C": "cpp",
+		"FILE.C": "cpp",
+		"FILEINT.C": "cpp",
+		"FOR.C": "cpp",
+		"STRFUNCT.C": "cpp",
+		"STRUCTEM.C": "cpp",
+		"STRUCTPR.C": "cpp",
+		"STRUCTUR.C": "cpp"
+	}
+}
