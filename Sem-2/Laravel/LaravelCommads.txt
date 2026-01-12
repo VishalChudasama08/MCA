@@ -1,0 +1,17 @@
+C:\Users\admin>cd ..
+
+C:\Users>cd ..
+
+C:\>cd xampp
+
+C:\xampp>cd htdocs
+
+create project command =>
+C:\xampp\htdocs>composer create-project laravel/laravel demo
+
+C:\xampp\htdocs> cd demo
+
+C:\xampp\htdocs\demo>code .
+
+run project command =>
+C:\xampp\htdocs\demo>php artisan serve
