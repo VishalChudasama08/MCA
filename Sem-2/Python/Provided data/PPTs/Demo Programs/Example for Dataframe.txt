@@ -1,0 +1,30 @@
+Employee Performance Analysis
+A company wants to analyze the performance and salary of its employees across multiple departments. The HR team has provided a CSV file containing the following columns:
+
+Employee_ID: Unique identifier for each employee.
+
+Name: Employee's name.
+
+Department: The department they work in.
+
+Experience: Years of experience.
+
+Salary: Monthly salary.
+
+Performance_Score: A score (out of 100) based on annual reviews.
+
+Objectives:
+
+Load and inspect the data.
+
+Find employees with missing values and handle them.
+
+Calculate average salary per department.
+
+Find the top 3 highest-paid employees.
+
+Identify employees with performance scores above 80.
+
+Increase salary by 10% for employees with scores above 90.
+
+Visualize salary distribution.

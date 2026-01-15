@@ -1,0 +1,11 @@
+def bubble_sort_simple(data, max_iterations=3):
+    n = len(data)
+    iterations = []
+    for i in range(n):
+        for j in range(n - i - 1):
+            if data[j] > data[j + 1]:
+                data[j], data[j + 1] = data[j + 1], data[j]
+        iterations.append(data.copy())
+        if len(iterations) == max_iterations:
+            break
+    return iterations

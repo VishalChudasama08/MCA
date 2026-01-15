@@ -1,0 +1,6 @@
+C:\Users\Administrator\AppData\Local\Programs\Python\Python39\Scripts
+
+pip install mysql.connector
+
+
+import mysql.connector

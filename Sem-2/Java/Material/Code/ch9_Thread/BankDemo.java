@@ -1,0 +1,65 @@
+class Account {
+  private int balance = 0;
+
+ synchronized void deposit(int amount) {
+ //	 void deposit(int amount) {
+    balance += amount;
+  }
+
+  int getBalance() {
+    return balance;
+  }
+}
+
+class Customer extends Thread {
+  Account account;
+
+  Customer(Account account) {
+    this.account = account;
+    System.out.println("new");
+  }
+
+  public void run() {
+    try {
+      for(int i = 0; i < 10; i++) {
+        account.deposit(10);
+        System.out.println(account.getBalance());
+       // Thread.sleep(4000);
+      }
+    }
+    catch(Exception e) {
+      e.printStackTrace();
+    }
+  }
+}
+
+class BankDemo {
+  private final static int NUMCUSTOMERS = 10;
+
+  public static void main(String args[]) {
+
+    // Create account
+    Account account = new Account();
+
+    // Create and start customer threads
+    Customer customers[] = new Customer[NUMCUSTOMERS];
+    for(int i = 0; i < NUMCUSTOMERS; i++) {
+      customers[i] = new Customer(account);
+      customers[i].start();
+      System.out.println(customers[i].getName());
+    }
+
+    // Wait for customer threads to complete
+    for(int i = 0; i < NUMCUSTOMERS; i++) {
+      try {
+        customers[i].join();
+      }
+      catch(InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
+    // Display account balance
+    System.out.println(account.getBalance());
+  }
+}

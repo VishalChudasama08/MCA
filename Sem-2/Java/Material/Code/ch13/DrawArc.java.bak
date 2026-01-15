@@ -1,0 +1,14 @@
+import java.applet.Applet;
+import java.awt.Graphics;
+/*
+  <applet code="DrawArc" width=400 height=400>
+  </applet>
+*/
+
+public class DrawArc extends Applet {
+
+  public void paint(Graphics g) {
+  	g.drawRect(20, 20, 200, 200);
+    g.drawArc(20, 20, 200, 200, 90, 180);
+  }
+}
