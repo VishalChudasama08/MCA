@@ -1,6 +1,5 @@
 #include<stdio.h>
 #include<conio.h>
-#define MAX 20
 
 int *arr; // global integer pointer variable
 int n; // global size
@@ -12,7 +11,9 @@ void delete(int);
 void update(int, int);
 void search(int);
 void reverse();
-void marge();
+void merge();
+void split();
+void displayd(int [], int);
 
 int main(){
 	int x, i, pos, val;
@@ -58,8 +59,9 @@ int main(){
 				search(val);
 				break;
 			case 6: reverse(); break;
-			case 7: marge(); break;
-			default: break;
+			case 7: merge(); break;
+			case 8: split(); break;
+			default: printf("\n\tEnter valid number"); break;
 		}
 	}while(1);
 }
@@ -72,7 +74,8 @@ int menu(){
 	printf("\n\t4. Update value");
 	printf("\n\t5. Search value");
 	printf("\n\t6. Reverse");
-	printf("\n\t7. marge");
+	printf("\n\t7. merge");
+	printf("\n\t8. split");
 	printf("\n\tEnter your choise: ");
 	scanf("%d", &n);
 	return n;
@@ -136,43 +139,79 @@ void search(int val){
 }
 
 void reverse(){
-	int rev[MAX];
-	int i;
-	printf("=>%d", n);
-	//rev = (int *)realloc(rev, (n+1) * sizeof(int));
+	int i, *rev = (int *)malloc(n*sizeof(int));
+
+	//printf("=>%d", n);
+
 	for(i=0;i<n;i++){
 		rev[i] = arr[n-i-1];
 	}
-	printf("\n");
-	for(i=0;i<n;i++){
-		printf("%d  ", rev[i]);
-	}
-	printf("End!\n");
+	printf("\nReverse Array => ");
+	displayd(rev, n);
 }
 
-void marge(){
-	int i,j,n2,n3;
+void merge(){
+	int i,j,n2,n3,n1=n;
 
-	int arr2[MAX], m[MAX];
+	int *arr2, *m;
 
-	printf("\n\tHow many element in Array ?:");
+	printf("\n\tHow many element in Array 2 ?: ");
 	scanf("%d", &n2);
-	n3 = n+n2;
+
+	arr2 = (int *)malloc(n2*sizeof(int));
+
 	for(i=0;i<n2;i++){
 		printf("Enter %d value: ", i+1);
 		scanf("%d", &arr2[i]);
 	}
-	for(i=0;i<n;i++){
-		m[i] = arr[i];
-	}
+
+	n3 = n1 + n2;
+	m = (int *)malloc(n3*sizeof(int));
+
 	j=0;
-	for(i=n;i<n3;i++){
-		m[i] = arr2[j];
+	for(i=0;i<n3;i++){
+		if(i<n1){
+			m[i] = arr[i];
+		} else {
+			m[i] = arr2[j];
+			j++;
+		}
+	}
+
+	printf("\nMerge Array => ");
+	displayd(m, n3);
+}
+void split(){
+	int x, *arr1, *arr2, v, i, j;
+	printf("\n\tEnter index value (Where from spliting): ");
+	scanf("%d", &x);
+
+	arr1 = (int *)malloc(x*sizeof(int));
+
+	for(i=0;i<x;i++){
+		arr1[i] = arr[i];
+	}
+
+	v = n-x;
+	arr2 = (int *)malloc(v*sizeof(int));
+
+	j=0;
+	for(i=x;i<n;i++){
+		arr2[j] = arr[i];
 		j++;
 	}
-	printf("\n");
-	for(i=0;i<n3;i++){
-		printf("%d  ", m[i]);
+
+	printf("\nArray 1 => ");
+	displayd(arr1, x);
+
+	printf("\nArray 2 => ");
+	displayd(arr2, v);
+}
+
+void displayd(int ar[], int v){
+	int i;
+	for(i=0;i<v;i++){
+		printf("%d  ", ar[i]);
 	}
 	printf("End!\n");
 }
