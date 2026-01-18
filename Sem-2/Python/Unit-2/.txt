@@ -1,0 +1,84 @@
+Noah wants to set up a deep learning framework to cluster similar documents. Which two critical components will he need to get started?  
+
+
+
+High number of parameters and an artificial neural network. 
+
+
+
+An artificial neural network and labeled data. 
+
+
+
+An artificial neural network and unlabeled data.  
+
+
+
+Unlabeled data and a high number of parameters. 
+
+
+1 point
+2.
+Question 2
+Katya is looking for a diffusion model that can help her generate high-quality graphical content. Which one do you recommend? 
+
+
+
+OpenAI’s Dall-E 2 
+
+
+
+Bidirectional Encoder Representations from Transformers (BERT)  
+
+
+
+SpaceGAN 
+
+
+
+OpenAI’s GPT-4 
+
+
+1 point
+3.
+Question 3
+_________________ use two convolutional neural networks to compete against each other to produce more realistic data samples.  
+
+
+
+Generative adversarial networks  
+
+
+
+Diffusion models  
+
+
+
+Variational autoencoders  
+
+
+
+Transformer-based models 
+
+
+1 point
+4.
+Question 4
+Foundation generative AI models are distinct from other generative AI models because they _______________. 
+
+
+
+Provides a predetermined response to queries 
+
+
+
+Is trained on restricted domain data  
+
+
+
+Exhibit broad capabilities that can be adapted to a range of different and specific tasks 
+
+
+
+Perform only image classification tasks 
+
