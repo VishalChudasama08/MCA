@@ -15,3 +15,11 @@ C:\xampp\htdocs\demo>code .
 
 run project command =>
 C:\xampp\htdocs\demo>php artisan serve
+
+view file => resources/views
+	file_name.blade.php
+	
+blade =>
+	on layout file => @yield('content-name')
+	extend layout file => @extends('layout_file_name')
+	section (that added in layout) => @section('content-name') @endsection
