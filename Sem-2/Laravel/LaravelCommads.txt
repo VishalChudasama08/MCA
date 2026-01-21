@@ -23,3 +23,27 @@ blade =>
 	on layout file => @yield('content-name')
 	extend layout file => @extends('layout_file_name')
 	section (that added in layout) => @section('content-name') @endsection
+	@foreach($array as $element) <html code> @endforeach
+
+
+create migration => (cmd in project folder) 
+	C:\xampp\htdocs\demo>php artisan make:migration migration_name
+	-- this create migration at --> \database\migration 
+ex.
+	C:\xampp\htdocs\demo>php artisan make:migration create_product_table
+	-- database\migrations\2026_01_21_082504_create_product_table.php
+
+after create and edit migration file now run that file to create that table in mysql =>
+	C:\xampp\htdocs\demo>php artisan migrate
+
+create controller => (cmd in project folder)
+	C:\xampp\htdocs\demo>php artisan make:controller NameController
+	-- app\Http\Controllers\NameController.php
+ex.
+	C:\xampp\htdocs\demo>php artisan make:controller ProductController
+	-- C:\xampp\htdocs\demo\app\Http\Controllers\ProductController.php
+
+
+
+
+
