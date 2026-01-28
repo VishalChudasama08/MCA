@@ -39,6 +39,32 @@
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
+                  <h5 class="card-title mb-0">Dynamic Table (get Data from mysql)</h5>
+                </div>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Qty</th>
+                      <th scope="col">Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @foreach($products as $p)
+                    <!-- For array type data -->
+                    <tr>
+                      <th scope="row">{{$p['id']}}</th>
+                      <td>{{$p['p_name']}}</td>
+                      <td>{{$p['p_qty']}}</td>
+                      <td>{{$p['p_price']}}</td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+              </div>
+              <div class="card">
+                <div class="card-body">
                   <h5 class="card-title mb-0">Static Table</h5>
                 </div>
                 <table class="table">

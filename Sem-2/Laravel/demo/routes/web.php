@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+
+Route::get('/tables', [ProductController::class, 'getAllProduct']); // run getAllProduct function from ProductController class
 // Route::get('/', function () {
 //     return view('welcome');
 // });
@@ -18,9 +21,9 @@ Route::get('/widgets', function(){
     return view('widgets_page');
 });
 
-Route::get('/tables', function(){
-    return view('tables_page');
-});
+// Route::get('/tables', function(){
+//     return view('tables_page');
+// });
 
 Route::get('/grid', function(){
     return view('grid_page');
