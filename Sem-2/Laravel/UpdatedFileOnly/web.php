@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::get('/tables', [ProductController::class, 'getAllProduct']); // run getAllProduct function from ProductController class
-Route::get('/tables', [EmployeeController::class, 'listEmployee']); 
+Route::get('/tables', [EmployeeController::class, 'listEmployee']);
 Route::post('add_emp', [EmployeeController::class,'addEmployee']);
 Route::get('delEmp/{id}', [EmployeeController::class,'deleteEmployee']);
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ProductController extends Controller
 {
     public function getAllProduct(){
-        $products = ProductsModel::all(); // get all products and
+        $products = ProductsModel::get(); // get all products and
         return view('tables_page', compact('products'));
     }
 }
