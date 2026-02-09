@@ -423,7 +423,7 @@
                   ><span class="hide-menu">Widgets</span></a
                 >
               </li>
-              <li class="sidebar-item">
+              <!-- <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"
                   href="/tables"
@@ -431,7 +431,46 @@
                   ><i class="mdi mdi-border-inside"></i
                   ><span class="hide-menu">Tables</span></a
                 >
+              </li> -->
+
+
+              <li class="sidebar-item">
+                <a
+                  class="sidebar-link has-arrow waves-effect waves-dark"
+                  href="javascript:void(0)"
+                  aria-expanded="false"
+                  ><i class="mdi mdi-face"></i
+                  ><span class="hide-menu">Tables</span></a
+                >
+                <ul aria-expanded="false" class="collapse first-level">
+                  <li class="sidebar-item">
+                    <a href="/productTable" class="sidebar-link"
+                      ><i class="mdi mdi-emoticon"></i
+                      ><span class="hide-menu"> Product Table </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="/employeesTable" class="sidebar-link"
+                      ><i class="mdi mdi-emoticon-cool"></i
+                      ><span class="hide-menu"> Employee Table </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="/staffTable" class="sidebar-link"
+                      ><i class="mdi mdi-emoticon-cool"></i
+                      ><span class="hide-menu"> Staff Table </span></a
+                    >
+                  </li>
+                  <li class="sidebar-item">
+                    <a href="/demo-tables" class="sidebar-link"
+                      ><i class="mdi mdi-emoticon-cool"></i
+                      ><span class="hide-menu"> Demo Tables </span></a
+                    >
+                  </li>
+                </ul>
               </li>
+
+
               <li class="sidebar-item">
                 <a
                   class="sidebar-link waves-effect waves-dark sidebar-link"

@@ -2,17 +2,26 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StaffController;
+
 use Illuminate\Support\Facades\Route;
 
 
-// Route::get('/tables', [ProductController::class, 'getAllProduct']); // run getAllProduct function from ProductController class
-Route::get('/tables', [EmployeeController::class, 'listEmployee']); 
-Route::post('add_emp', [EmployeeController::class,'addEmployee']);
+Route::get('/productTable', [ProductController::class, 'getAllProduct']); // run getAllProduct function from ProductController class
+
+Route::get('employeesTable', [EmployeeController::class, 'listEmployee']);
+Route::get('addEmployeeForm', function () {
+    return view('form-add-employee');
+});
+Route::post('addEmployee', [EmployeeController::class,'addEmployee']);
 Route::get('delEmp/{id}', [EmployeeController::class,'deleteEmployee']);
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
+Route::get('/staffTable', [StaffController::class, 'getStaff']);
+
+
+
+
 
 Route::get('/', function(){
     return view('Dashboard_page');
@@ -26,9 +35,9 @@ Route::get('/widgets', function(){
     return view('widgets_page');
 });
 
-// Route::get('/tables', function(){
-//     return view('tables_page');
-// });
+Route::get('/demo-tables', function(){
+    return view('demo-tables');
+});
 
 Route::get('/grid', function(){
     return view('grid_page');

@@ -1,0 +1,55 @@
+C:\Users\admin>cd ..
+
+C:\Users>cd ..
+
+C:\>cd xampp
+
+C:\xampp>cd htdocs
+
+create project command =>
+C:\xampp\htdocs>composer create-project laravel/laravel demo
+
+C:\xampp\htdocs> cd demo
+
+C:\xampp\htdocs\demo>code .
+
+run project command =>
+C:\xampp\htdocs\demo>php artisan serve
+
+view file => resources/views
+	file_name.blade.php
+	
+blade =>
+	on layout file => @yield('content-name')
+	extend layout file => @extends('layout_file_name')
+	section (that added in layout) => @section('content-name') @endsection
+	@foreach($array as $element) <html code> @endforeach
+
+
+create migration => (cmd in project folder) 
+	C:\xampp\htdocs\demo>php artisan make:migration migration_name
+	-- this create migration at --> \database\migration 
+ex.
+	C:\xampp\htdocs\demo>php artisan make:migration create_product_table
+	-- database\migrations\2026_01_21_082504_create_product_table.php
+
+	after create and edit migration file now run that file to create that table in mysql =>
+		C:\xampp\htdocs\demo>php artisan migrate
+
+create controller => (cmd in project folder)
+	C:\xampp\htdocs\demo>php artisan make:controller NameController
+	-- app\Http\Controllers\NameController.php
+ex.
+	C:\xampp\htdocs\demo>php artisan make:controller ProductController
+	-- C:\xampp\htdocs\demo\app\Http\Controllers\ProductController.php
+
+
+create model => (cmd in project folder)
+	C:\xampp\htdocs\demo> php artisan make:model Product
+	--   INFO  Model [C:\xampp\htdocs\demo\app\Models\Product.php] created successfully.
+
+
+
+
+
+

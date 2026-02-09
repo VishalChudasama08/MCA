@@ -4,28 +4,29 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\EmployeeModel;
+use App\Models\ProductsModel;
 
 class EmployeeController extends Controller{
     public function listEmployee(){
         $employees = EmployeeModel::get();
-        return view('tables_page', compact('employees'));
+        return view('employees-table', compact('employees'));
     }
     public function addEmployee(Request $request){
         $request->validate([
             'name'=>'required|min:3|max:20|alpha',
             'salary'=>'required|min:10000|numeric'
         ]);
-        // print_r($request->all());
+        print_r($request->all());
         EmployeeModel::create([
             'name'=>$request->name,
             'job_title'=>$request->job_title,
             'salary'=>$request->salary,
             'status'=>$request->status
         ]);
-        return redirect('tables');
+        return redirect('employeesTable');
     }
     public function deleteEmployee($id){
         EmployeeModel::where('id', $id)->delete();
-        return redirect('tables');
+        return redirect('employeesTable');
     }
 }
