@@ -18,7 +18,8 @@ Route::get('delEmp/{id}', [EmployeeController::class,'deleteEmployee']);
 
 
 Route::get('/staffTable', [StaffController::class, 'getStaff']);
-
+Route::get('/editStaff/{id}', [StaffController::class, 'findStaff']);
+Route::post('/editStaffData', [StaffController::class, 'editStaff']);
 
 
 

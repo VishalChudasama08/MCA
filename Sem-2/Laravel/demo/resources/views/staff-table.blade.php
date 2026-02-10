@@ -32,7 +32,15 @@
 	<!-- Container fluid  -->
 	<!-- ============================================================== -->
 	<div class="container-fluid">
-
+		@if ($errors->any())
+		<div class="alert alert-danger">
+			<ul>
+				@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+				@endforeach
+			</ul>
+		</div>
+		@endif
 		<div class="card">
 			<div class="card-body">
 				<h5 class="card-title mb-0">Filter</h5>
@@ -56,6 +64,7 @@
 						<th scope="col">Salary</th>
 						<th scope="col">Age</th>
 						<th scope="col">Start Date</th>
+						<th scope="col">Update</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -70,6 +79,7 @@
 						<td>{{$s['salary']}}</td>
 						<td>{{$s['age']}}</td>
 						<td>{{$s['start_date']}}</td>
+						<td><a href="{{url('editStaff', $s['id'])}}" class="btn btn-outline-warning btn-sm rounded">Edit</a></td>
 					</tr>
 					@endforeach
 				</tbody>
