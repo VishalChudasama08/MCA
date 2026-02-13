@@ -3,12 +3,11 @@
 #include<stdio.h>
 #include<conio.h>
 
-struct node{
+struct node {
 	int data;
-	struct node *next;
+	struct node* next;
 };
-struct node *head=NULL, *last=NULL;
-int total=0;
+struct node* head = NULL, * last = NULL;
 
 void create();
 void traversal();
@@ -16,26 +15,31 @@ void insertfirst();
 void insert();
 void deletefirst();
 void deletelast();
-void delete();
+void deleting();
 
-int main(){
+int main() {
+	int i = 0;
 	clrscr();
-	do{
-		switch(menu()){
-			case 0: exit();
-			case 1: create(); break;
-			case 2: traversal(); break;
-			case 3: insertfirst(); break;
-			case 4: create(); break;
-			case 5: insert(); break;
-			case 6: deletefirst(); break;
-			case 7: deletelast(); break;
-			case 8: delete(); break;
-			default: printf("\nEnter valid number!\n");
+	do {
+		switch (menu()) {
+		case 0: exit(0);
+		case 1: create(); break;
+		case 2: traversal(); break;
+		case 3: insertfirst(); break;
+		case 4: create(); break;
+		case 5: insert(); break;
+		case 6: deletefirst(); break;
+		case 7: deletelast(); break;
+		case 8: deleting(); break;
+		default: printf("\nEnter valid number!\n");
 		}
-	}while(1);
+		i++;
+		if (i > 100) { break; }
+	} while (1);
+	getch();
+	return 0;
 }
-int menu(){
+int menu() {
 	int x;
 	printf("\n\t0. Exit program");
 	printf("\n\t1. Create link list");
@@ -45,113 +49,175 @@ int menu(){
 	printf("\n\t5. Insert at any position");
 	printf("\n\t6. Delete first");
 	printf("\n\t7. Delete last");
-	printf("\n\t8. Delete at any position");
-	printf("\n\tEnter your choise: ");
+	printf("\n\t8. Delete from any position");
+	printf("\n\tEnter your choice: ");
 	scanf("%d", &x);
+	clrscr();
 	return x;
 }
-void create(){
-	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+void create() {
+	struct node* newnode = (struct node*)malloc(sizeof(struct node));
 
-	printf("\n\tEnter value you wan to insert: ");
+	printf("\n\tEnter value you want to insert: ");
 	scanf("%d", &newnode->data);
 	newnode->next = NULL;
-	if(head == NULL){
-		head=newnode;
-		last=newnode;
-		total++;
-	} else {
-		last->next=newnode;
-		last=newnode;
-		total++;
+	if (head == NULL) {
+		head = newnode;
+		last = newnode;
+	}
+	else {
+		last->next = newnode;
+		last = newnode;
 	}
 	printf("\n\tvalue inserted in link list successfully\n");
 }
-void traversal(){
-	struct node *temp=head;
+void traversal() {
+	struct node* temp = head;
 
-	if(head == NULL){
+	if (head == NULL) {
 		printf("\n\tlink list is empty\n");
-	} else {
-		printf("\n\t%d", temp->data);
-		while(temp->next != NULL){
-			temp=temp->next;
+	}
+	else {
+		printf("\n\tLink List:");
+		while (temp != NULL) {
 			printf("  %d", temp->data);
+			temp = temp->next;
 		}
 		printf("  End!\n");
 	}
 }
-void insertfirst(){
-	struct node *temp=head;
-	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+void insertfirst() {
+	struct node* temp = head;
+	struct node* newnode = (struct node*)malloc(sizeof(struct node));
 
-	if(head == NULL){
+	if (head == NULL) {
 		create();
-	} else {
-		printf("\n\tEnter value you wan to insert: ");
+	}
+	else {
+		printf("\n\tEnter value you want to insert: ");
 		scanf("%d", &newnode->data);
 
-		newnode->next=temp;
-		head=newnode;
-		total++;
+		newnode->next = temp;
+		head = newnode;
 	}
 }
 
-void insert(){
-	int pos, i=1;
-	struct node *temp=head, *pre=head;
-	struct node *newnode = (struct node *)malloc(sizeof(struct node));
+void insert() {
+	int pos, i = 1, ans = 0;
+	struct node* temp = head, * pre = head;
+	struct node* newnode = (struct node*)malloc(sizeof(struct node));
+
+	traversal();
+
+	printf("\n\tEnter position: ");
+	scanf("%d", &pos);
+	printf("\n\tEnter value you want to insert: ");
+	scanf("%d", &newnode->data);
+
+	if (head == NULL) { // if LL empty
+		newnode->next = NULL;
+		head = newnode;
+		last = newnode;
+		ans = 1;
+	}
+	else {
+		while (temp != NULL) {
+			if (pos == 1) { // first position
+				newnode->next = head;
+				head = newnode;
+				ans = 1;
+				break;
+			}
+			if (i == pos) { // any middle position
+				newnode->next = temp;
+				pre->next = newnode;
+				ans = 1;
+				break;
+			}
+			if (temp->next == NULL && pos > 1) { // last position
+				newnode->next = NULL;
+				temp->next = newnode;
+				last = newnode;
+				ans = 1;
+				break;
+			}
+			pre = temp;
+			temp = temp->next;
+			i++;
+		}
+	}
+	if (ans) {
+		printf("\n\tvalue inserted in link list successfully\n");
+	}
+	else {
+		printf("\n\tvalue not inserted! pleace enter valid position...\n");
+	}
+}
+
+void deletefirst() {
+	struct node* temp = head;
+	head = temp->next;
+	printf("\n\tFirst node deleted.\n");
+	free(temp);
+}
+void deletelast() {
+	int i = 0;
+	struct node* temp = head, * pre = head;
+	while (1) {
+		if (head->next == NULL) {
+			head = NULL;
+			i = 1;
+			break;
+		}
+		pre = temp;
+		temp = temp->next;
+		if (temp->next == NULL) {
+			pre->next = NULL;
+			i = 1;
+			break;
+		}
+	}
+	if (i) {
+		printf("\n\tLast node deleted.\n");
+		free(temp);
+		free(pre);
+	}
+}
+void deleting() {
+	int pos, i = 1, ans = 0;
+	struct node* temp = head, * pre = head;
 
 	traversal();
 
 	printf("\n\tEnter position: ");
 	scanf("%d", &pos);
 
-	if(pos==1){
-		insertfirst();
-		return;
-	} else {
-		printf("\n\tEnter value you wan to insert: ");
-		scanf("%d", &newnode->data);
-
-		while(temp->next != NULL){
-			if(i==pos){
-				newnode->next = temp;
-				pre->next = newnode;
-				printf("\n\tvalue inserted in link list successfully\n");
-				return;
+	while (temp != NULL) {
+		if (pos == 1) { // first
+			head = pre->next;
+			ans = 1;
+			break;
+		}
+		if (i == pos) {
+			if (temp->next == NULL) { // last
+				pre->next = NULL;
+				ans = 1;
+				break;
 			}
-			pre=temp;
-			temp=temp->next;
-			i++;
+			else {  // middle any
+				pre->next = temp->next;
+				ans = 1;
+				break;
+			}
 		}
+		pre = temp;
+		temp = temp->next;
+		i++;
 	}
-}
-
-void deletefirst(){
-	struct node *temp=head;
-	head=temp->next;
-	printf("\n\tFirst node deleted.\n");
-	free(temp);
-}
-void deletelast(){
-	struct node *temp=head, *pre=head;
-	while(1){
-		if(head->next == NULL){
-			head=NULL;
-			printf("\n\tLast node deleted.\n");
-			return;
-		}
-		pre=temp;
-		temp=temp->next;
-		if(temp->next == NULL){
-			pre->next=NULL;
-			printf("\n\tLast node deleted.\n");
-			free(temp);
-			return;
-		}
+	if (ans) {
+		printf("\n\tNode Deleted...\n");
 	}
-}
-void delete(){
-
+	else {
+		printf("\n\tNode Not Delete! please enter valid position\n");
+	}
 }
