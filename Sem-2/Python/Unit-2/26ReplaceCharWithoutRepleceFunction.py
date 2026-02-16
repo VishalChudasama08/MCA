@@ -7,6 +7,6 @@ for i in a:
     if i=='o' :
         b += '@'
     else:
-        b += i
+        b += i;
 
 print(b)

@@ -6,7 +6,7 @@
 # marge lists => list1.extend(list2)
 # count all occurence => list.count(value)
 # delete last element => list.pop()
-# sorting element => list.sort(reverse=True)
+# sorting element => list.sort(), for reverse sorting => list.sort(reverse=True)
 # make reverse list => list.reverse()
 # clear all element => list.clear()
 # find max,min,lenght => max(list), min(list), len(list)
