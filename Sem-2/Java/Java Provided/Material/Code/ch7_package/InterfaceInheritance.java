@@ -30,9 +30,9 @@ class InterfaceInheritance {
   
   public static void main(String args[]) {
     I i = new I();
-    System.out.println(i.j);
-    System.out.println(i.j1());
-    System.out.println(i.k1());
-    System.out.println(i.l1());
+    System.out.println(i.j); //200
+    System.out.println(i.j1()); //4
+    System.out.println(i.k1());//6.8
+    System.out.println(i.l1());//true
   }
 }
