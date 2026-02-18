@@ -1,0 +1,103 @@
+lambdas with filter(),reduce(),map(),sorted()
+
+filter()
+
+This function is useful to filter out the elements of the sequence depending on the
+result of a function
+
+   filter(function,sequence)  function should return true or false
+   
+ function - it represents the function which returns true or false
+sequence - list,string or tuple
+ 
+for the given example
+def is_even(x):
+     if x%2==0:
+          return True
+     else
+          return false
+		  
+lst=[1,2,3,4,5,6,7,8]
+t=list(filter(is_even,lst))		  
+
+The above statement will use each element of the list one by one and pass it to 
+the function is_even and add the elements to t if the function returns true for that
+value.
+
+to convert the above example into lambda
+t=list(filter(lambda x: (x%2==0),lst))
+
+
+2) lambdas with map()
+This is similar to filter() but it acts on each element of the sequence and changes
+the element
+
+       map(function,sequence)
+	   
+eg lst=[1,2,3,4,5,6]
+  if we want to find the squares of each element of the list
+  l=list(map(lambda x: x*x,lst))
+  here it will pass each element of the list(lst) to the lambda function and execute
+  the expression for each element.
+ 
+3) lambdas with reduce()
+ This function reduces the sequence of elements to a single value by processing the 
+elements according to function supplied
+          
+          reduce(function,sequence)
+
+lst=[1,2,3,4,5]
+t=reduce(lambda x,y:x+y,lst)  1,2=3
+((((1+2)+3)+4)+5)               3,3=6
+		                        6,4=10 
+                                10,5=15
+	For using reduce import reduce method from functools module
+ 
+ 
+4) sorted - This is an inbuilt function that is used to sort dictionaries
+         sorted(sequence,key,reverse)
+		 sequence - it should be dictionary(key value arguments
+		 key - that accepts the key for sorting
+		 reverse- boolean value (by default ascending order, reverse=True meand descending order)
+ 
+        grades={"abc":45,"Def":90,"xyz",:35}
+        t=sorted(grades.items, key=lambda x:x[0])  x[0] means sort on keys
+        t=sorted(grades.items,key=lambda x:x[1])   x[1] means sort on values
+        t=sorted(grades.items,key=lambda x:x[1][0])  means sort on first value when there is more than one value for a key
+		
+		students = [("Riya", 85,"z"), ("Ankit", 90,"y"), ("Zara", 80,"t")]
+
+         result = sorted(students, key = lambda x: x[1]) sorting on list if there is more than one values in the list
+		 
+		
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
