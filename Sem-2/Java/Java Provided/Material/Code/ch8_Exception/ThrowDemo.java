@@ -62,7 +62,7 @@ class ThrowDemo {
       int i = 1;
       int j = 0;
       System.out.println("Before division");
-      System.out.println(i/j);
+      System.out.println(i/j); //Arithmetic
       System.out.println("After division");
     }
     catch(ArithmeticException e) {

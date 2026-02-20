@@ -1,7 +1,7 @@
 interface College {
 
     interface Department {
-        void deptName();
+        void deptName();//abstract method
     }
 }
 
