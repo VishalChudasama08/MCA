@@ -20,3 +20,11 @@ print(evenodd())
     a.	Write a lambda function to separate integer elements as an output list. 
     b.	Write another lambda function to separate string elements as an output list.
 """
+
+l = [1, "hey", 2, 3, "there", 4, 1.2]
+
+l_int = list(x for x in l if(lambda x:type(x)==int or type(x)==float)(x))
+l_str = list(x for x in l if(lambda x:type(x)==str)(x))
+
+print(l_int)
+print(l_str)
