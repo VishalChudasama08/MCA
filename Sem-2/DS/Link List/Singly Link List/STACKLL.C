@@ -15,7 +15,6 @@ void traversal();
 void union_s();
 struct node * create(int);
 struct node * union_marge(struct node *, struct node *);
-int serach(struct node *, int);
 
 int main(){
 	int val, i=0;
@@ -83,38 +82,7 @@ struct node * union_marge(struct node *top1, struct node *top2){
 		newnode->next=pre;
 	}
 
-	temp=top2;
-
-	if(!serach(top1, temp->data)){
-		newnode = (struct node *)malloc(sizeof(struct node));
-		newnode->data = temp->data;
-		newnode->next = pre;
-	}
-	while(temp != 0){
-		pre = newnode;
-		temp=temp->next;
-		if(!serach(top1, temp->data)){
-		newnode = (struct node *)malloc(sizeof(struct node));
-		newnode->data = temp->data;
-		newnode->next = pre;
-		}
-	}
-	temp=pre;
-	printf("\ntop3:");
-	while(temp!=0){
-		printf("  %d", temp->data);
-		temp=temp->next;
-	}
 	return top3;
-}
-int serach(struct node *temp, int data){
-	while(temp != 0){
-		if(temp->data == data){
-			return 1;
-		}
-		temp=temp->next;
-	}
-	return 0;
 }
 struct node *create(int n){
 	struct node *newnode, *newtop=0;

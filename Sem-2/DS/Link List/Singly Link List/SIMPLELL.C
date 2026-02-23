@@ -87,7 +87,6 @@ void traversal() {
 	}
 }
 void insertfirst() {
-	struct node* temp = head;
 	struct node* newnode = (struct node*)malloc(sizeof(struct node));
 
 	if (head == NULL) {
@@ -97,8 +96,9 @@ void insertfirst() {
 		printf("\n\tEnter value you want to insert: ");
 		scanf("%d", &newnode->data);
 
-		newnode->next = temp;
+		newnode->next = head;
 		head = newnode;
+		printf("\n\tvalue added at first.\n");
 	}
 }
 
@@ -156,9 +156,13 @@ void insert() {
 
 void deletefirst() {
 	struct node* temp = head;
-	head = temp->next;
-	printf("\n\tFirst node deleted.\n");
-	free(temp);
+	if(head==0){
+		printf("\n\tNot any value present for deleting\n");
+	} else {
+		head = temp->next;
+		printf("\n\tFirst node deleted.\n");
+		free(temp);
+	}
 }
 void deletelast() {
 	int i = 0;

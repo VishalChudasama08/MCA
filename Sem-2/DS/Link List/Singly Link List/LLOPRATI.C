@@ -16,6 +16,16 @@ void traversalnew(struct node *);
 void copy();
 void marge_r(struct node *, struct node *);
 
+void sort();
+void reverse();
+
+void even();
+void evenpos();
+void div7();
+void prime();
+int isprime(int);
+int total();
+
 int main(){
 	int i=0;
 	clrscr();
@@ -28,6 +38,13 @@ int main(){
 			case 4: marge(); break;
 			case 5: copy(); break;
 			case 6: marge_r(head, secondhead);
+			case 7: sort(); break;
+			case 8: reverse(); break;
+			case 9: even(); break;
+			case 10: evenpos(); break;
+			case 11: div7(); break;
+			case 12: prime(); break;
+			case 13: printf("\n\tTotal node: %d\n", total()); break;
 			default: printf("\nEnter valid number!\n");
 		}
 		if(i>100){ break; }
@@ -38,13 +55,20 @@ int main(){
 }
 int menu(){
 	int x;
-	printf("\n\t0. Exit program");
-	printf("\n\t1. Create link list");
-	printf("\n\t2. traversal");
-	printf("\n\t3. search");
-	printf("\n\t4. marge link list");
-	printf("\n\t5. copy link list");
-	printf("\n\t6. marge by recursion");
+	printf("\n\t 0. Exit program");
+	printf("\n\t 1. Create link list");
+	printf("\n\t 2. traversal");
+	printf("\n\t 3. search");
+	printf("\n\t 4. marge link list");
+	printf("\n\t 5. copy link list");
+	printf("\n\t 6. marge by recursion");
+	printf("\n\t 7. sorting");
+	printf("\n\t 8. reverse link list");
+	printf("\n\t 9. display even node");
+	printf("\n\t10. display even position node");
+	printf("\n\t11. divided by 7");
+	printf("\n\t12. prime");
+	printf("\n\t13. total node");
 	printf("\n\tEnter your choise: ");
 	scanf("%d", &x);
 	return x;
@@ -185,4 +209,130 @@ void copy(){
 		temp=temp->next;
 	}
 	printf("  End!\n");
+}
+
+void sort(){
+	struct node *temp1=head, *temp2=head->next;
+	int d;
+
+	while(temp1 != 0){
+		temp2=temp1;
+		while(temp2 != 0){
+			if(temp1->data>temp2->data){
+				d = temp1->data;
+				temp1->data = temp2->data;
+				temp2->data = d;
+			}
+			temp2=temp2->next;
+		}
+		temp1=temp1->next;
+	}
+	printf("\n\tSorted link list: \n");
+	traversal();
+}
+
+void reverse(){
+	struct node *t1=head, *t2=head->next, *pn=0, *first=head;
+	while(t1!=0){
+		t1->next=pn;
+		pn=t1;
+		t1=t2;
+		t2=t2->next;
+	}
+	head=pn;
+	last=first;
+}
+
+
+void even(){
+	struct node *temp=head;
+	if(head == 0){
+		printf("\n\nLlink list is empty\n");
+	} else {
+		printf("\n\tEven data:");
+		while(temp != 0){
+			if(temp->data % 2 == 0){
+				printf("  %d", temp->data);
+			}
+			temp=temp->next;
+		}
+		printf("  End!\n");
+	}
+}
+
+void evenpos(){
+	int i=1;
+	struct node *temp=head;
+	if(head == 0){
+		printf("\n\nLlink list is empty\n");
+	} else {
+		traversal();
+		printf("\n\tEven data:");
+		while(temp != 0){
+			if(i % 2 == 0){
+				printf("  %d", temp->data);
+			}
+			i++;
+			temp=temp->next;
+		}
+		printf("  End!\n");
+	}
+}
+
+void div7(){
+	struct node *temp=head;
+	if(head == 0){
+		printf("\n\nLlink list is empty\n");
+	} else {
+		traversal();
+		printf("\n\tDivided by 7:");
+		while(temp != 0){
+			if(temp->data % 7 == 0){
+				printf("  %d", temp->data);
+			}
+			temp=temp->next;
+		}
+		printf("  End!\n");
+	}
+}
+void prime(){
+	struct node *temp=head;
+	if(head == 0){
+		printf("\n\nLlink list is empty\n");
+	} else {
+		traversal();
+		printf("\n\tDivided by 7:");
+		while(temp != 0){
+			if(isprime(temp->data)){
+				printf("  %d", temp->data);
+			}
+			temp=temp->next;
+		}
+		printf("  End!\n");
+	}
+}
+
+int isprime(int val){
+	int i;
+	for(i=2; i<val/2; i++){
+		if(val%i == 0){
+			return 0;
+		}
+	}
+	return 1;
+}
+
+
+int total(){
+	int i=0;
+	struct node *temp=head;
+	if(head == 0){
+		return 0;
+	} else {
+		while(temp != 0){
+			i++;
+			temp=temp->next;
+		}
+		return i;
+	}
 }
