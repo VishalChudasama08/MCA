@@ -5987,7 +5987,7 @@ input.main-search-input::placeholder {
   opacity: 0;
 }
 
-/* .pricing-items {
+.pricing-items {
   border-radius: 20px;
   background: hwb(210 10% 89%);
   padding: 40px 40px;
@@ -6029,7 +6029,7 @@ input.main-search-input::placeholder {
   content: "";
   border: 2px solid rgba(204, 204, 204, 0.2);
   border-radius: 20px;
-} */
+}
 .pricing-items.premium::after {
   position: absolute;
   left: 0px;
