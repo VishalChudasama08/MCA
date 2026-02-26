@@ -14,10 +14,13 @@ int menu();
 void create();
 void traversal();
 void insertfirst();
+void insertlast();
 void deletefirst();
 void deletelast();
 void insert();
 void deleting();
+void reverse();
+int countnode();
 
 int main(){
 	int i=0;
@@ -29,11 +32,13 @@ int main(){
 			case 2: traversal(); break;
 			case 3: insertfirst(); break;
 			case 4: deletefirst(); break;
-			case 5: create(); break;
+			case 5: insertlast(); break;
 			case 6: deletelast(); break;
 			case 7: insert(); break;
 			case 8: deleting(); break;
-			default: printf("\nEnter valid number!");
+			case 9: reverse(); break; // display reverse only
+			case 10: printf("\n\tTotal: %d\n", countnode()); break;
+			default: printf("\nEnter valid number!\n");
 		}
 		if(i>100) break;
 	} while(1);
@@ -69,7 +74,19 @@ void insertfirst(){
 		head=newnode;
 		printf("\n\tNode added at first\n");
 	}
-	
+}
+void insertlast(){
+	struct node *newnode=(struct node *)malloc(sizeof(struct node));
+	if(head==0){
+		create();
+	} else {
+		printf("\tEnter value you want to add at last: ");
+		scanf("%d", &newnode->data);
+		newnode->next=0;
+		newnode->pre=tail;
+		tail=newnode;
+		printf("\n\tNode added at last\n");
+	}
 }
 void deletefirst(){
 	struct node *temp = head;
@@ -104,6 +121,100 @@ void traversal(){
 		printf("  end!\n");
 	}
 	free(temp);
+}
+void reverse(){
+	struct node *temp=tail;
+	if(head==0){
+		printf("\n\tLink list is empty!\n");
+	} else {
+		printf("\n\tLink list:");
+		while(temp!=0){
+			printf("  %d", temp->data);
+			temp=temp->pre;
+		}
+		printf("  end!\n");
+	}
+	free(temp);
+}
+void insert(){
+	int pos, i=2;
+	struct node *newnode=(struct node *)malloc(sizeof(struct node));
+	struct node *temp=head, *cur=head;
+	printf("\n\tEnter value you want to added: ");
+	scanf("%d", &newnode->data);
+	newnode->pre=newnode->next=0;
+	printf("\n\tEnter position: ");
+	scanf("%d", &pos);
+
+
+	if(head==0){ // empty case
+		head=tail=newnode;
+		newnode->next=newnode->pre=0;
+	} else {
+		while(temp!=0){
+			cur=temp;
+			temp=temp->next;
+			if(pos==1) { //first
+				head->pre=newnode;
+				newnode->next=head;
+				newnode->pre=0;
+				head=newnode;
+				break;
+			}
+			if(temp->next==0 && i!=pos){ // last
+				newnode->next=0;
+				newnode->pre=tail;
+				tail->next=newnode;
+				tail=newnode;
+				break;
+			}
+			if(pos==i){ // any
+				newnode->next=temp;
+				newnode->pre=cur;
+				temp->pre=newnode;
+				cur->next=newnode;
+				break;
+			}
+			i++;
+		}
+	}
+}
+void deleting(){
+	int i=2, pos;
+	struct node *temp=head, *cur=head;
+
+	printf("\n\tEnter position: ");
+	scanf("%d", &pos);
+	while(temp!=0){
+		cur=temp;
+		temp=temp->next;
+		if(temp->pre==0){ // first
+			head=head->next;
+			head->pre=0;
+			break;
+		}
+		if(temp->next==0){ // last
+			tail=tail->pre;
+			tail->next=0;
+			break;
+		}
+		if(pos==i){ // any
+			cur->next=temp->next;
+			temp=temp->next;
+			temp->pre=cur;
+			break;
+		}
+		i++;
+	}
+}
+int countnode(){
+	int total=0;
+	struct node *temp=head;
+	while(temp!=0){
+		total++;
+		temp=temp->next;
+	}
+	return total;
 }
 int menu(){
 	int x;
