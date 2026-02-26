@@ -4,3 +4,7 @@
 Eg. stud= [{'name': 'Amit', 'age': 25}, {'name': 'Bina', 'age': 22}, {'name': 'Dax', 'age': 25}]
 """
 
+stud= [{'name': 'Amit', 'age': 25}, {'name': 'Bina', 'age': 22}, {'name': 'Dax', 'age': 25}]
+
+a=sorted(stud, key=lambda x:(x['age']))
+print(a)
