@@ -1,4 +1,4 @@
-class CatchSearch {
+class ThrowDemo2 { // throw in nested try-catch 
 
   public static void main(String args[]) {
     try {
@@ -6,7 +6,7 @@ class CatchSearch {
       a();
       System.out.println("After a");
     }
-    catch(Exception e) {
+    catch(ArithmeticException e) {
       System.out.println("main: " + e);
     }
     finally {
@@ -34,7 +34,7 @@ class CatchSearch {
       c();
       System.out.println("After c");
     }
-    catch(ArrayIndexOutOfBoundsException e) {
+    catch(ArithmeticException e) {
       System.out.println("b: " + e);
     }
     finally {
@@ -48,8 +48,9 @@ class CatchSearch {
       d();
       System.out.println("After d");
     }
-    catch(NumberFormatException e) {
+    catch(ArithmeticException e) {
       System.out.println("c: " + e);
+      throw e;
     }
     finally {
       System.out.println("c: finally");
@@ -58,11 +59,15 @@ class CatchSearch {
 
   public static void d() {
     try {
-      int array[] = new int[4];
-      array[10] = 10; //Array Index out of bounds
+      int i = 1;
+      int j = 0;
+      System.out.println("Before division");
+      System.out.println(i/j); //Arithmetic
+      System.out.println("After division");
     }
-    catch(ClassCastException e) {
+    catch(ArithmeticException e) {
       System.out.println("d: " + e);
+      throw e;
     }
     finally {
       System.out.println("d: finally");

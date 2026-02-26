@@ -2,11 +2,12 @@ class CatchSearch {
 
   public static void main(String args[]) {
     try {
+	  System.out.println("---in Main method----");
       System.out.println("Before a");
-      a();
+      a();//call a method
       System.out.println("After a");
     }
-    catch(Exception e) {
+    catch(ArrayIndexOutOfBound e) {
       System.out.println("main: " + e);
     }
     finally {
@@ -16,8 +17,9 @@ class CatchSearch {
 
   public static void a() {
     try {
+	System.out.println("---in a() method----");
       System.out.println("Before b");
-      b();
+      b();//call b method
       System.out.println("After b");
     }
     catch(ArithmeticException e) {
@@ -27,39 +29,11 @@ class CatchSearch {
       System.out.println("a: finally");
     }
   }
-
   public static void b() {
     try {
-      System.out.println("Before c");
-      c();
-      System.out.println("After c");
-    }
-    catch(ArrayIndexOutOfBoundsException e) {
-      System.out.println("b: " + e);
-    }
-    finally {
-      System.out.println("b: finally");
-    }
-  }
-
-  public static void c() {
-    try {
-      System.out.println("Before d");
-      d();
-      System.out.println("After d");
-    }
-    catch(NumberFormatException e) {
-      System.out.println("c: " + e);
-    }
-    finally {
-      System.out.println("c: finally");
-    }
-  }
-
-  public static void d() {
-    try {
-      int array[] = new int[4];
-      array[10] = 10; //Array Index out of bounds
+	System.out.println("---in b() method----");
+	  int array[] = new int[4];
+      array[10] = 10;//ArrayIndexOutOfBoundsException
     }
     catch(ClassCastException e) {
       System.out.println("d: " + e);

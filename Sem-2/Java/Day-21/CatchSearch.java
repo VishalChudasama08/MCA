@@ -59,7 +59,7 @@ class CatchSearch {
   public static void d() {
     try {
       int array[] = new int[4];
-      array[10] = 10; //Array Index out of bounds
+      array[10] = 10;
     }
     catch(ClassCastException e) {
       System.out.println("d: " + e);
