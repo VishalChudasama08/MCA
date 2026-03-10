@@ -54,13 +54,15 @@ struct node * union_ll(struct node *head1, struct node *head2){
 	temp=head1;
 	while(temp!=0){
 		newnode = (struct node *)malloc(sizeof(struct node));
+		newnode->data=temp->data;
+		newnode->next=0;
 		if(flag){
-			head=newnode;
+			head=pre=newnode;
 			flag=0;
+		} else {
+			pre->next=newnode;
+			pre=newnode;
 		}
-		newnode->data = temp->data;
-		newnode->next = temp->next;
-		pre=temp;
 		temp=temp->next;
 	}
 

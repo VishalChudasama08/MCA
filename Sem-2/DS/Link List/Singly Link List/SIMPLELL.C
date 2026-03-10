@@ -7,11 +7,12 @@ struct node {
 	int data;
 	struct node* next;
 };
-struct node* head = NULL, * last = NULL;
+struct node* head = NULL, *pre = NULL;
 
 void create();
 void traversal();
 void insertfirst();
+void insertlast();
 void insert();
 void deletefirst();
 void deletelast();
@@ -26,7 +27,7 @@ int main() {
 		case 1: create(); break;
 		case 2: traversal(); break;
 		case 3: insertfirst(); break;
-		case 4: create(); break;
+		case 4: insertlast(); break;
 		case 5: insert(); break;
 		case 6: deletefirst(); break;
 		case 7: deletelast(); break;
@@ -56,18 +57,17 @@ int menu() {
 	return x;
 }
 void create() {
-	struct node* newnode = (struct node*)malloc(sizeof(struct node));
+	struct node * newnode = (struct node*)malloc(sizeof(struct node));
 
 	printf("\n\tEnter value you want to insert: ");
 	scanf("%d", &newnode->data);
 	newnode->next = NULL;
 	if (head == NULL) {
-		head = newnode;
-		last = newnode;
+		head = pre = newnode;
 	}
 	else {
-		last->next = newnode;
-		last = newnode;
+		pre->next = newnode;
+		pre = newnode;
 	}
 	printf("\n\tvalue inserted in link list successfully\n");
 }
@@ -89,19 +89,23 @@ void traversal() {
 void insertfirst() {
 	struct node* newnode = (struct node*)malloc(sizeof(struct node));
 
-	if (head == NULL) {
-		create();
-	}
-	else {
-		printf("\n\tEnter value you want to insert: ");
-		scanf("%d", &newnode->data);
+	printf("\n\tEnter value you want to insert: ");
+	scanf("%d", &newnode->data);
 
-		newnode->next = head;
-		head = newnode;
-		printf("\n\tvalue added at first.\n");
-	}
+	newnode->next = head;
+	head = newnode;
 }
-
+void insertlast(){
+	struct node *temp=head;
+	struct node *newnode=(struct node *)malloc(sizeof(struct node));
+	newnode->next=NULL;
+	printf("\n\tEnter value you want to insert: ");
+	scanf("%d", &newnode->data);
+	while(temp->next != NULL){
+		temp=temp->next;
+	}
+	temp->next=newnode;
+}
 void insert() {
 	int pos, i = 1, ans = 0;
 	struct node* temp = head, * pre = head;
@@ -117,7 +121,6 @@ void insert() {
 	if (head == NULL) { // if LL empty
 		newnode->next = NULL;
 		head = newnode;
-		last = newnode;
 		ans = 1;
 	}
 	else {
@@ -134,10 +137,9 @@ void insert() {
 				ans = 1;
 				break;
 			}
-			if (temp->next == NULL && pos > 1) { // last position
+			if (temp->next == NULL && pos == i+1) { // last position
 				newnode->next = NULL;
 				temp->next = newnode;
-				last = newnode;
 				ans = 1;
 				break;
 			}
@@ -155,36 +157,33 @@ void insert() {
 }
 
 void deletefirst() {
-	struct node* temp = head;
-	if(head==0){
-		printf("\n\tNot any value present for deleting\n");
-	} else {
-		head = temp->next;
-		printf("\n\tFirst node deleted.\n");
-		free(temp);
-	}
+	struct node * temp = head;
+	head = temp->next;
+	printf("\n\tFirst node deleted.\n");
+	free(temp);
 }
 void deletelast() {
-	int i = 0;
-	struct node* temp = head, * pre = head;
-	while (1) {
-		if (head->next == NULL) {
-			head = NULL;
-			i = 1;
-			break;
-		}
-		pre = temp;
-		temp = temp->next;
-		if (temp->next == NULL) {
-			pre->next = NULL;
-			i = 1;
-			break;
-		}
+	int flag = 0;
+	struct node * temp = head, * pre = head;
+	if(head == NULL){
+		printf("\n\tLink list empty!\n");
+		return;
 	}
-	if (i) {
+	if (head->next == NULL) {
+		head = NULL;
+		flag = 1;
+	} else {
+		while (temp->next!=NULL) {
+			pre = temp;
+			temp = temp->next;
+		}
+		pre->next=NULL;
+		flag=1;
+	}
+
+	if (flag) {
 		printf("\n\tLast node deleted.\n");
 		free(temp);
-		free(pre);
 	}
 }
 void deleting() {

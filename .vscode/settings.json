@@ -26,6 +26,12 @@
       "CIRCUPRI.C": "cpp",
       "FLOAT.C": "cpp",
       "021PAISA.C": "cpp",
-      "FILEINT.C": "cpp"
+      "FILEINT.C": "cpp",
+      "STRUCTPR.C": "cpp",
+      "DUBBLYLL.C": "cpp",
+      "UNIONLL.C": "cpp",
+      "STACKLL.C": "cpp",
+      "SIMPLELL.C": "cpp",
+      "QUEUELL.C": "cpp"
    }
 }
