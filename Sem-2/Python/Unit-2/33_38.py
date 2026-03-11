@@ -1,6 +1,6 @@
 # Unit-2 PYTHON INDICATIVE LIST.docx
 # 33.	Create a tuple of 5 fruits. Ask the user to input a fruit name and search that name in the given fruit tuple. Display suitable messages
-"""
+
 tf = ('apple', 'banana', 'orange', 'mango', 'cherry')
 
 fruit = input("Enter Fruit name:")
@@ -13,7 +13,9 @@ else:
 # 34.	Create a tuple of cities of Gujarat by taking user input.
 cities = input("Enter gujarat cities name separate by comma: ")
 
-t5 = cities.split(",")
+lst = cities.split(",")
+t5 = tuple(lst)
+print(t5)
 
 # 35.	Find the length of name of each city in the above tuple. With and without len() method
 print("With len => ")
@@ -28,7 +30,7 @@ for i in t5:
     for j in c:
         count += 1
     print("\t", c, "= ", count)
-
+"""
 # 36.	Create a nested tuple t4 of your (name, (hobbies), (friends), degree)
 
 name = input("Enter name: ")
@@ -64,7 +66,7 @@ if flag == 1:
         print("Position of ", x, " is: t4[", p[0], "]", sep="")
 else:
     print("Not found")
-"""
+
 # 38.	Take a tuple of 10 integer numbers and segregate odd and even numbers in 2 different tuples.
 
 t5 = (1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
@@ -80,3 +82,4 @@ for i in t5:
 
 print("Even number tuple:", tEven)
 print("Odd number tuple:", tOdd)
+"""
