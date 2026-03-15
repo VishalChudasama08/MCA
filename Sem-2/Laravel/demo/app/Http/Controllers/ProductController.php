@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductsModel;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller{
-    public function getAllProduct(){
-        $products = ProductsModel::all(); // get all products and
-        return view('products-table', compact('products'));
+use App\Models\Product;
+
+class ProductController extends Controller
+{
+    public function productList()
+    {
+        $data = Product::with('category', 'user')->orderby('name', 'asc')->get();
+        $total = $data->count();
+
+        // print_r($data->toArray());die;
+
+        return view("RelatedTable/product_list", compact("data", "total"));
     }
 }
