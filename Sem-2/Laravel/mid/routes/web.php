@@ -42,7 +42,7 @@ Route::get('/register', function () {
 
 Route::post('/loginNow', [UserController::class, 'loginPro']);
 Route::post('registerNow', [UserController::class, 'registerPro']);
-Route::get('logoutNoe', [UserController::class, 'logout']);
+Route::get('logoutNow', [UserController::class, 'logout']);
 
 
 // product router's
