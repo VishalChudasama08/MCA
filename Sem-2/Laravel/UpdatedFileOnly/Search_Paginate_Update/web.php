@@ -1,0 +1,97 @@
+<?php
+
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\StaffController;
+
+use Illuminate\Support\Facades\Route;
+
+
+Route::get('/productTable', [ProductController::class, 'getAllProduct']); // run getAllProduct function from ProductController class
+
+Route::get('employeesTable', [EmployeeController::class, 'listEmployee']);
+Route::get('addEmployeeForm', function () {
+    return view('form-add-employee');
+});
+Route::post('addEmployee', [EmployeeController::class,'addEmployee']);
+Route::get('delEmp/{id}', [EmployeeController::class,'deleteEmployee']);
+
+
+Route::get('/staffTable', [StaffController::class, 'getStaff']);
+Route::get('/editStaff/{id}', [StaffController::class, 'findStaff']);
+Route::post('/editStaffData', [StaffController::class, 'editStaff']);
+
+
+
+
+Route::get('/', function(){
+    return view('Dashboard_page');
+});
+
+Route::get('/charts', function(){
+    return view('charts_page');
+});
+
+Route::get('/widgets', function(){
+    return view('widgets_page');
+});
+
+Route::get('/demo-tables', function(){
+    return view('demo-tables');
+});
+
+Route::get('/grid', function(){
+    return view('grid_page');
+});
+
+Route::get('/form-basic', function(){
+    return view('form-basic_page');
+});
+
+Route::get('/form-wizard', function(){
+    return view('form-wizard_page');
+});
+
+Route::get('/icon-material', function(){
+    return view('icon-material_page');
+});
+
+Route::get('/icon-fontawesome', function(){
+    return view('icon-fontawesome_page');
+});
+
+Route::get('/buttons', function(){
+    return view('buttons_page');
+});
+
+Route::get('/elements', function(){
+    return view('elements_page');
+});
+
+Route::get('/Dashboard2', function(){
+    return view('Dashboard2_page');
+});
+
+Route::get('/gallery', function(){
+    return view('gallery_page');
+});
+
+Route::get('/calendar', function(){
+    return view('calendar_page');
+});
+
+Route::get('/invoice', function(){
+    return view('invoice_page');
+});
+
+Route::get('/chat', function(){
+    return view('chat_page');
+});
+
+Route::get('/authentication-login', function(){
+    return view('authentication-login_page');
+});
+
+Route::get('/authentication-register', function(){
+    return view('authentication-register_page');
+});
