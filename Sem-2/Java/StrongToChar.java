@@ -1,4 +1,4 @@
-class Test {
+class StrongToChar {
 	public static void main(String[] args) {
 
 		for (String s : args) {
