@@ -1,0 +1,6 @@
+101	Pinak	Jamnagar
+102	Ayush	Surat
+103	Bhavesh	Khambhaliya
+104	Darpan	Somnath
+105	Hardik	Rajkot
+106	Haresh	Junagadh

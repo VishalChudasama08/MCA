@@ -1,0 +1,1 @@
+{'Rollno': 23, 'name': 'vishal', 'age': 23, 'hobby': ['movie'], 'marks': 80}{'Rollno': 5, 'name': 'v2', 'age': 22, 'hobby': ['moviw'], 'marks': 90}
