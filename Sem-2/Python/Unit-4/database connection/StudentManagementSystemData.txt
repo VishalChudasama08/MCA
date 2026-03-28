@@ -1,0 +1,6 @@
+----- Student Management System -----
+
+No	Name	mark	grade
+4	ayush	80.0	A
+13	Vishal	95.0	A
+41	pinak	70.0	B
