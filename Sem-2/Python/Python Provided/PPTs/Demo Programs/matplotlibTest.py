@@ -33,6 +33,6 @@ plt.title('Letter M')
 plt.xlabel('X label')
 plt.ylabel('Y Label')
 plt.grid(axis = 'y', linestyle='--', linewidth=1)
-
+plt.legend()
 plt.savefig('plt1.png')
 plt.show()

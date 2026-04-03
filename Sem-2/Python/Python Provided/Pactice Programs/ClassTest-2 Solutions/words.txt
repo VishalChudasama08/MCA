@@ -1,0 +1,10 @@
+word
+bell
+bird
+game
+dark
+tree
+star
+sing
+rice
+doll
