@@ -16,7 +16,7 @@ class PatientMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(Auth::user() && Auth()::user()->user_type == "Patient"){
+        if(Auth::user() && Auth::user()->user_type == "Patient"){
             return $next($request);
         } else {
             Auth::logout();
