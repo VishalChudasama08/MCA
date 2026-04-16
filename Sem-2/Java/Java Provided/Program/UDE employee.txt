@@ -1,0 +1,47 @@
+
+
+Write a program in java to create a class employee with fields empno,empname,salary.
+Give the values of empno and empname using constructor. Create the set method to store the value of the salary.
+The set method should raise a user defined exception if the salary is less than 10000 
+giving appropriate message
+
+
+Write a program in java to create a class for voters(name,age,address).
+Enter the details from the user and check the elgibility of the voter
+to vote. If he is not eligible an exception should be raised. else
+message should be display "Congratulations you are eligible".
+
+d
+
+
+Write a Java program to design a simple Flight Reservation System using object-oriented programming concepts.
+
+The program should include the following features:
+
+Create an abstract class to store common flight details such as flight number, destination, and available seats.
+
+Define an interface that contains methods for booking and cancelling tickets.
+
+Create a subclass that represents a specific type of flight and implements the reservation interface.
+
+Implement ticket booking and cancellation functionality.
+
+Generate a user-defined exception if the number of seats requested for booking exceeds the available seats.
+
+Demonstrate the working of the program in the main method with proper exception handling.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
