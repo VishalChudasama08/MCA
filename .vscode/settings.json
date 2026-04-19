@@ -32,6 +32,7 @@
       "UNIONLL.C": "cpp",
       "STACKLL.C": "cpp",
       "SIMPLELL.C": "cpp",
-      "QUEUELL.C": "cpp"
+      "QUEUELL.C": "cpp",
+      "GRAPH2.C": "cpp"
    }
 }
