@@ -33,12 +33,13 @@ int main(){
 void undirectedGraph(int n){
 	int arr[size][size], i,j, d=0;
 
+	printf("\n\tEnter 0 for no edge or 1 for edge\n\n");
 	for(i=0;i<n;i++){
 		for(j=0;j<n;j++){
 			if(i==j){
 				arr[i][j] = 0;
 			} else {
-				printf("vertices %d and %d are adjecent ? (0/1): ", i+1, j+1);
+				printf("\tvertices %d and %d are adjecent ? (0/1): ", i+1, j+1);
 				scanf("%d", &arr[i][j]);
 			}
 		}
