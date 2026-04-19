@@ -1,46 +1,75 @@
-// binary sorted tree
+// binary sorted tree, insert value from user
 
 #include<stdio.h>
 #include<conio.h>
 
 struct node {
 	int data;
-	struct node *left;
-	struct node *right;
+	struct node* left;
+	struct node* right;
 };
-struct node * root = 0;
+struct node* root = 0;
 
-void insert(){
-
+struct node* create(int data) {
+	struct node* nn = (struct node*)malloc(sizeof(struct node));
+	nn->data = data;
+	nn->left = nn->right = 0;
+	return nn;
 }
 
-void inorder(struct node * temp){
-	if(temp==0){
+struct node* insert(struct node* nn, int data) {
+	if (nn == 0) {
+		nn = create(data);
+	}
+	else if (data < nn->data) {
+		nn->left = insert(nn->left, data);
+	}
+	else if (data > nn->data) {
+		nn->right = insert(nn->right, data);
+	}
+	return nn;
+}
+
+void inorder(struct node* temp) {
+	if (temp == 0) {
 		return;
-	} else {
+	}
+	else {
 		inorder(temp->left);
 		printf("  %d", temp->data);
 		inorder(temp->right);
 	}
 }
 
-int main(){
-	int x,i=0;
+int main() {
+	int x, i = 0, data;
 	clrscr();
-	do{
+	do {
 		printf("\n\t0. exit");
 		printf("\n\t1. insert");
-		printf("\n\t2. inorder");
-		printf("\n\tEnter choise: ");
+		printf("\n\t2. inorder traversal");
+		printf("\n\tEnter choice: ");
 		scanf("%d", &x);
-		switch(x){
-			case 0: exit();
-			case 1: insert(); break;
-			case 2: inorder(root); break;
-			default: printf("\n\tEnter valid number\n");
+		switch (x) {
+		case 0: exit();
+		case 1: {
+			printf("\n\tEnter data: ");
+			scanf("%d", &data);
+			if (root == 0) { root = insert(root, data); }
+			else { insert(root, data); }
+			printf("\n\tInserted successfully\n");
+			break;
 		}
-		if(i>100) break; else i++;
-	}while(1);
+		case 2: {
+			printf("\n\tInorder(left-root-right): ");
+			inorder(root);
+			printf("\n");
+			break;
+		}
+		default: printf("\n\tEnter valid number\n");
+		}
+		if (i > 100) break; else i++;
+	} while (1);
 	getch();
 	return 0;
 }

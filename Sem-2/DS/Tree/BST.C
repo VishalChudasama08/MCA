@@ -18,14 +18,12 @@ struct node * create(int data){
 struct node * insert (struct node *nn, int data){
 	if(nn==0){
 		nn=create(data);
-		return nn;
 	} else if(data<nn->data){
 		nn->left=insert(nn->left, data);
 	} else if(data>nn->data){
 		nn->right=insert(nn->right, data);
 	}
-
-	return 0;
+	return nn;
 }
 
 void inorder(struct node * temp){
@@ -41,14 +39,17 @@ void inorder(struct node * temp){
 int main(){
 	clrscr();
 	root = insert(root, 50);
-	insert(root, 30);
-	insert(root, 70);
 	/*insert(root, 30);
+	insert(root, 70);
+	*/insert(root, 30);
 	insert(root, 45);
 	insert(root, 55);
-	insert(root, 70);*/
+	insert(root, 70);
 
+	printf("\n\tInorder(left-root-right): ");
 	inorder(root);
+	printf("\n");
+
 	getch();
 	return 0;
 }

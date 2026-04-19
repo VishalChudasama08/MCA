@@ -33,6 +33,11 @@
       "STACKLL.C": "cpp",
       "SIMPLELL.C": "cpp",
       "QUEUELL.C": "cpp",
-      "GRAPH2.C": "cpp"
+      "GRAPH2.C": "cpp",
+      "GRAPH.C": "cpp",
+      "BST_D.C": "cpp",
+      "BST.C": "cpp",
+      "BTREE.C": "cpp",
+      "SORTING.C": "cpp"
    }
 }
