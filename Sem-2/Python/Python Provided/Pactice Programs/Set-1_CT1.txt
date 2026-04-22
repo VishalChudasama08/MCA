@@ -1,0 +1,22 @@
+Q1. Word Counter in a Sentence						
+Write a Python program that:
+- Accepts a sentence from the user.
+- Create a python script to count the number of words in the sentence.
+- Check if a certain word exists in the sentence or not and display suitable message.
+
+Q2. Shopping Cart Billing System						
+
+A shopkeeper wants a simple billing system. Write a Python program that:
+- Stores product prices in a dictionary (e.g., {"Apple": 50, "Banana": 20, "Mango": 30}).
+-	Asks the user to enter products they want to buy with quantity.
+-	Check if the entered product exists in the dictionary.
+-	Write a script to calculate the total bill.
+
+Q3. Triangle Type Determination 						
+Write a Python program that:
+•	Takes three side lengths of a triangle as input.
+•	Uses conditional statements to classify the triangle as: 
+o	Equilateral (all sides equal)
+o	Isosceles (two sides equal)
+o	Scalene (all sides different)
+o	Not a Triangle (if the sum of any two sides is not greater than the third side).
