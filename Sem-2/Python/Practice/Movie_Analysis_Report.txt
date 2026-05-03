@@ -1,0 +1,18 @@
+--- Movie Analysis Report ---
+
+Average Rating per Movie:
+	Avatar          : 8.20
+	Inception       : 8.67
+	Interstellar    : 9.00
+	Joker           : 7.75
+	Titanic         : 7.50
+
+Top Rated Movie:
+	Interstellar    :9.00
+
+Average Rating per User:
+	UserID: 1   : 7.50
+	UserID: 2   : 8.50
+	UserID: 3   : 7.80
+	UserID: 4   : 8.25
+	UserID: 5   : 9.33
