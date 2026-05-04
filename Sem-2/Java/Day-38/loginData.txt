@@ -1,2 +1,2 @@
-User Name :	Admin
-User Password :	12345
+User Name:	Admin
+User Password:	12345

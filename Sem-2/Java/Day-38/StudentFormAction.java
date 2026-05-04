@@ -9,7 +9,6 @@ class StudentFormAction {
         frame.setLayout(null);
         // frame.setLayout(new FlowLayout());
         // frame.setLayout(new GridLayout(17,3));
-        frame.setSize(610, 680);
 
         JLabel lblDetail = new JLabel("Student Information");
         lblDetail.setBounds(210, 15, 250, 30);
@@ -32,11 +31,10 @@ class StudentFormAction {
 
         JLabel lblAddress = new JLabel("Enter Your Address: ");
         lblAddress.setBounds(100, 140, 180, 30);
-        JTextField txtAddress = new JTextField();
-        txtAddress.setBounds(240, 145, 220, 60);
+        JTextArea txtAddress = new JTextArea();
         JScrollPane scrollPanel = new JScrollPane(txtAddress);
+        scrollPanel.setBounds(240, 145, 220, 60);
         frame.add(lblAddress);
-        frame.add(txtAddress);
         frame.add(scrollPanel);
 
         JLabel lblHobby = new JLabel("Your Hobbes: ");
@@ -84,7 +82,8 @@ class StudentFormAction {
         frame.add(btnRemove);
 
         JLabel data = new JLabel();
-        data.setBounds(200, 400, 400, 200);
+        // JTextArea data = new JTextArea();
+        data.setBounds(100, 420, 400, 200);
         frame.add(data);
 
         JCheckBox agreeCheckBox = new JCheckBox("I Am Agree");
@@ -118,7 +117,14 @@ class StudentFormAction {
                     txtUserName.requestFocus();
                     return;
                 }
-                String number = txtUserNumber.getText();
+                long number = 0;
+                try {
+                    number = Long.parseLong(txtUserNumber.getText());
+                } catch (Exception ex){
+                    JOptionPane.showMessageDialog(frame, "Please enter a valid number");
+                    txtUserNumber.requestFocus();
+                    return;
+                }
                 if (txtUserNumber.getText().equals("")) {
                     JOptionPane.showMessageDialog(frame, "Please enter your number");
                     txtUserNumber.requestFocus();
@@ -175,6 +181,7 @@ class StudentFormAction {
             }
         });
 
+        frame.setSize(610, 680);
         frame.setVisible(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

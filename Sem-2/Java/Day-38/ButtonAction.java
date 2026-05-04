@@ -53,6 +53,7 @@ class ButtonAction {
                 if(color.equalsIgnoreCase("gray")) lblWel.setForeground(Color.GRAY);
                 if(color.equalsIgnoreCase("green")) lblWel.setForeground(Color.GREEN);
                 if(color.equalsIgnoreCase("orange")) lblWel.setForeground(Color.ORANGE);
+                if(color.equalsIgnoreCase("blue")) lblWel.setForeground(Color.BLUE);
                 String name = txtName.getText();
                 lblWel.setText("Welcome " + name);
             }

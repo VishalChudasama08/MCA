@@ -31,11 +31,10 @@ class StudentDetailsForm {
 
         JLabel lblAddress = new JLabel("Enter Your Address : ");
         lblAddress.setBounds(100, 140, 180, 30);
-        JTextField txtAddress = new JTextField();
-        txtAddress.setBounds(240, 145, 220, 60);
+        JTextArea txtAddress = new JTextArea();
         JScrollPane scrollPanel = new JScrollPane(txtAddress);
+        scrollPanel.setBounds(240, 145, 220, 60);
         frame.add(lblAddress);
-        frame.add(txtAddress);
         frame.add(scrollPanel);
 
         JLabel lblHobby = new JLabel("Your Hobbes : ");
@@ -56,11 +55,11 @@ class StudentDetailsForm {
         JRadioButton rbtnMale = new JRadioButton("Male");
         rbtnMale.setBounds(240, 255, 80, 25);
         JRadioButton rbtnFemale = new JRadioButton("Female");
+        rbtnFemale.setBounds(330, 254, 80, 25);
         frame.add(lblGender);
         frame.add(rbtnMale);
         frame.add(rbtnFemale);
 
-        rbtnFemale.setBounds(330, 254, 80, 25);
         ButtonGroup bg = new ButtonGroup();
         bg.add(rbtnMale);
         bg.add(rbtnFemale);

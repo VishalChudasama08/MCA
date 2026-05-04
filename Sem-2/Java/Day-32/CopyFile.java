@@ -15,7 +15,7 @@ class CopyFile {
                 while((i = fr.read()) != -1){
                     fw.write((char)i);
                 }
-                System.out.print(sourceFileName + "File copy on " + copyFileName "File successfully!");
+                System.out.print(sourceFileName + "File copy on " + copyFileName + "File successfully!");
                 fr.close();
                 fw.close();
             } else {
