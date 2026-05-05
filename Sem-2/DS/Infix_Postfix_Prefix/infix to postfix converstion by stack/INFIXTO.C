@@ -1,3 +1,5 @@
+// infix to postfix conversion by stack
+/*
 #include<stdio.h>
 #include<conio.h>
 #define size 30
@@ -61,7 +63,7 @@ void operators(char val){
 	switch(val){
 		case '+': headleStack();
 	}
-}
+}*/
 /*
 void pop(){
 	if(top==-1){
@@ -93,3 +95,85 @@ void count(){
 		printf("\n\tHere count is %d in stack\n", top+1);
 	}
 } */
+
+#include<stdio.h>
+#include<ctype.h>
+
+#define SIZE 30
+
+char stack[SIZE];
+int top = -1;
+
+char infix[SIZE];
+char postfix[SIZE];
+int pos = -1;
+
+// function declarations
+void push(char);
+char pop();
+char peek();
+int precedence(char);
+
+int main(){
+    int i = 0;
+    char val;
+
+    printf("\nEnter infix: ");
+    scanf("%s", infix);
+
+    while((val = infix[i]) != '\0'){
+
+        if(isalpha(val) || isdigit(val)){ // operand
+            postfix[++pos] = val;
+        } else if(val == '('){ // opening bracket
+            push(val);
+        } else if(val == ')'){ // closing bracket
+            while(top != -1 && peek() != '('){
+                postfix[++pos] = pop();
+            }
+            pop(); // remove '('
+        } else { // operator
+            while(top != -1 && precedence(peek()) >= precedence(val)){
+                postfix[++pos] = pop();
+            }
+            push(val);
+        }
+
+        i++;
+    }
+
+    // pop remaining operators
+    while(top != -1){
+        postfix[++pos] = pop();
+    }
+
+    postfix[++pos] = '\0';
+
+    printf("\nPostfix: %s\n", postfix);
+
+    return 0;
+}
+
+void push(char val){
+    stack[++top] = val;
+}
+
+char pop(){
+    return stack[top--];
+}
+
+char peek(){
+    return stack[top];
+}
+
+int precedence(char op){
+    switch(op){ // ^ => 3, *,/,% => 2, +,- => 1
+        case '^': return 3;
+        case '*':
+        case '/':
+        case '%': return 2;
+        case '+':
+        case '-': return 1;
+    }
+    return 0;
+}

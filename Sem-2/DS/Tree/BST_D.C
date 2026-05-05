@@ -30,7 +30,17 @@ struct node* insert(struct node* nn, int data) {
 	return nn;
 }
 
-void inorder(struct node* temp) {
+void preorder(struct node* temp) { // root-left-right
+	if (temp == 0) {
+		return;
+	}
+	else {
+		printf("  %d", temp->data);
+		preorder(temp->left);
+		preorder(temp->right);
+	}
+}
+void inorder(struct node* temp) { // left-root-right
 	if (temp == 0) {
 		return;
 	}
@@ -40,6 +50,16 @@ void inorder(struct node* temp) {
 		inorder(temp->right);
 	}
 }
+void postorder(struct node* temp) { // left-right-root
+	if (temp == 0) {
+		return;
+	}
+	else {
+		postorder(temp->left);
+		postorder(temp->right);
+		printf("  %d", temp->data);
+	}
+}
 
 int main() {
 	int x, i = 0, data;
@@ -47,26 +67,40 @@ int main() {
 	do {
 		printf("\n\t0. exit");
 		printf("\n\t1. insert");
-		printf("\n\t2. inorder traversal");
+		printf("\n\t2. preorder traversal");
+		printf("\n\t3. inorder traversal");
+		printf("\n\t4. postorder traversal");
 		printf("\n\tEnter choice: ");
 		scanf("%d", &x);
 		switch (x) {
-		case 0: exit();
-		case 1: {
-			printf("\n\tEnter data: ");
-			scanf("%d", &data);
-			if (root == 0) { root = insert(root, data); }
-			else { insert(root, data); }
-			printf("\n\tInserted successfully\n");
-			break;
-		}
-		case 2: {
-			printf("\n\tInorder(left-root-right): ");
-			inorder(root);
-			printf("\n");
-			break;
-		}
-		default: printf("\n\tEnter valid number\n");
+			case 0: exit(0);
+			case 1: {
+				printf("\n\tEnter data: ");
+				scanf("%d", &data);
+				if (root == 0) { root = insert(root, data); }
+				else { insert(root, data); }
+				printf("\n\tInserted successfully\n");
+				break;
+			}
+			case 2: {
+				printf("\n\tPreorder(root-left-right): ");
+				preorder(root);
+				printf("\n");
+				break;
+			}
+			case 3: {
+				printf("\n\tInorder(left-root-right): ");
+				inorder(root);
+				printf("\n");
+				break;
+			}
+			case 4: {
+				printf("\n\tPostorder(left-right-root): ");
+				postorder(root);
+				printf("\n");
+				break;
+			}
+			default: printf("\n\tEnter valid number\n");
 		}
 		if (i > 100) break; else i++;
 	} while (1);

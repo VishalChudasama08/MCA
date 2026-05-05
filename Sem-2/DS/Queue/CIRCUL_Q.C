@@ -111,13 +111,18 @@ void traversal(){
 	printf("end!\n");
 }
 int isFull(){
-  if(front==0 && rear==size-1){
+  if(front==(rear+1)%size){
+	return 1;
+  } else {
+	return 0;
+  }
+/*if(front==0 && rear==size-1){
 	return 1;
   } else if(front-1==rear){
 	return 1;
   } else {
 	return 0;
-  }
+  }*/
 }
 
 int isEmpty(){

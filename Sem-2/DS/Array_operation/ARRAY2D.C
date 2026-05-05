@@ -1,34 +1,30 @@
 #include<stdio.h>
 #include<conio.h>
 
-//int *arr;
-int arr[10][10];
+int **arr;
 int r,c;
 
 int menu();
 void display();
 void rowsum();
 void colsum();
-//void insert(int, int);
-//void delete(int);
-//void update(int, int);
-//void search(int);
-//void reverse();
-//void merge();
-//void split();
-//void displayd(int [], int);
+void search();
 
 int main(){
 	int x, i, j, pos, val;
 	clrscr();
 
-	printf("\n\tHow many row's element in Array ?:");
+	printf("\n\tHow many row's element in Array ?: ");
 	scanf("%d", &r);
 
-	printf("\n\tHow many column's element in Array ?:");
+	printf("\n\tHow many column's element in Array ?: ");
 	scanf("%d", &c);
 
-	//arr = (int *)malloc(n*sizeof(int)); // dynamic memory allocation for array
+	arr = (int **)malloc(r * sizeof(int *));
+
+	for (i=0; i<r; i++){
+		arr[i] = (int *)malloc(c * sizeof(int));
+	}
 
 	for(i=0;i<r;i++){
 		for(j=0;j<c;j++){
@@ -39,39 +35,13 @@ int main(){
 
 	do{
 		x = menu();
-			switch(x){
-			case 0: exit();
+		switch(x){
+			case 0: exit(0);
 			case 1: display(); break;
 			case 2: rowsum(); break;
 			case 3: colsum(); break;
-			/*case 2:
-				printf("\n\tEnter value: ");
-				scanf("%d", &val);
-				printf("\n\tEnter position: ");
-				scanf("%d", &pos);
-				insert(val, pos);
-				break;
-			case 3:
-				printf("\n\tEnter position: ");
-				scanf("%d", &pos);
-				delete(pos);
-				break;
-			case 4:
-				printf("\n\tEnter new value: ");
-				scanf("%d", &val);
-				printf("\n\tEnter position: ");
-				scanf("%d", &pos);
-				update(val, pos);
-				break;
-			case 5:
-				printf("\n\tEnter value: ");
-				scanf("%d", &val);
-				search(val);
-				break;
-			case 6: reverse(); break;
-			case 7: merge(); break;
-			case 8: split(); break; */
-			default: printf("\n\tEnter valid number"); break;
+			case 4: search(); break;
+			default: printf("\n\tEnter valid number\n"); 
 		}
 	}while(1);
 }
@@ -81,14 +51,8 @@ int menu(){
 	printf("\n\t1. Display ");
 	printf("\n\t2. row sum");
 	printf("\n\t3. column sum");
-	//printf("\n\t2. Insert at position ");
-	//printf("\n\t3. Delete at position ");
-	printf("\n\t4. Update value");
-	printf("\n\t5. Search value");
-	printf("\n\t6. Reverse");
-	printf("\n\t7. merge");
-	printf("\n\t8. split");
-	printf("\n\tEnter your choise: ");
+	printf("\n\t4. Search value");
+	printf("\n\tEnter your choice: ");
 	scanf("%d", &n);
 	return n;
 }
@@ -115,18 +79,42 @@ void rowsum(){
 	}
 }
 void colsum(){
-	int i,j,sum[10]={0};
+	int i,j,sum[c]={0};
 	printf("\nColumn Sum =>\n");
 	for(i=0;i<r;i++){
-		printf("\t  ");
+		printf("\t    ");
 		for(j=0;j<c;j++){
-			printf("%d  ", arr[i][j]);
+			printf("%d   ", arr[i][j]);
 			sum[j] += arr[i][j];
 		}
 		printf("\n");
 	}
-	printf("colu sum =");
-	for(i=0;i<r;i++){
+	printf("column sum: ");
+	for(i=0;i<c;i++){
 		printf("%d  ", sum[i]);
+	}
+}
+void search(){
+	int i, j, row=-1, col=-1, n;
+
+	display();
+
+	printf("\n\tEnter value you want to search: ");
+	scanf("%d", &n);
+
+	for (i=0; i<r; i++){
+		for (j=0; j<c; j++){
+			if (arr[i][j] == n){
+				row = i;
+				col = j;
+				break;
+			}
+		}
+	}
+
+	if (row == -1){
+		printf("\n\tValue not found. OR Value not present in Array\n");
+	} else {
+		printf("\n\tValue present at row %d & column %d\n", row, col);
 	}
 }

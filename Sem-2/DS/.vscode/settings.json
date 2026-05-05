@@ -1,0 +1,32 @@
+{
+	"files.associations": {
+		"ARRAY.C": "cpp",
+		"ARRAY2D.C": "cpp",
+		"STACK.C": "cpp",
+		"REVEBYST.C": "cpp",
+		"BST.C": "cpp",
+		"BTREE.C": "cpp",
+		"BST_D.C": "cpp",
+		"GRAPH.C": "cpp",
+		"GRAPH2.C": "cpp",
+		"PALIN_ST.C": "cpp",
+		"BRAKET.C": "cpp",
+		"QUEUE.C": "cpp",
+		"CIRCUL_Q.C": "cpp",
+		"Q_CIRCUL.C": "cpp",
+		"SIMPLELL.C": "cpp",
+		"DUBBLYLL.C": "cpp",
+		"LLEVEN.C": "cpp",
+		"LLOPRATI.C": "cpp",
+		"LLSEARCH.C": "cpp",
+		"LLSORT.C": "cpp",
+		"QUEUELL.C": "cpp",
+		"STACKLL.C": "cpp",
+		"UNIONLL.C": "cpp",
+		"SI_CI_LL.C": "cpp",
+		"INFIXTO.C": "cpp",
+		"POSTEVOL.C": "cpp",
+		"BINS.C": "cpp",
+		"SORTING.C": "cpp"
+	}
+}

@@ -31,7 +31,7 @@ int main(){
 
 	do{
 		x = menu();
-			switch(x){
+		switch(x){
 			case 0: exit();
 			case 1: display(); break;
 			case 2:
@@ -107,19 +107,19 @@ void insert(int val, int pos){
 void delete(int pos){
 	int i;
 
-	// reallocate memory for one reduse element
-	arr = (int *)realloc(arr, (n-1) * sizeof(int));
-
 	for(i=pos-1;i<n;i++){
 		arr[i] = arr[i+1];
 	}
 	n--;
-	printf("\nValue deleted successfully\n");
+	
+	// reallocate memory for one reduse element
+	arr = (int *)realloc(arr, n * sizeof(int));
+	printf("\n\tValue deleted successfully\n");
 }
 
 void update(int val, int pos){
 	arr[pos-1] = val;
-	printf("\n\Value update successfully\n");
+	printf("\n\tValue update successfully\n");
 }
 
 void search(int val){
