@@ -48,6 +48,11 @@ create model => (cmd in project folder)
 	C:\xampp\htdocs\demo> php artisan make:model Product
 	--   INFO  Model [C:\xampp\htdocs\demo\app\Models\Product.php] created successfully.
 
+create seeder => php artisan make:seeder UserSeeder
+   --   [...\database\seeders\UserSeeder.php] created successfully.
+
+run seeder => php artisan db:seed --class=UserSeeder
+
 
 
 
