@@ -38,7 +38,8 @@
       "BST_D.C": "cpp",
       "BST.C": "cpp",
       "BTREE.C": "cpp",
-      "SORTING.C": "cpp"
+      "SORTING.C": "cpp",
+      "026LEAP.C": "cpp"
    },
    "python-envs.defaultEnvManager": "ms-python.python:system",
    "python-envs.pythonProjects": []
