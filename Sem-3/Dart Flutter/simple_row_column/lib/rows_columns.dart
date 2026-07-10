@@ -160,22 +160,20 @@ class RowsColumns extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: 80,
+                      height: 70,
                       width: 40,
                       decoration: BoxDecoration(
                           color: Colors.redAccent,
-                          
                       ),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Container(
-                      height: 80,
+                      height: 70,
                       width: 40,
                       decoration: BoxDecoration(
                           color: Colors.redAccent,
-                          
                       ),
                     ),
                   ),

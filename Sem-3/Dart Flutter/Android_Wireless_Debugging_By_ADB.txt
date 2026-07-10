@@ -1,0 +1,158 @@
+Android Wireless Debugging (My Setup)
+
+My Device
+
+-   Phone: Realme 6 (RMX2001)
+-   Android: 11
+-   Laptop: Windows
+-   Flutter Project
+-   Android SDK: D:_Coding
+
+First-Time Setup (One Time)
+
+1. Connect phone with USB cable.
+
+2. Enable Developer Options
+
+Settings → Additional Settings → Developer Options
+
+Enable: - USB Debugging
+
+3. Open PowerShell (or Android Studio Terminal)
+
+Run:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" devices
+
+Expected:
+
+    List of devices attached
+    VG45XKGMSKXSZTDI    device
+
+4. Enable ADB over Wi-Fi
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" tcpip 5555
+
+Expected:
+
+    restarting in TCP mode port: 5555
+
+5. Find phone hotspot IP
+
+Run:
+
+    ipconfig
+
+Look for:
+
+    Wireless LAN adapter Wi-Fi
+
+    Default Gateway : 10.229.255.136
+
+In my case, the phone hotspot IP was:
+
+    10.229.255.136
+
+6. Connect wirelessly
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" connect 10.229.255.136:5555
+
+Expected:
+
+    connected to 10.229.255.136:5555
+
+7. Verify
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" devices
+
+Expected:
+
+    List of devices attached
+    VG45XKGMSKXSZTDI      device
+    10.229.255.136:5555   device
+
+8. Remove USB cable
+
+Run again:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" devices
+
+Expected:
+
+    List of devices attached
+    10.229.255.136:5555   device
+
+9. Check Flutter
+
+    flutter devices
+
+Expected:
+
+    RMX2001 (mobile) • 10.229.255.136:5555
+
+Now run your Flutter app normally.
+
+------------------------------------------------------------------------
+
+Daily Use
+
+Case 1: Phone NOT restarted
+
+1.  Turn on phone hotspot.
+2.  Connect laptop to hotspot.
+3.  Run:
+
+    ipconfig
+
+Check the Default Gateway (phone IP).
+
+Then run:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" connect <DefaultGateway>:5555
+
+Example:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" connect 10.229.255.136:5555
+
+Verify:
+
+    flutter devices
+
+No USB cable needed.
+
+------------------------------------------------------------------------
+
+Case 2: Phone restarted
+
+Connect USB once.
+
+Run:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" tcpip 5555
+
+Then:
+
+    ipconfig
+
+Find Default Gateway.
+
+Run:
+
+    & "D:\Happy_Coding\Android\Sdk\platform-tools\adb.exe" connect <DefaultGateway>:5555
+
+Remove USB.
+
+Run:
+
+    flutter devices
+
+Done.
+
+------------------------------------------------------------------------
+
+Notes
+
+-   The hotspot IP may change every day.
+-   Always use the current “Default Gateway” from ipconfig.
+-   adb tcpip 5555 is usually only needed after a phone reboot.
+-   adb connect <IP>:5555 is used to reconnect wirelessly.

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simple_row_column/loan_calculate.dart';
 import 'package:simple_row_column/rows_columns.dart';
+import 'package:simple_row_column/screens/login_screen/login_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -34,6 +36,8 @@ class MyApp extends StatelessWidget {
       ),
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: const RowsColumns(),
+      // home: const LoanCalculate(),
+      // home: LoginScreen(),
     );
   }
 }
