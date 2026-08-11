@@ -1,0 +1,3 @@
+WHOIS.com – Check domain ownership, registration details, and DNS information.
+https://mha.azurewebsites.net/ – Analyze file hashes to help identify potential malware.
+https://mxtoolbox.com/SuperTool.aspx – Test DNS, MX records, blacklist status, and email server health.

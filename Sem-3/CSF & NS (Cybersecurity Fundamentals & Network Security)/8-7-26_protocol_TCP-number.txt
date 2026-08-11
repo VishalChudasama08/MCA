@@ -1,0 +1,28 @@
+
+Protocol	Full Form				Service / Purpose				Port Number
+FTP		File Transfer Protocol			Transfers files between computers		20 (Data), 21 (Control)
+SSH		Secure Shell				Secure remote login and command execution	22
+Telnet		Telecommunication Network		Remote login (unencrypted)			23
+SMTP		Simple Mail Transfer Protocol		Sends email between mail servers		25
+DNS		Domain Name System			Resolves domain names to IP addresses		53
+HTTP		HyperText Transfer Protocol		Transfers web pages over the Internet		80
+POP3		Post Office Protocol Version 3		Retrieves/downloads email from a mail server	110
+IMAP		Internet Message Access Protocol	Accesses and manages email on the mail server	143
+HTTPS		HyperText Transfer Protocol Secure	Secure web browsing using SSL/TLS		443
+SMB		Server Message Block			File and printer sharing over a network		445
+
+
+
+TCP-SYN flood (deagram)
+similar to IP spooling which leads DOS as well.
+
+IP spooling
+replacing non-responsce ip address with the light/ responsive ip address of the user
+
+
+TCP 3-way handshak (deagram)
+
+
+Questions
+why open poerts = attack surface ?
+how to identify open ports? using which tool ?
