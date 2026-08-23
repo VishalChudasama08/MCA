@@ -1,0 +1,12 @@
+| Sr. No. | Port | Protocol | State | Service    | Version      | Possible Purpose      |
+| ------: | ---: | -------- | ----- | ---------- | ------------ | --------------------- |
+|       1 |   21 | TCP      | Open  | FTP        | vsftpd 2.3.4 | File transfer         |
+|       2 |   22 | TCP      | Open  | SSH        | OpenSSH      | Remote administration |
+|       3 |   23 | TCP      | Open  | Telnet     | telnetd      | Remote login          |
+|       4 |   25 | TCP      | Open  | SMTP       | Postfix      | Email transfer        |
+|       5 |   53 | TCP      | Open  | DNS        | BIND         | Name resolution       |
+|       6 |   80 | TCP      | Open  | HTTP       | Apache       | Web service           |
+|       7 |  139 | TCP      | Open  | NetBIOS    | Samba        | File/network sharing  |
+|       8 |  445 | TCP      | Open  | SMB        | Samba        | File sharing          |
+|       9 | 3306 | TCP      | Open  | MySQL      | MySQL        | Database              |
+|      10 | 5432 | TCP      | Open  | PostgreSQL | PostgreSQL   | Database              |

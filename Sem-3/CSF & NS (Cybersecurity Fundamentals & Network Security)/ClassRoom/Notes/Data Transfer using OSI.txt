@@ -1,0 +1,69 @@
+| OSI Layer       | What happens to data?                                | Data Unit / PDU        |
+| --------------- | ---------------------------------------------------- | ---------------------- |
+| 7. Application  | Application creates data                             | Data                   |
+| 6. Presentation | Formatting, encoding, encryption, compression        | Data                   |
+| 5. Session      | Manages communication session                        | Data                   |
+| 4. Transport    | Adds TCP/UDP information                             | Segment / Datagram     |
+| 3. Network      | Adds IP information                                  | Packet                 |
+| 2. Data Link    | Adds MAC information and error detection             | Frame                  |
+| 1. Physical     | Converts frame into electrical/radio/optical signals | Bits                   |
+
+                 SENDING COMPUTER
+                 
+Application Layer
+        │
+        │  Application Data
+        ▼
+   ┌─────────────┐
+   │    DATA         │
+   └─────────────┘
+        │
+        ▼
+Transport Layer
+        │
+        │  Adds TCP/UDP Header
+        ▼
+   ┌─────────────┐
+   │ TCP/UDP         │
+   │   HEADER        │
+   │    DATA         │
+   └─────────────┘
+        │
+        │  = SEGMENT
+        ▼
+Network Layer
+        │
+        │  Adds IP Header
+        ▼
+   ┌─────────────┐
+   │ IP HEADER       │
+   │ TCP/UDP HDR     │
+   │    DATA         │
+   └─────────────┘
+        │
+        │  = PACKET
+        ▼
+Data Link Layer
+        │
+        │  Adds MAC Header
+        │  + Trailer/FCS
+        ▼
+   ┌─────────────┐
+   │ MAC HEADER      │
+   │ IP HEADER       │
+   │ TCP/UDP HDR     │
+   │    DATA         │
+   │ FCS/TRAILER     │
+   └─────────────┘
+        │
+        │  = FRAME
+        ▼
+Physical Layer
+        │
+        │  Bits → Physical signals
+        ▼
+  101010101010101
+  110010101101010
+        │
+        ▼
+     NETWORK

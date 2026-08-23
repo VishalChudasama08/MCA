@@ -1,0 +1,51 @@
+Subject "DF & IR (Digital Forensics & Incident Response)" lab manual AIM's
+
+Practical-1 AIM-Evidence Acquisition with FTK Imager
+Practical-2 AIM-Autopsy: Deleted File Recovery & Activity Timeline
+Practical-3 AIM-Windows Registry Forensic Analysis
+Practical-4 AIM-Windows Event Log Analysis from own computer's Event Viewer
+Practical-5 AIM - Network Forensics with Wireshark
+Practical-6 AIM-Email Forensics
+
+
+Practical-1
+AIM-Evidence Acquisition with FTK Imager
+Objective: Capture volatile memory and create a forensic image of a USB device; verify integrity with hash values; complete chain-of-custody form.
+
+Install FTK Imager
+Capture Volatile Memory (RAM Capture)
+Create Forensic Image of the USB Device ← this is the pendrive imaging you just prepared for
+Verify Integrity via Hash Values (MD5/SHA1)
+Complete Chain-of-Custody Form
+Observation & Conclusion
+
+Practical-2
+AIM-Autopsy: Deleted File Recovery & Activity Timeline
+Objective: Load a pre-seeded forensic image in Autopsy; recover deleted files; extract recent activity artefacts; build a chronological timeline.
+
+Create a New Case and Load the Forensic Image
+Analyze the File System and Recover Deleted Files
+Extract Recent Activity Artifacts
+Build and Analyze the Chronological Activity Timeline
+Record Observations and Prepare the Conclusion
+
+Practical-3
+AIM-Windows Registry Forensic Analysis
+Objective: Extract forensic artefacts from Windows Registry hives to determine program execution history, USB device connections, and persistence mechanisms.
+
+Practical-4
+AIM-Windows Event Log Analysis from own computer's Event Viewer
+Objectives: Identify the critical event IDs and list out those Event IDs from your own event viewer and explain each one.
+
+Practical-5
+AIM - Network Forensics with Wireshark
+Objective: Analyse a faculty-provided malicious traffic capture to identify attack type, extract credentials, detect beaconing, and build an attack timeline.
+
+Practical-6
+AIM-Email Forensics
+Objective-Analyze any email header from your email inbox and compare it with the sample.EML or email header provided by instructor. Identify the RED flags from the email header provided to you.
+
+TryHeckMe Rooms:
+1. Intro to Digital Forensic
+2. Cold Forensic Investigation
+3. Disk Analysis and Autopsy
