@@ -49,3 +49,83 @@ TryHeckMe Rooms:
 1. Intro to Digital Forensic
 2. Cold Forensic Investigation
 3. Disk Analysis and Autopsy
+
+
+
+Practical 1 – Evidence Acquisition with FTK Imager (Est. time: 3 hrs)
+Objective: Capture volatile memory and create a forensic image of a USB device; verify integrity
+with hash values; complete chain-of-custody form.
+• Environment: Windows lab machine; FTK Imager 4.x; instructor-provided USB drive
+• Tools: FTK Imager
+• Expected output: FTK Imager verification report PDF with matching hashes; screenshot of
+chain-of-custody fields filled in; RAM capture file size recorded.
+• Observation questions: (1) You accidentally boot from the suspect USB drive before imaging it.
+Which files have their timestamps changed? What data might be written to the drive? (2) Why
+must you record MD5 AND SHA-1 – why is one hash algorithm not sufficient in court?
+
+Practical 2 – Autopsy: Deleted File Recovery & Activity Timeline (Est. time: 4 hrs)
+Objective: Load a pre-seeded forensic image in Autopsy; recover deleted files; extract recent activity
+artefacts; build a chronological timeline.
+• Environment: Lab machine with Autopsy 4.x; faculty-provided Windows forensic .E01 image
+(contains deleted documents, browser history, planted evidence)
+• Tools: Autopsy 4.x
+• Expected output: Deleted file recovery screenshot; recent documents list; browser history
+screenshot; USB device table; timeline CSV; 5-event narrative.
+• Observation questions: (1) In NTFS, a file is deleted. The MFT entry is marked inactive. When
+does the actual data become unrecoverable? (2) The timeline shows the user accessed a
+sensitive document at 23:47 and connected a USB drive at 23:49. What hypothesis does this
+support and what further evidence would you look for?
+
+
+Practical 3 – Windows Registry Forensic Analysis (Est. time: 4 hrs)
+Objective: Extract forensic artefacts from Windows Registry hives to determine program execution
+history, USB device connections, and persistence mechanisms.
+• Environment: Lab machine with Autopsy; same pre-seeded forensic image from Practical 2
+• Tools: Autopsy Registry Viewer module (or Registry Explorer if installed)
+• Expected output: USB device artefact table (minimum 2 devices); UserAssist decoded program
+list; Run/RunOnce entries (noting any suspicious entries); RecentDocs list; completed artefact
+table.
+• Observation questions: (1) The USBSTOR key shows a USB drive connected at 23:49
+(matching your timeline hypothesis from Practical 2). What additional information from the
+Registry would confirm data was copied to it? (2) You find a RunOnce entry pointing to
+C:\Users\Public\svchost32.exe. Why is this suspicious even though the filename looks
+legitimate?
+
+
+Practical 4 – Windows Event Log Analysis with Splunk (Est. time: 4 hrs)
+Objective: Ingest Windows event logs into Splunk and write SPL queries to identify a brute-force
+attack, successful compromise, and new account creation.
+• Environment: Lab machine with Splunk Free (localhost:8000); faculty-provided Security.evtx
+and System.evtx
+• Tools: Splunk Free
+• Expected output: All 5 SPL query screenshots with results; brute-force timeline chart; 1-
+paragraph triage note with recommended next step.
+• Observation questions: (1) Your query shows 847 failed logins in 3 minutes all from IP
+10.0.0.55 targeting the Administrator account. Write the Splunk alert rule that would have
+triggered on this. (2) Event 4624 Logon Type 3 from a workstation IP using the Administrator
+account at 03:00 AM. What does this indicate and why is it suspicious?
+
+
+Practical 5 – Network Forensics with Wireshark (Est. time: 4 hrs)
+Objective: Analyse a faculty-provided malicious traffic capture to identify attack type, extract
+credentials, detect beaconing, and build an attack timeline.
+• Environment: Lab machine with Wireshark; faculty-provided malicious.pcap
+• Tools: Wireshark, NetworkMiner (if installed)
+• Expected output: FTP credentials screenshot; SQLi payload in POST body; DNS anomaly
+screenshot; beaconing pattern screenshot (regular intervals); attack timeline with 6 events.
+• Observation questions: (1) The C2 beaconing interval is exactly 60 seconds. How could an
+attacker make this harder to detect with jitter? (2) The DNS tunnelling used subdomains like
+dGhpcyBpcyBhIHRlc3Q=.evil.com. What encoding is this and what does the subdomain
+contain?
+
+
+Practical 6 – Browser & Email Forensics (Est. time: 3 hrs)
+Objective: Extract browser forensic artefacts from the forensic image and trace a phishing email to its
+origin.
+• Environment: Lab machine with Autopsy; faculty-provided .eml phishing email file
+• Tools: Autopsy Web History module, SQLiteBrowser (optional), text editor
+• Expected output: Browser history table; downloads list; email hop-path diagram (drawn);
+originating IP details; SPF/DKIM analysis; verdict – is the From address spoofed?
+• Observation questions: (1) Chrome stores timestamps as WebKit format (microseconds since 1
+Jan 1601). Convert 13350000000000000 to a human-readable date. (2) The SPF check result is
+softfail. What does this mean, and is it sufficient to block the email?
