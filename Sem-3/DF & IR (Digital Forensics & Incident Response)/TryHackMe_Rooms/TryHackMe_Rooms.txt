@@ -1,0 +1,8 @@
+TryHeckMe Rooms:
+1. Intro to Digital Forensic
+2. Cold Forensic Investigation
+3. Disk Analysis and Autopsy
+
+Broken Access Control
+Crack the hash
+Linux Privilege Escalation
