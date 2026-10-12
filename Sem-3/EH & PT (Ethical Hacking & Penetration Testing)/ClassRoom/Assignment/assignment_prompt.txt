@@ -1,3 +1,51 @@
+7 Photos and this Prompt => [
+
+Create a professional, submission-ready Word document (.docx) for Question 20 of my MCA assignment, Ethical Hacking & Web Application Security.
+Question 20: [ Prepare a professional VAPT report for an authorized vulnerable application. The report should contain:
+• Executive Summary
+• Scope and Methodology
+• Tools Used
+• Vulnerabilities Identified
+• Technical Findings
+• Evidence/Screenshots
+• CVSS Score
+• Business Impact
+• Remediation Recommendations
+• Conclusion
+Suggested Practical Platforms
+• DVWA
+• Metasploitable]
+Title: Vulnerability Assessment and Penetration Testing (VAPT) Report — Metasploitable 2 and DVWA
+Student: Vishal Chudasama | Division: E02 | Assessment Date: 10 October 2026
+Requirements
+
+Produce a complete, detailed report of approximately 10–12 pages, including screenshots.
+Use a formal cybersecurity-report style with a cover page, table of contents, numbered headings, page numbers, consistent typography, professional tables, and clean spacing.
+Include all 10 required sections: Executive Summary; Scope and Methodology; Tools Used; Vulnerabilities Identified; Technical Findings; Evidence/Screenshots; CVSS Score; Business Impact; Remediation Recommendations; Conclusion.
+Use the 7 screenshots I provide. Insert each screenshot exactly once, at the relevant point in the technical findings—not randomly or all together at the end. Give each a numbered figure caption and refer to it in the explanation. Keep the evidence register as a table of filenames and descriptions without duplicating images.
+Cover Nmap service scanning, HTTP enumeration, PHP information disclosure, phpMyAdmin exposure, DVWA SQL Injection, DVWA Command Injection, and Hydra FTP password testing.
+Use the actual evidence: target 192.168.184.130; Nmap identified 23 open TCP ports; phpinfo.php returned HTTP 200 and exposed PHP 5.2.4 and server configuration; phpMyAdmin displayed a login page; SQL Injection returned five user records; Command Injection returned www-data; Hydra identified the FTP credential pair msfadmin / msfadmin.
+Do not include Burp Suite testing. Do not invent results, screenshots, successful exploits, privileges, or impacts that were not verified. Clearly distinguish confirmed observations from potential risks.
+Explain each finding with description, evidence, technical impact, root cause, severity assessment, and remediation. Treat CVSS scores as provisional unless enough evidence exists to calculate them accurately.
+Include business impact, prioritized remediation, assessment limitations, and a professional conclusion. Present it as an academic lab assessment, not a certified legal or forensic report.
+Protect the recovered password appropriately in any version intended for wider distribution.
+Deliverable: Create and provide the actual downloadable .docx file, not just the report text. Ensure all 7 supplied images are embedded, readable, correctly captioned, and placed beside their corresponding findings. Review the finished document for layout problems, repeated screenshots, broken tables, missing sections, and page overflow before delivering it.
+
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
 Agreed. I’ll choose the answer format from the question itself—plain text where enough, comparisons for differences, diagrams for processes, examples where they make the idea concrete, and screenshots only when the assignment requires evidence from an authorized lab.s
 
 
