@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cybersecurity Fundamentals · Unit 01 · 100-Question Quiz</title>
+  <style>
+    :root {
+      --bg: #edf1f0;
+      --surface: #ffffff;
+      --surface2: #f4f7f6;
+      --ink: #13202a;
+      --muted: #566672;
+      --line: #d5dedc;
+      --accent: #0b6e74;
+      --accent-ink: #ffffff;
+      --accent-soft: #dcefef;
+      --mark: #a35f08;
+      --mark-soft: #fbecd6;
+      --ok: #17733f;
+      --ok-soft: #d9f0e2;
+      --bad: #b3261e;
+      --bad-soft: #fbe2df;
+      --shadow: 0 1px 2px rgba(19, 32, 42, .06), 0 10px 28px rgba(19, 32, 42, .07);
+      --serif: Georgia, "Iowan Old Style", "Palatino Linotype", Palatino, serif;
+      --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color-scheme: light dark;
+    }
+
+    @media (prefers-color-scheme:dark) {
+      :root {
+        --bg: #0d1418;
+        --surface: #151f26;
+        --surface2: #1b2830;
+        --ink: #e7eef2;
+        --muted: #9aa9b3;
+        --line: #2b3b45;
+        --accent: #4cb3b9;
+        --accent-ink: #06191b;
+        --accent-soft: #17353a;
+        --mark: #f0b45c;
+        --mark-soft: #3a2d17;
+        --ok: #5fcf8d;
+        --ok-soft: #173627;
+        --bad: #ff8b82;
+        --bad-soft: #3d1c1a;
+        --shadow: 0 1px 2px rgba(0, 0, 0, .4), 0 10px 28px rgba(0, 0, 0, .35);
+      }
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    [hidden] {
+      display: none !important
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 16px/1.5 var(--sans);
+      min-height: 100vh
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer
+    }
+
+    button:focus-visible,
+    select:focus-visible,
+    input:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 2px
+    }
+
+    h1,
+    h2,
+    h3 {
+      font-family: var(--serif);
+      line-height: 1.25;
+      margin: 0
+    }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 16px 48px
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: var(--shadow)
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-weight: 600;
+      transition: background .15s, border-color .15s
+    }
+
+    .btn:hover:not(:disabled) {
+      border-color: var(--accent)
+    }
+
+    .btn:disabled {
+      opacity: .45;
+      cursor: not-allowed
+    }
+
+    .btn.primary {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink)
+    }
+
+    .btn.primary:hover:not(:disabled) {
+      filter: brightness(1.08)
+    }
+
+    .btn.danger {
+      background: var(--bad);
+      border-color: var(--bad);
+      color: #fff
+    }
+
+    .btn.ghost {
+      background: transparent
+    }
+
+    .btn.sm {
+      min-height: 36px;
+      padding: 6px 12px;
+      font-size: .9rem
+    }
+
+    /* ---------- start ---------- */
+    .start {
+      max-width: 820px;
+      margin: 24px auto 0;
+      padding: 32px
+    }
+
+    .start h1 {
+      font-size: clamp(1.6rem, 4vw, 2.3rem)
+    }
+
+    .start .sub {
+      color: var(--muted);
+      margin: 8px 0 24px
+    }
+
+    .mix {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 0 0 24px
+    }
+
+    .mix div {
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 14px
+    }
+
+    .mix b {
+      display: block;
+      font: 700 1.7rem var(--serif)
+    }
+
+    .mix span {
+      color: var(--muted);
+      font-size: .9rem
+    }
+
+    .rules {
+      margin: 0 0 24px;
+      padding-left: 20px
+    }
+
+    .rules li {
+      margin: 6px 0
+    }
+
+    .opts-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px 28px;
+      align-items: center;
+      margin-bottom: 24px
+    }
+
+    .opts-row label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 600
+    }
+
+    select {
+      font: inherit;
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink)
+    }
+
+    input[type=checkbox] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--accent)
+    }
+
+    /* ---------- quiz ---------- */
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--bg);
+      padding: 10px 0 12px
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: space-between
+    }
+
+    .topbar .ttl {
+      font: 700 1.05rem var(--serif)
+    }
+
+    .topbar .ttl small {
+      display: block;
+      font: 500 .8rem var(--sans);
+      color: var(--muted)
+    }
+
+    .chips {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap
+    }
+
+    .timer {
+      font: 700 1.1rem ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      padding: 7px 12px;
+      border-radius: 10px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      min-width: 96px;
+      text-align: center
+    }
+
+    .timer.warn {
+      color: var(--mark);
+      border-color: var(--mark)
+    }
+
+    .timer.danger {
+      color: var(--bad);
+      border-color: var(--bad)
+    }
+
+    .bar {
+      height: 8px;
+      border-radius: 99px;
+      background: var(--line);
+      overflow: hidden;
+      margin-top: 10px
+    }
+
+    .bar>i {
+      display: block;
+      height: 100%;
+      width: 0;
+      background: var(--accent);
+      transition: width .25s
+    }
+
+    .barlbl {
+      display: flex;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: .85rem;
+      margin-top: 6px
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 312px;
+      gap: 18px;
+      align-items: start;
+      margin-top: 8px
+    }
+
+    .qcard {
+      padding: 26px
+    }
+
+    .qmeta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 14px
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 99px;
+      font-size: .78rem;
+      font-weight: 700;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      color: var(--muted)
+    }
+
+    .tag.Simple {
+      color: var(--ok);
+      border-color: var(--ok)
+    }
+
+    .tag.Medium {
+      color: var(--accent);
+      border-color: var(--accent)
+    }
+
+    .tag.Hard {
+      color: var(--bad);
+      border-color: var(--bad)
+    }
+
+    .tag.msq {
+      color: var(--mark);
+      border-color: var(--mark);
+      background: var(--mark-soft)
+    }
+
+    .tag.flag {
+      color: var(--mark);
+      border-color: var(--mark);
+      background: var(--mark-soft)
+    }
+
+    .qnum {
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .qtext {
+      font: 600 clamp(1.1rem, 2.4vw, 1.35rem)/1.45 var(--serif);
+      margin: 0 0 16px
+    }
+
+    .hint {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      padding: 10px 14px;
+      border-radius: 0 10px 10px 0;
+      margin: 0 0 18px;
+      font-size: .95rem
+    }
+
+    .hint.msq {
+      border-color: var(--mark);
+      background: var(--mark-soft)
+    }
+
+    .opts {
+      display: grid;
+      gap: 10px
+    }
+
+    .opt {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      text-align: left;
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 12px;
+      border: 2px solid var(--line);
+      background: var(--surface);
+      transition: border-color .12s, background .12s
+    }
+
+    .opt:hover {
+      border-color: var(--accent)
+    }
+
+    .opt .key {
+      flex: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      background: var(--surface2);
+      border: 1px solid var(--line)
+    }
+
+    .opt.multi .key {
+      border-radius: 50%
+    }
+
+    .opt .txt {
+      flex: 1;
+      padding-top: 3px
+    }
+
+    .opt[aria-checked=true] {
+      border-color: var(--accent);
+      background: var(--accent-soft)
+    }
+
+    .opt[aria-checked=true] .key {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink)
+    }
+
+    /* Instant answer feedback */
+    .opt.feedback-correct {
+      border-color: var(--ok);
+      background: var(--ok-soft)
+    }
+
+    .opt.feedback-correct .key {
+      background: var(--ok);
+      border-color: var(--ok);
+      color: #fff
+    }
+
+    .opt.feedback-wrong {
+      border-color: var(--bad);
+      background: var(--bad-soft)
+    }
+
+    .opt.feedback-wrong .key {
+      background: var(--bad);
+      border-color: var(--bad);
+      color: #fff
+    }
+
+    .feedback-note {
+      display: block;
+      font-size: .78rem;
+      font-weight: 800;
+      margin-top: 4px
+    }
+
+    .live-feedback {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: var(--surface2);
+      font-size: .95rem
+    }
+
+    .live-feedback.success {
+      border-color: var(--ok);
+      background: var(--ok-soft);
+      color: var(--ok)
+    }
+
+    .live-feedback.pending {
+      border-color: var(--mark);
+      background: var(--mark-soft);
+      color: var(--ink)
+    }
+
+    .live-feedback b {
+      font-family: var(--serif)
+    }
+
+    .opt.feedback-correct .feedback-note {
+      color: var(--ok)
+    }
+
+    .opt.feedback-wrong .feedback-note {
+      color: var(--bad)
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line)
+    }
+
+    .actions .grp {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    .btn.markbtn[aria-pressed=true] {
+      background: var(--mark-soft);
+      border-color: var(--mark);
+      color: var(--mark)
+    }
+
+    .side {
+      position: sticky;
+      top: 104px;
+      padding: 18px;
+      max-height: calc(100vh - 120px);
+      overflow: auto
+    }
+
+    .side h3 {
+      font-size: 1.05rem;
+      margin-bottom: 10px
+    }
+
+    .pal {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+      gap: 6px
+    }
+
+    .pal button {
+      position: relative;
+      height: 34px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-weight: 700;
+      font-size: .85rem
+    }
+
+    .pal button.visited {
+      background: var(--surface2);
+      border-color: var(--muted)
+    }
+
+    .pal button.answered {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink)
+    }
+
+    .pal button.marked::after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--mark);
+      border: 2px solid var(--surface)
+    }
+
+    .pal button.current {
+      outline: 3px solid var(--ink);
+      outline-offset: 1px
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      margin: 14px 0;
+      font-size: .8rem;
+      color: var(--muted)
+    }
+
+    .legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .legend i {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      border: 1px solid var(--line);
+      display: inline-block
+    }
+
+    .legend .a {
+      background: var(--accent);
+      border-color: var(--accent)
+    }
+
+    .legend .v {
+      background: var(--surface2);
+      border-color: var(--muted)
+    }
+
+    .legend .m {
+      background: var(--mark);
+      border-color: var(--mark);
+      border-radius: 50%
+    }
+
+    .counts {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 12px
+    }
+
+    .palbtn {
+      display: none
+    }
+
+    .sheet-close {
+      display: none
+    }
+
+    /* ---------- modal ---------- */
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 12, 16, .6);
+      display: grid;
+      place-items: center;
+      padding: 16px;
+      z-index: 50
+    }
+
+    .dialog {
+      max-width: 460px;
+      width: 100%;
+      padding: 24px
+    }
+
+    .dialog h2 {
+      font-size: 1.3rem;
+      margin-bottom: 10px
+    }
+
+    .sumlist {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0;
+      display: grid;
+      gap: 6px
+    }
+
+    .sumlist li {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--surface2);
+      border-radius: 8px
+    }
+
+    .dialog .warn {
+      color: var(--mark);
+      font-weight: 600
+    }
+
+    .dialog .btns {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      margin-top: 18px
+    }
+
+    /* ---------- results ---------- */
+    .res-head {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: center
+    }
+
+    .ring {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: conic-gradient(var(--accent) calc(var(--p)*1%), var(--line) 0)
+    }
+
+    .ring div {
+      width: 118px;
+      height: 118px;
+      border-radius: 50%;
+      background: var(--surface);
+      display: grid;
+      place-items: center;
+      text-align: center
+    }
+
+    .ring b {
+      font: 800 2rem var(--serif);
+      line-height: 1
+    }
+
+    .ring span {
+      display: block;
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    .res-head h2 {
+      font-size: 1.5rem
+    }
+
+    .res-head p {
+      margin: 6px 0 0;
+      color: var(--muted)
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin: 16px 0
+    }
+
+    .stat {
+      padding: 14px;
+      text-align: center
+    }
+
+    .stat b {
+      display: block;
+      font: 800 1.5rem var(--serif)
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    .stat.ok b {
+      color: var(--ok)
+    }
+
+    .stat.bad b {
+      color: var(--bad)
+    }
+
+    .stat.skip b {
+      color: var(--mark)
+    }
+
+    .diff {
+      padding: 22px;
+      margin: 16px 0
+    }
+
+    .drow {
+      display: grid;
+      grid-template-columns: 130px 1fr 170px;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0
+    }
+
+    .drow .nm {
+      font-weight: 700
+    }
+
+    .dbar {
+      height: 14px;
+      border-radius: 99px;
+      background: var(--line);
+      overflow: hidden;
+      display: flex
+    }
+
+    .dbar i {
+      display: block;
+      height: 100%
+    }
+
+    .dbar .c {
+      background: var(--ok)
+    }
+
+    .dbar .w {
+      background: var(--bad)
+    }
+
+    .drow .val {
+      font-size: .9rem;
+      color: var(--muted);
+      text-align: right
+    }
+
+    .res-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 16px 0
+    }
+
+    .filters {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 8px 0 16px
+    }
+
+    .fchip {
+      padding: 7px 14px;
+      border-radius: 99px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      font-weight: 600;
+      font-size: .9rem
+    }
+
+    .fchip[aria-pressed=true] {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--accent-ink)
+    }
+
+    .rq {
+      padding: 22px;
+      margin-bottom: 14px
+    }
+
+    .rq h3 {
+      font: 600 1.1rem/1.45 var(--serif);
+      margin: 10px 0 12px
+    }
+
+    .status {
+      font-weight: 800;
+      font-size: .8rem;
+      padding: 3px 10px;
+      border-radius: 99px
+    }
+
+    .status.ok {
+      background: var(--ok-soft);
+      color: var(--ok)
+    }
+
+    .status.bad {
+      background: var(--bad-soft);
+      color: var(--bad)
+    }
+
+    .status.skip {
+      background: var(--mark-soft);
+      color: var(--mark)
+    }
+
+    .ropts {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 8px
+    }
+
+    .ropt {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 2px solid var(--line)
+    }
+
+    .ropt .key {
+      flex: none;
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: .85rem;
+      background: var(--surface2);
+      border: 1px solid var(--line)
+    }
+
+    .ropt .txt {
+      flex: 1
+    }
+
+    .ropt .note {
+      display: block;
+      font-size: .78rem;
+      font-weight: 800;
+      margin-top: 2px
+    }
+
+    .ropt.correct {
+      border-color: var(--ok);
+      background: var(--ok-soft)
+    }
+
+    .ropt.correct .key {
+      background: var(--ok);
+      border-color: var(--ok);
+      color: #fff
+    }
+
+    .ropt.correct .note {
+      color: var(--ok)
+    }
+
+    .ropt.wrong {
+      border-color: var(--bad);
+      background: var(--bad-soft)
+    }
+
+    .ropt.wrong .key {
+      background: var(--bad);
+      border-color: var(--bad);
+      color: #fff
+    }
+
+    .ropt.wrong .note {
+      color: var(--bad)
+    }
+
+    .expl {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--line);
+      font-size: .95rem
+    }
+
+    .expl b {
+      font-family: var(--serif)
+    }
+
+    .empty {
+      padding: 28px;
+      text-align: center;
+      color: var(--muted)
+    }
+
+    @media (max-width:900px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+
+      .side {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: auto;
+        z-index: 40;
+        max-height: 78vh;
+        overflow: auto;
+        border-radius: 18px 18px 0 0;
+        transform: translateY(105%);
+        transition: transform .22s;
+        visibility: hidden
+      }
+
+      .side.open {
+        transform: none;
+        visibility: visible
+      }
+
+      .palbtn {
+        display: inline-flex
+      }
+
+      .sheet-close {
+        display: inline-flex;
+        float: right
+      }
+
+      .res-head {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center
+      }
+
+      .drow {
+        grid-template-columns: 1fr;
+        gap: 4px
+      }
+
+      .drow .val {
+        text-align: left
+      }
+    }
+
+    @media (max-width:560px) {
+      .wrap {
+        padding: 12px 10px 40px
+      }
+
+      .start,
+      .qcard,
+      .rq,
+      .diff {
+        padding: 16px
+      }
+
+      .opt {
+        padding: 12px
+      }
+
+      .actions .btn {
+        flex: 1
+      }
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+      * {
+        transition: none !important
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- START -->
+    <section id="screen-start" class="card start">
+      <h1>Cybersecurity Fundamentals · Unit 01</h1>
+      <p class="sub">LJ University MCA Sem 3 · 100 questions drawn only from the Unit 01 slides</p>
+      <div class="mix" aria-label="Question mix">
+        <div><b>30</b><span>Simple · single answer</span></div>
+        <div><b>20</b><span>Medium · single answer</span></div>
+        <div><b>20</b><span>Hard · single answer</span></div>
+        <div><b>30</b><span>Scenario MSQs · select all that apply</span></div>
+      </div>
+      <ul class="rules">
+        <li>One question at a time, with four options (A–D). Move with Previous / Next or jump using the question palette.</li>
+        <li><b>Single-answer questions</b> have exactly one correct option.</li>
+        <li><b>Scenario MSQs</b> have two or more correct options. <b>Select all correct answers.</b></li>
+        <li>Each question is worth 1 mark. An MSQ earns its mark only when your selection matches the correct set exactly (no partial credit, no negative marking). Total: 100.</li>
+        <li>Use <b>Mark for review</b> to flag a question. Keys: ← → to move, A–D (or 1–4) to choose, M to mark.</li>
+        <li>When time runs out the quiz is submitted automatically. After submission you can review every answer with explanations.</li>
+      </ul>
+      <div class="opts-row">
+        <label for="dur">Time limit
+          <select id="dur">
+            <option value="60">60 minutes</option>
+            <option value="90" selected>90 minutes</option>
+            <option value="120">120 minutes</option>
+            <option value="150">150 minutes</option>
+          </select>
+        </label>
+        <label><input type="checkbox" id="shuf"> Shuffle question order</label>
+      </div>
+      <button class="btn primary" id="btn-start" type="button">Start quiz</button>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="screen-quiz" hidden>
+      <div class="top">
+        <div class="topbar">
+          <div class="ttl">Cybersecurity Fundamentals · Unit 01<small id="qpos">Question 1 of 100</small></div>
+          <div class="chips">
+            <div class="timer" id="timer" role="timer" aria-label="Time remaining">00:00</div>
+            <button class="btn sm palbtn" id="btn-pal" type="button">Palette</button>
+            <button class="btn sm primary" id="btn-submit-top" type="button">Submit</button>
+          </div>
+        </div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="bar"><i id="barfill"></i></div>
+        <div class="barlbl"><span id="barlbl">0 of 100 answered</span><span id="markcnt">0 marked</span></div>
+      </div>
+      <div class="layout">
+        <article class="card qcard" id="qcard" aria-live="polite">
+          <div class="qmeta" id="qmeta"></div>
+          <h2 class="qtext" id="qtext"></h2>
+          <div class="hint" id="qhint"></div>
+          <div class="opts" id="opts"></div>
+          <div class="live-feedback" id="live-feedback" hidden aria-live="polite"></div>
+          <div class="actions">
+            <div class="grp">
+              <button class="btn" id="btn-prev" type="button">← Previous</button>
+              <button class="btn" id="btn-next" type="button">Next →</button>
+            </div>
+            <div class="grp">
+              <button class="btn ghost" id="btn-clear" type="button">Clear answer</button>
+              <button class="btn markbtn" id="btn-mark" type="button" aria-pressed="false">Mark for review</button>
+            </div>
+          </div>
+        </article>
+        <aside class="card side" id="side" aria-label="Question palette">
+          <button class="btn sm sheet-close" id="btn-palclose" type="button">Close</button>
+          <h3>Question palette</h3>
+          <div class="counts"><span id="c-ans">0 answered</span><span id="c-un">100 left</span></div>
+          <div class="pal" id="pal"></div>
+          <div class="legend">
+            <span><i class="a"></i>Answered</span>
+            <span><i class="v"></i>Seen, no answer</span>
+            <span><i></i>Not visited</span>
+            <span><i class="m"></i>Marked</span>
+          </div>
+          <button class="btn primary" id="btn-submit" type="button" style="width:100%">Submit quiz</button>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section id="screen-result" hidden>
+      <div class="card res-head">
+        <div class="ring" id="ring" style="--p:0">
+          <div>
+            <p style="margin:0"><b id="r-score">0</b><span id="r-out">out of 100</span></p>
+          </div>
+        </div>
+        <div>
+          <h2 id="r-title">Result</h2>
+          <p id="r-msg"></p>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="card stat ok"><b id="s-correct">0</b><span>Correct</span></div>
+        <div class="card stat bad"><b id="s-wrong">0</b><span>Incorrect</span></div>
+        <div class="card stat skip"><b id="s-skip">0</b><span>Unanswered</span></div>
+        <div class="card stat"><b id="s-pct">0%</b><span>Score</span></div>
+        <div class="card stat"><b id="s-time">0:00</b><span>Time used</span></div>
+      </div>
+      <div class="card diff">
+        <h2 style="font-size:1.2rem">Performance by difficulty</h2>
+        <div id="diffrows"></div>
+      </div>
+      <div class="res-actions">
+        <button class="btn primary" id="btn-review" type="button">Review answers</button>
+        <button class="btn" id="btn-restart" type="button">Restart quiz</button>
+      </div>
+      <div id="review" hidden>
+        <h2 style="font-size:1.3rem;margin-bottom:8px">Answer review</h2>
+        <div class="filters" id="filters" role="group" aria-label="Filter review"></div>
+        <div id="rlist"></div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- SUBMIT MODAL -->
+  <div class="modal" id="modal" hidden>
+    <div class="card dialog" role="dialog" aria-modal="true" aria-labelledby="m-title">
+      <h2 id="m-title">Submit the quiz?</h2>
+      <p style="margin:0;color:var(--muted)">Once submitted you cannot change your answers.</p>
+      <ul class="sumlist">
+        <li><span>Answered</span><b id="m-ans">0</b></li>
+        <li><span>Not answered</span><b id="m-un">0</b></li>
+        <li><span>Marked for review</span><b id="m-mark">0</b></li>
+        <li><span>Time left</span><b id="m-time">0:00</b></li>
+      </ul>
+      <p class="warn" id="m-warn" hidden></p>
+      <div class="btns">
+        <button class="btn" id="m-cancel" type="button">Keep working</button>
+        <button class="btn danger" id="m-ok" type="button">Submit now</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const QUESTIONS = [{ "id": 1, "d": "Simple", "t": "single", "q": "What is cybersecurity, as defined in the unit?", "o": ["Protecting networks, systems, applications and digital assets from unauthorized access, cyberattacks and data breaches", "Recovering lost files and restoring systems after unexpected hardware failures and outages in the office", "Designing, building and maintaining high-speed networks for large digital organizations across several regions", "Converting sensitive data into unreadable code so that only authorized key holders can decode it in storage"], "a": [0], "e": "Slide 3 defines cybersecurity as protecting networks, systems, applications and digital assets from unauthorized access, cyberattacks, malware and data breaches." }, { "id": 2, "d": "Simple", "t": "single", "q": "What does the acronym CIA stand for in the CIA Triad?", "o": ["Cryptography, Isolation, Authentication", "Confidentiality, Identification, Authorization", "Confidentiality, Integrity, Availability", "Control, Integrity, Accountability"], "a": [2], "e": "Slide 11: the CIA Triad consists of Confidentiality, Integrity and Availability." }, { "id": 3, "d": "Simple", "t": "single", "q": "Which CIA principle ensures that sensitive data is accessible only to authorized individuals or systems?", "o": ["Availability", "Confidentiality", "Authentication", "Integrity"], "a": [1], "e": "Slide 11 and 13: Confidentiality prevents unauthorized viewing, access or misuse of private information." }, { "id": 4, "d": "Simple", "t": "single", "q": "Which CIA principle ensures that data remains accurate, authentic and unaltered during storage or transmission?", "o": ["Accountability", "Confidentiality", "Availability", "Integrity"], "a": [3], "e": "Slide 11 and 14: Integrity protects data from being tampered with or corrupted." }, { "id": 5, "d": "Simple", "t": "single", "q": "DoS and DDoS attacks mainly threaten which part of the CIA Triad?", "o": ["Availability", "Confidentiality", "Accountability", "Integrity"], "a": [0], "e": "Slide 15 lists DoS and DDoS attacks as risks to Availability because they make resources unavailable to legitimate users." }, { "id": 6, "d": "Simple", "t": "single", "q": "Which cybersecurity discipline protects internal networks from intruders using tools like firewalls and VPNs?", "o": ["Wireless Security", "Endpoint Security", "Network Security", "Cloud Security"], "a": [2], "e": "Slide 4: Network Security protects internal networks from intruders using tools such as firewalls and VPNs." }, { "id": 7, "d": "Simple", "t": "single", "q": "Endpoint Security focuses on protecting which of the following?", "o": ["Individual devices such as laptops, smartphones and IoT gadgets", "Internal networks from intruders using firewalls and VPNs", "Wireless network components and the protocols applied to them", "Data and digital infrastructure hosted on remote cloud platforms"], "a": [0], "e": "Slide 4: Endpoint Security protects individual devices like laptops, smartphones and Internet of Things gadgets." }, { "id": 8, "d": "Simple", "t": "single", "q": "Which discipline secures data and digital infrastructure hosted on remote platforms?", "o": ["Mobile Security", "Network Security", "Cloud Security", "Endpoint Security"], "a": [2], "e": "Slide 4: Cloud Security secures data and digital infrastructure hosted on remote cloud platforms." }, { "id": 9, "d": "Simple", "t": "single", "q": "Which discipline protects Android and iOS applications from vulnerabilities and threats?", "o": ["Cloud Security", "Mobile Security", "Network Security", "Wireless Security"], "a": [1], "e": "Slide 4: Mobile Security protects Android and iOS applications from vulnerabilities and threats." }, { "id": 10, "d": "Simple", "t": "single", "q": "What is malware?", "o": ["A security policy that restricts which employees may install new applications", "A hardware fault that slows a computer down after years of continuous and heavy daily usage", "Malicious software designed to damage, disrupt or gain unauthorized access to systems", "An encrypted channel that carries confidential traffic between two trusted servers"], "a": [2], "e": "Slide 17 defines malware as malicious software designed to damage, disrupt or gain unauthorized access to computer systems." }, { "id": 11, "d": "Simple", "t": "single", "q": "Which type of malware encrypts a victim’s data or locks them out of their system until a payment is made?", "o": ["Ransomware", "Spyware", "Virus", "Worm"], "a": [0], "e": "Slide 19: Ransomware renders data or systems inaccessible until a ransom is paid, typically in untraceable cryptocurrency." }, { "id": 12, "d": "Simple", "t": "single", "q": "Which malware looks like legitimate software but gives attackers access to or control of the system once installed?", "o": ["Spyware", "Ransomware", "Worm", "Trojan Horse"], "a": [3], "e": "Slide 20: A Trojan Horse is malware that looks like legitimate software and allows attackers to access or control the system." }, { "id": 13, "d": "Simple", "t": "single", "q": "Which malware secretly monitors user activities and collects passwords, browsing history and personal data?", "o": ["Ransomware", "Spyware", "Trojan Horse", "Worm"], "a": [1], "e": "Slide 20: Spyware secretly monitors user activities and collects sensitive information." }, { "id": 14, "d": "Simple", "t": "single", "q": "What is phishing?", "o": ["An attack that inserts malicious queries into input fields of a database-driven application", "An attack that uses fake messages or websites to trick victims into giving away sensitive information", "An attack that overloads a server with excessive requests until legitimate users are blocked from reaching it", "An attack that silently reroutes traffic between two parties to eavesdrop on their conversation"], "a": [1], "e": "Slide 21: Phishing uses fake messages or websites as bait to lure targets into revealing sensitive data." }, { "id": 15, "d": "Simple", "t": "single", "q": "Which type of phishing is carried out through SMS or text messages?", "o": ["Smishing", "Clone phishing", "Whaling", "Vishing"], "a": [0], "e": "Slide 25: Smishing is phishing conducted through SMS or text messages." }, { "id": 16, "d": "Simple", "t": "single", "q": "Which type of phishing is performed through voice calls?", "o": ["Spear phishing", "Vishing", "Whaling", "Smishing"], "a": [1], "e": "Slide 26: Vishing is phishing performed through voice calls." }, { "id": 17, "d": "Simple", "t": "single", "q": "Which phishing attack specifically targets senior executives such as CEOs and CFOs?", "o": ["Clone phishing", "Smishing", "Vishing", "Whaling"], "a": [3], "e": "Slide 24: Whaling targets senior executives and decision-makers." }, { "id": 18, "d": "Simple", "t": "single", "q": "What does an SQL injection attack involve?", "o": ["Sending fake emails that imitate trusted organizations to harvest login credentials", "Placing a malicious program inside cracked software so that users install it willingly", "Inserting an SQL query into regular input fields such as a username or password box", "Flooding a website with traffic until it becomes unreachable for legitimate visitors"], "a": [2], "e": "Slide 38: SQLi exploits application code by inserting an SQL query into input fields, which is then passed to the database." }, { "id": 19, "d": "Simple", "t": "single", "q": "What distinguishes a DDoS attack from a DoS attack?", "o": ["The attack is carried out through SMS messages to mobile users", "Multiple systems take part in the attack on the victim", "Only a single system is used to send packets to the victim", "The attack inserts SQL statements into the victim’s web forms"], "a": [1], "e": "Slide 31 and 32: DDoS uses multiple servers and connections to flood the target, whereas DoS uses a single system." }, { "id": 20, "d": "Simple", "t": "single", "q": "Which is the first stage of the Cyber Kill Chain?", "o": ["Exploitation", "Delivery", "Weaponization", "Reconnaissance"], "a": [3], "e": "Slide 45: Reconnaissance is the first stage of the Cyber Kill Chain model." }, { "id": 21, "d": "Simple", "t": "single", "q": "Which company developed the Cyber Kill Chain framework?", "o": ["Cisco Systems", "MITRE Corporation", "Lockheed Martin", "Microsoft"], "a": [2], "e": "Slide 42: The Cyber Kill Chain was developed by Lockheed Martin and is also called the Cyber Attack Lifecycle." }, { "id": 22, "d": "Simple", "t": "single", "q": "How does the unit define a threat?", "o": ["The possibility that a weakness will be exploited and cause a negative business impact on data", "The total number of possible points where an unauthorized user can enter and extract data", "Any entity, event or condition capable of causing damage to information systems or digital assets", "A weakness in software, hardware or processes that could allow unauthorized actions if exposed"], "a": [2], "e": "Slide 49 defines a threat as any entity, event or condition capable of causing damage; it is a potential source of harm." }, { "id": 23, "d": "Simple", "t": "single", "q": "Which formula expresses the common risk assessment model in the unit?", "o": ["Risk = Threat + Vulnerability", "Risk = Likelihood × Impact", "Risk = Impact ÷ Likelihood", "Risk = Asset − Control"], "a": [1], "e": "Slide 52 gives the common model: Risk = Likelihood × Impact." }, { "id": 24, "d": "Simple", "t": "single", "q": "Into which two categories is the attack surface divided?", "o": ["Internal and external", "Wired and wireless", "Technical and administrative", "Digital and physical"], "a": [3], "e": "Slide 57: The attack surface is split into the digital and the physical." }, { "id": 25, "d": "Simple", "t": "single", "q": "What does the Principle of Least Privilege state?", "o": ["Users, applications and systems should hold only the minimum permissions needed for their tasks", "Critical tasks should be divided among several people so nobody controls a whole process", "Multiple layers of controls should be used so that one failure does not expose the whole system to attackers", "Access should be denied by default and granted only after explicit authorization"], "a": [0], "e": "Slide 62 defines PoLP as granting only the minimum permissions necessary." }, { "id": 26, "d": "Simple", "t": "single", "q": "What is the idea behind Separation of Duties?", "o": ["Information is available only to those who need it, even when others hold the right clearance", "Every user receives identical permissions so that no employee is treated differently from others in the team", "A system stays in a secure state after failure by denying all requests until access is approved", "Critical tasks are divided among multiple individuals so no single person controls an important process"], "a": [3], "e": "Slide 64: Separation of Duties prevents fraud and abuse by dividing critical tasks among several people." }, { "id": 27, "d": "Simple", "t": "single", "q": "What does the Fail-Safe Defaults principle mean?", "o": ["Access is denied by default and permissions are granted only when authorized", "Security alerts are switched off after a failure so that normal operations can continue", "Backup systems automatically take over whenever the main server fails during operation", "Every new user receives standard permissions that administrators later reduce if needed"], "a": [0], "e": "Slide 68: Fail-Safe Defaults uses a default-deny approach; if a system fails, it remains in a secure state." }, { "id": 28, "d": "Simple", "t": "single", "q": "What is Defence in Depth?", "o": ["A strategy that tests deeply buried software code to locate vulnerabilities before release", "A strategy that hides important servers deep inside the network so that nobody can find them", "A strategy that places one very strong control at the network perimeter to block every attacker from entering", "A strategy that uses multiple layers of controls so that when one fails, others still protect the system"], "a": [3], "e": "Slide 60: Defence in Depth layers controls and prevents a single point of failure." }, { "id": 29, "d": "Simple", "t": "single", "q": "What is a man-in-the-middle (MITM) attack?", "o": ["A hacker impersonates a senior executive to request an urgent transfer of company money to a new account", "A hacker encrypts the files of a victim and demands a payment in cryptocurrency before unlocking them", "A hacker eavesdrops on communication between two online parties, such as a user and a web application", "A hacker overloads the resources of a server with a huge number of simultaneous requests"], "a": [2], "e": "Slide 34: MITM attackers secretly place themselves between two parties to intercept sensitive data." }, { "id": 30, "d": "Simple", "t": "single", "q": "Which attack manipulates people into sharing information, downloading software or sending money that they should not?", "o": ["Social engineering", "Denial of Service", "SQL injection", "Ransomware"], "a": [0], "e": "Slide 39: Social engineering attacks manipulate people into making security mistakes." }, { "id": 31, "d": "Medium", "t": "single", "q": "How does the unit describe the relationship between Information Security and Cybersecurity?", "o": ["Cybersecurity is the broader umbrella, and Information Security is a specialized section within it", "The two are separate fields with no shared responsibilities in protecting organizational data", "They are identical terms that describe exactly the same scope, tools and responsibilities", "Information Security is the broader umbrella, and Cybersecurity is a specialized section within it"], "a": [3], "e": "Slide 8: Information Security is the overarching umbrella, and Cybersecurity is a specialized section underneath it." }, { "id": 32, "d": "Medium", "t": "single", "q": "Which activity is an InfoSec concern rather than a purely cybersecurity concern, according to the unit’s examples?", "o": ["Building digital access controls that enforce rules inside the university portal", "Deploying network firewalls to block external hackers from reaching the digital grade servers", "Isolating malware found on a compromised university server and removing the attacker", "Requiring professors to lock physical cabinets that hold printed midterm exams"], "a": [3], "e": "Slide 8: InfoSec covers paper, printed files and spoken secrets as well as digital data; cybersecurity is limited to cyberspace." }, { "id": 33, "d": "Medium", "t": "single", "q": "In the university data-governance example, how are the responsibilities divided?", "o": ["Cybersecurity defines who may view data, and InfoSec builds the digital controls that enforce those rules", "Both teams only monitor network traffic, and neither one is responsible for defining access rules", "InfoSec defines who may view data, and cybersecurity builds the digital controls that enforce those rules", "InfoSec handles only firewalls, while cybersecurity handles only printed documents and spoken secrets"], "a": [2], "e": "Slide 10: InfoSec sets the rule (students cannot view others’ transcripts); cybersecurity enforces it with digital access controls." }, { "id": 34, "d": "Medium", "t": "single", "q": "During a server breach, which pairing of team and task matches the unit?", "o": ["Cybersecurity isolates the malware, while InfoSec evaluates which data was exposed and legal compliance", "Cybersecurity decides how to report the breach, while InfoSec kicks the attacker out of the network", "InfoSec isolates the malware, while cybersecurity evaluates which data was exposed and legal compliance", "Cybersecurity assesses legal exposure and reporting duties, while InfoSec deploys the network firewalls"], "a": [0], "e": "Slide 10: The cybersecurity team isolates malware and removes the attacker; the InfoSec team assesses exposed data, compliance and reporting." }, { "id": 35, "d": "Medium", "t": "single", "q": "Which statement correctly distinguishes a virus from a worm?", "o": ["A worm spreads only by tricking users with fake messages, while a virus floods servers with excessive requests", "A worm hides inside legitimate-looking software, while a virus secretly records passwords and browsing history", "A virus encrypts files in exchange for a ransom payment, while a worm monitors user activity in secret", "A virus copies itself into other programs or documents, while a worm clogs a system with replicating data"], "a": [3], "e": "Slides 18–19: A virus self-replicates by copying itself into other executable code or documents; a worm fills a system with self-replicating information so it slows or stops." }, { "id": 36, "d": "Medium", "t": "single", "q": "How do spear phishing and whaling differ?", "o": ["Spear phishing targets senior executives only, while whaling targets random users in bulk through generic mass emails", "Spear phishing targets a specific person or organization, while whaling targets senior executives", "Spear phishing copies an earlier email, while whaling replaces its links with malicious ones", "Spear phishing uses SMS messages to reach victims, while whaling is conducted entirely through voice calls"], "a": [1], "e": "Slides 23–24: Spear phishing is a targeted attack customized with personal or professional information; whaling focuses on CEOs, CFOs and other senior officials." }, { "id": 37, "d": "Medium", "t": "single", "q": "What makes clone phishing different from other types of phishing?", "o": ["A real earlier email is copied and its links or attachments are replaced with malicious ones", "Attackers phone victims and impersonate bank staff to obtain their one-time passwords and PINs", "Fraudulent text messages carry fake parcel delivery alerts and malicious tracking links", "Messages are sent only to CEOs and CFOs with urgent requests for large wire transfers of funds"], "a": [0], "e": "Slide 27: Clone phishing resends a legitimate-looking email with malicious replacements; victims trust it because it looks familiar." }, { "id": 38, "d": "Medium", "t": "single", "q": "Why is a DDoS attack harder to block than a DoS attack?", "o": ["Packets arrive from many devices and locations, so no single source can simply be shut out", "It uses one very powerful system, so its traffic cannot be separated from normal user requests on the server", "It only targets routers, so ordinary server defences cannot recognise the traffic", "It is always slower than a DoS attack, which makes filtering the traffic more difficult"], "a": [0], "e": "Slide 33: DoS can be blocked easily because only one system is used; DDoS is difficult to block since multiple devices attack from multiple locations." }, { "id": 39, "d": "Medium", "t": "single", "q": "Which comparison of traceability matches the unit?", "o": ["Both are equally easy to trace, since attack packets reveal the genuine sender’s location", "DoS attacks are easy to trace, while DDoS attacks are difficult to trace because many bots take part", "DoS attacks are difficult to trace, while DDoS attacks are easy to trace because a single tool is used", "Both are equally hard to trace, since neither attack can be linked to any device or location"], "a": [1], "e": "Slide 33: DoS attacks are easy to trace; DDoS attacks are difficult to trace." }, { "id": 40, "d": "Medium", "t": "single", "q": "Which of the following is listed as a type of DDoS attack in the unit?", "o": ["Teardrop attack", "Application layer attack", "Ping of Death attack", "Buffer overflow attack"], "a": [1], "e": "Slide 33: DDoS types are volumetric, fragmentation, application layer and protocol attacks. Teardrop, buffer overflow and Ping of Death are listed under DoS." }, { "id": 41, "d": "Medium", "t": "single", "q": "Which MITM technique associates an attacker’s MAC address with a legitimate IP address on a local network?", "o": ["IP spoofing", "HTTPS spoofing", "ARP spoofing (ARP cache poisoning)", "DNS spoofing"], "a": [2], "e": "Slide 36: ARP links an IP address to the correct MAC address; spoofing it routes the connection to the attacker’s MAC address." }, { "id": 42, "d": "Medium", "t": "single", "q": "How does HTTPS spoofing help an MITM attacker?", "o": ["It alters the sender’s IP address so that the attacker appears to be a genuine host on the network", "Users are secretly sent to a plain HTTP page, which exposes data that encryption protects", "It rewrites domain records so that legitimate website names resolve to a fraudulent server", "It links an attacker’s MAC address with a trusted address on the local network"], "a": [1], "e": "Slide 37: In HTTPS spoofing, attackers secretly route users to an unencrypted HTTP page to reach unprotected data." }, { "id": 43, "d": "Medium", "t": "single", "q": "Which statement correctly distinguishes a threat from a vulnerability?", "o": ["A threat is the calculated likelihood of damage, whereas a vulnerability is the financial loss afterwards", "A threat is a weakness in software or hardware, whereas a vulnerability is an external source of harm", "A threat must involve a human attacker, whereas a vulnerability exists only within physical devices", "A threat is a potential source of harm, whereas a vulnerability is a weakness that a threat may exploit"], "a": [3], "e": "Slides 49–51: A threat is a potential source of harm; a vulnerability is a weakness; risk combines likelihood and impact." }, { "id": 44, "d": "Medium", "t": "single", "q": "Which combination describes a Critical Risk in the unit’s risk categories?", "o": ["Publicly accessible attack surface, reliable exploits and severe financial or reputational impact", "Difficult to exploit, with minimal operational impact and strong mitigating controls in place", "Exploitable only under certain conditions, with moderate business disruption and limited data exposure", "Easily exploitable, with significant operational impact and sensitive information placed at risk"], "a": [0], "e": "Slide 51: Critical risk involves a publicly accessible attack surface, reliable exploitation methods and severe consequences. The other options describe Medium, High and Low risk." }, { "id": 45, "d": "Medium", "t": "single", "q": "Which statement about the attack surface is correct?", "o": ["The smaller the attack surface, the easier the system is to protect", "Attack surfaces stay constant even as organizations adopt new technologies", "A larger attack surface makes an organization easier to monitor and defend", "The attack surface covers only physical devices that an attacker can touch"], "a": [0], "e": "Slide 57: A smaller attack surface is easier to protect, and expanding digital footprints make minimizing it harder." }, { "id": 46, "d": "Medium", "t": "single", "q": "What distinguishes the Need-to-Know principle?", "o": ["Access is granted automatically to anyone who holds the matching clearance level for the data", "Permissions are denied by default and granted only after explicit authorization from an administrator", "Access is limited to those who need the information for their job, even with the right clearance", "Critical tasks are split among several people so that no single person controls an entire process"], "a": [2], "e": "Slide 66: Need-to-Know restricts information to those who require it for their job responsibilities, even with clearance." }, { "id": 47, "d": "Medium", "t": "single", "q": "What are the three high-level steps of the Unified Cyber Kill Chain?", "o": ["Reconnaissance, Lateral Movement, Data Exfiltration", "Network Propagation, Initial Foothold, Action on Objectives", "Initial Foothold, Delivery, Action on Objectives", "Initial Foothold, Network Propagation, Action on Objectives"], "a": [3], "e": "Slide 40: The Unified Kill Chain distils attacks into Initial Foothold, Network Propagation and Action on Objectives." }, { "id": 48, "d": "Medium", "t": "single", "q": "What makes insider threat actors different from most other threat actors?", "o": ["They are politically motivated groups that attack systems to promote a political or social agenda", "They do not always act maliciously; some cause harm through human error, such as losing a device", "They are disgruntled employees who deliberately seek revenge after being passed over for a deserved promotion", "They are government-funded teams that carry out espionage against rival nations"], "a": [1], "e": "Slide 56: Insider threat actors do not always have malicious intent; human error can also hurt a company." }, { "id": 49, "d": "Medium", "t": "single", "q": "At which kill chain stage do attackers remotely instruct planted malware and control botnets?", "o": ["Delivery", "Exploitation", "Command-and-Control (C2)", "Installation"], "a": [2], "e": "Slide 47: In the C2 phase, attackers communicate with and instruct malware they have planted and control infected computers and botnets." }, { "id": 50, "d": "Medium", "t": "single", "q": "Which pairing of discipline and focus matches the unit?", "o": ["Mobile Security – defending laptops and IoT gadgets as individual endpoint devices on the network", "Cloud Security – blocking intruders from internal networks with tools like firewalls and VPNs", "Wireless Security – protecting wireless network components and testing the protocols applied to them", "Endpoint Security – protecting data and infrastructure hosted on remote cloud platforms and servers"], "a": [2], "e": "Slide 4: Wireless Security protects wireless network components and tests the security mechanisms and protocols used for wireless networks." }, { "id": 51, "d": "Hard", "t": "single", "q": "How can a phishing email lead to a man-in-the-browser attack?", "o": ["The email floods the browser with traffic, which pushes the site offline for legitimate users of the service", "The email silently replaces the victim’s ARP table, which disables encryption on the local network", "Opening the message gives mail administrators direct access to every cookie stored by the browser", "Clicking the link can infect the browser with malware that covertly alters pages and transactions"], "a": [3], "e": "Slide 35: Phishing is a common entry point; a malicious link can infect the browser with malware that makes covert changes to pages, manipulates transactions and spies on the user." }, { "id": 52, "d": "Hard", "t": "single", "q": "A company relies only on a perimeter firewall. Once an attacker gets past it, nothing else stops the intrusion. Which principle was ignored?", "o": ["Fail-Safe Defaults", "Separation of Duties", "Need to Know", "Defence in Depth"], "a": [3], "e": "Slide 60: Defence in Depth uses multiple layers so there is no single point of failure." }, { "id": 53, "d": "Hard", "t": "single", "q": "An authentication server becomes unavailable. Which system behaviour follows Fail-Safe Defaults?", "o": ["Users are denied access until the server is restored", "Users with an administrator history receive temporary access to all resources", "Users authenticate against a locally cached list that skips verification checks", "Users are logged in automatically so that work is not interrupted"], "a": [0], "e": "Slide 69: If an authentication server is unavailable, users are denied access instead of being automatically logged in." }, { "id": 54, "d": "Hard", "t": "single", "q": "Which arrangement violates the principle of Separation of Duties?", "o": ["One administrator creates user accounts, and another administrator assigns privileges", "A developer writes code, and a different team reviews and deploys it", "One employee creates a payment request, and another employee approves it", "One employee both creates a payment request and approves it"], "a": [3], "e": "Slide 65: Separation of Duties requires different people for creating and approving; a single person doing both removes the check." }, { "id": 55, "d": "Hard", "t": "single", "q": "A reporting application only needs to read records from a database. Which configuration best applies Least Privilege?", "o": ["Grant the application read-only access to the tables it needs", "Share one administrator account among every application that touches the database", "Give the application full administrator rights to avoid future permission errors", "Allow read and write access to every table in case reporting needs expand later"], "a": [0], "e": "Slide 63: A software application should have only read access instead of full administrator privileges." }, { "id": 56, "d": "Hard", "t": "single", "q": "A senior engineer holds high security clearance but works on an unrelated project. How does Need-to-Know treat a request for confidential R&D files?", "o": ["Approved, because the engineer’s clearance level is high enough to view them", "Approved temporarily, since the principle applies only to employees without any clearance at all", "Denied, because the files are not required for the engineer’s own job responsibilities", "Approved, because senior staff are exempt from the principle of Least Privilege"], "a": [2], "e": "Slide 66: Need-to-Know applies even if a person already has the necessary security clearance." }, { "id": 57, "d": "Hard", "t": "single", "q": "Strong mitigating controls make a vulnerability much harder to exploit, while its impact stays the same. What happens to the risk under Risk = Likelihood × Impact?", "o": ["It decreases, because the likelihood component is reduced", "It increases, because defences draw more attention to the weakness", "It cannot be evaluated until the impact value is also reduced", "It stays the same, because the impact value has not changed"], "a": [0], "e": "Slides 51–52: Lower likelihood lowers risk; Low Risk is described as difficult to exploit with strong mitigating controls." }, { "id": 58, "d": "Hard", "t": "single", "q": "Which pair is classified correctly according to the unit?", "o": ["Device theft is a network-based threat, and buffer overflow is a configuration vulnerability", "Packet sniffing is a network threat, and default credentials are a configuration vulnerability", "Privilege misuse is a physical threat, and unencrypted protocols are a software-level vulnerability", "DDoS is an insider threat, and missing security updates are a network vulnerability"], "a": [1], "e": "Slides 49–50: Packet sniffing is a network-based threat; default credentials are a configuration vulnerability. Device theft is physical, buffer overflow is a software flaw, privilege misuse is an insider threat, and missing updates are an OS vulnerability." }, { "id": 59, "d": "Hard", "t": "single", "q": "In the unit’s lists of CIA risks, under which principle do ‘Malware & Ransomware’ appear?", "o": ["Availability", "Integrity", "Confidentiality", "Non-repudiation"], "a": [1], "e": "Slide 14: Malware & Ransomware are listed as risks to Integrity because they can modify, encrypt or destroy data." }, { "id": 60, "d": "Hard", "t": "single", "q": "Which of the following is listed among the risks to Confidentiality rather than to Integrity or Availability?", "o": ["Ransomware destroying files", "Intentional data tampering", "Weak or outdated encryption", "DoS and DDoS traffic floods"], "a": [2], "e": "Slide 13: Confidentiality risks are unauthorized access, weak encryption and insider threats. Tampering and ransomware are Integrity risks; DoS/DDoS are Availability risks." }, { "id": 61, "d": "Hard", "t": "single", "q": "Which asset falls under both InfoSec and cybersecurity at the same time?", "o": ["Printed midterm exams locked in a professor’s cabinet", "Shredded tuition checks placed in secure disposal bins", "Confidential matters discussed aloud inside a closed office", "Grades stored electronically in the university portal"], "a": [3], "e": "Slide 9: When physical information turns digital and is stored electronically, it falls under both disciplines." }, { "id": 62, "d": "Hard", "t": "single", "q": "Phishing emails with malicious links have already reached users. The attackers now exploit the vulnerabilities they found and move laterally across the network. Which stage is under way?", "o": ["Command-and-Control", "Exploitation", "Delivery", "Installation"], "a": [1], "e": "Slides 46–47: Delivery sends the phishing means; Exploitation penetrates deeper and moves laterally; Installation then places malware." }, { "id": 63, "d": "Hard", "t": "single", "q": "Which sequence lists the Cyber Kill Chain stages in the correct order?", "o": ["Reconnaissance → Delivery → Weaponization → Exploitation → Installation → Command-and-Control → Actions on Goals", "Reconnaissance → Weaponization → Delivery → Exploitation → Command-and-Control → Installation → Actions on Goals", "Reconnaissance → Weaponization → Delivery → Installation → Exploitation → Command-and-Control → Actions on Goals", "Reconnaissance → Weaponization → Delivery → Exploitation → Installation → Command-and-Control → Actions on Goals"], "a": [3], "e": "Slides 45–48 describe the seven stages in this order." }, { "id": 64, "d": "Hard", "t": "single", "q": "An attacker alters the source IP address so that a user believes they are talking to a genuine host, yet they are connected to a malicious source. Which MITM technique is this?", "o": ["HTTPS spoofing", "DNS spoofing", "IP spoofing", "ARP spoofing"], "a": [2], "e": "Slide 36: In IP spoofing, attackers alter their IP addresses so that it appears the user is communicating with a genuine host." }, { "id": 65, "d": "Hard", "t": "single", "q": "Which sequence best describes how a social engineering attack typically unfolds?", "o": ["Investigate the victim, gain their trust, then prompt actions that break security practices", "Flood the victim’s system with requests, study the outage, then ask for credentials", "Gain the victim’s trust, investigate their background, then deploy malware automatically onto their machine", "Install a backdoor, investigate security protocols, then demand a payment from the victim"], "a": [0], "e": "Slide 39: The attacker first researches the victim, then gains trust and provides stimuli that lead to security-breaking actions." }, { "id": 66, "d": "Hard", "t": "single", "q": "According to the unit, what is the underlying cause that makes SQL injection possible?", "o": ["Poor input handling in application code, which lets attacker-supplied SQL reach the database", "An unencrypted wireless link between the client device and the web server hosting the application", "Weak physical access controls on the secure room that houses the database server", "Outdated antivirus signatures on the endpoint used by the legitimate administrator"], "a": [0], "e": "Slide 38: SQLi exploits poor input handling, allowing attackers to bypass authentication, view, modify or delete records and even gain administrative control." }, { "id": 67, "d": "Hard", "t": "single", "q": "A teenager with little technical skill downloads existing hacking tools and attacks a vulnerable website purely for amusement. Which threat actor type fits best?", "o": ["Nation-state actor (government-backed)", "Thrill seeker (script kiddie)", "Cybercriminal (financial attacker)", "Hacktivist (political activist)"], "a": [1], "e": "Slide 55: Script kiddies lack advanced skills, use preexisting tools and attack primarily for amusement or personal satisfaction." }, { "id": 68, "d": "Hard", "t": "single", "q": "What distinguishes cyberterrorists from other threat actors in the unit?", "o": ["Their attackers are insiders who accidentally leak sensitive data through human error at work", "Their politically or ideologically motivated attacks threaten or result in violence", "Their attacks are carried out only for personal amusement and curiosity", "Their activity is limited to financial theft through ransomware and phishing"], "a": [1], "e": "Slide 56: Cyberterrorists launch politically or ideologically motivated attacks that threaten or result in violence." }, { "id": 69, "d": "Hard", "t": "single", "q": "Which factor makes minimizing the attack surface increasingly difficult for organizations?", "o": ["Continuous monitoring that quickly identifies and blocks potential threats", "A shrinking number of connected applications, servers and websites", "A growing digital footprint as new technologies are adopted", "Strict removal of unauthorized applications and devices from the network"], "a": [2], "e": "Slide 57: Minimizing the attack surface becomes difficult as organizations expand their digital footprint and embrace new technologies." }, { "id": 70, "d": "Hard", "t": "single", "q": "Which classification of attack surface elements is correct?", "o": ["Passwords written on paper are digital, while shadow IT is part of the physical attack surface", "Both are digital, since each involves information that is eventually stored electronically", "Passwords written on paper are physical, while shadow IT is part of the digital attack surface", "Both are physical, since employees rather than networks are the cause of each"], "a": [2], "e": "Slides 58–59: Shadow IT belongs to the digital attack surface; users writing passwords on paper belong to the physical attack surface." }, { "id": 71, "d": "Scenario MSQ", "t": "multi", "q": "A university portal goes down for hours after traffic from thousands of bot-infected devices floods it. Which statements are correct?", "o": ["This is a DDoS attack because multiple systems send the traffic", "Blocking one offending address would easily stop it, as only one system is involved", "The CIA principle most directly affected is Availability, as legitimate users lose access", "Tracing and blocking the attack is hard because the traffic comes from many locations"], "a": [0, 2, 3], "e": "Slides 31–33: DDoS uses many systems, targets Availability and is difficult to block and trace." }, { "id": 72, "d": "Scenario MSQ", "t": "multi", "q": "The CFO receives an email that appears to come from the CEO, urgently requesting a wire transfer. Which statements are correct?", "o": ["This is smishing, because the message is urgent and financial", "This is clone phishing, because an earlier CEO email was copied", "It is a form of phishing delivered through a fraudulent email message", "This is whaling, since a senior executive is the target of the request"], "a": [2, 3], "e": "Slide 24: Whaling targets senior executives with requests such as urgent wire transfers." }, { "id": 73, "d": "Scenario MSQ", "t": "multi", "q": "Attackers alter customer account balances, and malware corrupts stored records. Which statements are correct?", "o": ["Malware and ransomware can modify, encrypt or destroy data", "Data integrity is compromised because information is altered or corrupted", "Data tampering is a listed risk to the integrity of data", "Integrity risks arise only from physical events like fire and flood"], "a": [0, 1, 2], "e": "Slide 14: Data tampering and malware/ransomware are risks to integrity." }, { "id": 74, "d": "Scenario MSQ", "t": "multi", "q": "A caller pretending to be from a bank asks a customer for a one-time password to ‘verify’ an account. Which statements are correct?", "o": ["This is clone phishing, since an earlier message is being reused", "Attackers may impersonate banks, government agencies or technical support", "This is smishing, because one-time passwords are involved", "This is vishing, which is phishing performed through voice calls"], "a": [1, 3], "e": "Slide 26: Vishing uses voice calls and impersonation to persuade victims to reveal confidential information." }, { "id": 75, "d": "Scenario MSQ", "t": "multi", "q": "Staff receive what looks like a previously received invoice, now carrying an infected attachment disguised as an updated document. Which statements are correct?", "o": ["This is clone phishing, a type of phishing attack", "The email is a copy of a legitimate message with altered links or attachments", "Victims trust it because the message appears familiar to them", "This is whaling, since invoices are handled by executives"], "a": [0, 1, 2], "e": "Slide 27: Clone phishing resends a familiar email with malicious replacements." }, { "id": 76, "d": "Scenario MSQ", "t": "multi", "q": "On public Wi-Fi, an attacker secretly sits between a user and a banking site and captures login details. Which statements are correct?", "o": ["This is a man-in-the-middle (MITM) attack on the session", "The attack works by flooding the bank’s server with excessive requests", "ARP spoofing could route the connection to the attacker’s own MAC address", "Credit card numbers and login credentials can be intercepted"], "a": [0, 2, 3], "e": "Slides 34–36: MITM attackers intercept sensitive data using techniques such as ARP spoofing." }, { "id": 77, "d": "Scenario MSQ", "t": "multi", "q": "Users who type a bank’s web address are redirected to a fraudulent lookalike site because domain records were altered. Which statements are correct?", "o": ["The attacker secretly downgrades the connection to unencrypted HTTP", "This is DNS spoofing, where domain records are changed to reroute users", "This works by linking an IP address to the wrong MAC address on the LAN", "Users are routed away from the legitimate site to a fraudulent one"], "a": [1, 3], "e": "Slide 37: DNS spoofing changes domain records so users are routed from a legitimate site to a fraudulent one." }, { "id": 78, "d": "Scenario MSQ", "t": "multi", "q": "An attacker types an SQL statement into a login form’s username field and gains access without a valid password. Which statements are correct?", "o": ["This is an SQL injection (SQLi) attack on the login form", "It is a DoS technique, since it overwhelms the login page", "It exploits poor handling of user input in application code", "It can succeed only if the attacker already holds administrator rights"], "a": [0, 2], "e": "Slide 38: SQLi inserts queries into input fields and exploits poor input handling to bypass authentication." }, { "id": 79, "d": "Scenario MSQ", "t": "multi", "q": "Ransomware encrypts a school’s portal files and locks students out until a payment is made. Which statements are correct?", "o": ["Attackers typically demand payment in untraceable cryptocurrency", "Ransomware encrypts data or locks victims out of their own systems", "Operational continuity is disrupted because the portal becomes unavailable", "Ransomware secretly collects browsing history without affecting any files"], "a": [0, 1, 2], "e": "Slides 5 and 19: Ransomware breaks operational continuity and typically demands untraceable cryptocurrency." }, { "id": 80, "d": "Scenario MSQ", "t": "multi", "q": "A user installs a cracked software tool and later finds that browser-saved passwords were stolen. Which statements are correct?", "o": ["This is a Trojan, malware that disguises itself as legitimate software", "Malware is often installed through software downloads or infected files", "This is a worm, as the installer fills the system with replicating data", "This is a DoS attack, since the installer overloaded the user’s machine"], "a": [0, 1], "e": "Slide 17: A Trojan hidden in a cracked installer steals browser-stored passwords after execution." }, { "id": 81, "d": "Scenario MSQ", "t": "multi", "q": "Select all events that the unit classifies as physical threats.", "o": ["A fire damaging server hardware in the room", "DNS poisoning that redirects network traffic", "A power failure shutting down critical equipment", "A user sharing credentials with a colleague"], "a": [0, 2], "e": "Slide 49: Physical threats include device theft, fire, flood, power failure and hardware sabotage." }, { "id": 82, "d": "Scenario MSQ", "t": "multi", "q": "One employee shares a password with a colleague, and another loses a company laptop on a train. Which statements are correct?", "o": ["Both incidents are examples of insider threats caused by people with authorized access", "Insider threat actors do not always have malicious intent, since human error can also cause harm", "Insider threats arise only from disgruntled staff who deliberately steal data", "Only the lost laptop is an insider threat, as credential sharing is a configuration issue"], "a": [0, 1], "e": "Slides 49 and 56: Credential sharing is an insider threat example, and insiders may cause harm through human error." }, { "id": 83, "d": "Scenario MSQ", "t": "multi", "q": "Security analysts find attackers installing backdoors and other tools on compromised servers. Which statements are correct?", "o": ["This is the Weaponization stage, where attack tools are first prepared", "Attackers may also install trojan horses and command-line interfaces at this stage", "This is the Installation stage of the Cyber Kill Chain", "The next stage involves remotely instructing the planted malware"], "a": [1, 2, 3], "e": "Slide 47: Installation involves malware, trojans, backdoors and CLIs; C2 follows." }, { "id": 84, "d": "Scenario MSQ", "t": "multi", "q": "An attacker studies a company’s employees and the third parties it works with to find possible entry points. Which statements are correct?", "o": ["It occurs only after malware has been installed on the target network", "Reconnaissance can take place both online and offline against the same target", "This is the Reconnaissance stage, the first stage of the kill chain", "It involves remotely controlling infected computers and botnets"], "a": [1, 2], "e": "Slide 45: Reconnaissance studies targets, vulnerabilities and third parties, online or offline." }, { "id": 85, "d": "Scenario MSQ", "t": "multi", "q": "A criminal group prepares a ransomware payload to use against a target before sending any message. Which statements are correct?", "o": ["Tools at this stage range from malware and ransomware strains to payloads", "This corresponds to the Weaponization stage of the kill chain", "This corresponds to Actions on Goals, since ransomware is already running", "Delivery, using phishing means with malicious links, follows this stage"], "a": [0, 1, 3], "e": "Slides 45–46: Weaponization prepares cyber weapons; Delivery then sends them via phishing." }, { "id": 86, "d": "Scenario MSQ", "t": "multi", "q": "A single attacker sends ICMP packets of non-standard sizes that cause problems for the systems receiving them. Which statements are correct?", "o": ["This is the Ping of Death, a well-known DoS technique", "It is a volumetric DDoS, since many bots generate the traffic", "Targets may end up with inaccessible or ineffective services", "The attack comes from one system, so it is comparatively easy to trace"], "a": [0, 2, 3], "e": "Slides 29 and 33: Ping of Death uses ICMP packets of non-standard sizes; DoS from one system is easy to trace." }, { "id": 87, "d": "Scenario MSQ", "t": "multi", "q": "A data centre uses security guards, biometric access, CCTV, a firewall, an IDS, antivirus and MFA. Which statements are correct?", "o": ["It combines physical, technical and administrative controls", "It helps prevent a single point of failure", "It provides several opportunities to detect and stop attackers", "This applies Defence in Depth through multiple layers of controls"], "a": [0, 1, 2, 3], "e": "Slides 60–61: Defence in Depth layers controls, prevents a single point of failure and offers multiple chances to stop attackers." }, { "id": 88, "d": "Scenario MSQ", "t": "multi", "q": "A reporting app runs with read-only database access, and HR staff cannot open financial records. Which statements are correct?", "o": ["It reduces the impact if an account becomes compromised", "This applies the Principle of Least Privilege", "It increases the attack surface by granting broader access", "It helps minimize insider threats and accidental misuse of data"], "a": [0, 1, 3], "e": "Slides 62–63: Least Privilege limits access, reduces compromised-account impact and shrinks the attack surface." }, { "id": 89, "d": "Scenario MSQ", "t": "multi", "q": "One administrator creates user accounts while another assigns their privileges, and payment requests need a second person’s approval. Which statements are correct?", "o": ["This applies the principle of Separation of Duties across tasks", "Mistakes are easier to detect because a second person reviews the work", "It makes fraud easier because tasks are consolidated in one place", "It gives one administrator full control over account creation and privileges"], "a": [0, 1], "e": "Slides 64–65: Separation of Duties prevents fraud, adds checks and balances and detects mistakes more easily." }, { "id": 90, "d": "Scenario MSQ", "t": "multi", "q": "A doctor can open only the records of patients under their care, and a project team can view only its own project documents. Which statements are correct?", "o": ["This applies the Need-to-Know principle to sensitive records", "It applies even when staff hold the necessary security clearance", "It improves confidentiality and reduces the risk of data leakage", "It applies only to staff who lack any form of security clearance"], "a": [0, 1, 2], "e": "Slides 66–67: Need-to-Know restricts information to job requirements, even with clearance." }, { "id": 91, "d": "Scenario MSQ", "t": "multi", "q": "A firewall blocks all incoming traffic unless a rule allows it, new accounts start with no permissions, and a failed authentication server leads to denied access. Which statements are correct?", "o": ["Access is denied by default and granted only when explicitly authorized", "Users are denied access when the authentication server is unavailable", "Incoming traffic is blocked unless a specific rule allows it", "Newly created accounts have no permissions until access is assigned"], "a": [0, 1, 2, 3], "e": "Slides 68–69 list all of these as Fail-Safe Defaults examples." }, { "id": 92, "d": "Scenario MSQ", "t": "multi", "q": "A company adopts many cloud apps, employees use unapproved tools, and some servers leave open ports exposed. Which statements are correct?", "o": ["Unapproved tools are an example of shadow IT", "The digital attack surface includes applications, ports, servers and websites", "A larger attack surface generally makes the system easier to protect", "Expanding the digital footprint makes minimizing the attack surface harder"], "a": [0, 1, 3], "e": "Slides 57–58: The digital attack surface covers applications, ports, servers, websites and shadow IT." }, { "id": 93, "d": "Scenario MSQ", "t": "multi", "q": "A firm discards old hard drives without wiping them, staff use USB drives freely, and users write passwords on paper. Which statements are correct?", "o": ["Open administrative ports are the main part of the physical attack surface", "Carelessly discarded hardware belongs to the physical attack surface", "Passwords written on paper add to the physical attack surface", "USB drives are endpoint devices that attackers can physically access"], "a": [1, 2, 3], "e": "Slide 59: The physical attack surface includes endpoint devices, discarded hardware, paper passwords and physical break-ins." }, { "id": 94, "d": "Scenario MSQ", "t": "multi", "q": "A vulnerability sits on a publicly accessible server, a reliable exploit exists, and a breach would cause severe financial damage. Which statements are correct?", "o": ["It fits the Critical Risk category given public exposure", "Risk depends only on impact, so likelihood is irrelevant", "It is Medium Risk, since it is exploitable only under certain conditions", "Risk combines likelihood and impact (Risk = Likelihood × Impact)"], "a": [0, 3], "e": "Slides 51–52: Critical risk involves public exposure, reliable exploits and severe consequences." }, { "id": 95, "d": "Scenario MSQ", "t": "multi", "q": "An audit finds default credentials on a router, missing OS updates, unencrypted protocols in use and a buffer overflow in an application. Which classifications are correct?", "o": ["Missing security updates – operating system vulnerability", "Buffer overflow – software vulnerability", "Default credentials – configuration vulnerability", "Unencrypted protocols – network vulnerability"], "a": [0, 1, 2, 3], "e": "Slide 50 lists each of these under the matching vulnerability category." }, { "id": 96, "d": "Scenario MSQ", "t": "multi", "q": "A group hacks websites to expose human rights violations, believing it brings positive social change. Which statements are correct?", "o": ["Their main motivation is financial gain through ransomware", "Anonymous is a well-known example of such a hacktivist group", "These actors are hacktivists with a social agenda", "They are government-funded actors focused on espionage"], "a": [1, 2], "e": "Slide 55: Hacktivists promote political or social agendas; Anonymous is the example given." }, { "id": 97, "d": "Scenario MSQ", "t": "multi", "q": "A government-funded team steals confidential data and targets another country’s critical infrastructure. Which statements are correct?", "o": ["They are thrill seekers who attack systems mainly for fun", "These are nation-state actors backed by a government", "High funding makes their threats complex and hard to detect", "Their activities often include espionage or cyberwarfare"], "a": [1, 2, 3], "e": "Slide 54: Nation-state actors are highly funded and pursue espionage or cyberwarfare." }, { "id": 98, "d": "Scenario MSQ", "t": "multi", "q": "A group of script kiddies uses existing tools to attack vulnerable systems for amusement. Which statements are correct?", "o": ["They rely on preexisting tools and techniques", "They always intend to cause maximum harm to organizations", "They attack primarily for fun or personal satisfaction", "They can cause unintended damage and open the door to future attacks"], "a": [0, 2, 3], "e": "Slide 55: Thrill seekers do not always seek to cause harm but can still cause unintended damage." }, { "id": 99, "d": "Scenario MSQ", "t": "multi", "q": "A student’s LinkedIn account is hijacked using credential stuffing, and scam posts appear under their name. Which statements are correct?", "o": ["This is a physical threat, since an account holder’s device was stolen", "Credential stuffing is the technique the unit names for this hijacking", "This is mainly an operational continuity failure because the portal is offline", "Digital reputation and trust are at risk for the account owner"], "a": [1, 3], "e": "Slide 6: Credential stuffing can hijack accounts and damage digital reputation and trust." }, { "id": 100, "d": "Scenario MSQ", "t": "multi", "q": "Attackers exploit weak encryption to read customer data, and an employee accidentally exposes confidential files. Which statements are correct?", "o": ["Availability is the only CIA principle affected", "Confidentiality is compromised in both cases", "Weak encryption is a listed risk to confidentiality", "Insider threats are a listed risk to confidentiality"], "a": [1, 2, 3], "e": "Slide 13: Unauthorized access, weak encryption and insider threats are risks to confidentiality." }];
+  </script>
+  <script>
+    (function () {
+      'use strict';
+      var Q = QUESTIONS, LET = ['A', 'B', 'C', 'D'];
+      var DIFFS = ['Simple', 'Medium', 'Hard', 'Scenario MSQ'];
+      function $(id) { return document.getElementById(id); }
+      var S = { order: [], idx: 0, ans: {}, marked: {}, visited: {}, endAt: 0, startAt: 0, dur: 0, timer: null, active: false, submitted: false, filter: 'all', res: null, lastFocus: null };
+
+      function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+      function show(name) {
+        ['start', 'quiz', 'result'].forEach(function (n) { $('screen-' + n).hidden = (n !== name); });
+        window.scrollTo(0, 0);
+      }
+      function fmt(ms) {
+        var s = Math.max(0, Math.round(ms / 1000)), h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), r = s % 60;
+        var mm = (h ? String(m).padStart(2, '0') : String(m)), rr = String(r).padStart(2, '0');
+        return h ? h + ':' + mm + ':' + rr : mm + ':' + rr;
+      }
+      function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+      function cur() { return Q[S.order[S.idx]]; }
+      function sel(q) { return S.ans[q.id] || []; }
+      function isCorrect(q) {
+        var s = sel(q); if (s.length !== q.a.length) return false;
+        for (var i = 0; i < q.a.length; i++) { if (s.indexOf(q.a[i]) < 0) return false; }
+        return true;
+      }
+      function answeredCount() { var n = 0; Q.forEach(function (q) { if (sel(q).length) n++; }); return n; }
+      function markedCount() { return Object.keys(S.marked).filter(function (k) { return S.marked[k]; }).length; }
+
+      /* ---------- start ---------- */
+      function start() {
+        S.order = Q.map(function (_, i) { return i; });
+        if ($('shuf').checked) shuffle(S.order);
+        S.idx = 0; S.ans = {}; S.marked = {}; S.visited = {}; S.submitted = false; S.active = true; S.res = null; S.filter = 'all';
+        S.dur = parseInt($('dur').value, 10) * 60000;
+        S.startAt = Date.now(); S.endAt = S.startAt + S.dur;
+        buildPalette();
+        show('quiz');
+        $('review').hidden = true;
+        render();
+        clearInterval(S.timer);
+        S.timer = setInterval(tick, 500);
+        tick();
+      }
+      function tick() {
+        if (!S.active) return;
+        var left = S.endAt - Date.now();
+        var t = $('timer');
+        t.textContent = fmt(left);
+        t.className = 'timer' + (left <= 60000 ? ' danger' : (left <= 300000 ? ' warn' : ''));
+        if (left <= 0) { closeModal(); submit(true); }
+      }
+
+      /* ---------- palette ---------- */
+      function buildPalette() {
+        var p = $('pal'); p.innerHTML = '';
+        S.order.forEach(function (qi, pos) {
+          var b = el('button', '', String(pos + 1)); b.type = 'button'; b.setAttribute('data-pos', pos);
+          b.setAttribute('aria-label', 'Go to question ' + (pos + 1));
+          b.addEventListener('click', function () { go(pos); closePalette(); });
+          p.appendChild(b);
+        });
+      }
+      function paintPalette() {
+        var btns = $('pal').children;
+        for (var i = 0; i < btns.length; i++) {
+          var q = Q[S.order[i]], c = [];
+          if (sel(q).length) c.push('answered'); else if (S.visited[q.id]) c.push('visited');
+          if (S.marked[q.id]) c.push('marked');
+          if (i === S.idx) c.push('current');
+          btns[i].className = c.join(' ');
+        }
+        var a = answeredCount();
+        $('c-ans').textContent = a + ' answered'; $('c-un').textContent = (Q.length - a) + ' left';
+        $('barfill').style.width = (a / Q.length * 100) + '%';
+        $('bar').setAttribute('aria-valuenow', Math.round(a / Q.length * 100));
+        $('barlbl').textContent = a + ' of ' + Q.length + ' answered';
+        $('markcnt').textContent = markedCount() + ' marked';
+      }
+      function openPalette() { $('side').classList.add('open'); }
+      function closePalette() { $('side').classList.remove('open'); }
+
+      /* ---------- render question ---------- */
+      function render() {
+        var q = cur(); S.visited[q.id] = true;
+        var multi = q.t === 'multi';
+        $('qpos').textContent = 'Question ' + (S.idx + 1) + ' of ' + Q.length;
+        var meta = $('qmeta'); meta.innerHTML = '';
+        meta.appendChild(el('span', 'qnum', 'Q' + (S.idx + 1)));
+        meta.appendChild(el('span', 'tag ' + (multi ? 'msq' : q.d), q.d));
+        if (multi) meta.appendChild(el('span', 'tag msq', 'Multiple answers'));
+        if (S.marked[q.id]) meta.appendChild(el('span', 'tag flag', 'Marked for review'));
+        $('qtext').textContent = q.q;
+        var h = $('qhint');
+        h.className = 'hint' + (multi ? ' msq' : '');
+        h.textContent = multi ? 'Select ALL correct answers. This scenario has two or more correct options, and you earn the mark only if you choose every correct option and no wrong one.' : 'Select the one best answer.';
+        var o = $('opts'); o.innerHTML = ''; o.setAttribute('role', multi ? 'group' : 'radiogroup'); o.setAttribute('aria-label', 'Answer options');
+        var s = sel(q);
+        q.o.forEach(function (txt, i) {
+          var b = el('button', 'opt' + (multi ? ' multi' : '')); b.type = 'button';
+          b.setAttribute('role', multi ? 'checkbox' : 'radio');
+          b.setAttribute('aria-checked', s.indexOf(i) >= 0 ? 'true' : 'false');
+          b.appendChild(el('span', 'key', LET[i]));
+          b.appendChild(el('span', 'txt', txt));
+          b.addEventListener('click', function () { choose(i); });
+          o.appendChild(b);
+        });
+        paintFeedback(q);
+        paintLiveFeedback(q);
+        $('btn-prev').disabled = S.idx === 0;
+        $('btn-next').disabled = S.idx === Q.length - 1;
+        var mk = $('btn-mark'); mk.setAttribute('aria-pressed', S.marked[q.id] ? 'true' : 'false');
+        mk.textContent = S.marked[q.id] ? 'Unmark review' : 'Mark for review';
+        $('btn-clear').disabled = !s.length;
+        paintPalette();
+      }
+      function choose(i) {
+        if (S.submitted) return;
+        var q = cur(), s = sel(q).slice();
+        if (q.t === 'multi') {
+          var k = s.indexOf(i); if (k >= 0) s.splice(k, 1); else s.push(i);
+          s.sort();
+        } else { s = [i]; }
+        if (s.length) S.ans[q.id] = s; else delete S.ans[q.id];
+        var btns = $('opts').children;
+        for (var j = 0; j < btns.length; j++) btns[j].setAttribute('aria-checked', s.indexOf(j) >= 0 ? 'true' : 'false');
+        paintFeedback(q);
+        paintLiveFeedback(q);
+        $('btn-clear').disabled = !s.length;
+        paintPalette();
+      }
+      function paintFeedback(q) {
+        var chosen = sel(q), correct = q.a;
+        var btns = $('opts').children;
+        for (var j = 0; j < btns.length; j++) {
+          var b = btns[j];
+          b.classList.remove('feedback-correct', 'feedback-wrong');
+          var old = b.querySelector('.feedback-note');
+          if (old) old.remove();
+          var isChosen = chosen.indexOf(j) >= 0, isCorrect = correct.indexOf(j) >= 0;
+          var status = '';
+          if (q.t === 'multi') {
+            if (isChosen) { b.classList.add(isCorrect ? 'feedback-correct' : 'feedback-wrong'); status = isCorrect ? 'Correct choice' : 'Incorrect choice'; }
+          } else if (chosen.length) {
+            if (isCorrect) { b.classList.add('feedback-correct'); if (!isChosen) status = 'Correct answer'; else status = 'Correct'; }
+            else if (isChosen) { b.classList.add('feedback-wrong'); status = 'Incorrect'; }
+          }
+          if (status) {
+            var note = el('span', 'feedback-note', status);
+            b.querySelector('.txt').appendChild(note);
+            b.setAttribute('aria-label', LET[j] + '. ' + b.querySelector('.txt').textContent);
+          } else {
+            b.removeAttribute('aria-label');
+          }
+        }
+      }
+      function paintLiveFeedback(q) {
+        var box = $('live-feedback');
+        var chosen = sel(q);
+        box.className = 'live-feedback';
+        box.innerHTML = '';
+        if (!chosen.length) { box.hidden = true; return; }
+        box.hidden = false;
+        if (q.t === 'multi') {
+          var missing = q.a.filter(function (i) { return chosen.indexOf(i) < 0; }).length;
+          var extra = chosen.filter(function (i) { return q.a.indexOf(i) < 0; }).length;
+          var exact = missing === 0 && extra === 0;
+          if (exact) {
+            box.classList.add('success');
+            box.appendChild(el('b', '', 'All correct answers selected. '));
+            box.appendChild(el('span', '', 'Explanation: ' + q.e));
+          } else {
+            box.classList.add('pending');
+            if (missing > 0) {
+              box.appendChild(el('b', '', missing + ' correct answer' + (missing === 1 ? '' : 's') + ' left to select. '));
+            } else {
+              box.appendChild(el('b', '', 'You have selected all correct answers. '));
+            }
+            if (extra > 0) { box.appendChild(el('span', '', extra + ' incorrect option' + (extra === 1 ? ' is' : 's are') + ' selected. Deselect ' + (extra === 1 ? 'it' : 'them') + '.')); }
+          }
+        } else {
+          box.classList.add('success');
+          box.appendChild(el('b', '', 'Explanation: '));
+          box.appendChild(document.createTextNode(q.e));
+        }
+      }
+      function clearAns() { var q = cur(); delete S.ans[q.id]; render(); }
+      function toggleMark() { var q = cur(); S.marked[q.id] = !S.marked[q.id]; render(); }
+      function go(pos) { if (pos < 0 || pos >= Q.length) return; S.idx = pos; render(); window.scrollTo({ top: 0 }); }
+
+      /* ---------- submit ---------- */
+      function openModal() {
+        var a = answeredCount(), un = Q.length - a;
+        $('m-ans').textContent = a; $('m-un').textContent = un; $('m-mark').textContent = markedCount();
+        $('m-time').textContent = fmt(S.endAt - Date.now());
+        var w = $('m-warn');
+        if (un > 0) { w.hidden = false; w.textContent = 'You still have ' + un + ' unanswered question' + (un === 1 ? '' : 's') + '. They will score zero.'; }
+        else w.hidden = true;
+        S.lastFocus = document.activeElement;
+        $('modal').hidden = false; $('m-cancel').focus();
+      }
+      function closeModal() { $('modal').hidden = true; if (S.lastFocus && S.lastFocus.focus && S.active) try { S.lastFocus.focus(); } catch (e) { } }
+      function submit(auto) {
+        if (S.submitted) return;
+        S.submitted = true; S.active = false; clearInterval(S.timer);
+        var used = Math.min(S.dur, Date.now() - S.startAt);
+        var by = {}; DIFFS.forEach(function (d) { by[d] = { total: 0, correct: 0, wrong: 0, skip: 0 }; });
+        var total = 0, correct = 0, wrong = 0, skip = 0;
+        Q.forEach(function (q) {
+          var b = by[q.d]; b.total++; total++;
+          if (!sel(q).length) { b.skip++; skip++; }
+          else if (isCorrect(q)) { b.correct++; correct++; }
+          else { b.wrong++; wrong++; }
+        });
+        S.res = { total: total, correct: correct, wrong: wrong, skip: skip, by: by, used: used, auto: !!auto };
+        closePalette(); renderResult(); show('result');
+      }
+      function renderResult() {
+        var r = S.res, pct = Math.round(r.correct / r.total * 1000) / 10;
+        $('r-score').textContent = r.correct; $('r-out').textContent = 'out of ' + r.total;
+        $('ring').style.setProperty('--p', pct);
+        var title, msg;
+        if (pct >= 90) { title = 'Outstanding'; msg = 'You have a firm command of the Unit 01 material.'; }
+        else if (pct >= 75) { title = 'Strong result'; msg = 'Solid understanding. Review the questions you missed to close the gaps.'; }
+        else if (pct >= 60) { title = 'Good progress'; msg = 'You know the core ideas. Revisit the weaker difficulty levels below.'; }
+        else if (pct >= 40) { title = 'Needs more revision'; msg = 'Re-read the slides on the topics you missed, then try again.'; }
+        else { title = 'Start with a full revision'; msg = 'Go through the unit slides step by step, then retake the quiz.'; }
+        if (r.auto) msg = 'Time ran out and the quiz was submitted automatically. ' + msg;
+        $('r-title').textContent = title; $('r-msg').textContent = msg;
+        $('s-correct').textContent = r.correct; $('s-wrong').textContent = r.wrong; $('s-skip').textContent = r.skip;
+        $('s-pct').textContent = pct + '%'; $('s-time').textContent = fmt(r.used);
+        var box = $('diffrows'); box.innerHTML = '';
+        DIFFS.forEach(function (d) {
+          var b = r.by[d], row = el('div', 'drow');
+          row.appendChild(el('div', 'nm', d));
+          var bar = el('div', 'dbar'); var c = el('i', 'c'), w = el('i', 'w');
+          c.style.width = (b.correct / b.total * 100) + '%'; w.style.width = (b.wrong / b.total * 100) + '%';
+          bar.appendChild(c); bar.appendChild(w); row.appendChild(bar);
+          row.appendChild(el('div', 'val', b.correct + ' / ' + b.total + ' correct (' + Math.round(b.correct / b.total * 100) + '%)'));
+          box.appendChild(row);
+        });
+        buildFilters();
+      }
+
+      /* ---------- review ---------- */
+      var FILTERS = [['all', 'All'], ['correct', 'Correct'], ['wrong', 'Incorrect'], ['skip', 'Unanswered'], ['marked', 'Marked']];
+      function status(q) { return !sel(q).length ? 'skip' : (isCorrect(q) ? 'correct' : 'wrong'); }
+      function buildFilters() {
+        var f = $('filters'); f.innerHTML = '';
+        FILTERS.forEach(function (x) {
+          var n = 0; S.order.forEach(function (qi) { var q = Q[qi]; if (x[0] === 'all' || (x[0] === 'marked' ? S.marked[q.id] : status(q) === x[0])) n++; });
+          var b = el('button', 'fchip', x[1] + ' (' + n + ')'); b.type = 'button';
+          b.setAttribute('aria-pressed', S.filter === x[0] ? 'true' : 'false');
+          b.addEventListener('click', function () { S.filter = x[0]; buildFilters(); }); f.appendChild(b);
+        });
+        renderReview();
+      }
+      function renderReview() {
+        var list = $('rlist'); list.innerHTML = ''; var shown = 0;
+        S.order.forEach(function (qi, pos) {
+          var q = Q[qi], st = status(q);
+          if (S.filter === 'marked' ? !S.marked[q.id] : (S.filter !== 'all' && st !== S.filter)) return;
+          shown++;
+          var card = el('article', 'card rq'), meta = el('div', 'qmeta');
+          meta.appendChild(el('span', 'qnum', 'Q' + (pos + 1)));
+          meta.appendChild(el('span', 'tag ' + (q.t === 'multi' ? 'msq' : q.d), q.d));
+          meta.appendChild(el('span', 'status ' + (st === 'correct' ? 'ok' : st === 'wrong' ? 'bad' : 'skip'), st === 'correct' ? 'Correct' : st === 'wrong' ? 'Incorrect' : 'Unanswered'));
+          if (S.marked[q.id]) meta.appendChild(el('span', 'tag flag', 'Marked'));
+          card.appendChild(meta); card.appendChild(el('h3', '', q.q));
+          var ul = el('ul', 'ropts'), s = sel(q);
+          q.o.forEach(function (txt, i) {
+            var isA = q.a.indexOf(i) >= 0, picked = s.indexOf(i) >= 0;
+            var li = el('li', 'ropt' + (isA ? ' correct' : (picked ? ' wrong' : '')));
+            li.appendChild(el('span', 'key', LET[i]));
+            var t = el('span', 'txt'); t.appendChild(document.createTextNode(txt));
+            var note = isA ? (picked ? '✓ Correct answer · you selected this' : '✓ Correct answer' + (st === 'skip' ? '' : ' · you missed this')) : (picked ? '✗ Your answer · incorrect' : '');
+            if (note) t.appendChild(el('span', 'note', note));
+            li.appendChild(t); ul.appendChild(li);
+          });
+          card.appendChild(ul);
+          var ex = el('div', 'expl'); ex.appendChild(el('b', '', 'Explanation: ')); ex.appendChild(document.createTextNode(q.e));
+          card.appendChild(ex); list.appendChild(card);
+        });
+        if (!shown) list.appendChild(el('div', 'card empty', 'No questions in this filter.'));
+      }
+
+      /* ---------- events ---------- */
+      $('btn-start').addEventListener('click', start);
+      $('btn-prev').addEventListener('click', function () { go(S.idx - 1); });
+      $('btn-next').addEventListener('click', function () { go(S.idx + 1); });
+      $('btn-clear').addEventListener('click', clearAns);
+      $('btn-mark').addEventListener('click', toggleMark);
+      $('btn-submit').addEventListener('click', openModal);
+      $('btn-submit-top').addEventListener('click', openModal);
+      $('btn-pal').addEventListener('click', openPalette);
+      $('btn-palclose').addEventListener('click', closePalette);
+      $('m-cancel').addEventListener('click', closeModal);
+      $('m-ok').addEventListener('click', function () { closeModal(); submit(false); });
+      $('btn-review').addEventListener('click', function () { $('review').hidden = false; $('review').scrollIntoView({ behavior: 'smooth' }); });
+      $('btn-restart').addEventListener('click', function () {
+        if (S.active && !confirm('Restart and discard your current answers?')) return;
+        clearInterval(S.timer); S.active = false; show('start');
+      });
+      $('modal').addEventListener('click', function (e) { if (e.target === $('modal')) closeModal(); });
+      document.addEventListener('keydown', function (e) {
+        if (!$('modal').hidden) { if (e.key === 'Escape') closeModal(); return; }
+        if (!S.active || $('screen-quiz').hidden) return;
+        var tg = e.target && e.target.tagName; if (tg === 'SELECT' || tg === 'INPUT' || e.ctrlKey || e.metaKey || e.altKey) return;
+        var k = e.key.toLowerCase();
+        if (k === 'arrowright') { go(S.idx + 1); e.preventDefault(); }
+        else if (k === 'arrowleft') { go(S.idx - 1); e.preventDefault(); }
+        else if (k === 'm') { toggleMark(); }
+        else if ('abcd'.indexOf(k) >= 0 && k.length === 1) { choose('abcd'.indexOf(k)); }
+        else if ('1234'.indexOf(k) >= 0 && k.length === 1) { choose(parseInt(k, 10) - 1); }
+        else if (k === 'escape') { closePalette(); }
+      });
+      window.addEventListener('beforeunload', function (e) { if (S.active) { e.preventDefault(); e.returnValue = ''; } });
+    })();
+  </script>
+</body>
+
+</html>

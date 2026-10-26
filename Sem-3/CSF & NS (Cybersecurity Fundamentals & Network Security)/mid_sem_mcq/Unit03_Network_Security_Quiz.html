@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Unit 03 Quiz - Network Security Technologies</title>
+<style>
+:root{
+  --bg:#f2f4fb; --card:#ffffff; --text:#172033; --muted:#5a667c; --border:#dce2ef;
+  --primary:#4f46e5; --primary-d:#4038c9; --primary-weak:#eceeff; --on-primary:#ffffff;
+  --good:#15803d; --good-bg:#e7f7ed; --good-bd:#86d4a3;
+  --bad:#c62828; --bad-bg:#fdeaea; --bad-bd:#f1a3a3;
+  --warn:#b45309; --warn-bg:#fff3de; --warn-bd:#f0c27a;
+  --info:#1d4ed8; --info-bg:#e8f0ff; --info-bd:#a9c4f7;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 8px 24px rgba(20,30,60,.07);
+  --radius:16px;
+  --d-s:#0f766e; --d-m:#b45309; --d-h:#b91c1c; --d-q:#6d28d9;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1221; --card:#161d33; --text:#e8ecf7; --muted:#9aa6c0; --border:#2a3552;
+    --primary:#8b87ff; --primary-d:#a5a2ff; --primary-weak:#222a4d; --on-primary:#0d1221;
+    --good:#4ade80; --good-bg:#12301f; --good-bd:#2c7a49;
+    --bad:#ff7b7b; --bad-bg:#3a1a1f; --bad-bd:#8a3a42;
+    --warn:#fbbf24; --warn-bg:#35280f; --warn-bd:#8a6a1f;
+    --info:#7fb0ff; --info-bg:#162447; --info-bd:#34508f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+    --d-s:#2dd4bf; --d-m:#fbbf24; --d-h:#ff8a8a; --d-q:#b794f6;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+.hidden{display:none !important}
+h1,h2,h3{margin:0;line-height:1.25}
+button{font:inherit;color:inherit}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.screen{min-height:100vh}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:12px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:600;font-size:.95rem;transition:transform .08s,background .15s,border-color .15s}
+.btn:hover{border-color:var(--primary)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn:disabled:hover{border-color:var(--border)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.primary:hover{background:var(--primary-d);border-color:var(--primary-d)}
+.btn.ghost{background:transparent}
+.btn.danger{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.lg{padding:14px 28px;font-size:1.05rem;border-radius:14px}
+.btn.sm{padding:7px 12px;font-size:.85rem;border-radius:10px}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+
+/* start */
+#screen-start{display:flex;align-items:center;justify-content:center;padding:28px 16px}
+.start-card{max-width:760px;width:100%;padding:36px 36px 32px}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
+.start-card h1{font-size:2rem;margin:8px 0 10px}
+.lead{color:var(--muted);margin:0 0 18px;font-size:1.02rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:700;border:1px solid currentColor;background:transparent}
+.chip.d-s,.badge.d-s{color:var(--d-s)} .chip.d-m,.badge.d-m{color:var(--d-m)}
+.chip.d-h,.badge.d-h{color:var(--d-h)} .chip.d-q,.badge.d-q{color:var(--d-q)}
+.how{background:var(--primary-weak);border-radius:14px;padding:16px 20px;margin-bottom:22px}
+.how h2{font-size:1rem;margin-bottom:8px}
+.how ul{margin:0;padding-left:20px}
+.how li{margin:6px 0;font-size:.94rem}
+.settings{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-bottom:22px}
+.settings label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.93rem}
+.settings select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text)}
+.settings input[type=checkbox]{width:18px;height:18px;accent-color:var(--primary)}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;background:var(--card);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;font-weight:800;flex:none}
+.brand-title{font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:.78rem;color:var(--muted)}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.timer{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:var(--primary-weak);font-variant-numeric:tabular-nums;font-weight:800;font-size:1.02rem;border:1px solid transparent}
+.timer.warn{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-bd)}
+.timer.danger{background:var(--bad-bg);color:var(--bad);border-color:var(--bad-bd);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.65}}
+.only-mobile{display:none}
+
+/* progress */
+.progress-wrap{max-width:1180px;margin:14px auto 0;padding:0 20px}
+.progress-meta{display:flex;justify-content:space-between;gap:12px;font-size:.84rem;color:var(--muted);font-weight:600;margin-bottom:6px;flex-wrap:wrap}
+.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden}
+#progFill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#22c1c3);border-radius:999px;transition:width .25s}
+
+/* layout */
+.layout{max-width:1180px;margin:16px auto 40px;padding:0 20px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+.main-col{min-width:0}
+.filterbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.fchip{padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:600;font-size:.85rem}
+.fchip.active{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.fchip:disabled{opacity:.4;cursor:not-allowed}
+.qcard{padding:24px 26px}
+.qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.qnum{font-weight:800;color:var(--muted);font-size:.9rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:.74rem;font-weight:800;padding:4px 10px;border-radius:999px;border:1px solid currentColor;background:transparent}
+.b-single{color:var(--info)} .b-multi{color:var(--d-q)} .b-mark{color:var(--warn)}
+.qtext{font-size:1.2rem;font-weight:700;margin-bottom:14px}
+.instr{padding:10px 14px;border-radius:12px;font-size:.9rem;font-weight:600;margin-bottom:14px;background:var(--info-bg);color:var(--info);border:1px solid var(--info-bd)}
+.instr.multi{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-bd)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:13px 16px;border-radius:14px;border:2px solid var(--border);background:var(--card);cursor:pointer;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--primary)}
+.opt.locked{cursor:default}
+.opt.locked:hover{border-color:var(--border)}
+.opt .mark{flex:none;width:34px;height:34px;display:grid;place-items:center;font-weight:800;border:2px solid var(--border);background:var(--bg);font-size:.95rem;border-radius:50%}
+.opt.multi .mark{border-radius:9px}
+.opt .otext{flex:1;font-size:1rem}
+.opt .otag{flex:none;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;opacity:.95}
+.opt.selected{border-color:var(--primary);background:var(--primary-weak)}
+.opt.selected .mark{border-color:var(--primary)}
+.opt.correct{border-color:var(--good);background:var(--good-bg)}
+.opt.correct .mark{background:var(--good);border-color:var(--good);color:#fff}
+.opt.correct .otag{color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.wrong .mark{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.wrong .otag{color:var(--bad)}
+.opt.missed{border-color:var(--good);border-style:dashed;background:var(--card)}
+.opt.missed .mark{border-color:var(--good);color:var(--good)}
+.opt.missed .otag{color:var(--good)}
+.fb{margin-top:18px;border-radius:14px;padding:14px 18px;border:1px solid;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fb.good{background:var(--good-bg);border-color:var(--good-bd)}
+.fb.bad{background:var(--bad-bg);border-color:var(--bad-bd)}
+.fb.warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+.fb.info{background:var(--info-bg);border-color:var(--info-bd)}
+.fb.neutral{background:var(--bg);border-color:var(--border)}
+.fb-title{display:flex;gap:10px;align-items:flex-start;font-weight:800}
+.fb.good .fb-title{color:var(--good)} .fb.bad .fb-title{color:var(--bad)}
+.fb.warn .fb-title{color:var(--warn)} .fb.info .fb-title{color:var(--info)}
+.fb-ico{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;background:currentColor}
+.fb-ico span{color:var(--card)}
+.fb-line{margin-top:8px;font-size:.92rem}
+.fb-label{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:3px}
+.fb-answers{margin-top:10px}
+.fb-ans{font-weight:600;font-size:.95rem;margin:2px 0}
+.fb-expl{margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.fb-expl p{margin:0;font-size:.96rem}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.navbar{position:sticky;bottom:12px;display:flex;gap:10px;margin-top:14px;padding:10px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);z-index:10}
+.navbar .spacer{flex:1}
+
+/* palette */
+.palette{padding:18px;position:sticky;top:78px;max-height:calc(100vh - 96px);overflow:auto}
+.palette-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.palette-head h3{font-size:1rem}
+.pal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.pal{position:relative;aspect-ratio:1/1;border-radius:10px;border:2px solid var(--border);background:var(--card);cursor:pointer;font-weight:700;font-size:.85rem;padding:0}
+.pal:hover{border-color:var(--primary)}
+.pal.st-skipped{border-style:dashed;border-color:var(--muted)}
+.pal.st-answered{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.pal.st-correct{background:var(--good);border-color:var(--good);color:#fff}
+.pal.st-wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.pal.st-unanswered{border-style:dashed;border-color:var(--muted)}
+.pal.current{outline:3px solid var(--primary);outline-offset:2px}
+.pal.marked::after{content:"";position:absolute;top:-5px;right:-5px;width:13px;height:13px;border-radius:50%;background:var(--warn);border:2px solid var(--card)}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:14px;font-size:.78rem;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:4px;border:2px solid var(--border);display:inline-block;flex:none}
+.sw.answered{background:var(--primary);border-color:var(--primary)} .sw.skipped,.sw.unanswered{border-style:dashed;border-color:var(--muted)}
+.sw.correct{background:var(--good);border-color:var(--good)} .sw.wrong{background:var(--bad);border-color:var(--bad)}
+.sw.marked{background:var(--warn);border-color:var(--warn);border-radius:50%}
+.backdrop{position:fixed;inset:0;background:rgba(5,10,25,.5);z-index:35}
+
+/* result */
+.result-wrap{max-width:900px;margin:0 auto;padding:28px 18px 50px;display:grid;gap:18px}
+.hero{display:flex;gap:28px;align-items:center;padding:28px;flex-wrap:wrap}
+.ring{--p:0;width:170px;height:170px;border-radius:50%;background:conic-gradient(var(--primary) calc(var(--p)*1%),var(--border) 0);display:grid;place-items:center;flex:none}
+.ring-in{width:134px;height:134px;border-radius:50%;background:var(--card);display:grid;place-items:center;align-content:center}
+.ring-score{font-size:2rem;font-weight:800;line-height:1}
+.ring-pct{color:var(--muted);font-weight:700;margin-top:4px}
+.hero-text{flex:1;min-width:220px}
+.hero-text h1{font-size:1.7rem;margin-bottom:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{padding:16px;text-align:center}
+.stat b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--muted);font-weight:600}
+.stat.good b{color:var(--good)} .stat.bad b{color:var(--bad)}
+.card.pad{padding:22px}
+.card.pad h2{font-size:1.1rem;margin-bottom:14px}
+.drow{margin-bottom:14px}
+.dhead{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:.93rem;margin-bottom:6px;flex-wrap:wrap}
+.dbar{height:12px;border-radius:999px;background:var(--border);overflow:hidden;display:flex}
+.dbar i{display:block;height:100%}
+.dbar .c{background:var(--good)} .dbar .w{background:var(--bad)}
+.dsub{font-size:.8rem;color:var(--muted);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(5,10,25,.55)}
+.modal-box{max-width:460px;width:100%;padding:24px}
+.modal-box h2{font-size:1.2rem;margin-bottom:10px}
+.modal-box p{margin:6px 0;color:var(--muted)}
+.modal-box .warnline{color:var(--warn);font-weight:700}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.sumgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.sumgrid div{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.sumgrid b{display:block;font-size:1.3rem;color:var(--text)}
+.sumgrid span{font-size:.75rem;color:var(--muted);font-weight:600}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .palette{position:fixed;left:0;right:0;bottom:0;top:auto;max-height:78vh;z-index:40;border-radius:20px 20px 0 0;transform:translateY(105%);transition:transform .25s;visibility:hidden}
+  .palette.open{transform:none;visibility:visible}
+  .only-mobile{display:inline-flex}
+  .pal-grid{grid-template-columns:repeat(8,1fr)}
+}
+@media (max-width:560px){
+  .start-card{padding:24px 20px}
+  .start-card h1{font-size:1.5rem}
+  .qcard{padding:18px 16px}
+  .qtext{font-size:1.08rem}
+  .topbar{padding:8px 12px}
+  .brand-title{max-width:150px}
+  .pal-grid{grid-template-columns:repeat(6,1fr)}
+  .opt{padding:11px 12px;gap:10px}
+  .opt .otag{display:none}
+  .navbar .btn{padding:10px 12px}
+  .hero{padding:20px;justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- START SCREEN -->
+<section id="screen-start" class="screen">
+  <div class="card start-card">
+    <div class="eyebrow">MCA Sem 3 &middot; Cybersecurity Fundamentals and Network Security</div>
+    <h1>Unit 03: Network Security Technologies</h1>
+    <p class="lead">A 100-question practice quiz built strictly from the Unit 03 slides: firewalls, DMZ, IDS and IPS, VPNs, proxy servers, network segmentation, Zero Trust and wireless security.</p>
+    <div class="chips">
+      <span class="chip d-s">30 Simple</span>
+      <span class="chip d-m">20 Medium</span>
+      <span class="chip d-h">20 Hard</span>
+      <span class="chip d-q">30 Scenario MSQs</span>
+    </div>
+    <div class="how">
+      <h2>How this quiz works</h2>
+      <ul>
+        <li><b>Single-answer MCQs (70):</b> choose one option. Your answer locks immediately and the correct answer with its explanation appears.</li>
+        <li><b>Scenario-based MSQs (30):</b> <b>select ALL correct answers</b>. Correct picks turn green and wrong picks turn red. You are told how many correct answers are still missing, and the explanation appears only when your selection exactly matches. You can change your selection at any time.</li>
+        <li><b>Scoring:</b> 1 mark per question, no negative marking. An MSQ scores only when your final selection matches the correct set exactly.</li>
+        <li><b>Tools:</b> Previous/Next, question palette, Mark for review. Keys: A-D or 1-4 to select, left/right arrows to move, M to mark.</li>
+      </ul>
+    </div>
+    <div class="settings">
+      <label for="limitSel">Time limit
+        <select id="limitSel">
+          <option value="60">60 minutes</option>
+          <option value="90">90 minutes</option>
+          <option value="100" selected>100 minutes</option>
+          <option value="120">120 minutes</option>
+        </select>
+      </label>
+      <label class="chk" for="shuffleChk"><input type="checkbox" id="shuffleChk"> Shuffle question order</label>
+    </div>
+    <button id="btnStart" class="btn primary lg" type="button">Start quiz</button>
+  </div>
+</section>
+
+<!-- QUIZ / REVIEW SCREEN -->
+<section id="screen-quiz" class="screen hidden">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">U3</div>
+      <div><div class="brand-title">Network Security Technologies</div><div class="brand-sub" id="modeLabel">Unit 03 Quiz</div></div>
+    </div>
+    <div class="top-actions">
+      <div class="timer" id="timer" role="timer" aria-label="Time remaining"><span aria-hidden="true">&#9201;</span><span id="timerText">00:00</span></div>
+      <button id="btnPalette" class="btn ghost sm only-mobile" type="button">Palette</button>
+      <button id="btnRestart" class="btn ghost sm" type="button">Restart</button>
+      <button id="btnSubmit" class="btn primary sm" type="button">Submit</button>
+      <button id="btnBack" class="btn primary sm hidden" type="button">Back to results</button>
+    </div>
+  </header>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span id="progText"></span><span id="progRight"></span></div>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progBar"><div id="progFill"></div></div>
+  </div>
+  <div class="layout">
+    <div class="main-col">
+      <div class="filterbar hidden" id="filterBar"></div>
+      <article class="card qcard" id="qcard" aria-live="off"></article>
+      <nav class="navbar" aria-label="Question navigation">
+        <button id="btnPrev" class="btn" type="button">&larr; Previous</button>
+        <button id="btnMark" class="btn ghost" type="button">&#9734; Mark for review</button>
+        <span class="spacer"></span>
+        <button id="btnNext" class="btn primary" type="button">Next &rarr;</button>
+      </nav>
+    </div>
+    <aside class="card palette" id="palette" aria-label="Question palette">
+      <div class="palette-head"><h3 id="palTitle">Question palette</h3><button id="btnPalClose" class="btn ghost sm only-mobile" type="button">Close</button></div>
+      <div class="pal-grid" id="paletteGrid"></div>
+      <div class="legend" id="legend"></div>
+    </aside>
+  </div>
+  <div class="backdrop hidden" id="backdrop"></div>
+</section>
+
+<!-- RESULT SCREEN -->
+<section id="screen-result" class="screen hidden">
+  <div class="result-wrap">
+    <div class="card hero">
+      <div class="ring" id="ring"><div class="ring-in"><div class="ring-score" id="rScore"></div><div class="ring-pct" id="rPct"></div></div></div>
+      <div class="hero-text"><h1 id="rTitle"></h1><p id="rMsg" class="muted"></p><p id="rNote" class="muted"></p></div>
+    </div>
+    <div class="stats" id="rStats"></div>
+    <div class="card pad"><h2>Performance by difficulty</h2><div id="rDiff"></div></div>
+    <div class="actions">
+      <button id="btnRevAll" class="btn primary" type="button">Review all answers</button>
+      <button id="btnRevWrong" class="btn" type="button">Review incorrect and unanswered</button>
+      <button id="btnRestart2" class="btn" type="button">Restart quiz</button>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="card modal-box"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var QUESTIONS = [{"d":"S","t":"single","q":"What is the main purpose of a firewall?","o":["To compress files before they are sent over the network","To assign IP addresses automatically to new devices","To translate domain names into IP addresses for users","To prevent unauthorized access to or from a private network"],"a":[3],"e":"A firewall is a security system designed to prevent unauthorized access to or from a private network. It can be hardware-based, software-based or a combination of both (Slide 4)."},{"d":"S","t":"single","q":"Which firewall function records traffic data so that administrators gain insight into potential threats?","o":["Threat detection","Monitoring and logging","Access control","Traffic filtering"],"a":[1],"e":"Monitoring and logging means the firewall logs traffic data, which gives insight into potential threats. Traffic filtering analyses packets by rules, access control enforces policies, and threat detection identifies and blocks malicious activity (Slide 4)."},{"d":"S","t":"single","q":"Which type of firewall keeps a state table of active connections?","o":["Stateful firewall","Stateless firewall","Proxy firewall","Packet filtering firewall"],"a":[0],"e":"A stateful firewall tracks the state of active connections and maintains a table of active sessions, so it can decide using the context of the traffic (Slides 6 and 8)."},{"d":"S","t":"single","q":"How does a stateless firewall treat each packet?","o":["It rebuilds the connection through an intermediary server","It compares it with deep application-level threat feeds","It evaluates it in isolation against predetermined rules","It checks it against a table of established sessions"],"a":[2],"e":"Stateless firewalls filter packets solely on predetermined rules. Each packet is treated in isolation, without regard to any previous packets (Slide 9)."},{"d":"S","t":"single","q":"Which details does a packet filtering firewall use to allow or block traffic?","o":["Device details such as browser type and screen size","Header details such as IP addresses, ports and protocols","Payload details such as file names, hashes and subjects","User details such as passwords and one-time codes"],"a":[1],"e":"Packet filtering firewalls examine packet headers: source and destination IP addresses, port numbers and protocols such as TCP, UDP or ICMP (Slides 13 and 15)."},{"d":"S","t":"single","q":"What does a proxy firewall do with the direct connection between a client and an external server?","o":["It leaves it intact and only copies the packets to a log","It encrypts it with a shared passphrase for both sides","It breaks it and creates a brand-new connection to fetch the data","It splits it across several parallel tunnels for speed"],"a":[2],"e":"A proxy firewall breaks the direct connection, reads the application data, evaluates the request and creates a brand-new connection to fetch the data (Slide 16)."},{"d":"S","t":"single","q":"In addition to packet filtering, which technique do NGFWs use to inspect traffic more deeply?","o":["Domain name resolution (DNS)","Dynamic host configuration (DHCP)","Network address translation (NAT)","Deep packet inspection (DPI)"],"a":[3],"e":"NGFWs use deep packet inspection (DPI) in addition to packet filtering, which lets them find threats hidden in normal-seeming traffic (Slides 18 and 20)."},{"d":"S","t":"single","q":"What does DMZ stand for in network security?","o":["Demilitarized zone","Data monitoring zone","Distributed mail zone","Dynamic management zone"],"a":[0],"e":"A DMZ, or demilitarized zone, is a perimeter network that adds an extra layer of security between untrusted traffic and the internal LAN (Slide 23)."},{"d":"S","t":"single","q":"Which of these is typically placed in a DMZ?","o":["Administrator credential stores for the internal LAN","Web, mail and DNS servers that serve external users","Backup files of employee laptops and desktops","Private finance databases used only by employees"],"a":[1],"e":"External-facing services such as DNS, FTP, mail, proxy, VoIP and web servers are kept in the DMZ, isolated from the internal LAN (Slide 23)."},{"d":"S","t":"single","q":"What is the primary role of an Intrusion Detection System (IDS)?","o":["To detect potential threats and alert administrators","To block malicious packets before they arrive","To create encrypted tunnels between two sites","To divide a network into isolated segments"],"a":[0],"e":"The primary role of an IDS is to detect potential threats and alert administrators. It does not prevent attacks directly; it acts like a surveillance system (Slide 27)."},{"d":"S","t":"single","q":"Which type of IDS compares traffic with a database of known attack patterns?","o":["Network-based IDS","Anomaly-based IDS","Wireless IDS","Signature-based IDS"],"a":[3],"e":"Signature-based IDS compares network traffic or system activity to a database of known attack patterns and alerts when something matches (Slides 29 and 51)."},{"d":"S","t":"single","q":"Where is an IPS placed relative to the traffic it inspects?","o":["At the ISP, far from the organisation's own network","Off the main path, only reading copied log summaries","In-line with the traffic, inspecting packets as they pass","Inside each user's browser as an extension"],"a":[2],"e":"An IPS sits in-line with network traffic, often between the firewall and the rest of the network, inspecting packets as they pass through (Slide 35)."},{"d":"S","t":"single","q":"Which capability separates an IPS from an IDS?","o":["It can log events for later forensic analysis","It can send alerts about suspicious activity","It can monitor network traffic for malicious actions","It can automatically block or prevent threats in real time"],"a":[3],"e":"Both can monitor, alert and log, but unlike an IDS, which only detects and alerts, an IPS can block or prevent threats from reaching their target (Slide 34)."},{"d":"S","t":"single","q":"What does a host-based IDS (HIDS) monitor?","o":["All traffic passing the core routers of the network","Radio signals broadcast by wireless access points","Activities on a specific host, such as system files and processes","Only the traffic entering through the Internet firewall"],"a":[2],"e":"A HIDS monitors activities on a specific device or host, such as system files and processes, for suspicious behaviour (Slides 30 and 43)."},{"d":"S","t":"single","q":"Which open-source NIDS was developed by the Open Information Security Foundation (OISF)?","o":["Suricata","Snort","Nessus","Wireshark"],"a":[0],"e":"Suricata is an open-source network intrusion detection tool developed by the OISF. Snort was created by Martin Roesch and is maintained by Cisco Systems (Slides 53 and 55)."},{"d":"S","t":"single","q":"Snort was created by Martin Roesch and is maintained by which company?","o":["Palo Alto Networks","Cisco Systems","Check Point","Fortinet"],"a":[1],"e":"Snort is a popular open-source NIDS created by Martin Roesch and maintained by Cisco Systems (Slide 55)."},{"d":"S","t":"single","q":"What does a VPN create between a user's device and the VPN server?","o":["A shared plain-text session","A dedicated physical leased line","An encrypted tunnel over the internet","A local caching proxy"],"a":[2],"e":"A VPN creates an encrypted tunnel between the device and a VPN server over the internet, so traffic travels privately and the real IP address is hidden (Slide 59)."},{"d":"S","t":"single","q":"Which VPN type is also known as Router-to-Router VPN?","o":["Site-to-site VPN","Remote access VPN","SSL VPN","Split-tunnel VPN"],"a":[0],"e":"Site-to-site VPN is also known as Router-to-Router VPN and uses IPsec to build an encrypted tunnel between a customer's networks (Slide 64)."},{"d":"S","t":"single","q":"What does IPsec do to IP packets when it is used to set up a VPN?","o":["Tags them with VLAN identifiers","Encrypts them and authenticates their source","Rewrites them to hide the port numbers","Caches them to reduce bandwidth use"],"a":[1],"e":"IPsec is a group of protocols that secures connections by encrypting IP packets and authenticating the source they come from (Slide 66)."},{"d":"S","t":"single","q":"A proxy server sits between which two parties?","o":["Two switches inside one VLAN","A server and its local hard disk","A router and its configuration file","A user's device and the internet"],"a":[3],"e":"A proxy server is an intermediary between your device and the internet, forwarding requests through another server to improve privacy and control access (Slide 72)."},{"d":"S","t":"single","q":"Which type of proxy sits in front of servers to hide and protect them?","o":["Explicit proxy","Transparent proxy","Reverse proxy","Forward proxy"],"a":[2],"e":"A reverse proxy sits in front of servers to hide and protect them, load balancing traffic and caching content. A forward proxy sits in front of users instead (Slides 76 and 77)."},{"d":"S","t":"single","q":"What does network segmentation do to a network?","o":["Encrypts every packet with a single shared key","Replicates it at a remote site for disaster recovery","Merges all devices into one flat broadcast domain","Divides it into smaller, isolated segments to restrict communication"],"a":[3],"e":"Network segmentation divides a network into smaller, isolated segments to control and restrict communication, containing potential threats within defined boundaries (Slide 81)."},{"d":"S","t":"single","q":"What does VLAN stand for?","o":["Virtual Local Area Network","Variable Length Address Network","Virtual Link Authentication Node","Verified Link Access Node"],"a":[0],"e":"A VLAN is a Virtual LAN that groups devices into a separate logical network on the same switches (Slide 87)."},{"d":"S","t":"single","q":"Which phrase best summarises the core idea of Zero Trust?","o":["Trust the internal network, verify the internet","Never trust, always verify","Trust enrolled devices without further checks","Verify once at login, then trust the session"],"a":[1],"e":"Zero Trust is a security model that trusts no user, device or network by default and verifies every request: never trust, always verify (Slides 92 and 93)."},{"d":"S","t":"single","q":"In Zero Trust, which element is described as \"the new perimeter\"?","o":["The firewall","The data centre","The office network","Identity"],"a":[3],"e":"Slide 94 states that in Zero Trust, identity is the new perimeter, so access depends on verified user and device identity rather than network location."},{"d":"S","t":"single","q":"What does multi-factor authentication (MFA) require?","o":["One very long password with special characters","The same credentials reused on every system","Two or more proofs, such as a password plus an app code","A password that is changed every single day"],"a":[2],"e":"MFA requires two or more proofs of identity, for example a password plus an app code (Slide 94)."},{"d":"S","t":"single","q":"What is an SSID?","o":["The network name broadcast by an access point","The server that authenticates enterprise users","The shared passphrase used to join a network","The hardware address of a client device"],"a":[0],"e":"The SSID is the network name broadcast by an access point. Hiding it is not real security (Slide 99)."},{"d":"S","t":"single","q":"How does WPA2-Personal authenticate users?","o":["With per-user credentials checked by a RADIUS server","With one shared passphrase (PSK) for everyone","With SAE, a unique key exchange for every session","With a captive portal that asks for an email address"],"a":[1],"e":"WPA2-Personal (PSK) uses one shared passphrase for everyone. WPA2-Enterprise uses 802.1X with a RADIUS server, and SAE belongs to WPA3 (Slides 100 and 101)."},{"d":"S","t":"single","q":"Which method does WPA2 use for strong encryption and integrity?","o":["WPS","WEP","TKIP","AES-CCMP"],"a":[3],"e":"AES-CCMP is the strong encryption and integrity method used by WPA2. WEP, WPA/TKIP and WPS are insecure legacy options that should be disabled (Slides 100 and 106)."},{"d":"S","t":"single","q":"What does KRACK stand for?","o":["Key Reinstallation Attack","Kernel Reset and Crash Kit","Keystream Replay Authentication Check","Key Recovery and Cracking Kit"],"a":[0],"e":"KRACK stands for Key Reinstallation Attack (2017) and targets the WPA2 4-way handshake (Slide 105)."},{"d":"M","t":"single","q":"Why is a stateful firewall generally more secure than a stateless one?","o":["It examines each packet separately from earlier ones","It judges packets using the context of active sessions","It reads only the header fields of every packet","It uses fewer rules by ignoring connection history"],"a":[1],"e":"By keeping track of active sessions, a stateful firewall understands the context of packets and identifies legitimate traffic better than a stateless firewall, which lacks that context (Slides 6, 7 and 10)."},{"d":"M","t":"single","q":"Why are packet filtering firewalls usually fast and resource-efficient?","o":["They keep a detailed table of all active connections","They open a new connection for each client request","They work at a low level and do not track sessions","They read the full application data in every packet"],"a":[2],"e":"Packet filtering is fast because it operates at a low level without extensive processing, and it uses fewer resources than stateful firewalls since it does not track sessions (Slide 14)."},{"d":"M","t":"single","q":"Which is a drawback of proxy firewalls?","o":["Latency, because every request and response passes through them","They allow clients to connect directly to outside servers","They expose internal IP addresses to external servers","They cannot inspect any application-level content"],"a":[0],"e":"Acting as an intermediary can introduce latency, and proxy firewalls are also more complicated to configure. They do inspect content and hide internal IP addresses (Slide 17)."},{"d":"M","t":"single","q":"According to the NGFW versus traditional firewall diagram, which packets does a traditional firewall fail to stop but an NGFW blocks?","o":["Packets with malicious content in the header","Encrypted packets belonging to a VPN tunnel","Packets that do not belong to any connection","Packets coming from an unauthorized application"],"a":[3],"e":"The traditional firewall blocks malicious header content (packet filtering) and packets without a connection (stateful inspection), but lets malicious body content and unauthorized-application packets through. The NGFW blocks all four, and VPN packets are allowed by both (Slides 21 and 22)."},{"d":"M","t":"single","q":"How does a DMZ protect the internal LAN?","o":["Internal users are blocked from using the internet","Public servers sit apart from the LAN with limited access to it","Internal servers are moved to face the internet directly","Public servers are placed on the LAN with full access"],"a":[1],"e":"DMZ servers and resources are isolated and given limited access to the LAN, so they can be reached from the internet but the internal LAN cannot, making direct access to internal data harder (Slide 23)."},{"d":"M","t":"single","q":"Why does an IDS add no latency to network traffic?","o":["It compresses packets before they are analysed","It only runs during off-peak hours of the day","It sits in-line but inspects packets very quickly","It monitors passively and does not interfere with traffic"],"a":[3],"e":"Passive monitoring means the IDS does not interfere with network traffic, so it does not introduce latency or affect network performance. An in-line IPS can add latency (Slides 31 and 37)."},{"d":"M","t":"single","q":"Which statement correctly matches an IDS type with its main limitation?","o":["Anomaly-based IDS: cannot detect zero-day attacks","Signature-based IDS: prone to false positives","Anomaly-based IDS: prone to false positives","Signature-based IDS: needs a baseline of normal traffic"],"a":[2],"e":"Anomaly-based IDS builds a baseline and flags deviations, so legitimate deviations can trigger false positives. Signature-based IDS cannot detect unknown or zero-day threats without a signature (Slides 29, 30 and 32)."},{"d":"M","t":"single","q":"Besides blocking malicious packets, what other corrective actions can an IPS take?","o":["Resetting connections and modifying firewall rules","Rotating all user passwords across the network","Redirecting the attacker to a decoy server","Reinstalling the operating system on the target host"],"a":[0],"e":"In addition to blocking attacks, an IPS can reset connections, modify firewall rules or trigger alerts (Slide 35)."},{"d":"M","t":"single","q":"Why does a HIDS usually respond more slowly than a NIDS?","o":["It must examine all traffic in the whole network","It works from a read-only copy of live traffic","It is placed only at the main router","It compares file-system snapshots, which adds a delay"],"a":[3],"e":"A HIDS works by taking a snapshot of the system and comparing it with stored snapshots, which creates a delay. A NIDS examines the data flow in real time (Slides 43 and 50)."},{"d":"M","t":"single","q":"Why is a NIDS easier to install than a HIDS?","o":["It needs only a few installation points, such as routers","It must be installed on every single host","It replaces the need for any firewall","It is built into every operating system by default"],"a":[0],"e":"A HIDS must be installed on every host, which can be tiresome. A NIDS needs only a few installation points at intersection points such as routers (Slides 49 and 50)."},{"d":"M","t":"single","q":"What most distinguishes Suricata from Snort in the unit?","o":["Suricata is closed-source with no free version","Suricata's multi-threaded engine gives higher throughput","Suricata has no rule-based detection, unlike Snort","Suricata is maintained by Cisco Systems"],"a":[1],"e":"Suricata's multi-threaded architecture processes multiple tasks at once, giving faster packet processing and higher throughput. Both tools are open source and rule-based, and Cisco maintains Snort (Slides 54, 57 and 58)."},{"d":"M","t":"single","q":"Which statement correctly contrasts remote access VPN and site-to-site VPN?","o":["Remote access joins two offices; site-to-site serves individual users","Remote access uses routers at both ends; site-to-site uses client software","Remote access serves individual users; site-to-site joins networks","Site-to-site allows many users to connect; remote access allows only one"],"a":[2],"e":"Remote access VPN connects individual users (multiple users allowed) to a private network, while site-to-site VPN builds an IPsec tunnel between networks and does not allow multiple individual users (Slides 62 and 64)."},{"d":"M","t":"single","q":"At which layer does IPsec operate, compared with SSL?","o":["Both operate only at the physical layer","IPsec between transport and application layers; SSL in the Internet layer","IPsec in the application layer; SSL in the data link layer","IPsec in the Internet layer; SSL between transport and application layers"],"a":[3],"e":"IPsec works in the Internet layer of the OSI model, while SSL works between the transport layer and the application layer (Slide 68)."},{"d":"M","t":"single","q":"How does a transparent proxy differ from an explicit proxy?","o":["A transparent proxy hides the client's IP; an explicit proxy does not","A transparent proxy needs no client setup; an explicit proxy does","An explicit proxy works without any client configuration","A transparent proxy handles only HTTPS; an explicit proxy only HTTP"],"a":[1],"e":"Users may not know a transparent proxy is running, and it does not hide your IP. An explicit proxy is configured in the application, so each desktop must be set up to use it (Slides 79 and 80)."},{"d":"M","t":"single","q":"Why does network segmentation help limit lateral movement?","o":["Traffic between segments is automatically trusted","All segments share one broadcast domain for easier monitoring","A compromised system cannot freely reach systems in other segments","Devices keep full access but use stronger passwords"],"a":[2],"e":"Segmentation isolates critical systems and contains threats within defined boundaries, so an attacker who compromises one system cannot easily move to others (Slides 81 and 90)."},{"d":"M","t":"single","q":"How does Zero Trust differ from the traditional perimeter model in verification?","o":["Zero Trust verifies continuously; perimeter checks mainly at entry","Zero Trust relies on network location; perimeter relies on identity","Zero Trust verifies only at login; perimeter verifies continuously","Both verify users once per day, regardless of context"],"a":[0],"e":"In the comparison table, traditional perimeter verification may occur mainly at entry, whereas Zero Trust verification is ongoing and context-aware (Slide 97)."},{"d":"M","t":"single","q":"Which feature is required for WPA3 certification but optional in many WPA2 deployments?","o":["A pre-shared passphrase","AES-CCMP encryption","The 4-way handshake","Protected Management Frames (PMF)"],"a":[3],"e":"Management-frame protection is optional in many WPA2 deployments but required for WPA3 certification (Slide 102)."},{"d":"M","t":"single","q":"Why can attackers forge deauthentication frames in older Wi-Fi?","o":["The frames are encrypted with a key shared by all users","The frames travel over a wired link where anyone can read them","The frames are unauthenticated, so they can be forged","The frames are protected by PMF but with weak settings"],"a":[2],"e":"In older Wi-Fi, deauthentication frames are unauthenticated, so an attacker can forge them. Protected Management Frames make forged frames ineffective (Slide 104)."},{"d":"M","t":"single","q":"How does an evil twin differ from other rogue access points?","o":["It copies the name of a real AP so users connect to it","It encrypts all user traffic with WPA3-Enterprise","It affects only wired switch ports in the network","It is always installed by an authorised administrator"],"a":[0],"e":"An evil twin is a fake access point that copies the name of a real one. Rogue access points are any unauthorised APs, whether attacker-owned or plugged in by staff (Slide 103)."},{"d":"M","t":"single","q":"How does micro-segmentation differ from VLAN segmentation in granularity?","o":["VLANs target single applications; micro-segmentation groups subnets","VLANs group devices by subnet; micro-segmentation targets individual workloads","Both only separate the network at the perimeter","Both are enforced only through physical cabling"],"a":[1],"e":"VLAN segmentation groups devices (a subnet), while micro-segmentation applies fine-grained policy to individual workloads or applications (Slide 89)."},{"d":"H","t":"single","q":"A stateful firewall allows an outbound web request. What happens to the server's reply packets?","o":["They are held until an administrator adds a matching rule","A dynamic rule lets them in as part of the established session","They pass uninspected, since replies are never examined","They are checked in isolation as if they were new connections"],"a":[1],"e":"When a connection is established, a stateful firewall dynamically creates rules to allow the returning traffic, because it can see the packets belong to an established session (Slides 6 and 12)."},{"d":"H","t":"single","q":"A packet matches an allow rule but belongs to no real connection. How does a stateless firewall handle it?","o":["It holds it until a matching session is created","It drops it after checking a table of active sessions","It asks the sender to re-authenticate before forwarding","It allows it, because it has no session context to question it"],"a":[3],"e":"A stateless firewall evaluates each packet against rules only, with no context awareness, which makes it easier for malicious packets to bypass its protection (Slides 9 and 10)."},{"d":"H","t":"single","q":"A packet from an unauthorized application has valid headers and belongs to an established connection. Which device stops it?","o":["An NGFW, using application awareness and control","A traditional firewall, using stateful inspection","A traditional firewall, using packet filtering","Neither firewall, because the connection is legitimate"],"a":[0],"e":"Header checks and connection checks both pass this packet. Only an NGFW, with application awareness and control, blocks packets from an unauthorized application (Slides 20, 21 and 22)."},{"d":"H","t":"single","q":"In the two-firewall DMZ design, where are the web and mail servers placed?","o":["Outside both firewalls, directly on the internet","On the same segment as employee workstations","Between the Internet-facing firewall and the private-network firewall","Inside the private network, behind both firewalls"],"a":[2],"e":"The DMZ diagram shows the private network, then a firewall, then the DMZ with the mail server, web server and router, then a second firewall, then the Internet (Slide 24)."},{"d":"H","t":"single","q":"A hospital needs an audit trail for HIPAA and wants alerts only, with no chance of blocking legitimate traffic. What fits best?","o":["A packet filtering firewall, which filters headers by rule","An IDS, which monitors passively and logs activity","A reverse proxy, which load balances servers","An IPS, which blocks threats in-line"],"a":[1],"e":"IDS suits passive monitoring and compliance auditing (a detailed audit trail for regulations such as GDPR or HIPAA), and it does not block traffic. An in-line IPS could block legitimate users on false positives (Slides 37 and 42)."},{"d":"H","t":"single","q":"Why can a misconfigured IPS cause an outage that a misconfigured IDS would not?","o":["It copies all traffic to a remote site, doubling the load","It resets its baseline every time a user logs in","It disables the firewall rules that it depends on","It sits in-line, so false positives can block legitimate traffic"],"a":[3],"e":"An IPS is placed in-line and blocks traffic automatically, so false positives can block legitimate traffic or users and cause latency. An IDS only alerts (Slides 31 and 37)."},{"d":"H","t":"single","q":"Which NIDS weakness matters most when most traffic travels over protected channels?","o":["It cannot detect attacks across the wider network","It slows the performance of every protected host","Scrutinizing protected channels is difficult for it","It cannot reuse data gathered from other hosts"],"a":[2],"e":"A listed NIDS disadvantage is that scrutinizing protected channels can be difficult. Its advantages are network-wide detection, reuse of information from other hosts, and no effect on host performance (Slide 48)."},{"d":"H","t":"single","q":"An attacker alters system files on one server without generating suspicious network traffic. Which tool is best placed to notice?","o":["A HIDS, because it analyses files and processes on that host","A site-to-site VPN gateway, because it logs tunnels","A reverse proxy, because it caches server content","A NIDS at the router, because it inspects every host's files"],"a":[0],"e":"A HIDS examines the host's file system and processes, comparing snapshots, so file changes can point towards a potential attack (Slides 43 and 45)."},{"d":"H","t":"single","q":"Suricata is installed passively and not in-line. Which role does it perform?","o":["Both IDS and IPS, because it is multi-threaded","IDS only, alerting without blocking","IPS, blocking packets as they pass","Proxy firewall, terminating client connections"],"a":[1],"e":"If Suricata is installed as host-based or passive, it works only as an IDS. Only when installed as an active in-line solution can it also offer IPS functions (Slide 53)."},{"d":"H","t":"single","q":"Which combination describes SSL VPN, rather than IPsec, according to the unit?","o":["OS space; neither OS nor application changes required","OS space; OS changes required, no application changes","User space; no OS changes, but application changes are required","User space; OS changes required, no application changes"],"a":[2],"e":"SSL resides in user space and needs no OS changes but does need application changes. IPsec resides in the operating-system space, needs OS changes and no application changes (Slide 69)."},{"d":"H","t":"single","q":"Access is granted only to finance staff on managed laptops, during office hours, from approved locations. Which model is this?","o":["Role-based access control (RBAC)","Privileged access management (PAM)","Single sign-on (SSO)","Attribute-based access control (ABAC)"],"a":[3],"e":"ABAC grants access based on attributes such as department, device state, location and time. RBAC is based only on job role, and PAM controls, records and time-limits admin access (Slide 94)."},{"d":"H","t":"single","q":"How do forward and reverse proxies differ in what they hide?","o":["Forward hides clients from the internet; reverse hides servers from clients","Forward hides servers from clients; reverse hides clients from the internet","Neither hides identities; both only filter URLs","Both hide only the servers behind them"],"a":[0],"e":"A forward proxy sits between users and the internet and hides the client's identity. A reverse proxy sits in front of servers to hide and protect them (Slides 76 and 77)."},{"d":"H","t":"single","q":"A school wants content filtering without configuring each student PC, and does not need anonymity. Which proxy fits?","o":["Site-to-site VPN gateway","Reverse proxy","Explicit proxy","Transparent proxy"],"a":[3],"e":"A transparent proxy is common in schools and offices, runs without users necessarily knowing, and offers filtering but no anonymity. An explicit proxy must be configured on each desktop (Slides 79 and 80)."},{"d":"H","t":"single","q":"Which statement about physical segmentation is correct?","o":["It stops lateral movement even if the firewall is bypassed","It gives strong isolation but is costly and hard to scale","It is cheap and easy to scale since it relies on VLAN tags","It splits one physical network into virtual segments"],"a":[1],"e":"Physical segmentation uses dedicated switches, wiring and firewalls. It isolates strongly but is costly, difficult to scale and complex to manage, and internal networks often stay flat so an attacker who bypasses the firewall can move laterally (Slide 85)."},{"d":"H","t":"single","q":"Two hosts in different VLANs on the same switch must communicate. What is needed?","o":["A separate switch dedicated to each VLAN","Nothing, because VLANs share one broadcast domain","A router or Layer 3 switch performing inter-VLAN routing","A trunk port connecting the two access ports"],"a":[2],"e":"Each VLAN is its own broadcast domain and subnet, and VLAN-to-VLAN communication is not possible without a router or Layer 3 switch. Trunk ports only carry many VLANs between switches (Slide 87)."},{"d":"H","t":"single","q":"In the DMZ segmentation example, which traffic from the web server to the internal network is allowed?","o":["Only connections to the database port, such as TCP 3306","All traffic, as long as it originates in the DMZ","Only ICMP echo requests to the management VLAN","Any port on any internal server, if it is encrypted"],"a":[0],"e":"The web server in the DMZ may connect to the internal database only on the database port (for example TCP 3306). All other DMZ-to-internal traffic is denied, and the Internet can never reach the database directly (Slide 88)."},{"d":"H","t":"single","q":"Which approach is best suited to controlling east-west traffic between servers inside a data centre?","o":["VLAN segmentation enforced only by core switches","A perimeter firewall placed at the internet edge","A forward proxy that hides internal servers","Micro-segmentation enforced by host agents or hypervisor"],"a":[3],"e":"East-west traffic is traffic between servers inside the data centre. Micro-segmentation is best for east-west control, while VLAN segmentation is best for north-south and zone separation (Slide 89)."},{"d":"H","t":"single","q":"A user passed MFA this morning and now appears to log in from a new country mid-session. What does Zero Trust do?","o":["Re-evaluates risk and may ask for MFA again or block access","Keeps the session since MFA was completed earlier","Waits until the next scheduled login to review it","Trusts it because the session started on the office network"],"a":[0],"e":"Zero Trust re-checks trust throughout a session. A login from a new country mid-session raises risk, so the system asks for MFA again or blocks access (Slide 96)."},{"d":"H","t":"single","q":"Which sequence correctly describes the KRACK attack on the WPA2 4-way handshake?","o":["Forge deauthentication, capture the handshake, crack offline, expose traffic","Replay message 3, reinstall key with nonce reset, reuse keystream, expose traffic","Reinstall the key, replay message 3, reuse the keystream, reset the nonce","Replay message 3, reuse the keystream, reset the nonce, reinstall the key"],"a":[1],"e":"The attacker resends message 3, the key is reinstalled and the nonce counter is reset, the keystream is reused so encryption weakens, and traffic can be decrypted or altered (Slide 105)."},{"d":"H","t":"single","q":"Why can an attacker not crack a WPA3-Personal passphrase offline from a captured handshake?","o":["All management frames are encrypted using the shared passphrase itself","The SSID is hidden, so attackers cannot locate the handshake at all","SAE gives every session a unique key through a password-based exchange","Every user logs in through a RADIUS server with their own credentials"],"a":[2],"e":"WPA3-Personal replaces the shared-key handshake with SAE, a password-based key exchange where each session key is unique, so a captured handshake cannot be attacked offline (Slide 101)."},{"d":"Q","t":"multi","q":"A small company places a firewall at the edge of its network. Which of the following will the firewall do?","o":["Replace the antivirus software on every endpoint","Log traffic data that gives insight into potential threats","Analyze incoming and outgoing packets against specific rules","Assign IP addresses to employee laptops automatically"],"a":[1,2],"e":"Firewalls perform traffic filtering based on rules and monitoring and logging of traffic data. Assigning addresses and replacing endpoint antivirus are not firewall functions (Slide 4)."},{"d":"Q","t":"multi","q":"A data-centre team wants a firewall that recognises legitimate return traffic. Which statements about stateful firewalls are true?","o":["They create rules dynamically to allow returning traffic","They evaluate every packet in isolation with no memory of earlier ones","They maintain a state table of active sessions","They can tell whether a packet belongs to an established session"],"a":[0,2,3],"e":"Stateful firewalls use connection tracking and dynamic rules. Evaluating each packet in isolation describes a stateless firewall (Slides 6 and 9)."},{"d":"Q","t":"multi","q":"You are asked to review a company's Wi-Fi security on an authorized engagement. Which steps belong to the unit's assessment workflow?","o":["Validate segmentation between guest and internal networks","Check for rogue or unknown access points","List all access points and SSIDs in the environment","Test the passphrases of neighbouring businesses for practice"],"a":[0,1,2],"e":"The workflow is: identify access points, verify encryption, review configuration, check rogue APs, validate segmentation and document findings, and only on networks you are authorized to test (Slide 107)."},{"d":"Q","t":"multi","q":"An administrator is writing rules for a packet filtering firewall. Which of these can the rules be based on?","o":["The meaning of the content inside application data","Protocols such as TCP, UDP or ICMP","Source and destination IP addresses","Port numbers"],"a":[1,2,3],"e":"Packet filtering rules use header information: IP addresses, port numbers and protocols. These firewalls do not analyze packet content (Slides 13 and 14)."},{"d":"Q","t":"multi","q":"A bank wants a firewall that hides internal IP addresses and filters application-level content, accepting some slowdown. Which proxy firewall characteristics apply?","o":["It adds no latency because requests bypass the firewall","It hides internal IP addresses from external attackers","It lets packets pass straight through without examining them","It reads application data and creates a brand-new connection to fetch it"],"a":[1,3],"e":"A proxy firewall intercepts traffic, reads application data and hides internal IP addresses. Because every request and response passes through it, it can add latency (Slides 16 and 17)."},{"d":"Q","t":"multi","q":"A security team lists the capabilities they expect from an NGFW. Which items are correct?","o":["Application awareness and control","Threat intelligence","Blocking traffic based only on the source IP address","Intrusion prevention"],"a":[0,1,3],"e":"According to Gartner, an NGFW includes application awareness and control, intrusion prevention and threat intelligence, plus upgrade paths and techniques for evolving threats (Slide 20)."},{"d":"Q","t":"multi","q":"A company runs a public website, a mail server and a finance database. Which placements follow DMZ design?","o":["Put the external-facing mail server in the DMZ","Give DMZ servers unrestricted access to the internal LAN","Put the finance database in the DMZ for easier customer access","Put the public web server in the DMZ"],"a":[0,3],"e":"External-facing web and mail servers belong in the DMZ with limited access to the LAN. Sensitive internal databases stay in the protected internal zone (Slides 23 and 88)."},{"d":"Q","t":"multi","q":"Wi-Fi users in a branch keep getting disconnected, and the logs show bursts of deauthentication frames. Which statements are correct?","o":["In older Wi-Fi these frames are unauthenticated, so attackers can forge them","Protected Management Frames make forged deauthentication frames ineffective","A strong WPA2 passphrase makes management frames authenticated","Hiding the SSID prevents deauthentication attacks"],"a":[0,1],"e":"Older Wi-Fi leaves deauthentication frames unauthenticated and PMF fixes this. Hiding the SSID is not real security, and WPA2 management frames are unprotected by default (Slides 99, 100 and 104)."},{"d":"Q","t":"multi","q":"An IDS has just spotted suspicious traffic on a corporate network. Which actions are part of its operation?","o":["Dropping the malicious packets before they reach the target","Resetting the connection and modifying firewall rules","Sending alerts that include source and destination IPs and the time","Logging the event for future analysis and forensics"],"a":[2,3],"e":"An IDS alerts administrators and logs events. Dropping packets, resetting connections and modifying firewall rules are IPS responses (Slides 28 and 35)."},{"d":"Q","t":"multi","q":"A company considers deploying an IDS for passive monitoring. Which are advantages of an IDS?","o":["Visibility into the types of attacks targeting the network","Automatic blocking of attacks in real time","No added latency, since it does not interfere with traffic","Early warning of potential intrusions"],"a":[0,2,3],"e":"IDS advantages are early warning, visibility and passive monitoring. Automatic real-time blocking is an IPS advantage (Slides 31 and 37)."},{"d":"Q","t":"multi","q":"A SOC runs both signature-based and anomaly-based sensors. Which observations match the unit?","o":["Signature-based sensors miss attacks with no stored signature","Anomaly-based sensors cannot detect zero-day exploits","Anomaly-based sensors raise false alarms when legitimate behaviour deviates","Signature-based sensors need a baseline of normal behaviour"],"a":[0,2],"e":"Anomaly-based IDS compares activity with a baseline, can detect zero-day attacks, and is prone to false positives. Signature-based IDS cannot detect unknown threats without a signature (Slides 29, 30 and 32)."},{"d":"Q","t":"multi","q":"A bank wants real-time protection for its network. Which statements about an IPS are true?","o":["It can be network-based or host-based","It can reset connections or modify firewall rules","It sits in-line and can drop malicious packets","It only generates alerts and cannot stop any attack"],"a":[0,1,2],"e":"An IPS is deployed in-line, blocks or drops malicious packets, and can take corrective actions. NIPS and HIPS are its two types. Alert-only behaviour describes an IDS (Slides 35 and 36)."},{"d":"Q","t":"multi","q":"After an in-line IPS is deployed, users report slow access and some blocked pages. Which IPS drawbacks explain this?","o":["False positives can block legitimate traffic","In-line placement can introduce latency","It leaves malicious traffic untouched because it only monitors","Administrators cannot fine-tune its rules or responses"],"a":[0,1],"e":"IPS disadvantages include false positives, performance impact from in-line placement and complex configuration. It does allow granular control and does block threats (Slide 37)."},{"d":"Q","t":"multi","q":"A hospital and a power utility plan their monitoring. Which deployment choices are supported by the use cases in the unit?","o":["IDS to capture network activity for later forensic analysis","IDS for a detailed audit trail for GDPR or HIPAA compliance","IPS for purely passive monitoring with manual response","IPS for critical infrastructure that cannot tolerate breaches"],"a":[0,1,3],"e":"IDS use cases are passive threat monitoring, compliance and auditing, and forensic analysis. IPS fits proactive defense and high-security environments such as critical infrastructure (Slide 42)."},{"d":"Q","t":"multi","q":"An admin deploys a HIDS on a file server. Which statements are true?","o":["It compares the current file-system snapshot with a previous one","It works in real time and responds faster than a NIDS","It has to be installed on every host it protects","It monitors all traffic across the whole network from one point"],"a":[0,2],"e":"A HIDS compares file-system snapshots and must be installed on every host. It does not work in real time and has a slow response, unlike a NIDS (Slides 43, 45, 49 and 50)."},{"d":"Q","t":"multi","q":"An organisation with cloud and on-premises systems wants one monitoring approach. Which statements about NIDS apply?","o":["It examines each host's file system for changes","Host performance remains unaffected","It can detect attacks across the entire network","It can reuse data from other hosts' attacks to spot attacks on a new host"],"a":[1,2,3],"e":"A NIDS can detect attacks in the entire network, works in mixed and hybrid environments, uses information from attacks on other hosts, and does not affect host performance. File-system snapshots are a HIDS technique (Slides 46 and 48)."},{"d":"Q","t":"multi","q":"A team plans to run Suricata on high-traffic links. Which statements are correct?","o":["It can only ever work as a passive IDS","It is maintained by Cisco Systems","It can also act as an IPS when installed as an active in-line solution","Its multi-threaded architecture gives faster packet processing"],"a":[2,3],"e":"Suricata is developed by OISF, is multi-threaded for higher throughput, and can offer IPS functions when installed in-line. Cisco maintains Snort (Slides 53, 54 and 55)."},{"d":"Q","t":"multi","q":"A small office with limited hardware compares Snort and Suricata. Which statements match the comparison slides?","o":["Suricata uses YAML-based configuration","Snort uses fewer resources and suits limited hardware","Only Suricata provides rule-based detection","Both are open source and offer free community support"],"a":[0,1,3],"e":"Snort is shown as lower in resource usage and better for limited resources, Suricata uses YAML-based configuration, and both have open-source licenses with free community support. Both provide rule-based detection (Slides 57 and 58)."},{"d":"Q","t":"multi","q":"A consultant works from airport Wi-Fi and connects through a VPN. Which benefits apply?","o":["Logins and personal data are encrypted on the unsafe network","The airport network is automatically upgraded to WPA3-Enterprise","All malware on the laptop is blocked automatically","Their real IP address is hidden from websites and third parties"],"a":[0,3],"e":"A VPN encrypts traffic, protecting logins and personal data on unsafe networks, and hides your real IP address. It does not change the airport network's security mode or act as antimalware (Slide 59)."},{"d":"Q","t":"multi","q":"A company has remote workers and two branch offices to connect securely. Which statements apply to its VPN design?","o":["Remote workers can use a remote access VPN to reach company resources","A remote access VPN permits only one user at a time","Site-to-site VPN is more complex to configure than remote access VPN","Branch networks can be linked by a site-to-site VPN using IPsec"],"a":[0,2,3],"e":"Remote access VPN allows multiple users and is simpler to configure, while site-to-site VPN uses IPsec between networks and is more complex to configure and manage (Slides 62 to 65)."},{"d":"Q","t":"multi","q":"A company wants to protect its web servers and spread incoming requests across them. Which are properties of a reverse proxy?","o":["It monitors employee browsing on the way out","It caches content to reduce server load","It load balances traffic across servers","It hides the client's identity from websites"],"a":[1,2],"e":"A reverse proxy sits in front of servers, load balances, caches content and improves security and performance. Hiding clients and monitoring employee traffic are forward proxy roles (Slides 76 and 77)."},{"d":"Q","t":"multi","q":"A vendor discloses that the Wi-Fi handshake in its WPA2 products can be replayed. Which measures reduce the KRACK risk?","o":["Patch clients and access points","Use WPA3 where it is supported","Prefer HTTPS or a VPN for sensitive traffic","Hide the SSID so attackers cannot find the network"],"a":[0,1,2],"e":"KRACK mitigation is to patch clients and APs, prefer HTTPS or a VPN, and use WPA3 where supported. Hiding the SSID is not real security (Slides 99 and 105)."},{"d":"Q","t":"multi","q":"A university deploys a transparent proxy for its labs. Which statements are true?","o":["Every desktop must be manually configured to use it","It provides filtering but no anonymity","It hides each student's real IP address","Students may not even know it is running"],"a":[1,3],"e":"A transparent proxy does not hide your IP, is often used for caching, and users may not know it is running. Needing per-desktop configuration describes an explicit proxy (Slides 79 and 80)."},{"d":"Q","t":"multi","q":"Management asks why the company should segment its network. Which benefits can be cited?","o":["It removes the need for any access control policy","It improves performance by limiting broadcast traffic","It supports compliance with data protection regulations","It reduces the attack surface by isolating critical systems"],"a":[1,2,3],"e":"Segmentation reduces the attack surface, limits broadcast traffic and congestion, enforces access control and supports compliance. It works together with access control policies, not instead of them (Slides 81, 82 and 84)."},{"d":"Q","t":"multi","q":"A network engineer configures VLANs on campus switches. Which statements are true?","o":["Access ports carry many VLANs to each end device","Two VLANs can talk directly without any router or Layer 3 switch","Trunk ports carry multiple VLANs between switches using 802.1Q tags","Each VLAN is its own broadcast domain and subnet"],"a":[2,3],"e":"Access ports carry one VLAN to an end device, trunk ports carry many VLANs between switches, and inter-VLAN traffic needs a router or Layer 3 switch (Slide 87)."},{"d":"Q","t":"multi","q":"A workstation has been compromised. Which hardening measures limit lateral movement?","o":["Allow SMB, RDP, SSH and WinRM only from jump hosts","Place domain controllers and admin tools in restricted zones","Monitor east-west traffic for unusual internal connections","Let workstations talk freely to each other for convenience"],"a":[0,1,2],"e":"Limiting lateral movement means restricting unnecessary connectivity, protecting privileged systems, limiting administrative protocols to jump hosts and monitoring east-west traffic. Workstations should not talk to each other freely (Slide 90)."},{"d":"Q","t":"multi","q":"A company moves to cloud services and remote work. Which are Zero Trust principles it should adopt?","o":["Verify explicitly and continuously","Authenticate once at the perimeter and then trust the session","Assume breach","Trust devices that are inside the office network"],"a":[0,2],"e":"Zero Trust core principles are never trust, always verify, least privilege, assume breach, and verify explicitly and continuously. Being inside the office network grants nothing automatically (Slides 92 and 93)."},{"d":"Q","t":"multi","q":"A company is building identity-centric security under Zero Trust. Which controls fit this approach?","o":["Single sign-on through a central identity provider","Privileged access management that records and time-limits admin access","Granting access mainly based on network location","Device certificates that prove a device is known"],"a":[0,1,3],"e":"Identity-centric security uses a central identity provider, device identity through certificates or enrolment, MFA, RBAC, ABAC and PAM. Granting access by network location is the traditional perimeter approach (Slides 94 and 97)."},{"d":"Q","t":"multi","q":"At a cafe, visitors connect to a hotspot that copies the cafe's SSID and presents a fake login page. Which statements describe this attack?","o":["It is a KRACK attack that replays message 3 of the handshake","The attacker can intercept traffic or steal credentials","It is an evil twin attack","Hiding the SSID would have prevented it"],"a":[1,2],"e":"An evil twin is a fake access point copying a real name, letting the attacker see traffic or show a fake login page. KRACK targets the WPA2 4-way handshake, and hiding an SSID is not real security (Slides 99, 103 and 105)."},{"d":"Q","t":"multi","q":"An IT admin is hardening the office Wi-Fi. Which actions follow the unit's guidance?","o":["Keep the default administrator credentials for easier support","Enable Protected Management Frames and guest network isolation","Update access point firmware regularly","Disable insecure legacy options such as WEP, WPA/TKIP and WPS"],"a":[1,2,3],"e":"Securing wireless networks includes disabling WEP, WPA/TKIP and WPS, enabling PMF, using guest isolation, updating firmware and avoiding default administrator credentials (Slide 106)."}];
+  var LETTERS = ['A', 'B', 'C', 'D'];
+  var DIFFS = [
+    { key: 'S', label: 'Simple', cls: 'd-s' },
+    { key: 'M', label: 'Medium', cls: 'd-m' },
+    { key: 'H', label: 'Hard', cls: 'd-h' },
+    { key: 'Q', label: 'Scenario MSQ', cls: 'd-q' }
+  ];
+  var DIFF_BY = {};
+  DIFFS.forEach(function (d) { DIFF_BY[d.key] = d; });
+
+  var S = {
+    mode: 'start', order: [], list: [], pos: 0, num: {},
+    answers: {}, marked: {}, visited: {},
+    limitMin: 100, startAt: 0, endAt: 0, elapsedSec: 0, timerId: null, auto: false,
+    filter: 'all', results: null
+  };
+  var modalOpen = false;
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function h(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function plain(s) { return String(s).replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function fmtClock(sec) {
+    sec = Math.max(0, Math.ceil(sec));
+    var hr = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    return hr > 0 ? hr + ':' + pad2(m) + ':' + pad2(s) : pad2(m) + ':' + pad2(s);
+  }
+  function fmtDuration(sec) {
+    var hr = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    return (hr > 0 ? hr + 'h ' : '') + (hr > 0 || m > 0 ? pad2(m) + 'm ' : '') + pad2(s) + 's';
+  }
+  function letters(arr) { return arr.map(function (i) { return LETTERS[i]; }).join(', '); }
+
+  /* ---------- evaluation ---------- */
+  function isCorrect(q, sel) {
+    if (!sel || sel.length !== q.a.length) return false;
+    for (var i = 0; i < q.a.length; i++) { if (sel.indexOf(q.a[i]) < 0) return false; }
+    return true;
+  }
+  function statusOf(qi) {
+    var sel = S.answers[qi];
+    if (!sel || !sel.length) return 'unanswered';
+    return isCorrect(QUESTIONS[qi], sel) ? 'correct' : 'wrong';
+  }
+  function answeredCount() {
+    var n = 0;
+    for (var k in S.answers) { if (S.answers[k] && S.answers[k].length) n++; }
+    return n;
+  }
+  function markedCount() {
+    var n = 0;
+    for (var k in S.marked) { if (S.marked[k]) n++; }
+    return n;
+  }
+  function computeResults() {
+    var res = { correct: 0, wrong: 0, unanswered: 0, marked: markedCount(), byDiff: {} };
+    DIFFS.forEach(function (d) { res.byDiff[d.key] = { total: 0, correct: 0, wrong: 0, unanswered: 0 }; });
+    QUESTIONS.forEach(function (q, qi) {
+      var st = statusOf(qi), bd = res.byDiff[q.d];
+      bd.total++;
+      if (st === 'correct') { res.correct++; bd.correct++; }
+      else if (st === 'wrong') { res.wrong++; bd.wrong++; }
+      else { res.unanswered++; bd.unanswered++; }
+    });
+    return res;
+  }
+
+  /* ---------- screens ---------- */
+  function setScreen() {
+    $('screen-start').classList.toggle('hidden', S.mode !== 'start');
+    $('screen-quiz').classList.toggle('hidden', !(S.mode === 'quiz' || S.mode === 'review'));
+    $('screen-result').classList.toggle('hidden', S.mode !== 'result');
+  }
+
+  /* ---------- timer ---------- */
+  function stopTimer() { if (S.timerId) { clearInterval(S.timerId); S.timerId = null; } }
+  function tick() {
+    var leftMs = Math.max(0, S.endAt - Date.now());
+    var t = $('timer');
+    $('timerText').textContent = fmtClock(leftMs / 1000);
+    t.classList.toggle('warn', leftMs <= 10 * 60000 && leftMs > 5 * 60000);
+    t.classList.toggle('danger', leftMs <= 5 * 60000);
+    if (leftMs <= 0) finish(true);
+  }
+  function startTimer() { stopTimer(); tick(); if (S.mode === 'quiz') S.timerId = setInterval(tick, 250); }
+
+  /* ---------- quiz lifecycle ---------- */
+  function startQuiz() {
+    S.limitMin = parseInt($('limitSel').value, 10) || 100;
+    var idx = QUESTIONS.map(function (_, i) { return i; });
+    if ($('shuffleChk').checked) shuffle(idx);
+    S.order = idx; S.list = idx.slice(); S.pos = 0; S.num = {};
+    idx.forEach(function (qi, i) { S.num[qi] = i + 1; });
+    S.answers = {}; S.marked = {}; S.visited = {}; S.filter = 'all'; S.results = null; S.auto = false;
+    S.visited[S.list[0]] = true;
+    S.mode = 'quiz';
+    S.startAt = Date.now(); S.endAt = S.startAt + S.limitMin * 60000;
+    setScreen(); render(); startTimer();
+    window.scrollTo(0, 0);
+  }
+  function finish(auto) {
+    if (S.mode !== 'quiz') return;
+    stopTimer(); closeModal(); closePalette();
+    S.elapsedSec = Math.min(Math.round((Date.now() - S.startAt) / 1000), S.limitMin * 60);
+    S.auto = !!auto;
+    S.results = computeResults();
+    S.mode = 'result';
+    setScreen(); renderResult();
+    window.scrollTo(0, 0);
+  }
+  function restart() {
+    stopTimer(); closeModal(); closePalette();
+    S.mode = 'start'; setScreen(); window.scrollTo(0, 0);
+  }
+
+  /* ---------- navigation ---------- */
+  function go(p) {
+    if (p < 0 || p >= S.list.length) return;
+    S.pos = p;
+    S.visited[S.list[p]] = true;
+    render();
+    var c = $('qcard');
+    if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ block: 'start' });
+  }
+  function toggleMark() {
+    if (S.mode !== 'quiz' || !S.list.length) return;
+    var qi = S.list[S.pos];
+    if (S.marked[qi]) delete S.marked[qi]; else S.marked[qi] = true;
+    render();
+  }
+  function onOption(i) {
+    if (S.mode !== 'quiz' || !S.list.length) return;
+    var qi = S.list[S.pos], q = QUESTIONS[qi];
+    var sel = (S.answers[qi] || []).slice();
+    if (q.t === 'single') {
+      if (sel.length) return; // locked after first choice
+      sel = [i];
+    } else {
+      var k = sel.indexOf(i);
+      if (k >= 0) sel.splice(k, 1); else sel.push(i);
+      sel.sort(function (a, b) { return a - b; });
+    }
+    if (sel.length) S.answers[qi] = sel; else delete S.answers[qi];
+    renderQuestion(i); renderPalette(); renderProgress();
+  }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    renderHeader(); renderFilters(); renderProgress(); renderQuestion(); renderPalette(); renderNav();
+  }
+  function renderHeader() {
+    var review = S.mode === 'review';
+    $('modeLabel').textContent = review ? 'Answer review' : 'Unit 03 Quiz';
+    $('timer').classList.toggle('hidden', review);
+    $('btnSubmit').classList.toggle('hidden', review);
+    $('btnRestart').classList.toggle('hidden', review);
+    $('btnBack').classList.toggle('hidden', !review);
+    $('palTitle').textContent = review ? 'Review palette' : 'Question palette';
+  }
+  var FILTERS = [
+    { key: 'all', label: 'All' }, { key: 'issues', label: 'Incorrect + unanswered' },
+    { key: 'wrong', label: 'Incorrect' },
+    { key: 'unanswered', label: 'Unanswered' }, { key: 'marked', label: 'Marked' },
+    { key: 'correct', label: 'Correct' }
+  ];
+  function inFilter(qi, f) {
+    if (f === 'all') return true;
+    if (f === 'marked') return !!S.marked[qi];
+    if (f === 'issues') return statusOf(qi) !== 'correct';
+    return statusOf(qi) === f;
+  }
+  function renderFilters() {
+    var bar = $('filterBar');
+    clear(bar);
+    var review = S.mode === 'review';
+    bar.classList.toggle('hidden', !review);
+    if (!review) return;
+    FILTERS.forEach(function (f) {
+      var n = S.order.filter(function (qi) { return inFilter(qi, f.key); }).length;
+      var b = h('button', 'fchip' + (S.filter === f.key ? ' active' : ''), f.label + ' (' + n + ')');
+      b.type = 'button';
+      b.disabled = n === 0;
+      b.addEventListener('click', function () { setFilter(f.key); });
+      bar.appendChild(b);
+    });
+  }
+  function setFilter(f) {
+    S.filter = f;
+    S.list = S.order.filter(function (qi) { return inFilter(qi, f); });
+    S.pos = 0;
+    render();
+  }
+  function renderProgress() {
+    var fill = $('progFill'), bar = $('progBar');
+    if (S.mode === 'review') {
+      var total = S.list.length || 1;
+      var pct = S.list.length ? ((S.pos + 1) / total) * 100 : 0;
+      $('progText').textContent = S.list.length ? 'Reviewing ' + (S.pos + 1) + ' of ' + S.list.length : 'Nothing to review';
+      $('progRight').textContent = 'Filter: ' + FILTERS.filter(function (f) { return f.key === S.filter; })[0].label;
+      fill.style.width = pct + '%'; bar.setAttribute('aria-valuenow', String(Math.round(pct)));
+      return;
+    }
+    var a = answeredCount(), pc = (a / QUESTIONS.length) * 100;
+    var qi = S.list[S.pos];
+    $('progText').textContent = 'Question ' + S.num[qi] + ' of ' + QUESTIONS.length;
+    $('progRight').textContent = a + ' answered \u00b7 ' + (QUESTIONS.length - a) + ' remaining \u00b7 ' + markedCount() + ' marked';
+    fill.style.width = pc + '%'; bar.setAttribute('aria-valuenow', String(Math.round(pc)));
+  }
+  function renderNav() {
+    var review = S.mode === 'review';
+    var last = S.pos >= S.list.length - 1;
+    $('btnPrev').disabled = S.pos <= 0 || !S.list.length;
+    var next = $('btnNext');
+    if (!review && last) { next.textContent = 'Finish \u0026 submit'; next.disabled = false; }
+    else { next.textContent = 'Next \u2192'; next.disabled = last || !S.list.length; }
+    var mk = $('btnMark');
+    mk.classList.toggle('hidden', review);
+    var qi = S.list[S.pos];
+    mk.textContent = S.marked[qi] ? '\u2605 Marked for review' : '\u2606 Mark for review';
+    mk.setAttribute('aria-pressed', S.marked[qi] ? 'true' : 'false');
+  }
+
+  function optionStates(q, sel, review) {
+    var out = q.o.map(function () { return { cls: '', tag: '' }; });
+    q.o.forEach(function (_, i) {
+      var chosen = sel.indexOf(i) >= 0, right = q.a.indexOf(i) >= 0;
+      if (review) {
+        if (chosen && right) out[i] = { cls: 'correct', tag: 'Your answer \u2713' };
+        else if (chosen) out[i] = { cls: 'wrong', tag: 'Your answer \u2717' };
+        else if (right) out[i] = { cls: 'missed', tag: 'Correct answer' };
+      } else if (q.t === 'single') {
+        if (sel.length) {
+          if (chosen && right) out[i] = { cls: 'correct', tag: 'Correct' };
+          else if (chosen) out[i] = { cls: 'wrong', tag: 'Your answer' };
+          else if (right) out[i] = { cls: 'correct', tag: 'Correct answer' };
+        }
+      } else if (chosen) {
+        out[i] = right ? { cls: 'correct', tag: 'Correct' } : { cls: 'wrong', tag: 'Incorrect' };
+      }
+    });
+    return out;
+  }
+
+  function feedbackNode(q, sel, review) {
+    var T = q.a.length;
+    var c = sel.filter(function (i) { return q.a.indexOf(i) >= 0; }).length;
+    var w = sel.length - c, missing = T - c;
+    var kind, icon, title, showAnswers = false, showExpl = false, yourLine = null;
+
+    if (!sel.length) {
+      if (!review) return null;
+      kind = 'neutral'; icon = '\u2013'; title = 'Not answered'; showAnswers = showExpl = true;
+    } else if (q.t === 'single') {
+      kind = c === 1 ? 'good' : 'bad';
+      icon = c === 1 ? '\u2713' : '\u2717';
+      title = c === 1 ? 'Correct!' : 'Incorrect';
+      showAnswers = showExpl = true;
+    } else if (c === T && w === 0) {
+      kind = 'good'; icon = '\u2713';
+      title = 'Correct! You selected all ' + T + ' correct answers.';
+      showAnswers = showExpl = true;
+    } else if (review) {
+      kind = 'bad'; icon = '\u2717'; title = 'Incorrect';
+      yourLine = c + ' of ' + T + ' correct options selected' + (w ? ', ' + w + ' incorrect selected.' : '.');
+      showAnswers = showExpl = true;
+    } else if (c === T) {
+      kind = 'warn'; icon = '!';
+      title = 'All correct options are selected, but ' + w + ' incorrect selection' + (w > 1 ? 's' : '') + ' must be removed.';
+    } else if (w === 0) {
+      kind = 'info'; icon = 'i';
+      title = missing + ' correct answer' + (missing > 1 ? 's are' : ' is') + ' still missing.';
+    } else {
+      kind = 'bad'; icon = '\u2717';
+      title = missing + ' correct answer' + (missing > 1 ? 's are' : ' is') + ' still missing, and ' + w + ' incorrect selection' + (w > 1 ? 's' : '') + ' must be removed.';
+    }
+
+    var box = h('div', 'fb ' + kind);
+    box.setAttribute('role', 'status');
+    box.setAttribute('aria-live', 'polite');
+    var t = h('div', 'fb-title');
+    var ic = h('span', 'fb-ico'); ic.appendChild(h('span', null, icon));
+    t.appendChild(ic); t.appendChild(h('span', null, title));
+    box.appendChild(t);
+    if (review && sel.length) {
+      box.appendChild(h('div', 'fb-line', 'Your answer: ' + letters(sel)));
+    }
+    if (yourLine) box.appendChild(h('div', 'fb-line', yourLine));
+    if (showAnswers) {
+      var ans = h('div', 'fb-answers');
+      ans.appendChild(h('div', 'fb-label', T > 1 ? 'Correct answers' : 'Correct answer'));
+      q.a.forEach(function (i) { ans.appendChild(h('div', 'fb-ans', LETTERS[i] + '. ' + plain(q.o[i]))); });
+      box.appendChild(ans);
+    }
+    if (showExpl) {
+      var ex = h('div', 'fb-expl');
+      ex.appendChild(h('div', 'fb-label', 'Explanation'));
+      ex.appendChild(h('p', null, plain(q.e)));
+      box.appendChild(ex);
+    }
+    return box;
+  }
+
+  function renderQuestion(focusIdx) {
+    var card = $('qcard');
+    clear(card);
+    if (!S.list.length) { card.appendChild(h('div', 'empty', 'No questions match this filter.')); return; }
+    var qi = S.list[S.pos], q = QUESTIONS[qi], review = S.mode === 'review';
+    var sel = S.answers[qi] || [];
+
+    var meta = h('div', 'qmeta');
+    meta.appendChild(h('span', 'qnum', 'Question ' + S.num[qi] + ' of ' + QUESTIONS.length));
+    var badges = h('div', 'badges');
+    var dm = DIFF_BY[q.d];
+    badges.appendChild(h('span', 'badge ' + dm.cls, dm.label));
+    badges.appendChild(h('span', 'badge ' + (q.t === 'multi' ? 'b-multi' : 'b-single'), q.t === 'multi' ? 'Multiple answers' : 'Single answer'));
+    if (S.marked[qi]) badges.appendChild(h('span', 'badge b-mark', '\u2605 Marked'));
+    meta.appendChild(badges);
+    card.appendChild(meta);
+
+    var qt = h('h2', 'qtext', plain(q.q));
+    qt.id = 'qtext';
+    card.appendChild(qt);
+
+    if (!review) {
+      if (q.t === 'multi') card.appendChild(h('div', 'instr multi', 'Scenario MSQ: select ALL correct answers. More than one option is correct.'));
+      else card.appendChild(h('div', 'instr', 'Choose the single best answer.'));
+    }
+
+    var states = optionStates(q, sel, review);
+    var list = h('div', 'opts');
+    list.setAttribute('role', 'group');
+    list.setAttribute('aria-labelledby', 'qtext');
+    var lockedSingle = q.t === 'single' && sel.length > 0;
+    q.o.forEach(function (text, i) {
+      var st = states[i], chosen = sel.indexOf(i) >= 0;
+      var cls = 'opt' + (q.t === 'multi' ? ' multi' : '') + (st.cls ? ' ' + st.cls : (chosen ? ' selected' : ''));
+      if (review || lockedSingle) cls += ' locked';
+      var b = h('button', cls);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', chosen ? 'true' : 'false');
+      if (review || lockedSingle) b.setAttribute('aria-disabled', 'true');
+      var mk = st.cls === 'correct' && chosen ? '\u2713' : (st.cls === 'wrong' ? '\u2717' : LETTERS[i]);
+      b.appendChild(h('span', 'mark', mk));
+      b.appendChild(h('span', 'otext', plain(text)));
+      if (st.tag) b.appendChild(h('span', 'otag', st.tag));
+      b.setAttribute('aria-label', LETTERS[i] + '. ' + plain(text) + (st.tag ? ' (' + st.tag + ')' : ''));
+      b.addEventListener('click', function () { onOption(i); });
+      list.appendChild(b);
+    });
+    card.appendChild(list);
+
+    var fb = feedbackNode(q, sel, review);
+    if (fb) card.appendChild(fb);
+    if (focusIdx !== undefined && focusIdx !== null && list.children[focusIdx]) {
+      list.children[focusIdx].focus({ preventScroll: true });
+    }
+  }
+
+  function renderPalette() {
+    var g = $('paletteGrid'), lg = $('legend');
+    clear(g); clear(lg);
+    var review = S.mode === 'review';
+    S.list.forEach(function (qi, idx) {
+      var st = review ? statusOf(qi) : ((S.answers[qi] && S.answers[qi].length) ? 'answered' : (S.visited[qi] ? 'skipped' : 'new'));
+      var cls = 'pal st-' + st + (idx === S.pos ? ' current' : '') + (S.marked[qi] ? ' marked' : '');
+      var b = h('button', cls, String(S.num[qi]));
+      b.type = 'button';
+      var label = { answered: 'answered', skipped: 'visited, not answered', 'new': 'not visited', correct: 'correct', wrong: 'incorrect', unanswered: 'not answered' }[st];
+      b.setAttribute('aria-label', 'Question ' + S.num[qi] + ', ' + label + (S.marked[qi] ? ', marked for review' : '') + (idx === S.pos ? ', current' : ''));
+      b.addEventListener('click', function () { go(idx); closePalette(); });
+      g.appendChild(b);
+    });
+    var items = review
+      ? [['correct', 'Correct'], ['wrong', 'Incorrect'], ['unanswered', 'Not answered'], ['marked', 'Marked']]
+      : [['answered', 'Answered'], ['skipped', 'Visited, unanswered'], ['new', 'Not visited'], ['marked', 'Marked for review']];
+    items.forEach(function (it) {
+      var s = h('span');
+      s.appendChild(h('i', 'sw ' + it[0]));
+      s.appendChild(document.createTextNode(it[1]));
+      lg.appendChild(s);
+    });
+  }
+
+  function openPalette() { $('palette').classList.add('open'); $('backdrop').classList.remove('hidden'); }
+  function closePalette() { $('palette').classList.remove('open'); $('backdrop').classList.add('hidden'); }
+
+  /* ---------- result ---------- */
+  function renderResult() {
+    var r = S.results, total = QUESTIONS.length;
+    var pct = Math.round((r.correct / total) * 100);
+    $('ring').style.setProperty('--p', String(pct));
+    $('rScore').textContent = r.correct + ' / ' + total;
+    $('rPct').textContent = pct + '%';
+    var title, msg;
+    if (pct >= 90) { title = 'Outstanding!'; msg = 'You have an excellent command of Unit 03.'; }
+    else if (pct >= 75) { title = 'Great job!'; msg = 'Strong understanding. Review the few misses to polish it.'; }
+    else if (pct >= 60) { title = 'Good effort'; msg = 'Solid base. Revisit the topics where you lost marks.'; }
+    else if (pct >= 40) { title = 'Keep practising'; msg = 'You know some of it. Go back to the slides and review the explanations.'; }
+    else { title = 'Needs more revision'; msg = 'Study the Unit 03 slides again, then retry the quiz.'; }
+    $('rTitle').textContent = title;
+    $('rMsg').textContent = msg;
+    $('rNote').textContent = S.auto ? "Time was up, so your quiz was submitted automatically." : '';
+
+    var stats = $('rStats'); clear(stats);
+    [['Correct', r.correct, 'good'], ['Incorrect', r.wrong, 'bad'], ['Unanswered', r.unanswered, ''],
+     ['Marked', r.marked, ''], ['Time taken', fmtDuration(S.elapsedSec), '']].forEach(function (s) {
+      var c = h('div', 'card stat ' + s[2]);
+      c.appendChild(h('b', null, String(s[1])));
+      c.appendChild(h('span', null, s[0]));
+      stats.appendChild(c);
+    });
+
+    var dv = $('rDiff'); clear(dv);
+    DIFFS.forEach(function (d) {
+      var b = r.byDiff[d.key];
+      var row = h('div', 'drow');
+      var head = h('div', 'dhead');
+      var nm = h('span', null, d.label); nm.style.color = 'var(--' + d.cls.replace('d-', 'd-') + ')';
+      head.appendChild(nm);
+      var p = b.total ? Math.round((b.correct / b.total) * 100) : 0;
+      head.appendChild(h('span', null, b.correct + ' / ' + b.total + ' (' + p + '%)'));
+      row.appendChild(head);
+      var bar = h('div', 'dbar');
+      var ci = h('i', 'c'); ci.style.width = (b.total ? (b.correct / b.total) * 100 : 0) + '%';
+      var wi = h('i', 'w'); wi.style.width = (b.total ? (b.wrong / b.total) * 100 : 0) + '%';
+      bar.appendChild(ci); bar.appendChild(wi);
+      row.appendChild(bar);
+      row.appendChild(h('div', 'dsub', b.correct + ' correct \u00b7 ' + b.wrong + ' incorrect \u00b7 ' + b.unanswered + ' unanswered'));
+      dv.appendChild(row);
+    });
+    $('btnRevWrong').disabled = (r.wrong + r.unanswered) === 0;
+  }
+
+  function startReview(filter) {
+    S.mode = 'review';
+    setScreen();
+    setFilter(filter);
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- modal ---------- */
+  function showModal(title, bodyNodes, buttons) {
+    $('modalTitle').textContent = title;
+    var body = $('modalBody'); clear(body);
+    bodyNodes.forEach(function (n) { body.appendChild(n); });
+    var act = $('modalActions'); clear(act);
+    buttons.forEach(function (bt) {
+      var b = h('button', 'btn ' + (bt.cls || ''), bt.label);
+      b.type = 'button';
+      b.addEventListener('click', bt.onClick);
+      act.appendChild(b);
+    });
+    $('modal').classList.remove('hidden');
+    modalOpen = true;
+    var primary = act.lastChild; if (primary) primary.focus();
+  }
+  function closeModal() { $('modal').classList.add('hidden'); modalOpen = false; }
+
+  function openSubmit() {
+    if (S.mode !== 'quiz') return;
+    var a = answeredCount(), un = QUESTIONS.length - a, mk = markedCount();
+    var grid = h('div', 'sumgrid');
+    [['Answered', a], ['Unanswered', un], ['Marked', mk]].forEach(function (x) {
+      var d = h('div'); d.appendChild(h('b', null, String(x[1]))); d.appendChild(h('span', null, x[0])); grid.appendChild(d);
+    });
+    var nodes = [h('p', null, 'You are about to submit your quiz. You will not be able to change your answers afterwards.'), grid];
+    if (un > 0) nodes.push(h('p', 'warnline', un + ' question' + (un > 1 ? 's are' : ' is') + ' still unanswered.'));
+    if (mk > 0) nodes.push(h('p', 'warnline', mk + ' question' + (mk > 1 ? 's are' : ' is') + ' marked for review.'));
+    showModal('Submit quiz?', nodes, [
+      { label: 'Keep working', cls: 'ghost', onClick: closeModal },
+      { label: 'Submit quiz', cls: 'primary', onClick: function () { finish(false); } }
+    ]);
+  }
+  function openRestart() {
+    showModal('Restart quiz?', [h('p', null, 'All your answers, marks and the timer will be reset and you will return to the start screen.')], [
+      { label: 'Cancel', cls: 'ghost', onClick: closeModal },
+      { label: 'Restart', cls: 'danger', onClick: restart }
+    ]);
+  }
+
+  /* ---------- events ---------- */
+  $('btnStart').addEventListener('click', startQuiz);
+  $('btnPrev').addEventListener('click', function () { go(S.pos - 1); });
+  $('btnNext').addEventListener('click', function () {
+    if (S.mode === 'quiz' && S.pos >= S.list.length - 1) openSubmit(); else go(S.pos + 1);
+  });
+  $('btnMark').addEventListener('click', toggleMark);
+  $('btnSubmit').addEventListener('click', openSubmit);
+  $('btnRestart').addEventListener('click', openRestart);
+  $('btnRestart2').addEventListener('click', restart);
+  $('btnBack').addEventListener('click', function () { S.mode = 'result'; closePalette(); setScreen(); renderResult(); window.scrollTo(0, 0); });
+  $('btnRevAll').addEventListener('click', function () { startReview('all'); });
+  $('btnRevWrong').addEventListener('click', function () {
+    startReview('issues');
+  });
+  $('btnPalette').addEventListener('click', openPalette);
+  $('btnPalClose').addEventListener('click', closePalette);
+  $('backdrop').addEventListener('click', closePalette);
+
+  document.addEventListener('keydown', function (e) {
+    if (modalOpen) {
+      if (e.key === 'Escape') closeModal();
+      else if (e.key === 'Tab') {
+        var f = $('modal').querySelectorAll('button');
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      return;
+    }
+    if (S.mode !== 'quiz' && S.mode !== 'review') return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var tg = e.target && e.target.tagName;
+    if (tg === 'INPUT' || tg === 'SELECT' || tg === 'TEXTAREA') return;
+    var k = String(e.key).toLowerCase();
+    if (k === 'arrowright') { if (S.pos < S.list.length - 1) go(S.pos + 1); return; }
+    if (k === 'arrowleft') { if (S.pos > 0) go(S.pos - 1); return; }
+    if (S.mode === 'quiz') {
+      var i = 'abcd'.indexOf(k);
+      if (i < 0) i = '1234'.indexOf(k);
+      if (k.length === 1 && i >= 0) { e.preventDefault(); onOption(i); }
+      else if (k === 'm') toggleMark();
+    }
+  });
+  window.addEventListener('beforeunload', function (e) {
+    if (S.mode === 'quiz' && answeredCount() > 0) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* test hook (read-only helpers used for self-checks; harmless in normal use) */
+  window.__quiz = { QUESTIONS: QUESTIONS, state: S, isCorrect: isCorrect, statusOf: statusOf };
+
+  setScreen();
+})();
+</script>
+</body>
+</html>

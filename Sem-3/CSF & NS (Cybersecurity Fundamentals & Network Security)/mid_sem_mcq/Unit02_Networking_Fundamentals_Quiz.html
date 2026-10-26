@@ -1,0 +1,1472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Unit 02 – Networking Fundamentals | 100-Question Quiz</title>
+  <style>
+    :root {
+      --bg: #f3f5fb;
+      --card: #ffffff;
+      --text: #1b2236;
+      --muted: #5d667f;
+      --border: #d9deec;
+      --primary: #4f46e5;
+      --primary-d: #4338ca;
+      --primary-soft: #eceafd;
+      --green: #15803d;
+      --green-bg: #dcfce7;
+      --green-bd: #22c55e;
+      --red: #b91c1c;
+      --red-bg: #fee2e2;
+      --red-bd: #ef4444;
+      --amber: #b45309;
+      --amber-bg: #fef3c7;
+      --amber-bd: #f59e0b;
+      --shadow: 0 6px 24px rgba(30, 41, 90, .08);
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0f1426;
+      --card: #171d35;
+      --text: #e8ecfa;
+      --muted: #a2abc8;
+      --border: #2c3558;
+      --primary: #8b87ff;
+      --primary-d: #a09dff;
+      --primary-soft: #232a52;
+      --green: #4ade80;
+      --green-bg: #12301f;
+      --green-bd: #22c55e;
+      --red: #f87171;
+      --red-bg: #3a1618;
+      --red-bd: #ef4444;
+      --amber: #fbbf24;
+      --amber-bg: #3a2d0f;
+      --amber-bd: #f59e0b;
+      --shadow: 0 6px 24px rgba(0, 0, 0, .35);
+    }
+
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+      cursor: pointer
+    }
+
+    .hidden {
+      display: none !important
+    }
+
+    .wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 16px
+    }
+
+    /* Buttons */
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      transition: .15s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center
+    }
+
+    .btn:hover:not(:disabled) {
+      border-color: var(--primary);
+      color: var(--primary)
+    }
+
+    .btn:disabled {
+      opacity: .45;
+      cursor: not-allowed
+    }
+
+    .btn.primary {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff
+    }
+
+    .btn.primary:hover:not(:disabled) {
+      background: var(--primary-d);
+      color: #fff
+    }
+
+    .btn.danger {
+      border-color: var(--red-bd);
+      color: var(--red)
+    }
+
+    .btn.warn.on {
+      background: var(--amber-bg);
+      border-color: var(--amber-bd);
+      color: var(--amber)
+    }
+
+    .btn.small {
+      padding: 6px 12px;
+      font-size: .88rem
+    }
+
+    .btn.big {
+      padding: 14px 30px;
+      font-size: 1.05rem
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 22px
+    }
+
+    /* Start screen */
+    .hero {
+      max-width: 820px;
+      margin: 28px auto
+    }
+
+    .hero h1 {
+      margin: 0 0 6px;
+      font-size: 1.9rem;
+      line-height: 1.25
+    }
+
+    .hero p.sub {
+      margin: 0 0 18px;
+      color: var(--muted)
+    }
+
+    .stat-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 18px 0
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      background: var(--primary-soft)
+    }
+
+    .stat b {
+      display: block;
+      font-size: 1.5rem
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: .88rem
+    }
+
+    .rules {
+      margin: 10px 0 22px;
+      padding-left: 20px
+    }
+
+    .rules li {
+      margin: 6px 0
+    }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px
+    }
+
+    .topbar h2 {
+      margin: 0;
+      font-size: 1.05rem;
+      flex: 1;
+      min-width: 180px
+    }
+
+    .timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      font-size: 1.1rem;
+      padding: 8px 14px;
+      border-radius: 10px;
+      background: var(--primary-soft);
+      border: 1px solid var(--border)
+    }
+
+    .timer.low {
+      background: var(--red-bg);
+      border-color: var(--red-bd);
+      color: var(--red);
+      animation: pulse 1s infinite
+    }
+
+    @keyframes pulse {
+      50% {
+        opacity: .6
+      }
+    }
+
+    .progress {
+      height: 10px;
+      border-radius: 99px;
+      background: var(--border);
+      overflow: hidden
+    }
+
+    .progress>div {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(90deg, var(--primary), #22c1c3);
+      transition: width .3s
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-size: .85rem;
+      color: var(--muted);
+      margin: 6px 0 14px
+    }
+
+    .banner {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-bd);
+      color: var(--amber);
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center
+    }
+
+    /* Layout */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 340px;
+      gap: 16px;
+      align-items: start
+    }
+
+    @media(max-width:920px) {
+      .layout {
+        grid-template-columns: 1fr
+      }
+    }
+
+    /* Question */
+    .qhead {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+      margin-bottom: 12px
+    }
+
+    .qnum {
+      font-weight: 700;
+      color: var(--muted)
+    }
+
+    .badge {
+      font-size: .76rem;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 99px;
+      border: 1px solid transparent
+    }
+
+    .b-Simple {
+      background: #dbeafe;
+      color: #1d4ed8
+    }
+
+    .b-Medium {
+      background: #fef3c7;
+      color: #92400e
+    }
+
+    .b-Hard {
+      background: #fee2e2;
+      color: #991b1b
+    }
+
+    .b-Scenario {
+      background: #ede9fe;
+      color: #5b21b6
+    }
+
+    .b-type {
+      background: var(--primary-soft);
+      color: var(--primary);
+      border-color: var(--border)
+    }
+
+    :root[data-theme="dark"] .b-Simple {
+      background: #172a52;
+      color: #93c5fd
+    }
+
+    :root[data-theme="dark"] .b-Medium {
+      background: #3a2d0f;
+      color: #fcd34d
+    }
+
+    :root[data-theme="dark"] .b-Hard {
+      background: #3a1618;
+      color: #fca5a5
+    }
+
+    :root[data-theme="dark"] .b-Scenario {
+      background: #2b1f52;
+      color: #c4b5fd
+    }
+
+    .qtext {
+      font-size: 1.18rem;
+      font-weight: 600;
+      margin: 6px 0 14px
+    }
+
+    .instruction {
+      background: var(--amber-bg);
+      border: 1px solid var(--amber-bd);
+      color: var(--amber);
+      border-radius: 10px;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: .92rem;
+      margin-bottom: 14px
+    }
+
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 10px
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      text-align: left;
+      width: 100%;
+      padding: 12px 14px;
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      transition: .12s
+    }
+
+    .opt:hover:not(.locked) {
+      border-color: var(--primary);
+      background: var(--primary-soft)
+    }
+
+    .opt .letter {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: .9rem;
+      background: var(--card)
+    }
+
+    .opt.multi .letter {
+      border-radius: 8px
+    }
+
+    .opt .txt {
+      flex: 1;
+      padding-top: 3px
+    }
+
+    .opt .tag {
+      font-size: .72rem;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 99px;
+      align-self: center;
+      white-space: nowrap
+    }
+
+    .opt.sel {
+      border-color: var(--primary);
+      background: var(--primary-soft)
+    }
+
+    .opt.sel .letter {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff
+    }
+
+    .opt.correct {
+      border-color: var(--green-bd);
+      background: var(--green-bg)
+    }
+
+    .opt.correct .letter {
+      background: var(--green-bd);
+      border-color: var(--green-bd);
+      color: #fff
+    }
+
+    .opt.wrong {
+      border-color: var(--red-bd);
+      background: var(--red-bg)
+    }
+
+    .opt.wrong .letter {
+      background: var(--red-bd);
+      border-color: var(--red-bd);
+      color: #fff
+    }
+
+    .opt.missed {
+      border-color: var(--green-bd);
+      border-style: dashed;
+      background: transparent
+    }
+
+    .opt.missed .letter {
+      border-color: var(--green-bd);
+      color: var(--green)
+    }
+
+    .opt .tag.t-ok {
+      background: var(--green-bd);
+      color: #fff
+    }
+
+    .opt .tag.t-bad {
+      background: var(--red-bd);
+      color: #fff
+    }
+
+    .opt .tag.t-miss {
+      background: transparent;
+      border: 1px solid var(--green-bd);
+      color: var(--green)
+    }
+
+    .opt.locked {
+      cursor: default
+    }
+
+    /* Feedback */
+    .feedback {
+      margin-top: 16px;
+      border-radius: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      background: var(--primary-soft)
+    }
+
+    .feedback.ok {
+      background: var(--green-bg);
+      border-color: var(--green-bd)
+    }
+
+    .feedback.bad {
+      background: var(--red-bg);
+      border-color: var(--red-bd)
+    }
+
+    .feedback.info {
+      background: var(--amber-bg);
+      border-color: var(--amber-bd)
+    }
+
+    .feedback .fb-title {
+      font-weight: 700;
+      margin: 0 0 4px
+    }
+
+    .feedback .fb-line {
+      margin: 2px 0
+    }
+
+    .feedback .exp {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px dashed var(--border)
+    }
+
+    .feedback .exp h4 {
+      margin: 0 0 4px;
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: var(--muted)
+    }
+
+    .feedback .exp p {
+      margin: 0
+    }
+
+    /* Nav */
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: space-between;
+      align-items: center
+    }
+
+    .nav .grp {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap
+    }
+
+    /* Palette */
+    .palette h3 {
+      margin: 0 0 10px;
+      font-size: 1rem
+    }
+
+    .pgrid {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(0, 1fr));
+      gap: 5px
+    }
+
+    @media(max-width:480px) {
+      .pgrid {
+        grid-template-columns: repeat(8, minmax(0, 1fr))
+      }
+    }
+
+    .pbtn {
+      position: relative;
+      aspect-ratio: 1;
+      min-width: 0;
+      border: 1.5px solid var(--border);
+      background: var(--card);
+      border-radius: 7px;
+      font-size: .72rem;
+      font-weight: 600;
+      padding: 0
+    }
+
+    .pbtn:hover {
+      border-color: var(--primary)
+    }
+
+    .pbtn.vis {
+      border-color: var(--amber-bd);
+      background: var(--amber-bg)
+    }
+
+    .pbtn.ans {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff
+    }
+
+    .pbtn.ok {
+      background: var(--green-bd);
+      border-color: var(--green-bd);
+      color: #fff
+    }
+
+    .pbtn.bad {
+      background: var(--red-bd);
+      border-color: var(--red-bd);
+      color: #fff
+    }
+
+    .pbtn.na {
+      background: var(--border);
+      color: var(--muted)
+    }
+
+    .pbtn.cur {
+      outline: 3px solid var(--text);
+      outline-offset: 1px
+    }
+
+    .pbtn.mk::after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #f59e0b;
+      border: 2px solid var(--card)
+    }
+
+    .legend {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 10px;
+      margin-top: 14px;
+      font-size: .8rem;
+      color: var(--muted)
+    }
+
+    .legend i {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+      vertical-align: -2px;
+      margin-right: 6px;
+      border: 1.5px solid var(--border)
+    }
+
+    .legend .l-ans {
+      background: var(--primary);
+      border-color: var(--primary)
+    }
+
+    .legend .l-vis {
+      background: var(--amber-bg);
+      border-color: var(--amber-bd)
+    }
+
+    .legend .l-un {
+      background: var(--card)
+    }
+
+    .legend .l-mk {
+      background: #f59e0b;
+      border-color: #f59e0b;
+      border-radius: 50%
+    }
+
+    .legend .l-ok {
+      background: var(--green-bd);
+      border-color: var(--green-bd)
+    }
+
+    .legend .l-bad {
+      background: var(--red-bd);
+      border-color: var(--red-bd)
+    }
+
+    .legend .l-na {
+      background: var(--border)
+    }
+
+    .psummary {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 12px
+    }
+
+    .psummary b {
+      color: var(--text)
+    }
+
+    /* Results */
+    .res-top {
+      display: flex;
+      gap: 26px;
+      align-items: center;
+      flex-wrap: wrap
+    }
+
+    .ring {
+      --p: 0;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: conic-gradient(var(--primary) calc(var(--p)*1%), var(--border) 0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto
+    }
+
+    .ring>div {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center
+    }
+
+    .ring b {
+      font-size: 2rem;
+      line-height: 1
+    }
+
+    .ring span {
+      color: var(--muted);
+      font-size: .85rem
+    }
+
+    .res-msg h2 {
+      margin: 0 0 6px
+    }
+
+    .res-msg p {
+      margin: 0;
+      color: var(--muted)
+    }
+
+    .grid4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 12px;
+      margin: 20px 0
+    }
+
+    .grid4 .stat.g {
+      background: var(--green-bg);
+      border-color: var(--green-bd)
+    }
+
+    .grid4 .stat.r {
+      background: var(--red-bg);
+      border-color: var(--red-bd)
+    }
+
+    .grid4 .stat.a {
+      background: var(--amber-bg);
+      border-color: var(--amber-bd)
+    }
+
+    table.diff {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 8px
+    }
+
+    table.diff th,
+    table.diff td {
+      padding: 10px 8px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: .92rem
+    }
+
+    table.diff th {
+      color: var(--muted);
+      font-weight: 600
+    }
+
+    .bar {
+      height: 10px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      min-width: 90px
+    }
+
+    .bar>div {
+      height: 100%;
+      background: var(--primary)
+    }
+
+    .res-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 20px
+    }
+
+    .tablewrap {
+      overflow-x: auto
+    }
+
+    /* Modal */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 14, 30, .6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 50
+    }
+
+    .modal {
+      background: var(--card);
+      border-radius: 16px;
+      max-width: 460px;
+      width: 100%;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow)
+    }
+
+    .modal h3 {
+      margin: 0 0 8px
+    }
+
+    .modal ul {
+      padding-left: 20px;
+      margin: 10px 0
+    }
+
+    .modal .acts {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 18px;
+      flex-wrap: wrap
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 20px;
+      transform: translateX(-50%);
+      background: var(--text);
+      color: var(--bg);
+      padding: 10px 18px;
+      border-radius: 10px;
+      font-weight: 600;
+      z-index: 60
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+
+    <!-- START SCREEN -->
+    <section id="startScreen" class="hero card">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <div>
+          <h1>Unit 02 – Networking Fundamentals</h1>
+          <p class="sub">Cybersecurity Fundamentals and Network Security · 100-question practice quiz (works fully offline)</p>
+        </div>
+        <div><button class="btn small" id="themeBtnStart" type="button">Dark / Light</button></div>
+      </div>
+      <div class="stat-row">
+        <div class="stat"><b>100</b><span>Total questions</span></div>
+        <div class="stat"><b>30</b><span>Simple</span></div>
+        <div class="stat"><b>20</b><span>Medium</span></div>
+        <div class="stat"><b>20</b><span>Hard</span></div>
+        <div class="stat"><b>30</b><span>Scenario MSQs</span></div>
+        <div class="stat"><b>100 min</b><span>Time limit</span></div>
+      </div>
+      <ul class="rules">
+        <li>Questions 1–70 are single-answer MCQs. Questions 71–100 are scenario-based MSQs where <b>more than one option may be correct – select ALL correct answers</b>.</li>
+        <li>Each question carries 1 mark. An MSQ earns the mark only when the selection exactly matches all correct options. There is no negative marking.</li>
+        <li>You get instant feedback: correct options turn green and incorrect selections turn red. You may change your selection at any time before submitting.</li>
+        <li>For MSQs the quiz tells you how many correct answers are still missing, and when an incorrect option must be removed. The explanation appears once the selection is exactly right.</li>
+        <li>Use the palette to jump between questions, mark questions for review, and submit when you are done. The quiz auto-submits when the timer ends.</li>
+      </ul>
+      <button class="btn primary big" id="startBtn" type="button">Start Quiz</button>
+    </section>
+
+    <!-- QUIZ SCREEN -->
+    <section id="quizScreen" class="hidden">
+      <div class="topbar">
+        <h2>Unit 02 – Networking Fundamentals Quiz</h2>
+        <div class="timer" id="timer" aria-live="off">100:00</div>
+        <button class="btn small" id="themeBtn" type="button">Dark / Light</button>
+        <button class="btn small danger" id="restartTop" type="button">Restart</button>
+      </div>
+      <div id="reviewBanner" class="banner hidden">
+        <span id="reviewText">Review mode</span>
+        <button class="btn small" id="toResults" type="button">Back to Results</button>
+      </div>
+      <div class="progress" aria-label="Progress">
+        <div id="progressBar"></div>
+      </div>
+      <div class="progress-meta"><span id="progressText">Answered 0 / 100</span><span id="posText">Question 1 of 100</span></div>
+
+      <div class="layout">
+        <div class="card" id="qCard">
+          <div class="qhead">
+            <span class="qnum" id="qNum">Question 1</span>
+            <span class="badge" id="qDiff">Simple</span>
+            <span class="badge b-type" id="qType">Single answer</span>
+          </div>
+          <div id="instruction" class="instruction hidden">Scenario-based question: more than one option may be correct. Select ALL correct answers.</div>
+          <div class="qtext" id="qText"></div>
+          <div class="opts" id="opts" role="group"></div>
+          <div id="feedback" class="feedback hidden" aria-live="polite"></div>
+          <div class="nav">
+            <div class="grp">
+              <button class="btn" id="prevBtn" type="button">← Previous</button>
+              <button class="btn" id="nextBtn" type="button">Next →</button>
+            </div>
+            <div class="grp">
+              <button class="btn warn" id="markBtn" type="button">Mark for Review</button>
+              <button class="btn" id="clearBtn" type="button">Clear Answer</button>
+              <button class="btn primary" id="submitBtn" type="button">Submit Quiz</button>
+            </div>
+          </div>
+        </div>
+
+        <aside class="card palette">
+          <h3>Question Palette</h3>
+          <div class="psummary" id="psummary"></div>
+          <div class="pgrid" id="pgrid"></div>
+          <div class="legend" id="legend"></div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- RESULT SCREEN -->
+    <section id="resultScreen" class="hidden">
+      <div class="card">
+        <div class="res-top">
+          <div class="ring" id="ring">
+            <div><b id="scoreBig">0</b><span id="scoreSmall">out of 100</span></div>
+          </div>
+          <div class="res-msg">
+            <h2 id="resTitle">Quiz Complete</h2>
+            <p id="resMsg"></p>
+            <p id="resTime" style="margin-top:6px"></p>
+          </div>
+        </div>
+        <div class="grid4" id="resStats"></div>
+        <h3 style="margin:6px 0 0">Performance by difficulty</h3>
+        <div class="tablewrap">
+          <table class="diff">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Correct</th>
+                <th>Attempted</th>
+                <th>Accuracy</th>
+                <th style="width:30%">Score</th>
+              </tr>
+            </thead>
+            <tbody id="diffBody"></tbody>
+          </table>
+        </div>
+        <div class="res-actions">
+          <button class="btn primary" id="revAll" type="button">Review All Answers</button>
+          <button class="btn" id="revWrong" type="button">Review Incorrect</button>
+          <button class="btn" id="revNA" type="button">Review Unattempted</button>
+          <button class="btn" id="revMarked" type="button">Review Marked</button>
+          <button class="btn danger" id="restartBtn" type="button">Restart Quiz</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- MODAL -->
+  <div id="overlay" class="overlay hidden">
+    <div class="modal" role="dialog" aria-modal="true">
+      <h3 id="mTitle"></h3>
+      <div id="mBody"></div>
+      <div class="acts">
+        <button class="btn" id="mCancel" type="button">Cancel</button>
+        <button class="btn primary" id="mOk" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden"></div>
+
+  <script id="qdata" type="application/json">[{"d":"Simple","t":"single","q":"Which organisation developed the OSI model in 1984?","o":["Internet Engineering Task Force (IETF)","International Telecommunication Union (ITU)","International Organization for Standardization (ISO)","Institute of Electrical and Electronics Engineers (IEEE)"],"a":[2],"e":"The unit states that the 7-layer OSI model was developed by the International Organization for Standardization (ISO) in 1984."},{"d":"Simple","t":"single","q":"How many layers does the TCP/IP model use in this unit?","o":["Five","Four","Three","Seven"],"a":[1],"e":"The TCP/IP model has four layers: Network Access (Network Interface), Internet, Transport and Application. Seven layers belong to the OSI model."},{"d":"Simple","t":"single","q":"Which OSI layer transmits raw bits (0s and 1s) as electrical, radio or optical signals?","o":["Data Link Layer","Network Layer","Physical Layer","Session Layer"],"a":[2],"e":"The Physical Layer is the foundation of the OSI model. It converts digital data into electrical, radio or optical signals and transmits raw bits."},{"d":"Simple","t":"single","q":"Which type of address does the Data Link Layer use to identify devices on a local network?","o":["IP address","Domain name","MAC address","Port number"],"a":[2],"e":"The Data Link Layer uses MAC (Media Access Control) addresses to identify devices on a local network. IP addresses belong to the Network Layer."},{"d":"Simple","t":"single","q":"Which OSI layer routes packets between different networks using logical (IP) addresses?","o":["Transport Layer","Session Layer","Data Link Layer","Network Layer"],"a":[3],"e":"The Network Layer handles routing and forwarding of packets across different networks using logical addresses such as IP addresses."},{"d":"Simple","t":"single","q":"According to the unit, where are Transport Layer functions mainly implemented?","o":["In modem hardware only","On Layer 2 switch ports","In the operating system","Inside hubs and repeaters"],"a":[2],"e":"The unit notes that Transport Layer functions (TCP and UDP) are implemented in operating systems rather than in dedicated network devices."},{"d":"Simple","t":"single","q":"Which OSI layer handles data formatting, encryption/decryption and compression?","o":["Presentation Layer","Session Layer","Application Layer","Transport Layer"],"a":[0],"e":"The Presentation Layer translates data formats and handles encryption, decryption and compression. SSL/TLS, JPEG and MPEG are its key protocols."},{"d":"Simple","t":"single","q":"Dialog control and synchronisation between communicating devices are managed by which OSI layer?","o":["Presentation Layer","Session Layer","Physical Layer","Network Layer"],"a":[1],"e":"The Session Layer establishes, manages and terminates sessions, including synchronisation and dialog control (full-duplex or half-duplex)."},{"d":"Simple","t":"single","q":"Which of the following is a key protocol of the OSI Application Layer?","o":["BGP","OSPF","PPP","SMTP"],"a":[3],"e":"SMTP (email), HTTP, FTP and DNS are Application Layer protocols. OSPF and BGP work at the Network Layer and PPP at the Data Link Layer."},{"d":"Simple","t":"single","q":"What is the main job of the Address Resolution Protocol (ARP)?","o":["Translating domain names into IP addresses","Encrypting traffic between two hosts","Translating IP addresses into MAC addresses","Assigning IP addresses to hosts automatically"],"a":[2],"e":"ARP maps an IP address to the MAC address of a device on the local network. Hosts store these mappings in the ARP cache."},{"d":"Simple","t":"single","q":"ARP spoofing, also called ARP poisoning, is which type of attack?","o":["Cross-site scripting injection attack","Password brute-force guessing attack","TCP SYN flood denial-of-service attack","Man in the Middle (MitM) attack"],"a":[3],"e":"ARP spoofing is a Man in the Middle attack: forged ARP replies make victims send traffic to the attacker's MAC address."},{"d":"Simple","t":"single","q":"What is forged in an IP spoofing attack?","o":["The TLS certificate presented by the web server","The destination MAC address of a local switch port","The record type stored in a DNS zone entry","The source address in the IP packet header"],"a":[3],"e":"IP spoofing creates IP packets with a modified source address to hide the sender's identity, impersonate another system, or both."},{"d":"Simple","t":"single","q":"At which OSI layer does a TCP SYN flood operate?","o":["Layer 4 - Transport","Layer 2 - Data Link","Layer 3 - Network","Layer 7 - Application"],"a":[0],"e":"A TCP SYN flood abuses the TCP three-way handshake, so it is classified as a Layer 4 (Transport) attack."},{"d":"Simple","t":"single","q":"What is the correct sequence of messages in the TCP 3-way handshake?","o":["ACK, SYN, SYN-ACK","SYN-ACK, SYN, ACK","SYN, SYN-ACK, ACK","SYN, ACK, SYN-ACK"],"a":[2],"e":"The client sends SYN, the server answers with SYN-ACK, and the client completes the connection with ACK."},{"d":"Simple","t":"single","q":"Which is the lowest layer of the TCP/IP model?","o":["Application Layer","Network Interface Layer","Transport Layer","Internet Layer"],"a":[1],"e":"The Network Interface Layer is the lowest TCP/IP layer and covers the physical transmission of frames, using MAC addresses."},{"d":"Simple","t":"single","q":"How many bits long is an IPv4 address?","o":["32 bits","128 bits","64 bits","48 bits"],"a":[0],"e":"IPv4 uses 32-bit addresses (about 4.3 billion possible addresses). IPv6 uses 128-bit addresses."},{"d":"Simple","t":"single","q":"Which notation does IPv6 use for writing addresses?","o":["Octal with slash separators","Binary with dash separators","Decimal with dot separators","Hexadecimal with colon separators"],"a":[3],"e":"IPv6 uses hexadecimal colon-separated notation (for example 2001:db8::1), while IPv4 uses decimal dot-separated notation."},{"d":"Simple","t":"single","q":"What is the fixed header size of a UDP datagram?","o":["8 bytes","40 bytes","20 bytes","60 bytes"],"a":[0],"e":"UDP has a fixed 8-byte header. TCP has a variable header of 20 to 60 bytes."},{"d":"Simple","t":"single","q":"Which port range is known as the well-known ports?","o":["49152 to 65535","1024 to 49151","0 to 255","0 to 1023"],"a":[3],"e":"Well-known ports are 0-1023, registered ports are 1024-49151 and dynamic ports are 49152-65535."},{"d":"Simple","t":"single","q":"What is the default port for HTTPS?","o":["80","22","53","443"],"a":[3],"e":"HTTPS uses port 443 by default. HTTP uses 80, SSH uses 22 and DNS uses 53."},{"d":"Simple","t":"single","q":"Which service uses port 22 for secure logins, file transfers and port forwarding?","o":["SSH","Telnet","FTP","SMTP"],"a":[0],"e":"SSH (Secure Shell) runs on port 22. Telnet uses port 23 and sends everything, including passwords, in clear text."},{"d":"Simple","t":"single","q":"Which DNS record type maps a domain name to an IPv4 address?","o":["MX record","A record","CNAME record","AAAA record"],"a":[1],"e":"The A (Address) record maps a name to an IPv4 address. AAAA maps to IPv6, MX identifies mail servers and CNAME is an alias."},{"d":"Simple","t":"single","q":"What is the purpose of a DNS MX record?","o":["It lists the mail servers that accept email for the domain","It creates an alias that makes one hostname point to another hostname","It maps a domain name directly to an IPv6 address for AAAA lookups","It holds free text used for SPF, DKIM and DMARC policy publication"],"a":[0],"e":"MX (Mail Exchanger) records identify the mail servers that accept email for a domain, with a priority value."},{"d":"Simple","t":"single","q":"Which tool does the unit name for port scanning?","o":["Nmap","netstat","Wireshark","nslookup"],"a":[0],"e":"Nmap is the port scanning tool mentioned in the unit. Wireshark captures packets, nslookup queries DNS and netstat lists local connections."},{"d":"Simple","t":"single","q":"Who issues and digitally signs a digital certificate?","o":["A recursive DNS resolver","An Internet Service Provider (ISP)","A Certificate Authority (CA)","The web server itself"],"a":[2],"e":"A digital certificate is issued and signed by a trusted Certificate Authority, which lets browsers verify the identity of the server."},{"d":"Simple","t":"single","q":"Which subnet mask corresponds to CIDR notation /24?","o":["255.255.255.0","255.255.0.0","255.255.255.128","255.0.0.0"],"a":[0],"e":"A /24 prefix means 24 network bits, which equals the mask 255.255.255.0."},{"d":"Simple","t":"single","q":"What is the main purpose of Network Address Translation (NAT)?","o":["To assign unique MAC addresses to newly connected devices","To let many private-IP devices share one public IP address","To translate human-readable domain names into numeric IP addresses","To encrypt every packet that leaves the router toward the Internet"],"a":[1],"e":"NAT runs on the router or firewall and lets many devices with private addresses share a single public IP address."},{"d":"Simple","t":"single","q":"What does it mean that HTTP is a stateless protocol?","o":["Every message is encrypted by default using TLS certificates","The server never stores web pages and generates all content live","The server does not remember a user between requests","A client may send only a single request during each session"],"a":[2],"e":"HTTP is stateless: each request is independent. Cookies and sessions are used to add memory about the user."},{"d":"Simple","t":"single","q":"Which of the following is a private IPv4 address?","o":["203.0.113.5","8.8.8.8","192.168.1.10","172.32.0.1"],"a":[2],"e":"192.168.0.0 to 192.168.255.255 is a private range. The private 172 range ends at 172.31.255.255, so 172.32.0.1 is public."},{"d":"Simple","t":"single","q":"Which command displays the table that maps IP addresses to MAC addresses?","o":["nslookup example.com","arp -a","netstat -an","tracert example.com"],"a":[1],"e":"arp -a shows the IP-to-MAC table. netstat shows connections and open ports, tracert shows hops and nslookup shows DNS answers."},{"d":"Medium","t":"single","q":"Which statement correctly contrasts the OSI and TCP/IP models?","o":["OSI specifies the exact protocols for each layer, while TCP/IP is protocol-independent","OSI runs the Internet today, while TCP/IP is mainly used for teaching","OSI has four broad layers, while TCP/IP separates seven distinct layers","OSI is a theoretical reference model, while TCP/IP is implemented in real networks"],"a":[3],"e":"OSI is a conceptual, protocol-independent reference model; TCP/IP is practical, protocol-dependent and is what the Internet actually uses."},{"d":"Medium","t":"single","q":"Which OSI layers are combined into the TCP/IP Application Layer?","o":["Transport, Network and Data Link","Session, Transport and Presentation","Physical, Data Link and Network","Application, Presentation and Session"],"a":[3],"e":"The TCP/IP Application Layer combines the functions of the OSI Application, Presentation and Session layers."},{"d":"Medium","t":"single","q":"The TCP/IP Network Access Layer corresponds to which OSI layers?","o":["Data Link and Network","Physical and Network","Physical and Data Link","Network and Transport"],"a":[2],"e":"Network Access covers both the Physical and Data Link layers of OSI. The Internet Layer maps to the OSI Network Layer."},{"d":"Medium","t":"single","q":"Which statement about error detection and flow control is correct?","o":["TCP/IP handles them at the Data Link and Transport layers, while OSI handles them only at Transport","Both models handle them only at the Physical Layer through signal modulation","Neither model supports error detection or flow control at any layer of the stack","OSI handles them at Data Link and Transport; TCP/IP only at Transport"],"a":[3],"e":"The unit states that OSI deals with errors and flow control at two layers, whereas TCP/IP does so only at the Transport Layer through TCP."},{"d":"Medium","t":"single","q":"Which comparison of TCP and UDP headers is correct?","o":["TCP uses a fixed 40 byte header; UDP uses a variable header up to 8 bytes","Both TCP and UDP use a fixed header of exactly 20 bytes","TCP uses a fixed 8 byte header; UDP uses a variable 20 to 60 byte header","TCP uses a variable 20 to 60 byte header; UDP uses a fixed 8 byte header"],"a":[3],"e":"TCP has variable header size (20-60 bytes) and UDP a fixed 8 bytes, which is one reason UDP has lower overhead."},{"d":"Medium","t":"single","q":"Why is UDP often chosen for VoIP and live streaming?","o":["It retransmits every lost packet to preserve the audio quality","Speed matters more than guaranteed delivery, so low overhead helps","It performs a three-way handshake to protect the voice data in transit","It guarantees ordered delivery by acknowledging every single segment"],"a":[1],"e":"UDP is connectionless and lightweight with no acknowledgements or retransmission, so it suits real-time applications where speed matters more than perfect accuracy."},{"d":"Medium","t":"single","q":"Which set of applications primarily uses UDP according to the unit?","o":["DNS, SMTP, live streaming and HTTP","HTTPS, DHCP, FTP and VoIP","HTTP, HTTPS, FTP and SMTP","DNS, DHCP, VoIP and streaming"],"a":[3],"e":"The unit lists DNS, DHCP, VoIP and streaming for UDP, while HTTP, HTTPS, FTP and SMTP rely on TCP."},{"d":"Medium","t":"single","q":"Which statement about packet fragmentation is correct?","o":["Neither version supports fragmentation, so large packets are always dropped","Both versions fragment only at the receiving host after delivery","IPv4 lets sender and routers fragment; IPv6 lets only the sender fragment","IPv6 lets routers fragment packets, while IPv4 allows only the sender to do so"],"a":[2],"e":"In IPv4, fragmentation is done by both sender and routers. In IPv6 it is performed only by the sender."},{"d":"Medium","t":"single","q":"How does IPv6 replace the broadcast communication used in IPv4?","o":["By using static ARP entries","By using a variable-length header","By using multicast and anycast","By relying on address classes A to E"],"a":[2],"e":"IPv6 does not support broadcast; it uses multicast and anycast instead."},{"d":"Medium","t":"single","q":"Which statement about static and dynamic IP addresses is correct?","o":["Static suits servers needing a fixed address; dynamic is leased from a DHCP pool","Dynamic addresses are permanent and set manually, while static ones come from DHCP","Static addresses are produced only by NAT, and dynamic ones only by ARP queries","Both types are issued by DNS servers whenever a hostname is looked up by a client"],"a":[0],"e":"Static IPs are permanently assigned (servers, remote management). Dynamic IPs are temporarily assigned from a pool by DHCP."},{"d":"Medium","t":"single","q":"How does subnetting improve a network?","o":["Routers become unnecessary because every device shares a single subnet","Broadcast traffic stays within each subnet and inter-subnet traffic is routed","All departments share one broadcast domain, which simplifies management","Devices no longer need separate network and host portions in their IP addresses"],"a":[1],"e":"Subnetting divides a network into smaller logical networks, limits broadcasts to each subnet, routes inter-department traffic and improves performance, security and management."},{"d":"Medium","t":"single","q":"In the usable-hosts formula 2^(32 - n) - 2, why are 2 addresses subtracted?","o":["One is the network ID and one is the broadcast address","One is the default gateway and one is the DNS server address","One is the subnet mask and one is used by NAT translations","One is reserved for DHCP and one is reserved for ARP requests"],"a":[0],"e":"In every subnet, the first address identifies the network and the last is the broadcast address, so neither can be assigned to a host."},{"d":"Medium","t":"single","q":"Which port number falls in the registered port range (1024 to 49151)?","o":["50000","3389","443","53"],"a":[1],"e":"RDP's port 3389 is in the registered range. 443 and 53 are well-known ports, and 50000 is in the dynamic range (49152-65535)."},{"d":"Medium","t":"single","q":"How does a closed TCP port react when it is probed during a port scan?","o":["A firewall silently drops the probe and no reply arrives","The host replies with an RST because nothing is listening","A service answers with a SYN-ACK to accept the connection","The host completes the handshake and then closes it politely"],"a":[1],"e":"Open means a service replies, closed means the host replies with RST, and filtered means a firewall silently drops the probe."},{"d":"Medium","t":"single","q":"During DNS resolution, which server does the recursive resolver ask right after the Root server?","o":["The web server of the domain","The authoritative name server of the domain","The TLD server, such as the one for .com","The browser's local DNS cache"],"a":[2],"e":"The Root server points to the TLD server, which then points to the authoritative name server that returns the A record."},{"d":"Medium","t":"single","q":"Which HTTP status class does 502 Bad Gateway belong to?","o":["4xx - Client Error","2xx - Success","3xx - Redirection","5xx - Server Error"],"a":[3],"e":"5xx codes (500, 502, 503) mean the server failed to complete a valid request. 4xx codes indicate a problem with the request."},{"d":"Medium","t":"single","q":"In the certificate chain of trust, who signs the server (leaf) certificate?","o":["The administrator of the web server","The Root CA directly","The client browser during connection","An Intermediate CA"],"a":[3],"e":"The Root CA (pre-installed in the trust store) signs the Intermediate CA, and the Intermediate CA signs the server leaf certificate."},{"d":"Medium","t":"single","q":"Which pairing of attack and typical defence is correct?","o":["IP spoofing - Port security on switches","ARP spoofing - Dynamic ARP Inspection (DAI)","HTTP injection - SYN cookies and rate limiting","TCP SYN flood - Input validation and WAF rules"],"a":[1],"e":"From the security view table: ARP spoofing is defended with static ARP, port security and DAI; SYN flood with SYN cookies; IP spoofing with ingress/egress filtering; HTTP injection with input validation."},{"d":"Medium","t":"single","q":"In the OSI security view, SSL stripping and weak TLS ciphers are listed under which layer?","o":["Layer 6 - Presentation","Layer 5 - Session","Layer 4 - Transport","Layer 7 - Application"],"a":[0],"e":"SSL stripping and outdated TLS or ciphers are Presentation Layer issues; defences are strong TLS, HSTS and disabling old versions."},{"d":"Medium","t":"single","q":"Why can data flow in TCP/IP be faster in practice than in OSI?","o":["Fewer layers mean data passes through fewer checkpoints","TCP/IP uses no protocols at its lower layers","TCP/IP skips routing between different networks entirely","TCP/IP removes the Transport Layer from the stack"],"a":[0],"e":"The unit explains that TCP/IP data flow is more streamlined because it has fewer layers, giving faster transmission in practice."},{"d":"Hard","t":"single","q":"A subnet is 192.168.10.0/26. How many usable host addresses does it provide?","o":["30","126","62","64"],"a":[2],"e":"With /26 there are 6 host bits: 2^6 - 2 = 62 usable hosts. 64 forgets to subtract the network and broadcast addresses."},{"d":"Hard","t":"single","q":"A Class C network 193.1.2.0 is divided into two equal subnets. What is the direct broadcast address of Subnet-1?","o":["193.1.2.126","193.1.2.127","193.1.2.128","193.1.2.255"],"a":[1],"e":"Subnet-1 spans 193.1.2.0 to 193.1.2.127 with mask 255.255.255.128. The subnet ID is .0, the broadcast ID is .127 and 126 hosts are usable."},{"d":"Hard","t":"single","q":"Which prefix length gives exactly two usable addresses, suiting router-to-router links?","o":["/30","/29","/28","/26"],"a":[0],"e":"A /30 has 2 host bits, so 2^2 - 2 = 2 usable hosts. A /29 gives 6, a /28 gives 14 and a /26 gives 62."},{"d":"Hard","t":"single","q":"An analyst wants a scan that sends SYN and then RST instead of completing the handshake. Which scan is this?","o":["Ping reachability test (ICMP echo)","UDP scan (-sU)","SYN / half-open scan (-sS)","TCP connect scan (-sT)"],"a":[2],"e":"The SYN scan never sends the final ACK, making it stealthier. The connect scan completes the full handshake and is easily logged."},{"d":"Hard","t":"single","q":"A UDP scan receives no response from one port. What can be concluded?","o":["Open or filtered; silence alone cannot separate the two","The port is definitely filtered by a firewall on the path","The port is definitely open because the probe was accepted","The port is definitely closed because no service answered"],"a":[0],"e":"For UDP there is no handshake. An ICMP port unreachable means closed, while silence means open or filtered."},{"d":"Hard","t":"single","q":"A phishing site displays a padlock icon in the browser. What does the padlock actually indicate?","o":["The connection is encrypted, but the site itself may still be malicious","No metadata about the visit, such as the domain, is visible on the network","The site is safe because a trusted CA has verified the intentions of its owner","The web server is free of application vulnerabilities such as SQL injection or XSS"],"a":[0],"e":"The unit stresses that phishing sites can hold valid certificates, so the padlock does not mean the site is safe."},{"d":"Hard","t":"single","q":"Why do SQL injection and cross-site scripting still work against sites that use HTTPS?","o":["HTTPS encrypts only the server responses, so client requests are always sent in clear text","Digital certificates automatically switch off input validation on servers that use HTTPS","The attack payload travels inside the encrypted channel and still reaches the application","HTTPS operates only at the Network Layer, which is below the layer where these attacks occur"],"a":[2],"e":"HTTPS protects data in transit; it does not fix web-app flaws. The attack is encrypted too and is processed by the application after decryption."},{"d":"Hard","t":"single","q":"Which statement about NAT and security is accurate?","o":["NAT makes private addresses directly routable across the public Internet backbone","NAT hides internal addresses but is not a firewall; port forwarding re-exposes services","NAT can fully replace a firewall because it always blocks every inbound connection attempt","NAT encrypts all internal traffic, so enabling port forwarding is always safe and recommended"],"a":[1],"e":"NAT hides internal addresses and drops unsolicited inbound connections by default, but it is not a firewall and port forwarding exposes internal services again."},{"d":"Hard","t":"single","q":"Which cookie attribute best limits theft of a session cookie by malicious JavaScript injected through XSS?","o":["SameSite","HttpOnly","Secure","Expiry time"],"a":[1],"e":"HttpOnly hides the cookie from JavaScript. Secure restricts sending to HTTPS, SameSite limits cross-site sending, and expiry only sets a lifetime."},{"d":"Hard","t":"single","q":"In the TLS handshake, which pairing of cryptography type and role is correct?","o":["Asymmetric authenticates the server and exchanges keys; symmetric encrypts the bulk data","Symmetric authenticates the server and exchanges keys, while asymmetric encrypts the bulk data","Only hashing is used in TLS, so no keys are ever exchanged between client and server","Asymmetric encrypts all HTTP data for better speed, while symmetric only signs the certificates"],"a":[0],"e":"Asymmetric cryptography authenticates the server and exchanges keys, then fast symmetric keys such as AES encrypt the actual data."},{"d":"Hard","t":"single","q":"How does traceroute discover each router on the path to a destination?","o":["It broadcasts ARP requests to every router on the Internet and records each of the replies","Packets with rising TTL values make each router return an ICMP Time Exceeded message","It sends DNS A record queries for each router on the path one after another in strict sequence","It reads the NAT table of the local gateway to list every upstream router on the path"],"a":[1],"e":"Traceroute sends packets with TTL 1, 2, 3 and so on; each router that reduces the TTL to 0 reveals its address. A line of * * * means that hop is filtered or silent."},{"d":"Hard","t":"single","q":"As a packet travels hop by hop across routers, what changes at each hop?","o":["The TCP ports are rewritten while the MAC addresses stay constant","The TTL is raised by 1 and the source IP is replaced by each router","The TTL is lowered by 1 and the MAC addresses are rewritten","The destination IP is replaced by the next router's IP while the TTL stays unchanged"],"a":[2],"e":"Each router forwards by IP address, lowers the TTL by 1 and rewrites the MAC addresses hop by hop. NAT happens at the gateway, not at every router."},{"d":"Hard","t":"single","q":"Running arp -a on a LAN host shows two different IP addresses mapped to the same MAC address. What does this hint at?","o":["A normal TCP retransmission","Possible ARP spoofing","A healthy NAT table entry","An expired DNS cache entry"],"a":[1],"e":"The unit notes that duplicate MAC addresses in the ARP table hint at ARP spoofing, since the attacker advertises its own MAC for several IPs."},{"d":"Hard","t":"single","q":"Which weakness of classic DNS makes DNS poisoning possible?","o":["Every response is signed with weak keys that attackers can easily recover","Responses are unencrypted and unauthenticated, so forged answers can be accepted","Resolver caches ignore TTL values, so every cached record stays valid forever","Resolvers never use transaction IDs or source ports, so replies cannot be matched"],"a":[1],"e":"Classic DNS has no encryption or authentication, so an attacker who guesses the transaction ID or port can inject forged data. DNSSEC and randomisation help."},{"d":"Hard","t":"single","q":"What risk can a dangling CNAME record create?","o":["SYN flood amplification","ARP cache overflow","Session fixation","Subdomain takeover"],"a":[3],"e":"The unit lists subdomain takeover as the risk of a dangling CNAME, which is why attackers enumerate DNS records during reconnaissance."},{"d":"Hard","t":"single","q":"What is the specific purpose of egress filtering as a defence against IP spoofing?","o":["Check outgoing packets for legitimate source headers to stop spoofing from inside","Check incoming packets for source headers that do not match where they came from","Encrypt outgoing packets so that their source addresses cannot be read by outsiders","Drop every outgoing packet that uses TCP port 80 to stop web-based data theft"],"a":[0],"e":"Ingress filtering rejects suspicious incoming packets; egress filtering examines packets leaving the network so that someone inside cannot launch an outbound spoofing attack."},{"d":"Hard","t":"single","q":"Which tuning change helps a server clear half-open connections faster during a SYN flood?","o":["Lengthen the TTL of every outgoing packet so replies last longer","Increase the SYN backlog queue and reduce the SYN-RECEIVED timeout","Remove the final ACK from the handshake so connections open faster","Increase the SYN-RECEIVED timeout and shrink the backlog queue"],"a":[1],"e":"The unit recommends a larger SYN backlog and a shorter SYN-RECEIVED timeout so half-open connections are cleared faster."},{"d":"Hard","t":"single","q":"A web application copies a user-supplied value into an HTTP response header. Which control best prevents header injection?","o":["Switch the whole application to HTTPS only so that newlines are blocked","Encode the value in Base64 and then trust it without any further checks","Move the affected header into a separate UDP packet to isolate it from users","Allow only short alphanumeric strings in the header and reject other input"],"a":[3],"e":"The unit advises avoiding user data in headers, or strictly validating it to short alphanumeric strings so newline characters cannot be injected."},{"d":"Hard","t":"single","q":"A host has the IP address 192.168.1.10 and the subnet mask 255.255.255.0. Which statement is correct?","o":["The network ID is 192.168.0.0 and the host ID is 1.10","The network ID is 192.168.1.255 and the host ID is 10","The network ID is 192.168.1.10 and the host ID is 0","The network ID is 192.168.1.0 and the host ID is 10"],"a":[3],"e":"The mask 255.255.255.0 makes the first three octets the network portion, giving network ID 192.168.1.0, and the last octet (10) the host portion."},{"d":"Hard","t":"single","q":"Which statement about the transport protocols used by HTTP versions is correct?","o":["HTTP 1.x and 2 use TCP, while HTTP/3 uses QUIC on top of UDP","HTTP/3 moves back to TCP and uses port 80 exclusively for all traffic","Every HTTP version uses UDP only, since TCP is never used for web traffic","HTTP/3 uses SCTP, while HTTP 1.x and 2 use QUIC over UDP"],"a":[0],"e":"The port table notes that HTTP and HTTPS use TCP in versions 1.x and 2, whereas HTTP/3 uses QUIC, a transport protocol built on UDP."},{"d":"Scenario","t":"multi","q":"A laptop at 192.168.1.10:50500 on a home network opens a website through the router, whose public IP is 203.0.113.5. Which statements correctly describe what happens?","o":["The router records the translation in a NAT table","Returning replies are matched to the NAT table and forwarded to the laptop","The laptop's private address is advertised directly across the Internet backbone","The router replaces the private source IP and port with its public IP and a unique port"],"a":[0,1,3],"e":"This is PAT (NAT overload): the router swaps the private IP and port for its public IP and a unique port, stores the mapping in the NAT table and uses it to deliver replies. Private addresses are not routable on the Internet, so they are never advertised directly."},{"d":"Scenario","t":"multi","q":"A web server's monitoring shows thousands of half-open connections from spoofed sources, and legitimate users cannot connect. Which measures from the unit would help?","o":["Enable SYN cookies so requests are verified before memory is allocated","Create static ARP entries for every client on the Internet","Route traffic through a cloud security provider that absorbs the handshakes","Rate-limit the number of incoming SYN packets"],"a":[0,2,3],"e":"SYN cookies, rate limiting, adjusted timers and backlog, and cloud protection are the listed SYN flood defences. Static ARP works at Layer 2 on a local network and does nothing against spoofed remote SYN packets."},{"d":"Scenario","t":"multi","q":"In an office LAN, staff report intercepted traffic, and the ARP cache shows the router's IP mapped to an unknown MAC address. Which actions help prevent or stop this attack?","o":["Increase the TTL value of all outgoing packets","Define a static ARP entry for the router on each workstation","Use packet filtering to catch ARP packets with conflicting source information","Connect through a VPN so intercepted traffic is encrypted"],"a":[1,2,3],"e":"The unit lists VPN, static ARP and packet filtering as ARP spoofing defences. Changing TTL has no effect on forged ARP replies."},{"d":"Scenario","t":"multi","q":"An Nmap scan of an Internet-facing company server shows ports 23, 445 and 3389 open. Which actions are appropriate?","o":["Place RDP behind a VPN or gateway with MFA and NLA","Leave all open because well-known ports are trusted","Block SMB at the perimeter, disable SMBv1 and apply patches","Disable Telnet and use SSH instead"],"a":[0,2,3],"e":"Telnet sends passwords in clear text, SMB exposure enabled WannaCry-type worms, and RDP is a favourite ransomware entry point. A well-known port number gives no protection."},{"d":"Scenario","t":"multi","q":"Before trusting a server's certificate over HTTPS, which checks does the browser perform?","o":["Whether the certificate is signed by a trusted CA","Whether the certificate is unexpired and not revoked (CRL or OCSP)","Whether the server is listening on port 80","Whether the domain name matches the certificate"],"a":[0,1,3],"e":"The browser verifies the CA signature, the domain match, validity period and revocation status. The port used for plain HTTP is irrelevant to certificate validation."},{"d":"Scenario","t":"multi","q":"A user browses an HTTPS banking site over public Wi-Fi while an attacker sniffs the traffic. Which information can the attacker still observe?","o":["The password typed into the login form","The approximate volume of traffic exchanged","The domain name through DNS or SNI","The IP address of the server being contacted"],"a":[1,2,3],"e":"HTTPS protects the content, such as passwords and cookies, but metadata remains visible: IP addresses, domain name (DNS/SNI) and traffic volume."},{"d":"Scenario","t":"multi","q":"A security analyst reviews web server logs. Which interpretations match the unit?","o":["500 errors may leak stack traces and software versions","A large number of 404 responses may indicate directory scanning","Many 200 OK responses prove that a SYN flood is in progress","Repeated 401 or 403 responses may indicate password guessing or access-control probing"],"a":[0,1,3],"e":"The unit links many 404s to directory scanning, repeated 401/403 to guessing or probing, and 500 errors to information leakage. A 200 OK is a normal success code and says nothing about a SYN flood."},{"d":"Scenario","t":"multi","q":"Users of a company DNS resolver are sent to a fake bank site although they typed the correct URL. Which measures reduce the risk of DNS poisoning?","o":["Deploy DNSSEC so that records are digitally signed","Disable browser certificate warnings to avoid false alarms","Use DNS over HTTPS or TLS","Randomise source ports and transaction IDs"],"a":[0,2,3],"e":"DNSSEC, randomised ports and IDs, patched software, DoH/DoT and secured routers are prevention measures. Users should never ignore certificate warnings, as they often expose a fake site."},{"d":"Scenario","t":"multi","q":"An administrator must publish an SPF policy, route incoming email to mail servers and make www an alias of example.com. Which record types fit?","o":["A record for publishing the SPF policy","TXT record for the SPF policy","MX record for the mail servers","CNAME record for the www alias"],"a":[1,2,3],"e":"TXT holds SPF, DKIM and DMARC data, MX lists mail servers and CNAME defines an alias. An A record only maps a name to an IPv4 address."},{"d":"Scenario","t":"multi","q":"A web application suffers session hijacking through stolen Session IDs. Which defences does the unit recommend?","o":["Use HTTPS so that the Session ID is not sniffed","Regenerate the Session ID after login","Set session timeouts and invalidate the session on logout","Keep the same Session ID before and after login so users stay recognised"],"a":[0,1,2],"e":"The unit recommends HTTPS, regenerating the Session ID after login, timeouts and invalidation on logout. Reusing the same ID invites session fixation."},{"d":"Scenario","t":"multi","q":"A developer wants a session cookie that is sent only over HTTPS and cannot be read by JavaScript. Which attributes achieve these goals?","o":["HttpOnly","Secure","Expiry time","SameSite"],"a":[0,1],"e":"Secure restricts the cookie to HTTPS and HttpOnly hides it from JavaScript. SameSite limits cross-site sending and the expiry only controls lifetime, so neither meets the stated goals."},{"d":"Scenario","t":"multi","q":"A switch on an office network is hit by forged ARP replies and floods of fake MAC addresses. Which Layer 2 defences from the security view would help?","o":["Strong TLS with HSTS","Port security on the switch","Static ARP entries","SYN cookies on the servers"],"a":[1,2],"e":"Static ARP, port security and DAI are the Layer 2 defences. SYN cookies are Layer 4 and strong TLS with HSTS belongs to Layer 6."},{"d":"Scenario","t":"multi","q":"A data centre wants to reduce Physical Layer risks such as cable tapping, rogue devices and theft. Which defences fit?","o":["Locked racks","Input validation on web forms","Physical access control","Strong TLS versions"],"a":[0,2],"e":"Physical access control, CCTV and locked racks protect Layer 1. Input validation protects Layer 7 and strong TLS protects Layer 6."},{"d":"Scenario","t":"multi","q":"A port scan shows a mix of results. Which interpretations are correct?","o":["No reply always means the port is closed","A SYN-ACK reply to a SYN probe means the port is open","An RST reply means the port is closed","An RST reply means a service is accepting connections"],"a":[1,2],"e":"SYN-ACK means open and RST means closed. Silence usually means a firewall is dropping the probe (filtered), not that the port is closed."},{"d":"Scenario","t":"multi","q":"A trainee wants to practise using Nmap. Which choices are appropriate?","o":["Scan other systems only after obtaining written permission","Scan systems that the trainee owns","Scan a neighbour's Wi-Fi router without telling them","Scan any public server because open ports are public information"],"a":[0,1],"e":"The unit says to scan only systems you own or have written permission to test. Unauthorised scanning is reconnaissance, not auditing."},{"d":"Scenario","t":"multi","q":"A team is choosing transport protocols for different applications. Which choices are appropriate?","o":["Live video streaming over UDP for speed","Large file download over TCP for reliable delivery","Email transfer over TCP","Online banking login over UDP because it is faster"],"a":[0,1,2],"e":"UDP suits streaming, VoIP and gaming, while TCP suits downloads, web, FTP and email. Reliability matters for a banking login, so UDP is a poor choice."},{"d":"Scenario","t":"multi","q":"You type https://example.com into a browser. Which events happen before the web page content is delivered?","o":["DNS resolves the domain name to an IP address using UDP port 53","A TCP three-way handshake with the server on port 443, followed by the TLS handshake","The TCP handshake is skipped because HTTPS replaces it","ARP finds the MAC address of the default gateway so the frame can reach the router"],"a":[0,1,3],"e":"The packet flow is DNS lookup, TCP handshake, TLS handshake, ARP for the gateway, then routing with NAT. HTTPS still depends on TCP and does not replace its handshake."},{"d":"Scenario","t":"multi","q":"A trainer explains data encapsulation. Which pairings of data unit and addressing are correct?","o":["Segment - port numbers","Frame - MAC addresses","Packet - IP addresses","Packet - MAC addresses"],"a":[0,1,2],"e":"Encapsulation goes data, then segment (TCP ports), then packet (IP addresses), then frame (MAC addresses), then bits."},{"d":"Scenario","t":"multi","q":"A company puts each department into its own subnet. Which benefits does the unit describe?","o":["Routers are no longer needed between departments","Broadcast traffic is limited to each subnet","Network performance, security and management improve","Inter-department traffic is routed through a router"],"a":[1,2,3],"e":"Subnetting limits broadcasts, routes traffic between subnets through routers and improves performance, security and management. Routers are still required."},{"d":"Scenario","t":"multi","q":"An administrator works with the network 192.168.10.0/25. Which statements are correct?","o":["There are 254 usable host addresses","There are 126 usable host addresses","The broadcast address is 192.168.10.255","The subnet mask is 255.255.255.128"],"a":[1,3],"e":"A /25 has 7 host bits, giving mask 255.255.255.128 and 2^7 - 2 = 126 usable hosts. The broadcast address of 192.168.10.0/25 is 192.168.10.127, because it is half of a /24."},{"d":"Scenario","t":"multi","q":"An organisation is migrating from IPv4 to IPv6. Which statements about IPv6 are correct?","o":["It supports address classes A to E","Its header size is variable from 20 to 60 bytes","A Flow Label field identifies packet flows","End-to-end connectivity is restored without NAT"],"a":[2,3],"e":"IPv6 restores end-to-end connectivity without NAT and has a Flow Label. It does not use address classes and has a fixed 40-byte header."},{"d":"Scenario","t":"multi","q":"A firewall allows inbound traffic to ports 445 and 3389 from the Internet. Which concerns or actions are valid?","o":["Exposed SMB port 445 enabled the spread of WannaCry (EternalBlue)","Replacing SMB with Telnet would remove the risk","RDP should sit behind a VPN or gateway with MFA and NLA","These ports are well known, so they are inherently safe"],"a":[0,2],"e":"SMB exposure and exposed RDP are classic ransomware entry points. Telnet is itself a clear-text protocol, so it would add risk."},{"d":"Scenario","t":"multi","q":"A mail server on port 25 is being abused as an open relay to deliver spam and phishing. Which mitigations apply?","o":["Publish SPF, DKIM and DMARC records","Enable anonymous relaying for all senders","Move the mail service to Telnet port 23","Require authentication for sending mail"],"a":[0,3],"e":"The unit recommends authentication and SPF/DKIM/DMARC against open relay abuse. Anonymous relaying is the problem itself and Telnet is unrelated to SMTP."},{"d":"Scenario","t":"multi","q":"An FTP server on port 21 accepts anonymous logins and sends credentials in clear text. Which fixes are suitable?","o":["Allow clear-text credentials but hide the banner","Move the FTP service to port 23","Disable anonymous access","Switch to SFTP or FTPS"],"a":[2,3],"e":"The unit lists SFTP/FTPS and disabling anonymous access as FTP mitigations. Hiding a banner or changing the port does not encrypt credentials."},{"d":"Scenario","t":"multi","q":"An SSH service on port 22 is facing brute-force attacks on weak passwords. Which hardening steps match the unit?","o":["Permit password-only logins from any address","Restrict access by source IP address","Use key-based login instead of passwords","Disable root login over SSH"],"a":[1,2,3],"e":"Key-based login, disabling root login and restricting by IP are the listed mitigations. Password-only access from anywhere keeps the attack surface large."},{"d":"Scenario","t":"multi","q":"A technician labels network devices by OSI layer. Which assignments are correct?","o":["Hub - Physical Layer","Router - Data Link Layer","Switch - Network Layer","Repeater - Physical Layer"],"a":[0,3],"e":"Hubs, repeaters, cables, modems and NICs are Physical Layer devices. Switches work at Layer 2 and routers at Layer 3."},{"d":"Scenario","t":"multi","q":"A network edge device is configured to fight IP spoofing. Which descriptions of its filtering are correct?","o":["Ingress filtering rejects incoming packets with source headers that look forged","Egress filtering checks that outgoing packets carry legitimate source headers","Ingress filtering encrypts the payloads of all incoming packets","Egress filtering applies only to Layer 2 frames inside the LAN"],"a":[0,1],"e":"Both are forms of packet filtering at the edge: ingress inspects incoming source headers and egress inspects outgoing ones. Neither encrypts payloads nor works at Layer 2."},{"d":"Scenario","t":"multi","q":"A web application copies a user-supplied value into the Location response header without validation. Which risks does the unit describe?","o":["A proxy server's cache can be poisoned with injected content","An attacker can deliver cross-site scripting style attacks","The vulnerability affects only Physical Layer cabling","An attacker can inject newline characters to add new HTTP headers"],"a":[0,1,3],"e":"HTTP response header injection can add headers, break into the message body, deliver XSS-type attacks and poison proxy caches. It is a Layer 7 issue."},{"d":"Scenario","t":"multi","q":"A help-desk engineer picks diagnostic tools. Which command-to-purpose pairings are correct?","o":["ping example.com lists every active TCP connection on the host","tracert example.com shows each router hop and its latency","nslookup example.com shows DNS answers and record types","netstat -an shows active connections and listening ports"],"a":[1,2,3],"e":"ping reports reachability and round-trip time using ICMP. Active connections and open ports come from netstat or ss."},{"d":"Scenario","t":"multi","q":"A bank wants to inspect an X.509 certificate presented by a web server. Which items does a certificate contain?","o":["The server's public key","The validity period","The server's private key","The CA's digital signature"],"a":[0,1,3],"e":"A certificate holds subject, public key, issuer, validity period, serial number, signature algorithm and the CA's signature. The private key is never included in the certificate."}]</script>
+  <script>
+    (function () {
+      'use strict';
+      var Q = JSON.parse(document.getElementById('qdata').textContent);
+      var N = Q.length;
+      var LET = ['A', 'B', 'C', 'D'];
+      var TOTAL_SEC = 200 * 60;
+      var DIFFS = [
+        { key: 'Simple', label: 'Simple' },
+        { key: 'Medium', label: 'Medium' },
+        { key: 'Hard', label: 'Hard' },
+        { key: 'Scenario', label: 'Scenario-based MSQ' }
+      ];
+      var S = null;
+
+      function $(id) { return document.getElementById(id); }
+      function el(tag, cls, text) {
+        var e = document.createElement(tag);
+        if (cls) e.className = cls;
+        if (text !== undefined) e.textContent = text;
+        return e;
+      }
+      function fresh() {
+        return {
+          cur: 0,
+          ans: Q.map(function () { return []; }),
+          marked: Q.map(function () { return false; }),
+          visited: Q.map(function () { return false; }),
+          submitted: false, review: false, reviewList: null, reviewLabel: '',
+          startTs: 0, endTs: 0, timer: null
+        };
+      }
+
+      /* ---------- Core logic ---------- */
+      function evaluate(q, sel) {
+        var cs = 0, wrong = 0;
+        sel.forEach(function (i) { if (q.a.indexOf(i) > -1) cs++; else wrong++; });
+        var missing = q.a.length - cs;
+        var status;
+        if (sel.length === 0) status = 'none';
+        else if (missing === 0 && wrong === 0) status = 'exact';
+        else if (missing === 0 && wrong > 0) status = 'extra';
+        else status = 'partial';
+        return { status: status, correctSel: cs, wrong: wrong, missing: missing };
+      }
+      function isCorrect(i) { return evaluate(Q[i], S.ans[i]).status === 'exact'; }
+      function answeredCount() { var c = 0; S.ans.forEach(function (a) { if (a.length) c++; }); return c; }
+      function markedCount() { var c = 0; S.marked.forEach(function (m) { if (m) c++; }); return c; }
+      function plural(n, one, many) { return n + ' ' + (n === 1 ? one : many); }
+      function fmt(sec) {
+        sec = Math.max(0, sec);
+        var m = Math.floor(sec / 60), s = sec % 60;
+        return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+      }
+      function computeResult() {
+        var r = { correct: 0, incorrect: 0, unattempted: 0, marked: 0, by: {} };
+        DIFFS.forEach(function (d) { r.by[d.key] = { total: 0, correct: 0, attempted: 0 }; });
+        Q.forEach(function (q, i) {
+          var b = r.by[q.d]; b.total++;
+          if (S.ans[i].length) {
+            b.attempted++;
+            if (isCorrect(i)) { r.correct++; b.correct++; } else r.incorrect++;
+          } else r.unattempted++;
+          if (S.marked[i]) r.marked++;
+        });
+        return r;
+      }
+
+      /* ---------- Screens ---------- */
+      function showScreen(name) {
+        ['startScreen', 'quizScreen', 'resultScreen'].forEach(function (id) { $(id).classList.add('hidden'); });
+        $(name).classList.remove('hidden');
+        window.scrollTo(0, 0);
+      }
+
+      /* ---------- Modal / toast ---------- */
+      var modalOk = null;
+      function openModal(title, bodyNodes, okText, onOk, hideCancel) {
+        $('mTitle').textContent = title;
+        var b = $('mBody'); b.textContent = '';
+        bodyNodes.forEach(function (n) { b.appendChild(n); });
+        $('mOk').textContent = okText || 'OK';
+        $('mCancel').classList.toggle('hidden', !!hideCancel);
+        modalOk = onOk;
+        $('overlay').classList.remove('hidden');
+      }
+      function closeModal() { $('overlay').classList.add('hidden'); modalOk = null; }
+      function modalOpen() { return !$('overlay').classList.contains('hidden'); }
+      var toastT = null;
+      function toast(msg) {
+        var t = $('toast'); t.textContent = msg; t.classList.remove('hidden');
+        clearTimeout(toastT); toastT = setTimeout(function () { t.classList.add('hidden'); }, 2600);
+      }
+
+      /* ---------- Palette ---------- */
+      function buildPalette() {
+        var g = $('pgrid'); g.textContent = '';
+        Q.forEach(function (q, i) {
+          var b = el('button', 'pbtn', String(i + 1));
+          b.type = 'button';
+          b.setAttribute('aria-label', 'Go to question ' + (i + 1));
+          b.addEventListener('click', function () { goTo(i); });
+          g.appendChild(b);
+        });
+      }
+      function legendItems() {
+        var lg = $('legend'); lg.textContent = '';
+        var items = S.submitted ?
+          [['l-ok', 'Correct'], ['l-bad', 'Incorrect'], ['l-na', 'Unattempted'], ['l-mk', 'Marked']] :
+          [['l-ans', 'Answered'], ['l-vis', 'Visited, not answered'], ['l-un', 'Not visited'], ['l-mk', 'Marked for review']];
+        items.forEach(function (it) {
+          var d = el('div'); var i = el('i', it[0]); d.appendChild(i); d.appendChild(document.createTextNode(it[1])); lg.appendChild(d);
+        });
+      }
+      function updatePalette() {
+        var btns = $('pgrid').children;
+        for (var i = 0; i < N; i++) {
+          var c = 'pbtn';
+          if (S.submitted) {
+            if (!S.ans[i].length) c += ' na';
+            else c += isCorrect(i) ? ' ok' : ' bad';
+          } else {
+            if (S.ans[i].length) c += ' ans';
+            else if (S.visited[i]) c += ' vis';
+          }
+          if (S.marked[i]) c += ' mk';
+          if (i === S.cur) c += ' cur';
+          btns[i].className = c;
+        }
+        var ps = $('psummary'); ps.textContent = '';
+        var parts = S.submitted ? (function () {
+          var r = computeResult();
+          return [['Correct', r.correct], ['Incorrect', r.incorrect], ['Unattempted', r.unattempted], ['Marked', r.marked]];
+        })() : [['Answered', answeredCount()], ['Unanswered', N - answeredCount()], ['Marked', markedCount()]];
+        parts.forEach(function (p) {
+          var s = el('span'); s.appendChild(document.createTextNode(p[0] + ': ')); s.appendChild(el('b', '', String(p[1]))); ps.appendChild(s);
+        });
+      }
+
+      /* ---------- Render question ---------- */
+      function render() {
+        var q = Q[S.cur], sel = S.ans[S.cur], multi = q.t === 'multi';
+        S.visited[S.cur] = true;
+
+        $('qNum').textContent = 'Question ' + (S.cur + 1);
+        var dl = DIFFS.filter(function (d) { return d.key === q.d; })[0].label;
+        var bd = $('qDiff'); bd.textContent = dl; bd.className = 'badge b-' + q.d;
+        $('qType').textContent = multi ? 'Multiple answers (MSQ)' : 'Single answer';
+        $('instruction').classList.toggle('hidden', !multi);
+        $('qText').textContent = q.q;
+
+        var box = $('opts'); box.textContent = '';
+        box.setAttribute('role', multi ? 'group' : 'radiogroup');
+        q.o.forEach(function (text, idx) {
+          var chosen = sel.indexOf(idx) > -1;
+          var isAns = q.a.indexOf(idx) > -1;
+          var cls = 'opt' + (multi ? ' multi' : '');
+          var tag = null;
+          if (S.submitted) {
+            cls += ' locked';
+            if (isAns && chosen) { cls += ' correct'; tag = ['Your answer', 't-ok']; }
+            else if (!isAns && chosen) { cls += ' wrong'; tag = ['Your answer', 't-bad']; }
+            else if (isAns && !chosen) { cls += ' missed'; tag = ['Correct answer', 't-miss']; }
+          } else if (chosen) {
+            cls += isAns ? ' correct' : ' wrong';
+          } else if (!multi && sel.length && isAns) {
+            cls += ' correct';
+          }
+          var b = el('button', cls);
+          b.type = 'button';
+          b.setAttribute('role', multi ? 'checkbox' : 'radio');
+          b.setAttribute('aria-checked', chosen ? 'true' : 'false');
+          if (S.submitted) b.disabled = false;
+          b.appendChild(el('span', 'letter', LET[idx]));
+          b.appendChild(el('span', 'txt', text));
+          if (tag) b.appendChild(el('span', 'tag ' + tag[1], tag[0]));
+          b.addEventListener('click', function () { choose(idx); });
+          box.appendChild(b);
+        });
+
+        renderFeedback(q, sel, multi);
+
+        $('markBtn').textContent = S.marked[S.cur] ? 'Unmark Review' : 'Mark for Review';
+        $('markBtn').classList.toggle('on', S.marked[S.cur]);
+        $('clearBtn').classList.toggle('hidden', S.submitted);
+        $('markBtn').classList.toggle('hidden', S.submitted);
+        $('submitBtn').textContent = S.submitted ? 'View Results' : 'Submit Quiz';
+        $('submitBtn').classList.toggle('primary', true);
+
+        var nav = navTargets();
+        $('prevBtn').disabled = nav.prev === null;
+        $('nextBtn').disabled = nav.next === null;
+        $('posText').textContent = S.review && S.reviewList ?
+          'Reviewing ' + (S.reviewList.indexOf(S.cur) > -1 ? (S.reviewList.indexOf(S.cur) + 1) + ' of ' + S.reviewList.length : 'question ' + (S.cur + 1)) :
+          'Question ' + (S.cur + 1) + ' of ' + N;
+        updateProgress();
+        updatePalette();
+      }
+
+      function fbBox(kind) {
+        var f = $('feedback');
+        f.textContent = '';
+        f.className = 'feedback ' + kind;
+        return f;
+      }
+      function addExplanation(f, text) {
+        var ex = el('div', 'exp');
+        ex.appendChild(el('h4', '', 'Explanation'));
+        ex.appendChild(el('p', '', text));
+        f.appendChild(ex);
+      }
+      function correctListText(q) {
+        return q.a.map(function (i) { return LET[i] + ') ' + q.o[i]; });
+      }
+      function renderFeedback(q, sel, multi) {
+        var f = $('feedback');
+        if (S.submitted) {
+          var ev = evaluate(q, sel);
+          var kind = ev.status === 'exact' ? 'ok' : (sel.length ? 'bad' : 'info');
+          f = fbBox(kind);
+          f.appendChild(el('p', 'fb-title', ev.status === 'exact' ? 'Correct' : (sel.length ? 'Incorrect' : 'Not attempted')));
+          if (q.a.length > 1) {
+            f.appendChild(el('p', 'fb-line', 'Correct answers:'));
+            correctListText(q).forEach(function (t) { f.appendChild(el('p', 'fb-line', t)); });
+          } else {
+            f.appendChild(el('p', 'fb-line', 'Correct answer: ' + correctListText(q)[0]));
+          }
+          addExplanation(f, q.e);
+          f.classList.remove('hidden');
+          return;
+        }
+        if (!multi) {
+          if (!sel.length) { f.className = 'feedback hidden'; f.textContent = ''; return; }
+          var ok = q.a.indexOf(sel[0]) > -1;
+          f = fbBox(ok ? 'ok' : 'bad');
+          f.appendChild(el('p', 'fb-title', ok ? 'Correct!' : 'Incorrect'));
+          if (!ok) f.appendChild(el('p', 'fb-line', 'Correct answer: ' + LET[q.a[0]] + ') ' + q.o[q.a[0]]));
+          addExplanation(f, q.e);
+          f.classList.remove('hidden');
+          return;
+        }
+        var e = evaluate(q, sel);
+        if (e.status === 'none') {
+          f = fbBox('info');
+          f.appendChild(el('p', 'fb-title', 'Select ALL correct answers'));
+          f.appendChild(el('p', 'fb-line', 'Choose the options you think are correct. Feedback updates instantly as you change your selection.'));
+          f.classList.remove('hidden');
+        } else if (e.status === 'exact') {
+          f = fbBox('ok');
+          f.appendChild(el('p', 'fb-title', 'Correct! You selected every correct answer.'));
+          addExplanation(f, q.e);
+          f.classList.remove('hidden');
+        } else if (e.status === 'extra') {
+          f = fbBox('bad');
+          f.appendChild(el('p', 'fb-title', 'All correct options are selected, but an incorrect option is also selected.'));
+          f.appendChild(el('p', 'fb-line', 'Remove ' + plural(e.wrong, 'incorrect selection', 'incorrect selections') + ' (shown in red) to complete this question.'));
+          f.classList.remove('hidden');
+        } else {
+          f = fbBox(e.wrong ? 'bad' : 'info');
+          f.appendChild(el('p', 'fb-title', e.wrong ? 'Not fully correct yet' : 'Good so far – keep going'));
+          f.appendChild(el('p', 'fb-line', plural(e.missing, 'correct answer is', 'correct answers are') + ' still missing.'));
+          if (e.wrong) f.appendChild(el('p', 'fb-line', 'Also remove ' + plural(e.wrong, 'incorrect selection', 'incorrect selections') + ' (shown in red).'));
+          f.classList.remove('hidden');
+        }
+      }
+      function updateProgress() {
+        var a = answeredCount();
+        $('progressBar').style.width = (a / N * 100) + '%';
+        $('progressText').textContent = 'Answered ' + a + ' / ' + N;
+      }
+
+      /* ---------- Interaction ---------- */
+      function choose(idx) {
+        if (S.submitted) return;
+        var q = Q[S.cur], sel = S.ans[S.cur];
+        if (q.t === 'single') {
+          S.ans[S.cur] = [idx];
+        } else {
+          var p = sel.indexOf(idx);
+          if (p > -1) sel.splice(p, 1); else { sel.push(idx); sel.sort(function (a, b) { return a - b; }); }
+        }
+        render();
+      }
+      function navTargets() {
+        var prev = null, next = null;
+        if (S.review && S.reviewList && S.reviewList.length) {
+          for (var i = 0; i < S.reviewList.length; i++) {
+            var v = S.reviewList[i];
+            if (v < S.cur) prev = v;
+            if (v > S.cur && next === null) next = v;
+          }
+        } else {
+          prev = S.cur > 0 ? S.cur - 1 : null;
+          next = S.cur < N - 1 ? S.cur + 1 : null;
+        }
+        return { prev: prev, next: next };
+      }
+      function goTo(i) { S.cur = i; render(); }
+      function prev() { var t = navTargets().prev; if (t !== null) goTo(t); }
+      function next() { var t = navTargets().next; if (t !== null) goTo(t); }
+
+      /* ---------- Timer ---------- */
+      function tick() {
+        var used = Math.floor((Date.now() - S.startTs) / 1000);
+        var rem = TOTAL_SEC - used;
+        var t = $('timer');
+        t.textContent = fmt(rem);
+        t.classList.toggle('low', rem <= 300);
+        if (rem <= 0) { finish(true); }
+      }
+      function startTimer() {
+        clearInterval(S.timer);
+        S.startTs = Date.now();
+        tick();
+        S.timer = setInterval(tick, 1000);
+      }
+
+      /* ---------- Start / submit / results ---------- */
+      function startQuiz() {
+        S = fresh();
+        buildPalette();
+        legendItems();
+        $('reviewBanner').classList.add('hidden');
+        $('timer').classList.remove('hidden');
+        showScreen('quizScreen');
+        startTimer();
+        render();
+      }
+      function requestSubmit() {
+        if (S.submitted) { showResults(); return; }
+        var a = answeredCount();
+        var body = [];
+        var ul = el('ul');
+        ul.appendChild(el('li', '', 'Answered: ' + a + ' of ' + N));
+        ul.appendChild(el('li', '', 'Unanswered: ' + (N - a)));
+        ul.appendChild(el('li', '', 'Marked for review: ' + markedCount()));
+        body.push(el('p', '', 'Are you sure you want to submit your quiz? You will not be able to change your answers afterwards.'));
+        body.push(ul);
+        openModal('Submit quiz?', body, 'Yes, Submit', function () { finish(false); });
+      }
+      function finish(auto) {
+        if (S.submitted) return;
+        clearInterval(S.timer);
+        S.submitted = true;
+        S.endTs = Date.now();
+        closeModal();
+        legendItems();
+        showResults();
+        if (auto) toast('Time is up – your quiz was submitted automatically.');
+      }
+      function showResults() {
+        var r = computeResult();
+        var pct = Math.round(r.correct / N * 100);
+        $('scoreBig').textContent = r.correct;
+        $('scoreSmall').textContent = 'out of ' + N + ' (' + pct + '%)';
+        $('ring').style.setProperty('--p', pct);
+        var title, msg;
+        if (pct >= 85) { title = 'Outstanding!'; msg = 'You have an excellent command of networking fundamentals and the related security concepts.'; }
+        else if (pct >= 70) { title = 'Well done!'; msg = 'A strong result. Review the incorrect answers to close the remaining gaps.'; }
+        else if (pct >= 50) { title = 'Good effort'; msg = 'You know the basics. Revisit the explanations for the questions you missed.'; }
+        else { title = 'Keep practising'; msg = 'Go through the unit again and use the review mode to study the explanations.'; }
+        $('resTitle').textContent = title;
+        $('resMsg').textContent = msg;
+        var used = Math.min(TOTAL_SEC, Math.floor((S.endTs - S.startTs) / 1000));
+        $('resTime').textContent = 'Time taken: ' + fmt(used) + ' of ' + fmt(TOTAL_SEC);
+
+        var st = $('resStats'); st.textContent = '';
+        [['Correct', r.correct, 'g'], ['Incorrect', r.incorrect, 'r'], ['Unattempted', r.unattempted, 'a'], ['Marked for review', r.marked, '']].forEach(function (x) {
+          var d = el('div', 'stat ' + x[2]); d.appendChild(el('b', '', String(x[1]))); d.appendChild(el('span', '', x[0])); st.appendChild(d);
+        });
+
+        var tb = $('diffBody'); tb.textContent = '';
+        DIFFS.forEach(function (d) {
+          var b = r.by[d.key];
+          var tr = el('tr');
+          tr.appendChild(el('td', '', d.label));
+          tr.appendChild(el('td', '', b.correct + ' / ' + b.total));
+          tr.appendChild(el('td', '', b.attempted + ' / ' + b.total));
+          var acc = b.total ? Math.round(b.correct / b.total * 100) : 0;
+          tr.appendChild(el('td', '', acc + '%'));
+          var td = el('td'); var bar = el('div', 'bar'); var fill = el('div'); fill.style.width = acc + '%'; bar.appendChild(fill); td.appendChild(bar); tr.appendChild(td);
+          tb.appendChild(tr);
+        });
+        showScreen('resultScreen');
+      }
+
+      /* ---------- Review ---------- */
+      function startReview(kind) {
+        var list = [], label = '';
+        Q.forEach(function (q, i) {
+          var has = S.ans[i].length > 0;
+          if (kind === 'all') list.push(i);
+          else if (kind === 'wrong' && has && !isCorrect(i)) list.push(i);
+          else if (kind === 'na' && !has) list.push(i);
+          else if (kind === 'marked' && S.marked[i]) list.push(i);
+        });
+        label = { all: 'all answers', wrong: 'incorrect answers', na: 'unattempted questions', marked: 'marked questions' }[kind];
+        if (!list.length) { toast('No questions in this category.'); return; }
+        S.review = true; S.reviewList = list; S.cur = list[0];
+        $('reviewText').textContent = 'Review mode – showing ' + label + ' (' + list.length + ')';
+        $('reviewBanner').classList.remove('hidden');
+        $('timer').classList.add('hidden');
+        legendItems();
+        showScreen('quizScreen');
+        render();
+      }
+
+      /* ---------- Restart ---------- */
+      function restart() {
+        clearInterval(S && S.timer);
+        S = null;
+        closeModal();
+        showScreen('startScreen');
+      }
+      function requestRestart() {
+        if (S && !S.submitted) {
+          openModal('Restart quiz?', [el('p', '', 'Your current answers and timer will be discarded and you will return to the start screen.')], 'Yes, Restart', restart);
+        } else restart();
+      }
+
+      /* ---------- Theme ---------- */
+      function toggleTheme() {
+        var r = document.documentElement;
+        r.setAttribute('data-theme', r.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
+      }
+
+      /* ---------- Wiring ---------- */
+      $('startBtn').addEventListener('click', startQuiz);
+      $('prevBtn').addEventListener('click', prev);
+      $('nextBtn').addEventListener('click', next);
+      $('markBtn').addEventListener('click', function () { if (S.submitted) return; S.marked[S.cur] = !S.marked[S.cur]; render(); });
+      $('clearBtn').addEventListener('click', function () { if (S.submitted) return; S.ans[S.cur] = []; render(); });
+      $('submitBtn').addEventListener('click', requestSubmit);
+      $('restartTop').addEventListener('click', requestRestart);
+      $('restartBtn').addEventListener('click', requestRestart);
+      $('toResults').addEventListener('click', showResults);
+      $('revAll').addEventListener('click', function () { startReview('all'); });
+      $('revWrong').addEventListener('click', function () { startReview('wrong'); });
+      $('revNA').addEventListener('click', function () { startReview('na'); });
+      $('revMarked').addEventListener('click', function () { startReview('marked'); });
+      $('themeBtn').addEventListener('click', toggleTheme);
+      $('themeBtnStart').addEventListener('click', toggleTheme);
+      $('mCancel').addEventListener('click', closeModal);
+      $('mOk').addEventListener('click', function () { var f = modalOk; closeModal(); if (f) f(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modalOpen()) { closeModal(); return; }
+        if (modalOpen() || !S || $('quizScreen').classList.contains('hidden')) return;
+        if (e.ctrlKey || e.metaKey || e.altKey) return;
+        var k = e.key;
+        if (k === 'ArrowRight') next();
+        else if (k === 'ArrowLeft') prev();
+        else if (/^[a-dA-D]$/.test(k)) choose(LET.indexOf(k.toUpperCase()));
+        else if ((k === 'm' || k === 'M') && !S.submitted) { S.marked[S.cur] = !S.marked[S.cur]; render(); }
+      });
+
+      /* Test hook (harmless): exposes pure logic for verification */
+      window.__quiz = { Q: Q, evaluate: evaluate, getState: function () { return S; } };
+    })();
+  </script>
+</body>
+
+</html>
