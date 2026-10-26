@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ethical Hacking & Penetration Testing | 160-Question Audited Quiz</title>
+<style>
+:root{
+  --bg:#f2f4fb; --card:#ffffff; --text:#172033; --muted:#5a667c; --border:#dce2ef;
+  --primary:#4f46e5; --primary-d:#4038c9; --primary-weak:#eceeff; --on-primary:#ffffff;
+  --good:#15803d; --good-bg:#e7f7ed; --good-bd:#86d4a3;
+  --bad:#c62828; --bad-bg:#fdeaea; --bad-bd:#f1a3a3;
+  --warn:#b45309; --warn-bg:#fff3de; --warn-bd:#f0c27a;
+  --info:#1d4ed8; --info-bg:#e8f0ff; --info-bd:#a9c4f7;
+  --shadow:0 1px 2px rgba(20,30,60,.06),0 8px 24px rgba(20,30,60,.07);
+  --radius:16px;
+  --d-s:#0f766e; --d-m:#b45309; --d-h:#b91c1c; --d-q:#6d28d9;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0d1221; --card:#161d33; --text:#e8ecf7; --muted:#9aa6c0; --border:#2a3552;
+    --primary:#8b87ff; --primary-d:#a5a2ff; --primary-weak:#222a4d; --on-primary:#0d1221;
+    --good:#4ade80; --good-bg:#12301f; --good-bd:#2c7a49;
+    --bad:#ff7b7b; --bad-bg:#3a1a1f; --bad-bd:#8a3a42;
+    --warn:#fbbf24; --warn-bg:#35280f; --warn-bd:#8a6a1f;
+    --info:#7fb0ff; --info-bg:#162447; --info-bd:#34508f;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.3);
+    --d-s:#2dd4bf; --d-m:#fbbf24; --d-h:#ff8a8a; --d-q:#b794f6;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+.hidden{display:none !important}
+h1,h2,h3{margin:0;line-height:1.25}
+button{font:inherit;color:inherit}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.screen{min-height:100vh}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:10px 18px;border-radius:12px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:600;font-size:.95rem;transition:transform .08s,background .15s,border-color .15s}
+.btn:hover{border-color:var(--primary)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+.btn:disabled:hover{border-color:var(--border)}
+.btn.primary{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.btn.primary:hover{background:var(--primary-d);border-color:var(--primary-d)}
+.btn.ghost{background:transparent}
+.btn.danger{background:var(--bad);border-color:var(--bad);color:#fff}
+.btn.lg{padding:14px 28px;font-size:1.05rem;border-radius:14px}
+.btn.sm{padding:7px 12px;font-size:.85rem;border-radius:10px}
+:focus-visible{outline:3px solid var(--primary);outline-offset:2px}
+
+/* start */
+#screen-start{display:flex;align-items:center;justify-content:center;padding:28px 16px}
+.start-card{max-width:760px;width:100%;padding:36px 36px 32px}
+.eyebrow{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--primary)}
+.start-card h1{font-size:2rem;margin:8px 0 10px}
+.lead{color:var(--muted);margin:0 0 18px;font-size:1.02rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.chip{padding:6px 12px;border-radius:999px;font-size:.85rem;font-weight:700;border:1px solid currentColor;background:transparent}
+.chip.d-s,.badge.d-s{color:var(--d-s)} .chip.d-m,.badge.d-m{color:var(--d-m)}
+.chip.d-h,.badge.d-h{color:var(--d-h)} .chip.d-q,.badge.d-q{color:var(--d-q)}
+.how{background:var(--primary-weak);border-radius:14px;padding:16px 20px;margin-bottom:22px}
+.how h2{font-size:1rem;margin-bottom:8px}
+.how ul{margin:0;padding-left:20px}
+.how li{margin:6px 0;font-size:.94rem}
+.settings{display:flex;flex-wrap:wrap;gap:18px;align-items:center;margin-bottom:22px}
+.settings label{display:flex;align-items:center;gap:8px;font-weight:600;font-size:.93rem}
+.settings select{font:inherit;padding:8px 10px;border-radius:10px;border:1px solid var(--border);background:var(--card);color:var(--text)}
+.settings input[type=checkbox]{width:18px;height:18px;accent-color:var(--primary)}
+
+/* top bar */
+.topbar{position:sticky;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 20px;background:var(--card);border-bottom:1px solid var(--border)}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.logo{width:38px;height:38px;border-radius:11px;background:var(--primary);color:var(--on-primary);display:grid;place-items:center;font-weight:800;flex:none}
+.brand-title{font-weight:700;font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-sub{font-size:.78rem;color:var(--muted)}
+.top-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.timer{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:12px;background:var(--primary-weak);font-variant-numeric:tabular-nums;font-weight:800;font-size:1.02rem;border:1px solid transparent}
+.timer.warn{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-bd)}
+.timer.danger{background:var(--bad-bg);color:var(--bad);border-color:var(--bad-bd);animation:pulse 1s infinite}
+@keyframes pulse{50%{opacity:.65}}
+.only-mobile{display:none}
+
+/* progress */
+.progress-wrap{max-width:1180px;margin:14px auto 0;padding:0 20px}
+.progress-meta{display:flex;justify-content:space-between;gap:12px;font-size:.84rem;color:var(--muted);font-weight:600;margin-bottom:6px;flex-wrap:wrap}
+.progress{height:10px;border-radius:999px;background:var(--border);overflow:hidden}
+#progFill{height:100%;width:0;background:linear-gradient(90deg,var(--primary),#22c1c3);border-radius:999px;transition:width .25s}
+
+/* layout */
+.layout{max-width:1180px;margin:16px auto 40px;padding:0 20px;display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:20px;align-items:start}
+.main-col{min-width:0}
+.filterbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.fchip{padding:7px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-weight:600;font-size:.85rem}
+.fchip.active{background:var(--primary);color:var(--on-primary);border-color:var(--primary)}
+.fchip:disabled{opacity:.4;cursor:not-allowed}
+.qcard{padding:24px 26px}
+.qmeta{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.qnum{font-weight:800;color:var(--muted);font-size:.9rem}
+.badges{display:flex;gap:6px;flex-wrap:wrap}
+.badge{font-size:.74rem;font-weight:800;padding:4px 10px;border-radius:999px;border:1px solid currentColor;background:transparent}
+.b-single{color:var(--info)} .b-multi{color:var(--d-q)} .b-mark{color:var(--warn)}
+.qtext{font-size:1.2rem;font-weight:700;margin-bottom:14px}
+.instr{padding:10px 14px;border-radius:12px;font-size:.9rem;font-weight:600;margin-bottom:14px;background:var(--info-bg);color:var(--info);border:1px solid var(--info-bd)}
+.instr.multi{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-bd)}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:center;gap:14px;width:100%;text-align:left;padding:13px 16px;border-radius:14px;border:2px solid var(--border);background:var(--card);cursor:pointer;transition:border-color .12s,background .12s}
+.opt:hover{border-color:var(--primary)}
+.opt.locked{cursor:default}
+.opt.locked:hover{border-color:var(--border)}
+.opt .mark{flex:none;width:34px;height:34px;display:grid;place-items:center;font-weight:800;border:2px solid var(--border);background:var(--bg);font-size:.95rem;border-radius:50%}
+.opt.multi .mark{border-radius:9px}
+.opt .otext{flex:1;font-size:1rem}
+.opt .otag{flex:none;font-size:.74rem;font-weight:800;text-transform:uppercase;letter-spacing:.03em;opacity:.95}
+.opt.selected{border-color:var(--primary);background:var(--primary-weak)}
+.opt.selected .mark{border-color:var(--primary)}
+.opt.correct{border-color:var(--good);background:var(--good-bg)}
+.opt.correct .mark{background:var(--good);border-color:var(--good);color:#fff}
+.opt.correct .otag{color:var(--good)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-bg)}
+.opt.wrong .mark{background:var(--bad);border-color:var(--bad);color:#fff}
+.opt.wrong .otag{color:var(--bad)}
+.opt.missed{border-color:var(--good);border-style:dashed;background:var(--card)}
+.opt.missed .mark{border-color:var(--good);color:var(--good)}
+.opt.missed .otag{color:var(--good)}
+.fb{margin-top:18px;border-radius:14px;padding:14px 18px;border:1px solid;animation:fade .18s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+.fb.good{background:var(--good-bg);border-color:var(--good-bd)}
+.fb.bad{background:var(--bad-bg);border-color:var(--bad-bd)}
+.fb.warn{background:var(--warn-bg);border-color:var(--warn-bd)}
+.fb.info{background:var(--info-bg);border-color:var(--info-bd)}
+.fb.neutral{background:var(--bg);border-color:var(--border)}
+.fb-title{display:flex;gap:10px;align-items:flex-start;font-weight:800}
+.fb.good .fb-title{color:var(--good)} .fb.bad .fb-title{color:var(--bad)}
+.fb.warn .fb-title{color:var(--warn)} .fb.info .fb-title{color:var(--info)}
+.fb-ico{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-size:.8rem;background:currentColor}
+.fb-ico span{color:var(--card)}
+.fb-line{margin-top:8px;font-size:.92rem}
+.fb-label{font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:3px}
+.fb-answers{margin-top:10px}
+.fb-ans{font-weight:600;font-size:.95rem;margin:2px 0}
+.fb-expl{margin-top:12px;padding-top:12px;border-top:1px solid var(--border)}
+.fb-expl p{margin:0;font-size:.96rem}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.navbar{position:sticky;bottom:12px;display:flex;gap:10px;margin-top:14px;padding:10px;border-radius:16px;background:var(--card);border:1px solid var(--border);box-shadow:var(--shadow);z-index:10}
+.navbar .spacer{flex:1}
+
+/* palette */
+.palette{padding:18px;position:sticky;top:78px;max-height:calc(100vh - 96px);overflow:auto}
+.palette-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.palette-head h3{font-size:1rem}
+.pal-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.pal{position:relative;aspect-ratio:1/1;border-radius:10px;border:2px solid var(--border);background:var(--card);cursor:pointer;font-weight:700;font-size:.85rem;padding:0}
+.pal:hover{border-color:var(--primary)}
+.pal.st-skipped{border-style:dashed;border-color:var(--muted)}
+.pal.st-answered{background:var(--primary);border-color:var(--primary);color:var(--on-primary)}
+.pal.st-correct{background:var(--good);border-color:var(--good);color:#fff}
+.pal.st-wrong{background:var(--bad);border-color:var(--bad);color:#fff}
+.pal.st-unanswered{border-style:dashed;border-color:var(--muted)}
+.pal.current{outline:3px solid var(--primary);outline-offset:2px}
+.pal.marked::after{content:"";position:absolute;top:-5px;right:-5px;width:13px;height:13px;border-radius:50%;background:var(--warn);border:2px solid var(--card)}
+.legend{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;margin-top:14px;font-size:.78rem;color:var(--muted)}
+.legend span{display:flex;align-items:center;gap:6px}
+.sw{width:14px;height:14px;border-radius:4px;border:2px solid var(--border);display:inline-block;flex:none}
+.sw.answered{background:var(--primary);border-color:var(--primary)} .sw.skipped,.sw.unanswered{border-style:dashed;border-color:var(--muted)}
+.sw.correct{background:var(--good);border-color:var(--good)} .sw.wrong{background:var(--bad);border-color:var(--bad)}
+.sw.marked{background:var(--warn);border-color:var(--warn);border-radius:50%}
+.backdrop{position:fixed;inset:0;background:rgba(5,10,25,.5);z-index:35}
+
+/* result */
+.result-wrap{max-width:900px;margin:0 auto;padding:28px 18px 50px;display:grid;gap:18px}
+.hero{display:flex;gap:28px;align-items:center;padding:28px;flex-wrap:wrap}
+.ring{--p:0;width:170px;height:170px;border-radius:50%;background:conic-gradient(var(--primary) calc(var(--p)*1%),var(--border) 0);display:grid;place-items:center;flex:none}
+.ring-in{width:134px;height:134px;border-radius:50%;background:var(--card);display:grid;place-items:center;align-content:center}
+.ring-score{font-size:2rem;font-weight:800;line-height:1}
+.ring-pct{color:var(--muted);font-weight:700;margin-top:4px}
+.hero-text{flex:1;min-width:220px}
+.hero-text h1{font-size:1.7rem;margin-bottom:6px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+.stat{padding:16px;text-align:center}
+.stat b{display:block;font-size:1.6rem;font-variant-numeric:tabular-nums}
+.stat span{font-size:.82rem;color:var(--muted);font-weight:600}
+.stat.good b{color:var(--good)} .stat.bad b{color:var(--bad)}
+.card.pad{padding:22px}
+.card.pad h2{font-size:1.1rem;margin-bottom:14px}
+.drow{margin-bottom:14px}
+.dhead{display:flex;justify-content:space-between;gap:10px;font-weight:700;font-size:.93rem;margin-bottom:6px;flex-wrap:wrap}
+.dbar{height:12px;border-radius:999px;background:var(--border);overflow:hidden;display:flex}
+.dbar i{display:block;height:100%}
+.dbar .c{background:var(--good)} .dbar .w{background:var(--bad)}
+.dsub{font-size:.8rem;color:var(--muted);margin-top:4px}
+.actions{display:flex;flex-wrap:wrap;gap:10px}
+
+/* modal */
+.modal{position:fixed;inset:0;z-index:60;display:grid;place-items:center;padding:16px;background:rgba(5,10,25,.55)}
+.modal-box{max-width:460px;width:100%;padding:24px}
+.modal-box h2{font-size:1.2rem;margin-bottom:10px}
+.modal-box p{margin:6px 0;color:var(--muted)}
+.modal-box .warnline{color:var(--warn);font-weight:700}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:18px;flex-wrap:wrap}
+.sumgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:12px 0}
+.sumgrid div{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.sumgrid b{display:block;font-size:1.3rem;color:var(--text)}
+.sumgrid span{font-size:.75rem;color:var(--muted);font-weight:600}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr}
+  .palette{position:fixed;left:0;right:0;bottom:0;top:auto;max-height:78vh;z-index:40;border-radius:20px 20px 0 0;transform:translateY(105%);transition:transform .25s;visibility:hidden}
+  .palette.open{transform:none;visibility:visible}
+  .only-mobile{display:inline-flex}
+  .pal-grid{grid-template-columns:repeat(8,1fr)}
+}
+@media (max-width:560px){
+  .start-card{padding:24px 20px}
+  .start-card h1{font-size:1.5rem}
+  .qcard{padding:18px 16px}
+  .qtext{font-size:1.08rem}
+  .topbar{padding:8px 12px}
+  .brand-title{max-width:150px}
+  .pal-grid{grid-template-columns:repeat(6,1fr)}
+  .opt{padding:11px 12px;gap:10px}
+  .opt .otag{display:none}
+  .navbar .btn{padding:10px 12px}
+  .hero{padding:20px;justify-content:center;text-align:center}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- START SCREEN -->
+<section id="screen-start" class="screen">
+  <div class="card start-card">
+    <div class="eyebrow">MCA Sem 3 &middot; Ethical Hacking and Penetration Testing</div>
+    <h1>Ethical Hacking &amp; Penetration Testing</h1>
+    <p class="lead">A 160-question interactive practice quiz covering ethical hacking foundations, legal frameworks, reconnaissance, scanning, enumeration, vulnerabilities, web security, tools, and practical scenarios.</p>
+    <div class="chips">
+      <span class="chip d-s">35 Simple</span>
+      <span class="chip d-m">35 Medium</span>
+      <span class="chip d-h">30 Hard</span>
+      <span class="chip d-q">60 Scenario-based</span>
+    </div>
+    <div class="how">
+      <h2>How this quiz works</h2>
+      <ul>
+        <li><b>Single-answer MCQs (160):</b> choose one option. Your answer locks immediately and instant feedback shows the correct answer with an explanation.</li>
+        <li><b>Scenario-based questions (60):</b> apply concepts to practical situations. Each question has exactly one correct answer.</li>
+        <li><b>Scoring:</b> 1 mark per question, no negative marking. Your answer is checked instantly.</li>
+        <li><b>Tools:</b> Previous/Next, question palette, Mark for review, answer review, difficulty-wise results. Keyboard: A-D or 1-4 to answer, left/right arrows to navigate, M to mark.</li>
+      </ul>
+    </div>
+    <div class="settings">
+      <label for="limitSel">Time limit
+        <select id="limitSel">
+          <option value="90">90 minutes</option>
+          <option value="120" selected>120 minutes</option>
+          <option value="150">150 minutes</option>
+        </select>
+      </label>
+      <label class="chk" for="shuffleChk"><input type="checkbox" id="shuffleChk"> Shuffle question order</label>
+    </div>
+    <button id="btnStart" class="btn primary lg" type="button">Start quiz</button>
+  </div>
+</section>
+
+<!-- QUIZ / REVIEW SCREEN -->
+<section id="screen-quiz" class="screen hidden">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo" aria-hidden="true">EH</div>
+      <div><div class="brand-title">Ethical Hacking &amp; Penetration Testing</div><div class="brand-sub" id="modeLabel">Unit 03 Quiz</div></div>
+    </div>
+    <div class="top-actions">
+      <div class="timer" id="timer" role="timer" aria-label="Time remaining"><span aria-hidden="true">&#9201;</span><span id="timerText">00:00</span></div>
+      <button id="btnPalette" class="btn ghost sm only-mobile" type="button">Palette</button>
+      <button id="btnRestart" class="btn ghost sm" type="button">Restart</button>
+      <button id="btnSubmit" class="btn primary sm" type="button">Submit</button>
+      <button id="btnBack" class="btn primary sm hidden" type="button">Back to results</button>
+    </div>
+  </header>
+  <div class="progress-wrap">
+    <div class="progress-meta"><span id="progText"></span><span id="progRight"></span></div>
+    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progBar"><div id="progFill"></div></div>
+  </div>
+  <div class="layout">
+    <div class="main-col">
+      <div class="filterbar hidden" id="filterBar"></div>
+      <article class="card qcard" id="qcard" aria-live="off"></article>
+      <nav class="navbar" aria-label="Question navigation">
+        <button id="btnPrev" class="btn" type="button">&larr; Previous</button>
+        <button id="btnMark" class="btn ghost" type="button">&#9734; Mark for review</button>
+        <span class="spacer"></span>
+        <button id="btnNext" class="btn primary" type="button">Next &rarr;</button>
+      </nav>
+    </div>
+    <aside class="card palette" id="palette" aria-label="Question palette">
+      <div class="palette-head"><h3 id="palTitle">Question palette</h3><button id="btnPalClose" class="btn ghost sm only-mobile" type="button">Close</button></div>
+      <div class="pal-grid" id="paletteGrid"></div>
+      <div class="legend" id="legend"></div>
+    </aside>
+  </div>
+  <div class="backdrop hidden" id="backdrop"></div>
+</section>
+
+<!-- RESULT SCREEN -->
+<section id="screen-result" class="screen hidden">
+  <div class="result-wrap">
+    <div class="card hero">
+      <div class="ring" id="ring"><div class="ring-in"><div class="ring-score" id="rScore"></div><div class="ring-pct" id="rPct"></div></div></div>
+      <div class="hero-text"><h1 id="rTitle"></h1><p id="rMsg" class="muted"></p><p id="rNote" class="muted"></p></div>
+    </div>
+    <div class="stats" id="rStats"></div>
+    <div class="card pad"><h2>Performance by difficulty</h2><div id="rDiff"></div></div>
+    <div class="actions">
+      <button id="btnRevAll" class="btn primary" type="button">Review all answers</button>
+      <button id="btnRevWrong" class="btn" type="button">Review incorrect and unanswered</button>
+      <button id="btnRestart2" class="btn" type="button">Restart quiz</button>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div id="modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="card modal-box"><h2 id="modalTitle"></h2><div id="modalBody"></div><div class="modal-actions" id="modalActions"></div></div>
+</div>
+
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var QUESTIONS = [{"d":"S","t":"single","q":"What fundamentally distinguishes ethical hacking from malicious hacking?","o":["Written authorisation","The tools used during the engagement","The programming languages involved","The operating system of the target"],"a":[0],"e":"Ethical hacking uses the same tools and skills as malicious hacking; the legal line is written authorisation, scope, and intent, not the techniques themselves."},{"d":"S","t":"single","q":"Which type of hacker tests systems without authorisation but without malicious intent, often disclosing flaws unsolicited?","o":["Grey Hat","White Hat","Black Hat","Script Kiddie"],"a":[0],"e":"Grey Hats operate outside authorised scope but are not driven by theft or damage, unlike Black Hats."},{"d":"S","t":"single","q":"Which IT Act 2000 section deals specifically with identity theft (fraudulent use of a password or unique identifier)?","o":["Section 66C","Section 43","Section 66B","Section 66F"],"a":[0],"e":"Section 66C criminalises fraudulent or dishonest use of another person's electronic signature, password, or unique identification feature."},{"d":"S","t":"single","q":"What is the correct order of the 5 Phases of Ethical Hacking?","o":["Reconnaissance → Scanning & Enumeration → Gaining Access → Maintaining Access → Covering Tracks","Scanning & Enumeration → Reconnaissance → Gaining Access → Maintaining Access → Covering Tracks","Reconnaissance → Gaining Access → Scanning & Enumeration → Maintaining Access → Covering Tracks","Reconnaissance → Scanning & Enumeration → Maintaining Access → Gaining Access → Covering Tracks"],"a":[0],"e":"The five phases always follow this sequence: Reconnaissance, Scanning & Enumeration, Gaining Access, Maintaining Access, Covering Tracks."},{"d":"S","t":"single","q":"In Red/Blue/Purple Team terminology, which team is responsible for monitoring, detecting, and responding to intrusions?","o":["Blue Team","Red Team","Purple Team","Grey Team"],"a":[0],"e":"The Blue Team owns SOC operations, incident response, and hardening — the defensive role."},{"d":"S","t":"single","q":"Which document legally binds a penetration tester to confidentiality over data and vulnerabilities encountered during testing?","o":["Non-Disclosure Agreement","Rules of Engagement (RoE)","Scope Definition","Executive Summary"],"a":[0],"e":"The NDA is the legal instrument that obligates the tester to keep client data and findings confidential."},{"d":"S","t":"single","q":"Which organisation developed the Cyber Kill Chain model?","o":["Lockheed Martin","Open Web Application Security Project","MITRE Corporation","National Institute of Standards and Technology"],"a":[0],"e":"The Cyber Kill Chain, modelling an intrusion as 7 sequential stages, was developed by Lockheed Martin."},{"d":"M","t":"single","q":"How does a Vulnerability Assessment differ from a Penetration Test?","o":["Assessment lists weaknesses; pentesting proves impact by exploitation","A Vulnerability Assessment always takes longer than a penetration test","A Vulnerability Assessment is performed only after a penetration test is complete","There is no meaningful difference between the two"],"a":[0],"e":"Vulnerability Assessment is breadth-first automated scanning with no exploitation; a penetration test is manual, targeted, and includes active exploitation."},{"d":"M","t":"single","q":"Under Section 43A of the IT Act, what is a company's primary obligation regarding sensitive personal data?","o":["Reasonable security practices and compensation for resulting loss","Report every security incident to the police within 24 hours","Obtain a cybersecurity insurance policy before processing any data","Encrypt all data using government-approved algorithms only"],"a":[0],"e":"Section 43A introduces organisational cybersecurity responsibility: failing to implement reasonable security practices that causes wrongful loss makes the company liable to compensate affected individuals."},{"d":"M","t":"single","q":"Why is the Cyber Kill Chain useful to defenders even though they cannot stop every stage?","o":["Interrupting one stage can break the attack chain","It guarantees 100% prevention if followed correctly","It replaces the need for endpoint detection tools","It only applies to nation-state attackers"],"a":[0],"e":"Because each stage in the kill chain depends on the previous one succeeding, interrupting any single stage stops the overall intrusion — defenders don't need to block everything, just one link."},{"d":"M","t":"single","q":"What is the primary purpose of Rules of Engagement (RoE) in a penetration test?","o":["Set testing windows, permitted techniques, and escalation rules","To list which certifications the tester holds","To specify the exact monetary cost of the engagement","To describe which marketing materials the client may use afterward"],"a":[0],"e":"RoE sets the operational boundaries of the test — when it can happen, what techniques are allowed, and how to escalate issues during testing."},{"d":"M","t":"single","q":"Which of the following best differentiates PTES from the OWASP Testing Guide?","o":["PTES: full pentest lifecycle; OWASP: web application testing","PTES only covers wireless networks while OWASP covers databases","PTES is a legal framework while OWASP is a certification body","They are two names for the exact same standard"],"a":[0],"e":"PTES (Penetration Testing Execution Standard) spans pre-engagement through reporting for any type of test, whereas the OWASP WSTG is scoped specifically to web applications."},{"d":"M","t":"single","q":"Under the DPDP Act 2023, what model does India use for cross-border personal data transfer restrictions?","o":["Blacklist model: transfers allowed unless a destination is restricted","A whitelist model identical to GDPR's adequacy-decision approach","All cross-border transfers are banned outright","Transfers require individual approval from the Data Protection Board for every transaction"],"a":[0],"e":"The DPDP Act takes a blacklist approach: data may be transferred abroad by default unless the destination country is specifically restricted by government notification — more permissive than GDPR's whitelist model."},{"d":"M","t":"single","q":"What is the maximum reporting window CERT-In Directions 2022 mandate for reportable cybersecurity incidents?","o":["6 hours","24 hours","72 hours","30 days"],"a":[0],"e":"CERT-In's 2022 directions require reportable incidents to be notified within 6 hours — one of the strictest windows globally, compared to GDPR's 72-hour rule."},{"d":"H","t":"single","q":"A Significant Data Fiduciary under the DPDP Act 2023 is subject to which enhanced obligation NOT required of ordinary fiduciaries?","o":["Appoint an India-based DPO and an independent auditor","Obtaining consent before any processing","Registering with the Ministry of Electronics and IT","Publishing an annual transparency report to the public"],"a":[0],"e":"SDF status triggers enhanced obligations: an India-based DPO, an independent auditor, periodic DPIAs, and compliance audits — none of which are required for standard fiduciaries."},{"d":"H","t":"single","q":"Which IT Act section carries a punishment that may extend to life imprisonment, and under what intent threshold?","o":["Section 66F — cyber terrorism threatening national security","Section 66 — any dishonest or fraudulent computer-related offence","Section 67B — any obscene electronic publication","Section 70 — unauthorised access to any government website"],"a":[0],"e":"Section 66F (Cyber Terrorism) is the only IT Act offence carrying potential life imprisonment, triggered specifically by intent to threaten national sovereignty/security or strike terror."},{"d":"H","t":"single","q":"How does NCIIPC's protection of Critical Information Infrastructure (CII) relate to Section 70 of the IT Act?","o":["Section 70 criminalises unauthorised access to protected systems","Section 70 only applies to private banking systems, not CII","NCIIPC operates entirely independently of the IT Act with no statutory basis","Section 70 caps penalties for CII breaches at a monetary fine only"],"a":[0],"e":"Section 70 empowers the government to declare systems (often CII) as 'protected systems'; unauthorised access to them is a serious offence with imprisonment up to 10 years, coordinated by NCIIPC."},{"d":"H","t":"single","q":"What is the structural difference between how DPDP Act 2023 and GDPR determine lawful bases for processing personal data?","o":["DPDP: consent/limited uses; GDPR: six legal bases","DPDP has no lawful basis requirement at all","GDPR relies solely on consent with no alternatives","Both frameworks use an identical seven-basis model"],"a":[0],"e":"DPDP's framework is narrower — consent plus specific legitimate-use exceptions (employment, medical emergency, etc.) — compared to GDPR's broader six lawful bases."},{"d":"H","t":"single","q":"Why does the course material note that 'good intent' is not a legal defence under the IT Act for unauthorised testing?","o":["Unauthorised access is not excused by good intent","Because the IT Act only punishes acts that cause financial loss","Because intent is only relevant for Section 67 obscenity cases","Because authorisation is implied if the target system has no visible security controls"],"a":[0],"e":"Even a 'helpful' grey-hat scan without written authorisation is a criminal offence under the IT Act — intent to help does not substitute for the legal requirement of permission."},{"d":"H","t":"single","q":"Within the Kill Chain-to-pentest-phase mapping, which defender action is specifically associated with the 'Installation' stage?","o":["EDR/antivirus and application allow-listing","Monitoring OSINT exposure and limiting public data leakage","Email filtering and web application firewalls","Data loss prevention and log integrity monitoring"],"a":[0],"e":"Installation (mapped to Maintaining Access) is countered primarily by EDR/antivirus and application allow-listing, which detect or block persistence mechanisms being planted."},{"d":"Q","t":"single","q":"A junior tester is handed a signed scope document listing only the IP range 10.0.5.0/24, but notices an interesting server on 10.0.6.15 that appears related. What should the tester do?","o":["Leave the host untested and request written scope expansion","Test it anyway since it's clearly part of the same organisation","Test it only during off-peak hours to minimise risk","Document it as in-scope in the final report without testing it"],"a":[0],"e":"Scope definition is a hard legal boundary; testing systems outside the agreed scope — even if related — is unauthorised access under the IT Act, regardless of good intentions."},{"d":"Q","t":"single","q":"During an engagement, a tester discovers a critical vulnerability in a system explicitly listed as out-of-scope. What is the professionally correct action?","o":["Report it and obtain authorisation before further testing","Exploit it fully to demonstrate maximum impact in the report","Ignore it completely since it is outside the agreed boundaries","Publicly disclose it immediately to pressure the client into fixing it"],"a":[0],"e":"Out-of-scope findings should be flagged to the client without active exploitation — professional ethics and the RoE prohibit acting beyond authorised scope, but responsible disclosure still applies."},{"d":"Q","t":"single","q":"A company's NDA with a penetration testing firm expires, but the firm's former employee later shares a client's unpatched vulnerability details on a public forum. Which principle has been violated?","o":["Keep client data and findings confidential under the NDA","Rules of Engagement, since the RoE governs post-engagement conduct","Section 66F of the IT Act, as this qualifies as cyber terrorism","VAPT deliverable requirements"],"a":[0],"e":"The NDA binds the tester (and by extension, employees who gained knowledge through the engagement) to confidentiality over data and vulnerabilities — public disclosure breaches this core ethical obligation."},{"d":"Q","t":"single","q":"An Indian bank's third-party vendor processing payment data wants to store backup copies on servers located outside India. Which regulatory requirement is most directly relevant?","o":["RBI requires payment-system data to be stored in India","DPDP Act's blacklist cross-border transfer rule, since it applies to all data uniformly","Section 66F of the IT Act","CERT-In's 6-hour breach notification mandate"],"a":[0],"e":"RBI's sector-specific data localisation rule requires payment system data to be stored only within India, overriding the more permissive general DPDP cross-border rule for this specific data category."},{"d":"Q","t":"single","q":"A service provider in India experiences a ransomware attack at 2 PM and confirms it as a reportable incident at 4 PM. By what time must they notify CERT-In?","o":["By 10 PM (six hours after confirmation)","8 PM the same day (6 hours from the 2 PM attack)","4 PM the next day (24 hours from confirmation)","There is no fixed deadline for ransomware specifically"],"a":[0],"e":"CERT-In's 6-hour window runs from noticing or being brought to notice — here, confirmation at 4 PM — so the deadline is 10 PM, not from the initial attack time."},{"d":"Q","t":"single","q":"A penetration tester's report states a finding is 'High' severity for two separate findings, but a client stakeholder asks why one feels more urgent than the other. What should the report have included to address this?","o":["Justify each severity rating with its driving CVSS metrics","A statement that both findings are equally urgent by definition","Removal of the severity rating entirely to avoid confusion","A coin-flip priority recommendation"],"a":[0],"e":"Per the course material, two findings sharing a severity label should still be justified by the specific metrics (e.g. network-reachable, unauthenticated) that produced the score, so clients can sanity-check priority."},{"d":"Q","t":"single","q":"A Significant Data Fiduciary suffers a breach affecting children's personal data due to inadequate security safeguards. Under the DPDP Act's penalty schedule, which combination of violations could apply?","o":["Inadequate safeguards and additional children’s-data obligations","Only Section 66F of the IT Act applies, capping at life imprisonment","A flat ₹10,000 penalty regardless of severity, since DPB enforcement is standardised","No penalty applies because DPDP penalties are imprisonment-based, not financial"],"a":[0],"e":"The DPDP Act's penalty schedule allows the Data Protection Board to assess multiple applicable violations — here, both the security-safeguards failure and the children's-data-specific failure could be charged, each with its own ceiling."},{"d":"Q","t":"single","q":"An employee at an outsourcing firm discloses a client's customer database to a third party for personal financial gain, violating their service contract. Which IT Act section most directly applies?","o":["Section 72A — breach-of-contract disclosure","Section 66B — receiving stolen computer resource","Section 70A — national nodal agency provisions","Section 81 — overriding effect of the IT Act"],"a":[0],"e":"Section 72A specifically targets a person providing services under a lawful contract who discloses personal information without consent, intending wrongful gain — exactly this scenario."},{"d":"Q","t":"single","q":"During a Purple Team exercise, the Red Team successfully exfiltrates test data undetected. What is the correct next step per the collaborative Purple Team model?","o":["Red and Blue Teams review the detection gap and close it together","The Red Team keeps the technique secret to use again in future unannounced tests","The exercise is terminated immediately and treated as a real incident","The finding is only shared after a 90-day responsible disclosure period"],"a":[0],"e":"Purple Team exercises are collaborative by design — detection gaps are closed in real time by both teams working together, not held back for a later report."},{"d":"Q","t":"single","q":"A university's online student portal is tested under written authorisation. The tester creates Student A and Student B accounts and finds that changing a URL parameter from Student A's ID to Student B's reveals Student B's marks. Which phase of the 5-phase model does this exploitation activity fall under?","o":["Gaining Access","Reconnaissance","Maintaining Access","Covering Tracks"],"a":[0],"e":"Actively exploiting the identified weakness (the ID-swap) to obtain unauthorised access to data is the 'Gaining Access' phase, not passive information gathering or persistence."},{"d":"S","t":"single","q":"Which Google dorking operator restricts search results to a single domain?","o":["site:","filetype:","intitle:","inurl:"],"a":[0],"e":"The site: operator limits results to pages indexed within a specified domain."},{"d":"S","t":"single","q":"What does the WHOIS lookup command primarily reveal about a domain?","o":["Registrar, domain dates, and name servers","The exact physical IP location of every employee","Source code of the website","A list of all open ports on the web server"],"a":[0],"e":"WHOIS reveals domain registration details — registrar, dates, and name servers — not server-side technical details like open ports."},{"d":"S","t":"single","q":"Which DNS record type identifies a domain's mail servers?","o":["MX","A","NS","TXT"],"a":[0],"e":"MX (Mail Exchange) records specify which servers handle email for the domain."},{"d":"S","t":"single","q":"theHarvester is primarily used for which reconnaissance task?","o":["Collecting public emails and subdomains","Actively exploiting unpatched vulnerabilities","Cracking password hashes offline","Generating Metasploit payloads"],"a":[0],"e":"theHarvester is an OSINT tool that gathers emails, subdomains, IPs, and hostnames from search engines and other public sources, without touching the target directly."},{"d":"S","t":"single","q":"What does the Nmap flag -sS perform?","o":["A TCP SYN (\"half-open\") scan","A full TCP Connect scan","A UDP scan","Host discovery only, skipping port scanning"],"a":[0],"e":"-sS sends a SYN packet without completing the handshake — faster and stealthier than a full connect scan."},{"d":"S","t":"single","q":"What does the -a flag do when running enum4linux against an SMB target?","o":["Full SMB sweep of OS, users, groups, and shares","Only enumerates the administrator account","Performs an aggressive denial-of-service attack","Encrypts the output file automatically"],"a":[0],"e":"The -a (\"all\") flag is the standard first command against SMB, running every available enum4linux check in a single pass."},{"d":"S","t":"single","q":"In CVSS v3.1, which metric captures whether a victim must click a link or otherwise act for an attack to succeed?","o":["User Interaction (UI)","Attack Vector (AV)","Privileges Required (PR)","Scope (S)"],"a":[0],"e":"User Interaction (None or Required) specifically measures whether the exploit depends on an action by a human victim."},{"d":"S","t":"single","q":"Which website is the authoritative source for looking up CVE records and their CVSS scores?","o":["nvd.nist.gov","shodan.io","hackerone.com","owasp.org"],"a":[0],"e":"The National Vulnerability Database (NVD), hosted at nvd.nist.gov, is the authoritative, freely searchable source for CVE records and CVSS data."},{"d":"S","t":"single","q":"What CVSS v3.1 score range is classified as 'Critical' severity?","o":["9.0–10.0","7.0 – 8.9","4.0 – 6.9","0.1 – 3.9"],"a":[0],"e":"The Critical band spans 9.0 to 10.0 — typically remotely exploitable with no authentication required."},{"d":"M","t":"single","q":"What is the key difference between the Nmap flags -sS and -sT?","o":["-sS leaves the handshake incomplete; -sT completes it","-sS is slower than -sT in every scenario","-sT performs UDP scanning while -sS performs TCP scanning","-sS requires no special privileges while -sT requires root"],"a":[0],"e":"-sS (SYN scan) is a half-open scan that avoids completing the handshake, making it faster and less visible in logs, but it needs raw-socket (usually root) access; -sT uses the OS socket API for a full connect."},{"d":"M","t":"single","q":"Why is a successful unrestricted AXFR zone transfer considered a security risk even though it doesn't grant direct system access?","o":["It exposes much of the DNS namespace in one request","It immediately grants administrator access to the DNS server","It automatically triggers a denial-of-service condition on the target","It bypasses firewall rules on all associated hosts"],"a":[0],"e":"AXFR reveals hostnames, subdomains, and internal naming conventions in bulk, turning what would be extensive manual enumeration into a single information-disclosure request — a misconfiguration, not direct access."},{"d":"M","t":"single","q":"Why might Shodan be classified as a passive reconnaissance technique even though it returns live service banners?","o":["Shodan searches stored scan data instead of probing the target directly","Because Shodan only returns results for government networks","Because Shodan requires written authorisation from the target before each query","Because Shodan results are always at least one year out of date"],"a":[0],"e":"Shodan continuously scans the internet itself and stores results; querying its database involves no packets reaching the target, keeping it within passive reconnaissance."},{"d":"M","t":"single","q":"What distinguishes NSE's --script=default from --script=vuln?","o":["Default scripts are curated; vuln scripts test for known weaknesses","--script=default is only usable with -sU, while --script=vuln only works with -sS","--script=vuln is included automatically with every scan by default","There is no functional difference between the two"],"a":[0],"e":"default is the low-risk set bundled with -A, while vuln specifically probes for known vulnerabilities and is more disruptive/detectable."},{"d":"M","t":"single","q":"What practical risk arises from SNMP being left on the default community string 'public'?","o":["An unauthenticated attacker can read network/system details","It allows direct remote code execution with no further steps","It only exposes the device's uptime and nothing else","It automatically disables the device's firewall"],"a":[0],"e":"A default/guessable SNMP community string permits unauthenticated 'walking' of the MIB tree, exposing significant internal configuration detail."},{"d":"M","t":"single","q":"Why does the CVSS 'Scope' metric matter when scoring a stored XSS vulnerability?","o":["Scope may be Changed because impact reaches the victim’s browser context","Scope only applies to network-layer vulnerabilities, never to web application flaws","Scope determines whether the finding can be reported at all","Scope is always 'Unchanged' for any client-side vulnerability"],"a":[0],"e":"Scope: Changed reflects that the impact crosses a security boundary — from the vulnerable web app into the victim's own browser context — which is characteristic of many XSS findings."},{"d":"M","t":"single","q":"A Nessus scan returns a finding with CVSS 9.8, but further manual verification shows the underlying service was patched and only the banner string is outdated. What does this represent?","o":["Possible false positive from a spoofed banner or vendor backport","Confirmation that the finding is accurate and should be reported as-is","Proof that Nessus scans should never be trusted","An automatic indicator of a zero-day vulnerability"],"a":[0],"e":"Backported security fixes that don't change the displayed version string are a classic cause of false positives — manual verification before reporting is essential."},{"d":"M","t":"single","q":"What differentiates IXFR from AXFR in DNS zone transfers?","o":["IXFR sends changes; AXFR sends the complete zone","IXFR is always disabled by default while AXFR is enabled by default","AXFR only works over UDP while IXFR only works over TCP","IXFR is exclusively used for reverse DNS lookups"],"a":[0],"e":"AXFR is a full zone transfer; IXFR is designed for efficiency, sending only records that changed since the secondary's last copy."},{"d":"M","t":"single","q":"Why would a security team prefer gobuster over dirb for directory brute-forcing in most modern engagements?","o":["Gobuster is faster and supports directory, DNS, and virtual-host discovery","dirb requires a paid license while gobuster is always free","gobuster works only against HTTPS targets while dirb works only against HTTP","dirb can only be run on Windows systems"],"a":[0],"e":"gobuster, written in Go, offers notably better performance plus extra capabilities (DNS/vhost brute-forcing) beyond dirb's classic directory/file brute-forcing."},{"d":"H","t":"single","q":"An authorised AXFR request against an organisation's DNS server succeeds, revealing dev.example.com and vpn.example.com, both of which were never publicly linked elsewhere. How should this be categorised in the finding, and why?","o":["Information disclosure caused by an unrestricted zone transfer","A critical remote code execution vulnerability, since internal hosts were exposed","A false positive, since DNS data is inherently public","A violation specific to Section 66F of the IT Act"],"a":[0],"e":"Per the course material, unrestricted zone transfer is documented as an information-disclosure/misconfiguration finding — it reveals infrastructure detail but does not itself grant access."},{"d":"H","t":"single","q":"During a vulnerability scan, two findings both score CVSS 7.5 ('High'). Finding A has AV:N/AC:L/PR:N/UI:N while Finding B has AV:N/AC:H/PR:L/UI:R. Which statement correctly explains why they can share a score despite different individual metrics?","o":["Different CVSS metric combinations can produce the same score","Both findings must have identical attack vectors for the score to match","CVSS only considers the Attack Vector metric when calculating severity","This is a calculator error, since differing metrics can never produce the same score"],"a":[0],"e":"CVSS base scores are calculated from the combination of all metrics, so different individual metric profiles can land in the same severity band — which is why the vector string, not just the number, must be reported."},{"d":"H","t":"single","q":"A penetration tester uses -sV against a target and identifies 'Apache 2.4.41' on port 80. What is the primary analytical value of this version-specific detail over simply knowing 'a web server is running'?","o":["Map the service version to potentially applicable CVEs","It automatically completes the exploitation phase without further action","It eliminates the need for any further enumeration","It confirms the target has no firewall present"],"a":[0],"e":"Precise version detection enables targeted CVE lookup (e.g. on nvd.nist.gov) rather than generic risk assessment — a core reason version detection matters in the scanning phase."},{"d":"H","t":"single","q":"Why does the material caution that OS fingerprinting via Nmap's -O flag should be treated as a 'strong hint, not certainty'?","o":["Firewalls and proxies can distort TCP/IP fingerprint signals","Because -O only works on targets running Windows","Because -O requires written permission separate from the rest of the engagement","Because -O always returns a definitive, unspoofable result"],"a":[0],"e":"OS fingerprinting analyses subtle TCP/IP behavioural signatures; network middleboxes altering traffic can distort these signatures, so results are probabilistic rather than guaranteed."},{"d":"H","t":"single","q":"Theoretically, a company blocks ICMP but leaves TCP port 443 open with a misconfigured service banner showing an outdated version string that was actually patched via backporting. Which combination of concepts from the Unit II material explains the correct analyst response?","o":["Manually verify the finding before reporting a potentially spoofed version","Immediately escalate it as Critical based on the CVSS score alone","Disregard ICMP being blocked as irrelevant to any further analysis","Assume the vendor never backports security fixes, so the version string must be accurate"],"a":[0],"e":"The false-positive section specifically calls out vendor backporting as a common cause of version-based false positives requiring manual validation before reporting."},{"d":"H","t":"single","q":"A tester compares a Nessus-reported CVSS score of 9.8 against the NVD record for the same CVE and finds the vectors match, but the affected version range on NVD does not include the target's actual running version. What should the tester conclude?","o":["The target may fall outside the CVE’s affected version range","The CVSS score should be manually increased to 10.0 to reflect the discrepancy","The finding should be reported as Critical regardless, since the CVE itself is real","The discrepancy proves Nessus has fabricated the CVE entirely"],"a":[0],"e":"Confirming the affected version range is part of the described NVD verification workflow — a matching CVSS vector doesn't matter if the specific version isn't actually affected."},{"d":"H","t":"single","q":"In the context of NSE timing templates (-T0 through -T5), what trade-off does selecting -T2 represent compared to the default -T3?","o":["-T2 is slower and quieter but takes more time","-T2 is faster than -T3 but less accurate","-T2 and -T3 are functionally identical in all respects","-T2 disables all NSE scripts while -T3 enables them"],"a":[0],"e":"Lower timing templates like -T2 trade scan speed for stealth (reduced detection likelihood), while -T3 is Nmap's balanced default."},{"d":"H","t":"single","q":"Why does the course material recommend cross-checking theHarvester's output against DNS/WHOIS results before including it in a report?","o":["Cross-check to remove stale or inaccurate third-party results","Because theHarvester results are legally inadmissible without DNS confirmation","Because theHarvester cannot query more than one source at a time","Because WHOIS data always overrides theHarvester's findings automatically"],"a":[0],"e":"theHarvester pulls from search engines, certificate transparency logs, and other APIs that may surface outdated or tangential results — validation against authoritative DNS/WHOIS data improves report accuracy."},{"d":"Q","t":"single","q":"A tester wants to discover exposed login portals for target.com without sending any traffic to target.com's infrastructure. Which approach fits this requirement?","o":["Use site:target.com with inurl:login","Running nmap -sS against target.com","Running enum4linux -a against target.com's IP","Attempting dirb against target.com's web root"],"a":[0],"e":"Google dorking queries Google's index, not the target directly, keeping the activity fully passive — unlike Nmap, enum4linux, or dirb, which all send traffic to the target."},{"d":"Q","t":"single","q":"A tester runs dig AXFR target.com @ns1.target.com and receives a REFUSED response. What does this indicate?","o":["The server refuses unauthorised AXFR","The DNS server is completely offline","The domain target.com does not exist","A firewall is blocking all DNS traffic to the server"],"a":[0],"e":"A REFUSED response to an unauthorised AXFR request is the expected, secure outcome — it demonstrates the server properly restricts zone transfers to authorised secondary servers."},{"d":"Q","t":"single","q":"During Practical 1, a student runs theHarvester -d <practice-domain> -b all against a domain they do not own and were not assigned by the instructor, 'just to see what comes up.' What is the issue with this action?","o":["Only test domains you own or are authorised to assess","There is no issue, since theHarvester is a purely informational search tool","The issue is only that -b all is too broad a source list","The issue is that theHarvester requires administrator privileges to run"],"a":[0],"e":"The material explicitly flags this as a common beginner mistake — passive tools still require staying within an authorised/owned domain, not just 'any domain of interest.'"},{"d":"Q","t":"single","q":"A tester runs nmap -sU against a target and sees many ports reported as 'open|filtered' rather than a clear 'open' or 'closed'. What does this ambiguous state typically indicate about UDP scanning?","o":["UDP probe received no ICMP unreachable response","The target has crashed and is no longer responding to any traffic","UDP scanning always returns this state regardless of actual port status","The scan was run with insufficient privileges and produced invalid results"],"a":[0],"e":"UDP scanning marks a port 'open|filtered' when no reply (not even an ICMP unreachable) comes back, since that silence is ambiguous between an open port and a filtering firewall."},{"d":"Q","t":"single","q":"A tester finds that enum4linux -a against a Windows file server returns a full list of usernames via an anonymous session. What is the most direct downstream risk this enables?","o":["Usernames enable password spraying or brute force","It immediately grants the tester domain administrator rights","It automatically decrypts all files on the shares","It disables the target's antivirus software"],"a":[0],"e":"A leaked username list from a null session is a reconnaissance win that narrows the target list for subsequent credential-based attacks, rather than direct access on its own."},{"d":"Q","t":"single","q":"A company's Nessus scan flags a finding as CVSS 9.8 for a public-facing server. The tester is told the client can only remediate 3 findings this month out of 12 total. Besides the raw CVSS score, what additional factors should influence which 3 are prioritised?","o":["Consider exploitability, business impact, and fix effort","Only the alphabetical order of the vulnerability names","Whichever findings were discovered first chronologically","The CVSS score alone, since it is the only relevant factor"],"a":[0],"e":"The material explicitly notes that a high CVSS score alone doesn't automatically make something the top priority — exploitability and business impact must also be weighed."},{"d":"Q","t":"single","q":"A tester wants to confirm which operating system a target is running before selecting an exploit, but is concerned that a WAF in front of the target might distort results. Which Nmap technique is most directly affected by this concern, and why?","o":["Nmap -O relies on TCP/IP fingerprinting that middleboxes can distort","Host discovery (-sn), because it only checks whether a host is reachable","Grepable output (-oG), because it's just a file format, not a scanning technique","TCP Connect scanning (-sT), because it bypasses all middleboxes by design"],"a":[0],"e":"The caveat explicitly given for -O is that firewalls, proxies, and traffic shaping can distort the TCP/IP signature matching, making OS fingerprinting a hint rather than a certainty."},{"d":"Q","t":"single","q":"A tester runs a Google dork of site:target.com filetype:xlsx and finds a spreadsheet containing internal employee data. What is the appropriate classification and next step for this finding?","o":["Document the exposed document and recommend restricting or removing it","Immediately email the spreadsheet to colleagues to verify the data is accurate","Disregard it since Google dorking is not a 'real' reconnaissance technique","Attempt to use the discovered employee data to log into the target's VPN"],"a":[0],"e":"Passive OSINT findings like exposed documents should be documented as evidence of information disclosure and reported for remediation — not exploited further or redistributed, which would exceed authorised scope and ethics."},{"d":"Q","t":"single","q":"A security analyst reviewing a Nessus executive summary sees 40 findings: 2 Critical, 5 High, 18 Medium, 15 Low. Per the material's guidance on reading a Nessus report, how should the analyst proceed?","o":["Prioritise by severity and exploitability, not plugin ID alone","Fix findings in the exact order Nessus lists them by plugin ID","Ignore all Medium and Low findings permanently","Treat all 40 findings as equally urgent regardless of severity"],"a":[0],"e":"The material specifically states that Nessus reports are meant to be triaged by severity and exploitability, not worked through mechanically in plugin-ID order."},{"d":"Q","t":"single","q":"During reconnaissance, a tester uses LinkedIn OSINT combined with site:linkedin.com/in \"Target Corp\" \"IT Administrator\" to find a specific employee. What is this technique primarily building toward?","o":["Use the information only for authorised phishing simulations","Direct unauthorised access to the employee's LinkedIn account","Automatic password reset for the identified employee's corporate account","A denial-of-service attack against the employee's personal devices"],"a":[0],"e":"LinkedIn OSINT for employee enumeration is explicitly framed as building a target list for authorised social-engineering assessments — intelligence gathering within scope, not intrusion."},{"d":"Q","t":"single","q":"A tester receives a scan report with a finding rated 'High' with Attack Vector: Adjacent and Privileges Required: High. Another finding is also 'High' with Attack Vector: Network and Privileges Required: None. Why might a client reasonably treat these two findings differently despite the identical severity label?","o":["Network reachability and no required privileges expose more potential attackers","Severity labels always mean identical real-world risk regardless of underlying metrics","The Adjacent vector finding should automatically be treated as more severe","CVSS metrics beyond the final score are not meant to inform prioritisation"],"a":[0],"e":"This reflects the material's emphasis on citing specific metrics behind a score — a network-reachable, unauthenticated issue is a materially different real-world risk than one requiring adjacent network access and high privileges, even if both land in 'High.'"},{"d":"Q","t":"single","q":"A tester is asked to perform SMTP enumeration against a mail server using VRFY and EXPN commands. What information could this technique realistically reveal to an attacker?","o":["Whether the username is valid on the mail server","The full plaintext password for any mailbox","The physical location of the mail server's data centre","The private encryption key used for TLS on the mail server"],"a":[0],"e":"VRFY/EXPN let a mail server confirm whether a username is valid, allowing an attacker to build a list of real email accounts for later attacks — not credentials or infrastructure secrets directly."},{"d":"Q","t":"single","q":"A tester banner-grabs a web server with nc -nv target.com 80 and sends HEAD / HTTP/1.0, receiving a response listing 'Server: nginx/1.18.0'. What is the primary reconnaissance value of this manual step compared to simply trusting Nmap's -sV output?","o":["A low-noise manual check to validate scanner findings","It automatically patches the server to the latest version","It is required before Nmap can be used at all","It bypasses the need for any further vulnerability scanning"],"a":[0],"e":"Banner grabbing via netcat is explicitly described as a lightweight way to manually confirm automated scanner (Nmap) findings — a validation step, not a replacement for scanning."},{"d":"Q","t":"single","q":"A tester finds that a target's SNMP service responds to snmpwalk -v2c -c public target.com with full interface and routing table data. What underlying misconfiguration does this demonstrate?","o":["The SNMP community string remains the default “public”","The device has no SNMP service installed at all","The finding indicates the device is immune to all further attacks","SNMP always returns this data regardless of configuration"],"a":[0],"e":"A successful walk using the default 'public' string demonstrates the classic SNMP misconfiguration — the community string acting as a weak, often-default credential was never changed."},{"d":"S","t":"single","q":"Which Metasploit module type delivers the code that actually runs after an exploit succeeds?","o":["Payload","Auxiliary","Encoder","NOP"],"a":[0],"e":"The payload is the code executed on the target once the exploit module successfully compromises it — e.g. opening a shell or Meterpreter session."},{"d":"S","t":"single","q":"In Metasploit connection variables, what does LHOST represent?","o":["Callback IP address","The target's IP address","The target's listening port","The attacker's listening port"],"a":[0],"e":"LHOST is the attacker-side IP that a reverse payload calls back to; RHOST is the target's IP being attacked."},{"d":"S","t":"single","q":"Which command finds SUID binaries system-wide on a Linux target during privilege escalation?","o":["find / -perm -4000 -type f 2>/dev/null","find / -perm -2000 -type f 2>/dev/null","find / -type f -writable 2>/dev/null","find / -perm -0002 -type f 2>/dev/null"],"a":[0],"e":"This find command specifically searches for files with the SUID bit set across the filesystem, a key step in Linux privilege escalation."},{"d":"S","t":"single","q":"What is the primary difference between /etc/passwd and /etc/shadow on a Linux system?","o":["/etc/passwd lists accounts; root-only /etc/shadow stores password hashes","They contain identical information in different formats","/etc/shadow is world-readable while /etc/passwd is root-only","/etc/passwd stores password hashes while /etc/shadow stores usernames only"],"a":[0],"e":"/etc/passwd lists usernames, UIDs, and shells and is readable by any user; /etc/shadow, readable only by root, holds the actual password hashes."},{"d":"S","t":"single","q":"Which tool is a GPU-accelerated password recovery tool, making it far faster than CPU-based cracking for large wordlists?","o":["Hashcat","John the Ripper (default mode)","Hydra","enum4linux"],"a":[0],"e":"Hashcat leverages GPU acceleration, giving it a significant speed advantage over traditional CPU-bound cracking for large-scale jobs."},{"d":"S","t":"single","q":"What is the defining characteristic of an online brute-force attack performed by Hydra, as opposed to offline cracking tools like John or Hashcat?","o":["Hydra tests a live login service over the network","Hydra only works against encrypted hash files, never live services","Hydra requires GPU acceleration to function at all","Hydra can only test a single password guess per execution"],"a":[0],"e":"Unlike John/Hashcat, which crack already-obtained hashes offline, Hydra submits live username/password attempts directly against a running login service."},{"d":"S","t":"single","q":"What does Meterpreter's getuid command report?","o":["The user identity of the current session","The target's full file system structure","The target's installed antivirus product","The attacker's own IP address"],"a":[0],"e":"getuid reports the identity/privilege level of the account under which the current Meterpreter session is executing."},{"d":"M","t":"single","q":"What is the fundamental trade-off between staged and stageless Metasploit payloads?","o":["Staged: small first stage; stageless: complete payload","Staged payloads cannot be used with any Windows targets","Stageless payloads are always smaller in size than staged ones","There is no meaningful operational difference between the two"],"a":[0],"e":"Staged (e.g. windows/meterpreter/reverse_tcp) trades size for a two-step delivery that depends on connection stability; stageless (e.g. windows/shell_reverse_tcp) is one self-contained package, more reliable but larger."},{"d":"M","t":"single","q":"Why must a listener (exploit/multi/handler) be configured with the same PAYLOAD, LHOST, and LPORT as a payload generated via MSFvenom?","o":["The handler must match the payload type and callback settings","Because MSFvenom and exploit/multi/handler are the exact same tool under different names","Because mismatched values will cause the target machine to crash immediately","Because the listener only needs to match LPORT, not LHOST or PAYLOAD"],"a":[0],"e":"The listener must precisely mirror the generated payload's configuration so the callback connection from the target is correctly received and handled."},{"d":"M","t":"single","q":"Why is an exploitable SUID find binary particularly dangerous during Linux privilege escalation?","o":["find can spawn a shell that inherits its elevated privileges","Because find automatically deletes all log files when run","Because find requires no special permissions to begin with, making it irrelevant to privesc","Because find can only be exploited if the attacker already has root access"],"a":[0],"e":"Since SUID find runs with the file owner's (often root's) privileges regardless of who executes it, spawning a shell through its -exec option inherits that elevated privilege."},{"d":"M","t":"single","q":"How does Windows token impersonation via Meterpreter's getsystem differ from exploiting unquoted service paths?","o":["getsystem uses tokens/pipes; unquoted paths exploit parsing","Both techniques require physical access to the target machine","getsystem can only be used before any session is established","Unquoted service paths require no misconfiguration to exploit"],"a":[0],"e":"getsystem leverages token-impersonation techniques within an already-open session, whereas unquoted service paths exploit a specific path-parsing misconfiguration to have Windows execute a malicious binary."},{"d":"M","t":"single","q":"Why does the material recommend identifying a hash's type (e.g. via hashid or hashcat --identify) before attempting to crack it?","o":["The cracking mode must match the hash algorithm","Hash identification is a legal requirement under the IT Act before any cracking attempt","All hash types use identical cracking modes, so identification is purely cosmetic","Hash identification automatically cracks the password as a side effect"],"a":[0],"e":"Selecting the wrong hash mode (e.g. treating NTLM as MD5) means the cracking attempt will never succeed regardless of how long it runs, wasting compute resources."},{"d":"M","t":"single","q":"What is the practical purpose of Metasploit's post/multi/recon/local_exploit_suggester module?","o":["It suggests local privilege-escalation exploits for the compromised host","It automatically downloads and installs patches on the compromised host","It permanently removes all traces of the Metasploit session from the target","It generates a brand-new payload tailored to the target's antivirus"],"a":[0],"e":"This automation replaces manually testing each potential privilege-escalation exploit by hand, speeding up and standardising the privilege-escalation discovery process."},{"d":"M","t":"single","q":"Why is rockyou.txt commonly paired with John the Ripper and Hydra for password attacks?","o":["A large leaked-password wordlist useful for common password guesses","It is a list of every mathematically possible password combination","It is the only wordlist format John and Hydra are technically capable of reading","It contains exclusively randomly generated, non-human passwords"],"a":[0],"e":"rockyou.txt's effectiveness comes from being drawn from real leaked passwords, which tend to overlap heavily with what people actually choose."},{"d":"H","t":"single","q":"In the Metasploit module architecture, why are Encoder modules considered optional rather than a core requirement for every exploit?","o":["Encoders alter payload bytes to address bad characters or basic signatures","Encoder modules are deprecated and no longer functional in current Metasploit versions","Encoder modules are required only for Auxiliary modules, never for Exploit modules","Encoder modules replace the need for a Payload module entirely"],"a":[0],"e":"Encoding is a situational evasion technique; many straightforward exploit/payload combinations work without needing byte reshaping, which is why encoders sit alongside, not replace, the payload pipeline."},{"d":"H","t":"single","q":"A tester obtains a Meterpreter session running as the 'daemon' user on a Linux target via the vsftpd 2.3.4 backdoor exploit. Why is privilege escalation the necessary next step before meaningful post-exploitation, according to the material?","o":["Root privileges are needed for many sensitive post-exploitation actions","Because the daemon user account is scheduled for automatic deletion after 24 hours","Because Meterpreter sessions automatically terminate after 10 minutes unless escalated","Because the daemon user cannot run any Meterpreter commands at all"],"a":[0],"e":"The material explicitly notes that the daemon-level session limits what can be demonstrated, making privilege escalation the natural immediate next step before deeper post-exploitation."},{"d":"H","t":"single","q":"What does the historical vsftpd 2.3.4 backdoor incident illustrate about supply chain security, as discussed in the material?","o":["A compromised software distribution channel can introduce a backdoor","It proves that open-source software is inherently less secure than closed-source software","It shows that backdoors can only be introduced by nation-state actors","It demonstrates that FTP servers are immune to all other vulnerability classes"],"a":[0],"e":"The backdoor was injected into the publicly distributed source archive for a period in 2011 — anyone downloading and compiling the 'official' source got a backdoored binary, illustrating distribution-channel risk."},{"d":"H","t":"single","q":"Why does giving a regular user sudo privileges to a full-screen text editor like vim represent a critical security mistake, per the GTFOBins-related discussion in the material?","o":["Sudo access to vim may allow a root shell through its command escape","Because vim consumes excessive system resources when run with sudo","Because vim cannot be run by any user other than root under any circumstances","Because sudo access to any program always grants unrestricted root access automatically"],"a":[0],"e":"Nearly every full-screen editor has a shell-escape capability; combined with sudo rights, that escape inherits the elevated privilege, turning 'just an editor' into a full root shell."},{"d":"H","t":"single","q":"A tester runs hashcat -m 1000 -a 0 hashes.txt rockyou.txt but the attempt silently fails to crack anything, despite the hash being a valid NTLM hash with a weak, dictionary-matched password. What is the most likely explanation based on the material's guidance?","o":["The Hashcat mode does not match the actual hash type","rockyou.txt is too small a wordlist to ever succeed against NTLM hashes","Hashcat cannot process NTLM hashes under any circumstances","The -a 0 flag indicates a brute-force attack rather than dictionary, which is incompatible with rockyou.txt"],"a":[0],"e":"Mode 1000 is listed as NTLM in the material, but the broader guidance is that the mode must exactly match the algorithm identified in step 1 (hashcat --identify) — a mismatch, not the wordlist or attack type, causes silent failure. (-a 0 is dictionary mode, used correctly here.)"},{"d":"H","t":"single","q":"During authorised online brute-forcing with Hydra against a corporate SSH service, the engagement triggers an account lockout after only 5 attempts. What operational consequence does the material note is typical of this attack class compared to offline cracking?","o":["Online attacks are slower and more likely to trigger alerts or lockouts","Online attacks are always faster than offline cracking regardless of network conditions","Account lockouts have no practical effect on Hydra's attack speed","Hydra attacks never generate any detectable network traffic"],"a":[0],"e":"The material explicitly contrasts the slow, noisy, lockout-prone nature of live online attacks (Hydra) against the faster, undetectable nature of offline hash cracking (John/Hashcat)."},{"d":"H","t":"single","q":"Why does the local_exploit_suggester module's value increase specifically in engagements involving many compromised hosts, according to the material?","o":["Automated enumeration finds escalation candidates consistently across hosts","Because it is the only module capable of compromising more than one host at a time","Because manual testing becomes legally prohibited once more than one host is compromised","Because it automatically merges all compromised hosts into a single Meterpreter session"],"a":[0],"e":"The stated rationale for automation is speed and consistency at scale — manually testing privilege-escalation exploits one by one doesn't scale well across many compromised hosts."},{"d":"Q","t":"single","q":"A tester successfully exploits a target and needs to set up a listener before the payload calls back. Which msfconsole module should be loaded for this purpose?","o":["exploit/multi/handler","auxiliary/scanner/portscan/tcp","post/multi/recon/local_exploit_suggester","exploit/unix/ftp/vsftpd_234_backdoor"],"a":[0],"e":"exploit/multi/handler is the standard module for catching a callback from a separately delivered payload (e.g. one generated via MSFvenom), matched to the same PAYLOAD, LHOST, and LPORT."},{"d":"Q","t":"single","q":"A tester runs sudo -l on a compromised Linux host and sees the current user can run /usr/bin/less as root with no password. What is the most direct next step toward privilege escalation?","o":["Check whether `less` can escape to a shell under sudo","Immediately report that no privilege escalation is possible","Attempt to brute-force the root password via Hydra","Reboot the system to reset sudo permissions"],"a":[0],"e":"GTFOBins catalogues exact escalation techniques for standard binaries like less when runnable via sudo — this is the documented next step rather than unrelated techniques like brute-forcing."},{"d":"Q","t":"single","q":"A tester finds a Windows service whose executable path is C:\\Program Files\\My App\\service.exe, unquoted, and the tester has write access to C:\\Program Files\\My.exe. What privilege-escalation risk does this represent?","o":["Windows may try C:\\Program.exe before the intended service path","This represents no risk, since Windows always correctly identifies the real executable regardless of quoting","This can only be exploited if the attacker has physical access to the server","This is a vulnerability only in the registry, not in the service path itself"],"a":[0],"e":"Unquoted service paths with spaces are tried segment-by-segment by Windows; an attacker-controlled binary placed at an earlier segment runs instead, inheriting the service's privilege level."},{"d":"Q","t":"single","q":"After gaining a low-privilege Meterpreter session, a tester runs hashdump and obtains a list of NTLM hashes. What is the appropriate next step to make use of these hashes offline?","o":["Use John or Hashcat with the correct hash mode and a wordlist","Immediately attempt to log into the live service online using Hydra with the raw hash as the password","Discard them, since NTLM hashes cannot be cracked under any circumstances","Upload them back to the target using Meterpreter's upload command"],"a":[0],"e":"hashdump extracts hashes specifically for offline cracking with tools like John or Hashcat — not for direct online submission as a literal password via Hydra."},{"d":"Q","t":"single","q":"A tester wants to confirm full root compromise after a successful SUID binary exploitation. Which single command best confirms this, and why?","o":["Run id and confirm the output reports uid=0(root)","ls -la, because it lists file permissions but not the current user's privilege level","pwd, because it only shows the working directory","getuid, because it is a Windows-specific Meterpreter command not applicable here"],"a":[0],"e":"id directly reports the effective UID of the current shell; uid=0(root) is the standard confirmation that an SUID exploitation chain succeeded in elevating to root."},{"d":"Q","t":"single","q":"During Practical 4, a student successfully escalates to root on Metasploitable 2 and is asked why reading /etc/shadow is considered a significant post-exploitation win. What is the correct justification?","o":["Reading root-only /etc/shadow confirms elevated access","Because /etc/shadow contains the plaintext passwords for every account directly","Because reading /etc/shadow automatically grants domain administrator rights on the network","Because /etc/shadow is readable by any user by default, making this step trivial"],"a":[0],"e":"The material frames this exactly: shadow's root-only readability makes successfully reading it direct proof of root compromise, and its contents (hashes) enable further offline cracking."},{"d":"Q","t":"single","q":"A tester is building a payload intended to be delivered via a narrow injection vector with very limited space for initial code, where the connection to the target is expected to remain stable. Which payload type is the better fit, and why?","o":["A staged payload has a smaller initial footprint for the limited injection space","A stageless payload, because it always requires less total space than a staged payload","Neither type matters since MSFvenom does not distinguish between staged and stageless payloads","A stageless payload, because it works better specifically on unstable connections, which this scenario doesn't need"],"a":[0],"e":"Staged payloads are explicitly suited to space-constrained exploitation vectors due to their small initial footprint, provided the connection can reliably sustain the second-stage download."},{"d":"Q","t":"single","q":"A tester has only a short custom wordlist of 50 likely passwords and wants the fastest possible cracking approach against a captured NTLM hash dump. Which approach best fits, and why?","o":["Use a dictionary attack against the 50 likely passwords first","An online Hydra brute-force attack against the original live service, since it is always faster than offline cracking","A full brute-force attack covering every possible character combination, since that guarantees success fastest","SNMP walking against the target to retrieve the plaintext password directly"],"a":[0],"e":"A small, targeted dictionary of likely candidates is the fastest practical approach for offline hash cracking when the password is suspected to be common or guessable — not brute-force or unrelated techniques."},{"d":"Q","t":"single","q":"A tester successfully escalates to SYSTEM on a Windows target using getsystem after obtaining an initial low-privileged session via a phishing payload. What does this demonstrate about the technique's starting requirement?","o":["getsystem escalates an existing session; it does not create initial access","getsystem can gain initial remote access to a target with no prior foothold","getsystem only works if the target has no antivirus installed","getsystem requires physical access to the Windows machine's keyboard"],"a":[0],"e":"getsystem is a post-exploitation privilege-escalation technique used within an existing Meterpreter session via token impersonation — it does not itself provide the initial access."},{"d":"Q","t":"single","q":"A tester captures a password hash and identifies it as 40 hexadecimal characters with no fixed prefix. Based on the hash-type table in the material, which algorithm is this most likely to be?","o":["SHA-1","MD5","NTLM","bcrypt"],"a":[0],"e":"SHA-1 produces a 40-hex-character hash, distinguishing it from MD5/NTLM (32 hex characters) and bcrypt (which starts with a fixed $2a$/$2b$ prefix)."},{"d":"Q","t":"single","q":"A tester wants to move an active Meterpreter session into a more stable, less conspicuous process to avoid losing access if the original exploited process crashes. Which Meterpreter command accomplishes this?","o":["migrate","sysinfo","pwd","download"],"a":[0],"e":"migrate moves the current session into another running process, improving stability and stealth — distinct from informational commands like sysinfo or file-transfer commands like download."},{"d":"Q","t":"single","q":"During Practical 3, a tester's exploit/unix/ftp/vsftpd_234_backdoor module successfully opens a command shell session. The tester then runs sysinfo and getuid. What is the purpose of running these two commands immediately after a session opens?","o":["Confirm the compromised system and current privilege level","To permanently delete all logs on the target system","To automatically escalate the session to root without further action","To close the session and open a new one with higher privileges"],"a":[0],"e":"sysinfo and getuid are informational first steps that orient the tester (target OS/hostname, current privilege level) before proceeding to further post-exploitation or escalation."},{"d":"Q","t":"single","q":"A student is told to use MSFvenom to generate a Windows payload and is given the command msfvenom -p windows/meterpreter/reverse_tcp LHOST=10.10.1.5 LPORT=4444 -f exe -o update.exe. What must happen on the attacker machine before the generated update.exe is executed on the target for a session to open?","o":["Start a matching handler using LHOST 10.10.1.5 and LPORT 4444","Nothing further is needed — the payload opens a session automatically with no listener required","The attacker must manually open port 4444 on the target machine, not their own","The payload must be re-encoded using a separate Encoder module before it can function"],"a":[0],"e":"The four-step workflow described (generate, deliver, listen, execute) requires the listener to be active and correctly matched before the delivered payload calls back."},{"d":"Q","t":"single","q":"A tester identifies a hash beginning with $2b$ during a web application assessment. Based on the hash-identification table, what does this prefix indicate, and what does it suggest about the application's security posture relative to MD5-based storage?","o":["The $2b$ prefix indicates bcrypt password hashing","It indicates NTLM, which is weaker than MD5 in all cases","It indicates a corrupted hash that cannot be identified by any tool","It indicates the password was stored in plaintext with a fixed prefix added"],"a":[0],"e":"The $2a$/$2b$ prefix is bcrypt's signature; being a slow, salted algorithm, it represents considerably stronger password storage practice than fast, unsalted MD5."},{"d":"S","t":"single","q":"Under OWASP Top 10 (2021 official numbering), which category does SQL Injection fall under?","o":["A03 — Injection","A01 — Broken Access Control","A05 — Security Misconfiguration","A07 — Identification and Authentication Failures"],"a":[0],"e":"SQL Injection, Command Injection, and similar input-interpreted-as-instruction flaws fall under the A03 Injection category."},{"d":"S","t":"single","q":"In Burp Suite, which component is used to resend a single captured request repeatedly with small manual modifications?","o":["Repeater","Intruder","Decoder","Proxy intercept"],"a":[0],"e":"Repeater is designed for manually testing an injection point by resending a modified version of one captured request repeatedly."},{"d":"S","t":"single","q":"What does DVWA stand for?","o":["Damn Vulnerable Web Application","Direct Vulnerability Web Analyzer","Dynamic Vulnerability Web Assessment","Defended Vulnerable Web Account"],"a":[0],"e":"DVWA (Damn Vulnerable Web Application) is a PHP/MySQL application intentionally built with common vulnerabilities for safe, legal practice."},{"d":"S","t":"single","q":"Which type of XSS is also known as 'Persistent XSS' because the payload remains saved on the server?","o":["Stored XSS","Reflected XSS","DOM-based XSS","Session-based XSS"],"a":[0],"e":"Stored XSS saves the malicious script in the application's database (e.g. a comment), so it executes for every visitor who later views the affected content."},{"d":"S","t":"single","q":"What is the primary purpose of a CSRF token?","o":["A unique token that the server validates on form submission","To encrypt all traffic between the browser and server","To automatically log out inactive users after a set time","To block all cross-origin requests regardless of authentication"],"a":[0],"e":"CSRF tokens are the standard defence: since an attacker's forged cross-site request cannot include the correct token, the server rejects the forgery."},{"d":"S","t":"single","q":"What does IDOR stand for, and what does it generally involve?","o":["IDOR: accessing another user’s object by changing its identifier","International Data Object Routing — a network routing protocol vulnerability","Indirect Domain Object Resolution — a DNS misconfiguration","Internal Device Operations Registry — a hardware logging flaw"],"a":[0],"e":"IDOR is a common manifestation of Broken Access Control where changing an object identifier (like an ID in a URL) grants access to data belonging to someone else."},{"d":"S","t":"single","q":"Which Burp Suite component is used to automate sending many variations of a request, such as a wordlist against a login form?","o":["Intruder","Repeater","Target scope","Decoder"],"a":[0],"e":"Intruder automates payload sweeps, such as a Sniper attack cycling a wordlist through a login form for credential-stuffing style testing."},{"d":"M","t":"single","q":"Why does the syllabus list SSRF as A08 while the official OWASP Top 10 (2021) lists it as A10?","o":["The syllabus numbering differs from the official OWASP Top 10 (2021)","Because SSRF was removed entirely from the official OWASP Top 10","Because the syllabus made a typo that has no actual relevance to the material","Because OWASP changes its numbering every year with no fixed official list"],"a":[0],"e":"The study material explicitly clarifies this discrepancy: official OWASP A08 is Software and Data Integrity Failures, with SSRF actually at A10 — a point the course flags for the student's awareness."},{"d":"M","t":"single","q":"What distinguishes Insecure Design (A04) from a typical coding bug?","o":["Insecure Design is a flaw in security requirements or architecture","Insecure Design only refers to visual/UI design flaws, not security","Insecure Design is always caused by using an outdated programming language","Insecure Design and coding bugs are functionally identical concepts"],"a":[0],"e":"The password-reset-token example illustrates this: syntactically correct code implementing a fundamentally flawed design (never-expiring, reusable tokens) is still an Insecure Design problem."},{"d":"M","t":"single","q":"Why is Stored XSS generally considered more severe than Reflected XSS?","o":["Stored XSS persists and can affect visitors who view the stored content","Stored XSS cannot be prevented by any defensive measure","Reflected XSS always requires database access while Stored XSS does not","Stored XSS only affects the attacker's own browser session"],"a":[0],"e":"Because the malicious script is saved and served to every subsequent visitor, Stored XSS has a persistent, broader blast radius compared to Reflected XSS, which requires a victim to click a specific crafted link each time."},{"d":"M","t":"single","q":"In DOM-based XSS, why might the payload 'never reach the server' at all?","o":["Client-side JavaScript sends data from a source to a dangerous sink","Because DOM XSS requires the attacker to have direct database access","Because DOM XSS only occurs when JavaScript is completely disabled in the browser","Because all DOM XSS payloads are automatically blocked by HTTPS"],"a":[0],"e":"DOM XSS's defining trait is that the entire vulnerable data flow — source to sink — happens client-side in the browser, meaning the payload may never be transmitted to or processed by the server at all."},{"d":"M","t":"single","q":"Why is output encoding considered the primary defence against XSS, while input validation is a secondary layer?","o":["Output encoding renders untrusted input as inert text at display time","Input validation is actually the only effective defence, and output encoding is ineffective","Output encoding is only relevant for Reflected XSS, never for Stored or DOM-based XSS","Both techniques are functionally identical and interchangeable"],"a":[0],"e":"Output encoding addresses the vulnerability at the exact moment of rendering, which is why it's the primary defence — input validation alone can be bypassed or may not anticipate every injection context."},{"d":"M","t":"single","q":"What is the key difference between how a Low-security and Medium-security DVWA file upload filter can typically be bypassed?","o":["Low lacks meaningful checks; Medium may block common extensions only","Medium security cannot be bypassed under any circumstances, unlike Low security","Low security requires authentication while Medium does not","Both security levels use identical, unbypassable validation logic"],"a":[0],"e":"This progression illustrates why extension-based blocklisting is weak: Medium's partial filtering can often be defeated with alternate extensions the server still executes."},{"d":"M","t":"single","q":"Why does the material describe a WAF as only a secondary defence against SQL Injection, with parameterised queries as the primary defence?","o":["Parameterised queries separate SQL code from data; WAF rules can be bypassed","A WAF is actually more effective than parameterised queries in every scenario","Parameterised queries require no development effort to implement, unlike a WAF","WAFs and parameterised queries serve completely unrelated security purposes with no overlap"],"a":[0],"e":"Parameterised/prepared statements prevent SQLi at the architectural level by design, whereas a WAF relies on signature/pattern detection, which determined attackers can sometimes evade."},{"d":"H","t":"single","q":"In the UNION-based SQL injection extraction method described in the material, why is the ORDER BY technique used before attempting UNION SELECT?","o":["ORDER BY errors reveal the column count needed by UNION SELECT","ORDER BY is used to sort the extracted data alphabetically for readability","ORDER BY is required to bypass authentication before injection becomes possible","ORDER BY has no functional purpose and is only used to confirm the database type"],"a":[0],"e":"UNION SELECT requires the same number of columns as the original query; incrementally testing ORDER BY values until an error occurs determines that column count before constructing a working UNION payload."},{"d":"H","t":"single","q":"Why does the material note that Medium-security SQLi on DVWA 'often still works by modifying the request in Burp Repeater' even though simple quote-based input is filtered?","o":["Changing the request method in Repeater may bypass the Medium-level filter","Because Burp Repeater automatically removes all server-side filters","Because Medium security on DVWA has SQL injection protection completely disabled by default","Because Repeater encrypts the payload, making it invisible to the filter"],"a":[0],"e":"This illustrates that filtering implemented inconsistently across input paths/methods can be circumvented by changing how the same payload is delivered, which Repeater makes easy to test manually."},{"d":"H","t":"single","q":"A tester discovers a Server-Side Request Forgery (SSRF) vulnerability in a 'Fetch document from URL' feature. Why does the material emphasize that the risk depends on 'the implementation and the permissions of the server-side component,' rather than being uniformly severe?","o":["SSRF impact depends on reachable internal services and returned data","Because SSRF is always a low-severity, purely cosmetic issue regardless of context","Because SSRF only matters if the attacker already has valid login credentials","Because SSRF severity is determined exclusively by the CVSS Attack Vector metric alone"],"a":[0],"e":"SSRF impact is highly context-dependent: whether the attacker can read a response, infer service availability, or trigger an internal action depends entirely on what the compromised server component can reach and how it processes the result."},{"d":"H","t":"single","q":"Why might a CVSS-based severity rating undervalue a Broken Access Control finding like IDOR if scored using only generic metrics, according to the material's framing of business impact?","o":["CVSS does not directly capture the business sensitivity of exposed data","Because IDOR vulnerabilities cannot be scored with CVSS at all","Because Broken Access Control findings are always automatically scored as Critical regardless of data sensitivity","Because CVSS only applies to network-layer vulnerabilities, never to application-layer ones"],"a":[0],"e":"The business impact of an IDOR depends heavily on what data is exposed; the report's structure specifically requires a separate 'Business Impact' field alongside the CVSS score for exactly this reason."},{"d":"H","t":"single","q":"A penetration tester finds that a web application's CI/CD pipeline automatically downloads and deploys a third-party dependency without verifying its authenticity. Which OWASP category does this fall under, and how does it differ conceptually from A06 (Vulnerable and Outdated Components)?","o":["A08 concerns integrity of software/data and update sources","A06 — Vulnerable and Outdated Components, since both concern third-party dependencies identically","A01 — Broken Access Control, since CI/CD pipelines control access to deployment","A03 — Injection, since the dependency could contain injection vulnerabilities"],"a":[0],"e":"A08 specifically addresses trust in software/update integrity (e.g. an unverified CI/CD download), which is conceptually distinct from A06's concern about using a component already known to be vulnerable or outdated."},{"d":"H","t":"single","q":"Why does the material argue that A09 (Security Logging & Monitoring Failures) is 'not normally established through a single exploit,' unlike most other OWASP categories?","o":["Verify logging failures using controlled actions, logs, and SIEM evidence","Because A09 findings cannot be documented in a penetration test report at all","Because logging failures are purely a legal compliance issue with no technical component","Because A09 only applies to applications with no logging infrastructure whatsoever"],"a":[0],"e":"Testing A09 involves a multi-step verification process (generating test events, reviewing logs, checking alert triggers, confirming routing) rather than a single exploit that directly proves a vulnerability exists."},{"d":"Q","t":"single","q":"A tester logs into a banking portal as Student A, notices the URL shows ?invoice=1002, and changes it to ?invoice=1003, successfully viewing another student's invoice. What finding should this be documented as?","o":["Broken Access Control (IDOR)","Cross-Site Scripting (XSS)","Server-Side Request Forgery (SSRF)","CSRF (Cross-Site Request Forgery)"],"a":[0],"e":"Manipulating an object identifier (invoice number) to access another user's resource without proper authorization is the textbook example of IDOR, a form of Broken Access Control."},{"d":"Q","t":"single","q":"A tester finds that a login page is served over http:// instead of https://, and traffic could be intercepted by anyone with network visibility. Which OWASP category applies, and what should be recommended?","o":["A02 — Cryptographic Failures; enforce HTTPS/TLS for authentication","A05 — Security Misconfiguration; disable the login page entirely","A03 — Injection; implement input validation on the login form","A07 — Identification and Authentication Failures; add multi-factor authentication only"],"a":[0],"e":"Transmitting credentials without TLS protection is a cryptographic failure (sensitive data exposed in transit); the direct recommended fix is implementing HTTPS/TLS."},{"d":"Q","t":"single","q":"On DVWA's Low security level, a tester submits <script>alert('XSS')<\/script> into a name field that echoes input directly back unescaped, and a popup appears. What has this demonstrated?","o":["Unencoded input is interpreted as script by the browser","That the application is completely immune to SQL Injection","That the server has crashed and needs to be restarted","That CSRF protection is correctly functioning"],"a":[0],"e":"A successfully alerting <script> tag confirms the application fails to sanitise/encode user input before rendering it, the core mechanism behind XSS."},{"d":"Q","t":"single","q":"A tester configures FoxyProxy to route browser traffic through 127.0.0.1:8080 and imports Burp's CA certificate. What is the purpose of importing the CA certificate specifically?","o":["Let Burp inspect HTTPS traffic without certificate warnings","To encrypt the tester's own hard drive","To grant Burp Suite administrator rights on the operating system","To automatically bypass all authentication on the target website"],"a":[0],"e":"Burp acts as a man-in-the-middle proxy; importing its CA certificate as trusted lets the browser accept Burp's dynamically generated certificates for HTTPS sites without warnings, enabling TLS traffic inspection."},{"d":"Q","t":"single","q":"A tester sends a captured login request to Burp Intruder, marks only the password field as the injection position, selects Sniper attack, and loads a wordlist. What is this configuration testing for?","o":["Check for rate limiting or account lockout","Whether the application is vulnerable to SQL Injection specifically","Whether the application's CSRF token can be guessed","Whether the server supports HTTP/2"],"a":[0],"e":"Cycling a password wordlist through a login form via Sniper is the classic Burp Intruder setup for testing broken authentication / lack of lockout protection, as described for DVWA's brute-force module."},{"d":"Q","t":"single","q":"A tester finds an application that accepts a URL parameter for 'fetch company logo' and discovers the server will retrieve content from any arbitrary URL supplied, including internal addresses like http://169.254.169.254/. What vulnerability class does this represent, and why is it particularly dangerous here?","o":["SSRF: the server can reach internal services unavailable to the public","Cross-Site Scripting (XSS) — because the browser executes the attacker's script","SQL Injection — because database queries are being manipulated","Broken Access Control — because the user's own account permissions were bypassed"],"a":[0],"e":"The key SSRF characteristic described in the material is that the request originates from the server, giving it access to internal resources the attacker couldn't reach directly — exactly illustrated by reaching an internal metadata-style address."},{"d":"Q","t":"single","q":"A security tester is asked to determine whether a search feature is vulnerable to Reflected XSS. They submit the string XSS_TEST_12345 into the search box and see 'You searched for: XSS_TEST_12345' in the response. What is the correct next step in the testing methodology?","o":["Identify the reflection context before choosing a test payload","Immediately conclude the application has no XSS vulnerability since no alert popped up","Move on to testing for SQL Injection instead, since reflection alone proves nothing useful","Report the finding as Critical without further verification"],"a":[0],"e":"Confirming reflection is only the first step; the material's methodology next requires determining the output context, since the required payload (and whether encoding is actually happening) depends on where exactly the input lands."},{"d":"Q","t":"single","q":"During DOM XSS testing, a tester inspects client-side JavaScript and finds: var data = location.hash; output.innerHTML = data;. What are the source and sink in this code, and why does this pattern deserve closer review?","o":["Source: location.hash; sink: innerHTML","Source: innerHTML; Sink: location.hash — because the DOM always writes to the URL, not from it","There is no source or sink here since this is a server-side code snippet","Source: output; Sink: data — because variable names always indicate source/sink roles directly"],"a":[0],"e":"location.hash is a classic attacker-controllable source (URL fragment); innerHTML is a classic dangerous sink that interprets content as HTML — the direct, unsanitised source-to-sink flow is the vulnerability pattern."},{"d":"Q","t":"single","q":"A tester examines an application's handling of special characters and observes that < becomes &lt; and > becomes &gt; in the rendered page source when user input is reflected. What does this indicate about the application's XSS defences?","o":["Output encoding converts special characters into inert text","The application has no defences whatsoever against any form of XSS","This encoding indicates a SQL Injection vulnerability exists","This encoding means the application is using HTTPS instead of HTTP"],"a":[0],"e":"HTML entity encoding of < and > is a textbook output-encoding defence, specifically designed to prevent injected HTML/script tags from being interpreted as executable markup by the browser."},{"d":"Q","t":"single","q":"An attacker crafts a hidden form on a malicious site that auto-submits a 'change password' POST request to a banking site where the victim happens to be logged in, using the victim's existing session cookie. Which attack does this describe, and what single mechanism is the standard defence?","o":["CSRF; use an unguessable token validated by the server","Reflected XSS; the standard defence is output encoding","SQL Injection; the standard defence is parameterised queries","SSRF; the standard defence is a destination allowlist"],"a":[0],"e":"This is the textbook CSRF scenario (forged request riding on an authenticated session cookie); CSRF tokens are the standard defence since the attacker's forged request can't know the server-issued token."},{"d":"Q","t":"single","q":"A tester uploads a file named shell.php.jpg to a DVWA Medium-security upload form that blocks .php extensions but not .phtml or double extensions, and the server executes it as PHP. What server-side control, rather than filename-based validation, would have prevented this regardless of the extension used?","o":["Verify file content and disable script execution in uploads","Only allowing uploads from users with administrator accounts","Requiring the uploaded filename to be in all lowercase letters","Encrypting the uploaded file's contents with AES before storage"],"a":[0],"e":"The material's recommended fix set targets validation that doesn't rely purely on filename/extension: check actual file content (magic bytes) and disable execution rights in the upload directory, closing the gap that extension-blocklisting alone leaves open."},{"d":"Q","t":"single","q":"A penetration tester is assessing an e-commerce site and finds that a customer can add -5 as the quantity for an item during checkout, resulting in a negative total charge that credits the customer's account. Which OWASP category best fits this finding?","o":["A04 — Insecure Design: a business-logic flaw in the application design","A07 — Identification and Authentication Failures, since it involves the checkout session","A09 — Security Logging and Monitoring Failures, since the transaction wasn't logged","A06 — Vulnerable and Outdated Components, since it involves the shopping cart library"],"a":[0],"e":"Allowing negative quantities to manipulate the transaction total is a business-logic/design flaw — the kind of architectural weakness A04 (Insecure Design) specifically addresses, similar to the unlimited-purchase example in the material."},{"d":"Q","t":"single","q":"A security team notices that hundreds of failed login attempts against a customer account generated no alert and were not recorded in any centralized log, allowing a credential-stuffing attack to continue undetected for days. Which OWASP category and which specific defensive control would most directly have addressed this gap?","o":["A09 — Security Logging & Monitoring Failures","A02 — Cryptographic Failures; implementing HTTPS on the login page","A01 — Broken Access Control; enforcing least privilege on the login form","A08 — Software and Data Integrity Failures; verifying the login page's code signature"],"a":[0],"e":"Undetected, unalerted failed-login volume is the defining A09 scenario; the material specifically recommends centralizing events to a SIEM with detection rules for exactly this kind of suspicious sequence."},{"d":"Q","t":"single","q":"A tester finds that a web application's JavaScript framework (React) is in use, and attempts a standard <script> tag XSS payload, which fails to execute. However, the tester later finds a specific component using dangerouslySetInnerHTML with unsanitised user input, and the payload executes there. What does this illustrate about modern framework protections?","o":["React escapes output by default, but unsafe APIs can bypass that protection","React is completely immune to XSS under all possible configurations","The framework being used has no bearing on XSS risk whatsoever","dangerouslySetInnerHTML is a built-in XSS filter that blocked the first payload"],"a":[0],"e":"This matches the material's point directly: modern frameworks reduce XSS risk by default, but developer use of explicitly unsafe escape-hatch APIs can reintroduce the vulnerability."},{"d":"Q","t":"single","q":"A company deploys a Content-Security-Policy header of Content-Security-Policy: script-src 'self' on a page that has a Stored XSS vulnerability via an inline <script> tag injected by an attacker. What will happen when a victim visits the page, and why?","o":["CSP blocks inline scripts unless the policy explicitly permits them","The injected script will execute normally, since CSP only applies to images and stylesheets","The page will fail to load entirely due to the CSP header being malformed","The CSP header will automatically remove the malicious script from the page's HTML"],"a":[0],"e":"A correctly configured CSP like script-src 'self' blocks inline scripts and non-origin script sources, meaning even a successfully injected <script> tag won't be allowed to execute — CSP as a secondary layer behind output encoding."},{"d":"S","t":"single","q":"Which section of a penetration test report is specifically written as a one-page, non-technical overview for managers?","o":["Executive Summary","Technical Findings","Scope & Methodology","Risk Heat Map"],"a":[0],"e":"The Executive Summary is explicitly designed as a one-page, non-technical overview covering what was found, overall risk, and top recommendations — for a management audience."},{"d":"S","t":"single","q":"What two axes does a Risk Heat Map typically plot findings against?","o":["Likelihood and Impact","Cost and Duration","Severity and Alphabetical Order","CVSS Score and Report Page Number"],"a":[0],"e":"A risk heat map visually plots findings on likelihood versus impact, giving stakeholders an at-a-glance view of priority."},{"d":"S","t":"single","q":"Which certification is described as a rigorous, fully hands-on exam requiring candidates to compromise real lab machines?","o":["OSCP (OffSec)","CompTIA Security+","CEH (EC-Council)","eJPT (eLearnSecurity)"],"a":[0],"e":"OSCP is characterised as an advanced, fully practical exam requiring hands-on compromise of real lab machines and professional documentation."},{"d":"S","t":"single","q":"What is the defining principle of responsible disclosure?","o":["Privately report the flaw and allow reasonable time for remediation","Publicly disclosing every vulnerability immediately upon discovery","Only disclosing vulnerabilities to competitors of the affected organisation","Waiting exactly one calendar year before any disclosure regardless of circumstances"],"a":[0],"e":"Responsible disclosure centres on giving the affected organisation private notice and reasonable remediation time before any public release of details."},{"d":"S","t":"single","q":"Which two platforms are named in the material as formally connecting organisations with researchers for bug bounty programs?","o":["HackerOne and Bugcrowd","Metasploit and Cobalt Strike frameworks","Nmap and Nessus scanning tools","John the Ripper and Hashcat crackers"],"a":[0],"e":"HackerOne and Bugcrowd are the two bug bounty platforms explicitly named as formally defining scope and reward for responsible vulnerability reporting."},{"d":"M","t":"single","q":"Why does the material instruct testers to always show the CVSS vector string and reasoning in a report, rather than just quoting a final score?","o":["Document the CVSS vector and justify the metric choices","Because vector strings are a legal requirement under the IT Act","Because final scores are always inaccurate and should never be trusted","Because clients are not permitted to see numeric CVSS scores directly"],"a":[0],"e":"The material's caution on CVSS precision explicitly states that an exam or report needs correct metric selection and severity-band placement, not just a quoted number that might vary slightly by tool."},{"d":"M","t":"single","q":"Comparing the two worked CVSS examples in the material — a network-exploitable backdoor (9.8) and a stored XSS (approx. 6.1) — both share Attack Vector: Network and Attack Complexity: Low, yet differ by over 3.5 points. What does this illustrate about CVSS scoring?","o":["Severity depends on multiple factors, not network reachability alone","Attack Vector and Attack Complexity are the only metrics that actually affect the final score","The stored XSS example must have been scored incorrectly, since both share the same first two metrics","CVSS scores are randomly generated and have no consistent underlying logic"],"a":[0],"e":"This is stated as the central lesson of the comparison: even sharing two metrics, differences in Privileges Required, User Interaction, Scope, and CIA impact drive a substantially different overall score."},{"d":"M","t":"single","q":"In the backdoor CVSS worked example (score 9.8), why is Privileges Required set to None and User Interaction set to None?","o":["No authentication or user interaction is required for the backdoor example","Because every CVSS calculation defaults to None for both metrics automatically","Because the backdoor requires administrator credentials to trigger, which rounds down to None","Because Privileges Required and User Interaction are not applicable to backdoor vulnerabilities"],"a":[0],"e":"The scenario describes an unauthenticated backdoor requiring no victim interaction to trigger remote code execution — both factors independently contribute to the maximal 9.8 Critical score."},{"d":"M","t":"single","q":"Why does the material describe a VAPT deliverable as including more than just the final report document?","o":["A complete engagement also includes evidence, methodology, and retesting","Because the report itself is legally insufficient without a signed confession from the client","Because VAPT deliverables never include a written report at all, only evidence files","Because evidence and methodology summaries replace the need for any CVSS scoring"],"a":[0],"e":"The full VAPT deliverable set includes evidence (screenshots, raw output), methodology, and often a verification re-test — not just the narrative report document alone."},{"d":"M","t":"single","q":"How does remediation priority typically relate to the risk heat map, according to the material?","o":["The heat map shows likelihood versus impact alongside CVSS scoring","The heat map entirely replaces the need for individual CVSS scores in the report","The heat map only plots findings by alphabetical order of vulnerability name","Findings plotted in the heat map's low-likelihood, low-impact quadrant should always be remediated first"],"a":[0],"e":"The material is explicit that the heat map is a complementary visualisation tool, not a replacement for detailed CVSS-based scoring of each individual finding."},{"d":"H","t":"single","q":"A finding scores CVSS 'High' due to being network-reachable and unauthenticated, despite only causing partial confidentiality impact. Per the material's guidance on comparing and justifying severity ratings, how should this be communicated in a report versus simply stating 'High'?","o":["Explain which CVSS metrics drive the High rating","By omitting any explanation, since the numeric score alone is self-explanatory","By changing the rating to Critical to account for the network reachability alone","By downgrading it to Medium since the impact itself is only partial"],"a":[0],"e":"The material gives this almost verbatim as the model phrasing — citing the specific metrics that drove the rating lets the client's team verify and trust the assessment rather than accepting a bare label."},{"d":"H","t":"single","q":"A report lists Remediation Strategies including patching, secure configuration, least privilege, input validation, and output encoding. Why does the material specifically single out output encoding as 'the core defence against XSS' within this broader list, rather than treating all five as equally applicable to every finding type?","o":["Match remediation to the root cause; output encoding addresses XSS rendering","Because output encoding is actually irrelevant to XSS and only applies to SQL Injection","Because all five remediation strategies are functionally interchangeable regardless of vulnerability type","Because output encoding is the only remediation strategy ever mentioned anywhere in the material"],"a":[0],"e":"Remediation strategies in a professional report map to the specific technical root cause of each finding; output encoding's specific role in preventing XSS execution is why it's called out distinctly even within a broader five-item remediation list."},{"d":"H","t":"single","q":"Considering both the CVSS worked examples (Unit V) and the CVSS component definitions (Unit II), why would a stored XSS vulnerability typically receive Scope: Changed while a straightforward backdoor RCE receives Scope: Unchanged?","o":["Stored XSS crosses into the victim’s browser security context; the backdoor does not","Because Scope is always set based solely on whether the vulnerability is client-side or server-side, with no other reasoning involved","Because Scope: Changed is only used for vulnerabilities scoring below 5.0","Because both examples should actually use the same Scope value, and the material contains an error"],"a":[0],"e":"Scope captures whether impact crosses a security authority boundary; stored XSS impacting the victim's browser session (a separate security context from the server) is the textbook Scope: Changed case, unlike a backdoor whose RCE impact is contained to the exploited host's own authority."},{"d":"Q","t":"single","q":"A client asks why a finding scored 9.8 (Critical) wasn't immediately placed on the very top of the remediation priority list ahead of all other Critical findings. What is the most appropriate professional response, per the material's prioritisation guidance?","o":["CVSS is important, but exploitability and business context affect priority","Insist that the highest CVSS score must always dictate absolute remediation order with no exceptions","Recommend ignoring CVSS scores entirely in favour of alphabetical finding titles","Explain that 9.8 findings are automatically deprioritised in favour of Medium findings"],"a":[0],"e":"The material's guidance (from the Nessus-report-reading discussion) explicitly notes that a high CVSS score alone doesn't automatically dictate top priority — other factors legitimately shape the final order."},{"d":"Q","t":"single","q":"A capstone student is writing the Technical Findings section of their VAPT report and includes a title, CVSS score, affected system, and vulnerability description for a finding — but omits Proof of Concept evidence and a CVE/CWE reference. What is missing relative to the required report structure?","o":["Add PoC/evidence and a CVE/CWE reference where applicable","Nothing is missing; the four included fields fully satisfy the required structure","Only the Executive Summary is required to be complete; individual findings need no further detail","A Risk Heat Map must be embedded directly inside each individual finding entry"],"a":[0],"e":"The report structure explicitly lists Proof of Concept/Evidence and a CVE/CWE reference as required components of each Technical Finding, alongside title, severity, affected system, and description."},{"d":"Q","t":"single","q":"A researcher discovers a critical vulnerability in a company's product while testing a different, authorised target, entirely outside their engagement's agreed scope. The company has no public bug bounty program. Per the professional ethics principles discussed, what is the appropriate course of action?","o":["Privately notify the organisation and allow time to remediate","Immediately post full technical details publicly since no bug bounty program exists","Ignore the finding entirely since there is no formal reward program in place","Attempt to exploit it further to build a more impressive proof of concept before reporting"],"a":[0],"e":"Responsible disclosure applies regardless of whether a formal bug bounty program exists — the core principle is private notification with reasonable remediation time before public disclosure."},{"d":"Q","t":"single","q":"A fresh graduate wants to pursue a career path starting with entry-level, broad security knowledge before eventually attempting a fully hands-on, advanced practical exam. Based on the certification pathway ordering described in the material, which sequence fits this goal?","o":["Start with Security+ and work toward OSCP as a longer-term goal","OSCP first, then CompTIA Security+ as a follow-up refresher","eJPT is the only certification needed, with no further progression necessary","CEH should be skipped entirely in favour of jumping directly to OSCP with no practical experience"],"a":[0],"e":"The material explicitly describes the certifications mapping roughly in the listed order — Security+ first as the entry-level foundation, with OSCP positioned as the longer-term, advanced practical goal."},{"d":"Q","t":"single","q":"During the capstone assessment, a student's report receives full marks for 'Finding quality and evidence' and 'CVSS accuracy,' but loses points under 'Report structure and writing.' Based on the assessment weighting described (15/10/5), what is most likely missing from their submission even if the technical findings themselves were excellent?","o":["Follow the required report structure and write it clearly","Additional technical findings beyond the minimum six required, since quantity drives structure scoring","A higher overall CVSS average across all findings, since structure scoring is tied to severity","Use of more advanced exploitation tools, since tool sophistication determines structure marks"],"a":[0],"e":"Since 'Report structure and writing' is scored separately (10 of 30 marks) from 'Finding quality and evidence' (15) and 'CVSS accuracy' (5), losing points there specifically points to organisational/writing issues independent of the technical content's quality."},{"d":"Q","t":"single","q":"A client's security team pushes back on a report's Executive Summary, saying it's too technical for their board members to understand, listing CVE identifiers and CVSS vector strings on the first page. What does this reveal about how the report deviates from the described structure?","o":["Keep the Executive Summary non-technical; put CVE/vector detail in findings","The report is correct as written, since all technical detail must appear as early as possible in any report","The Executive Summary should be removed entirely and replaced directly with the Technical Findings section","CVE identifiers should never appear anywhere in a professional penetration test report"],"a":[0],"e":"The report structure explicitly separates a non-technical Executive Summary (for management) from the detailed Technical Findings section where CVE/CWE references and vector strings belong."},{"d":"Q","t":"single","q":"A tester calculates a finding's CVSS vector as CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N using an online calculator, and gets a slightly different base score than a colleague who used a different tool with the same vector string. How should the team resolve this discrepancy for the final report?","o":["Document the vector, metric reasoning, and correct severity band","Immediately distrust both tools and refuse to include any CVSS score in the report","Always default to whichever tool produces the higher numeric score, regardless of methodology","Recalculate the vector string itself until both tools agree on an identical score down to the decimal"],"a":[0],"e":"The material directly addresses this exact situation — minor score variance between calculators is expected due to rounding, and what matters is correct metric selection, documented reasoning, and correct severity-band placement."}];
+  var LETTERS = ['A', 'B', 'C', 'D'];
+  var DIFFS = [
+    { key: 'S', label: 'Simple', cls: 'd-s' },
+    { key: 'M', label: 'Medium', cls: 'd-m' },
+    { key: 'H', label: 'Hard', cls: 'd-h' },
+    { key: 'Q', label: 'Scenario', cls: 'd-q' }
+  ];
+  var DIFF_BY = {};
+  DIFFS.forEach(function (d) { DIFF_BY[d.key] = d; });
+
+  var S = {
+    mode: 'start', order: [], list: [], pos: 0, num: {},
+    answers: {}, marked: {}, visited: {},
+    limitMin: 120, startAt: 0, endAt: 0, elapsedSec: 0, timerId: null, auto: false,
+    filter: 'all', results: null
+  };
+  var modalOpen = false;
+
+  /* ---------- helpers ---------- */
+  function $(id) { return document.getElementById(id); }
+  function h(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text !== undefined && text !== null) e.textContent = text;
+    return e;
+  }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+  function plain(s) { return String(s).replace(/\u00a0/g, ' ').replace(/\s+/g, ' ').trim(); }
+  function shuffle(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+  function fmtClock(sec) {
+    sec = Math.max(0, Math.ceil(sec));
+    var hr = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    return hr > 0 ? hr + ':' + pad2(m) + ':' + pad2(s) : pad2(m) + ':' + pad2(s);
+  }
+  function fmtDuration(sec) {
+    var hr = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60), s = sec % 60;
+    return (hr > 0 ? hr + 'h ' : '') + (hr > 0 || m > 0 ? pad2(m) + 'm ' : '') + pad2(s) + 's';
+  }
+  function letters(arr) { return arr.map(function (i) { return LETTERS[i]; }).join(', '); }
+
+  /* ---------- evaluation ---------- */
+  function isCorrect(q, sel) {
+    if (!sel || sel.length !== q.a.length) return false;
+    for (var i = 0; i < q.a.length; i++) { if (sel.indexOf(q.a[i]) < 0) return false; }
+    return true;
+  }
+  function statusOf(qi) {
+    var sel = S.answers[qi];
+    if (!sel || !sel.length) return 'unanswered';
+    return isCorrect(QUESTIONS[qi], sel) ? 'correct' : 'wrong';
+  }
+  function answeredCount() {
+    var n = 0;
+    for (var k in S.answers) { if (S.answers[k] && S.answers[k].length) n++; }
+    return n;
+  }
+  function markedCount() {
+    var n = 0;
+    for (var k in S.marked) { if (S.marked[k]) n++; }
+    return n;
+  }
+  function computeResults() {
+    var res = { correct: 0, wrong: 0, unanswered: 0, marked: markedCount(), byDiff: {} };
+    DIFFS.forEach(function (d) { res.byDiff[d.key] = { total: 0, correct: 0, wrong: 0, unanswered: 0 }; });
+    QUESTIONS.forEach(function (q, qi) {
+      var st = statusOf(qi), bd = res.byDiff[q.d];
+      bd.total++;
+      if (st === 'correct') { res.correct++; bd.correct++; }
+      else if (st === 'wrong') { res.wrong++; bd.wrong++; }
+      else { res.unanswered++; bd.unanswered++; }
+    });
+    return res;
+  }
+
+  /* ---------- screens ---------- */
+  function setScreen() {
+    $('screen-start').classList.toggle('hidden', S.mode !== 'start');
+    $('screen-quiz').classList.toggle('hidden', !(S.mode === 'quiz' || S.mode === 'review'));
+    $('screen-result').classList.toggle('hidden', S.mode !== 'result');
+  }
+
+  /* ---------- timer ---------- */
+  function stopTimer() { if (S.timerId) { clearInterval(S.timerId); S.timerId = null; } }
+  function tick() {
+    var leftMs = Math.max(0, S.endAt - Date.now());
+    var t = $('timer');
+    $('timerText').textContent = fmtClock(leftMs / 1000);
+    t.classList.toggle('warn', leftMs <= 10 * 60000 && leftMs > 5 * 60000);
+    t.classList.toggle('danger', leftMs <= 5 * 60000);
+    if (leftMs <= 0) finish(true);
+  }
+  function startTimer() { stopTimer(); tick(); if (S.mode === 'quiz') S.timerId = setInterval(tick, 250); }
+
+  /* ---------- quiz lifecycle ---------- */
+  function startQuiz() {
+    S.limitMin = parseInt($('limitSel').value, 10) || 100;
+    // Shuffle each question's options for every new attempt, carrying correctness with each option.
+    QUESTIONS.forEach(function (q) {
+      var opts = q.o.map(function (text, i) { return { text: text, correct: q.a.indexOf(i) !== -1 }; });
+      shuffle(opts);
+      q.o = opts.map(function (o) { return o.text; });
+      q.a = opts.map(function (o, i) { return o.correct ? i : -1; }).filter(function (i) { return i >= 0; });
+    });
+    var idx = QUESTIONS.map(function (_, i) { return i; });
+    if ($('shuffleChk').checked) shuffle(idx);
+    S.order = idx; S.list = idx.slice(); S.pos = 0; S.num = {};
+    idx.forEach(function (qi, i) { S.num[qi] = i + 1; });
+    S.answers = {}; S.marked = {}; S.visited = {}; S.filter = 'all'; S.results = null; S.auto = false;
+    S.visited[S.list[0]] = true;
+    S.mode = 'quiz';
+    S.startAt = Date.now(); S.endAt = S.startAt + S.limitMin * 60000;
+    setScreen(); render(); startTimer();
+    window.scrollTo(0, 0);
+  }
+  function finish(auto) {
+    if (S.mode !== 'quiz') return;
+    stopTimer(); closeModal(); closePalette();
+    S.elapsedSec = Math.min(Math.round((Date.now() - S.startAt) / 1000), S.limitMin * 60);
+    S.auto = !!auto;
+    S.results = computeResults();
+    S.mode = 'result';
+    setScreen(); renderResult();
+    window.scrollTo(0, 0);
+  }
+  function restart() {
+    stopTimer(); closeModal(); closePalette();
+    S.mode = 'start'; setScreen(); window.scrollTo(0, 0);
+  }
+
+  /* ---------- navigation ---------- */
+  function go(p) {
+    if (p < 0 || p >= S.list.length) return;
+    S.pos = p;
+    S.visited[S.list[p]] = true;
+    render();
+    var c = $('qcard');
+    if (c.getBoundingClientRect().top < 0) c.scrollIntoView({ block: 'start' });
+  }
+  function toggleMark() {
+    if (S.mode !== 'quiz' || !S.list.length) return;
+    var qi = S.list[S.pos];
+    if (S.marked[qi]) delete S.marked[qi]; else S.marked[qi] = true;
+    render();
+  }
+  function onOption(i) {
+    if (S.mode !== 'quiz' || !S.list.length) return;
+    var qi = S.list[S.pos], q = QUESTIONS[qi];
+    var sel = (S.answers[qi] || []).slice();
+    if (q.t === 'single') {
+      if (sel.length) return; // locked after first choice
+      sel = [i];
+    } else {
+      var k = sel.indexOf(i);
+      if (k >= 0) sel.splice(k, 1); else sel.push(i);
+      sel.sort(function (a, b) { return a - b; });
+    }
+    if (sel.length) S.answers[qi] = sel; else delete S.answers[qi];
+    renderQuestion(i); renderPalette(); renderProgress();
+  }
+
+  /* ---------- rendering ---------- */
+  function render() {
+    renderHeader(); renderFilters(); renderProgress(); renderQuestion(); renderPalette(); renderNav();
+  }
+  function renderHeader() {
+    var review = S.mode === 'review';
+    $('modeLabel').textContent = review ? 'Answer review' : '160-question practice quiz · randomized options';
+    $('timer').classList.toggle('hidden', review);
+    $('btnSubmit').classList.toggle('hidden', review);
+    $('btnRestart').classList.toggle('hidden', review);
+    $('btnBack').classList.toggle('hidden', !review);
+    $('palTitle').textContent = review ? 'Review palette' : 'Question palette';
+  }
+  var FILTERS = [
+    { key: 'all', label: 'All' }, { key: 'issues', label: 'Incorrect + unanswered' },
+    { key: 'wrong', label: 'Incorrect' },
+    { key: 'unanswered', label: 'Unanswered' }, { key: 'marked', label: 'Marked' },
+    { key: 'correct', label: 'Correct' }
+  ];
+  function inFilter(qi, f) {
+    if (f === 'all') return true;
+    if (f === 'marked') return !!S.marked[qi];
+    if (f === 'issues') return statusOf(qi) !== 'correct';
+    return statusOf(qi) === f;
+  }
+  function renderFilters() {
+    var bar = $('filterBar');
+    clear(bar);
+    var review = S.mode === 'review';
+    bar.classList.toggle('hidden', !review);
+    if (!review) return;
+    FILTERS.forEach(function (f) {
+      var n = S.order.filter(function (qi) { return inFilter(qi, f.key); }).length;
+      var b = h('button', 'fchip' + (S.filter === f.key ? ' active' : ''), f.label + ' (' + n + ')');
+      b.type = 'button';
+      b.disabled = n === 0;
+      b.addEventListener('click', function () { setFilter(f.key); });
+      bar.appendChild(b);
+    });
+  }
+  function setFilter(f) {
+    S.filter = f;
+    S.list = S.order.filter(function (qi) { return inFilter(qi, f); });
+    S.pos = 0;
+    render();
+  }
+  function renderProgress() {
+    var fill = $('progFill'), bar = $('progBar');
+    if (S.mode === 'review') {
+      var total = S.list.length || 1;
+      var pct = S.list.length ? ((S.pos + 1) / total) * 100 : 0;
+      $('progText').textContent = S.list.length ? 'Reviewing ' + (S.pos + 1) + ' of ' + S.list.length : 'Nothing to review';
+      $('progRight').textContent = 'Filter: ' + FILTERS.filter(function (f) { return f.key === S.filter; })[0].label;
+      fill.style.width = pct + '%'; bar.setAttribute('aria-valuenow', String(Math.round(pct)));
+      return;
+    }
+    var a = answeredCount(), pc = (a / QUESTIONS.length) * 100;
+    var qi = S.list[S.pos];
+    $('progText').textContent = 'Question ' + S.num[qi] + ' of ' + QUESTIONS.length;
+    $('progRight').textContent = a + ' answered \u00b7 ' + (QUESTIONS.length - a) + ' remaining \u00b7 ' + markedCount() + ' marked';
+    fill.style.width = pc + '%'; bar.setAttribute('aria-valuenow', String(Math.round(pc)));
+  }
+  function renderNav() {
+    var review = S.mode === 'review';
+    var last = S.pos >= S.list.length - 1;
+    $('btnPrev').disabled = S.pos <= 0 || !S.list.length;
+    var next = $('btnNext');
+    if (!review && last) { next.textContent = 'Finish \u0026 submit'; next.disabled = false; }
+    else { next.textContent = 'Next \u2192'; next.disabled = last || !S.list.length; }
+    var mk = $('btnMark');
+    mk.classList.toggle('hidden', review);
+    var qi = S.list[S.pos];
+    mk.textContent = S.marked[qi] ? '\u2605 Marked for review' : '\u2606 Mark for review';
+    mk.setAttribute('aria-pressed', S.marked[qi] ? 'true' : 'false');
+  }
+
+  function optionStates(q, sel, review) {
+    var out = q.o.map(function () { return { cls: '', tag: '' }; });
+    q.o.forEach(function (_, i) {
+      var chosen = sel.indexOf(i) >= 0, right = q.a.indexOf(i) >= 0;
+      if (review) {
+        if (chosen && right) out[i] = { cls: 'correct', tag: 'Your answer \u2713' };
+        else if (chosen) out[i] = { cls: 'wrong', tag: 'Your answer \u2717' };
+        else if (right) out[i] = { cls: 'missed', tag: 'Correct answer' };
+      } else if (q.t === 'single') {
+        if (sel.length) {
+          if (chosen && right) out[i] = { cls: 'correct', tag: 'Correct' };
+          else if (chosen) out[i] = { cls: 'wrong', tag: 'Your answer' };
+          else if (right) out[i] = { cls: 'correct', tag: 'Correct answer' };
+        }
+      } else if (chosen) {
+        out[i] = right ? { cls: 'correct', tag: 'Correct' } : { cls: 'wrong', tag: 'Incorrect' };
+      }
+    });
+    return out;
+  }
+
+  function feedbackNode(q, sel, review) {
+    var T = q.a.length;
+    var c = sel.filter(function (i) { return q.a.indexOf(i) >= 0; }).length;
+    var w = sel.length - c, missing = T - c;
+    var kind, icon, title, showAnswers = false, showExpl = false, yourLine = null;
+
+    if (!sel.length) {
+      if (!review) return null;
+      kind = 'neutral'; icon = '\u2013'; title = 'Not answered'; showAnswers = showExpl = true;
+    } else if (q.t === 'single') {
+      kind = c === 1 ? 'good' : 'bad';
+      icon = c === 1 ? '\u2713' : '\u2717';
+      title = c === 1 ? 'Correct!' : 'Incorrect';
+      showAnswers = showExpl = true;
+    } else if (c === T && w === 0) {
+      kind = 'good'; icon = '\u2713';
+      title = 'Correct! You selected all ' + T + ' correct answers.';
+      showAnswers = showExpl = true;
+    } else if (review) {
+      kind = 'bad'; icon = '\u2717'; title = 'Incorrect';
+      yourLine = c + ' of ' + T + ' correct options selected' + (w ? ', ' + w + ' incorrect selected.' : '.');
+      showAnswers = showExpl = true;
+    } else if (c === T) {
+      kind = 'warn'; icon = '!';
+      title = 'All correct options are selected, but ' + w + ' incorrect selection' + (w > 1 ? 's' : '') + ' must be removed.';
+    } else if (w === 0) {
+      kind = 'info'; icon = 'i';
+      title = missing + ' correct answer' + (missing > 1 ? 's are' : ' is') + ' still missing.';
+    } else {
+      kind = 'bad'; icon = '\u2717';
+      title = missing + ' correct answer' + (missing > 1 ? 's are' : ' is') + ' still missing, and ' + w + ' incorrect selection' + (w > 1 ? 's' : '') + ' must be removed.';
+    }
+
+    var box = h('div', 'fb ' + kind);
+    box.setAttribute('role', 'status');
+    box.setAttribute('aria-live', 'polite');
+    var t = h('div', 'fb-title');
+    var ic = h('span', 'fb-ico'); ic.appendChild(h('span', null, icon));
+    t.appendChild(ic); t.appendChild(h('span', null, title));
+    box.appendChild(t);
+    if (review && sel.length) {
+      box.appendChild(h('div', 'fb-line', 'Your answer: ' + letters(sel)));
+    }
+    if (yourLine) box.appendChild(h('div', 'fb-line', yourLine));
+    if (showAnswers) {
+      var ans = h('div', 'fb-answers');
+      ans.appendChild(h('div', 'fb-label', T > 1 ? 'Correct answers' : 'Correct answer'));
+      q.a.forEach(function (i) { ans.appendChild(h('div', 'fb-ans', LETTERS[i] + '. ' + plain(q.o[i]))); });
+      box.appendChild(ans);
+    }
+    if (showExpl) {
+      var ex = h('div', 'fb-expl');
+      ex.appendChild(h('div', 'fb-label', 'Explanation'));
+      ex.appendChild(h('p', null, plain(q.e)));
+      box.appendChild(ex);
+    }
+    return box;
+  }
+
+  function renderQuestion(focusIdx) {
+    var card = $('qcard');
+    clear(card);
+    if (!S.list.length) { card.appendChild(h('div', 'empty', 'No questions match this filter.')); return; }
+    var qi = S.list[S.pos], q = QUESTIONS[qi], review = S.mode === 'review';
+    var sel = S.answers[qi] || [];
+
+    var meta = h('div', 'qmeta');
+    meta.appendChild(h('span', 'qnum', 'Question ' + S.num[qi] + ' of ' + QUESTIONS.length));
+    var badges = h('div', 'badges');
+    var dm = DIFF_BY[q.d];
+    badges.appendChild(h('span', 'badge ' + dm.cls, dm.label));
+    badges.appendChild(h('span', 'badge ' + (q.t === 'multi' ? 'b-multi' : 'b-single'), q.t === 'multi' ? 'Multiple answers' : 'Single answer'));
+    if (S.marked[qi]) badges.appendChild(h('span', 'badge b-mark', '\u2605 Marked'));
+    meta.appendChild(badges);
+    card.appendChild(meta);
+
+    var qt = h('h2', 'qtext', plain(q.q));
+    qt.id = 'qtext';
+    card.appendChild(qt);
+
+    if (!review) {
+      if (q.t === 'multi') card.appendChild(h('div', 'instr multi', 'Scenario MSQ: select ALL correct answers. More than one option is correct.'));
+      else card.appendChild(h('div', 'instr', 'Choose the single best answer.'));
+    }
+
+    var states = optionStates(q, sel, review);
+    var list = h('div', 'opts');
+    list.setAttribute('role', 'group');
+    list.setAttribute('aria-labelledby', 'qtext');
+    var lockedSingle = q.t === 'single' && sel.length > 0;
+    q.o.forEach(function (text, i) {
+      var st = states[i], chosen = sel.indexOf(i) >= 0;
+      var cls = 'opt' + (q.t === 'multi' ? ' multi' : '') + (st.cls ? ' ' + st.cls : (chosen ? ' selected' : ''));
+      if (review || lockedSingle) cls += ' locked';
+      var b = h('button', cls);
+      b.type = 'button';
+      b.setAttribute('aria-pressed', chosen ? 'true' : 'false');
+      if (review || lockedSingle) b.setAttribute('aria-disabled', 'true');
+      var mk = st.cls === 'correct' && chosen ? '\u2713' : (st.cls === 'wrong' ? '\u2717' : LETTERS[i]);
+      b.appendChild(h('span', 'mark', mk));
+      b.appendChild(h('span', 'otext', plain(text)));
+      if (st.tag) b.appendChild(h('span', 'otag', st.tag));
+      b.setAttribute('aria-label', LETTERS[i] + '. ' + plain(text) + (st.tag ? ' (' + st.tag + ')' : ''));
+      b.addEventListener('click', function () { onOption(i); });
+      list.appendChild(b);
+    });
+    card.appendChild(list);
+
+    var fb = feedbackNode(q, sel, review);
+    if (fb) card.appendChild(fb);
+    if (focusIdx !== undefined && focusIdx !== null && list.children[focusIdx]) {
+      list.children[focusIdx].focus({ preventScroll: true });
+    }
+  }
+
+  function renderPalette() {
+    var g = $('paletteGrid'), lg = $('legend');
+    clear(g); clear(lg);
+    var review = S.mode === 'review';
+    S.list.forEach(function (qi, idx) {
+      var st = review ? statusOf(qi) : ((S.answers[qi] && S.answers[qi].length) ? 'answered' : (S.visited[qi] ? 'skipped' : 'new'));
+      var cls = 'pal st-' + st + (idx === S.pos ? ' current' : '') + (S.marked[qi] ? ' marked' : '');
+      var b = h('button', cls, String(S.num[qi]));
+      b.type = 'button';
+      var label = { answered: 'answered', skipped: 'visited, not answered', 'new': 'not visited', correct: 'correct', wrong: 'incorrect', unanswered: 'not answered' }[st];
+      b.setAttribute('aria-label', 'Question ' + S.num[qi] + ', ' + label + (S.marked[qi] ? ', marked for review' : '') + (idx === S.pos ? ', current' : ''));
+      b.addEventListener('click', function () { go(idx); closePalette(); });
+      g.appendChild(b);
+    });
+    var items = review
+      ? [['correct', 'Correct'], ['wrong', 'Incorrect'], ['unanswered', 'Not answered'], ['marked', 'Marked']]
+      : [['answered', 'Answered'], ['skipped', 'Visited, unanswered'], ['new', 'Not visited'], ['marked', 'Marked for review']];
+    items.forEach(function (it) {
+      var s = h('span');
+      s.appendChild(h('i', 'sw ' + it[0]));
+      s.appendChild(document.createTextNode(it[1]));
+      lg.appendChild(s);
+    });
+  }
+
+  function openPalette() { $('palette').classList.add('open'); $('backdrop').classList.remove('hidden'); }
+  function closePalette() { $('palette').classList.remove('open'); $('backdrop').classList.add('hidden'); }
+
+  /* ---------- result ---------- */
+  function renderResult() {
+    var r = S.results, total = QUESTIONS.length;
+    var pct = Math.round((r.correct / total) * 100);
+    $('ring').style.setProperty('--p', String(pct));
+    $('rScore').textContent = r.correct + ' / ' + total;
+    $('rPct').textContent = pct + '%';
+    var title, msg;
+    if (pct >= 90) { title = 'Outstanding!'; msg = 'You have an excellent command of Unit 03.'; }
+    else if (pct >= 75) { title = 'Great job!'; msg = 'Strong understanding. Review the few misses to polish it.'; }
+    else if (pct >= 60) { title = 'Good effort'; msg = 'Solid base. Revisit the topics where you lost marks.'; }
+    else if (pct >= 40) { title = 'Keep practising'; msg = 'You know some of it. Go back to the slides and review the explanations.'; }
+    else { title = 'Needs more revision'; msg = 'Study the Unit 03 slides again, then retry the quiz.'; }
+    $('rTitle').textContent = title;
+    $('rMsg').textContent = msg;
+    $('rNote').textContent = S.auto ? "Time was up, so your quiz was submitted automatically." : '';
+
+    var stats = $('rStats'); clear(stats);
+    [['Correct', r.correct, 'good'], ['Incorrect', r.wrong, 'bad'], ['Unanswered', r.unanswered, ''],
+     ['Marked', r.marked, ''], ['Time taken', fmtDuration(S.elapsedSec), '']].forEach(function (s) {
+      var c = h('div', 'card stat ' + s[2]);
+      c.appendChild(h('b', null, String(s[1])));
+      c.appendChild(h('span', null, s[0]));
+      stats.appendChild(c);
+    });
+
+    var dv = $('rDiff'); clear(dv);
+    DIFFS.forEach(function (d) {
+      var b = r.byDiff[d.key];
+      var row = h('div', 'drow');
+      var head = h('div', 'dhead');
+      var nm = h('span', null, d.label); nm.style.color = 'var(--' + d.cls.replace('d-', 'd-') + ')';
+      head.appendChild(nm);
+      var p = b.total ? Math.round((b.correct / b.total) * 100) : 0;
+      head.appendChild(h('span', null, b.correct + ' / ' + b.total + ' (' + p + '%)'));
+      row.appendChild(head);
+      var bar = h('div', 'dbar');
+      var ci = h('i', 'c'); ci.style.width = (b.total ? (b.correct / b.total) * 100 : 0) + '%';
+      var wi = h('i', 'w'); wi.style.width = (b.total ? (b.wrong / b.total) * 100 : 0) + '%';
+      bar.appendChild(ci); bar.appendChild(wi);
+      row.appendChild(bar);
+      row.appendChild(h('div', 'dsub', b.correct + ' correct \u00b7 ' + b.wrong + ' incorrect \u00b7 ' + b.unanswered + ' unanswered'));
+      dv.appendChild(row);
+    });
+    $('btnRevWrong').disabled = (r.wrong + r.unanswered) === 0;
+  }
+
+  function startReview(filter) {
+    S.mode = 'review';
+    setScreen();
+    setFilter(filter);
+    window.scrollTo(0, 0);
+  }
+
+  /* ---------- modal ---------- */
+  function showModal(title, bodyNodes, buttons) {
+    $('modalTitle').textContent = title;
+    var body = $('modalBody'); clear(body);
+    bodyNodes.forEach(function (n) { body.appendChild(n); });
+    var act = $('modalActions'); clear(act);
+    buttons.forEach(function (bt) {
+      var b = h('button', 'btn ' + (bt.cls || ''), bt.label);
+      b.type = 'button';
+      b.addEventListener('click', bt.onClick);
+      act.appendChild(b);
+    });
+    $('modal').classList.remove('hidden');
+    modalOpen = true;
+    var primary = act.lastChild; if (primary) primary.focus();
+  }
+  function closeModal() { $('modal').classList.add('hidden'); modalOpen = false; }
+
+  function openSubmit() {
+    if (S.mode !== 'quiz') return;
+    var a = answeredCount(), un = QUESTIONS.length - a, mk = markedCount();
+    var grid = h('div', 'sumgrid');
+    [['Answered', a], ['Unanswered', un], ['Marked', mk]].forEach(function (x) {
+      var d = h('div'); d.appendChild(h('b', null, String(x[1]))); d.appendChild(h('span', null, x[0])); grid.appendChild(d);
+    });
+    var nodes = [h('p', null, 'You are about to submit your quiz. You will not be able to change your answers afterwards.'), grid];
+    if (un > 0) nodes.push(h('p', 'warnline', un + ' question' + (un > 1 ? 's are' : ' is') + ' still unanswered.'));
+    if (mk > 0) nodes.push(h('p', 'warnline', mk + ' question' + (mk > 1 ? 's are' : ' is') + ' marked for review.'));
+    showModal('Submit quiz?', nodes, [
+      { label: 'Keep working', cls: 'ghost', onClick: closeModal },
+      { label: 'Submit quiz', cls: 'primary', onClick: function () { finish(false); } }
+    ]);
+  }
+  function openRestart() {
+    showModal('Restart quiz?', [h('p', null, 'All your answers, marks and the timer will be reset and you will return to the start screen.')], [
+      { label: 'Cancel', cls: 'ghost', onClick: closeModal },
+      { label: 'Restart', cls: 'danger', onClick: restart }
+    ]);
+  }
+
+  /* ---------- events ---------- */
+  $('btnStart').addEventListener('click', startQuiz);
+  $('btnPrev').addEventListener('click', function () { go(S.pos - 1); });
+  $('btnNext').addEventListener('click', function () {
+    if (S.mode === 'quiz' && S.pos >= S.list.length - 1) openSubmit(); else go(S.pos + 1);
+  });
+  $('btnMark').addEventListener('click', toggleMark);
+  $('btnSubmit').addEventListener('click', openSubmit);
+  $('btnRestart').addEventListener('click', openRestart);
+  $('btnRestart2').addEventListener('click', restart);
+  $('btnBack').addEventListener('click', function () { S.mode = 'result'; closePalette(); setScreen(); renderResult(); window.scrollTo(0, 0); });
+  $('btnRevAll').addEventListener('click', function () { startReview('all'); });
+  $('btnRevWrong').addEventListener('click', function () {
+    startReview('issues');
+  });
+  $('btnPalette').addEventListener('click', openPalette);
+  $('btnPalClose').addEventListener('click', closePalette);
+  $('backdrop').addEventListener('click', closePalette);
+
+  document.addEventListener('keydown', function (e) {
+    if (modalOpen) {
+      if (e.key === 'Escape') closeModal();
+      else if (e.key === 'Tab') {
+        var f = $('modal').querySelectorAll('button');
+        if (!f.length) return;
+        var first = f[0], last = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+      return;
+    }
+    if (S.mode !== 'quiz' && S.mode !== 'review') return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var tg = e.target && e.target.tagName;
+    if (tg === 'INPUT' || tg === 'SELECT' || tg === 'TEXTAREA') return;
+    var k = String(e.key).toLowerCase();
+    if (k === 'arrowright') { if (S.pos < S.list.length - 1) go(S.pos + 1); return; }
+    if (k === 'arrowleft') { if (S.pos > 0) go(S.pos - 1); return; }
+    if (S.mode === 'quiz') {
+      var i = 'abcd'.indexOf(k);
+      if (i < 0) i = '1234'.indexOf(k);
+      if (k.length === 1 && i >= 0) { e.preventDefault(); onOption(i); }
+      else if (k === 'm') toggleMark();
+    }
+  });
+  window.addEventListener('beforeunload', function (e) {
+    if (S.mode === 'quiz' && answeredCount() > 0) { e.preventDefault(); e.returnValue = ''; }
+  });
+
+  /* test hook (read-only helpers used for self-checks; harmless in normal use) */
+  window.__quiz = { QUESTIONS: QUESTIONS, state: S, isCorrect: isCorrect, statusOf: statusOf };
+
+  setScreen();
+})();
+</script>
+</body>
+</html>

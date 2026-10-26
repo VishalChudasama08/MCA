@@ -1,0 +1,17 @@
+1. zphisher
+2. bruteforce via burpsuite
+3. hydra bruteforce
+4. OS command injection
+5. theHarvestor
+6. SQLi on DVWA [UNIOIN ATTACK]
+7. msfconsole [ftp, ssh,mysql, apache tomcat]
+8. google dorking
+9. nmap on metasploitable
+10. password cracking [hashcat & johnTheRipper]
+11. privilege escalation on metasploitable
+12. cross site scripting [xss stored and reflected]
+13. gain reverse shell via file upload vulnerability [revshells.com & weevely]
+_14. nessuss basic scan
+_15. passive info gathering via maltego
+16. passive info gathering via nslookup & whois
+17. DNS zone transfer via nslookup & host
