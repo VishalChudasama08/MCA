@@ -1,0 +1,2 @@
+This is a sample file for Practical 7.
+Hash comparison using PowerShell.This line changes the file content.
