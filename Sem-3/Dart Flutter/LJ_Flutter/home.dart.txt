@@ -1,0 +1,110 @@
+body: SingleChildScrollView(
+  padding: const EdgeInsets.all(20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'Welcome to Dashboard!',
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Manage your products and users from one place.',
+        style: TextStyle(
+          fontSize: 16,
+          color: Colors.grey,
+        ),
+      ),
+      const SizedBox(height: 25),
+
+      LayoutBuilder(
+        builder: (context, constraints) {
+          final isWide = constraints.maxWidth >= 600;
+
+          return GridView.count(
+            crossAxisCount: isWide ? 2 : 1,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisSpacing: 16,
+            mainAxisSpacing: 16,
+            childAspectRatio: isWide ? 2.2 : 2.5,
+            children: [
+              _dashboardCard(
+                title: 'Products',
+                subtitle: 'Explore available products',
+                icon: Icons.inventory_2_rounded,
+                color: Colors.blue,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProductsPage(),
+                    ),
+                  );
+                },
+              ),
+              _dashboardCard(
+                title: 'Users',
+                subtitle: 'View user information',
+                icon: Icons.people_rounded,
+                color: Colors.green,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => UsersPage(),
+                    ),
+                  );
+                },
+              ),
+            ],
+          );
+        },
+      ),
+
+      const SizedBox(height: 25),
+
+      const Text(
+        'Quick Information',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(height: 12),
+
+      Card(
+        elevation: 2,
+        child: ListTile(
+          leading: const CircleAvatar(
+            backgroundColor: Colors.blueAccent,
+            child: Icon(
+              Icons.api_rounded,
+              color: Colors.white,
+            ),
+          ),
+          title: const Text('Products API'),
+          subtitle: const Text('Data fetched from DummyJSON'),
+        ),
+      ),
+
+      Card(
+        elevation: 2,
+        child: ListTile(
+          leading: const CircleAvatar(
+            backgroundColor: Colors.green,
+            child: Icon(
+              Icons.security_rounded,
+              color: Colors.white,
+            ),
+          ),
+          title: const Text('Authentication'),
+          subtitle: const Text('Firebase Authentication'),
+        ),
+      ),
+    ],
+  ),
+),

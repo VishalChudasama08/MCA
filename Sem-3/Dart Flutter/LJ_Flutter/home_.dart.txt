@@ -1,0 +1,93 @@
+body: SingleChildScrollView(
+  padding: const EdgeInsets.all(20),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      const Text(
+        'Welcome to Dashboard!',
+        style: TextStyle(
+          fontSize: 26,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      const SizedBox(height: 8),
+      const Text(
+        'Manage your products and users from one place.',
+        style: TextStyle(fontSize: 16, color: Colors.grey),
+      ),
+      const SizedBox(height: 25),
+
+      Card(
+        child: ListTile(
+          leading: const Icon(
+            Icons.inventory_2,
+            color: Colors.blue,
+            size: 35,
+          ),
+          title: const Text('Products'),
+          subtitle: const Text('Explore available products'),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductsPage(),
+              ),
+            );
+          },
+        ),
+      ),
+
+      const SizedBox(height: 12),
+
+      Card(
+        child: ListTile(
+          leading: const Icon(
+            Icons.people,
+            color: Colors.green,
+            size: 35,
+          ),
+          title: const Text('Users'),
+          subtitle: const Text('View user information'),
+          trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UsersPage(),
+              ),
+            );
+          },
+        ),
+      ),
+
+      const SizedBox(height: 25),
+
+      const Text(
+        'Quick Information',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+
+      const SizedBox(height: 12),
+
+      const Card(
+        child: ListTile(
+          leading: Icon(Icons.api, color: Colors.blueAccent),
+          title: Text('Products API'),
+          subtitle: Text('Data fetched from DummyJSON'),
+        ),
+      ),
+
+      const Card(
+        child: ListTile(
+          leading: Icon(Icons.security, color: Colors.green),
+          title: Text('Authentication'),
+          subtitle: Text('Firebase Authentication'),
+        ),
+      ),
+    ],
+  ),
+),
