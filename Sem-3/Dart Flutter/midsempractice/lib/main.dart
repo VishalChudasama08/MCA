@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:midsempractice/counter.dart';
 import 'package:midsempractice/navigate_page.dart';
 import 'package:midsempractice/register_page.dart';
-import 'package:midsempractice/running_calculator.dart';
 
 import 'admin_dashboard.dart';
 
