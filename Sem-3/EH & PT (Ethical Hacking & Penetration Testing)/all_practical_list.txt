@@ -12,7 +12,7 @@
 12. cross site scripting [xss stored and reflected]
 13. gain reverse shell via file upload vulnerability [revshells.com & weevely]
 _14. nessuss basic scan
-_15. passive info gathering via maltego
+15. passive info gathering via maltego
 16. passive info gathering via nslookup & whois
 17. DNS zone transfer via nslookup & host
 
