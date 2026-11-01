@@ -15,3 +15,36 @@ _14. nessuss basic scan
 _15. passive info gathering via maltego
 16. passive info gathering via nslookup & whois
 17. DNS zone transfer via nslookup & host
+
+
+
+Unit 2 – Reconnaissance, Scanning & Vulnerability Assessment
+1. Lab Setup & OSINT Reconnaissance
+2. Nmap + Nessus Vulnerability Assessment
+Unit 3 – Metasploit, Exploitation & Privilege Escalation
+3. Metasploit Exploitation
+4. Linux Privilege Escalation
+5. Password Cracking + Hydra
+Unit 4 – Web Application Security & OWASP
+6. SQL Injection on DVWA
+7. XSS + File Upload on DVWA
+
+
+
+
+Unit I
+1. Zphisher – Phishing Simulation in a Controlled Lab (Done)
+Unit II
+2. Google Dorking (Done)
+3. Nmap Scanning on Metasploitable 2 (Done)
+4. TheHarvester
+5. Passive Information Gathering Using Maltego
+6. Passive Information Gathering Using Nslookup and WHOIS
+7. DNS Zone Transfer Testing Using Nslookup and Host
+8. Nessus Essentials – Basic Vulnerability Scan
+
+Unit III
+9. MSFconsole – FTP, SSH, MySQL and Apache Tomcat Services
+10. Password Cracking Using Hashcat and John the Ripper
+11. Hydra Brute-Force Testing
+12. Privilege Escalation on Metasploitable 2
