@@ -1,0 +1,40 @@
+Return-Path: <exam-notice-bounces+staff.member=university.example.com@bulk-notify.example.org>
+Received: from mx-univ-edge.university.example.com (mx-univ-edge.university.example.com [192.0.2.25])
+        by mx.university.example.com with ESMTPS id RCV-77A91
+        for <staff.member@university.example.com>;
+        Mon, 02 Nov 2026 10:15:09 +0530
+Received: from relay-03.bulk-notify.example.org (relay-03.bulk-notify.example.org [198.51.100.88])
+        by mx-univ-edge.university.example.com with ESMTPS id REL-03-551
+        for <staff.member@university.example.com>;
+        Mon, 02 Nov 2026 10:15:06 +0530
+Received: from host-203-0-113-77.dynamic.example.net (unknown [203.0.113.77])
+        by relay-03.bulk-notify.example.org with ESMTP id BN-20261102-1904
+        (envelope-from <exam-alert@mailer.example.net>);
+        Mon, 02 Nov 2026 10:14:51 +0530
+Received: from localhost (localhost [127.0.0.1])
+        by host-203-0-113-77.dynamic.example.net with ESMTP id LOCAL-882
+        for <staff.member@university.example.com>;
+        Mon, 02 Nov 2026 10:14:48 +0530
+From: "University Examination Office" <exam-office@university-exam.example.com>
+Sender: "Examination Notifications" <exam-alert@mailer.example.net>
+Reply-To: "Verification Desk" <verify.exam@gmail.com>
+To: "Staff Member" <staff.member@university.example.com>
+Cc: "Department Examination Coordinator" <exam.coordinator@university.example.com>
+Subject: [ACTION REQUIRED] Examination Result Verification - Department Pending
+Date: Mon, 02 Nov 2026 10:14:45 +0530
+Message-ID: <20261102.101445.4521.exam-alert@mailer.example.net>
+In-Reply-To: <20261030.results.notice.1182@university.example.com>
+References: <20261030.results.notice.1182@university.example.com>
+Authentication-Results: mx.university.example.com;
+        spf=fail (sender IP is 203.0.113.77)
+        smtp.mailfrom=exam-notice-bounces@bulk-notify.example.org;
+        dkim=pass (header.d=bulk-notify.example.org header.s=notice2026);
+        dmarc=fail (header.from=university-exam.example.com)
+        header.from=university-exam.example.com
+X-Mailer: BulkNotify Mailer 5.2
+X-Originating-IP: 203.0.113.77
+X-Campaign-ID: EXAM-VERIFY-2026-11
+X-Priority: 1 (Highest)
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="----=_Boundary_Exam_2026_11_02_5A7C"
+
